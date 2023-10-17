@@ -1,11 +1,11 @@
 name = "eth-node-lighthouse-cli"
 architecture = "any"
-summary = "Go ethereum binary"
+summary = "Lighthouse binary"
 conflicts = []
-recommends = ["geth-node-@variant"]
+recommends = ["eth-node-lighthouse-node-@variant"]
 provides = ["eth-node-consensus-client"]
 suggests = ["eth-node"]
 add_files = []
 add_manpages = []
-long_doc = """ Go-etheurum binary
+long_doc = """ Lighthouse binary
 """
