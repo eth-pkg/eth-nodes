@@ -1,4 +1,4 @@
-name = "eth-node-geth-config-@variant-default"
+name = "eth-node-geth-config-default-@variant"
 extends = "eth-node-geth-service-@variant"
 provides = ["eth-node-geth-config-{variant}"]
 replaces = ["eth-node-geth-config-{variant}"]
