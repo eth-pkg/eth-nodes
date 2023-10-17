@@ -1,4 +1,4 @@
-name = "eth-node-lighthouse-config-@variant-default"
+name = "eth-node-lighthouse-config-default-@variant"
 extends = "eth-node-lighthouse-service-@variant"
 provides = ["eth-node-lighthouse-config-{variant}"]
 replaces = ["eth-node-lighthouse-config-{variant}"]
