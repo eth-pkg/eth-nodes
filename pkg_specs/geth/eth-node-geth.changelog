@@ -1,4 +1,4 @@
-geth (0.1) buster; urgency=medium
+eth-node-geth (0.1) buster; urgency=medium
 
   * Initial packaging
 
