@@ -1,0 +1,65 @@
+Source: eth-node-geth
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-geth-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-geth-service-@variant
+Suggests: eth-node
+Provides: eth-node-execution-client
+Description: Go ethereum binary
+  Go-etheurum binary
+ 
+Package: eth-node-geth-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-geth-service-mainnet
+Provides: eth-node-geth-config-mainnet
+Conflicts: eth-node-geth-config-mainnet
+Enhances: eth-node-geth-service-mainnet
+Replaces: eth-node-geth-config-mainnet
+Description: Required configuration options for the geth-service
+
+Package: eth-node-geth-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-geth-service-sepolia
+Provides: eth-node-geth-config-sepolia
+Conflicts: eth-node-geth-config-sepolia
+Enhances: eth-node-geth-service-sepolia
+Replaces: eth-node-geth-config-sepolia
+Description: Required configuration options for the geth-service
+
+Package: eth-node-geth-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-geth-cli,
+         eth-node-geth-config-mainnet,
+         geth (>= 1.13.4),
+         procps
+Provides: eth-node-execution-client-service
+Description: Service package for geth
+
+Package: eth-node-geth-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-geth-cli,
+         eth-node-geth-config-sepolia,
+         geth (>= 1.13.4),
+         procps
+Provides: eth-node-execution-client-service
+Description: Service package for geth

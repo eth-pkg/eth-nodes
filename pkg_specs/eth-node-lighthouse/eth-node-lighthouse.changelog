@@ -1,0 +1,11 @@
+eth-node-lighthouse (4.5.444-1aca484) buster; urgency=medium
+
+  * Use correct lighthouse versioning version number + git commit
+
+ -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 14:33:27 +0700
+
+eth-node-lighthouse (0.1) buster; urgency=medium
+
+  * Initial packaging
+
+ -- Eniko Nagy <mail@eenagy.com>  Tue, 17 Oct 2023 13:19:27 +0700

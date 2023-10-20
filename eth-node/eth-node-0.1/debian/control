@@ -1,0 +1,18 @@
+Source: eth-node
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Provides: eth-node-consensus-client,
+          eth-node-execution-client
+Description: Package placeholder for eth-node
+  Virtual package to install eth-node dependencies
+ One of the available execution client and consensus client by installing this package.
+ 
