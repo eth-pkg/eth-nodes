@@ -33,8 +33,15 @@ DEBIAN_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1
 DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
 endef
 
-# Expand the template for each client
 $(foreach client, $(CLIENTS), $(eval $(call CLIENT_VARIABLE_template,$(client))))
+
+# Meta package
+VERSION_NUMBER_eth-node := $(shell dpkg-parsechangelog -l $(PKG_DIR)/pkg_specs/eth-node/eth-node.changelog -S Version 2>/dev/null | sed 's/-.*//')
+SOURCE_DIR_eth-node := $(WORK_DIR)/eth-node/$(VERSION_NUMBER_eth-node)/eth-node-$(VERSION_NUMBER_eth-node)
+SOURCE_DIR_PARENT_eth-node := $(dir $(SOURCE_DIR_eth-node))
+DEBCRAFTER_PKG_DIR_eth-node := $(PKG_DIR)/pkg_specs/eth-node
+DEBIAN_DIR_eth-node := $(PKG_DIR)/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian
+DEPS_eth-node := $(SOURCE_DIR_eth-node)/debian
 
 # 5. Copy the debcrafter directory from pkg_config
 define COPY_DEBCRAFTER_DIR_template
@@ -118,8 +125,38 @@ $(foreach client, $(CLIENTS), $(eval $(call EXTRACT_SOURCE_template,$(client))))
 # Create $(DEPS_client) targets for each client
 $(foreach client, $(CLIENTS), $(eval $(call COPY_DEBCRAFTER_DIR_template,$(client))))
 
-PHONIES:= all $(CLIENTS) list
 
+# syntax doesn't have to be the same as template, but kept it for sake of being the same
+eth-node: $(DEPS_eth-node) 
+	@echo "Client eth-node $*"
+	@echo "Building debian packages $@"
+	@cd ${SOURCE_DIR_eth-node} &&  dpkg-buildpackage -us -uc
+
+# we need source dir, but that dir will be empty
+$(DEPS_eth-node): $(DEBIAN_DIR_eth-node) $(SOURCE_DIR_eth-node)
+	@echo "Dependencies for $@: $^"
+	@echo "Copying source $@"
+	@cp -R $(DEBIAN_DIR_eth-node) $(SOURCE_DIR_eth-node)
+
+# empty source dir, as eth-node is virtual package
+$(SOURCE_DIR_eth-node): 
+	@echo "Dependencies for $@: $^"
+	@mkdir -p $@ 
+
+$(DEBIAN_DIR_eth-node): $(DEBCRAFTER_PKG_DIR_eth-node) 
+	@echo "Dependencies for $@: $^"
+	@echo "Creating debian folder with debcrafter $@"
+	@echo "folder: $<"
+	@debcrafter $</eth-node.sss ${PKG_DIR}/eth-node --split-source
+
+$(DEBCRAFTER_PKG_DIR_eth-node):
+	@echo "Dependencies for $@: $^"
+	@if [ ! -d "$@" ]; then \
+	echo "Error: $@ directory does not exist. You cannot create packages without it." && exit 1; \
+	fi
+
+
+PHONIES:= all $(CLIENTS) list eth-node
 list: 
 	@echo "$(PHONIES)"
 #list the client defined variabls
