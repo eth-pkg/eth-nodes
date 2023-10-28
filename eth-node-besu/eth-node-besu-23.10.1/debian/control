@@ -10,7 +10,6 @@ Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Recommends: eth-node-besu-service-@variant
 Suggests: eth-node
 Provides: eth-node-execution-client
 Description: Go ethereum binary
