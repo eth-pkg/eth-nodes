@@ -1,0 +1,18 @@
+[Unit]
+Description=Service package for lighthouse
+
+[Service]
+Type=exec
+ExecStart=/usr/share/lighthouse/lighthouse $DEBCRAFTER_EXTRA_SERVICE_ARGS
+User=eth-node-lighthouse-service-sepolia
+Group=eth-node-lighthouse-service-sepolia
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RuntimeDirectory=eth-node-lighthouse-service-sepolia
+RuntimeDirectoryMode=0755
+
+[Install]
+WantedBy=multi-user.target

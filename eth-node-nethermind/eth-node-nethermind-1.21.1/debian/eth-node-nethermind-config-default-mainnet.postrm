@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = purge ];
+then
+	rm -f /etc/eth-node-nethermind-service-mainnet/chain_mode
+	dpkg-trigger "`realpath "/etc/eth-node-nethermind-service-mainnet/chain_mode"`"
+	dpkg-trigger "`realpath "/etc/eth-node-nethermind-service-mainnet"`"
+	dpkg-trigger "eth-node-nethermind-config-default-mainnet-config-changed"
+fi
+
+#DEBHELPER#
+
+exit 0

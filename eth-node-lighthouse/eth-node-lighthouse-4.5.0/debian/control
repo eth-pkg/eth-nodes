@@ -1,0 +1,65 @@
+Source: eth-node-lighthouse
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-lighthouse-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-lighthouse-service-@variant
+Suggests: eth-node
+Provides: eth-node-consensus-client
+Description: Lighthouse binary
+  Lighthouse binary
+ 
+Package: eth-node-lighthouse-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-lighthouse-service-mainnet
+Provides: eth-node-lighthouse-config-mainnet
+Conflicts: eth-node-lighthouse-config-mainnet
+Enhances: eth-node-lighthouse-service-mainnet
+Replaces: eth-node-lighthouse-config-mainnet
+Description: Required configuration options for lighthouse
+
+Package: eth-node-lighthouse-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-lighthouse-service-sepolia
+Provides: eth-node-lighthouse-config-sepolia
+Conflicts: eth-node-lighthouse-config-sepolia
+Enhances: eth-node-lighthouse-service-sepolia
+Replaces: eth-node-lighthouse-config-sepolia
+Description: Required configuration options for lighthouse
+
+Package: eth-node-lighthouse-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-lighthouse-cli,
+         eth-node-lighthouse-config-mainnet,
+         lighthouse (>= 4.5.0),
+         procps
+Provides: eth-node-consensus-client-service
+Description: Service package for lighthouse
+
+Package: eth-node-lighthouse-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-lighthouse-cli,
+         eth-node-lighthouse-config-sepolia,
+         lighthouse (>= 4.5.0),
+         procps
+Provides: eth-node-consensus-client-service
+Description: Service package for lighthouse

@@ -1,0 +1,8 @@
+name = "eth-node-prysm"
+maintainer = "Eniko Nagy <mail@eenagy.com>"
+section = "net"
+variants = ["mainnet", "sepolia"]
+build-depends = []
+packages = ["eth-node-prysm-cli",  "eth-node-prysm-service-@variant", "eth-node-prysm-config-default-@variant"]
+skip_debug_symbols = true
+

@@ -1,0 +1,8 @@
+name = "eth-node-besu"
+maintainer = "Eniko Nagy <mail@eenagy.com>"
+section = "net"
+variants = ["mainnet", "sepolia"]
+build-depends = []
+packages = ["eth-node-besu-cli", "eth-node-besu-service-@variant", "eth-node-besu-config-default-@variant"]
+skip_debug_symbols = true
+

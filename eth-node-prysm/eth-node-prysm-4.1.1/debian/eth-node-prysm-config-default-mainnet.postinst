@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+mkdir -p "`dirname "/etc/eth-node-prysm-service-mainnet/chain_mode"`"
+echo -n > "/etc/eth-node-prysm-service-mainnet/chain_mode"
+echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-prysm-service-mainnet/chain_mode"
+chmod 640 /etc/eth-node-prysm-service-mainnet/chain_mode
+RET="0"
+CONFIG["eth-node-prysm-config-default-mainnet/prune"]="$RET"
+RET="0"
+CONFIG["eth-node-prysm-config-default-mainnet/txindex"]="$RET"
+RET="${CONFIG[eth-node-prysm-config-default-mainnet/prune]}"
+echo >> "/etc/eth-node-prysm-service-mainnet/chain_mode"
+cat << EOF >> "/etc/eth-node-prysm-service-mainnet/chain_mode"
+prune=$RET
+EOF
+
+RET="${CONFIG[eth-node-prysm-config-default-mainnet/txindex]}"
+echo >> "/etc/eth-node-prysm-service-mainnet/chain_mode"
+cat << EOF >> "/etc/eth-node-prysm-service-mainnet/chain_mode"
+txindex=$RET
+EOF
+
+dpkg-trigger --no-await "`realpath "/etc/eth-node-prysm-service-mainnet/chain_mode"`"
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-prysm-config-default-mainnet-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

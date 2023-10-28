@@ -1,0 +1,18 @@
+[Unit]
+Description=Service package for nethermind
+
+[Service]
+Type=exec
+ExecStart=/usr/share/nethermind/nethermind $DEBCRAFTER_EXTRA_SERVICE_ARGS
+User=eth-node-nethermind-service-mainnet
+Group=eth-node-nethermind-service-mainnet
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RuntimeDirectory=eth-node-nethermind-service-mainnet
+RuntimeDirectoryMode=0755
+
+[Install]
+WantedBy=multi-user.target

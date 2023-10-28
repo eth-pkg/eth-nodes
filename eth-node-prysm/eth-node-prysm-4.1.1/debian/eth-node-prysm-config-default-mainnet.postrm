@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = purge ];
+then
+	rm -f /etc/eth-node-prysm-service-mainnet/chain_mode
+	dpkg-trigger "`realpath "/etc/eth-node-prysm-service-mainnet/chain_mode"`"
+	dpkg-trigger "`realpath "/etc/eth-node-prysm-service-mainnet"`"
+	dpkg-trigger "eth-node-prysm-config-default-mainnet-config-changed"
+fi
+
+#DEBHELPER#
+
+exit 0

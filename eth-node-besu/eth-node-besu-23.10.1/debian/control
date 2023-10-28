@@ -1,0 +1,65 @@
+Source: eth-node-besu
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-besu-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-besu-service-@variant
+Suggests: eth-node
+Provides: eth-node-execution-client
+Description: Go ethereum binary
+  Go-etheurum binary
+ 
+Package: eth-node-besu-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-besu-service-mainnet
+Provides: eth-node-besu-config-mainnet
+Conflicts: eth-node-besu-config-mainnet
+Enhances: eth-node-besu-service-mainnet
+Replaces: eth-node-besu-config-mainnet
+Description: Required configuration options for the besu-service
+
+Package: eth-node-besu-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-besu-service-sepolia
+Provides: eth-node-besu-config-sepolia
+Conflicts: eth-node-besu-config-sepolia
+Enhances: eth-node-besu-service-sepolia
+Replaces: eth-node-besu-config-sepolia
+Description: Required configuration options for the besu-service
+
+Package: eth-node-besu-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         besu (>= 23.10.1),
+         eth-node-besu-cli,
+         eth-node-besu-config-mainnet,
+         procps
+Provides: eth-node-execution-client-service
+Description: Service package for besu
+
+Package: eth-node-besu-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         besu (>= 23.10.1),
+         eth-node-besu-cli,
+         eth-node-besu-config-sepolia,
+         procps
+Provides: eth-node-execution-client-service
+Description: Service package for besu

@@ -1,0 +1,65 @@
+Source: eth-node-teku
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-teku-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-teku-service-@variant
+Suggests: eth-node
+Provides: eth-node-consensus-client
+Description: Lighthouse binary
+  Lighthouse binary
+ 
+Package: eth-node-teku-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-teku-service-mainnet
+Provides: eth-node-teku-config-mainnet
+Conflicts: eth-node-teku-config-mainnet
+Enhances: eth-node-teku-service-mainnet
+Replaces: eth-node-teku-config-mainnet
+Description: Required configuration options for teku
+
+Package: eth-node-teku-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-teku-service-sepolia
+Provides: eth-node-teku-config-sepolia
+Conflicts: eth-node-teku-config-sepolia
+Enhances: eth-node-teku-service-sepolia
+Replaces: eth-node-teku-config-sepolia
+Description: Required configuration options for teku
+
+Package: eth-node-teku-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-teku-cli,
+         eth-node-teku-config-mainnet,
+         procps,
+         teku (>= 23.10.0)
+Provides: eth-node-consensus-client-service
+Description: Service package for teku
+
+Package: eth-node-teku-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-teku-cli,
+         eth-node-teku-config-sepolia,
+         procps,
+         teku (>= 23.10.0)
+Provides: eth-node-consensus-client-service
+Description: Service package for teku

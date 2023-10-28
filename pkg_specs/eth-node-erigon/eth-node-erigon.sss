@@ -1,0 +1,8 @@
+name = "eth-node-erigon"
+maintainer = "Eniko Nagy <mail@eenagy.com>"
+section = "net"
+variants = ["mainnet", "sepolia"]
+build-depends = []
+packages = ["eth-node-erigon-cli", "eth-node-erigon-service-@variant", "eth-node-erigon-config-default-@variant"]
+skip_debug_symbols = true
+

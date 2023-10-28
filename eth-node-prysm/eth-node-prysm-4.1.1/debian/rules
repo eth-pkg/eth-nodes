@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_installsystemd:
+	dh_installsystemd --name=eth-node-prysm-service-mainnet
+	dh_installsystemd --name=eth-node-prysm-service-sepolia
+
+override_dh_dwz:

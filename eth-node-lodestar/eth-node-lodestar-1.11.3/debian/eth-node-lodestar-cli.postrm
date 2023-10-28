@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$1" = purge ];
+then
+	dpkg-trigger "eth-node-lodestar-cli-config-changed"
+fi
+
+#DEBHELPER#
+
+exit 0

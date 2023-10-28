@@ -1,0 +1,18 @@
+[Unit]
+Description=Service package for nimbus-eth2
+
+[Service]
+Type=exec
+ExecStart=/usr/share/nimbus-eth2/nimbus-eth2 $DEBCRAFTER_EXTRA_SERVICE_ARGS
+User=eth-node-nimbus-eth2-service-mainnet
+Group=eth-node-nimbus-eth2-service-mainnet
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RuntimeDirectory=eth-node-nimbus-eth2-service-mainnet
+RuntimeDirectoryMode=0755
+
+[Install]
+WantedBy=multi-user.target

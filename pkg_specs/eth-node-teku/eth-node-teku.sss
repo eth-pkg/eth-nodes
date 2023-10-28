@@ -1,0 +1,8 @@
+name = "eth-node-teku"
+maintainer = "Eniko Nagy <mail@eenagy.com>"
+section = "net"
+variants = ["mainnet", "sepolia"]
+build-depends = []
+packages = ["eth-node-teku-cli",  "eth-node-teku-service-@variant", "eth-node-teku-config-default-@variant"]
+skip_debug_symbols = true
+

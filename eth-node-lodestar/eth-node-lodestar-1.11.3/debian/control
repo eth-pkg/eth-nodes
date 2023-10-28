@@ -1,0 +1,65 @@
+Source: eth-node-lodestar
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-lodestar-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-lodestar-service-@variant
+Suggests: eth-node
+Provides: eth-node-consensus-client
+Description: Lighthouse binary
+  Lighthouse binary
+ 
+Package: eth-node-lodestar-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-lodestar-service-mainnet
+Provides: eth-node-lodestar-config-mainnet
+Conflicts: eth-node-lodestar-config-mainnet
+Enhances: eth-node-lodestar-service-mainnet
+Replaces: eth-node-lodestar-config-mainnet
+Description: Required configuration options for lodestar
+
+Package: eth-node-lodestar-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-lodestar-service-sepolia
+Provides: eth-node-lodestar-config-sepolia
+Conflicts: eth-node-lodestar-config-sepolia
+Enhances: eth-node-lodestar-service-sepolia
+Replaces: eth-node-lodestar-config-sepolia
+Description: Required configuration options for lodestar
+
+Package: eth-node-lodestar-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-lodestar-cli,
+         eth-node-lodestar-config-mainnet,
+         lodestar (>= 1.11.3),
+         procps
+Provides: eth-node-consensus-client-service
+Description: Service package for lodestar
+
+Package: eth-node-lodestar-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-lodestar-cli,
+         eth-node-lodestar-config-sepolia,
+         lodestar (>= 1.11.3),
+         procps
+Provides: eth-node-consensus-client-service
+Description: Service package for lodestar

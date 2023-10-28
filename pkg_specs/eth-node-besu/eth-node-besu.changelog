@@ -1,0 +1,11 @@
+eth-node-besu (23.10.1-287f0c2) buster; urgency=medium
+
+  * Change the packaging version to reflect the besu versioning
+
+ -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 13:14:17 +0700
+
+eth-node-besu (0.1) buster; urgency=medium
+
+  * Initial packaging
+
+ -- Eniko Nagy <mail@eenagy.com>  Tue, 17 Oct 2023 13:19:27 +0700

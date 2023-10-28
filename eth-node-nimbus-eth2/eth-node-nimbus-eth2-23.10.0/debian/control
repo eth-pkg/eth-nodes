@@ -1,0 +1,65 @@
+Source: eth-node-nimbus-eth2
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-nimbus-eth2-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-nimbus-eth2-service-@variant
+Suggests: eth-node
+Provides: eth-node-consensus-client
+Description: Lighthouse binary
+  Lighthouse binary
+ 
+Package: eth-node-nimbus-eth2-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-nimbus-eth2-service-mainnet
+Provides: eth-node-nimbus-eth2-config-mainnet
+Conflicts: eth-node-nimbus-eth2-config-mainnet
+Enhances: eth-node-nimbus-eth2-service-mainnet
+Replaces: eth-node-nimbus-eth2-config-mainnet
+Description: Required configuration options for nimbus-eth2
+
+Package: eth-node-nimbus-eth2-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-nimbus-eth2-service-sepolia
+Provides: eth-node-nimbus-eth2-config-sepolia
+Conflicts: eth-node-nimbus-eth2-config-sepolia
+Enhances: eth-node-nimbus-eth2-service-sepolia
+Replaces: eth-node-nimbus-eth2-config-sepolia
+Description: Required configuration options for nimbus-eth2
+
+Package: eth-node-nimbus-eth2-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-nimbus-eth2-cli,
+         eth-node-nimbus-eth2-config-mainnet,
+         nimbus-eth2 (>= 23.10.0),
+         procps
+Provides: eth-node-consensus-client-service
+Description: Service package for nimbus-eth2
+
+Package: eth-node-nimbus-eth2-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-nimbus-eth2-cli,
+         eth-node-nimbus-eth2-config-sepolia,
+         nimbus-eth2 (>= 23.10.0),
+         procps
+Provides: eth-node-consensus-client-service
+Description: Service package for nimbus-eth2

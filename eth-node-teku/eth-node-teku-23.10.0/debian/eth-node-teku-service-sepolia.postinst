@@ -1,0 +1,20 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
+then
+	deb-systemd-invoke restart eth-node-teku-service-sepolia
+fi
+
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-teku-service-sepolia-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

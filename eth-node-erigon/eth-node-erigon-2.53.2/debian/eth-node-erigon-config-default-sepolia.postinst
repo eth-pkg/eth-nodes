@@ -1,0 +1,36 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+mkdir -p "`dirname "/etc/eth-node-erigon-service-sepolia/chain_mode"`"
+echo -n > "/etc/eth-node-erigon-service-sepolia/chain_mode"
+echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
+chmod 640 /etc/eth-node-erigon-service-sepolia/chain_mode
+RET="0"
+CONFIG["eth-node-erigon-config-default-sepolia/prune"]="$RET"
+RET="0"
+CONFIG["eth-node-erigon-config-default-sepolia/txindex"]="$RET"
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/prune]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
+prune=$RET
+EOF
+
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/txindex]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
+txindex=$RET
+EOF
+
+dpkg-trigger --no-await "`realpath "/etc/eth-node-erigon-service-sepolia/chain_mode"`"
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-erigon-config-default-sepolia-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

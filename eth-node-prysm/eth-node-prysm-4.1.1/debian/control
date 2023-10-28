@@ -1,0 +1,65 @@
+Source: eth-node-prysm
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-prysm-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-prysm-service-@variant
+Suggests: eth-node
+Provides: eth-node-consensus-client
+Description: Lighthouse binary
+  Lighthouse binary
+ 
+Package: eth-node-prysm-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-prysm-service-mainnet
+Provides: eth-node-prysm-config-mainnet
+Conflicts: eth-node-prysm-config-mainnet
+Enhances: eth-node-prysm-service-mainnet
+Replaces: eth-node-prysm-config-mainnet
+Description: Required configuration options for prysm
+
+Package: eth-node-prysm-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-prysm-service-sepolia
+Provides: eth-node-prysm-config-sepolia
+Conflicts: eth-node-prysm-config-sepolia
+Enhances: eth-node-prysm-service-sepolia
+Replaces: eth-node-prysm-config-sepolia
+Description: Required configuration options for prysm
+
+Package: eth-node-prysm-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-prysm-cli,
+         eth-node-prysm-config-mainnet,
+         procps,
+         prysm (>= 4.1.1)
+Provides: eth-node-consensus-client-service
+Description: Service package for prysm
+
+Package: eth-node-prysm-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-prysm-cli,
+         eth-node-prysm-config-sepolia,
+         procps,
+         prysm (>= 4.1.1)
+Provides: eth-node-consensus-client-service
+Description: Service package for prysm
