@@ -46,10 +46,10 @@ This project is designed to simplify the process of packaging different Ethereum
    cd /tmp/source-override/erigon
    dquilt new your_patch_name.patch
    dquilt add modified_file
-   dquilt refresh
+   ... modify the file
    ```
 
-   Copy the patched source. 
+   Copy the patched source to the folder, so you can build package from it. 
    ```bash
    make patch-commit CLIENT=erigon
    ```

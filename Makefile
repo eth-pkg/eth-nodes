@@ -27,7 +27,7 @@ SOURCE_URL_teku := https://github.com/Consensys/teku/archive/refs/tags/$(VERSION
 
 # Define a template for client-specific variables
 define CLIENT_VARIABLE_template
-SOURCE_DIR_$(1) := $$(WORK_DIR)/eth-node-$(1)/$$(VERSION_NUMBER_$(1))/eth-node-$(1)-$$(VERSION_NUMBER_$(1))
+SOURCE_DIR_$(1) := $$(WORK_DIR)/eth-node-$(1)/$$(VERSION_NUMBER_$(1))/eth-node-$(1)_$$(VERSION_NUMBER_$(1))
 SOURCE_DIR_PARENT_$(1) := $$(dir $$(SOURCE_DIR_$(1)))
 DEBCRAFTER_PKG_DIR_$(1) := $$(PKG_DIR)/pkg_specs/eth-node-$(1)
 DEBIAN_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
@@ -40,7 +40,7 @@ $(foreach client, $(CLIENTS), $(eval $(call CLIENT_VARIABLE_template,$(client)))
 
 # Meta package
 VERSION_NUMBER_eth-node := $(shell dpkg-parsechangelog -l $(PKG_DIR)/pkg_specs/eth-node/eth-node.changelog -S Version 2>/dev/null | sed 's/-.*//')
-SOURCE_DIR_eth-node := $(WORK_DIR)/eth-node/$(VERSION_NUMBER_eth-node)/eth-node-$(VERSION_NUMBER_eth-node)
+SOURCE_DIR_eth-node := $(WORK_DIR)/eth-node/$(VERSION_NUMBER_eth-node)/eth-node_$(VERSION_NUMBER_eth-node)
 SOURCE_DIR_PARENT_eth-node := $(dir $(SOURCE_DIR_eth-node))
 DEBCRAFTER_PKG_DIR_eth-node := $(PKG_DIR)/pkg_specs/eth-node
 DEBIAN_DIR_eth-node := $(PKG_DIR)/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian
@@ -57,19 +57,20 @@ endef
 
 define EXTRACT_SOURCE_template
 # 4. Extract the source
-$(SOURCE_DIR_$1): $$(SOURCE_DIR_$1).tar.gz
+$(SOURCE_DIR_$1): $$(SOURCE_DIR_$1).orig.tar.gz
 	@echo "Dependencies for $$@: $$^"
 	@echo "Extracting source $$@"
-	@mkdir -p $$@ && tar -zxvf $$(SOURCE_DIR_$1).tar.gz -C $$@ --strip-components=1 >/dev/null 2>&1
+	@mkdir -p $$@ && tar -zxvf $$(SOURCE_DIR_$1).orig.tar.gz -C $$@ --strip-components=1 >/dev/null 2>&1
 
 endef 
 
 define DOWNLOAD_SOURCE_template
-# 3. Download the source .tar.gz
-$(SOURCE_DIR_$1).tar.gz: $$(SOURCE_DIR_PARENT_$1)
+# 3. Download the source .orig.tar.gz
+$(SOURCE_DIR_$1).orig.tar.gz: $$(SOURCE_DIR_PARENT_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Downloading source $$@"
 	@cd $$< && wget -O $$@ $${SOURCE_URL_$1}
+	#cd $$< && mv $$(SOURCE_DIR_$1).tar.gz $$(SOURCE_DIR_$1).orig.tar.gz
 endef
 
 define CREATE_DEBIAN_DIR_template
@@ -79,7 +80,13 @@ $(DEBIAN_DIR_$1): $$(DEBCRAFTER_PKG_DIR_$1)
 	@echo "Creating debian folder with debcrafter $$@"
 	@echo "folder: $$<"
 	@debcrafter $$</eth-node-$1.sss $${PKG_DIR}/eth-node-$1 --split-source
-
+	@# Add quilt format, so the package can be patched, not supported currently by debcrafter
+	@cd $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir debian/source && touch debian/source/format
+	@echo "3.0 (quilt)" > $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian/source/format
+	@cd $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir .pc	
+	@cd $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && touch .pc/.version 	
+	@echo "2" > $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/.pc/.version
+	
 endef
 
 define CHECK_REQUIREMENTS_template
@@ -153,6 +160,7 @@ $(DEBIAN_DIR_eth-node): $(DEBCRAFTER_PKG_DIR_eth-node)
 	@echo "folder: $<"
 	@debcrafter $</eth-node.sss ${PKG_DIR}/eth-node --split-source
 
+
 $(DEBCRAFTER_PKG_DIR_eth-node):
 	@echo "Dependencies for $@: $^"
 	@if [ ! -d "$@" ]; then \
@@ -160,11 +168,11 @@ $(DEBCRAFTER_PKG_DIR_eth-node):
 	fi
 
 
-PHONIES:= all $(CLIENTS) list eth-node
+PHONIES:= all $(CLIENTS) list eth-node patch-clean
 
 #HELPERS
 list: 
-	@echo "$(PHONIES)"
+	@echo "$(PHONIES) patch-setup patch-checkout"
 clients: 
 	@echo "$(CLIENTS)"
 
@@ -186,8 +194,7 @@ patch-checkout:
 	@mkdir -p /tmp/source-override/
 	@cd /tmp/source-override && git clone --depth 1 $(GIT_SOURCE_$(CLIENT)) $(CLIENT) --branch=v$(VERSION_NUMBER_$(CLIENT))
 	@cp -R $(DEBIAN_DIR_$(CLIENT)) /tmp/source-override/$(CLIENT)
-	@cd /tmp/source-override/$(CLIENT) && mkdir debian/source && touch debian/source/format
-	@echo "3.0 (quilt)" > /tmp/source-override/$(CLIENT)/debian/source/format
+	@cp -R $(PC_DIR_$(CLIENT)) /tmp/source-override/$(CLIENT)
 	@echo "You can enter dir to make changes to code /tmp/source-override/$(CLIENT)"	
 	@echo "Upon making changes, you can reenter cd $(PKG_DIR) and execute make patch-commit CLIENT=$(CLIENT)"	
 patch-commit: 
@@ -197,8 +204,16 @@ patch-commit:
 	fi
 	@# Copy back source-format, currently debcrafter doesn't support quilt 3, might as well add it 
 	@cp -R /tmp/source-override/$(CLIENT)/debian/source $(DEBIAN_DIR_$(CLIENT))/debian 
-	@cp -R /tmp/source-override/$(CLIENT)/.pc $(DEBIAN_DIR_$(CLIENT)) 
-	@cd /tmp/source-override/$(CLIENT) && cp -R $(SOURCE_DIR_erigon)/debian/patches $(DEBIAN_DIR_erigon)
+	@cp -R /tmp/source-override/$(CLIENT)/.pc/* $(PC_DIR_$(CLIENT)) 
+	@cd /tmp/source-override/$(CLIENT) && cp -R /tmp/source-override/$(CLIENT)/debian/patches $(DEBIAN_DIR_$(CLIENT))
+
+patch-clean: 
+	@if [ -z "$(CLIENT)" ]; then \
+		echo "ERROR: CLIENT is not defined. Please run make patch-commit CLIENT=client_name. See make clients for possible list."; \
+		exit 1; \
+	fi
+	
+	@rm -rf /tmp/source-override/$(CLIENT)
 
 #list the client defined variabls
 
