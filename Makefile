@@ -116,6 +116,10 @@ $(foreach client, $(CLIENTS), $(eval $(client)_setup: $(DEPS_$(client))))
 	@echo "Client $@ $*"
 	@echo "Dependencies for $@: $^"
 	@echo "Building debian packages $@"
+
+	@echo 'alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"' >> ${HOME}/.bashrc
+	@cd ${SOURCE_DIR_$*} && quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null
+	@cd ${SOURCE_DIR_$*} && quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg push 2> /dev/null
 	@cd ${SOURCE_DIR_$*} &&  dpkg-buildpackage -us -uc
 
 # create directory if not exists
@@ -206,7 +210,7 @@ patch-commit:
 	@cp -R /tmp/source-override/$(CLIENT)/debian/source $(DEBIAN_DIR_$(CLIENT))/debian 
 	@cp -R /tmp/source-override/$(CLIENT)/.pc/* $(PC_DIR_$(CLIENT)) 
 	@cd /tmp/source-override/$(CLIENT) && cp -R /tmp/source-override/$(CLIENT)/debian/patches $(DEBIAN_DIR_$(CLIENT))
-
+	@rm $(PC_DIR_$(CLIENT))/applied-patches
 patch-clean: 
 	@if [ -z "$(CLIENT)" ]; then \
 		echo "ERROR: CLIENT is not defined. Please run make patch-commit CLIENT=client_name. See make clients for possible list."; \
