@@ -118,8 +118,8 @@ $(foreach client, $(CLIENTS), $(eval $(client)_setup: $(DEPS_$(client))))
 	@echo "Building debian packages $@"
 
 	@echo 'alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"' >> ${HOME}/.bashrc
-	@cd ${SOURCE_DIR_$*} && quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null
-	@cd ${SOURCE_DIR_$*} && quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg push 2> /dev/null
+	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null || true)
+	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg push 2> /dev/null || true)
 	@cd ${SOURCE_DIR_$*} &&  dpkg-buildpackage -us -uc
 
 # create directory if not exists
@@ -187,8 +187,19 @@ patch-setup:
 	@echo '. /usr/share/bash-completion/completions/quilt' >> ${HOME}/.bashrc
 	@echo 'complete -F _quilt_completion $$_quilt_complete_opt dquilt' >> ${HOME}/.bashrc
 	@echo "Please source your basrc: source ~/.bashrc" 
+EXECUTION_CLIENTS = geth nethermind besu erigon
+CONSENSUS_CLIENTS = lighthouse lodestar nimbus-eth2 prysm teku
 
+GIT_SOURCE_geth=
+GIT_SOURCE_nethermind=
+GIT_SOURCE_besu=
 GIT_SOURCE_erigon=https://github.com/ledgerwatch/erigon.git
+GIT_SOURCE_lighthouse=https://github.com/sigp/lighthouse.git
+GIT_SOURCE_lodestar=
+GIT_SOURCE_nimbus-eth2=
+GIT_SOURCE_prysm=
+GIT_SOURCE_teku=
+
 patch-checkout: 
 	@if [ -z "$(CLIENT)" ]; then \
 		echo "ERROR: CLIENT is not defined. Please run make patch-commit CLIENT=client_name. See make clients for possible list."; \
