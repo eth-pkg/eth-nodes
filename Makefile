@@ -1,7 +1,8 @@
 EXECUTION_CLIENTS = geth nethermind besu erigon
 CONSENSUS_CLIENTS = lighthouse lodestar nimbus-eth2 prysm teku
 WORK_DIR = /tmp/eth-packages
-PKG_DIR := /home/debian/workspace/eth-deb
+HOME:= /home/debian
+PKG_DIR := $(HOME)/workspace/eth-deb
 
 # Define the clients that you want to build
 CLIENTS = $(EXECUTION_CLIENTS) $(CONSENSUS_CLIENTS)
@@ -30,6 +31,8 @@ SOURCE_DIR_$(1) := $$(WORK_DIR)/eth-node-$(1)/$$(VERSION_NUMBER_$(1))/eth-node-$
 SOURCE_DIR_PARENT_$(1) := $$(dir $$(SOURCE_DIR_$(1)))
 DEBCRAFTER_PKG_DIR_$(1) := $$(PKG_DIR)/pkg_specs/eth-node-$(1)
 DEBIAN_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
+# Holds patches, not always exists
+PC_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/.pc
 DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
 endef
 
@@ -49,6 +52,7 @@ $(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Copying source $$@"
 	@cp -R $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
+	@cp -R $$(PC_DIR_$1) $$(SOURCE_DIR_$1)
 endef
 
 define EXTRACT_SOURCE_template
@@ -99,7 +103,7 @@ endef
 
 all: $(CLIENTS)
 $(CLIENTS): %: %_setup
-# 6. Build the source 
+# 6. Build the source, add dependencies for $_setup 
 $(foreach client, $(CLIENTS), $(eval $(client)_setup: $(DEPS_$(client))))
 %_setup: 
 	@echo "Client $@ $*"
@@ -157,8 +161,45 @@ $(DEBCRAFTER_PKG_DIR_eth-node):
 
 
 PHONIES:= all $(CLIENTS) list eth-node
+
+#HELPERS
 list: 
 	@echo "$(PHONIES)"
+clients: 
+	@echo "$(CLIENTS)"
+
+
+patch-setup: 
+	@cp $(PKG_DIR)/tools/.quiltrc-dpkg $(HOME) 
+	@echo 'alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"' >> ${HOME}/.bashrc
+	@echo '. /usr/share/bash-completion/completions/quilt' >> ${HOME}/.bashrc
+	@echo 'complete -F _quilt_completion $$_quilt_complete_opt dquilt' >> ${HOME}/.bashrc
+	@echo "Please source your basrc: source ~/.bashrc" 
+
+GIT_SOURCE_erigon=https://github.com/ledgerwatch/erigon.git
+patch-checkout: 
+	@if [ -z "$(CLIENT)" ]; then \
+		echo "ERROR: CLIENT is not defined. Please run make patch-commit CLIENT=client_name. See make clients for possible list."; \
+		exit 1; \
+	fi
+	
+	@mkdir -p /tmp/source-override/
+	@cd /tmp/source-override && git clone --depth 1 $(GIT_SOURCE_$(CLIENT)) $(CLIENT) --branch=v$(VERSION_NUMBER_$(CLIENT))
+	@cp -R $(DEBIAN_DIR_$(CLIENT)) /tmp/source-override/$(CLIENT)
+	@cd /tmp/source-override/$(CLIENT) && mkdir debian/source && touch debian/source/format
+	@echo "3.0 (quilt)" > /tmp/source-override/$(CLIENT)/debian/source/format
+	@echo "You can enter dir to make changes to code /tmp/source-override/$(CLIENT)"	
+	@echo "Upon making changes, you can reenter cd $(PKG_DIR) and execute make patch-commit CLIENT=$(CLIENT)"	
+patch-commit: 
+	@if [ -z "$(CLIENT)" ]; then \
+		echo "ERROR: CLIENT is not defined. Please run make patch-commit CLIENT=client_name. See make clients for possible list."; \
+		exit 1; \
+	fi
+	@# Copy back source-format, currently debcrafter doesn't support quilt 3, might as well add it 
+	@cp -R /tmp/source-override/$(CLIENT)/debian/source $(DEBIAN_DIR_$(CLIENT))/debian 
+	@cp -R /tmp/source-override/$(CLIENT)/.pc $(DEBIAN_DIR_$(CLIENT)) 
+	@cd /tmp/source-override/$(CLIENT) && cp -R $(SOURCE_DIR_erigon)/debian/patches $(DEBIAN_DIR_erigon)
+
 #list the client defined variabls
 
 PHONY: $(PHONIES) 
