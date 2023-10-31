@@ -22,6 +22,14 @@ This project is designed to simplify the process of packaging different Ethereum
 
     make clients
    ```
+**Clean built package**: Removes source, and tries to build from stratch:
+
+   ```bash
+
+    make clean # Going to remove all client builds
+    make clean CLIENT=erigon # Remove per client
+   ```
+
 
 ## TODO Adding new clients
 
@@ -34,6 +42,12 @@ This project is designed to simplify the process of packaging different Ethereum
    ```bash
    make erigon VERSION_NUMBER_erigon=3.2.2
    ```
+## Upload to debian server (own hosted), you will need permission for this
+
+   ```bash
+   make upload CLIENT=erigon
+   ```
+
 ## Patch source
 
    Setup dquilt if not done before

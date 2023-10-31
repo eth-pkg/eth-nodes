@@ -250,7 +250,7 @@ upload:
 	fi
 	
 	@echo "Uploading $(CLIENT) to apt server"	
-	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -c $(PKG_DIR)/tools/dupload.conf --to eth-${DISTRO} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
+	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${DISTRO} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
 
 
 
