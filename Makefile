@@ -1,8 +1,9 @@
 EXECUTION_CLIENTS = geth nethermind besu erigon
 CONSENSUS_CLIENTS = lighthouse lodestar nimbus-eth2 prysm teku
-WORK_DIR = /tmp/eth-packages
 HOME:= /home/debian
+WORK_DIR = $(HOME)/eth-packages
 PKG_DIR := $(HOME)/workspace/eth-deb
+SHELL := /bin/bash
 
 # Define the clients that you want to build
 CLIENTS = $(EXECUTION_CLIENTS) $(CONSENSUS_CLIENTS)
@@ -45,6 +46,18 @@ SOURCE_DIR_PARENT_eth-node := $(dir $(SOURCE_DIR_eth-node))
 DEBCRAFTER_PKG_DIR_eth-node := $(PKG_DIR)/pkg_specs/eth-node
 DEBIAN_DIR_eth-node := $(PKG_DIR)/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian
 DEPS_eth-node := $(SOURCE_DIR_eth-node)/debian
+
+# Used for patching
+GIT_SOURCE_geth=https://github.com/ethereum/go-ethereum.git
+GIT_SOURCE_nethermind=https://github.com/NethermindEth/nethermind.git
+GIT_SOURCE_besu=https://github.com/hyperledger/besu.git
+GIT_SOURCE_erigon=https://github.com/ledgerwatch/erigon.git
+GIT_SOURCE_lighthouse=https://github.com/sigp/lighthouse.git
+GIT_SOURCE_lodestar=https://github.com/ChainSafe/lodestar.git
+GIT_SOURCE_nimbus-eth2=https://github.com/status-im/nimbus-eth2.git
+GIT_SOURCE_prysm=https://github.com/prysmaticlabs/prysm.git
+GIT_SOURCE_teku=https://github.com/Consensys/teku.git
+
 
 # 5. Copy the debcrafter directory from pkg_config
 define COPY_DEBCRAFTER_DIR_template
@@ -172,12 +185,12 @@ $(DEBCRAFTER_PKG_DIR_eth-node):
 	fi
 
 
-PHONIES:= all $(CLIENTS) list eth-node patch-clean
+PHONIES:= all $(CLIENTS) list eth-node patch-clean clean
 
 #HELPERS
 list: 
 	@echo "$(PHONIES) patch-setup patch-checkout"
-clients: 
+list-clients: 
 	@echo "$(CLIENTS)"
 
 
@@ -187,18 +200,6 @@ patch-setup:
 	@echo '. /usr/share/bash-completion/completions/quilt' >> ${HOME}/.bashrc
 	@echo 'complete -F _quilt_completion $$_quilt_complete_opt dquilt' >> ${HOME}/.bashrc
 	@echo "Please source your basrc: source ~/.bashrc" 
-EXECUTION_CLIENTS = geth nethermind besu erigon
-CONSENSUS_CLIENTS = lighthouse lodestar nimbus-eth2 prysm teku
-
-GIT_SOURCE_geth=
-GIT_SOURCE_nethermind=
-GIT_SOURCE_besu=
-GIT_SOURCE_erigon=https://github.com/ledgerwatch/erigon.git
-GIT_SOURCE_lighthouse=https://github.com/sigp/lighthouse.git
-GIT_SOURCE_lodestar=
-GIT_SOURCE_nimbus-eth2=
-GIT_SOURCE_prysm=
-GIT_SOURCE_teku=
 
 patch-checkout: 
 	@if [ -z "$(CLIENT)" ]; then \
@@ -229,6 +230,29 @@ patch-clean:
 	fi
 	
 	@rm -rf /tmp/source-override/$(CLIENT)
+
+clean: 
+	@if [ -z "$(CLIENT)" ]; then \
+		echo "ERROR: CLIENT is not defined. Cleaning all client dirs."; \
+		rm -rf $(WORK_DIR)/* \
+		exit 0; \
+	fi
+
+	@echo "Cleaning $(CLIENT) dir"	
+	@rm -rf $(WORK_DIR)/eth-node-$(CLIENT)
+
+#TODO use appropiate distro
+DISTRO=buster
+upload: 
+	@if [ -z "$(CLIENT)" ]; then \
+		echo "ERROR: CLIENT is not defined. Please run make upload CLIENT=client_name. See make clients for possible list."; \
+		exit 1; \
+	fi
+	
+	@echo "Uploading $(CLIENT) to apt server"	
+	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -c $(PKG_DIR)/tools/dupload.conf --to eth-${DISTRO} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
+
+
 
 #list the client defined variabls
 
