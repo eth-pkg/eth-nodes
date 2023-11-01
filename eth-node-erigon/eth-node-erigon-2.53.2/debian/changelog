@@ -1,10 +1,10 @@
-eth-node-erigon (2.53.2-4fc8c37) buster; urgency=medium
+eth-node-erigon (2.53.2-4fc8c37) unstable; urgency=medium
 
   * Change the packaging version to reflect the go-ethereum versioning
 
  -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 13:14:17 +0700
 
-eth-node-erigon (0.1) buster; urgency=medium
+eth-node-erigon (0.1) unstable; urgency=medium
 
   * Initial packaging
 

@@ -4,6 +4,8 @@ HOME:= /home/debian
 WORK_DIR = $(HOME)/eth-packages
 PKG_DIR := $(HOME)/workspace/eth-deb
 SHELL := /bin/bash
+CODENAME:=buster
+DISTRIBUTION := unstable
 
 # Define the clients that you want to build
 CLIENTS = $(EXECUTION_CLIENTS) $(CONSENSUS_CLIENTS)
@@ -31,7 +33,7 @@ define CLIENT_VARIABLE_template
 SOURCE_DIR_$(1) := $$(WORK_DIR)/eth-node-$(1)/$$(VERSION_NUMBER_$(1))/eth-node-$(1)_$$(VERSION_NUMBER_$(1))
 SOURCE_DIR_PARENT_$(1) := $$(dir $$(SOURCE_DIR_$(1)))
 DEBCRAFTER_PKG_DIR_$(1) := $$(PKG_DIR)/pkg_specs/eth-node-$(1)
-DEBIAN_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
+DEBIAN_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
 # Holds patches, not always exists
 PC_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/.pc
 DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
@@ -242,7 +244,6 @@ clean:
 	@rm -rf $(WORK_DIR)/eth-node-$(CLIENT)
 
 #TODO use appropiate distro
-DISTRO=buster
 upload: 
 	@if [ -z "$(CLIENT)" ]; then \
 		echo "ERROR: CLIENT is not defined. Please run make upload CLIENT=client_name. See make clients for possible list."; \
@@ -250,7 +251,7 @@ upload:
 	fi
 	
 	@echo "Uploading $(CLIENT) to apt server"	
-	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${DISTRO} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
+	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${CODENAME} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
 
 
 

@@ -1,10 +1,10 @@
-eth-node-consensus-client (<version_number>-<short_commit>) buster; urgency=medium
+eth-node-consensus-client (<version_number>-<short_commit>) unstable; urgency=medium
 
   * Use correct consensus-client versioning version number + git commit
 
  -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 14:33:27 +0700
 
-eth-node-consensus-client (0.1) buster; urgency=medium
+eth-node-consensus-client (0.1) unstable; urgency=medium
 
   * Initial packaging
 

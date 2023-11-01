@@ -1,0 +1,64 @@
+Source: eth-node-erigon
+Section: net
+Priority: optional
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-erigon-cli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Suggests: eth-node
+Provides: eth-node-execution-client
+Description: Go ethereum binary
+  Go-etheurum binary
+ 
+Package: eth-node-erigon-config-default-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-erigon-service-mainnet
+Provides: eth-node-erigon-config-mainnet
+Conflicts: eth-node-erigon-config-mainnet
+Enhances: eth-node-erigon-service-mainnet
+Replaces: eth-node-erigon-config-mainnet
+Description: Required configuration options for the erigon-service
+
+Package: eth-node-erigon-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-erigon-service-sepolia
+Provides: eth-node-erigon-config-sepolia
+Conflicts: eth-node-erigon-config-sepolia
+Enhances: eth-node-erigon-service-sepolia
+Replaces: eth-node-erigon-config-sepolia
+Description: Required configuration options for the erigon-service
+
+Package: eth-node-erigon-service-mainnet
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         erigon (>= 2.53.2),
+         eth-node-erigon-cli,
+         eth-node-erigon-config-mainnet,
+         procps
+Provides: eth-node-execution-client-service
+Description: Service package for erigon
+
+Package: eth-node-erigon-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         erigon (>= 2.53.2),
+         eth-node-erigon-cli,
+         eth-node-erigon-config-sepolia,
+         procps
+Provides: eth-node-execution-client-service
+Description: Service package for erigon
