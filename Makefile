@@ -35,7 +35,7 @@ SOURCE_DIR_PARENT_$(1) := $$(dir $$(SOURCE_DIR_$(1)))
 DEBCRAFTER_PKG_DIR_$(1) := $$(PKG_DIR)/pkg_specs/eth-node-$(1)
 DEBIAN_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
 # Holds patches, not always exists
-PC_DIR_$(1) := $$(PKG_DIR)/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/.pc
+PC_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/.pc
 DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
 endef
 
@@ -46,7 +46,7 @@ VERSION_NUMBER_eth-node := $(shell dpkg-parsechangelog -l $(PKG_DIR)/pkg_specs/e
 SOURCE_DIR_eth-node := $(WORK_DIR)/eth-node/$(VERSION_NUMBER_eth-node)/eth-node_$(VERSION_NUMBER_eth-node)
 SOURCE_DIR_PARENT_eth-node := $(dir $(SOURCE_DIR_eth-node))
 DEBCRAFTER_PKG_DIR_eth-node := $(PKG_DIR)/pkg_specs/eth-node
-DEBIAN_DIR_eth-node := $(PKG_DIR)/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian
+DEBIAN_DIR_eth-node := $(PKG_DIR)/debian_specs/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian
 DEPS_eth-node := $(SOURCE_DIR_eth-node)/debian
 
 # Used for patching
@@ -251,6 +251,8 @@ upload:
 	fi
 	
 	@echo "Uploading $(CLIENT) to apt server"	
+	@echo "Please sign the packages first, uploads requires signed packages"
+	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && debsign eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
 	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${CODENAME} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
 
 
