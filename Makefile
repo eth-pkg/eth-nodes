@@ -31,12 +31,12 @@ SOURCE_URL_teku := https://github.com/Consensys/teku/archive/refs/tags/$(VERSION
 # Define a template for client-specific variables
 define CLIENT_VARIABLE_template
 SOURCE_DIR_$(1) := $$(WORK_DIR)/eth-node-$(1)/$$(VERSION_NUMBER_$(1))/eth-node-$(1)_$$(VERSION_NUMBER_$(1))
+DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
 SOURCE_DIR_PARENT_$(1) := $$(dir $$(SOURCE_DIR_$(1)))
 DEBCRAFTER_PKG_DIR_$(1) := $$(PKG_DIR)/pkg_specs/eth-node-$(1)
 DEBIAN_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
 # Holds patches, not always exists
 PC_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/.pc
-DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
 endef
 
 $(foreach client, $(CLIENTS), $(eval $(call CLIENT_VARIABLE_template,$(client))))
@@ -94,13 +94,16 @@ $(DEBIAN_DIR_$1): $$(DEBCRAFTER_PKG_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Creating debian folder with debcrafter $$@"
 	@echo "folder: $$<"
-	@debcrafter $$</eth-node-$1.sss $${PKG_DIR}/eth-node-$1 --split-source
+	@debcrafter $$</eth-node-$1.sss $${PKG_DIR}/debian_specs/eth-node-$1 --split-source
 	@# Add quilt format, so the package can be patched, not supported currently by debcrafter
-	@cd $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir debian/source && touch debian/source/format
-	@echo "3.0 (quilt)" > $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian/source/format
-	@cd $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir .pc	
-	@cd $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && touch .pc/.version 	
-	@echo "2" > $$(PKG_DIR)/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/.pc/.version
+	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir debian/source && touch debian/source/format
+	@echo "3.0 (quilt)" > $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian/source/format
+	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir .pc	
+	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && touch .pc/.version 	
+	@echo "2" > $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/.pc/.version
+	# Add Standards-Version to the file 
+	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian &&  head -n 3 control > control.txt && echo "Standards-Version: 4.5.1" >> control.txt && tail -n +4 control >> control.txt && mv control.txt control
+
 	
 endef
 
