@@ -1,5 +1,5 @@
 name = "eth-node-lodestar-service-@variant"
-bin_package = "lodestar"
+bin_package = "eth-node-lodestar-cli"
 binary = "/usr/share/lodestar/lodestar"
 conf_param = "-conf="
 user = { group = true }

@@ -1,5 +1,5 @@
 name = "eth-node-lighthouse-service-@variant"
-bin_package = "lighthouse"
+bin_package = "eth-node-lighthouse-cli"
 binary = "/usr/share/lighthouse/lighthouse"
 conf_param = "-conf="
 user = { group = true }

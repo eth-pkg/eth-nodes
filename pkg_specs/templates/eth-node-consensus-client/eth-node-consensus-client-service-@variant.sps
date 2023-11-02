@@ -1,5 +1,5 @@
 name = "eth-node-consensus-client-service-@variant"
-bin_package = "consensus-client"
+bin_package = "eth-node-consensus-client-cli"
 binary = "/usr/share/consensus-client/consensus-client"
 conf_param = "-conf="
 user = { group = true }

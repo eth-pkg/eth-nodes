@@ -1,5 +1,5 @@
 name = "eth-node-geth-service-@variant"
-bin_package = "geth"
+bin_package = "eth-node-geth-cli"
 binary = "/usr/share/geth/geth"
 conf_param = "-conf="
 user = { group = true }

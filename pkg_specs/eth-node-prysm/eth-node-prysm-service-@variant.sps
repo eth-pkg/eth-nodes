@@ -1,5 +1,5 @@
 name = "eth-node-prysm-service-@variant"
-bin_package = "prysm"
+bin_package = "eth-node-prysm-cli"
 binary = "/usr/share/prysm/prysm"
 conf_param = "-conf="
 user = { group = true }

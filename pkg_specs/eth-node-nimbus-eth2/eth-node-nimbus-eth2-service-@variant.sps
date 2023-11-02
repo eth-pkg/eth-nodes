@@ -1,5 +1,5 @@
 name = "eth-node-nimbus-eth2-service-@variant"
-bin_package = "nimbus-eth2"
+bin_package = "eth-node-nimbus-eth2-cli"
 binary = "/usr/share/nimbus-eth2/nimbus-eth2"
 conf_param = "-conf="
 user = { group = true }

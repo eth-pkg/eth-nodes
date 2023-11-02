@@ -1,5 +1,5 @@
 name = "eth-node-besu-service-@variant"
-bin_package = "besu"
+bin_package = "eth-node-besu-cli"
 binary = "/usr/share/besu/besu"
 conf_param = "-conf="
 user = { group = true }

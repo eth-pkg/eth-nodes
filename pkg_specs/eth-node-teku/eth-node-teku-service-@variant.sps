@@ -1,5 +1,5 @@
 name = "eth-node-teku-service-@variant"
-bin_package = "teku"
+bin_package = "eth-node-teku-cli"
 binary = "/usr/share/teku/teku"
 conf_param = "-conf="
 user = { group = true }

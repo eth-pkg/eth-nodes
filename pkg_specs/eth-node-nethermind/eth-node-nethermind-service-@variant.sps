@@ -1,5 +1,5 @@
 name = "eth-node-nethermind-service-@variant"
-bin_package = "nethermind"
+bin_package = "eth-node-nethermind-cli"
 binary = "/usr/share/nethermind/nethermind"
 conf_param = "-conf="
 user = { group = true }

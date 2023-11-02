@@ -1,5 +1,5 @@
 name = "eth-node-erigon-service-@variant"
-bin_package = "erigon"
+bin_package = "eth-node-erigon-cli"
 binary = "/usr/share/erigon/erigon"
 conf_param = "-conf="
 user = { group = true }

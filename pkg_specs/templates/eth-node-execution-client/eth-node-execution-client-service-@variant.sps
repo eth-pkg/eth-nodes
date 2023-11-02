@@ -1,5 +1,5 @@
 name = "eth-node-execution-client-service-@variant"
-bin_package = "execution-client"
+bin_package = "eth-node-execution-client-cli"
 binary = "/usr/share/execution-client/execution-client"
 conf_param = "-conf="
 user = { group = true }
