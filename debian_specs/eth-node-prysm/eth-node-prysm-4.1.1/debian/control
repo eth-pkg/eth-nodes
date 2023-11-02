@@ -1,6 +1,7 @@
 Source: eth-node-prysm
 Section: net
 Priority: optional
+Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
@@ -45,9 +46,9 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-prysm-cli,
+         eth-node-prysm-cli (>= 4.1.1),
          eth-node-prysm-config-mainnet,
-         procps,
-         prysm (>= 4.1.1)
+         procps
 Provides: eth-node-consensus-client-service
 Description: Service package for prysm
 
@@ -57,8 +58,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-prysm-cli,
+         eth-node-prysm-cli (>= 4.1.1),
          eth-node-prysm-config-sepolia,
-         procps,
-         prysm (>= 4.1.1)
+         procps
 Provides: eth-node-consensus-client-service
 Description: Service package for prysm

@@ -1,6 +1,7 @@
 Source: eth-node-lodestar
 Section: net
 Priority: optional
+Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
@@ -45,8 +46,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-lodestar-cli,
+         eth-node-lodestar-cli (>= 1.11.3),
          eth-node-lodestar-config-mainnet,
-         lodestar (>= 1.11.3),
          procps
 Provides: eth-node-consensus-client-service
 Description: Service package for lodestar
@@ -57,8 +58,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-lodestar-cli,
+         eth-node-lodestar-cli (>= 1.11.3),
          eth-node-lodestar-config-sepolia,
-         lodestar (>= 1.11.3),
          procps
 Provides: eth-node-consensus-client-service
 Description: Service package for lodestar

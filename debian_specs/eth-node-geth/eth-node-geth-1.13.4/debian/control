@@ -1,6 +1,7 @@
 Source: eth-node-geth
 Section: net
 Priority: optional
+Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
@@ -45,8 +46,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-geth-cli,
+         eth-node-geth-cli (>= 1.13.4),
          eth-node-geth-config-mainnet,
-         geth (>= 1.13.4),
          procps
 Provides: eth-node-execution-client-service
 Description: Service package for geth
@@ -57,8 +58,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-geth-cli,
+         eth-node-geth-cli (>= 1.13.4),
          eth-node-geth-config-sepolia,
-         geth (>= 1.13.4),
          procps
 Provides: eth-node-execution-client-service
 Description: Service package for geth

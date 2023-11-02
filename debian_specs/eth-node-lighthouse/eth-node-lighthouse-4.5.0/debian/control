@@ -1,6 +1,7 @@
 Source: eth-node-lighthouse
 Section: net
 Priority: optional
+Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
@@ -45,8 +46,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-lighthouse-cli,
+         eth-node-lighthouse-cli (>= 4.5.0),
          eth-node-lighthouse-config-mainnet,
-         lighthouse (>= 4.5.0),
          procps
 Provides: eth-node-consensus-client-service
 Description: Service package for lighthouse
@@ -57,8 +58,8 @@ Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
          eth-node-lighthouse-cli,
+         eth-node-lighthouse-cli (>= 4.5.0),
          eth-node-lighthouse-config-sepolia,
-         lighthouse (>= 4.5.0),
          procps
 Provides: eth-node-consensus-client-service
 Description: Service package for lighthouse
