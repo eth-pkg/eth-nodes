@@ -180,7 +180,7 @@ $(DEBIAN_DIR_eth-node): $(DEBCRAFTER_PKG_DIR_eth-node)
 	@echo "Dependencies for $@: $^"
 	@echo "Creating debian folder with debcrafter $@"
 	@echo "folder: $<"
-	@debcrafter $</eth-node.sss ${PKG_DIR}/eth-node --split-source
+	@debcrafter $</eth-node.sss ${PKG_DIR}/debian_specs/eth-node --split-source
 
 
 $(DEBCRAFTER_PKG_DIR_eth-node):
