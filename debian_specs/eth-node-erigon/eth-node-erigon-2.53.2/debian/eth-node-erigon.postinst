@@ -7,7 +7,7 @@ declare -A CONFIG
 
 if [ "$1" '!=' triggered ];
 then
-	dpkg-trigger eth-node-erigon-cli-config-changed
+	dpkg-trigger eth-node-erigon-config-changed
 
 fi
 #DEBHELPER#

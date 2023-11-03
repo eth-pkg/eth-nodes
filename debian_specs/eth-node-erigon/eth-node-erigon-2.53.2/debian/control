@@ -6,15 +6,16 @@ Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
 
-Package: eth-node-erigon-cli
+Package: eth-node-erigon
 Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Suggests: eth-node
 Provides: eth-node-execution-client
-Description: Go ethereum binary
-  Go-etheurum binary
+Description: Ethereum implementation on the efficiency frontier
+ Erigon is an implementation of Ethereum (execution layer with embeddable consensus layer), 
+ on the efficiency frontier. Archive Node by default.
  
 Package: eth-node-erigon-config-default-mainnet
 Priority: optional
@@ -45,8 +46,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-erigon-cli,
-         eth-node-erigon-cli (>= 2.53.2),
+         eth-node-erigon,
+         eth-node-erigon (>= 2.53.2),
          eth-node-erigon-config-mainnet,
          procps
 Provides: eth-node-execution-client-service
@@ -57,8 +58,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-erigon-cli,
-         eth-node-erigon-cli (>= 2.53.2),
+         eth-node-erigon,
+         eth-node-erigon (>= 2.53.2),
          eth-node-erigon-config-sepolia,
          procps
 Provides: eth-node-execution-client-service
