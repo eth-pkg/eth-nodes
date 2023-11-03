@@ -3,7 +3,7 @@ Description=Service package for teku
 
 [Service]
 Type=exec
-ExecStart=/usr/share/teku/teku $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/share/eth-node-teku/bin/teku $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-teku-service-mainnet
 Group=eth-node-teku-service-mainnet
 NoNewPrivileges=true

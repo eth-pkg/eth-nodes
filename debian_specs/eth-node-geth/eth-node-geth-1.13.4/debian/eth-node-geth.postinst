@@ -7,7 +7,7 @@ declare -A CONFIG
 
 if [ "$1" '!=' triggered ];
 then
-	dpkg-trigger eth-node-teku-cli-config-changed
+	dpkg-trigger eth-node-geth-config-changed
 
 fi
 #DEBHELPER#

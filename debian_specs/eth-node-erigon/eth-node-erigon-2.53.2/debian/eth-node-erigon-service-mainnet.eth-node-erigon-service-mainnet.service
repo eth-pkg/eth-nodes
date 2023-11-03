@@ -3,7 +3,7 @@ Description=Service package for erigon
 
 [Service]
 Type=exec
-ExecStart=/usr/share/erigon/erigon $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/share/eth-node-erigon/bin/erigon $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-erigon-service-mainnet
 Group=eth-node-erigon-service-mainnet
 NoNewPrivileges=true

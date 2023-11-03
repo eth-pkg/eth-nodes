@@ -3,7 +3,7 @@ Description=Service package for geth
 
 [Service]
 Type=exec
-ExecStart=/usr/share/geth/geth $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/share/eth-node-geth/bin/geth $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-geth-service-sepolia
 Group=eth-node-geth-service-sepolia
 NoNewPrivileges=true

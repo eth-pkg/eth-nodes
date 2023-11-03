@@ -2,7 +2,7 @@
 
 if [ "$1" = purge ];
 then
-	dpkg-trigger "eth-node-geth-service-mainnet-config-changed"
+	dpkg-trigger "eth-node-geth-config-changed"
 fi
 
 #DEBHELPER#

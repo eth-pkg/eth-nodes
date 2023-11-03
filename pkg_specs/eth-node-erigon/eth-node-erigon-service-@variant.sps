@@ -1,6 +1,6 @@
 name = "eth-node-erigon-service-@variant"
 bin_package = "eth-node-erigon"
-binary = "/usr/share/erigon/erigon"
+binary = "/usr/share/eth-node-erigon/bin/erigon"
 conf_param = "-conf="
 user = { group = true }
 depends = ["eth-node-erigon-config-{variant}", "eth-node-erigon"]

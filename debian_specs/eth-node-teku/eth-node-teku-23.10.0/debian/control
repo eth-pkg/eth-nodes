@@ -6,7 +6,7 @@ Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
 
-Package: eth-node-teku-cli
+Package: eth-node-teku
 Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
@@ -45,8 +45,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-teku-cli,
-         eth-node-teku-cli (>= 23.10.0),
+         eth-node-teku,
+         eth-node-teku (>= 23.10.0),
          eth-node-teku-config-mainnet,
          procps
 Provides: eth-node-consensus-client-service
@@ -57,8 +57,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-teku-cli,
-         eth-node-teku-cli (>= 23.10.0),
+         eth-node-teku,
+         eth-node-teku (>= 23.10.0),
          eth-node-teku-config-sepolia,
          procps
 Provides: eth-node-consensus-client-service

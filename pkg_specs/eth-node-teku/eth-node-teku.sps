@@ -1,4 +1,4 @@
-name = "eth-node-teku-cli"
+name = "eth-node-teku"
 architecture = "any"
 summary = "Lighthouse binary"
 conflicts = []
