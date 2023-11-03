@@ -4,17 +4,17 @@ Priority: optional
 Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
-               debhelper (>= 12.1.1)
+               debhelper (>= 12.1.1),
+               openjdk-11-jdk, gradle-debian-helper
 
-Package: eth-node-besu-cli
+Package: eth-node-besu
 Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Suggests: eth-node
-Provides: eth-node-execution-client
-Description: Go ethereum binary
-  Go-etheurum binary
+Description: Besu is an Apache 2.0 licensed, MainNet compatible, Ethereum client written in Java.
+  
  
 Package: eth-node-besu-config-default-mainnet
 Priority: optional
@@ -45,11 +45,11 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-besu-cli,
-         eth-node-besu-cli (>= 23.10.1),
+         eth-node-besu,
+         eth-node-besu (>= 23.10.1),
          eth-node-besu-config-mainnet,
          procps
-Provides: eth-node-execution-client-service
+Provides: eth-node-execution-client
 Description: Service package for besu
 
 Package: eth-node-besu-service-sepolia
@@ -57,9 +57,9 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-besu-cli,
-         eth-node-besu-cli (>= 23.10.1),
+         eth-node-besu,
+         eth-node-besu (>= 23.10.1),
          eth-node-besu-config-sepolia,
          procps
-Provides: eth-node-execution-client-service
+Provides: eth-node-execution-client
 Description: Service package for besu

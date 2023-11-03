@@ -2,7 +2,7 @@
 
 if [ "$1" = purge ];
 then
-	dpkg-trigger "eth-node-besu-cli-config-changed"
+	dpkg-trigger "eth-node-besu-config-changed"
 fi
 
 #DEBHELPER#

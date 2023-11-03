@@ -5,6 +5,7 @@ conflicts = []
 recommends = []
 provides = []
 suggests = []
+depends = ["eth-node-execution-client", "eth-node-consensus-client"]
 add_files = []
 add_manpages = []
 long_doc = """This virtual package simplifies the installation of essential

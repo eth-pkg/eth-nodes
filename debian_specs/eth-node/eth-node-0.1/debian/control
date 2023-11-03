@@ -9,7 +9,9 @@ Package: eth-node
 Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
-         ${shlibs:Depends}
+         ${shlibs:Depends},
+         eth-node-consensus-client,
+         eth-node-execution-client
 Description: Simplified Ethereum node installation
  This virtual package simplifies the installation of essential
  dependencies required for running an Ethereum node. By installing this package, you
