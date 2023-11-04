@@ -2,7 +2,7 @@
 
 if [ "$1" = purge ];
 then
-	dpkg-trigger "eth-node-prysm-cli-config-changed"
+	dpkg-trigger "eth-node-prysm-config-changed"
 fi
 
 #DEBHELPER#

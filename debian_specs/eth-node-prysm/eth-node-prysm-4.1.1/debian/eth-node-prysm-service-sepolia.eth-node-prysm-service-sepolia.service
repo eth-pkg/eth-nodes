@@ -3,7 +3,7 @@ Description=Service package for prysm
 
 [Service]
 Type=exec
-ExecStart=/usr/share/prysm/prysm $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/bin/prysm-beacon-chain $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-prysm-service-sepolia
 Group=eth-node-prysm-service-sepolia
 NoNewPrivileges=true

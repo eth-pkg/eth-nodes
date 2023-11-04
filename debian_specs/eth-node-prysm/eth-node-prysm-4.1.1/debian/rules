@@ -3,6 +3,10 @@
 %:
 	dh $@
 
+override_dh_auto_build:
+	bazelisk build //cmd/beacon-chain:beacon-chain --config=release
+	bazelisk build //cmd/validator:validator --config=release
+
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-prysm-service-mainnet
 	dh_installsystemd --name=eth-node-prysm-service-sepolia

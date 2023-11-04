@@ -1,11 +1,22 @@
 name = "eth-node-teku"
 architecture = "any"
-summary = "Lighthouse binary"
+summary = "Teku is a Java implementation of the Ethereum 2.0 Beacon Chain."
 conflicts = []
 recommends = []
 provides = ["eth-node-consensus-client"]
 suggests = ["eth-node"]
-add_files = []
+add_files = ["/build/install/teku/bin/teku /usr/bin"]
 add_manpages = []
-long_doc = """ Lighthouse binary
+long_doc = """
+Teku is an open source Ethereum consensus client (previously called an Ethereum 2.0 client) written in Java.
+Teku contains a full beacon node implementation and a validator client for participating in proof of stake consensus.
+What can you do with Teku?
+
+Teku supports the following features:
+
+    Running the beacon node synchronization and consensus.
+    Proposing and attesting to blocks.
+    Enterprise-focused metrics using Prometheus.
+    A REST API for managing consensus layer node operations.
+    External key management for managing validator signing keys.
 """

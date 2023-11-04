@@ -13,8 +13,18 @@ Depends: ${misc:Depends},
          ${shlibs:Depends}
 Suggests: eth-node
 Provides: eth-node-consensus-client
-Description: Lighthouse binary
-  Lighthouse binary
+Description: Teku is a Java implementation of the Ethereum 2.0 Beacon Chain.
+ Teku is an open source Ethereum consensus client (previously called an Ethereum 2.0 client) written in Java.
+ Teku contains a full beacon node implementation and a validator client for participating in proof of stake consensus.
+ What can you do with Teku?
+ .
+ Teku supports the following features:
+ .
+     Running the beacon node synchronization and consensus.
+     Proposing and attesting to blocks.
+     Enterprise-focused metrics using Prometheus.
+     A REST API for managing consensus layer node operations.
+     External key management for managing validator signing keys.
  
 Package: eth-node-teku-config-default-mainnet
 Priority: optional

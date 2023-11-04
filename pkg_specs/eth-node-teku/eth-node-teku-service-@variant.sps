@@ -1,6 +1,6 @@
 name = "eth-node-teku-service-@variant"
 bin_package = "eth-node-teku"
-binary = "/usr/share/eth-node-teku/bin/teku"
+binary = "/usr/bin/teku"
 conf_param = "-conf="
 user = { group = true }
 depends = ["eth-node-teku-config-{variant}", "eth-node-teku"]
