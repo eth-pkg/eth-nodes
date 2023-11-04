@@ -3,7 +3,7 @@ Description=Service package for lodestar
 
 [Service]
 Type=exec
-ExecStart=/usr/share/lodestar/lodestar $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/bin/lodestar $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-lodestar-service-sepolia
 Group=eth-node-lodestar-service-sepolia
 NoNewPrivileges=true

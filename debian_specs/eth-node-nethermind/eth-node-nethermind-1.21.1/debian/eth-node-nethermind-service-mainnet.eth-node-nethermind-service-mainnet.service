@@ -3,7 +3,7 @@ Description=Service package for nethermind
 
 [Service]
 Type=exec
-ExecStart=/usr/share/nethermind/nethermind $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/bin/nethermind $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-nethermind-service-mainnet
 Group=eth-node-nethermind-service-mainnet
 NoNewPrivileges=true

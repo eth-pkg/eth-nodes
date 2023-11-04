@@ -3,6 +3,15 @@
 %:
 	dh $@
 
+override_dh_auto_build:
+	cd src/Nethermind/Nethermind.Runner && dotnet run -c release -- -c mainnet
+	
+override_dh_auto_test:
+	# Run Nethermind tests:
+	cd src/Nethermind && dotnet run -c release -- -c mainnet
+	# Run Ethereum Foundation tests:
+	cd src/Nethermind && dotnet test EthereumTests.sln -c release
+
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-nethermind-service-mainnet
 	dh_installsystemd --name=eth-node-nethermind-service-sepolia

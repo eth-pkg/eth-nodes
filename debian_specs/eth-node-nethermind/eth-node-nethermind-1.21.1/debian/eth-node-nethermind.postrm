@@ -2,7 +2,7 @@
 
 if [ "$1" = purge ];
 then
-	dpkg-trigger "eth-node-nethermind-cli-config-changed"
+	dpkg-trigger "eth-node-nethermind-config-changed"
 fi
 
 #DEBHELPER#

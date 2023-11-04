@@ -1,9 +1,9 @@
 name = "eth-node-lodestar-service-@variant"
-bin_package = "eth-node-lodestar-cli"
-binary = "/usr/share/lodestar/lodestar"
+bin_package = "eth-node-lodestar"
+binary = "/usr/bin/lodestar"
 conf_param = "-conf="
 user = { group = true }
-depends = ["eth-node-lodestar-config-{variant}", "eth-node-lodestar-cli"]
+depends = ["eth-node-lodestar-config-{variant}", "eth-node-lodestar"]
 provides = ["eth-node-consensus-client-service"]
 summary = "Service package for lodestar"
 runtime_dir = { mode = "0755" }

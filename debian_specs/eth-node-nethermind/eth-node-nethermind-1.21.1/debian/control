@@ -6,15 +6,15 @@ Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
 
-Package: eth-node-nethermind-cli
+Package: eth-node-nethermind
 Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Suggests: eth-node
 Provides: eth-node-execution-client
-Description: Go ethereum binary
-  Go-etheurum binary
+Description: Nethermind Ethereum client
+ Nethermind is a high-performance, highly configurable full Ethereum protocol execution client built on .NET that runs on Linux, Windows, and macOS, and supports Clique, Aura, and Ethash. Nethermind offers very fast sync speeds and support for external plugins. Enjoy reliable access to rich on-chain data thanks to high-performance JSON-RPC based on the Kestrel web server. Healthy node monitoring is secured with Grafana analytics and Seq logging.
  
 Package: eth-node-nethermind-config-default-mainnet
 Priority: optional
@@ -45,8 +45,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-nethermind-cli,
-         eth-node-nethermind-cli (>= 1.21.1),
+         eth-node-nethermind,
+         eth-node-nethermind (>= 1.21.1),
          eth-node-nethermind-config-mainnet,
          procps
 Provides: eth-node-execution-client-service
@@ -57,8 +57,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-nethermind-cli,
-         eth-node-nethermind-cli (>= 1.21.1),
+         eth-node-nethermind,
+         eth-node-nethermind (>= 1.21.1),
          eth-node-nethermind-config-sepolia,
          procps
 Provides: eth-node-execution-client-service

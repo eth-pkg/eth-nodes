@@ -7,7 +7,7 @@ declare -A CONFIG
 
 if [ "$1" '!=' triggered ];
 then
-	dpkg-trigger eth-node-nethermind-cli-config-changed
+	dpkg-trigger eth-node-lodestar-config-changed
 
 fi
 #DEBHELPER#
