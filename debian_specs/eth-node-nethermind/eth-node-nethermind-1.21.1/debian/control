@@ -10,7 +10,8 @@ Package: eth-node-nethermind
 Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
-         ${shlibs:Depends}
+         ${shlibs:Depends},
+         aspnetcore-runtime-7.0
 Suggests: eth-node
 Provides: eth-node-execution-client
 Description: Nethermind Ethereum client

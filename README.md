@@ -61,6 +61,7 @@ This project is designed to simplify the process of packaging different Ethereum
    dquilt new your_patch_name.patch
    dquilt add modified_file
    ... modify the file
+   dquilt refresh # this will save the modified patches under /debian/patches
    ```
 
    Copy the patched source to the folder, so you can build package from it. 
