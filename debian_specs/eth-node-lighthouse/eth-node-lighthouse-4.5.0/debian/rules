@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-CARGO_INSTALL_EXTRA_FLAGS= --out-dir build/bin
+export CARGO_INSTALL_EXTRA_FLAGS= --root build
 
 %:
 	dh $@
