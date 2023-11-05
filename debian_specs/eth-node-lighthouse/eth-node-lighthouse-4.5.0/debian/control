@@ -6,7 +6,7 @@ Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
 
-Package: eth-node-lighthouse-cli
+Package: eth-node-lighthouse
 Priority: optional
 Architecture: any
 Depends: ${misc:Depends},
@@ -45,8 +45,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-lighthouse-cli,
-         eth-node-lighthouse-cli (>= 4.5.0),
+         eth-node-lighthouse,
+         eth-node-lighthouse (>= 4.5.0),
          eth-node-lighthouse-config-mainnet,
          procps
 Provides: eth-node-consensus-client-service
@@ -57,8 +57,8 @@ Priority: optional
 Architecture: all
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-lighthouse-cli,
-         eth-node-lighthouse-cli (>= 4.5.0),
+         eth-node-lighthouse,
+         eth-node-lighthouse (>= 4.5.0),
          eth-node-lighthouse-config-sepolia,
          procps
 Provides: eth-node-consensus-client-service

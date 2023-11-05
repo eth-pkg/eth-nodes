@@ -5,7 +5,8 @@ conflicts = []
 recommends = []
 provides = []
 suggests = ["eth-node"]
-add_files = []
+add_files = ["build/install/besu /usr/share/eth-node-besu"]
+add_links = ["/usr/share/eth-node-besu/besu/bin/besu /usr/bin/besu"]
 add_manpages = []
 long_doc = """ 
 """

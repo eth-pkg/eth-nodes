@@ -4,8 +4,7 @@ Priority: optional
 Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
-               debhelper (>= 12.1.1),
-               openjdk-11-jdk, gradle-debian-helper
+               debhelper (>= 12.1.1)
 
 Package: eth-node-besu
 Priority: optional

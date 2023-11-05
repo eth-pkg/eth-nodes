@@ -1,7 +1,10 @@
 #!/usr/bin/make -f
 
 %:
-	dh $@ --buildsystem=gradle --no-parallel
+	dh $@
+
+override_dh_auto_build:
+	./gradlew installDist
 
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-besu-service-mainnet
