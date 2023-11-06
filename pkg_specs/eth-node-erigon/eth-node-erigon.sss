@@ -1,8 +1,7 @@
 name = "eth-node-erigon"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
-variants = ["mainnet", "sepolia"]
-build-depends = []
+variants = ["sepolia"]
+build_depends = ["wget", "ca-certificates"]
 packages = ["eth-node-erigon", "eth-node-erigon-service-@variant", "eth-node-erigon-config-default-@variant"]
 skip_debug_symbols = true
-

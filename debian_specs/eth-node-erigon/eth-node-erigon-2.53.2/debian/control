@@ -4,7 +4,9 @@ Priority: optional
 Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
-               debhelper (>= 12.1.1)
+               debhelper (>= 12.1.1),
+               wget,
+               ca-certificates
 
 Package: eth-node-erigon
 Priority: optional
@@ -17,18 +19,6 @@ Description: Ethereum implementation on the efficiency frontier
  Erigon is an implementation of Ethereum (execution layer with embeddable consensus layer), 
  on the efficiency frontier. Archive Node by default.
  
-Package: eth-node-erigon-config-default-mainnet
-Priority: optional
-Architecture: all
-Depends: ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: eth-node-erigon-service-mainnet
-Provides: eth-node-erigon-config-mainnet
-Conflicts: eth-node-erigon-config-mainnet
-Enhances: eth-node-erigon-service-mainnet
-Replaces: eth-node-erigon-config-mainnet
-Description: Required configuration options for the erigon-service
-
 Package: eth-node-erigon-config-default-sepolia
 Priority: optional
 Architecture: all
@@ -40,18 +30,6 @@ Conflicts: eth-node-erigon-config-sepolia
 Enhances: eth-node-erigon-service-sepolia
 Replaces: eth-node-erigon-config-sepolia
 Description: Required configuration options for the erigon-service
-
-Package: eth-node-erigon-service-mainnet
-Priority: optional
-Architecture: all
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         eth-node-erigon,
-         eth-node-erigon (>= 2.53.2),
-         eth-node-erigon-config-mainnet,
-         procps
-Provides: eth-node-execution-client-service
-Description: Service package for erigon
 
 Package: eth-node-erigon-service-sepolia
 Priority: optional

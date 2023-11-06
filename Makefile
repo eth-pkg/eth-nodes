@@ -2,9 +2,9 @@ EXECUTION_CLIENTS = geth nethermind besu erigon
 CONSENSUS_CLIENTS = lighthouse lodestar nimbus-eth2 prysm teku
 HOME:= /home/debian
 WORK_DIR = $(HOME)/eth-packages
-PKG_DIR := $(HOME)/workspace/eth-deb
+PKG_DIR := $(HOME)/eth-deb
 SHELL := /bin/bash
-CODENAME:=buster
+CODENAME:=bullseye
 DISTRIBUTION := unstable
 
 # Define the clients that you want to build
@@ -64,6 +64,7 @@ GIT_SOURCE_teku=https://github.com/Consensys/teku.git
 # 5. Copy the debcrafter directory from pkg_config
 define COPY_DEBCRAFTER_DIR_template
 $(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
+#$(DEPS_$1): $$(SOURCE_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Copying source $$@"
 	@cp -R $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
@@ -138,7 +139,9 @@ $(foreach client, $(CLIENTS), $(eval $(client)_setup: $(DEPS_$(client))))
 	@echo 'alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"' >> ${HOME}/.bashrc
 	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null || true)
 	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg push 2> /dev/null || true)
-	@cd ${SOURCE_DIR_$*} &&  dpkg-buildpackage -us -uc
+	#@cd ${SOURCE_DIR_$*} &&  debuild
+ 	#cd ${SOURCE_DIR_$*} &&  dpkg-buildpackage -us -uc
+	@cd ${SOURCE_DIR_$*} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
 # create directory if not exists
 $(foreach client, $(CLIENTS), $(eval $(call CREATE_PACKAGING_DIR_template,$(client))))
@@ -245,7 +248,7 @@ clean:
 	fi
 
 	@echo "Cleaning $(CLIENT) dir"	
-	@rm -rf $(WORK_DIR)/eth-node-$(CLIENT)
+	@sudo rm -rf $(WORK_DIR)/eth-node-$(CLIENT)
 
 #TODO use appropiate distro
 upload: 
@@ -256,7 +259,7 @@ upload:
 	
 	@echo "Uploading $(CLIENT) to apt server"	
 	@echo "Please sign the packages first, uploads requires signed packages"
-	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && debsign eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
+	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && debsign --no-re-sign eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
 	@cd ${SOURCE_DIR_$(CLIENT)} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${CODENAME} eth-node-$(CLIENT)_$(VERSION_NUMBER_$(CLIENT))-*.changes
 
 upload-eth-node: 

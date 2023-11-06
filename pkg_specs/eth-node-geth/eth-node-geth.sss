@@ -1,8 +1,8 @@
 name = "eth-node-geth"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
-variants = ["mainnet", "sepolia"]
-build-depends = []
+variants = ["sepolia"]
+build_depends = ["wget", "ca-certificates"]
 packages = ["eth-node-geth", "eth-node-geth-service-@variant", "eth-node-geth-config-default-@variant"]
 skip_debug_symbols = true
 

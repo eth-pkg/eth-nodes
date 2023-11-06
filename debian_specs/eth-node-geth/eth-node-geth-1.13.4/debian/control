@@ -4,7 +4,9 @@ Priority: optional
 Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
-               debhelper (>= 12.1.1)
+               debhelper (>= 12.1.1),
+               wget,
+               ca-certificates
 
 Package: eth-node-geth
 Priority: optional
@@ -16,18 +18,6 @@ Provides: eth-node-execution-client
 Description: Go ethereum binary
   Go-etheurum binary
  
-Package: eth-node-geth-config-default-mainnet
-Priority: optional
-Architecture: all
-Depends: ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: eth-node-geth-service-mainnet
-Provides: eth-node-geth-config-mainnet
-Conflicts: eth-node-geth-config-mainnet
-Enhances: eth-node-geth-service-mainnet
-Replaces: eth-node-geth-config-mainnet
-Description: Required configuration options for the geth-service
-
 Package: eth-node-geth-config-default-sepolia
 Priority: optional
 Architecture: all
@@ -39,18 +29,6 @@ Conflicts: eth-node-geth-config-sepolia
 Enhances: eth-node-geth-service-sepolia
 Replaces: eth-node-geth-config-sepolia
 Description: Required configuration options for the geth-service
-
-Package: eth-node-geth-service-mainnet
-Priority: optional
-Architecture: all
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         eth-node-geth,
-         eth-node-geth (>= 1.13.4),
-         eth-node-geth-config-mainnet,
-         procps
-Provides: eth-node-execution-client-service
-Description: Service package for geth
 
 Package: eth-node-geth-service-sepolia
 Priority: optional

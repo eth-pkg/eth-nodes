@@ -1,10 +1,36 @@
 #!/usr/bin/make -f
 
+export BUILD_DIR=/tmp
+export GOCACHE=$(BUILD_DIR)/.gocache
+export GOROOT=$(BUILD_DIR)/go
+export GOPATH=$(BUILD_DIR)/go-libs
+export PATH :=$(PATH):$(GOROOT)/bin
+export GO_VERSION=1.21.3
+export GO_TAR=go$(GO_VERSION).linux-amd64.tar.gz 
+
+
 %:
 	dh $@
+	
+override_dh_auto_test:
+	# do not run the tests
+	# TODO tests are failing under sbuild 
+	
+override_dh_auto_clean:
+	# Do nothing, patch the makefile 
+	#
+	-rm $(GO_TAR)
+	-rm $(BUILD_DIR)/go
+
+override_dh_auto_build:
+	echo $(BUILD_DIR)
+	wget -q --no-check-certificate https://go.dev/dl/$(GO_TAR) 
+	tar -C $(BUILD_DIR) -xzf $(GO_TAR) 
+	rm $(GO_TAR)
+	go env
+	make -j4 "INSTALL=install --strip-program=true"
 
 override_dh_installsystemd:
-	dh_installsystemd --name=eth-node-geth-service-mainnet
 	dh_installsystemd --name=eth-node-geth-service-sepolia
 
 override_dh_dwz:

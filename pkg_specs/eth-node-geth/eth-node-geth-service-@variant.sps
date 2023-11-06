@@ -1,7 +1,7 @@
 name = "eth-node-geth-service-@variant"
 bin_package = "eth-node-geth"
 binary = "/usr/share/eth-node-geth/bin/geth"
-conf_param = "-conf="
+conf_param = "--@variant --config="
 user = { group = true }
 depends = ["eth-node-geth-config-{variant}", "eth-node-geth"]
 provides = ["eth-node-execution-client-service"]
