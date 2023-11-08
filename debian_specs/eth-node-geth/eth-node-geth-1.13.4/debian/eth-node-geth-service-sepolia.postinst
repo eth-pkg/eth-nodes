@@ -5,6 +5,8 @@ set -e
 
 declare -A CONFIG
 
+adduser --system --quiet --group --home "/var/lib/eth-node-geth-service-sepolia" eth-node-geth-service-sepolia
+
 if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
 then
 	deb-systemd-invoke restart eth-node-geth-service-sepolia

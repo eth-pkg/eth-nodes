@@ -16,7 +16,8 @@ add_files = [
 "build/bin/faucet /usr/lib/eth-node-geth/bin",
 "build/bin/geth /usr/lib/eth-node-geth/bin",
 "build/bin/p2psim /usr/lib/eth-node-geth/bin",
-"build/bin/rldump /usr/lib/eth-node-geth/bin",
+"build/bin/rlpdump /usr/lib/eth-node-geth/bin",
+"build/config /usr/lib/eth-node-geth/config/examples",
 ]
 add_links = ["/usr/lib/eth-node-geth/bin/geth /usr/bin/geth"]
 add_manpages = []
