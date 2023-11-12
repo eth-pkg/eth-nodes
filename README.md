@@ -58,6 +58,8 @@ This project is designed to simplify the process of packaging different Ethereum
    ```bash
    make patch-checkout CLIENT=erigon
    cd /tmp/source-override/erigon
+   ln -s debian/patches patches # create link so series file is found
+   dquilt push -a # apply existing patches
    dquilt new your_patch_name.patch
    dquilt add modified_file
    ... modify the file

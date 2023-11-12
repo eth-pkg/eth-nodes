@@ -2,6 +2,9 @@
 
 if [ "$1" = purge ];
 then
+	rm -f /etc/eth-node-erigon-service-sepolia/config.toml
+	dpkg-trigger "`realpath "/etc/eth-node-erigon-service-sepolia/config.toml"`"
+	dpkg-trigger "`realpath "/etc/eth-node-erigon-service-sepolia"`"
 	dpkg-trigger "eth-node-erigon-service-sepolia-config-changed"
 fi
 

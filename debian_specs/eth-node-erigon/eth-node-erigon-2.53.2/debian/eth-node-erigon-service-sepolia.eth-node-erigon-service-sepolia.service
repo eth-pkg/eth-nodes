@@ -3,7 +3,7 @@ Description=Service package for erigon
 
 [Service]
 Type=exec
-ExecStart=/usr/bin/erigon $DEBCRAFTER_EXTRA_SERVICE_ARGS
+ExecStart=/usr/bin/erigon -config=/etc/eth-node-erigon-service-sepolia/config.toml $DEBCRAFTER_EXTRA_SERVICE_ARGS
 User=eth-node-erigon-service-sepolia
 Group=eth-node-erigon-service-sepolia
 NoNewPrivileges=true

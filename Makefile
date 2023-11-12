@@ -217,7 +217,7 @@ patch-checkout:
 	
 	@mkdir -p /tmp/source-override/
 	# TODO add version formatting v or without v or release/version , etc
-	@cd /tmp/source-override && git clone --depth 1 $(GIT_SOURCE_$(CLIENT)) $(CLIENT) --branch=$(VERSION_NUMBER_$(CLIENT))
+	@cd /tmp/source-override && git clone --depth 1 $(GIT_SOURCE_$(CLIENT)) $(CLIENT) --branch=v$(VERSION_NUMBER_$(CLIENT))
 	@cp -R $(DEBIAN_DIR_$(CLIENT)) /tmp/source-override/$(CLIENT)
 	@cp -R $(PC_DIR_$(CLIENT)) /tmp/source-override/$(CLIENT)
 	@echo "You can enter dir to make changes to code /tmp/source-override/$(CLIENT)"	
