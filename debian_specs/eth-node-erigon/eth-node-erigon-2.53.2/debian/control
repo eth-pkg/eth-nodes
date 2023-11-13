@@ -40,5 +40,6 @@ Depends: ${misc:Depends},
          eth-node-erigon (>= 2.53.2),
          eth-node-erigon-config-sepolia,
          procps
-Provides: eth-node-execution-client-service
+Provides: eth-node-execution-client-service-sepolia
+Conflicts: eth-node-execution-client-service-sepolia
 Description: Service package for erigon

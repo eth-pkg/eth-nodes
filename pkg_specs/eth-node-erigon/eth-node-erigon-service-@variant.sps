@@ -4,9 +4,9 @@ binary = "/usr/bin/erigon"
 conf_param = "-config="
 user = { group = true, create = { home = true } }
 depends = ["eth-node-erigon-config-{variant}", "eth-node-erigon"]
-provides = ["eth-node-execution-client-service"]
+conflicts = ["eth-node-execution-client-service-{variant}"]
+provides = ["eth-node-execution-client-service-{variant}"]
 summary = "Service package for erigon"
-runtime_dir = { mode = "0755" }
 
 [extra_groups."eth-node-erigon-{variant}"]
 create=false
@@ -76,6 +76,13 @@ summary = "http.api"
 # use comma seperated list, debcrafter doesn't support arrays yet
 default = "eth,debug,net,trace,web3,erigon"
 priority = "medium"
+
+[config."config.toml".ivars."authrpc.jwtsecret"]
+type = "string"
+summary = "Path to jwt secret"
+default = "/data/jwt/{variant}/jwt.hex"
+priority = "medium"
+
 
 # http.api, http.port, authrpc.port, torrent.port, private.api.addr is not quoted properly
 # this script fixes the quoting upon save

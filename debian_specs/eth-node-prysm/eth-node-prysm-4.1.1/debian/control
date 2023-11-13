@@ -29,18 +29,6 @@ Description: Prysm: An Ethereum Consensus Implementation Written in Go
  .
  Launched December 1st 2020, eth2 is a publicly accessible network running multiple client implementations participating in Ethereum consensus based on the formal specification for the protocol. The official and only validator deposit contract is 0x00000000219ab540356cbb839cbe05303d7705fa. 
  
-Package: eth-node-prysm-config-default-mainnet
-Priority: optional
-Architecture: all
-Depends: ${misc:Depends},
-         ${shlibs:Depends}
-Recommends: eth-node-prysm-service-mainnet
-Provides: eth-node-prysm-config-mainnet
-Conflicts: eth-node-prysm-config-mainnet
-Enhances: eth-node-prysm-service-mainnet
-Replaces: eth-node-prysm-config-mainnet
-Description: Required configuration options for prysm
-
 Package: eth-node-prysm-config-default-sepolia
 Priority: optional
 Architecture: all
@@ -53,18 +41,6 @@ Enhances: eth-node-prysm-service-sepolia
 Replaces: eth-node-prysm-config-sepolia
 Description: Required configuration options for prysm
 
-Package: eth-node-prysm-service-mainnet
-Priority: optional
-Architecture: all
-Depends: ${misc:Depends},
-         ${shlibs:Depends},
-         eth-node-prysm,
-         eth-node-prysm (>= 4.1.1),
-         eth-node-prysm-config-mainnet,
-         procps
-Provides: eth-node-consensus-client-service
-Description: Service package for prysm
-
 Package: eth-node-prysm-service-sepolia
 Priority: optional
 Architecture: all
@@ -74,5 +50,6 @@ Depends: ${misc:Depends},
          eth-node-prysm (>= 4.1.1),
          eth-node-prysm-config-sepolia,
          procps
-Provides: eth-node-consensus-client-service
+Provides: eth-node-execution-client-service-sepolia
+Conflicts: eth-node-execution-client-service-sepolia
 Description: Service package for prysm

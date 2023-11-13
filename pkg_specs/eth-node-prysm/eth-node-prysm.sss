@@ -1,7 +1,7 @@
 name = "eth-node-prysm"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
-variants = ["mainnet", "sepolia"]
+variants = ["sepolia"]
 build_depends = ["wget", "ca-certificates", "git", "cmake", "libssl-dev", "libgmp-dev", "libtinfo5", "libprotoc-dev"]
 packages = ["eth-node-prysm",  "eth-node-prysm-service-@variant", "eth-node-prysm-config-default-@variant"]
 skip_debug_symbols = true

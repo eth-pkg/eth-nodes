@@ -2,6 +2,9 @@
 
 if [ "$1" = purge ];
 then
+	rm -f /etc/eth-node-prysm-service-sepolia/config.yaml
+	dpkg-trigger "`realpath "/etc/eth-node-prysm-service-sepolia/config.yaml"`"
+	dpkg-trigger "`realpath "/etc/eth-node-prysm-service-sepolia"`"
 	dpkg-trigger "eth-node-prysm-service-sepolia-config-changed"
 fi
 

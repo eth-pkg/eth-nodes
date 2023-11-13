@@ -45,5 +45,10 @@ Description: ws
 
 Template: eth-node-erigon-service-sepolia/http.api
 Type: string
-Default: eth, debug, net, trace, web3, erigon
+Default: eth,debug,net,trace,web3,erigon
 Description: http.api
+
+Template: eth-node-erigon-service-sepolia/authrpc.jwtsecret
+Type: string
+Default: /data/jwt/sepolia/jwt.hex
+Description: Path to jwt secret
