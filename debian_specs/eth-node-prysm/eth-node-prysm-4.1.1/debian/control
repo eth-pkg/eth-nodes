@@ -4,7 +4,15 @@ Priority: optional
 Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
-               debhelper (>= 12.1.1)
+               debhelper (>= 12.1.1),
+               wget,
+               ca-certificates,
+               git,
+               cmake,
+               libssl-dev,
+               libgmp-dev,
+               libtinfo5,
+               libprotoc-dev
 
 Package: eth-node-prysm
 Priority: optional

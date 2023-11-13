@@ -6,6 +6,8 @@ export GOPATH=$(BUILD_DIR)/go-libs
 export PATH :=$(PATH):$(GOROOT)/bin
 export GO_VERSION=1.21.3
 export GO_TAR=go$(GO_VERSION).linux-amd64.tar.gz 
+# Fix issue with https://github.com/ethereum/go-ethereum/issues/22961 
+export CGO_ENABLED=0
 
 
 %:

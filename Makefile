@@ -63,8 +63,8 @@ GIT_SOURCE_teku=https://github.com/Consensys/teku.git
 
 # 5. Copy the debcrafter directory from pkg_config
 define COPY_DEBCRAFTER_DIR_template
-#$(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
-$(DEPS_$1): $$(SOURCE_DIR_$1)
+$(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
+#$(DEPS_$1): $$(SOURCE_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Copying source $$@"
 	@cp -R $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
@@ -140,7 +140,7 @@ $(foreach client, $(CLIENTS), $(eval $(client)_setup: $(DEPS_$(client))))
 	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null || true)
 	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg push 2> /dev/null || true)
 	#@cd ${SOURCE_DIR_$*} &&  debuild
- 	#cd ${SOURCE_DIR_$*} &&  dpkg-buildpackage -us -uc
+	#cd ${SOURCE_DIR_$*} && dpkg-buildpackage -us -uc
 	@cd ${SOURCE_DIR_$*} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
 # create directory if not exists

@@ -10,4 +10,10 @@ summary = "Service package for geth"
 runtime_dir = { mode = "0755" }
 # Copy the default generated config used by geth and name is as config.toml
 # config packages will be patching this default config
-add_files = ["build/config/{variant}.toml config.toml"]
+add_files = ["build/config/{variant}.toml /etc/eth-node-geth-service-{variant}/examples/"]
+
+[config."config.toml"]
+format = "toml"
+
+[config."config.toml".ivars.DataDir]
+

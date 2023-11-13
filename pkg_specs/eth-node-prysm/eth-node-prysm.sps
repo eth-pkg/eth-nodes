@@ -6,8 +6,12 @@ recommends = []
 provides = ["eth-node-consensus-client"]
 suggests = ["eth-node"]
 add_files = [
-"bazel-bin/cmd/beacon-chain/beacon-chain_/beacon-chain /usr/bin",
-"bazel-bin/cmd/validator/validator_/validator /usr/bin"
+"bazel-bin/cmd/beacon-chain/beacon-chain_/beacon-chain /usr/lib/eth-node-prysm/bin",
+"bazel-bin/cmd/validator/validator_/validator /usr/lib/eth-node-prysm/bin"
+]
+add_links = [
+"/usr/lib/eth-node-prysm/bin/beacon-chain /usr/bin/prysm-beacon-chain",
+"/usr/lib/eth-node-prysm/bin/validator /usr/bin/prysm-validator"
 ]
 add_manpages = []
 long_doc = """Prysm
