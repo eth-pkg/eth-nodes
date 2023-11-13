@@ -8,6 +8,9 @@ provides = ["eth-node-execution-client-service"]
 summary = "Service package for erigon"
 runtime_dir = { mode = "0755" }
 
+[extra_groups."eth-node-erigon-{variant}"]
+create=false
+
 [config."config.toml"]
 format = "toml"
 
@@ -71,10 +74,10 @@ type = "string"
 summary = "http.api"
 #default = ["eth", "debug", "net", "trace", "web3", "erigon"]
 # use comma seperated list, debcrafter doesn't support arrays yet
-default = "eth, debug, net, trace, web3, erigon"
+default = "eth,debug,net,trace,web3,erigon"
 priority = "medium"
 
 # http.api, http.port, authrpc.port, torrent.port, private.api.addr is not quoted properly
 # this script fixes the quoting upon save
 [config."config.toml".postprocess]
-command = ["bash", "/usr/lib/eth-node-erigon/bin/fix-service-config.sh"]
+command = ["bash", "/usr/lib/eth-node-erigon/bin/fix-service-config.sh", "{variant}"]

@@ -63,8 +63,8 @@ GIT_SOURCE_teku=https://github.com/Consensys/teku.git
 
 # 5. Copy the debcrafter directory from pkg_config
 define COPY_DEBCRAFTER_DIR_template
-$(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
-#$(DEPS_$1): $$(SOURCE_DIR_$1)
+#$(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
+$(DEPS_$1): $$(SOURCE_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Copying source $$@"
 	@cp -R $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
