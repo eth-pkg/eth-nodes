@@ -5,27 +5,100 @@ set -e
 
 declare -A CONFIG
 
-mkdir -p "`dirname "/etc/eth-node-erigon-service-sepolia/chain_mode"`"
-echo -n > "/etc/eth-node-erigon-service-sepolia/chain_mode"
-echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
-chmod 640 /etc/eth-node-erigon-service-sepolia/chain_mode
-RET="0"
-CONFIG["eth-node-erigon-config-default-sepolia/prune"]="$RET"
-RET="0"
-CONFIG["eth-node-erigon-config-default-sepolia/txindex"]="$RET"
-RET="${CONFIG[eth-node-erigon-config-default-sepolia/prune]}"
-echo >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
-cat << EOF >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
-prune=$RET
+db_get eth-node-erigon-config-default-sepolia/datadir
+CONFIG["eth-node-erigon-config-default-sepolia/datadir"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/chain
+CONFIG["eth-node-erigon-config-default-sepolia/chain"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/port
+CONFIG["eth-node-erigon-config-default-sepolia/port"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/http.port
+CONFIG["eth-node-erigon-config-default-sepolia/http.port"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/authrpc.port
+CONFIG["eth-node-erigon-config-default-sepolia/authrpc.port"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/torrent.port
+CONFIG["eth-node-erigon-config-default-sepolia/torrent.port"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/private.api.addr
+CONFIG["eth-node-erigon-config-default-sepolia/private.api.addr"]="$RET"
+db_get eth-node-erigon-config-default-sepolia/http
+CONFIG["eth-node-erigon-config-default-sepolia/http"]="$RET"
+mkdir -p "`dirname "/etc/eth-node-erigon-service-sepolia/config.toml"`"
+echo -n > "/etc/eth-node-erigon-service-sepolia/config.toml"
+echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+chmod 640 /etc/eth-node-erigon-service-sepolia/config.toml
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/authrpc.port]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+authrpc.port = $RET
 EOF
 
-RET="${CONFIG[eth-node-erigon-config-default-sepolia/txindex]}"
-echo >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
-cat << EOF >> "/etc/eth-node-erigon-service-sepolia/chain_mode"
-txindex=$RET
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/chain]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+echo -n "chain=\"" >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+fi
+
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/datadir]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+echo -n "datadir=\"" >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+fi
+
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/http]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+http = $RET
 EOF
 
-dpkg-trigger --no-await "`realpath "/etc/eth-node-erigon-service-sepolia/chain_mode"`"
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/http.port]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+http.port = $RET
+EOF
+
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/port]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+port = $RET
+EOF
+
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/private.api.addr]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+echo -n "private.api.addr=\"" >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+fi
+
+RET="${CONFIG[eth-node-erigon-config-default-sepolia/torrent.port]}"
+echo >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+cat << EOF >> "/etc/eth-node-erigon-service-sepolia/config.toml"
+torrent.port = $RET
+EOF
+
+MAINTSCRIPT_ACTION="$1" MAINTSCRIPT_VERSION="$2" 'bash' '/usr/lib/eth-node-erigon-service-sepolia/postprocess.sh' 'sepolia'
+dpkg-trigger --no-await "`realpath "/etc/eth-node-erigon-service-sepolia/config.toml"`"
 if [ "$1" '!=' triggered ];
 then
 	dpkg-trigger eth-node-erigon-config-default-sepolia-config-changed

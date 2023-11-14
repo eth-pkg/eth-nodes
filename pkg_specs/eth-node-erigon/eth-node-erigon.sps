@@ -23,7 +23,6 @@ add_files = ["build/bin/capcli /usr/lib/eth-node-erigon/bin",
 "build/bin/state /usr/lib/eth-node-erigon/bin",
 "build/bin/txpool /usr/lib/eth-node-erigon/bin",
 "build/bin/verkle /usr/lib/eth-node-erigon/bin",
-"fix-service-config.sh /usr/lib/eth-node-erigon/bin",
 ]
 add_links = ["/usr/lib/eth-node-erigon/bin/erigon /usr/bin/erigon"]
 add_manpages = []
