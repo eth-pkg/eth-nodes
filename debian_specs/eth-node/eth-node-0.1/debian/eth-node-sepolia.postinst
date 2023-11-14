@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-sepolia-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

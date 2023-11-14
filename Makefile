@@ -35,19 +35,32 @@ DEPS_$(1) := $$(SOURCE_DIR_$(1))/debian
 SOURCE_DIR_PARENT_$(1) := $$(dir $$(SOURCE_DIR_$(1)))
 DEBCRAFTER_PKG_DIR_$(1) := $$(PKG_DIR)/pkg_specs/eth-node-$(1)
 DEBIAN_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/debian
+# Additional sources
+ADD_SRC_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/src
 # Holds patches, not always exists
 PC_DIR_$(1) := $$(PKG_DIR)/debian_specs/eth-node-$(1)/eth-node-$(1)-$$(VERSION_NUMBER_$(1))/.pc
 endef
 
 $(foreach client, $(CLIENTS), $(eval $(call CLIENT_VARIABLE_template,$(client))))
 
-# Meta package
+# Meta packages (eth-node, eth-node-service)
 VERSION_NUMBER_eth-node := $(shell dpkg-parsechangelog -l $(PKG_DIR)/pkg_specs/eth-node/eth-node.changelog -S Version 2>/dev/null | sed 's/-.*//')
 SOURCE_DIR_eth-node := $(WORK_DIR)/eth-node/$(VERSION_NUMBER_eth-node)/eth-node_$(VERSION_NUMBER_eth-node)
 SOURCE_DIR_PARENT_eth-node := $(dir $(SOURCE_DIR_eth-node))
 DEBCRAFTER_PKG_DIR_eth-node := $(PKG_DIR)/pkg_specs/eth-node
 DEBIAN_DIR_eth-node := $(PKG_DIR)/debian_specs/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian
 DEPS_eth-node := $(SOURCE_DIR_eth-node)/debian
+
+VERSION_NUMBER_eth-node-service := $(shell dpkg-parsechangelog -l $(PKG_DIR)/pkg_specs/eth-node-service/eth-node-service.changelog -S Version 2>/dev/null | sed 's/-.*//')
+SOURCE_DIR_eth-node-service := $(WORK_DIR)/eth-node-service/$(VERSION_NUMBER_eth-node-service)/eth-node-service_$(VERSION_NUMBER_eth-node-service)
+SOURCE_DIR_PARENT_eth-node-service := $(dir $(SOURCE_DIR_eth-node-service))
+DEBCRAFTER_PKG_DIR_eth-node-service := $(PKG_DIR)/pkg_specs/eth-node-service
+DEBIAN_DIR_eth-node-service := $(PKG_DIR)/debian_specs/eth-node-service/eth-node-service-$(VERSION_NUMBER_eth-node)/debian
+DEPS_eth-node-service := $(SOURCE_DIR_eth-node-service)/debian
+# Additional sources
+ADD_SRC_DIR_eth-node-service := $(PKG_DIR)/debian_specs/eth-node-service/eth-node-service-$(VERSION_NUMBER_eth-node-service)/src
+
+
 
 # Used for patching
 GIT_SOURCE_geth=https://github.com/ethereum/go-ethereum.git
@@ -68,6 +81,7 @@ $(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Copying source $$@"
 	@cp -R $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
+	@cp -R $$(ADD_SRC_DIR_$1) $$(SOURCE_DIR_$1)
 	@cp -R $$(PC_DIR_$1) $$(SOURCE_DIR_$1)
 endef
 
@@ -96,6 +110,8 @@ $(DEBIAN_DIR_$1): $$(DEBCRAFTER_PKG_DIR_$1)
 	@echo "Creating debian folder with debcrafter $$@"
 	@echo "folder: $$<"
 	@debcrafter $$</eth-node-$1.sss $${PKG_DIR}/debian_specs/eth-node-$1 --split-source
+	# Copy Additional source if needed, can be patches and so on
+	@cp -R $$(DEBCRAFTER_PKG_DIR_$1)/src $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) 
 	@# Add quilt format, so the package can be patched, not supported currently by debcrafter
 	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir debian/source && touch debian/source/format
 	@echo "3.0 (quilt)" > $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian/source/format
@@ -184,6 +200,10 @@ $(DEBIAN_DIR_eth-node): $(DEBCRAFTER_PKG_DIR_eth-node)
 	@echo "Creating debian folder with debcrafter $@"
 	@echo "folder: $<"
 	@debcrafter $</eth-node.sss ${PKG_DIR}/debian_specs/eth-node --split-source
+	@cd $(PKG_DIR)/debian_specs/eth-node/eth-node-$(VERSION_NUMBER_eth-node)/debian &&  head -n 3 control > control.txt && echo "Standards-Version: 4.5.1" >> control.txt && tail -n +4 control >> control.txt && mv control.txt control
+
+
+
 
 
 $(DEBCRAFTER_PKG_DIR_eth-node):
@@ -191,6 +211,44 @@ $(DEBCRAFTER_PKG_DIR_eth-node):
 	@if [ ! -d "$@" ]; then \
 	echo "Error: $@ directory does not exist. You cannot create packages without it." && exit 1; \
 	fi
+
+# syntax doesn't have to be the same as template, but kept it for sake of being the same
+eth-node-service: $(DEPS_eth-node-service) 
+	@echo "Meta package: eth-node-service $*"
+	@echo "Building debian packages $@"
+	@cd ${SOURCE_DIR_eth-node-service} &&  dpkg-buildpackage -us -uc
+
+# we need source dir, but that dir will be empty
+$(DEPS_eth-node-service): $(DEBIAN_DIR_eth-node-service) $(SOURCE_DIR_eth-node-service)
+	@echo "Dependencies for $@: $^"
+	@echo "Copying source $@"
+	@cp -R $(DEBIAN_DIR_eth-node-service) $(SOURCE_DIR_eth-node-service)
+	# Copy Additional source if needed, can be patches and so on
+	@cp -R $(ADD_SRC_DIR_eth-node-service)/* $(SOURCE_DIR_eth-node-service)
+
+# empty source dir, as eth-node-service is confext package
+$(SOURCE_DIR_eth-node-service): 
+	@echo "Dependencies for $@: $^"
+	@mkdir -p $@ 
+
+$(DEBIAN_DIR_eth-node-service): $(DEBCRAFTER_PKG_DIR_eth-node-service) 
+	@echo "Dependencies for $@: $^"
+	@echo "Creating debian folder with debcrafter $@"
+	@echo "folder: $<"
+	@debcrafter $</eth-node-service.sss ${PKG_DIR}/debian_specs/eth-node-service --split-source
+	# Copy Additional source if needed, can be patches and so on
+	@cp -R $(DEBCRAFTER_PKG_DIR_eth-node-service)/src $(PKG_DIR)/debian_specs/eth-node-service/eth-node-service-$(VERSION_NUMBER_eth-node-service) 
+	# Add Standards-Version to the file 
+	@cd $(PKG_DIR)/debian_specs/eth-node-service/eth-node-service-$(VERSION_NUMBER_eth-node-service)/debian &&  head -n 3 control > control.txt && echo "Standards-Version: 4.5.1" >> control.txt && tail -n +4 control >> control.txt && mv control.txt control
+
+
+
+$(DEBCRAFTER_PKG_DIR_eth-node-service):
+	@echo "Dependencies for $@: $^"
+	@if [ ! -d "$@" ]; then \
+	echo "Error: $@ directory does not exist. You cannot create packages without it." && exit 1; \
+	fi
+
 
 
 PHONIES:= all $(CLIENTS) list eth-node patch-clean clean
@@ -267,6 +325,12 @@ upload-eth-node:
 	@echo "Please sign the packages first, uploads requires signed packages"
 	@cd ${SOURCE_DIR_eth-node} && cd ..   && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && debsign eth-node_$(VERSION_NUMBER_eth-node)*.changes
 	@cd ${SOURCE_DIR_eth-node} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${CODENAME} eth-node_$(VERSION_NUMBER_eth-node)*.changes
+
+upload-eth-node-service: 
+	@echo "Uploading eth-node-service  to apt server"	
+	@echo "Please sign the packages first, uploads requires signed packages"
+	@cd ${SOURCE_DIR_eth-node-service} && cd ..   && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && debsign eth-node-service_$(VERSION_NUMBER_eth-node-service)*.changes
+	@cd ${SOURCE_DIR_eth-node-service} && cd ..  && eval "$(ssh-agent -s)" && ssh-add $(HOME)/.ssh/id_ed25519 && dupload -f -c $(PKG_DIR)/tools/dupload.conf --to eth-${CODENAME} eth-node-service_$(VERSION_NUMBER_eth-node-service)*.changes
 
 
 

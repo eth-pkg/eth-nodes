@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = purge ];
+then
+	rm -f /etc/eth-node-service-sepolia/config.toml
+	dpkg-trigger "`realpath "/etc/eth-node-service-sepolia/config.toml"`"
+	dpkg-trigger "`realpath "/etc/eth-node-service-sepolia"`"
+	dpkg-trigger "eth-node-service-sepolia-config-changed"
+fi
+
+#DEBHELPER#
+
+exit 0

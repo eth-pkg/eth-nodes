@@ -1,0 +1,9 @@
+Template: eth-node-service-sepolia/jwtsecret
+Type: string
+Default: /data/jwt/sepolia/jwt.hex
+Description: Path to jwt secret
+
+Template: eth-node-service-sepolia/datadir
+Type: string
+Default: /data/sepolia
+Description: Data dir

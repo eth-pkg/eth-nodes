@@ -1,0 +1,53 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+db_get eth-node-service-goerli/jwtsecret
+CONFIG["eth-node-service-goerli/jwtsecret"]="$RET"
+db_get eth-node-service-goerli/datadir
+CONFIG["eth-node-service-goerli/datadir"]="$RET"
+mkdir -p "`dirname "/etc/eth-node-service-goerli/config.toml"`"
+echo -n > "/etc/eth-node-service-goerli/config.toml"
+echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-service-goerli/config.toml"
+chmod 640 /etc/eth-node-service-goerli/config.toml
+RET="${CONFIG[eth-node-service-goerli/datadir]}"
+echo >> "/etc/eth-node-service-goerli/config.toml"
+echo -n "datadir=\"" >> "/etc/eth-node-service-goerli/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-service-goerli/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-service-goerli/config.toml"
+fi
+
+RET="${CONFIG[eth-node-service-goerli/jwtsecret]}"
+echo >> "/etc/eth-node-service-goerli/config.toml"
+echo -n "jwtsecret=\"" >> "/etc/eth-node-service-goerli/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-service-goerli/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-service-goerli/config.toml"
+fi
+
+MAINTSCRIPT_ACTION="$1" MAINTSCRIPT_VERSION="$2" 'bash' '/etc/eth-node-service-goerli/postprocess.sh' 'goerli'
+dpkg-trigger --no-await "`realpath "/etc/eth-node-service-goerli/config.toml"`"
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-service-goerli-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

@@ -7,7 +7,7 @@ declare -A CONFIG
 
 if [ "$1" '!=' triggered ];
 then
-	dpkg-trigger eth-node-config-changed
+	dpkg-trigger eth-node-ephemery-config-changed
 
 fi
 #DEBHELPER#

@@ -3,7 +3,7 @@ bin_package = "eth-node-prysm"
 binary = "/usr/bin/prysm-beacon-chain"
 conf_param = "--{variant} --config-file="
 user = { group = true, create = { home = true} }
-depends = ["eth-node-prysm-config-{variant}", "eth-node-prysm"]
+depends = ["eth-node-prysm-config-{variant}", "eth-node-consensus-client-service-{variant}", "eth-node-prysm"]
 conflicts = ["eth-node-execution-client-service-{variant}"]
 provides = ["eth-node-execution-client-service-{variant}"]
 

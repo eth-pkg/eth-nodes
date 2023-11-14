@@ -1,0 +1,9 @@
+Template: eth-node-service-goerli/jwtsecret
+Type: string
+Default: /data/jwt/goerli/jwt.hex
+Description: Path to jwt secret
+
+Template: eth-node-service-goerli/datadir
+Type: string
+Default: /data/goerli
+Description: Data dir

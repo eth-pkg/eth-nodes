@@ -1,0 +1,53 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+db_get eth-node-service-ephemery/jwtsecret
+CONFIG["eth-node-service-ephemery/jwtsecret"]="$RET"
+db_get eth-node-service-ephemery/datadir
+CONFIG["eth-node-service-ephemery/datadir"]="$RET"
+mkdir -p "`dirname "/etc/eth-node-service-ephemery/config.toml"`"
+echo -n > "/etc/eth-node-service-ephemery/config.toml"
+echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-service-ephemery/config.toml"
+chmod 640 /etc/eth-node-service-ephemery/config.toml
+RET="${CONFIG[eth-node-service-ephemery/datadir]}"
+echo >> "/etc/eth-node-service-ephemery/config.toml"
+echo -n "datadir=\"" >> "/etc/eth-node-service-ephemery/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-service-ephemery/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-service-ephemery/config.toml"
+fi
+
+RET="${CONFIG[eth-node-service-ephemery/jwtsecret]}"
+echo >> "/etc/eth-node-service-ephemery/config.toml"
+echo -n "jwtsecret=\"" >> "/etc/eth-node-service-ephemery/config.toml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-service-ephemery/config.toml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-service-ephemery/config.toml"
+fi
+
+MAINTSCRIPT_ACTION="$1" MAINTSCRIPT_VERSION="$2" 'bash' '/etc/eth-node-service-ephemery/postprocess.sh' 'ephemery'
+dpkg-trigger --no-await "`realpath "/etc/eth-node-service-ephemery/config.toml"`"
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-service-ephemery-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

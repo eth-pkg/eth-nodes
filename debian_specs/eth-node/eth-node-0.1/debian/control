@@ -1,27 +1,60 @@
 Source: eth-node
 Section: net
 Priority: optional
+Standards-Version: 4.5.1
 Maintainer: Eniko Nagy <mail@eenagy.com>
 Build-Depends: debhelper (>= 9),
                debhelper (>= 12.1.1)
 
-Package: eth-node
+Package: eth-node-ephemery
 Priority: optional
-Architecture: all
+Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends},
-         eth-node-consensus-client,
-         eth-node-execution-client
-Description: Simplified Ethereum node installation
- This virtual package simplifies the installation of essential
- dependencies required for running an Ethereum node. By installing this package, you
- can easily set up and configure any available Ethereum execution client or consensus
- client. It helps in the process of preparing your system for Ethereum network
- participation and provides a convenient starting point for node deployment and
- management.
- .
- Whether you intend to run an Ethereum node for development, testing, or production
- purposes, the "eth-node" package ensures that the necessary dependencies are in
- place, simplifying the setup process and improving your overall experience with
- Ethereum blockchain technologies.
+         eth-node-consensus-client-ephemery,
+         eth-node-execution-client-ephemery
+Description: Simplified Ethereum node installation for ephemery
+ eth-node-ephemery
+ This package simplifies connecting to the Ethereum network, by allowing 
+ you to simply install this package, and setups the client for connecting to 
+ Ethereum ephemery network.
+ 
+Package: eth-node-goerli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-consensus-client-goerli,
+         eth-node-execution-client-goerli
+Description: Simplified Ethereum node installation for goerli
+ eth-node-goerli
+ This package simplifies connecting to the Ethereum network, by allowing 
+ you to simply install this package, and setups the client for connecting to 
+ Ethereum goerli network.
+ 
+Package: eth-node-mainnet
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-consensus-client-mainnet,
+         eth-node-execution-client-mainnet
+Description: Simplified Ethereum node installation for mainnet
+ eth-node-mainnet
+ This package simplifies connecting to the Ethereum network, by allowing 
+ you to simply install this package, and setups the client for connecting to 
+ Ethereum mainnet network.
+ 
+Package: eth-node-sepolia
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-consensus-client-sepolia,
+         eth-node-execution-client-sepolia
+Description: Simplified Ethereum node installation for sepolia
+ eth-node-sepolia
+ This package simplifies connecting to the Ethereum network, by allowing 
+ you to simply install this package, and setups the client for connecting to 
+ Ethereum sepolia network.
  

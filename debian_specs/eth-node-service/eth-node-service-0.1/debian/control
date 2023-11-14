@@ -1,0 +1,76 @@
+Source: eth-node-service
+Section: net
+Priority: optional
+Standards-Version: 4.5.1
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1)
+
+Package: eth-node-service-ephemery
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-ephemery
+Description: Configuration for Ethereum clients shared for ephemery
+ eth-node-service-ephemery
+ .
+ Essential shared configuration shared by Ethereum clients, 
+ that are not owned by one client but shared between them.
+ .
+ If you wish to define configuration values that need to used 
+ by different clients, and if changes must be reflected in others 
+ clients as well, you must add configuration value to this package,
+ and reference the config values from the dependent package.
+ 
+Package: eth-node-service-goerli
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-goerli
+Description: Configuration for Ethereum clients shared for goerli
+ eth-node-service-goerli
+ .
+ Essential shared configuration shared by Ethereum clients, 
+ that are not owned by one client but shared between them.
+ .
+ If you wish to define configuration values that need to used 
+ by different clients, and if changes must be reflected in others 
+ clients as well, you must add configuration value to this package,
+ and reference the config values from the dependent package.
+ 
+Package: eth-node-service-mainnet
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-mainnet
+Description: Configuration for Ethereum clients shared for mainnet
+ eth-node-service-mainnet
+ .
+ Essential shared configuration shared by Ethereum clients, 
+ that are not owned by one client but shared between them.
+ .
+ If you wish to define configuration values that need to used 
+ by different clients, and if changes must be reflected in others 
+ clients as well, you must add configuration value to this package,
+ and reference the config values from the dependent package.
+ 
+Package: eth-node-service-sepolia
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-sepolia
+Description: Configuration for Ethereum clients shared for sepolia
+ eth-node-service-sepolia
+ .
+ Essential shared configuration shared by Ethereum clients, 
+ that are not owned by one client but shared between them.
+ .
+ If you wish to define configuration values that need to used 
+ by different clients, and if changes must be reflected in others 
+ clients as well, you must add configuration value to this package,
+ and reference the config values from the dependent package.
+ 

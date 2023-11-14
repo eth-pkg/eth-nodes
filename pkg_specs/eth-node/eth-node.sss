@@ -1,8 +1,9 @@
 name = "eth-node"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
-variants = []
-build-depends = []
-packages = ["eth-node"]
+# You can only run one consensus/execution client per chain currently
+variants = ["mainnet", "sepolia", "ephemery", "goerli"]
+build_depends = []
+packages = ["eth-node-@variant"]
 skip_debug_symbols = true
 

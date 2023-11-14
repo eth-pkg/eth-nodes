@@ -46,6 +46,9 @@ This project is designed to simplify the process of packaging different Ethereum
 
    ```bash
    make upload CLIENT=erigon
+   #For other packages
+   make upload-eth-node
+   make upload-eth-node-service
    ```
 
 ## Patch source

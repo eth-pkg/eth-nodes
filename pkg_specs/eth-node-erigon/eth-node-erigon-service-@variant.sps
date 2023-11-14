@@ -8,7 +8,7 @@ conflicts = ["eth-node-execution-client-service-{variant}"]
 provides = ["eth-node-execution-client-service-{variant}"]
 summary = "Service package for erigon"
 
-[extra_groups."eth-node-erigon-{variant}"]
+[extra_groups."eth-node-{variant}"]
 create=false
 
 [config."config.toml"]

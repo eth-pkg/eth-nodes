@@ -1,0 +1,9 @@
+Template: eth-node-service-ephemery/jwtsecret
+Type: string
+Default: /data/jwt/ephemery/jwt.hex
+Description: Path to jwt secret
+
+Template: eth-node-service-ephemery/datadir
+Type: string
+Default: /data/ephemery
+Description: Data dir

@@ -1,0 +1,13 @@
+# confext packaget to sync variables that required by multiple clients
+# ex: datadir, jwt secret
+name = "eth-node-service"
+maintainer = "Eniko Nagy <mail@eenagy.com>"
+section = "net"
+# Add all variants that you plan to support in clients
+# not all variant needs to be suport
+# Make sure that the variants are the same for the eth-node package as well
+variants = ["mainnet", "sepolia", "ephemery", "goerli"]
+build_depends = []
+packages = ["eth-node-service-@variant"]
+skip_debug_symbols = true
+
