@@ -1,0 +1,16 @@
+[Unit]
+Description=Service package for prysm
+
+[Service]
+Type=exec
+ExecStart=/usr/bin/prysm-beacon-chain $DEBCRAFTER_EXTRA_SERVICE_ARGS
+User=eth-node-prysm-service-sepolia
+Group=eth-node-prysm-service-sepolia
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target

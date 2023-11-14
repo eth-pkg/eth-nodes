@@ -1,0 +1,117 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+db_get eth-node-prysm-config-default-sepolia/execution-endpoint
+CONFIG["eth-node-prysm-config-default-sepolia/execution-endpoint"]="$RET"
+db_get eth-node-prysm-config-default-sepolia/genesis-state
+CONFIG["eth-node-prysm-config-default-sepolia/genesis-state"]="$RET"
+db_get eth-node-prysm-config-default-sepolia/checkpoint-sync-url
+CONFIG["eth-node-prysm-config-default-sepolia/checkpoint-sync-url"]="$RET"
+db_get eth-node-prysm-config-default-sepolia/genesis-beacon-api-url
+CONFIG["eth-node-prysm-config-default-sepolia/genesis-beacon-api-url"]="$RET"
+db_get eth-node-prysm-config-default-sepolia/jwt-secret
+CONFIG["eth-node-prysm-config-default-sepolia/jwt-secret"]="$RET"
+db_get eth-node-prysm-config-default-sepolia/datadir
+CONFIG["eth-node-prysm-config-default-sepolia/datadir"]="$RET"
+mkdir -p "`dirname "/etc/eth-node-prysm-service-sepolia/config.yaml"`"
+echo -n > "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo '# Automtically generated - DO NOT MODIFY!' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+chmod 640 /etc/eth-node-prysm-service-sepolia/config.yaml
+RET="${CONFIG[eth-node-prysm-config-default-sepolia/checkpoint-sync-url]}"
+echo >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo -n "checkpoint-sync-url: \"" >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+fi
+
+RET="${CONFIG[eth-node-prysm-config-default-sepolia/datadir]}"
+echo >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo -n "datadir: \"" >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+fi
+
+RET="${CONFIG[eth-node-prysm-config-default-sepolia/execution-endpoint]}"
+echo >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo -n "execution-endpoint: \"" >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+fi
+
+RET="${CONFIG[eth-node-prysm-config-default-sepolia/genesis-beacon-api-url]}"
+echo >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo -n "genesis-beacon-api-url: \"" >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+fi
+
+RET="${CONFIG[eth-node-prysm-config-default-sepolia/genesis-state]}"
+echo >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo -n "genesis-state: \"" >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+fi
+
+RET="${CONFIG[eth-node-prysm-config-default-sepolia/jwt-secret]}"
+echo >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+echo -n "jwt-secret: \"" >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+if [ $(cat << EOF | wc -c
+$RET
+EOF
+) -gt 1 ]; then
+cat << EOF | perl -pe 'chomp if eof' | sed -e 's/\\/\\\\/' -e 's/"/\\"/' | awk 1 ORS='\n' | sed 's/$/"/' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+$RET
+EOF
+else
+echo '"' >> "/etc/eth-node-prysm-service-sepolia/config.yaml"
+fi
+
+MAINTSCRIPT_ACTION="$1" MAINTSCRIPT_VERSION="$2" 'bash' '/etc/eth-node-prysm-service-sepolia/postprocess.sh' 'sepolia'
+dpkg-trigger --no-await "`realpath "/etc/eth-node-prysm-service-sepolia/config.yaml"`"
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-prysm-config-default-sepolia-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

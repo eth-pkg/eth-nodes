@@ -4,6 +4,7 @@ provides = ["eth-node-prysm-config-{variant}"]
 replaces = ["eth-node-prysm-config-{variant}"]
 conflicts = ["eth-node-prysm-config-{variant}"]
 summary = "Required configuration options for prysm"
+add_files = ["debian/postprocess.sh /etc/lib/eth-node-prysm-service-{variant}"]
 
 [config."config.yaml"]
 format="yaml"
@@ -32,13 +33,31 @@ summary = "Genesis beacon API URL"
 type = "string"
 priority = "medium"
 
+[config."config.yaml".ivars."jwt-secret"]
+summary = "Path to jwt secret"
+default = "/data/jwt/{variant}/jwt.hex"
+type = "path"
+file_type = "regular"
+priority = "medium"
+
+[config."config.yaml".ivars.datadir]
+summary = "Data dir"
+type = "path"
+file_type = "dir"
+default = "/data/{variant}"
+priority = "medium"
+
+[config."config.yaml".postprocess]
+command = ["bash", "/etc/eth-node-prysm-service-{variant}/postprocess.sh", "{variant}"]
+
+### TODO need to modify debcrafter as package directories broke this
 # External config, defined in another package, the value will be pulled from that package
 # name is the name in this package
-[config."config.yaml".evars."../eth-node-service-@variant/eth-node-service-@variant"."jwtsecret"]
-name="jwt-secret"
+#[config."config.yaml".evars."../eth-node-service/eth-node-service-@variant"."jwtsecret"]
+#name="jwt-secret"
 
 # External config, defined in another package, the value will be pulled from that package
-[config."config.yaml".evars."../eth-node-service-@variant/eth-node-service-@variant".datadir]
-name="datadir"
+#[config."config.yaml".evars."../eth-node-service/eth-node-service-@variant".datadir]
+#name="datadir"
 
 

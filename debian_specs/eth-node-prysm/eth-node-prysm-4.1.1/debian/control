@@ -1,0 +1,56 @@
+Source: eth-node-prysm
+Section: net
+Priority: optional
+Standards-Version: 4.5.1
+Maintainer: Eniko Nagy <mail@eenagy.com>
+Build-Depends: debhelper (>= 9),
+               debhelper (>= 12.1.1),
+               wget,
+               ca-certificates,
+               git,
+               cmake,
+               libssl-dev,
+               libgmp-dev,
+               libtinfo5,
+               libprotoc-dev
+
+Package: eth-node-prysm
+Priority: optional
+Architecture: any
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Suggests: eth-node
+Provides: eth-node-consensus-client
+Description: Prysm: An Ethereum Consensus Implementation Written in Go
+ Prysm
+ A full-featured client for the Ethereum Proof-of-Stake protocol, written in Go
+ .
+ The Prysm project is a Go implementation of the Ethereum protocol as detailed by its official specification. It contains a full beacon node implementation as well as a validator client for participating in blockchain consensus. Prysm utilizes top tools for production servers and interprocess communication, using Google's gRPC library, BoltDB as an optimized, persistent, key-value store, and libp2p by Protocol Labs for all peer-to-peer networking.
+ .
+ Launched December 1st 2020, eth2 is a publicly accessible network running multiple client implementations participating in Ethereum consensus based on the formal specification for the protocol. The official and only validator deposit contract is 0x00000000219ab540356cbb839cbe05303d7705fa. 
+ 
+Package: eth-node-prysm-config-default-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: eth-node-prysm-service-sepolia
+Provides: eth-node-prysm-config-sepolia
+Conflicts: eth-node-prysm-config-sepolia
+Enhances: eth-node-prysm-service-sepolia
+Replaces: eth-node-prysm-config-sepolia
+Description: Required configuration options for prysm
+
+Package: eth-node-prysm-service-sepolia
+Priority: optional
+Architecture: all
+Depends: ${misc:Depends},
+         ${shlibs:Depends},
+         eth-node-prysm,
+         eth-node-prysm (>= 4.1.1),
+         eth-node-prysm-config-sepolia,
+         eth-node-service-sepolia,
+         procps
+Provides: eth-node-execution-client-service-sepolia
+Conflicts: eth-node-execution-client-service-sepolia
+Description: Service package for prysm
