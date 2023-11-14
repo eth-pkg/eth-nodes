@@ -1,6 +1,6 @@
 # Ethereum Node Packaging
 
-This project is designed to simplify the process of packaging different Ethereum nodes for Debian-based systems. It provides a structured way to create Debian packages for multiple Ethereum node clients. 
+This project is designed to simplify the process of packaging different Ethereum nodes for Debian-based systems. It provides a structured way to create Debian packages for multiple Ethereum clients. 
 
 ## Usage
 
