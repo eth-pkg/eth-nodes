@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-export BUILD_DIR=/tmp
+export BUILD_DIR=/tmp/eth-node-prysm
 export GOCACHE=$(BUILD_DIR)/.gocache
 export GOROOT=$(BUILD_DIR)/go
 export GOPATH=$(BUILD_DIR)/go-libs
@@ -19,10 +19,10 @@ override_dh_auto_test:
 override_dh_auto_clean:
 	# Do nothing, patch the makefile
 	#
-	-rm $(GO_TAR)
-	-rm $(BUILD_DIR)/go
+	-rm -rf $(BUILD_DIR)
 
 override_dh_auto_build:
+	mkdir -p $(BUILD_DIR)
 	wget -q --no-check-certificate https://go.dev/dl/$(GO_TAR)
 	tar -C $(BUILD_DIR) -xzf $(GO_TAR)
 	rm $(GO_TAR)
@@ -32,7 +32,7 @@ override_dh_auto_build:
 	$(GOPATH)/bin/bazelisk build //cmd/beacon-chain:beacon-chain --config=release
 	$(GOPATH)/bin/bazelisk build //cmd/validator:validator --config=release 
 
-
+# Todo this needs to be merged with the debcrafter generated debian/rules override
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-prysm-service-mainnet
 	dh_installsystemd --name=eth-node-prysm-service-sepolia

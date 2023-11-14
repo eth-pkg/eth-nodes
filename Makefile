@@ -81,8 +81,7 @@ $(DEPS_$1): $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
 	@echo "Dependencies for $$@: $$^"
 	@echo "Copying source $$@"
 	@cp -R $$(DEBIAN_DIR_$1) $$(SOURCE_DIR_$1)
-	@cp -R $$(ADD_SRC_DIR_$1) $$(SOURCE_DIR_$1)
-	@cp -R $$(PC_DIR_$1) $$(SOURCE_DIR_$1)
+	@cp -R $$(ADD_SRC_DIR_$1)/* $$(SOURCE_DIR_$1)
 endef
 
 define EXTRACT_SOURCE_template
