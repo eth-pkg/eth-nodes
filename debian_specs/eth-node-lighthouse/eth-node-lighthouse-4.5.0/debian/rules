@@ -1,13 +1,7 @@
 #!/usr/bin/make -f
-export CARGO_INSTALL_EXTRA_FLAGS= --root build
 
 %:
 	dh $@
-
-override_dh_auto_test:
-	# do not run the tests
-	# TODO tests are failing 
-	
 
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-lighthouse-service-mainnet

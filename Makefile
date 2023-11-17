@@ -155,8 +155,8 @@ $(foreach client, $(CLIENTS), $(eval $(client)_setup: $(DEPS_$(client))))
 	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null || true)
 	@cd ${SOURCE_DIR_$*} && (quilt --quiltrc=$(PKG_DIR)/tools/.quiltrc-dpkg push 2> /dev/null || true)
 	#@cd ${SOURCE_DIR_$*} &&  debuild
-	#cd ${SOURCE_DIR_$*} && dpkg-buildpackage -us -uc
-	@cd ${SOURCE_DIR_$*} && chmod +x debian/rules && sbuild -d $(CODENAME)
+	cd ${SOURCE_DIR_$*} && dpkg-buildpackage -us -uc
+	#@cd ${SOURCE_DIR_$*} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
 # create directory if not exists
 $(foreach client, $(CLIENTS), $(eval $(call CREATE_PACKAGING_DIR_template,$(client))))
