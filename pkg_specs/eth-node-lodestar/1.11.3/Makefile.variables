@@ -1,0 +1,20 @@
+HOME := /home/debian
+WORK_DIR := $(HOME)/eth-pkg
+ETH_DEB_DIR := $(HOME)/eth-deb
+SHELL := /bin/bash
+CODENAME := bookworm
+
+.SILENT:
+
+# Client-specific variables
+
+CLIENT := lodestar
+VERSION_NUMBER := $(shell dpkg-parsechangelog -l eth-node-$(CLIENT).changelog -S Version 2>/dev/null | sed 's/-.*//')
+PACKAGE_NAME := eth-node-$(CLIENT)_$(VERSION_NUMBER)
+# double dir, as first dir contains debian tarballs
+PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
+TARBALL_URL := https://github.com/ChainSafe/lodestar/archive/refs/tags/v$(VERSION_NUMBER).tar.gz
+
+# Git source
+GIT_SOURCE := https://github.com/ChainSafe/lodestar.git
+
