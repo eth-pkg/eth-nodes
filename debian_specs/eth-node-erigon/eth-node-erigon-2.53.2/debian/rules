@@ -1,9 +1,0 @@
-#!/usr/bin/make -f
-
-%:
-	dh $@
-
-override_dh_installsystemd:
-	dh_installsystemd --name=eth-node-erigon-service-sepolia
-
-override_dh_dwz:

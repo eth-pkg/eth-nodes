@@ -1,13 +1,26 @@
-include Makefile.variables
+HOME := /home/debian
+WORK_DIR := $(HOME)/eth-pkg
+ETH_DEB_DIR := $(HOME)/eth-deb
+SHELL := /bin/bash
+CODENAME := bookworm
+
+.SILENT:
+
+# Client-specific variables
+
+CLIENT := lodestar
+VERSION_NUMBER := $(shell dpkg-parsechangelog -l eth-node-$(CLIENT).changelog -S Version 2>/dev/null | sed 's/-.*//')
+PACKAGE_NAME := eth-node-$(CLIENT)_$(VERSION_NUMBER)
+# double dir, as first dir contains debian tarballs
+PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
+TARBALL_URL := https://github.com/ChainSafe/lodestar/archive/refs/tags/v$(VERSION_NUMBER_lodestar).tar.gz
+
+# Git source
+GIT_SOURCE := https://github.com/ChainSafe/lodestar.git
 
 .PHONY: setup-quilt build debcrafter
 # Targets and rules
-all: build 
-
-build: 
-	echo "Working in $(CURDIR)"
-	echo -e "Building Client:$(CLIENT) VERSION:$(VERSION_NUMBER)\n"
-	$(MAKE) build-dpkg
+all: build-dpkg
 
 # simple build
 build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
@@ -15,7 +28,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 	cd $(PACKAGING_DIR) && dpkg-buildpackage -us -uc -nc
 
 # whole reproducible build
-build-sbuild: $(PACKAGING_DIR) $(PACKAGING_DIR)/debian/src  setup-quilt
+build-sbuild: $(PACKAGING_DIR) setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
@@ -60,17 +73,11 @@ $(PACKAGING_DIR)/debian/control: $(PACKAGING_DIR)/debian/source/format $(PACKAGI
   	{ head -n 3 control; echo "Standards-Version: 4.5.1"; tail -n +4 control; } > control.new && \
   	mv control.new control
 
-# 4.d Copy source dir override if exist
+# 4.d Copy source dir override if exist 
 # This step allows to override generated debian files, or save patched config between versions
-ifeq ($(wildcard src),)
-$(PACKAGING_DIR)/debian/src:
-	echo "Source directory 'src' not found. Skipping copy."
-else
-$(PACKAGING_DIR)/debian/src: | src
+$(PACKAGING_DIR)/debian/src: src
 	echo -e "Copying source $@\n"
 	cp -R src/* $(PACKAGING_DIR)
-endif
-
 
 # setup-quilt for patching
 setup-quilt: $(PACKAGING_DIR)

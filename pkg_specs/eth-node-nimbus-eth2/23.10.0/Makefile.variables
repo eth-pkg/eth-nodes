@@ -1,0 +1,31 @@
+HOME := /home/debian
+WORK_DIR := $(HOME)/eth-pkg
+ETH_DEB_DIR := $(HOME)/eth-deb
+SHELL := /bin/bash
+CODENAME := bookworm
+
+.SILENT:
+
+# Client-specific variables
+
+CLIENT := nimbus-eth2
+VERSION_NUMBER := $(shell dpkg-parsechangelog -l eth-node-$(CLIENT).changelog -S Version 2>/dev/null | sed 's/-.*//')
+PACKAGE_NAME := eth-node-$(CLIENT)_$(VERSION_NUMBER)
+# double dir, as first dir contains debian tarballs
+PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
+TARBALL_URL := https://github.com/status-im/nimbus-eth2/archive/refs/tags/v$(VERSION_NUMBER).tar.gz
+
+# Git source
+GIT_SOURCE := https://github.com/status-im/nimbus-eth2.git
+
+$(info HOME: $(HOME))
+$(info WORK_DIR: $(WORK_DIR))
+$(info ETH_DEB_DIR: $(ETH_DEB_DIR))
+$(info SHELL: $(SHELL))
+$(info CODENAME: $(CODENAME))
+$(info CLIENT: $(CLIENT))
+$(info VERSION_NUMBER: $(VERSION_NUMBER))
+$(info PACKAGE_NAME: $(PACKAGE_NAME))
+$(info PACKAGING_DIR: $(PACKAGING_DIR))
+$(info TARBALL_URL: $(TARBALL_URL))
+$(info GIT_SOURCE: $(GIT_SOURCE))
