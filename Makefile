@@ -112,14 +112,15 @@ $(DEBIAN_DIR_$1): $$(DEBCRAFTER_PKG_DIR_$1)
 	# Copy Additional source if needed, can be patches and so on
 	@cp -R $$(DEBCRAFTER_PKG_DIR_$1)/src $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) 
 	@# Add quilt format, so the package can be patched, not supported currently by debcrafter
-	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir debian/source && touch debian/source/format
+	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir -p debian/source && touch debian/source/format
 	@echo "3.0 (quilt)" > $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian/source/format
-	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir .pc	
+	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && mkdir -p .pc	
 	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1) && touch .pc/.version 	
 	@echo "2" > $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/.pc/.version
 	# Add Standards-Version to the file 
 	@cd $$(PKG_DIR)/debian_specs/eth-node-$1/eth-node-$1-$$(VERSION_NUMBER_$1)/debian &&  head -n 3 control > control.txt && echo "Standards-Version: 4.5.1" >> control.txt && tail -n +4 control >> control.txt && mv control.txt control
 
+	@rm $(PC_DIR_$1)/applied-patches
 	
 endef
 
