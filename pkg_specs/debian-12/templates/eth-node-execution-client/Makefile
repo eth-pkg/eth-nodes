@@ -7,7 +7,7 @@ all: build
 build: 
 	echo "Working in $(CURDIR)"
 	echo -e "Building Client:$(CLIENT) VERSION:$(VERSION_NUMBER)\n"
-	$(MAKE) build-dpkg
+	$(MAKE) build-sbuild
 
 # simple build
 build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
