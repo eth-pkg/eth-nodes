@@ -18,7 +18,8 @@ TARBALL_URL := https://github.com/hyperledger/besu/archive/refs/tags/$(VERSION_N
 GIT_SOURCE := https://github.com/hyperledger/besu.git
 
 IS_VIRTUAL_PACKAGE := 
-SBUILD_ENV := /srv/chroot/$(CODENAME)-amd64.tar.gz
+SBUILD_ENV := /tmp/sbuild/$(PACKAGE_NAME)
+SBUILD_TARBALL := /srv/chroot/$(CODENAME)-amd64.tar.gz
 
 $(info HOME: $(HOME))
 $(info WORK_DIR: $(WORK_DIR))
@@ -34,3 +35,4 @@ $(info TARBALL_URL: $(TARBALL_URL))
 $(info IS_VIRTUAL_PACKAGE: $(IS_VIRTUAL_PACKAGE))
 $(info GIT_SOURCE: $(GIT_SOURCE))
 $(info SBUILD_ENV: $(SBUILD_ENV))
+$(info SBUILD_TARBALL: $(SBUILD_TARBALL))
