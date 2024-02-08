@@ -1,0 +1,17 @@
+name: Build eth-node-nethermind on debian 12
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_eth_node_nethermind_debian12:
+    runs-on: debian
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Directory 2
+        run: |
+          # Add your build steps for dir2
