@@ -13,7 +13,7 @@ $source_only_changes = 1;
 $verbose = 1;
 
 $build_environment = {
-'HOME' => '/tmp/sbuild'
+'HOME' => '/home/debian'
 };
 
 ##############################################################################

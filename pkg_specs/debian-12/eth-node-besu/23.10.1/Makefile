@@ -15,7 +15,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 	cd $(PACKAGING_DIR) && dpkg-buildpackage -us -uc -nc
 
 # whole reproducible build
-build-sbuild: $(PACKAGING_DIR) $(PACKAGING_DIR)/debian/src $(PACKAGING_DIR)/debian setup-quilt $(SBUILD_TARBALL)
+build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt $(SBUILD_TARBALL)
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
@@ -97,14 +97,9 @@ $(SBUILD_ENV):
 # sbuild 3. create env, extract tarball  
 $(SBUILD_TARBALL): $(HOME)/.sbuildrc $(SBUILD_ENV)
 	echo "Creating sbuild env $@"
-	sudo sbuild-adduser debian > /dev/null 2>&1 || true
-	newgrp sbuild
-	sudo sbuild-createchroot \
-		--merged-usr \
-		--make-sbuild-tarball=$(SBUILD_TARBALL) \
-		$(CODENAME) \
-		$(SBUILD_ENV) \
-		http://deb.debian.org/debian 
+	#TODO sudo sbuild-adduser debian > /dev/null 2>&1 || true
+	#newgrp sbuild
+	#sudo sbuild-createchroot --merged-usr --make-sbuild-tarball=$(SBUILD_TARBALL) $(CODENAME) $(SBUILD_ENV) http://deb.debian.org/debian 
 
 # setup-quilt for patching
 setup-quilt: $(PACKAGING_DIR)

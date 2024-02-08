@@ -1,10 +1,16 @@
 #!/usr/bin/make -f
 
+export BUILD_DIR=/tmp/eth-node-besu
+
 %:
+	echo "make: Entering directory '$(CURDIR)'"
 	dh $@
 
 override_dh_auto_build:
+	echo "Building eth-node-besu"
 	./gradlew installDist
+	
+override_dh_auto_install:
 
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-besu-service-mainnet
