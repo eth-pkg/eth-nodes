@@ -15,10 +15,10 @@ PACKAGE_NAME := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER)
 # double dir, as first dir contains debian tarballs
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
 TARBALL_URL := 
+GIT_SOURCE := 
+
 IS_VIRTUAL_PACKAGE := true
 
-# Git source
-GIT_SOURCE := 
 
 $(info HOME: $(HOME))
 $(info WORK_DIR: $(WORK_DIR))

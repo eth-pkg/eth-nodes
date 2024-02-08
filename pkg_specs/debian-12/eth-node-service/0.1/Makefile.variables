@@ -20,6 +20,9 @@ IS_VIRTUAL_PACKAGE := true
 # Git source
 GIT_SOURCE := 
 
+IS_VIRTUAL_PACKAGE := 
+
+
 $(info HOME: $(HOME))
 $(info WORK_DIR: $(WORK_DIR))
 $(info ETH_DEB_DIR: $(ETH_DEB_DIR))
