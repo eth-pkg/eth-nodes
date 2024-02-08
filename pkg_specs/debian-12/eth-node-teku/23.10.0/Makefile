@@ -25,20 +25,31 @@ $(WORK_DIR)/$(PACKAGE_NAME):
 	mkdir -p $@
 
 # 2. Download the source .orig.tar.gz
-$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME) 
+ifndef IS_VIRTUAL_PACKAGE
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
 	echo -e "Downloading source $@\n"
 	cd $< && wget -O $@ ${TARBALL_URL}
+else
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz:
+	echo "Skipping source download as IS_VIRTUAL_PACKAGE is defined"
+endif
 
 # 3. Extract the source .orig.tar.gz
-$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz 
+ifndef IS_VIRTUAL_PACKAGE
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz
 	echo -e "Extracting source $@\n"
 	mkdir -p $@ && tar -zxvf $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz -C $@ --strip-components=1 >/dev/null 2>&1
+else
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)
+	echo "Skipping source extraction as IS_VIRTUAL_PACKAGE is defined"
+	mkdir -p $@
+endif
 
 # 4. Create debian dir if not exist 
 $(PACKAGING_DIR)/debian: $(PACKAGING_DIR) debcrafter
-	echo -e "Creating packaging directory $(PACKAGING_DIR)\n"
-	debcrafter eth-node-$(CLIENT).sss /tmp 
-	cp -R /tmp/eth-node-$(CLIENT)-$(VERSION_NUMBER)/debian $(PACKAGING_DIR)
+	echo -e "Creating debian directory $(PACKAGING_DIR)/debian\n"
+	debcrafter $(CLIENT_FULL_NAME).sss /tmp 
+	cp -R /tmp/$(CLIENT_FULL_NAME)-$(VERSION_NUMBER)/debian $(PACKAGING_DIR)
 
 # 4.a Patch quilt 
 $(PACKAGING_DIR)/debian/source/format: $(PACKAGING_DIR)/debian
@@ -82,7 +93,7 @@ setup-quilt: $(PACKAGING_DIR)
 
 # Git checkout
 patch-checkout:
-	echo "Checking out source code for $(CLIENT)"
+	echo "Checking out source code for $(PACKAGE_NAME)"
 	git clone --depth 1 $(GIT_SOURCE) $(PACKAGING_DIR) --branch=v$(VERSION_NUMBER)
 
 debcrafter: 

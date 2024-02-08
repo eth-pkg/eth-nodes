@@ -8,15 +8,16 @@ CODENAME := bookworm
 
 # Client-specific variables
 
-CLIENT := besu
-CLIENT_FULL_NAME := eth-node-$(CLIENT)
+CLIENT := 
+CLIENT_FULL_NAME := eth-node
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null | sed 's/-.*//')
 PACKAGE_NAME := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER)
+# double dir, as first dir contains debian tarballs
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
-TARBALL_URL := https://github.com/hyperledger/besu/archive/refs/tags/$(VERSION_NUMBER).tar.gz
-GIT_SOURCE := https://github.com/hyperledger/besu.git
+TARBALL_URL := 
+GIT_SOURCE := 
 
-IS_VIRTUAL_PACKAGE := 
+IS_VIRTUAL_PACKAGE := true
 
 
 $(info HOME: $(HOME))

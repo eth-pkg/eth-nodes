@@ -1,9 +1,0 @@
-Template: eth-node-service-mainnet/jwtsecret
-Type: string
-Default: /data/jwt/mainnet/jwt.hex
-Description: Path to jwt secret
-
-Template: eth-node-service-mainnet/datadir
-Type: string
-Default: /data/mainnet
-Description: Data dir

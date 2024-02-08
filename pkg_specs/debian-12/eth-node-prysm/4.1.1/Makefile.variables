@@ -9,7 +9,8 @@ CODENAME := bookworm
 # Client-specific variables
 
 CLIENT := prysm
-VERSION_NUMBER := $(shell dpkg-parsechangelog -l eth-node-$(CLIENT).changelog -S Version 2>/dev/null | sed 's/-.*//')
+CLIENT_FULL_NAME := eth-node-$(CLIENT)
+VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null | sed 's/-.*//')
 PACKAGE_NAME := eth-node-$(CLIENT)_$(VERSION_NUMBER)
 # double dir, as first dir contains debian tarballs
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
@@ -18,14 +19,19 @@ TARBALL_URL := https://github.com/prysmaticlabs/prysm/archive/refs/tags/v$(VERSI
 # Git source
 GIT_SOURCE := https://github.com/prysmaticlabs/prysm.git
 
+IS_VIRTUAL_PACKAGE := 
+
+
 $(info HOME: $(HOME))
 $(info WORK_DIR: $(WORK_DIR))
 $(info ETH_DEB_DIR: $(ETH_DEB_DIR))
 $(info SHELL: $(SHELL))
 $(info CODENAME: $(CODENAME))
 $(info CLIENT: $(CLIENT))
+$(info CLIENT_FULL_NAME: $(CLIENT_FULL_NAME))
 $(info VERSION_NUMBER: $(VERSION_NUMBER))
 $(info PACKAGE_NAME: $(PACKAGE_NAME))
 $(info PACKAGING_DIR: $(PACKAGING_DIR))
 $(info TARBALL_URL: $(TARBALL_URL))
+$(info IS_VIRTUAL_PACKAGE: $(IS_VIRTUAL_PACKAGE))
 $(info GIT_SOURCE: $(GIT_SOURCE))
