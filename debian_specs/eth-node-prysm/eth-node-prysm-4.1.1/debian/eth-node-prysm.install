@@ -1,2 +1,0 @@
-bazel-bin/cmd/beacon-chain/beacon-chain_/beacon-chain /usr/lib/eth-node-prysm/bin
-bazel-bin/cmd/validator/validator_/validator /usr/lib/eth-node-prysm/bin
