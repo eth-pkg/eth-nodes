@@ -15,7 +15,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 	cd $(PACKAGING_DIR) && dpkg-buildpackage -us -uc -nc
 
 # whole reproducible build
-build-sbuild: $(PACKAGING_DIR) $(PACKAGING_DIR)/debian/src  setup-quilt
+build-sbuild: $(PACKAGING_DIR) $(PACKAGING_DIR)/debian/src  setup-quilt $(SBUILD_ENV)
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
@@ -86,16 +86,19 @@ endif
 
 # sbuild 1. copy config  
 $(HOME)/.sbuildrc: 
+	echo "Copying .sbuildrc"
 	cp $(WORK_DIR)/tools/sbuildrc-$(OS_DISTRIBUTION) 
 
 # sbuild 2. create dir  
 /srv/$(PACKAGE_NAME)-sbuild: 
+	echo "Creating dir $<"
 	mkdir $@ 
 
 # sbuild 3. create env  
-SBUILD_ENV := /srv/chroot/$(CODENAME)-amd64.tar.gz
 $(SBUILD_ENV): $(HOME)/.sbuildrc /srv/$(PACKAGE_NAME)-sbuild
-    sudo sbuild-adduser debian
+	echo "Creating sbuild env $<"
+	sudo sbuild-adduser debian
+	newgrp sbuild
 	sudo sbuild-createchroot \
 		--merged-usr \
 		--make-sbuild-tarball=/srv/chroot/$(CODENAME)-amd64.tar.gz \
@@ -123,4 +126,3 @@ debcrafter:
 clean:
 	echo "Cleaning lighthouse directory"
 	rm -rf $(PACKAGING_DIR)
-
