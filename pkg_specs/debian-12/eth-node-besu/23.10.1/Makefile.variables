@@ -3,6 +3,7 @@ WORK_DIR := $(HOME)/eth-pkg
 ETH_DEB_DIR := $(HOME)/eth-deb
 SHELL := /bin/bash
 CODENAME := bookworm
+OS_DISTRIBUTION := debian-12
 
 .SILENT:
 

@@ -1,6 +1,6 @@
 include Makefile.variables
 
-.PHONY: setup-quilt build debcrafter
+.PHONY: setup-quilt build debcrafter setup-sbuild
 # Targets and rules
 all: build 
 
@@ -82,6 +82,26 @@ $(PACKAGING_DIR)/debian/src: | src
 	cp -R src/* $(PACKAGING_DIR)
 endif
 
+# sbuild setup
+
+# sbuild 1. copy config  
+$(HOME)/.sbuildrc: 
+	cp $(WORK_DIR)/tools/sbuildrc-$(OS_DISTRIBUTION) 
+
+# sbuild 2. create dir  
+/srv/$(PACKAGE_NAME)-sbuild: 
+	mkdir $@ 
+
+# sbuild 3. create env  
+SBUILD_ENV := /srv/chroot/$(CODENAME)-amd64.tar.gz
+$(SBUILD_ENV): $(HOME)/.sbuildrc /srv/$(PACKAGE_NAME)-sbuild
+    sudo sbuild-adduser debian
+	sudo sbuild-createchroot \
+		--merged-usr \
+		--make-sbuild-tarball=/srv/chroot/$(CODENAME)-amd64.tar.gz \
+		$(CODENAME) \
+		$(shell mktemp -d) \
+		http://deb.debian.org/debian
 
 # setup-quilt for patching
 setup-quilt: $(PACKAGING_DIR)
