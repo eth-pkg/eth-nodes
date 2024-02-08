@@ -1,26 +1,13 @@
-HOME := /home/debian
-WORK_DIR := $(HOME)/eth-pkg
-ETH_DEB_DIR := $(HOME)/eth-deb
-SHELL := /bin/bash
-CODENAME := bookworm
-
-.SILENT:
-
-# Client-specific variables
-
-CLIENT := lighthouse
-VERSION_NUMBER := $(shell dpkg-parsechangelog -l eth-node-$(CLIENT).changelog -S Version 2>/dev/null | sed 's/-.*//')
-PACKAGE_NAME := eth-node-$(CLIENT)_$(VERSION_NUMBER)
-# double dir, as first dir contains debian tarballs
-PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
-TARBALL_URL := https://github.com/sigp/lighthouse/archive/refs/tags/v$(VERSION_NUMBER).tar.gz
-
-# Git source
-GIT_SOURCE := https://github.com/sigp/lighthouse.git
+include Makefile.variables
 
 .PHONY: setup-quilt build debcrafter
 # Targets and rules
-all: build-dpkg
+all: build 
+
+build: 
+	echo "Working in $(CURDIR)"
+	echo -e "Building Client:$(CLIENT) VERSION:$(VERSION_NUMBER)\n"
+	$(MAKE) build-dpkg
 
 # simple build
 build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
@@ -28,7 +15,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 	cd $(PACKAGING_DIR) && dpkg-buildpackage -us -uc -nc
 
 # whole reproducible build
-build-sbuild: $(PACKAGING_DIR) setup-quilt
+build-sbuild: $(PACKAGING_DIR) $(PACKAGING_DIR)/debian/src  setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
@@ -38,20 +25,31 @@ $(WORK_DIR)/$(PACKAGE_NAME):
 	mkdir -p $@
 
 # 2. Download the source .orig.tar.gz
-$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME) 
+ifndef IS_VIRTUAL_PACKAGE
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
 	echo -e "Downloading source $@\n"
 	cd $< && wget -O $@ ${TARBALL_URL}
+else
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz:
+	echo "Skipping source download as IS_VIRTUAL_PACKAGE is defined"
+endif
 
 # 3. Extract the source .orig.tar.gz
-$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz 
+ifndef IS_VIRTUAL_PACKAGE
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz
 	echo -e "Extracting source $@\n"
 	mkdir -p $@ && tar -zxvf $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz -C $@ --strip-components=1 >/dev/null 2>&1
+else
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)
+	echo "Skipping source extraction as IS_VIRTUAL_PACKAGE is defined"
+	mkdir -p $@
+endif
 
 # 4. Create debian dir if not exist 
 $(PACKAGING_DIR)/debian: $(PACKAGING_DIR) debcrafter
-	echo -e "Creating packaging directory $(PACKAGING_DIR)\n"
-	debcrafter eth-node-$(CLIENT).sss /tmp 
-	cp -R /tmp/eth-node-$(CLIENT)-$(VERSION_NUMBER)/debian $(PACKAGING_DIR)
+	echo -e "Creating debian directory $(PACKAGING_DIR)/debian\n"
+	debcrafter $(CLIENT_FULL_NAME).sss /tmp 
+	cp -R /tmp/$(CLIENT_FULL_NAME)-$(VERSION_NUMBER)/debian $(PACKAGING_DIR)
 
 # 4.a Patch quilt 
 $(PACKAGING_DIR)/debian/source/format: $(PACKAGING_DIR)/debian
@@ -73,11 +71,17 @@ $(PACKAGING_DIR)/debian/control: $(PACKAGING_DIR)/debian/source/format $(PACKAGI
   	{ head -n 3 control; echo "Standards-Version: 4.5.1"; tail -n +4 control; } > control.new && \
   	mv control.new control
 
-# 4.d Copy source dir override if exist 
+# 4.d Copy source dir override if exist
 # This step allows to override generated debian files, or save patched config between versions
-$(PACKAGING_DIR)/debian/src: src
+ifeq ($(wildcard src),)
+$(PACKAGING_DIR)/debian/src:
+	echo "Source directory 'src' not found. Skipping copy."
+else
+$(PACKAGING_DIR)/debian/src: | src
 	echo -e "Copying source $@\n"
 	cp -R src/* $(PACKAGING_DIR)
+endif
+
 
 # setup-quilt for patching
 setup-quilt: $(PACKAGING_DIR)
@@ -89,7 +93,7 @@ setup-quilt: $(PACKAGING_DIR)
 
 # Git checkout
 patch-checkout:
-	echo "Checking out source code for $(CLIENT)"
+	echo "Checking out source code for $(PACKAGE_NAME)"
 	git clone --depth 1 $(GIT_SOURCE) $(PACKAGING_DIR) --branch=v$(VERSION_NUMBER)
 
 debcrafter: 
