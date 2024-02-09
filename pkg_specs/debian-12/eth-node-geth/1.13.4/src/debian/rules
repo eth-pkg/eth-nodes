@@ -29,7 +29,7 @@ override_dh_auto_test:
 	# TODO tests are failing under sbuild
 	
 override_dh_auto_build:
-	make -j4 "INSTALL=install --strip-program=true"
+	$(MAKE) -j4 "INSTALL=install --strip-program=true"
 
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-geth-service-sepolia

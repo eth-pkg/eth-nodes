@@ -7,10 +7,10 @@ depends = ["eth-node-geth-config-{variant}", "eth-node-geth"]
 provides = ["eth-node-execution-client-service"]
 summary = "Service package for geth"
 runtime_dir = { mode = "0755" }
-add_files = ["build/config/{variant}.toml /etc/eth-node-geth-service-{variant}/examples/"]
+#add_files = ["build/config/{variant}.toml /etc/eth-node-geth-service-{variant}/examples/"]
 
-[config."config.toml"]
-format = "toml"
+#[config."config.toml"]
+#format = "toml"
 
-[config."config.toml".ivars.DataDir]
+#[config."config.toml".ivars.DataDir]
 
