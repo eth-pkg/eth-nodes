@@ -19,6 +19,8 @@ $(info GIT_SOURCE: $(GIT_SOURCE))
 HOST_HOME := /home/debian
 
 .PHONY: setup-quilt build debcrafter
+.SILENT: 
+
 # Targets and rules
 all: build 
 
@@ -49,7 +51,7 @@ $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_N
 	echo -e "Downloading source $@\n"
 	cd $< && wget -O $@ ${TARBALL_URL}
 else
-$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz:
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
 	echo "Creating empty .tar.gz for virtual package"
 	cd $(WORK_DIR)/$(PACKAGE_NAME) && tar czvf $(PACKAGE_NAME).orig.tar.gz --files-from /dev/null
 endif

@@ -27,12 +27,12 @@ build: BUILD_SYSTEM:=v1
 build: 
 	[ -n "$(PACKAGE)" ] || (echo "Please specify a package to build" && exit 1)
 	[ -d "$(CURDIR)/pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)" ] || (echo "Directory does not exist: $(CURDIR)/pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)" && exit 1)
-	mkdir -p /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
-	cp -r pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)/* /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
+	mkdir -p /tmp/pkg_specs/$(PACKAGE)-$(VERSION)
+	cp -r pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)/* /tmp/pkg_specs/$(PACKAGE)-$(VERSION)
 	# I have no clue why the hidden files are not copied with recursive, neither with -a option
-	cp -r build-systems/$(BUILD_SYSTEM)/.quiltrc-dpkg /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
-	cp -r build-systems/$(BUILD_SYSTEM)/* /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
-	cd /tmp/pkg_specs/$(PACKAGE)_$(VERSION) && $(MAKE) -f Makefile
+	cp -r build-systems/$(BUILD_SYSTEM)/.quiltrc-dpkg /tmp/pkg_specs/$(PACKAGE)-$(VERSION)
+	cp -r build-systems/$(BUILD_SYSTEM)/* /tmp/pkg_specs/$(PACKAGE)-$(VERSION)
+	cd /tmp/pkg_specs/$(PACKAGE)-$(VERSION) && $(MAKE) -f Makefile
 
 available-arch: 
 	echo "Only $(ARCH) is supported at the moment"
