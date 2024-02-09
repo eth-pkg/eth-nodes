@@ -1,11 +1,14 @@
 #!/usr/bin/make -f
 
-CARGO_INSTALL_EXTRA_FLAGS="--root build"
-RUST_VERSION=1.76.0
+export CARGO_INSTALL_EXTRA_FLAGS:="--root build"
+export RUST_VERSION:=1.76.0
+export PATH:="$(HOME)/.cargo/bin:$(PATH)"
+
 
 %:
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain $(RUST_VERSION)
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain $(RUST_VERSION)
 	dh $@
+
 
 override_dh_auto_test:
 	echo "Testing is disabled for this package"
