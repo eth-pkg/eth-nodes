@@ -18,7 +18,6 @@ SBUILD_TARBALL := /srv/chroot/$(CODENAME)-$(ARCH).tar.gz
 
 
 HOST_HOME := /home/debian
-BUILD_HOME := 
 
 .PHONY: setup-quilt build debcrafter
 # Targets and rules
@@ -31,13 +30,11 @@ build:
 	$(MAKE) build-sbuild
 
 # simple build
-build-dpkg: BUILD_HOME=$(HOST_HOME)
 build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd $(PACKAGING_DIR) && dpkg-buildpackage -us -uc -nc
 
 # whole reproducible build
-build-dpkg: BUILD_HOME=/root
 build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
@@ -111,7 +108,7 @@ endif
 # sbuild 1. copy config  
 $(HOST_HOME)/.sbuildrc: 
 	echo "Copying .sbuildrc"
-	cp .sbuildrc-$(CODENAME) $(HOST_HOME)/.sbuildrc
+	cp .sbuildrc-$(CODENAME) /tmp/.sbuildrc
 
 # sbuild 2. create env dir  
 $(SBUILD_ENV): 
@@ -129,9 +126,11 @@ $(SBUILD_TARBALL): $(HOST_HOME)/.sbuildrc $(SBUILD_ENV)
 # setup-quilt for patching
 setup-quilt: $(PACKAGING_DIR)
 	echo -e "Setting up $@\n"
-	cp .quiltrc-dpkg $(BUILD_HOME)
-	cd ${PACKAGING_DIR} && (quilt --quiltrc=$(BUILD_HOME)/.quiltrc-dpkg upgrade 2> /dev/null || true)
-	cd ${PACKAGING_DIR} && (quilt --quiltrc=$(BUILD_HOME)/.quiltrc-dpkg push 2> /dev/null || true)
+	cp .quiltrc-dpkg /tmp
+	cd ${PACKAGING_DIR} && (quilt --quiltrc=/tmp/.quiltrc-dpkg upgrade 2> /dev/null || true)
+	rm -f ${PACKAGING_DIR}/.pc/applied-patches
+	cd ${PACKAGING_DIR} && (quilt --quiltrc=/tmp/.quiltrc-dpkg push || true)
+
 
 
 

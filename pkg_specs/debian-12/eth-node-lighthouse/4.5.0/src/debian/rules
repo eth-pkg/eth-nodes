@@ -1,17 +1,27 @@
 #!/usr/bin/make -f
 
-export CARGO_INSTALL_EXTRA_FLAGS:="--root build"
+export CARGO_INSTALL_EXTRA_FLAGS:=--root build
 export RUST_VERSION:=1.76.0
 export PATH:="$(HOME)/.cargo/bin:$(PATH)"
+export PROFILE:=release
+export FEATURES:=jemalloc
 
 
 %:
-	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain $(RUST_VERSION)
+	cd /tmp && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain $(RUST_VERSION)
 	dh $@
 
 
 override_dh_auto_test:
 	echo "Testing is disabled for this package"
+
+override_dh_auto_install:
+override_dh_auto_build:
+	$(HOME)/.cargo/bin/cargo install --path lighthouse --force --locked \
+		--features "$(FEATURES)" \
+		--profile "$(PROFILE)" \
+		$(CARGO_INSTALL_EXTRA_FLAGS)
+
 
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-lighthouse-service-mainnet

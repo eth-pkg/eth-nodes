@@ -2,7 +2,7 @@ name = "eth-node-lighthouse"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
 variants = ["mainnet", "sepolia"]
-build-depends = ["git", "gcc", "g++", "make", "cmake", "pkg-config", "llvm-dev", "libclang-dev", "clang"]
+build_depends = ["ca-certificates","git", "curl", "gcc", "g++", "make", "cmake", "pkg-config", "llvm-dev", "libclang-dev", "clang"]
 packages = ["eth-node-lighthouse",  "eth-node-lighthouse-service-@variant", "eth-node-lighthouse-config-default-@variant"]
 skip_debug_symbols = true
 
