@@ -1,4 +1,4 @@
-eth-node-erigon (2.53.2-4fc8c37) unstable; urgency=medium
+eth-node-erigon (2.53.2-1) unstable; urgency=medium
 
   * Change the packaging version to reflect the go-ethereum versioning
 

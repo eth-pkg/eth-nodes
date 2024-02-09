@@ -1,4 +1,4 @@
-eth-node-geth (1.13.4-3f907d6a) unstable; urgency=medium
+eth-node-geth (1.13.4-1) unstable; urgency=medium
 
   * Change the packaging version to reflect the go-ethereum versioning
 

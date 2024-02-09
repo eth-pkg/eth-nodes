@@ -1,4 +1,4 @@
-eth-node-nimbus-eth2 (23.10.0-8b07f4f) unstable; urgency=medium
+eth-node-nimbus-eth2 (23.10.0-1) unstable; urgency=medium
 
   * Use correct nimbus-eth2 versioning version number + git commit
 

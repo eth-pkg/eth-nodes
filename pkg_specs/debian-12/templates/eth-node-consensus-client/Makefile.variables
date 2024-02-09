@@ -6,7 +6,6 @@ ARCH:=amd64
 CLIENT := consensus-client
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null | sed 's/-.*//')
-PACKAGE_NAME := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER)
 # double dir, as first dir contains debian tarballs
 TARBALL_URL := 
 # Git source

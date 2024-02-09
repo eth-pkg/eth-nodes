@@ -1,4 +1,4 @@
-eth-node-execution-client (<version_number>-<short_commit>) unstable; urgency=medium
+eth-node-execution-client (<version_number>-<short_commit>-<revision>) unstable; urgency=medium
 
   * Change the packaging version to reflect the client versioning
 

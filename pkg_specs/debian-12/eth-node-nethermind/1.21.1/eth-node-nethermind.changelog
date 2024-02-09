@@ -1,4 +1,4 @@
-eth-node-nethermind (1.21.1-9b435ba) unstable; urgency=medium
+eth-node-nethermind (1.21.1-1) unstable; urgency=medium
 
   * Change the packaging version to reflect the nethermind versioning
 

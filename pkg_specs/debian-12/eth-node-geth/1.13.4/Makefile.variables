@@ -6,7 +6,6 @@ ARCH:=amd64
 CLIENT :=geth
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version | sed 's/-.*//')
-PACKAGE_NAME := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER)
 # double dir, as first dir contains debian tarballs
 TARBALL_URL := https://github.com/ethereum/go-ethereum/archive/refs/tags/v$(VERSION_NUMBER).tar.gz
 
