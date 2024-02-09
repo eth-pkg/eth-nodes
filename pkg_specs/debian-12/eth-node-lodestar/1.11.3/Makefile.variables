@@ -1,4 +1,3 @@
-HOME := /home/debian
 WORK_DIR := /tmp/eth-pkg
 SHELL := /bin/bash
 CODENAME := bookworm
