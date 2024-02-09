@@ -5,7 +5,7 @@ ARCH:=amd64
 
 CLIENT := lodestar
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
-VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null | sed 's/-.*//')
+VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null)
 # double dir, as first dir contains debian tarballs
 TARBALL_URL := https://github.com/ChainSafe/lodestar/archive/refs/tags/v$(VERSION_NUMBER).tar.gz
 
