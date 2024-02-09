@@ -6,17 +6,17 @@ This project is designed to simplify the process of packaging different Ethereum
 
 **Build the Debian Packages**: Build Debian packages for each client using the generated variables.
    ```bash
-   make build PACKAGE=eth-node VERSION=0.1
-   make build PACKAGE=eth-node-besu VERSION=23.10.1
-   make build PACKAGE=eth-node-erigon VERSION=2.53.2
-   make build PACKAGE=eth-node-geth VERSION=1.13.4
-   make build PACKAGE=eth-node-lighthouse VERSION=4.5.0
-   make build PACKAGE=eth-node-lodestar VERSION=1.11.3
-   make build PACKAGE=eth-node-nethermind VERSION=1.21.1
-   make build PACKAGE=eth-node-nimbus-eth2 VERSION=23.10.0
-   make build PACKAGE=eth-node-prysm VERSION=4.1.1
-   make build PACKAGE=eth-node-service VERSION=0.1
-   make build PACKAGE=eth-node-teku VERSION=23.10.0
+   make build PACKAGE=eth-node VERSION=0.1-1
+   make build PACKAGE=eth-node-besu VERSION=23.10.1-1
+   make build PACKAGE=eth-node-erigon VERSION=2.53.2-1
+   make build PACKAGE=eth-node-geth VERSION=1.13.4-1
+   make build PACKAGE=eth-node-lighthouse VERSION=4.5.0-1
+   make build PACKAGE=eth-node-lodestar VERSION=1.11.3-1
+   make build PACKAGE=eth-node-nethermind VERSION=1.21.1-1
+   make build PACKAGE=eth-node-nimbus-eth2 VERSION=23.10.0-1
+   make build PACKAGE=eth-node-prysm VERSION=4.1.1-1
+   make build PACKAGE=eth-node-service VERSION=0.1-1
+   make build PACKAGE=eth-node-teku VERSION=23.10.0-1
 
    ```
   This will generate the appropiate .deb files for each package.
