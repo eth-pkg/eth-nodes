@@ -51,7 +51,8 @@ $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_N
 	cd $< && wget -O $@ ${TARBALL_URL}
 else
 $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz:
-	echo "Skipping source download as IS_VIRTUAL_PACKAGE is defined"
+	echo "Creating empty .tar.gz for virtual package"
+	cd $(WORK_DIR)/$(PACKAGE_NAME) && tar czvf $(PACKAGE_NAME).orig.tar.gz --files-from /dev/null
 endif
 
 # 3. Extract the source .orig.tar.gz
@@ -60,7 +61,7 @@ $(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz
 	echo -e "Extracting source $@\n"
 	mkdir -p $@ && tar -zxvf $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz -C $@ --strip-components=1 >/dev/null 2>&1
 else
-$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz
 	echo "Skipping source extraction as IS_VIRTUAL_PACKAGE is defined"
 	mkdir -p $@
 endif
@@ -78,7 +79,7 @@ $(PACKAGING_DIR)/debian/source/format: $(PACKAGING_DIR)/debian
 	echo "3.0 (quilt)" > $(PACKAGING_DIR)/debian/source/format
 
 # 4.b Patch .pc dir setup 
-$(PACKAGING_DIR)/debian/.pc/.version: $(PACKAGING_DIR)/debian
+$(PACKAGING_DIR)/.pc/.version: $(PACKAGING_DIR)/debian
 	echo -e "Creating necessary directories for patching \n"
 	mkdir -p $(PACKAGING_DIR)/.pc
 	touch $(PACKAGING_DIR)/.pc/.version
@@ -87,17 +88,17 @@ $(PACKAGING_DIR)/debian/.pc/.version: $(PACKAGING_DIR)/debian
 # 4.c Patch .pc patch version number 
 $(PACKAGING_DIR)/debian/control: $(PACKAGING_DIR)/debian/source/format $(PACKAGING_DIR)/.pc/.version
 	echo -e "Adding Standards-Version to the control file\n"
-	cd $(PACKAGING_DIR)/debian && \
-  	{ head -n 3 control; echo "Standards-Version: 4.5.1"; tail -n +4 control; } > control.new && \
-  	mv control.new control
+	#cd $(PACKAGING_DIR)/debian && \
+  	# head -n 3 control; echo "Standards-Version: 4.5.1"; tail -n +4 control;  > control.new 
+	#cd $(PACKAGING_DIR)/debian && mv control.new control
 
 # 4.d Copy source dir override if exist
 # This step allows to override generated debian files, or save patched config between versions
 ifeq ($(wildcard src),)
-$(PACKAGING_DIR)/debian/src:
+$(PACKAGING_DIR)/debian/src: $(PACKAGING_DIR)/debian/control
 	echo "Source directory 'src' not found. Skipping copy."
 else
-$(PACKAGING_DIR)/debian/src: | src
+$(PACKAGING_DIR)/debian/src: $(PACKAGING_DIR)/debian/control | src
 	echo -e "Copying source $@\n"
 	cp -R src/* $(PACKAGING_DIR)
 endif

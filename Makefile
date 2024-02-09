@@ -1,5 +1,7 @@
 .PHONY: build all 
 
+.SILENT:
+
 # Define allowed packages
 ALLOWED_PACKAGES := \
 	eth-node \
