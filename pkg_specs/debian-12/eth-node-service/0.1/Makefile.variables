@@ -15,4 +15,4 @@ IS_VIRTUAL_PACKAGE := true
 # Git source
 GIT_SOURCE := 
 
-IS_VIRTUAL_PACKAGE := 
+IS_VIRTUAL_PACKAGE :=  yes
