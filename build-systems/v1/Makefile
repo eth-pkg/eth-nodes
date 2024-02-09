@@ -1,9 +1,10 @@
 include Makefile.variables
 
+PACKAGE_NAME := $(CLIENT_FULL_NAME)-$(VERSION_NUMBER)
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
 SBUILD_ENV := /tmp/sbuild/$(PACKAGE_NAME)
 SBUILD_TARBALL := /srv/chroot/$(CODENAME)-$(ARCH).tar.gz
-PACKAGE_NAME := $(CLIENT_FULL_NAME)-$(VERSION_NUMBER)
+VERSION_NUMBER_WITHOUT_REVISION := $(shell cut -d'-' -f1 <<< $(VERSION_NUMBER))
 
 $(info HOME: $(HOME))
 $(info WORK_DIR: $(WORK_DIR))
@@ -16,7 +17,8 @@ $(info TARBALL_URL: $(TARBALL_URL))
 $(info IS_VIRTUAL_PACKAGE: $(IS_VIRTUAL_PACKAGE))
 $(info GIT_SOURCE: $(GIT_SOURCE))
 $(info PACKAGE_NAME: $(PACKAGE_NAME))
-
+$(info PACKAGING_DIR: $(PACKAGING_DIR))
+$(info VERSION_NUMBER_WITHOUT_REVISION: $(VERSION_NUMBER_WITHOUT_REVISION))
 HOST_HOME := /home/debian
 
 .PHONY: setup-quilt build debcrafter
@@ -72,7 +74,7 @@ endif
 $(PACKAGING_DIR)/debian: $(PACKAGING_DIR) debcrafter
 	echo -e "Creating debian directory $(PACKAGING_DIR)/debian\n"
 	debcrafter $(CLIENT_FULL_NAME).sss /tmp 
-	cp -R /tmp/$(CLIENT_FULL_NAME)-$(VERSION_NUMBER)/debian $(PACKAGING_DIR)
+	cp -R /tmp/$(CLIENT_FULL_NAME)-$(VERSION_NUMBER_WITHOUT_REVISION)/debian $(PACKAGING_DIR)
 
 # 4.a Patch quilt 
 $(PACKAGING_DIR)/debian/source/format: $(PACKAGING_DIR)/debian
