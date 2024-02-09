@@ -125,8 +125,9 @@ setup-quilt: $(PACKAGING_DIR)
 	echo -e "Setting up $@\n"
 	cp .quiltrc-dpkg $(HOME)
 	echo 'alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"' >> ${HOME}/.bashrc
-	cd ${PACKAGING_DIR} && (dquilt upgrade 2> /dev/null || true)
-	cd ${PACKAGING_DIR} && (dquilt push 2> /dev/null || true)
+	cd ${PACKAGING_DIR} && (quilt --quiltrc=$(HOME).quiltrc-dpkg upgrade 2> /dev/null || true)
+	cd ${PACKAGING_DIR} && (quilt --quiltrc=$(HOME)/.quiltrc-dpkg push 2> /dev/null || true)
+
 
 
 # Git checkout
