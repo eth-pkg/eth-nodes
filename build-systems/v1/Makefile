@@ -1,6 +1,23 @@
 include Makefile.variables
 
-.PHONY: setup-quilt build debcrafter setup-sbuild
+$(info HOME: $(HOME))
+$(info WORK_DIR: $(WORK_DIR))
+$(info SHELL: $(SHELL))
+$(info CODENAME: $(CODENAME))
+$(info CLIENT: $(CLIENT))
+$(info CLIENT_FULL_NAME: $(CLIENT_FULL_NAME))
+$(info VERSION_NUMBER: $(VERSION_NUMBER))
+$(info PACKAGE_NAME: $(PACKAGE_NAME))
+$(info TARBALL_URL: $(TARBALL_URL))
+$(info IS_VIRTUAL_PACKAGE: $(IS_VIRTUAL_PACKAGE))
+$(info GIT_SOURCE: $(GIT_SOURCE))
+
+PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
+SBUILD_ENV := /tmp/sbuild/$(PACKAGE_NAME)
+SBUILD_TARBALL := /srv/chroot/$(CODENAME)-$(ARCH).tar.gz
+
+
+.PHONY: setup-quilt build debcrafter
 # Targets and rules
 all: build 
 
@@ -15,7 +32,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 	cd $(PACKAGING_DIR) && dpkg-buildpackage -us -uc -nc
 
 # whole reproducible build
-build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt $(SBUILD_TARBALL)
+build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
 
@@ -82,12 +99,13 @@ $(PACKAGING_DIR)/debian/src: | src
 	cp -R src/* $(PACKAGING_DIR)
 endif
 
+
 # sbuild setup
 
 # sbuild 1. copy config  
 $(HOME)/.sbuildrc: 
 	echo "Copying .sbuildrc"
-	cp $(ETH_DEB_DIR)/tools/sbuildrc-$(OS_DISTRIBUTION) $(HOME)/.sbuildrc
+	cp .sbuildrc-$(CODENAME) $(HOME)/.sbuildrc
 
 # sbuild 2. create env dir  
 $(SBUILD_ENV): 
@@ -101,12 +119,13 @@ $(SBUILD_TARBALL): $(HOME)/.sbuildrc $(SBUILD_ENV)
 	#newgrp sbuild
 	#sudo sbuild-createchroot --merged-usr --make-sbuild-tarball=$(SBUILD_TARBALL) $(CODENAME) $(SBUILD_ENV) http://deb.debian.org/debian 
 
+
 # setup-quilt for patching
 setup-quilt: $(PACKAGING_DIR)
 	echo -e "Setting up $@\n"
 	echo 'alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"' >> ${HOME}/.bashrc
-	cd ${PACKAGING_DIR} && (quilt --quiltrc=$(ETH_DEB_DIR)/tools/.quiltrc-dpkg upgrade 2> /dev/null || true)
-	cd ${PACKAGING_DIR} && (quilt --quiltrc=$(ETH_DEB_DIR)/tools/.quiltrc-dpkg push 2> /dev/null || true)
+	cd ${PACKAGING_DIR} && (quilt --quiltrc=.quiltrc-dpkg upgrade 2> /dev/null || true)
+	cd ${PACKAGING_DIR} && (quilt --quiltrc=.quiltrc-dpkg push 2> /dev/null || true)
 
 
 # Git checkout
@@ -119,5 +138,6 @@ debcrafter:
 
 # Clean
 clean:
-	echo "Cleaning lighthouse directory"
-	rm -rf $(PACKAGING_DIR)
+	echo "Cleaning $(WORK_DIR)/$(PACKAGE_NAME) directory"
+	rm -rf $(WORK_DIR)/$(PACKAGE_NAME)
+
