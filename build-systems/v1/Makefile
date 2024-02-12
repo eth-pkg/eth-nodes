@@ -1,7 +1,7 @@
 include Makefile.variables
 
-PACKAGE_NAME := $(CLIENT_FULL_NAME)-$(VERSION_NUMBER)
-PACKAGE_NAME_WO_REVISION := $(CLIENT_FULL_NAME)-$(VERSION_NUMBER_WITHOUT_REVISION)
+PACKAGE_NAME := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER)
+PACKAGE_NAME_WO_REVISION := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER_WITHOUT_REVISION)
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
 SBUILD_ENV := /tmp/sbuild/$(PACKAGE_NAME)
 SBUILD_TARBALL := /srv/chroot/$(CODENAME)-$(ARCH).tar.gz
@@ -45,7 +45,7 @@ build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 
 # 1. Create packaging folder
 $(WORK_DIR)/$(PACKAGE_NAME):
-    # This has to be with revision number
+	# This has to be with revision number
 	echo -e "Creating package folder $(WORK_DIR)/$(PACKAGE_NAME)\n"
 	mkdir -p $@
 
@@ -75,7 +75,7 @@ endif
 $(PACKAGING_DIR)/debian: $(PACKAGING_DIR) debcrafter
 	echo -e "Creating debian directory $(PACKAGING_DIR)/debian\n"
 	debcrafter $(CLIENT_FULL_NAME).sss /tmp 
-	cp -R /tmp/$(PACKAGE_NAME_WO_REVISION)/debian $(PACKAGING_DIR)
+	cp -R /tmp/$(CLIENT_FULL_NAME)-$(VERSION_NUMBER_WITHOUT_REVISION)/debian $(PACKAGING_DIR)
 
 # 4.a Patch quilt 
 $(PACKAGING_DIR)/debian/source/format: $(PACKAGING_DIR)/debian
