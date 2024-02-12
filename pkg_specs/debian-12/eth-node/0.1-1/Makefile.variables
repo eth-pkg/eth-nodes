@@ -6,6 +6,8 @@ ARCH:=amd64
 CLIENT := 
 CLIENT_FULL_NAME := eth-node
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null)
+VERSION_NUMBER_WITHOUT_REVISION := $(shell cut -d'-' -f1 <<< $(VERSION_NUMBER))
+
 # double dir, as first dir contains debian tarballs
 TARBALL_URL := 
 GIT_SOURCE := 

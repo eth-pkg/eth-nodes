@@ -6,7 +6,9 @@ ARCH:=amd64
 CLIENT := besu
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null)
-TARBALL_URL := https://github.com/hyperledger/besu/archive/refs/tags/$(VERSION_NUMBER).tar.gz
+VERSION_NUMBER_WITHOUT_REVISION := $(shell cut -d'-' -f1 <<< $(VERSION_NUMBER))
+
+TARBALL_URL := https://github.com/hyperledger/besu/archive/refs/tags/$(VERSION_NUMBER_WITHOUT_REVISION).tar.gz
 GIT_SOURCE := https://github.com/hyperledger/besu.git
 
 IS_VIRTUAL_PACKAGE := 

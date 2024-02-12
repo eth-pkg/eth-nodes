@@ -7,7 +7,7 @@ CLIENT := lighthouse
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null)
 # double dir, as first dir contains debian tarballs
-TARBALL_URL := https://github.com/sigp/lighthouse/archive/refs/tags/v$(VERSION_NUMBER).tar.gz
+TARBALL_URL := https://github.com/sigp/lighthouse/archive/refs/tags/v$(VERSION_NUMBER_WITHOUT_REVISION).tar.gz
 
 # Git source
 GIT_SOURCE := https://github.com/sigp/lighthouse.git
