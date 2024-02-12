@@ -1,6 +1,7 @@
 include Makefile.variables
 
 PACKAGE_NAME := $(CLIENT_FULL_NAME)-$(VERSION_NUMBER)
+PACKAGE_NAME_WO_REVISION := $(CLIENT_FULL_NAME)-$(VERSION_NUMBER_WITHOUT_REVISION)
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
 SBUILD_ENV := /tmp/sbuild/$(PACKAGE_NAME)
 SBUILD_TARBALL := /srv/chroot/$(CODENAME)-$(ARCH).tar.gz
@@ -44,27 +45,28 @@ build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 
 # 1. Create packaging folder
 $(WORK_DIR)/$(PACKAGE_NAME):
+    # This has to be with revision number
 	echo -e "Creating package folder $(WORK_DIR)/$(PACKAGE_NAME)\n"
 	mkdir -p $@
 
 # 2. Download the source .orig.tar.gz
 ifndef IS_VIRTUAL_PACKAGE
-$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME_WO_REVISION).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
 	echo -e "Downloading source $@\n"
 	cd $< && wget -O $@ ${TARBALL_URL}
 else
-$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
+$(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME_WO_REVISION).orig.tar.gz: $(WORK_DIR)/$(PACKAGE_NAME)
 	echo "Creating empty .tar.gz for virtual package"
-	cd $(WORK_DIR)/$(PACKAGE_NAME) && tar czvf $(PACKAGE_NAME).orig.tar.gz --files-from /dev/null
+	cd $(WORK_DIR)/$(PACKAGE_NAME) && tar czvf $(PACKAGE_NAME_WO_REVISION).orig.tar.gz --files-from /dev/null
 endif
 
 # 3. Extract the source .orig.tar.gz
 ifndef IS_VIRTUAL_PACKAGE
-$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME_WO_REVISION).orig.tar.gz
 	echo -e "Extracting source $@\n"
-	mkdir -p $@ && tar -zxvf $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz -C $@ --strip-components=1 >/dev/null 2>&1
+	mkdir -p $@ && tar -zxvf $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME_WO_REVISION).orig.tar.gz -C $@ --strip-components=1 >/dev/null 2>&1
 else
-$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME).orig.tar.gz
+$(PACKAGING_DIR): $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME_WO_REVISION).orig.tar.gz
 	echo "Skipping source extraction as IS_VIRTUAL_PACKAGE is defined"
 	mkdir -p $@
 endif
@@ -73,7 +75,7 @@ endif
 $(PACKAGING_DIR)/debian: $(PACKAGING_DIR) debcrafter
 	echo -e "Creating debian directory $(PACKAGING_DIR)/debian\n"
 	debcrafter $(CLIENT_FULL_NAME).sss /tmp 
-	cp -R /tmp/$(CLIENT_FULL_NAME)-$(VERSION_NUMBER_WITHOUT_REVISION)/debian $(PACKAGING_DIR)
+	cp -R /tmp/$(PACKAGE_NAME_WO_REVISION)/debian $(PACKAGING_DIR)
 
 # 4.a Patch quilt 
 $(PACKAGING_DIR)/debian/source/format: $(PACKAGING_DIR)/debian
