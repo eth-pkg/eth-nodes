@@ -2,7 +2,7 @@ name = "eth-node-lodestar"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
 variants = ["mainnet", "sepolia"]
-build_depends = []
+build_depends = ["nodejs", "yarnpkg"]
 packages = ["eth-node-lodestar",  "eth-node-lodestar-service-@variant", "eth-node-lodestar-config-default-@variant"]
 skip_debug_symbols = true
 

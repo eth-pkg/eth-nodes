@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+
+
+
+%:
+	dh $@
+
+override_dh_auto_test:
+	yarnpkg test
+
+override_dh_auto_build:
+	yarnpkg install 
+	yarnpkg build
+
+override_dh_installsystemd:
+	dh_installsystemd --name=eth-node-lodestar-service-mainnet
+	dh_installsystemd --name=eth-node-lodestar-service-sepolia
+
+override_dh_dwz:
