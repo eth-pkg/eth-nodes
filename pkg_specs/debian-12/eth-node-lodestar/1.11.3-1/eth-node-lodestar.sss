@@ -2,7 +2,21 @@ name = "eth-node-lodestar"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
 variants = ["mainnet", "sepolia"]
-build_depends = ["nodejs", "ca-certificates" , "build-essential"]
+build_depends = ["nodejs", 
+"apt-transport-https", 
+"ca-certificates", 
+"curl",  
+"gnupg", 
+"build-essential", 
+"make",
+"g++",
+"libssl-dev",
+"libjpeg-dev",
+"libgif-dev", 
+"libpixman-1-dev",
+"libpango1.0-dev",
+"libffi-dev"
+]
 packages = ["eth-node-lodestar",  "eth-node-lodestar-service-@variant", "eth-node-lodestar-config-default-@variant"]
 skip_debug_symbols = true
 

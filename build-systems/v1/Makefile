@@ -1,13 +1,11 @@
 include Makefile.variables
 
-SBUILD_TYPE?="$(CODENAME)-$(ARCH)-no-deps"
+SBUILD_ENV?="$(CODENAME)-$(ARCH)-no-deps"
 
 WORK_DIR ?= /tmp/eth-pkg
 PACKAGE_NAME := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER)
 PACKAGE_NAME_WO_REVISION := $(CLIENT_FULL_NAME)_$(VERSION_NUMBER_WITHOUT_REVISION)
 PACKAGING_DIR := $(WORK_DIR)/$(PACKAGE_NAME)/$(PACKAGE_NAME)
-SBUILD_ENV := /tmp/sbuild/$(PACKAGE_NAME)
-SBUILD_TARBALL := /srv/chroot/$(CODENAME)-$(ARCH).tar.gz
 
 $(info HOME: $(HOME))
 $(info WORK_DIR: $(WORK_DIR))
@@ -22,6 +20,7 @@ $(info GIT_SOURCE: $(GIT_SOURCE))
 $(info PACKAGE_NAME: $(PACKAGE_NAME))
 $(info PACKAGING_DIR: $(PACKAGING_DIR))
 $(info VERSION_NUMBER_WITHOUT_REVISION: $(VERSION_NUMBER_WITHOUT_REVISION))
+$(info SBUILD_ENV: $(SBUILD_ENV))
 HOST_HOME := /home/debian
 
 .PHONY: setup-quilt build debcrafter
@@ -44,7 +43,6 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 # whole reproducible build
 build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
-	#cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
 	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(SBUILD_ENV)
 
 # 1. Create packaging folder

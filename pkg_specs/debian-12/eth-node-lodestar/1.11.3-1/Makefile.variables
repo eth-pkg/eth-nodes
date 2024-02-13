@@ -16,4 +16,4 @@ TARBALL_URL := https://github.com/ChainSafe/lodestar/archive/refs/tags/v$(VERSIO
 GIT_SOURCE := https://github.com/ChainSafe/lodestar.git
 
 IS_VIRTUAL_PACKAGE := 
-SBUILD_TYPE:="$(CODENAME)-$(ARCH)-node"
+SBUILD_ENV:="$(CODENAME)-$(ARCH)-node"

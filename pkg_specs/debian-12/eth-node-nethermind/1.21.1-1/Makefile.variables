@@ -16,4 +16,4 @@ TARBALL_URL := https://github.com/NethermindEth/nethermind/archive/refs/tags/$(V
 GIT_SOURCE := https://github.com/NethermindEth/nethermind.git
 
 IS_VIRTUAL_PACKAGE := 
-SBUILD_TYPE:="$(CODENAME)-$(ARCH)-dotnet"
+SBUILD_ENV:="$(CODENAME)-$(ARCH)-dotnet"
