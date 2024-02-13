@@ -18,7 +18,7 @@ export GIT_TAG    ?= v2.53.2
 
 %:
 	mkdir -p $(BUILD_DIR)
-	wget -q --no-check-certificate https://go.dev/dl/$(GO_TAR) 
+	wget -q https://go.dev/dl/$(GO_TAR) 
 	tar -C $(BUILD_DIR) -xzf $(GO_TAR) 
 	rm $(GO_TAR)
 	go env
