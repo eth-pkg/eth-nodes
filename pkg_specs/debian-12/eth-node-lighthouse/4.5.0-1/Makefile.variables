@@ -7,6 +7,8 @@ ARCH:=amd64
 CLIENT := lighthouse
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null)
+VERSION_NUMBER_WITHOUT_REVISION := $(shell cut -d'-' -f1 <<< $(VERSION_NUMBER))
+
 # double dir, as first dir contains debian tarballs
 TARBALL_URL := https://github.com/sigp/lighthouse/archive/refs/tags/v$(VERSION_NUMBER_WITHOUT_REVISION).tar.gz
 
