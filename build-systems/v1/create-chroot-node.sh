@@ -31,4 +31,4 @@ sudo sbuild-createchroot --merged-usr \
 # echo -e "Package: nodejs\nPin: origin deb.nodesource.com\nPin-Priority: 600" | sudo tee "/srv/chroot/$CHROOT_PREFIX/etc/apt/preferences.d/nodejs" > /dev/null
 
 # Install Node.js in the chroot environment
-sudo chroot "/srv/chroot/$CHROOT_PREFIX" /bin/bash -c 'curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - && sudo apt-get install -y nodejs'
+sudo chroot "/srv/chroot/$CHROOT_PREFIX" /bin/bash -c 'curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs'
