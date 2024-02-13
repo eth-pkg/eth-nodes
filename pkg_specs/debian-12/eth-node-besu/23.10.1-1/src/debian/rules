@@ -1,25 +1,11 @@
 #!/usr/bin/make -f
 
-export JAVA_HOME:=/tmp/lib/jvm/jdk-17
-export GRADLE_HOME=/tmp/lib/gradle
-export PATH:=$(PATH):$(JAVA_HOME)/bin:$(GRADLE_HOME)
 
 %:
 	dh $@
 
 override_dh_auto_build:
-	cd /tmp && wget -q https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-	mkdir -p /tmp/lib/jvm
-	cd /tmp && tar -zxf jdk-17_linux-x64_bin.tar.gz 
-	mv /tmp/jdk-17.0.10 /tmp/lib/jvm/jdk-17-oracle-x64
-	ls /tmp/lib/jvm/jdk-17-oracle-x64
-	ln -s /tmp/lib/jvm/jdk-17-oracle-x64 $(JAVA_HOME)
-	#wget -q https://services.gradle.org/distributions/gradle-7.6-bin.zip -P /tmp
-	#unzip -d /tmp/lib/gradle /tmp/gradle-*.zip
-	
-	#GRADLE_USER_HOME="/tmp/sbuild/.gradle" /tmp/lib/gradle/gradle-7.6/bin/gradle installDist
-	ls /tmp/lib/jvm/jdk-17
-	GRADLE_USER_HOME="/tmp/sbuild/.gradle" ./gradlew installDist
+	./gradlew installDist
 	
 override_dh_auto_install:
 

@@ -2,7 +2,7 @@ name = "eth-node-besu"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
 variants = ["mainnet", "sepolia"]
-build_depends = ["libsodium23", "libnss3", "wget", "ca-certificates", "unzip"]
+build_depends = ["libsodium23", "libnss3", "wget", "ca-certificates", "unzip", "curl"]
 packages = ["eth-node-besu", "eth-node-besu-service-@variant", "eth-node-besu-config-default-@variant"]
 skip_debug_symbols = true
 
