@@ -32,3 +32,4 @@ sudo sbuild-createchroot --merged-usr \
 
 # Install Node.js in the chroot environment
 sudo chroot "/srv/chroot/$CHROOT_PREFIX" /bin/bash -c 'curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs'
+sudo chroot "/srv/chroot/$CHROOT_PREFIX" /bin/bash -c 'npm install --global yarn'

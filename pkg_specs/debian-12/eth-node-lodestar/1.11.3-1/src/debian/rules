@@ -1,8 +1,6 @@
 #!/usr/bin/make -f
 
 
-export PATH:=/tmp/.npm-global/bin:$(PATH)
-
 %:
 	dh $@
 
@@ -11,10 +9,6 @@ override_dh_auto_test:
 
 override_dh_auto_build:
 	node --version
-	mkdir /tmp/.npm-global
-	npm config set prefix '/tmp/.npm-global'
-
-	npm install --global yarn
 	yarn install 
 	yarn build
 
