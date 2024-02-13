@@ -24,9 +24,6 @@ export GIT_TAG    ?= v2.53.2
 	go env
 	dh $@
 
-override_dh_auto_test:
-	# do not run the tests
-	# TODO tests are failing under sbuild
 	
 override_dh_auto_build:
 	make -j4 "INSTALL=install --strip-program=true"

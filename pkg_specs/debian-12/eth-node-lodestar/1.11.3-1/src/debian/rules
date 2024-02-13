@@ -5,8 +5,10 @@
 	dh $@
 
 # Test are failing, but not because of node-gyp dep
-#override_dh_auto_test:
-#	yarn test
+override_dh_auto_test:
+	yarn test:unit
+	yarn test:e2e
+	yarn test:e2e:sim
 
 override_dh_auto_build:
 	node --version

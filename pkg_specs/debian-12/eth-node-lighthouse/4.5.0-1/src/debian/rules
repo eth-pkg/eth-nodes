@@ -12,16 +12,14 @@ export FEATURES:=jemalloc
 	dh $@
 
 
-override_dh_auto_test:
-	echo "Testing is disabled for this package"
 
-override_dh_auto_install:
 override_dh_auto_build:
 	$(HOME)/.cargo/bin/cargo install --path lighthouse --force --locked \
 		--features "$(FEATURES)" \
 		--profile "$(PROFILE)" \
 		$(CARGO_INSTALL_EXTRA_FLAGS)
 
+override_dh_auto_install:
 
 override_dh_installsystemd:
 	dh_installsystemd --name=eth-node-lighthouse-service-mainnet
