@@ -1,3 +1,6 @@
+# has to be bash for cut to work 
+SHELL := /bin/bash
+
 CODENAME := bookworm
 ARCH:=amd64
 
