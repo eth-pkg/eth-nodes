@@ -10,21 +10,21 @@ This project is designed to simplify the process of packaging different Ethereum
 
 Sbuild env
 ```bash
-bash build-systems/v1/create-chroot-no-deps.sh
+bash build-systems/v1/create-chroot-no-deps.sh bookworm amd64
 ```
 Sbuild env for java/besu
 ```bash
-bash build-systems/v1/create-chroot-jdk.sh
+bash build-systems/v1/create-chroot-oracle-jdk.sh  bookworm amd64
 ```
 
 Sbuild env for dotnet/nethermind
 ```bash
-bash build-systems/v1/create-chroot-dotnet.sh
+bash build-systems/v1/create-chroot-dotnet.sh  bookworm amd64
 ```
 
 Sbuild env for node.js/lodestar
 ```bash
-bash build-systems/v1/create-chroot-node.sh
+bash build-systems/v1/create-chroot-node.sh  bookworm amd64
 ```
 
 **Build the Debian Packages**: Build Debian packages for each client using the generated variables.
