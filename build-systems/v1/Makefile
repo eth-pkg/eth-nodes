@@ -43,7 +43,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 # whole reproducible build
 build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
-	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(SBUILD_ENV)
+	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild  -c $(SBUILD_ENV)-$(ARCH)-sbuild -d $(CODENAME)
 
 # 1. Create packaging folder
 $(WORK_DIR)/$(PACKAGE_NAME):
