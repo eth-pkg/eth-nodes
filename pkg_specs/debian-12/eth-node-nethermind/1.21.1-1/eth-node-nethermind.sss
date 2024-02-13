@@ -2,7 +2,7 @@ name = "eth-node-nethermind"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
 variants = ["mainnet", "sepolia"]
-build_depends = ["libsnappy-dev"]
+build_depends = ["libsnappy-dev", "dotnet-sdk-7.0"]
 packages = ["eth-node-nethermind", "eth-node-nethermind-service-@variant", "eth-node-nethermind-config-default-@variant"]
 skip_debug_symbols = true
 
