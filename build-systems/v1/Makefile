@@ -45,7 +45,7 @@ build-dpkg: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src setup-quilt
 build-sbuild: $(PACKAGING_DIR)/debian $(PACKAGING_DIR)/debian/src  setup-quilt
 	echo -e "Building debian packages for $(PACKAGE_NAME)\n"
 	#cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(CODENAME)
-	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d bookworm-amd64-plus-node-repo
+	cd ${PACKAGING_DIR} && chmod +x debian/rules && sbuild -d $(SBUILD_ENV)
 
 # 1. Create packaging folder
 $(WORK_DIR)/$(PACKAGE_NAME):
