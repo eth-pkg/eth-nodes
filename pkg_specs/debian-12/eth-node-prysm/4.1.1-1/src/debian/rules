@@ -12,9 +12,10 @@ export GO_TAR=go$(GO_VERSION).linux-amd64.tar.gz
 %:
 	dh $@
 
-override_dh_auto_test:
+#override_dh_auto_test:
 	# do not run the tests
 	# TODO tests are failing under sbuild
+        CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" $(GOPATH)/bin/bazelisk test //..
 
 override_dh_auto_clean:
 	# Do nothing, patch the makefile
