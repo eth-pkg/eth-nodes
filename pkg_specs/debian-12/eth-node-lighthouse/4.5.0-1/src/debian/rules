@@ -19,6 +19,10 @@ override_dh_auto_build:
 		--profile "$(PROFILE)" \
 		$(CARGO_INSTALL_EXTRA_FLAGS)
 
+override_dh_auto_test:
+	$(HOME)/.cargo/bin/cargo test --workspace --release --exclude ef_tests --exclude beacon_chain --exclude slasher
+
+
 override_dh_auto_install:
 
 override_dh_installsystemd:
