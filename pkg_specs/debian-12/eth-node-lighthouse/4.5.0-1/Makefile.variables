@@ -16,3 +16,4 @@ TARBALL_URL := https://github.com/sigp/lighthouse/archive/refs/tags/v$(VERSION_N
 GIT_SOURCE := https://github.com/sigp/lighthouse.git
 
 IS_VIRTUAL_PACKAGE := 
+SBUILD_ENV:="$(CODENAME)-$(ARCH)-docker"

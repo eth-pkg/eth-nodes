@@ -7,7 +7,7 @@ fi
 
 CODENAME="$1"
 ARCH="$2"
-CHROOT_PREFIX="$CODENAME-$ARCH-node"
+CHROOT_PREFIX="$CODENAME-$ARCH-no-deps"
 SRV_PREFIX=/srv/chroot/"$CHROOT_PREFIX"
 
 # Clean up previous chroots
@@ -17,18 +17,11 @@ sudo rm -rf "/srv/chroot/$CHROOT_PREFIX"
 
 # Create new chroot
 sudo sbuild-createchroot --merged-usr \
-                         --include="apt-transport-https ca-certificates curl gnupg" \
+                         --include="ca-certificates curl" \
                          --chroot-prefix="$CHROOT_PREFIX" \
-                         "$CODENAME" "$SRV_PREFIX" \
+                         "$CODENAME" "/srv/chroot/$CHROOT_PREFIX" \
                          http://deb.debian.org/debian
 
-
-# Install Node.js in the chroot environment
-# Should be working but is not
-sudo chroot "$SRV_PREFIX" curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
-sudo chroot "$SRV_PREFIX" npm install --global yarn
-
-# Add docker for the tests
 sudo chroot "$SRV_PREFIX" install -m 0755 -d /etc/apt/keyrings
 sudo chroot "$SRV_PREFIX" curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 sudo chroot "$SRV_PREFIX" chmod a+r /etc/apt/keyrings/docker.asc
