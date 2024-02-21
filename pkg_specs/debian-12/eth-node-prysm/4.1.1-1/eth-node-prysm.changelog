@@ -1,0 +1,11 @@
+eth-node-prysm (4.1.1-1) unstable; urgency=medium
+
+  * Use correct prysm versioning version number + git commit
+
+ -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 14:33:27 +0700
+
+eth-node-prysm (0.1) unstable; urgency=medium
+
+  * Initial packaging
+
+ -- Eniko Nagy <mail@eenagy.com>  Tue, 17 Oct 2023 13:19:27 +0700

@@ -1,21 +1,19 @@
-WORK_DIR := /tmp/eth-pkg
+# has to be bash for cut to work 
 SHELL := /bin/bash
+
 CODENAME := bookworm
 ARCH:=amd64
 
-
-
-CLIENT := execution-client
+CLIENT := lodestar
 CLIENT_FULL_NAME := eth-node-$(CLIENT)
 VERSION_NUMBER := $(shell dpkg-parsechangelog -l $(CLIENT_FULL_NAME).changelog -S Version 2>/dev/null)
 VERSION_NUMBER_WITHOUT_REVISION := $(shell cut -d'-' -f1 <<< $(VERSION_NUMBER))
 
 # double dir, as first dir contains debian tarballs
-TARBALL_URL := 
+TARBALL_URL := https://github.com/ChainSafe/lodestar/archive/refs/tags/v$(VERSION_NUMBER_WITHOUT_REVISION).tar.gz
+
 # Git source
-GIT_SOURCE := 
+GIT_SOURCE := https://github.com/ChainSafe/lodestar.git
 
-
-IS_VIRTUAL_PACKAGE := true
-
-
+IS_VIRTUAL_PACKAGE := 
+SBUILD_ENV:="$(CODENAME)-$(ARCH)-node"

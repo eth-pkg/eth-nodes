@@ -1,6 +1,8 @@
-.PHONY: all
+.PHONY: build all 
 
-# Define allowed client packages
+.SILENT:
+
+# Define allowed packages
 ALLOWED_PACKAGES := \
 	eth-node \
 	eth-node-besu \
@@ -15,34 +17,28 @@ ALLOWED_PACKAGES := \
 	eth-node-teku 
 
 DISTRIBUTION := debian-12
+ARCH := amd64
 
-ifeq ($(filter $(PACKAGE),$(ALLOWED_PACKAGES)),)
-    $(error Invalid PACKAGE. Please use 'make PACKAGE=eth-node-lighthouse VERSION=4.5.0' or 'make PACKAGE=eth-node-erigon VERSION=4.5.0')
-endif
+all: build
 
-# If VERSION is not set, find the maximum version
-ifeq ($(VERSION),)
-    AVAILABLE_VERSIONS := $(shell ls -d pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/*/ 2>/dev/null)
-    $(info Available Versions: $(AVAILABLE_VERSIONS))
+build: PACKAGE:=
+build: VERSION:=
+build: BUILD_SYSTEM:=v1
+build: 
+	[ -n "$(PACKAGE)" ] || (echo "Please specify a package to build" && exit 1)
+	[ -d "$(CURDIR)/pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)" ] || (echo "Directory does not exist: $(CURDIR)/pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)" && exit 1)
+	mkdir -p /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
+	cp -r pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)/* /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
+	# I have no clue why the hidden files are not copied with recursive, neither with -a option
+	cp -r build-systems/$(BUILD_SYSTEM)/.quiltrc-dpkg /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
+	cp -r build-systems/$(BUILD_SYSTEM)/* /tmp/pkg_specs/$(PACKAGE)_$(VERSION)
+	cd /tmp/pkg_specs/$(PACKAGE)_$(VERSION) && $(MAKE) -f Makefile
 
-    # Ensure there are versions available
-    ifeq ($(strip $(AVAILABLE_VERSIONS)),)
-        $(error No versions available for PACKAGE=$(PACKAGE))
-    endif
+available-arch: 
+	echo "Only $(ARCH) is supported at the moment"
 
-    LAST_VERSION := $(shell echo $(AVAILABLE_VERSIONS) | xargs basename | sort -V | tail -n 1)
-    $(info Last Version: $(LAST_VERSION))
+available-distributions: 
+	echo "Currently only debian-12 is supported"
 
-    VERSION := $(LAST_VERSION)
-    $(info Selected Version: $(VERSION))
-endif
-
-PACKAGE_DIR := pkg_specs/$(DISTRIBUTION)/$(PACKAGE)/$(VERSION)
-
-# Check if the directory exists
-ifeq ($(wildcard $(PACKAGE_DIR)),)
-    $(error Directory $(dir $(PACKAGE_DIR)) does not exist or Makefile is missing)
-endif
-
-all:
-	cd $(PACKAGE_DIR) && $(MAKE) -f Makefile
+available-packages: 
+	echo "Available packages are $(ALLOWED_PACKAGES)"

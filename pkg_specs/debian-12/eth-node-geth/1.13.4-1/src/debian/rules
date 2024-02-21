@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+# Use custom go install, when built with sbuild if go is not installed, without this it will throw an error
+#
+#
+
+export BUILD_DIR=/tmp/eth-node-geth
+export GOCACHE=$(BUILD_DIR)/.gocache
+export GOROOT=$(BUILD_DIR)/go
+export GOPATH=$(BUILD_DIR)/go-libs
+export PATH :=$(PATH):$(GOROOT)/bin
+export GO_VERSION=1.21.3
+export GO_TAR=go$(GO_VERSION).linux-amd64.tar.gz 
+export CGO_ENABLED=0 
+
+export GIT_COMMIT ?= 4fc8c374cfcdce19cea612846a0634f4de186cb8
+export GIT_BRANCH ?= main
+export GIT_TAG    ?= v2.53.2
+
+
+%:
+	mkdir -p $(BUILD_DIR)
+	wget -q https://go.dev/dl/$(GO_TAR) 
+	tar -C $(BUILD_DIR) -xzf $(GO_TAR) 
+	rm $(GO_TAR)
+	go env
+	dh $@
+
+	
+override_dh_auto_build:
+	$(MAKE) -j4 "INSTALL=install --strip-program=true" all
+
+override_dh_installsystemd:
+	dh_installsystemd --name=eth-node-geth-service-sepolia
+
+override_dh_dwz:

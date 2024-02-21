@@ -1,0 +1,33 @@
+ ##############################################################################
+# PACKAGE BUILD RELATED (source-only-upload as default)
+##############################################################################
+# -d
+$distribution = 'bookworm';
+# -A
+$build_arch_all = 1;
+# -s
+$build_source = 1;
+# --source-only-changes
+$source_only_changes = 1;
+# -v
+$verbose = 1;
+
+$build_environment = {
+'HOME' => '/home/debian'
+};
+
+##############################################################################
+# POST-BUILD RELATED (turn off functionality by setting variables to 0)
+##############################################################################
+$run_lintian = 0;
+$lintian_opts = ['-i', '-I'];
+$run_piuparts = 0;
+$piuparts_opts = ['--schroot', 'bookworm-amd64'];
+$run_autopkgtest = 0;
+$autopkgtest_root_args = '';
+$autopkgtest_opts = [ '--', 'schroot', '%r-%a-sbuild' ];
+
+##############################################################################
+# PERL MAGIC
+##############################################################################
+1;
