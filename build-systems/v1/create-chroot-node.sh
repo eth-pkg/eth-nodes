@@ -25,18 +25,20 @@ sudo sbuild-createchroot --merged-usr \
 
 # Install Node.js in the chroot environment
 # Should be working but is not
-sudo chroot "$SRV_PREFIX" curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
-sudo chroot "$SRV_PREFIX" npm install --global yarn
+sudo chroot "$SRV_PREFIX" /bin/bash -c 
+'curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
+npm install --global yarn'
 
 # Add docker for the tests
-sudo chroot "$SRV_PREFIX" install -m 0755 -d /etc/apt/keyrings
-sudo chroot "$SRV_PREFIX" curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chroot "$SRV_PREFIX" chmod a+r /etc/apt/keyrings/docker.asc
+sudo chroot "$SRV_PREFIX" /bin/bash -c '
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc'
 
 # Add the repository to Apt sources:
-sudo chroot "$SRV_PREFIX"  echo \
+sudo chroot "$SRV_PREFIX" /bin/bash -c '
+echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo chroot "$SRV_PREFIX" apt-get update
+apt-get update'
