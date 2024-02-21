@@ -629,8 +629,8 @@ to attach them to the start of each source file to most effectively
 state the exclusion of warranty; and each file should have at least
 the "copyright" line and a pointer to where the full notice is found.
 
-    eth-deb, build-system for ethereum debian packaging
-    Copyright (C) 2023  Eniko Nagy
+    eth-deb, package specs for ethereum ecosystem
+    Copyright (C) 2023-2024  Eniko Nagy
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as published by
