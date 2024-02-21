@@ -13,6 +13,7 @@ export FEATURES:=jemalloc
 
 
 
+
 override_dh_auto_build:
 	$(HOME)/.cargo/bin/cargo install --path lighthouse --force --locked \
 		--features "$(FEATURES)" \
@@ -20,6 +21,10 @@ override_dh_auto_build:
 		$(CARGO_INSTALL_EXTRA_FLAGS)
 
 override_dh_auto_test:
+	#Install anvil for running tests
+	cd /tmp && curl -s -L https://github.com/foundry-rs/foundry/releases/download/nightly-ca67d15f4abd46394b324c50e21e66f306a1162d/foundry_nightly_linux_amd64.tar.gz -o foundry_nightly_linux_amd64.tar.gz
+	cd /tmp && tar xvf foundry_nightly_linux_amd64.tar.gz 
+	cp /tmp/anvil $(HOME)/.cargo/bin
 	$(HOME)/.cargo/bin/cargo test --workspace --release --exclude ef_tests --exclude beacon_chain --exclude slasher
 
 
