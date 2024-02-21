@@ -16,7 +16,11 @@ build_depends = ["nodejs",
 "libpixman-1-dev",
 "libpango1.0-dev",
 "libffi-dev",
-"docker"
+"docker-ce",
+"docker-ce-cli",
+"containerd.io",
+"docker-buildx-plugin",
+"docker-compose-plugin"
 ]
 packages = ["eth-node-lodestar",  "eth-node-lodestar-service-@variant", "eth-node-lodestar-config-default-@variant"]
 skip_debug_symbols = true
