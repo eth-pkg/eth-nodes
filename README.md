@@ -27,6 +27,11 @@ Sbuild env for node.js/lodestar
 bash build-systems/v1/create-chroot-node.sh  bookworm amd64
 ```
 
+Sbuild env for lighthouse/docker
+```bash
+bash build-systems/v1/create-chroot-docker.sh  bookworm amd64
+```
+
 **Build the Debian Packages**: Build Debian packages for each client using the generated variables.
    ```bash
    make build PACKAGE=eth-node VERSION=0.1-1

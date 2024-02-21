@@ -7,7 +7,7 @@ fi
 
 CODENAME="$1"
 ARCH="$2"
-CHROOT_PREFIX="$CODENAME-$ARCH-no-deps"
+CHROOT_PREFIX="$CODENAME-$ARCH-docker"
 SRV_PREFIX=/srv/chroot/"$CHROOT_PREFIX"
 
 # Clean up previous chroots
