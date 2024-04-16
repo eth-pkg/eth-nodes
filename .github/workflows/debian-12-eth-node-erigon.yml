@@ -36,6 +36,8 @@ jobs:
           mkdir -p ${HOME}/.local/bin 
           mv pkg-builder ${HOME}/.local/bin
           mv debcrafter ${HOME}/.local/bin 
+          chmod +x ${HOME}/.local/bin/pkg-builder
+          chmod +x ${HOME}/.local/bin/debcrafter
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
       - name: Create env
