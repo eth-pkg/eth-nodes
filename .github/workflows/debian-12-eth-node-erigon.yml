@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - main
-    # paths:
-    #   - 'pkg_specs/debian-12/eth-node-erigon/2.53.2-1/**'  
+  pull_request:
+    branches:
+      - main     
+    paths:
+      - 'pkg_specs/debian-12/eth-node-erigon/2.53.2-1/**'  
 
 jobs:
   build_eth_node_ergion_debian12:
