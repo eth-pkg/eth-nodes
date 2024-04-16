@@ -33,6 +33,10 @@ jobs:
         run: |
           wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
           wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+          mkdir -p ${HOME}/.local/bin 
+          mv pkg-builder ${HOME}/.local/bin
+          mv debcrafter ${HOME}/.local/bin 
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
       - name: Create env
         run: pkg-builder build-env create pkg_specs/debian-12/eth-node-erigon/2.53.2-1/pkg-builder.toml
