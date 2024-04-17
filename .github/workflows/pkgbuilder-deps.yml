@@ -45,10 +45,11 @@ jobs:
       with:
         repository: eenagy/pkg-builder  
         ref: bookworm-2  
-        path: pkg-builder
+        path: ${HOME}/pkg-builder
 
     - name: Install pkg-builder
       run: |
+        cd ${HOME}/pkg-builder
         cargo build --release
         mv target/release/pkg-builder ${HOME}/.local/bin
         chmod +x ${HOME}/.local/bin/pkg-builder
