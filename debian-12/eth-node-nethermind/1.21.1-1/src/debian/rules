@@ -3,24 +3,14 @@
 %:
 	dh $@
 
-override_dh_auto_build:
-	cd src/Nethermind/Nethermind.Runner && dotnet build -c release
-	# Deleta all other archs then x64
-	# You need to delete them, as this error will be presented by dpkg: dpkg-shlibdeps: error: cannot find library ld-linux-aarch64.so.1
-	# TODO this should come from the build specs
-	find src/Nethermind/Nethermind.Runner/bin/release/net7.0/runtimes -mindepth 1 -maxdepth 1 -type d ! -name 'linux-x64' -exec rm -r {} \;
-
-
-override_dh_auto_test:
-	# Skip tests as they are failing
-	# Run Nethermind tests:
-	cd src/Nethermind && dotnet test Nethermind.sln -c release
-	# Run Ethereum Foundation tests:
-	cd src/Nethermind && dotnet test EthereumTests.sln -c release
-
-
-override_dh_installsystemd:
-	dh_installsystemd --name=eth-node-nethermind-service-mainnet
-	dh_installsystemd --name=eth-node-nethermind-service-sepolia
-
 override_dh_dwz:
+
+override_dh_auto_install:
+	# This relies on make install script
+	# if there is no install script, you have define your own rules
+	dh_auto_install -- prefix=/usr
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean

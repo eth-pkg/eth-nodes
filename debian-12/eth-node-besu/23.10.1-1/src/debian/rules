@@ -1,27 +1,16 @@
 #!/usr/bin/make -f
-export JAVA_HOME:=/tmp/lib/jvm/jdk-17
-export GRADLE_HOME=/tmp/lib/gradle
-export PATH:=$(PATH):$(JAVA_HOME)/bin:$(GRADLE_HOME)
 
 %:
 	dh $@
 
-override_dh_auto_test:
-	GRADLE_USER_HOME="/tmp/sbuild/.gradle" ./gradlew test
-
-override_dh_auto_build:
-	cd /tmp && wget -q https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz
-	mkdir -p /tmp/lib/jvm
-	cd /tmp && tar -zxf jdk-17_linux-x64_bin.tar.gz 
-	mv /tmp/jdk-17.0.10 /tmp/lib/jvm/jdk-17-oracle-x64
-	ln -s /tmp/lib/jvm/jdk-17-oracle-x64 $(JAVA_HOME)
-	ls /tmp/lib/jvm/jdk-17
-	GRADLE_USER_HOME="/tmp/sbuild/.gradle" ./gradlew installDist
-	
-override_dh_auto_install:
-
-override_dh_installsystemd:
-	dh_installsystemd --name=eth-node-besu-service-mainnet
-	dh_installsystemd --name=eth-node-besu-service-sepolia
-
 override_dh_dwz:
+
+override_dh_auto_install:
+	# This relies on make install script
+	# if there is no install script, you have define your own rules
+	dh_auto_install -- prefix=/usr
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
