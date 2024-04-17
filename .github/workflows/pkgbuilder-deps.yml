@@ -14,7 +14,7 @@ on:
           type: string      
 
 jobs:
-  pkgbuilder:
+  package:
     runs-on: ubuntu-latest
     steps:
     - name: Sbuild setup

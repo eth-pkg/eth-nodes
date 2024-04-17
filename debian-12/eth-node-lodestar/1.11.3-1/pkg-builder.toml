@@ -10,7 +10,8 @@ homepage="https://github.com/ChainSafe/lodestar"
 package_type="default"
 tarball_url = "https://github.com/ChainSafe/lodestar/archive/refs/tags/v1.11.3.tar.gz"
 # TODO no hash provided for source code 
-
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "7625dfb89a85df2372fcf4e085d1f7e0177a7ea036ce7c39f5d0f32ee19e8f39"
 
 [package_type.language_env]
 

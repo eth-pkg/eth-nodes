@@ -1,16 +1,17 @@
 [package_fields]
 spec_file = "eth-node-nimbus-eth2.sss"
 package_name = "eth-node-nimbus-eth2"
-version_number = "2.53.2"
+version_number = "23.10.0"
 revision_number = "1"
 homepage="https://github.com/status-im/nimbus-eth2"
 
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/status-im/nimbus-eth2/archive/refs/tags/v2.53.2.tar.gz"
+tarball_url = "https://github.com/status-im/nimbus-eth2/archive/refs/tags/v23.10.0.tar.gz"
 # TODO no hash provided for source code 
-
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "319ee590475c84555868d8038b0060e5a48daf01c3df39253113633b0cbe2340"
 
 [package_type.language_env]
 

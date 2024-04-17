@@ -10,7 +10,8 @@ homepage="https://github.com/prysmaticlabs/prysm"
 package_type="default"
 tarball_url = "https://github.com/prysmaticlabs/prysm/archive/refs/tags/v4.1.1.tar.gz"
 # TODO no hash provided for source code 
-
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "6cd8c7d9f304e056649f0f7f71cc4e1e3cd5e7aad6d5dbb6477d5f718a322c6e"
 
 [package_type.language_env]
 language_env = "rust"
