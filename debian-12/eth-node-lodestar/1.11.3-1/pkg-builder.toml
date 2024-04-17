@@ -1,0 +1,44 @@
+[package_fields]
+spec_file = "eth-node-lodestar.sss"
+package_name = "eth-node-lodestar"
+version_number = "1.11.3"
+revision_number = "1"
+homepage="https://github.com/ChainSafe/lodestar"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/ChainSafe/lodestar/archive/refs/tags/v1.11.3.tar.gz"
+tarball_hash = ""
+no_hash=true
+
+[package_type.language_env]
+
+
+[build_env]
+codename="bookworm"
+arch = "amd64"
+# TODO not used yet
+pkg_builder_version="0.1"
+# TODO not used yet
+debcrafter_version = "latest"
+run_lintian=false
+run_piuparts=false
+run_autopkgtest=false
+# package directory
+workdir="~/.pkg-builder/packages"
+
+[cli_options]
+# not used
+is_ci=false
+log="info"
+log_to="file"
+reuse_previous_build=false
+
+[verify]
+# if tarball_url is specified
+tarball_hash=""
+# if git_source is specified and package_is_git
+git_commit=""
+# output hash
+bin_bash=""

@@ -1,0 +1,26 @@
+name: Build eth-node-lighthouse on debian 12
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main     
+    paths:
+      - 'debian-12/eth-node-lighthouse/4.5.0-1/**'  
+
+jobs:
+  install_pkgbuilder_deps:
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+  package_eth_node_lighthouse_debian12:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create env
+        run: pkg-builder build-env create debian-12/eth-node-lighthouse/4.5.0-1/pkg-builder.toml
+
+      - name: Create package
+        run: pkg-builder package debian-12/eth-node-lighthouse/4.5.0-1/pkg-builder.toml

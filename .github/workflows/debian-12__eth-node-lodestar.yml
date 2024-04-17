@@ -1,0 +1,26 @@
+name: Build eth-node-lodestar on debian 12
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main     
+    paths:
+      - 'debian-12/eth-node-lodestar/1.11.3-1/**'  
+
+jobs:
+  install_pkgbuilder_deps:
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+  package_eth_node_lodestar_debian12:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create env
+        run: pkg-builder build-env create debian-12/eth-node-lodestar/1.11.3-1/pkg-builder.toml
+
+      - name: Create package
+        run: pkg-builder package debian-12/eth-node-lodestar/1.11.3-1/pkg-builder.toml

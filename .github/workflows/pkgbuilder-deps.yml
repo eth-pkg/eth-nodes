@@ -1,0 +1,36 @@
+name: pkbuilder-deps
+
+on:
+  workflow_call:
+
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sbuild setup
+      run: |
+        sudo apt-get update
+        # Note this is an older version of sbuild, no need to patch it, yet
+        sudo apt install -y debhelper schroot ubuntu-dev-tools
+        sudo apt-get -y install pkg-config libssl-dev uidmap
+        sudo apt-get install -y libfilesys-df-perl libmime-lite-perl
+        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/sbuild_0.85.6_all.deb
+        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/libsbuild-perl_0.85.6_all.deb
+        sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+
+
+    - name: pkg-builder
+      run: |
+        wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
+        wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+        mkdir -p ${HOME}/.local/bin 
+        mv pkg-builder ${HOME}/.local/bin
+        mv debcrafter ${HOME}/.local/bin 
+        chmod +x ${HOME}/.local/bin/pkg-builder
+        chmod +x ${HOME}/.local/bin/debcrafter
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+    - name: Create env
+      run: pkg-builder build-env create debian-12/eth-node-erigon/2.53.2-1/pkg-builder.toml
+
