@@ -1,4 +1,4 @@
-name: Build eth-node-nimbus-eth2 on debian 12
+name: Package eth-node-nimbus-eth2 on debian 12
 
 on:
   push:
@@ -8,22 +8,19 @@ on:
     branches:
       - main     
     paths:
-      - 'debian-12/eth-node-nimbus-eth2/4.1.1-1/**'  
+      - 'debian-12/eth-node-nimbus-eth2/**'  
 
 jobs:
-  install_pkgbuilder_deps:
-    uses: ./.github/workflows/pkgbuilder-deps.yml
+  package:
+    strategy:
+      matrix:
+        package-name: ["eth-node-nimbus-eth2"]
+        package-version: ["23.10.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml@package
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version: ${{ matrix.package-version }}
+      codename:  ${{ matrix.codename }}
 
-  package_eth_node_nimbus_eth2_debian12:
-    runs-on: ubuntu-latest
-    steps:
-     
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Create env
-        run: pkg-builder build-env create debian-12/eth-node-nimbus-eth2/4.1.1-1/pkg-builder.toml
-
-
-      - name: Create package
-        run: pkg-builder package debian-12/eth-node-nimbus-eth2/4.1.1-1/pkg-builder.toml
+  

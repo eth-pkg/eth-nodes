@@ -2,12 +2,26 @@ name: pkbuilder-deps
 
 on:
   workflow_call:
-
+    inputs:
+      package-name:
+        required: true
+        type: string
+      package-version-with-revision:
+          required: true
+          type: string  
+      codename:
+          required: true
+          type: string      
 
 jobs:
-  triage:
+  package:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/labeler@v4
+      with:
+        package-name: ${{ inputs.package-name }}
+        configuration-path: ${{ inputs.package-version-with-revision }}
+        codename: ${{ inputs.codename }}
     - name: Sbuild setup
       run: |
         sudo apt-get update
@@ -31,6 +45,12 @@ jobs:
         chmod +x ${HOME}/.local/bin/debcrafter
         echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
+    - name: Checkout repository
+      uses: actions/checkout@v4    
+    
     - name: Create env
-      run: pkg-builder build-env create debian-12/eth-node-erigon/2.53.2-1/pkg-builder.toml
+      run: pkg-builder build-env create ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
+
+    - name: Create package
+      run: pkg-builder package ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml

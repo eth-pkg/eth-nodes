@@ -1,4 +1,4 @@
-name: Build eth-node-nethermind on debian 12
+name: Package eth-node-nethermind on debian 12
 
 on:
   push:
@@ -8,19 +8,19 @@ on:
     branches:
       - main     
     paths:
-      - 'debian-12/eth-node-nethermind/1.21.1-1/**'  
+      - 'debian-12/eth-node-nethermind/**'  
 
 jobs:
-  install_pkgbuilder_deps:
-    uses: ./.github/workflows/pkgbuilder-deps.yml
-  package_eth_node_nethermind_debian12:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  package:
+    strategy:
+      matrix:
+        package-name: ["eth-node-nethermind"]
+        package-version: ["1.21.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml@package
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version: ${{ matrix.package-version }}
+      codename:  ${{ matrix.codename }}
 
-      - name: Create env
-        run: pkg-builder build-env create debian-12/eth-node-nethermind/1.21.1-1/pkg-builder.toml
-
-      - name: Create package
-        run: pkg-builder package debian-12/eth-node-nethermind/1.21.1-1/pkg-builder.toml
+  
