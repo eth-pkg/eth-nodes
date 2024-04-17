@@ -17,7 +17,7 @@ jobs:
         package-name: ["eth-node-nethermind"]
         package-version: ["1.21.1-1"]
         codename: ["debian-12"]
-    uses: ./.github/workflows/pkgbuilder-deps.yml@package
+    uses: ./.github/workflows/pkgbuilder-deps.yml
     with:
       package-name: ${{ matrix.package-name }}
       package-version: ${{ matrix.package-version }}
