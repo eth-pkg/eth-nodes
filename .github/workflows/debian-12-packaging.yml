@@ -1,0 +1,121 @@
+name: Package eth-node-besu on debian 12
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main     
+    paths:
+      - 'debian-12/**'  
+
+jobs:
+  
+  eth-node-besu:
+    strategy:
+      matrix:
+        package-name: ["eth-node-besu"]
+        package-version-with-revision: ["23.10.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}
+
+  eth-node-erigon:
+    strategy:
+      matrix:
+        package-name: ["eth-node-erigon"]
+        package-version-with-revision: ["2.53.2-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}
+
+  eth-node-geth:
+    strategy:
+      matrix:
+        package-name: ["eth-node-geth"]
+        package-version-with-revision: ["1.13.4-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}
+
+  eth-node-lighthouse:
+    strategy:
+      matrix:
+        package-name: ["eth-node-lighthouse"]
+        package-version-with-revision: ["4.5.0-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}    
+    
+  eth-node-lodestar:
+    strategy:
+      matrix:
+        package-name: ["eth-node-lodestar"]
+        package-version-with-revision: ["1.11.3-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+        package-name: ${{ matrix.package-name }}
+        package-version-with-revision: ${{ matrix.package-version-with-revision }}
+        codename:  ${{ matrix.codename }}   
+        
+  eth-node-nethermind:
+    strategy:
+      matrix:
+        package-name: ["eth-node-nethermind"]
+        package-version-with-revision: ["1.21.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}      
+
+  eth-node-nimbus-eth2:
+    strategy:
+      matrix:
+        package-name: ["eth-node-nimbus-eth2"]
+        package-version-with-revision: ["23.10.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}    
+
+  eth-node-prysm:
+    strategy:
+      matrix:
+        package-name: ["eth-node-prsym"]
+        package-version-with-revision: ["4.1.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}
+     
+  eth-node-teku:
+    strategy:
+      matrix:
+        package-name: ["eth-node-teku"]
+        package-version-with-revision: ["23.10.1-1"]
+        codename: ["debian-12"]
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}    
