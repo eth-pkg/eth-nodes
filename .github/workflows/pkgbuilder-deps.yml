@@ -51,6 +51,7 @@ jobs:
       run: |
         cd pkg-builder
         cargo build --release
+        mkdir -p ${HOME}/.local/bin 
         mv target/release/pkg-builder ${HOME}/.local/bin
         chmod +x ${HOME}/.local/bin/pkg-builder
         echo "${HOME}/.local/bin" >> $GITHUB_PATH
@@ -59,6 +60,7 @@ jobs:
     - name: Install debcrafter
       run: |
         wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+        mkdir -p ${HOME}/.local/bin 
         mv debcrafter ${HOME}/.local/bin
         chmod +x ${HOME}/.local/bin/debcrafter
         echo "${HOME}/.local/bin" >> $GITHUB_PATH
