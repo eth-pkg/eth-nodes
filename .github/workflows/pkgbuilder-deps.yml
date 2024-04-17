@@ -24,15 +24,15 @@ jobs:
         sudo apt install -y debhelper schroot ubuntu-dev-tools
         sudo apt-get -y install pkg-config libssl-dev uidmap
         sudo apt-get install -y libfilesys-df-perl libmime-lite-perl
-        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/sbuild_0.85.6_all.deb
-        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/libsbuild-perl_0.85.6_all.deb
+        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/sbuild_0.85.6_all.deb
+        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/libsbuild-perl_0.85.6_all.deb
         sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
 
 
     # - name: pkg-builder
     #   run: |
-    #     wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
-    #     wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+    #     wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
+    #     wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
     #     mkdir -p ${HOME}/.local/bin 
     #     mv pkg-builder ${HOME}/.local/bin
     #     mv debcrafter ${HOME}/.local/bin 
@@ -59,7 +59,7 @@ jobs:
 
     - name: Install debcrafter
       run: |
-        wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+        wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
         mkdir -p ${HOME}/.local/bin 
         mv debcrafter ${HOME}/.local/bin
         chmod +x ${HOME}/.local/bin/debcrafter
@@ -68,12 +68,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4    
     
-    - name: Create env
+    - name: Create chroot env
       run: |
-        pwd 
-        ls -l
         pkg-builder build-env create ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
-
+        echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
     - name: Create package
       run: pkg-builder package ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
