@@ -14,7 +14,7 @@ on:
           type: string      
 
 jobs:
-  package:
+  pkgbuilder:
     runs-on: ubuntu-latest
     steps:
     - name: Sbuild setup
@@ -48,18 +48,18 @@ jobs:
         path: pkg-builder
 
     - name: Install pkg-builder
-        run: |
-          cargo build --release
-          mv target/release/pkg-builder ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/pkg-builder
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+      run: |
+        cargo build --release
+        mv target/release/pkg-builder ${HOME}/.local/bin
+        chmod +x ${HOME}/.local/bin/pkg-builder
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
     - name: Install debcrafter
-        run: |
-          wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
-          mv debcrafter ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/debcrafter
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+      run: |
+        wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+        mv debcrafter ${HOME}/.local/bin
+        chmod +x ${HOME}/.local/bin/debcrafter
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
     - name: Checkout repository
       uses: actions/checkout@v4    

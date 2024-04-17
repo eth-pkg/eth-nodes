@@ -9,8 +9,8 @@ homepage="https://github.com/status-im/nimbus-eth2"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/status-im/nimbus-eth2/archive/refs/tags/v2.53.2.tar.gz"
-tarball_hash = ""
-no_hash=true
+# TODO no hash provided for source code 
+
 
 [package_type.language_env]
 

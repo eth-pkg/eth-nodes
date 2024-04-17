@@ -9,8 +9,8 @@ homepage="https://github.com/ChainSafe/lodestar"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/ChainSafe/lodestar/archive/refs/tags/v1.11.3.tar.gz"
-tarball_hash = ""
-no_hash=true
+# TODO no hash provided for source code 
+
 
 [package_type.language_env]
 
