@@ -45,15 +45,16 @@ jobs:
       with:
         repository: eenagy/pkg-builder  
         ref: bookworm-2  
-        path: ${HOME}/pkg-builder
+        path: pkg-builder
 
     - name: Install pkg-builder
       run: |
-        cd ${HOME}/pkg-builder
+        cd pkg-builder
         cargo build --release
         mv target/release/pkg-builder ${HOME}/.local/bin
         chmod +x ${HOME}/.local/bin/pkg-builder
         echo "${HOME}/.local/bin" >> $GITHUB_PATH
+        cd .. && rm -rf pkg-builder
 
     - name: Install debcrafter
       run: |
