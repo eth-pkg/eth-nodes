@@ -17,11 +17,6 @@ jobs:
   package:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/labeler@v4
-      with:
-        package-name: ${{ inputs.package-name }}
-        configuration-path: ${{ inputs.package-version-with-revision }}
-        codename: ${{ inputs.codename }}
     - name: Sbuild setup
       run: |
         sudo apt-get update
