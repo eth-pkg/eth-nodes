@@ -29,16 +29,37 @@ jobs:
         sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
 
 
-    - name: pkg-builder
-      run: |
-        wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
-        wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
-        mkdir -p ${HOME}/.local/bin 
-        mv pkg-builder ${HOME}/.local/bin
-        mv debcrafter ${HOME}/.local/bin 
-        chmod +x ${HOME}/.local/bin/pkg-builder
-        chmod +x ${HOME}/.local/bin/debcrafter
-        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+    # - name: pkg-builder
+    #   run: |
+    #     wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
+    #     wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+    #     mkdir -p ${HOME}/.local/bin 
+    #     mv pkg-builder ${HOME}/.local/bin
+    #     mv debcrafter ${HOME}/.local/bin 
+    #     chmod +x ${HOME}/.local/bin/pkg-builder
+    #     chmod +x ${HOME}/.local/bin/debcrafter
+    #     echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+    - name: Checkout dependency repository
+      uses: actions/checkout@v4
+      with:
+        repository: eenagy/pkg-builder  
+        ref: bookworm-2  
+        path: pkg-builder
+
+    - name: Install pkg-builder
+        run: |
+          cargo build --release
+          mv target/release/pkg-builder ${HOME}/.local/bin
+          chmod +x ${HOME}/.local/bin/pkg-builder
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+    - name: Install debcrafter
+        run: |
+          wget https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+          mv debcrafter ${HOME}/.local/bin
+          chmod +x ${HOME}/.local/bin/debcrafter
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
     - name: Checkout repository
       uses: actions/checkout@v4    
