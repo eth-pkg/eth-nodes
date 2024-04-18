@@ -5,6 +5,15 @@
 
 override_dh_dwz:
 
+override_dh_auto_test:
+	# yarn test:unit
+	# yarn test:e2e
+	# yarn test:e2e:sim
+
+override_dh_auto_build:
+	yarn install --frozen-lockfile
+	yarn build
+
 override_dh_auto_install:
 	# This relies on make install script
 	# if there is no install script, you have define your own rules
