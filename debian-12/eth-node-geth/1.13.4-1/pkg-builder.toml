@@ -1,6 +1,6 @@
 [package_fields]
 spec_file = "eth-node-geth.sss"
-package_name = "eth-geth-erigon"
+package_name = "eth-node-geth"
 version_number = "1.13.4"
 revision_number = "1"
 homepage="https://github.com/ethereum/go-ethereum"

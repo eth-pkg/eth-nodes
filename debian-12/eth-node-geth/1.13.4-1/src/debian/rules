@@ -1,4 +1,9 @@
 #!/usr/bin/make -f
+export CGO_ENABLED=0 
+
+export GIT_COMMIT ?= 4fc8c374cfcdce19cea612846a0634f4de186cb8
+export GIT_BRANCH ?= main
+export GIT_TAG    ?= v2.53.2
 
 %:
 	dh $@
