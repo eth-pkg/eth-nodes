@@ -2,7 +2,9 @@ name = "eth-node-lighthouse"
 maintainer = "Eniko Nagy <mail@eenagy.com>"
 section = "net"
 variants = []
-build_depends = [
+build_depends = [ 
+"curl",
+"git", 
 "gcc", 
 "g++", 
 "make", 
@@ -12,12 +14,11 @@ build_depends = [
 "libclang-dev", 
 "libpq-dev",
 "clang", 
-"docker-ce",
-"docker-ce-cli",
-"containerd.io",
-"docker-buildx-plugin",
-"docker-compose-plugin",
-"curl"
+# "docker-ce",
+# "docker-ce-cli",
+# "containerd.io",
+# "docker-buildx-plugin",
+# "docker-compose-plugin"
 ]
 packages = ["eth-node-lighthouse"]
 skip_debug_symbols = true
