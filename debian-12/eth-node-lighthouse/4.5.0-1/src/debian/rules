@@ -15,8 +15,6 @@ export FEATURES=gnosis,slasher-lmdb,slasher-mdbx,jemalloc
 %:
 	dh $@
 
-override_dh_dwz:
-
 
 override_dh_auto_test:
 	# # Install additional test dependency

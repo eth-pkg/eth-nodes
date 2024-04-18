@@ -6,8 +6,6 @@ export PATH:=$(PATH):$(GO_BIN_HOME)/bin
 	go install github.com/bazelbuild/bazelisk@v1.18.0
 	dh $@
 
-override_dh_dwz:
-
 override_dh_auto_test:
     CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
 

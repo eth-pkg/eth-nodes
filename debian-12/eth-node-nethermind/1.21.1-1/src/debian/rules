@@ -3,8 +3,6 @@
 %:
 	dh $@
 
-override_dh_dwz:
-
 override_dh_auto_build:
 	cd src/Nethermind/Nethermind.Runner && dotnet build -c release
 	# Deleta all other archs then x64
