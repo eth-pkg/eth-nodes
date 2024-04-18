@@ -18,7 +18,7 @@ export FEATURES=gnosis,slasher-lmdb,slasher-mdbx,jemalloc
 override_dh_dwz:
 
 
-#override_dh_auto_test:
+override_dh_auto_test:
 	# # Install additional test dependency
 	# cd /tmp && curl -s -L https://github.com/foundry-rs/foundry/releases/download/nightly-ca67d15f4abd46394b324c50e21e66f306a1162d/foundry_nightly_linux_amd64.tar.gz -o foundry_nightly_linux_amd64.tar.gz
 	# cd /tmp && tar xvf foundry_nightly_linux_amd64.tar.gz 
