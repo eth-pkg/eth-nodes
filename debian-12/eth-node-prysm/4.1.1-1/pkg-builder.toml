@@ -14,27 +14,13 @@ tarball_url = "https://github.com/prysmaticlabs/prysm/archive/refs/tags/v4.1.1.t
 tarball_hash = "6cd8c7d9f304e056649f0f7f71cc4e1e3cd5e7aad6d5dbb6477d5f718a322c6e"
 
 [package_type.language_env]
-language_env = "rust"
-rust_version="1.77.2"
-rust_binary_url="https://static.rust-lang.org/dist/rust-1.77.2-x86_64-unknown-linux-gnu.tar.xz"
-rust_binary_gpg_asc="""
------BEGIN PGP SIGNATURE-----
+language_env = "go"
+go_version = "1.22.2"
+go_binary_url = "https://go.dev/dl/go1.22.2.linux-amd64.tar.gz"
+go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471216a17"
 
-wsFcBAABCgAQBQJmFa+iCRCFq5bm+hvl/gAAc4oP/12rJYjE54yHsCgcpf6Lg+jz
-h8HPP4uCET7gt7LZPBPaQPEllssvBE+OZPNXs2J/Bf9Dk+3Za2uEfSaEwRkuf2TV
-EjLRkbxxjAx6e5FczAV0Qdd9u8O2LimndsRPOpjvIJtU4+wXnlHpPQ0lydr0rJso
-/K9wdxvA3NgmNBa0SAKtGBwuziMk5tR+7gFFebJikXqnBsGgdifszL41tKSl5VkK
-FUyb6xn0tA+wGmCVNiCV8JeTacr7+upJhAcMEqYWH/AuhA2vgF21W5jDPeA3VfoJ
-RgPYUkbTKSdmUd68sUS5pzixxnYa6LXMBewshTim/kbxlMHxrZ+YSoOjBSuMUA/9
-ZcvqR/fdVNLXI/2oFIT4VPNM1cYmR15xBI1G5AbfOzYWoPGU9OTu4hs11Y3DCTCz
-E5obQCVAm4/H8gO3hTvDiJE0Rb2M0h1uV12LkCMymzuIBrhLkVhQeekDZadJmWq0
-XlT/N86YFd8P393xYE3fpKaGqZ0fBJfX4nLdZHdZeFrov6ADjf7NLsfY0S9AnRnK
-SAytDb5EQMcBZXlNKnF+mLG9l0Y4JtijEsaiMaJgzVInTIUTtkW/GlgpAgzIBQ8m
-KGFMBQELjcFWLGcBVE45DRuVR8E3XYunjSdgLFXjfZfeGF3uiS6fNHGCH41ryqfj
-2jwoU0cewz4tgDucAWWC
-=sCT4
------END PGP SIGNATURE-----
-"""
+[package_type.language_env.bazelisk]
+bazelisk_version="1.18.0"
 
 [build_env]
 codename="bookworm"

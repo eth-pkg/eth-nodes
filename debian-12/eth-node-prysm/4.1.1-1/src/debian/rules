@@ -1,14 +1,20 @@
 #!/usr/bin/make -f
+export GO_BIN_HOME=$(HOME)/go
+export PATH:=$(PATH):$(GO_BIN_HOME)/bin
 
 %:
+	go install github.com/bazelbuild/bazelisk@v1.18.0
 	dh $@
 
 override_dh_dwz:
 
-override_dh_auto_install:
-	# This relies on make install script
-	# if there is no install script, you have define your own rules
-	dh_auto_install -- prefix=/usr
+override_dh_auto_test:
+    CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
+
+override_dh_auto_build:
+	bazelisk build //cmd/beacon-chain:beacon-chain --config=release
+	bazelisk build //cmd/validator:validator --config=release 
+
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
