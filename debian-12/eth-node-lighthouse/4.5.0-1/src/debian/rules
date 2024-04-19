@@ -7,14 +7,21 @@ export PATH:=$(PATH):$(CARGO)/bin
 # pkg-builder uses chroot instead of docker, chroot is much more lightweight
 # chroot is the debian way
 export FEATURES=gnosis,slasher-lmdb,slasher-mdbx,jemalloc
-# export XDG_RUNTIME_DIR=/tmp/user/112
-# export DOCKER_HOST=unix:///tmp/docker-112/docker.sock
-# export PATH:=/home/eniko/bin:$(PATH)
+##export XDG_RUNTIME_DIR=/tmp/user/112
+##export DOCKER_HOST:=unix:///$(XDG_RUNTIME_DIR)/docker.sock
 
 
 %:
 	dh $@
 
+# docker_setup:
+# 	docker run hello-world
+# 	# ls -l /tmp/user
+# 	# export SKIP_IPTABLES=1 && curl -fsSL https://get.docker.com/rootless | sh
+# 	# dockerd-rootless.sh --experimental --storage-driver vfs seccomp=unconfined apparmor=unconfined systempaths=unconfined
+
+override_dh_auto_build: docker_setup 
+	dh_auto_build
 
 override_dh_auto_test:
 	# # Install additional test dependency
