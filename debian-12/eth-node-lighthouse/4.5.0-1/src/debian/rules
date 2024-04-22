@@ -7,18 +7,32 @@ export PATH:=$(PATH):$(CARGO)/bin
 # pkg-builder uses chroot instead of docker, chroot is much more lightweight
 # chroot is the debian way
 export FEATURES=gnosis,slasher-lmdb,slasher-mdbx,jemalloc
-##export XDG_RUNTIME_DIR=/tmp/user/112
-##export DOCKER_HOST:=unix:///$(XDG_RUNTIME_DIR)/docker.sock
-
+export XDG_RUNTIME_DIR=/tmp/user/112
+export DOCKER_HOST:=unix:///$(XDG_RUNTIME_DIR)/docker.sock
+export IMAGE_NAME=fedora-coreos-39.20240322.3.1-qemu.x86_64.qcow2.xz
+export IMAGE_URL:=https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/39.20240322.3.1/x86_64/$(IMAGE_NAME)
 
 %:
 	dh $@
 
-# docker_setup:
-# 	docker run hello-world
-# 	# ls -l /tmp/user
-# 	# export SKIP_IPTABLES=1 && curl -fsSL https://get.docker.com/rootless | sh
-# 	# dockerd-rootless.sh --experimental --storage-driver vfs seccomp=unconfined apparmor=unconfined systempaths=unconfined
+docker_setup:
+	#eval "$$(ssh-agent -s)"
+	# curl $(IMAGE_URL) --output $(IMAGE_NAME)
+	# xz -d $(IMAGE_NAME)
+	# qemu-system-x86_64 -m 2048M -drive file=fedora-coreos-39.20240322.3.1-qemu.x86_64.qcow2,format=qcow2 -nographic
+	# podman machine init --rootful=false
+	# podman machine start
+	# mkdir -p /tmp/user/112
+	# mkdir -p /var/lib/sbuild/.local/share/containers
+	# strace podman --storage-driver=vfs info --debug
+	cat /etc/subuid
+	cat /etc/subgid
+	cat /proc/sys/user/max_user_namespaces
+	#strace podman info
+	podman run --security-opt label=disable hello-world
+	# ls -l /tmp/user
+	# export SKIP_IPTABLES=1 && curl -fsSL https://get.docker.com/rootless | sh
+	# dockerd-rootless.sh --experimental --storage-driver vfs seccomp=unconfined apparmor=unconfined systempaths=unconfined
 
 override_dh_auto_build: docker_setup 
 	dh_auto_build

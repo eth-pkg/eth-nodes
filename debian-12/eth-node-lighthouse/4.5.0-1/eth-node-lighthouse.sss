@@ -4,16 +4,23 @@ section = "net"
 variants = []
 build_depends = [ 
 "curl",
-"git", 
-"gcc", 
-"g++", 
-"make", 
-"cmake", 
-"pkg-config", 
-"llvm-dev", 
-"libclang-dev", 
-"libpq-dev",
-"clang", 
+#"git", 
+#"gcc", 
+#"g++", 
+#"make", 
+#"cmake", 
+#"pkg-config", 
+#"llvm-dev", 
+#"libclang-dev", 
+#"libpq-dev",
+#"clang", 
+"podman",
+"strace",
+"qemu-system-x86",
+"openssh-client",
+"qemu-utils",
+"virtinst",
+"xz-utils"
 ]
 packages = ["eth-node-lighthouse"]
 skip_debug_symbols = true
