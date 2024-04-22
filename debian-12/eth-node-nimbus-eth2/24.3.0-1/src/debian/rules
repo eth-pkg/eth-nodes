@@ -1,0 +1,14 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	# This relies on make install script
+	# if there is no install script, you have define your own rules
+	dh_auto_install -- prefix=/usr
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
