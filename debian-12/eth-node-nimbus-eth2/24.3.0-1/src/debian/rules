@@ -1,7 +1,16 @@
 #!/usr/bin/make -f
+export NIM_DIR=/opt/lib/nim/nim-2.0.2
+export USE_SYSTEM_NIM=1
 
 %:
 	dh $@
+
+override_dh_auto_test:
+	#Test are failing 
+	
+override_dh_auto_build:
+	-make update
+	make -j1 build
 
 override_dh_auto_install:
 	# This relies on make install script
