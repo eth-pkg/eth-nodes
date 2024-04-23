@@ -25,9 +25,9 @@ override_dh_auto_build: $(BINARIES)
 	
 
 override_dh_auto_install: copy_binaries
-	cp -R $(DIST_PATH) /usr/share/eth-node-nimbus-eth2 
-	dh_auto_install
-	#make dh_auto_install --destdir=/usr/lib/eth-node-nimbus-eth2
+	# cp -R $(DIST_PATH) /usr/share/eth-node-nimbus-eth2 
+	# dh_auto_install
+	make dh_auto_install --destdir=/usr/lib/eth-node-nimbus-eth2
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
