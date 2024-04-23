@@ -10,7 +10,7 @@ export GIT_TAG    ?= v2.53.2
 
 override_dh_auto_install:
 	# This relies on make install script
-	# if there is no install script, you have define your own rules
+	# if there is no install script, you have to define your own rules
 	dh_auto_install -- prefix=/usr
 
 override_dh_auto_clean:
