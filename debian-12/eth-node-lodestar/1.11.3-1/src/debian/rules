@@ -4,9 +4,9 @@
 	dh $@
 
 override_dh_auto_test:
-	# yarn test:unit
-	# yarn test:e2e
-	# yarn test:e2e:sim
+	yarn test:unit
+	yarn test:e2e
+	yarn test:e2e:sim
 
 override_dh_auto_build:
 	yarn install --frozen-lockfile
