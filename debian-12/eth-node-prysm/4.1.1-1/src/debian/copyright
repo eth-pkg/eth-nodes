@@ -1542,14 +1542,6 @@ Files:     .bazelrc
            crypto/rand/BUILD.bazel
            crypto/rand/rand.go
            crypto/rand/rand_test.go
-           debian/compat
-           debian/control
-           debian/eth-node-prysm.install
-           debian/eth-node-prysm.links
-           debian/eth-node-prysm.postinst
-           debian/eth-node-prysm.postrm
-           debian/rules
-           debian/source/format
            deps.bzl
            encoding/bytesutil/BUILD.bazel
            encoding/bytesutil/bits.go

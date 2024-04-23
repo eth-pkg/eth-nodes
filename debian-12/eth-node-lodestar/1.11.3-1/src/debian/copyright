@@ -70,14 +70,6 @@ Files:     .benchrc.yaml
            dashboards/lodestar_validator_client.json
            dashboards/lodestar_validator_monitor.json
            dashboards/lodestar_vm_host.json
-           debian/compat
-           debian/control
-           debian/eth-node-lodestar.install
-           debian/eth-node-lodestar.links
-           debian/eth-node-lodestar.postinst
-           debian/eth-node-lodestar.postrm
-           debian/rules
-           debian/source/format
            default.env
            docker-compose.validator.yml
            docker-compose.yml

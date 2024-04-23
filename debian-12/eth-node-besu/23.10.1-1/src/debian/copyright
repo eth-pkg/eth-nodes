@@ -4178,14 +4178,6 @@ Files:     .circleci/config.yml
            crypto/algorithms/src/test/resources/org/hyperledger/besu/crypto/eip152TestCases.csv
            crypto/algorithms/src/test/resources/org/hyperledger/besu/crypto/validPrivateKey.txt
            crypto/algorithms/src/test/resources/validPrivateKey.txt
-           debian/compat
-           debian/control
-           debian/eth-node-besu.install
-           debian/eth-node-besu.links
-           debian/eth-node-besu.postinst
-           debian/eth-node-besu.postrm
-           debian/rules
-           debian/source/format
            docker/.gitignore
            docker/graalvm/Dockerfile
            docker/openj9-jdk-17/Dockerfile

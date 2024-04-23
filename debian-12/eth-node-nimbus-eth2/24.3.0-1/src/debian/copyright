@@ -54,14 +54,6 @@ Files:     .editorconfig
            beacon_chain/validators/activity_metrics.nim
            benchmarks/rest_api_benchmark.nim
            benchmarks/rest_api_benchmark.nim.cfg
-           debian/compat
-           debian/control
-           debian/eth-node-nimbus-eth2-cli.postinst
-           debian/eth-node-nimbus-eth2-cli.postrm
-           debian/patches/001-makefile.patch
-           debian/patches/series
-           debian/rules
-           debian/source/format
            docker/README.md
            docker/dist/Dockerfile.amd64
            docker/dist/Dockerfile.arm

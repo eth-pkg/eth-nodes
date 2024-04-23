@@ -47,16 +47,6 @@ Files:     .dockerignore
            Dockerfile.stateRunner
            SECURITY.md
            TERMS.md
-           debian/compat
-           debian/control
-           debian/eth-node-nethermind.install
-           debian/eth-node-nethermind.links
-           debian/eth-node-nethermind.postinst
-           debian/eth-node-nethermind.postrm
-           debian/patches/000-patch-Nethermind.Runner.csproj
-           debian/patches/series
-           debian/rules
-           debian/source/format
            scripts/deployment/archive-packages.sh
            scripts/deployment/build-cli.sh
            scripts/deployment/build-launcher.sh

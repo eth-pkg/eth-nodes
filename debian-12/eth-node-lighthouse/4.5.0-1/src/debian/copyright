@@ -807,16 +807,6 @@ Files:     .cargo/config.toml
            crypto/eth2_wallet/tests/tests.rs
            database_manager/Cargo.toml
            database_manager/src/lib.rs
-           debian/compat
-           debian/control
-           debian/eth-node-lighthouse.install
-           debian/eth-node-lighthouse.links
-           debian/eth-node-lighthouse.postinst
-           debian/eth-node-lighthouse.postrm
-           debian/patches/000-patch-makefile.patch
-           debian/patches/series
-           debian/rules
-           debian/source/format
            lcli/.gitignore
            lcli/Cargo.toml
            lcli/Dockerfile

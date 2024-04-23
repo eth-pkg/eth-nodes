@@ -987,14 +987,6 @@ Files:     .buildkite/hooks/pre-command
            crypto/ecies/.gitignore
            crypto/ecies/README
            dataflow/states.go
-           debian/compat
-           debian/control
-           debian/eth-node-erigon.install
-           debian/eth-node-erigon.links
-           debian/eth-node-erigon.postinst
-           debian/eth-node-erigon.postrm
-           debian/rules
-           debian/source/format
            debug.Dockerfile
            design/logos/Illustrator/logo.ai
            design/logos/Illustrator/readme.md

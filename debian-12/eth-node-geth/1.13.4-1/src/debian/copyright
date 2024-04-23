@@ -401,14 +401,6 @@ Files:     .dockerignore
            crypto/secp256k1/libsecp256k1/src/modules/ecdh/dummy.go
            crypto/secp256k1/libsecp256k1/src/modules/recovery/Makefile.am.include
            crypto/secp256k1/libsecp256k1/src/modules/recovery/dummy.go
-           debian/compat
-           debian/control
-           debian/eth-node-geth.install
-           debian/eth-node-geth.links
-           debian/eth-node-geth.postinst
-           debian/eth-node-geth.postrm
-           debian/rules
-           debian/source/format
            docs/audits/2017-04-25_Geth-audit_Truesec.pdf
            docs/audits/2018-09-14_Clef-audit_NCC.pdf
            docs/audits/2019-10-15_Discv5_audit_LeastAuthority.pdf

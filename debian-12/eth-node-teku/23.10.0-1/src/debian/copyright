@@ -4047,14 +4047,6 @@ Files:     .circleci/config.yml
            data/provider/build.gradle
            data/publisher/build.gradle
            data/serializer/build.gradle
-           debian/compat
-           debian/control
-           debian/eth-node-teku.install
-           debian/eth-node-teku.links
-           debian/eth-node-teku.postinst
-           debian/eth-node-teku.postrm
-           debian/rules
-           debian/source/format
            docker/jdk17/Dockerfile
            eth-benchmark-tests/build.gradle
            eth-benchmark-tests/src/testFixtures/resources/blocks/blocks_1Epochs_32BlocksPerEpoch_1800000Validators.ssz.gz
