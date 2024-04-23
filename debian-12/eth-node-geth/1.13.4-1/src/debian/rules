@@ -8,6 +8,9 @@ export GIT_TAG    ?= v2.53.2
 %:
 	dh $@
 
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
 override_dh_auto_install:
 	# This relies on make install script
 	# if there is no install script, you have to define your own rules
