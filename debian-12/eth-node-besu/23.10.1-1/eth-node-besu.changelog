@@ -1,4 +1,4 @@
-eth-node-besu (23.10.1-1) unstable; urgency=medium
+eth-node-besu (23.10.1-1) bookworm; urgency=medium
 
   * Change the packaging version to reflect the besu versioning
 

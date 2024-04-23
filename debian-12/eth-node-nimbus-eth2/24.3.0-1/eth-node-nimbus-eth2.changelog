@@ -1,4 +1,4 @@
-eth-node-nimbus-eth2 (24.3.0-1) unstable; urgency=medium
+eth-node-nimbus-eth2 (24.3.0-1) bookworm; urgency=medium
 
   * Use correct nimbus-eth2 versioning version number + git commit
 

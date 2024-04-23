@@ -1,4 +1,4 @@
-eth-node-lodestar (1.11.3-1) unstable; urgency=medium
+eth-node-lodestar (1.11.3-1) bookworm; urgency=medium
 
   * Use correct lodestar versioning version number + git commit
 

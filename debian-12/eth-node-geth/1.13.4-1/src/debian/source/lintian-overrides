@@ -6,4 +6,3 @@ eth-node-geth source: source-is-missing [graphql/internal/graphiql/react.product
 eth-node-geth source: source-is-missing [internal/jsre/deps/bignumber.js]
 eth-node-geth source: source-is-missing [internal/jsre/deps/web3.js]
 eth-node-geth source: source-is-missing [tests/solidity/bytecode.js]
-eth-node-geth: statically-linked-binary [usr/lib/eth-node-geth/bin/rlpdump]

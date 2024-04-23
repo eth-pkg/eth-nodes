@@ -1,4 +1,4 @@
-eth-node-service (0.1) unstable; urgency=medium
+eth-node-service (0.1) bookworm; urgency=medium
 
   * Initial packaging
 

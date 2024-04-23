@@ -1,10 +1,10 @@
-eth-node-execution-client (<version_number>-<short_commit>-<revision>) unstable; urgency=medium
+eth-node-execution-client (<version_number>-<short_commit>-<revision>) bookworm; urgency=medium
 
   * Change the packaging version to reflect the client versioning
 
  -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 13:14:17 +0700
 
-eth-node-execution-client (0.1) unstable; urgency=medium
+eth-node-execution-client (0.1) bookworm; urgency=medium
 
   * Initial packaging
 
