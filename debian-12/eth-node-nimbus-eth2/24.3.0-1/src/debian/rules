@@ -1,23 +1,54 @@
 #!/usr/bin/make -f
 export NIM_DIR=/opt/lib/nim/nim-2.0.2
 export USE_SYSTEM_NIM=1
+#export BINARIES="nimbus_beacon_node nimbus_validator_client deposit_contract nimbus_signing_node nimbus_light_client logtrace"
+export BINARIES="nimbus_beacon_node"
+#export NIMFLAGS="-d:disableMarchNative --gcc.options.debug:'-g1' --clang.options.debug:'-gline-tables-only'"
+export NIMFLAGS="-d:release"
+export GIT_COMMIT="dc19b08"
+# debian can pick up source from this dir
+export DIST_PATH="debian/tmp"
+export PARTIAL_STATIC_LINKING=1
+export QUICK_AND_DIRTY_COMPILER=1
+export LOG_LEVEL="TRACE"
 
 %:
 	dh $@
 
-override_dh_auto_test:
-	#Test are failing 
-	
-override_dh_auto_build:
-	-make update
-	make -j1 build
 
-override_dh_auto_install:
-	# This relies on make install script
-	# if there is no install script, you have define your own rules
+$(BINARIES): 
+	make $@
+
+
+
+override_dh_auto_build: $(BINARIES)
+	
+
+override_dh_auto_install: copy_binaries
 	dh_auto_install -- prefix=/usr
+	#make dh_auto_install --destdir=/usr/lib/eth-node-nimbus-eth2
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
 	# on bookworm clean succeeds, even if dependency is not installed
 	-make -j1 clean
+
+override_dh_auto_test:
+	# -make update
+	# make -j1 build
+
+copy_binaries:
+	mkdir -p ${DIST_PATH}
+	mkdir ${DIST_PATH}/scripts
+	mkdir ${DIST_PATH}/build
+	@for BINARY in $(BINARIES); do \
+        cp -a "./build/$${BINARY}" "$(DIST_PATH)/build/"; \
+        cd "$(DIST_PATH)/build"; \
+        sha512sum "$${BINARY}" > "$${BINARY}.sha512sum"; \
+        cd - >/dev/null; \
+	done	
+	
+	sed -e "s/GIT_COMMIT/${GIT_COMMIT}/" docker/dist/README.md.tpl > "${DIST_PATH}/README.md"
+	sed -i -e 's/^make dist$$/make dist-amd64/' "${DIST_PATH}/README.md"
+	cp -a scripts/run-beacon-node.sh "${DIST_PATH}/scripts"
+	cp -a ./run-*-beacon-node.sh "${DIST_PATH}/"
