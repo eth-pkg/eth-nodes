@@ -2,4 +2,4 @@ eth-node-nimbus-eth2 (24.3.0-1) bookworm; urgency=medium
 
   * Use correct nimbus-eth2 versioning version number + git commit
 
- -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 20 Oct 2023 14:33:27 +0700
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 24 May 2024 13:14:17 +0700
