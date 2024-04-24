@@ -46,7 +46,7 @@ debcrafter_version = "latest"
 # needed for tests
 docker=true
 run_lintian=true
-run_piuparts=false
+run_piuparts=true
 run_autopkgtest=false
 # package directory
 workdir="~/.pkg-builder/packages"
