@@ -16,12 +16,16 @@ override_dh_auto_build:
 	dh_auto_build
 
 override_dh_auto_test:
-	# # Install additional test dependency
+	# # # Install additional test dependency
 	cd /tmp && curl -s -L https://github.com/foundry-rs/foundry/releases/download/nightly-ca67d15f4abd46394b324c50e21e66f306a1162d/foundry_nightly_linux_amd64.tar.gz -o foundry_nightly_linux_amd64.tar.gz
 	cd /tmp && tar xvf foundry_nightly_linux_amd64.tar.gz 
 	cp /tmp/anvil $(HOME)/.cargo/bin
 	anvil --version # check if it correctly installed
-	make -j1 test-release
+	# # TODO include docker tests (watch) 
+	# web3signer_tests also fail if run by workspace, not sure why (web3signer_tests)
+	cargo test --workspace --release --exclude ef_tests --exclude beacon_chain --exclude slasher --exclude watch --exclude web3signer_tests
+	# run web3signer tests seperately
+	cargo test -p web3signer_tests --lib
 
 override_dh_auto_install:
 	# This relies on make install script

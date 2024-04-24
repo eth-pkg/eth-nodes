@@ -1,13 +1,16 @@
 name = "eth-node-lighthouse"
 architecture = "any"
-summary = "Lighthouse binary"
+summary = "An open-source Ethereum consensus client, written in Rust and maintained by Sigma Prime."
 conflicts = []
 recommends = []
 provides = ["eth-node-consensus-client"]
 suggests = ["eth-node"]
-add_files = ["target/release/lighthouse /usr/share/eth-node-lighthouse/bin"]
-add_links = ["/usr/share/eth-node-lighthouse/bin/lighthouse /usr/bin/lighthouse"]
+add_files = ["target/release/lighthouse /usr/lib/eth-node-lighthouse/bin"]
+add_links = ["/usr/lib/eth-node-lighthouse/bin/lighthouse /usr/bin/lighthouse"]
 
 add_manpages = []
-long_doc = """ Lighthouse binary
+long_doc = """
+Lighthouse is an Ethereum consensus client that connects
+to other Ethereum consensus clients to form a resilient 
+and decentralized proof-of-stake blockchain.
 """
