@@ -1,11 +1,13 @@
 #!/usr/bin/make -f
+export INSTALL_DIR=/usr/lib/eth-node-lodestar
 
 %:
 	dh $@
 
 override_dh_auto_test:
 	yarn test:unit
-	yarn test:e2e
+	# TODO Enable docker tests, docker does not work under chroot, yet
+	# yarn test:e2e
 	yarn test:e2e:sim
 
 override_dh_auto_build:

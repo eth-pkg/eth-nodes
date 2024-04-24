@@ -1,0 +1,5 @@
+eth-node-lodestar: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lodestar/changelog.Debian.gz:1]
+
+# this need to be ignored, will going to remove, with .gitignore as well 
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/packages/api/node_modules/json-schema-traverse/spec/.eslintrc.yml]
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/packages/api/node_modules/json-schema-traverse/.eslintrc.yml]
