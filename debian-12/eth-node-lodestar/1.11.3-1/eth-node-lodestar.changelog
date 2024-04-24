@@ -2,4 +2,4 @@ eth-node-lodestar (1.11.3-1) bookworm; urgency=medium
 
   * Use correct lodestar versioning version number + git commit
 
- -- Eniko Nagy <mail@eenagy.com>  Fri, 20 Oct 2023 14:33:27 +0700
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 20 Oct 2023 14:33:27 +0700
