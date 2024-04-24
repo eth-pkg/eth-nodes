@@ -5,8 +5,8 @@ conflicts = []
 recommends = []
 provides = ["eth-node-consensus-client"]
 suggests = ["eth-node"]
-add_files = ["/build/install/teku /usr/share/eth-node-teku"]
-add_links = ["/usr/share/eth-node-teku/teku/bin/teku /usr/bin/teku"]
+add_files = ["/build/install/teku /usr/lib/eth-node-teku"]
+add_links = ["/usr/lib/eth-node-teku/teku/bin/teku /usr/bin/teku"]
 add_manpages = []
 long_doc = """
 Teku is an open source Ethereum consensus client (previously called an Ethereum 2.0 client) written in Java.
