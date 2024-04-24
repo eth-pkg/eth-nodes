@@ -1,0 +1,3 @@
+# TODO bugs
+eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/lib/build/nimbus_beacon_node]
+eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/lib/build/nimbus_light_client]
