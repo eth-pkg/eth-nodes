@@ -1,1 +1,3 @@
+# TODO this is a bug, let's wait and see if compiled with different flags will solve it
+# waiting for the verify build task
 eth-node-geth: statically-linked-binary [usr/lib/eth-node-geth/bin/rlpdump]
