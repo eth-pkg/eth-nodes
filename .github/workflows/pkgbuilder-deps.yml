@@ -78,7 +78,6 @@ jobs:
 
     - name: piuparts
       run: |
-        sudo apt-get update
         # Install debian-archive-keyring but fails, as it is already installed
         # sudo apt-get install -y debian-archive-keyring
         sudo /home/runner/.cargo/bin/pkg-builder piuparts ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
