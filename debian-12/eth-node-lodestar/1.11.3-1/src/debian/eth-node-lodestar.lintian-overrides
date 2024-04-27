@@ -32,7 +32,10 @@ eth-node-lodestar: package-contains-npm-ignore-file [usr/lib/eth-node-lodestar/b
 eth-node-lodestar: package-contains-npm-ignore-file
 eth-node-lodestar: package-installs-python-pycache-dir [usr/lib/eth-node-lodestar/bin/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/]
 eth-node-lodestar: package-installs-python-pycache-dir [usr/lib/eth-node-lodestar/bin/node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__/]
+eth-node-lodestar: package-installs-python-pycache-dir [usr/lib/eth-node-lodestar/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/]
+eth-node-lodestar: package-installs-python-pycache-dir [usr/lib/eth-node-lodestar/node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__/]
 eth-node-lodestar: privacy-breach-uses-embedded-file You may use the libjs-jquery package. (//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js) [usr/lib/eth-node-lodestar/bin/node_modules/jmespath/index.html]
+eth-node-lodestar: privacy-breach-uses-embedded-file You may use the libjs-jquery package. (//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js) [usr/lib/eth-node-lodestar/node_modules/jmespath/index.html]
 eth-node-lodestar: python3-script-but-no-python3-dep python3 (does not satisfy python3:any | python3-minimal:any) [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/c#/run.me]
 eth-node-lodestar: python3-script-but-no-python3-dep python3 (does not satisfy python3:any | python3-minimal:any) [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/emscripten/build.py]
 eth-node-lodestar: python3-script-but-no-python3-dep python3 (does not satisfy python3:any | python3-minimal:any) [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/go/generate.py]
@@ -42,3 +45,4 @@ eth-node-lodestar: unstripped-binary-or-object [usr/lib/eth-node-lodestar/bin/no
 eth-node-lodestar: unstripped-binary-or-object [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
 eth-node-lodestar: unstripped-binary-or-object
 eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/bin/node_modules/fastify/integration/test.sh]
+eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/node_modules/fastify/integration/test.sh]

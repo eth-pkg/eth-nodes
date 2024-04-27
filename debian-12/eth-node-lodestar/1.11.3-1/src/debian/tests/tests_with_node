@@ -4,7 +4,7 @@ exec 2>&1
 
 set -e
 
-cd 
+cd /tmp
 curl -o node.tar.gz -L https://nodejs.org/download/release/v20.12.2/node-v20.12.2-linux-x64.tar.gz
 mkdir /usr/lib/node && tar -C /usr/lib/node -xzf node.tar.gz --strip-components=1
 ls -l /usr/lib/node/bin
@@ -22,11 +22,9 @@ test_binary_in_path(){
 
 test_invocation(){
   output="$(lodestar --version)"
-  # if output contains dot, assertContains fail
-  output=$(echo "$output" | sed 's/\./_/g')
-  assertContains "🌟 Lodestar: TypeScript Implementation of the Ethereum Consensus Beacon Chain" "$output"
-  assertContains "* Version: v1.11.3" "$output"
-  assertContains "* by ChainSafe Systems, 2018-2024" "$output"
+  assertContains "$output" "🌟 Lodestar: TypeScript Implementation of the Ethereum Consensus Beacon Chain"
+  assertContains "$output" "* Version: v1.11.3"
+  assertContains "$output" "* by ChainSafe Systems, 2018-2024"
 }
 
 . shunit2
