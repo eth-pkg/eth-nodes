@@ -3,8 +3,8 @@ architecture = "any"
 summary = "Besu is an Apache 2.0 licensed, MainNet compatible, Ethereum client written in Java."
 conflicts = []
 recommends = []
-provides = []
-suggests = ["eth-node"]
+provides = ["eth-node-execution-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = ["build/install/besu /usr/lib/eth-node-besu"]
 add_links = ["/usr/lib/eth-node-besu/besu/bin/besu /usr/bin/besu"]
 add_manpages = []

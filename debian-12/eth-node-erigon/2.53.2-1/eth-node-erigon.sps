@@ -3,8 +3,8 @@ architecture = "any"
 summary = "Ethereum implementation on the efficiency frontier"
 conflicts = []
 recommends = []
-provides = ["eth-node-execution-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-execution-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = ["build/bin/capcli /usr/lib/eth-node-erigon/bin",
 "build/bin/caplin /usr/lib/eth-node-erigon/bin",
 "build/bin/caplin-regression /usr/lib/eth-node-erigon/bin",

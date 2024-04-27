@@ -3,11 +3,11 @@ architecture = "any"
 summary = "Nethermind Ethereum client"
 conflicts = []
 recommends = []
-provides = ["eth-node-execution-client"]
+provides = ["eth-node-execution-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 # TODO can't add depends, piuparts are failing 
 #depends = ["aspnetcore-runtime-7.0", "ca-certificates"]
 depends = []
-suggests = ["eth-node"]
 add_files = ["src/Nethermind/Nethermind.Runner/bin/release/net7.0 /usr/lib/eth-node-nethermind"]
 add_links = ["/usr/lib/eth-node-nethermind/net7.0/nethermind /usr/bin/nethermind"]
 add_manpages = []

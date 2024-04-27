@@ -3,8 +3,8 @@ architecture = "any"
 summary = "TypeScript Implementation of Ethereum Consensus "
 conflicts = []
 recommends = []
-provides = ["eth-node-consensus-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-consensus-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = ["lodestar /usr/lib/eth-node-lodestar/bin", "packages /usr/lib/eth-node-lodestar"]
 add_links = ["/usr/lib/eth-node-lodestar/bin/lodestar /usr/bin/lodestar"]
 add_manpages = []

@@ -3,8 +3,8 @@ architecture = "any"
 summary = "Prysm: An Ethereum Consensus Implementation Written in Go"
 conflicts = []
 recommends = []
-provides = ["eth-node-consensus-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-consensus-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = [
 "bazel-bin/cmd/beacon-chain/beacon-chain_/beacon-chain /usr/lib/eth-node-prysm/bin",
 "bazel-bin/cmd/validator/validator_/validator /usr/lib/eth-node-prysm/bin"

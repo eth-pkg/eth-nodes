@@ -3,8 +3,8 @@ architecture = "any"
 summary = "Golang execution layer implementation of the Ethereum protocol."
 conflicts = []
 recommends = []
-provides = ["eth-node-execution-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-execution-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = [
 "build/bin/abidump /usr/lib/eth-node-geth/bin",
 "build/bin/abigen /usr/lib/eth-node-geth/bin",

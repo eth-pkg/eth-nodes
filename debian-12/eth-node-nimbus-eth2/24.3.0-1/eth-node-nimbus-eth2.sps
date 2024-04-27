@@ -3,8 +3,8 @@ architecture = "any"
 summary = "Nimbus Eth2 (Beacon Chain)"
 conflicts = []
 recommends = []
-provides = ["eth-node-consensus-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-consensus-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = [
     "build /usr/lib/eth-node-nimbus-eth2",
     "scripts/run-beacon-node.sh /usr/lib/eth-node-nimbus-eth2/scripts",

@@ -3,8 +3,8 @@ architecture = "any"
 summary = "Teku is a Java implementation of the Ethereum 2.0 Beacon Chain."
 conflicts = []
 recommends = []
-provides = ["eth-node-consensus-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-consensus-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = ["/build/install/teku /usr/lib/eth-node-teku"]
 add_links = ["/usr/lib/eth-node-teku/teku/bin/teku /usr/bin/teku"]
 add_manpages = []

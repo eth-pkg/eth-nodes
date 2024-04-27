@@ -3,8 +3,8 @@ architecture = "any"
 summary = "An open-source Ethereum consensus client, written in Rust and maintained by Sigma Prime."
 conflicts = []
 recommends = []
-provides = ["eth-node-consensus-client"]
-suggests = ["eth-node"]
+provides = ["eth-node-consensus-client (= 1)"]
+suggests = ["eth-node (= 1)"]
 add_files = ["target/release/lighthouse /usr/lib/eth-node-lighthouse/bin"]
 add_links = ["/usr/lib/eth-node-lighthouse/bin/lighthouse /usr/bin/lighthouse"]
 
