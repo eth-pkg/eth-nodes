@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+cd /tmp
+curl https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb --output jdk-17_linux-x64_bin.deb
+dpkg -i jdk-17_linux-x64_bin.deb
+
+test_binary_in_path(){
+  output="$(which besu)"
+  assertEquals "/usr/bin/besu" "$output"
+}
+
+test_invocation(){
+  output="$(besu --version)"
+  assertEquals "besu/v23.10.1/linux-x86_64/oracle-java-17" "$output"
+}
+
+. shunit2

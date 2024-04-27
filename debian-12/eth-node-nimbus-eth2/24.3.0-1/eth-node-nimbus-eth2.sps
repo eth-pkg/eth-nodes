@@ -11,8 +11,8 @@ add_files = [
     "docker/dist/README.md.tpl /usr/lib/eth-node-nimbus-eth2/README"
 ]
 add_links = [
-    "/usr/lib/eth-node-nimbus-eth2/scripts/run-beacon-node /usr/bin/nimbus-eth2",
-    "/usr/lib/eth-node-nimbus-eth2/scripts/run-beacon-node /usr/bin/run-beacon-node",
+    "/usr/lib/eth-node-nimbus-eth2/scripts/run-beacon-node.sh /usr/bin/nimbus-eth2",
+    "/usr/lib/eth-node-nimbus-eth2/scripts/run-beacon-node.sh /usr/bin/run-beacon-node",
     ]
 
 add_manpages = []

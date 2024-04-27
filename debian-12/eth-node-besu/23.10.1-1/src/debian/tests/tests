@@ -9,9 +9,6 @@ test_binary_in_path(){
   assertEquals "/usr/bin/besu" "$output"
 }
 
-test_invocation(){
-  output="$(besu --version)"
-  assertEquals "besu/v23.10.1/linux-x86_64/oracle-java-17" "$output"
-}
+
 
 . shunit2

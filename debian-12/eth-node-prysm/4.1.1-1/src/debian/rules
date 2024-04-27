@@ -13,6 +13,7 @@ override_dh_auto_test:
 override_dh_auto_build:
 	bazelisk build //cmd/beacon-chain:beacon-chain --config=release
 	bazelisk build //cmd/validator:validator --config=release 
+	mv bazel-bin bin
 
 
 override_dh_auto_clean:

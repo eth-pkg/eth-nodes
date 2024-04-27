@@ -10,7 +10,7 @@ test_binary_in_path(){
 }
 
 test_invocation(){
-  output="$(erigon)"
+  output="$(erigon --version)"
   assertEquals "erigon version 2.53.2" "$output"
 }
 

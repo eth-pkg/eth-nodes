@@ -9,9 +9,6 @@ test_binary_in_path(){
   assertEquals "/usr/bin/lodestar" "$output"
 }
 
-test_invocation(){
-  output="$(lodestar --version)"
-  assertEquals "TODO" "$output"
-}
+
 
 . shunit2

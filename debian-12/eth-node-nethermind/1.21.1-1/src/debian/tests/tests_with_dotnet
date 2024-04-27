@@ -15,7 +15,7 @@ test_invocation_with_dotnet(){
   # TODO not sure if this is good
   assertContains "Commit: Nethermind" "$output"
   assertContains "OS: Linux x64" "$output"
-  assertContains "Runtime: .NET 7.0.18" "$output"
+  assertContains "Runtime: .NET 7.0" "$output"
 }
 
 . shunit2

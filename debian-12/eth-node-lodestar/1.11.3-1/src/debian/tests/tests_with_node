@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+cd 
+curl -o node.tar.gz -L https://nodejs.org/download/release/v20.12.2/node-v20.12.2-linux-x64.tar.gz
+mkdir /usr/lib/node && tar -C /usr/lib/node -xzf node.tar.gz --strip-components=1
+ls -l /usr/lib/node/bin
+ln -s /usr/lib/node/bin/node /usr/bin/node
+ln -s /usr/lib/node/bin/npm /usr/bin/npm
+ln -s /usr/lib/node/bin/npx /usr/bin/npx
+ln -s /usr/lib/node/bin/corepack /usr/bin/corepack
+node --version
+npm --version
+
+test_binary_in_path(){
+  output="$(which lodestar)"
+  assertEquals "/usr/bin/lodestar" "$output"
+}
+
+test_invocation(){
+  output="$(lodestar --version)"
+  assertEquals "TODO" "$output"
+}
+
+. shunit2

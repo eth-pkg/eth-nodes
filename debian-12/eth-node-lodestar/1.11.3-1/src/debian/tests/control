@@ -2,3 +2,7 @@
 
 Tests: tests
 Depends: @, shunit2, which
+
+Tests: tests_with_node
+Depends: @, shunit2, which, curl, ca-certificates
+Restrictions:needs-root
