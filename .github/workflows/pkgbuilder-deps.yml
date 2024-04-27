@@ -24,6 +24,7 @@ jobs:
         sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts
         sudo apt-get -y install pkg-config libssl-dev uidmap
         sudo apt-get install -y libfilesys-df-perl libmime-lite-perl
+        sudo apt-get install -y autopkgtest vmdb2 qemu-system-x86
         wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/sbuild_0.85.6_all.deb
         wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/libsbuild-perl_0.85.6_all.deb
         sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
@@ -87,5 +88,4 @@ jobs:
 
     - name: autopkgtests
       run: |
-        sudo apt install -y autopkgtest vmdb2 qemu-system-x86
         sudo ${HOME}/.cargo/bin/pkg-builder autopkgtests ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
