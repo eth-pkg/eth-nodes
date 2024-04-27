@@ -88,4 +88,4 @@ jobs:
 
     - name: autopkgtests
       run: |
-        sudo ${HOME}/.cargo/bin/pkg-builder autopkgtests ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+        sudo ${HOME}/.cargo/bin/pkg-builder autopkgtest ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
