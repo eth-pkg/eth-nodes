@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which teku)"
+  assertEquals "/usr/bin/teku" "$output"
+}
+
+test_invocation(){
+  output="$(teku)"
+  # TODO fix version numbers
+  assertEquals "teku/vUNKNOWN+develop/linux-x86_64/oracle-java-17" "$output"
+}
+
+. shunit2

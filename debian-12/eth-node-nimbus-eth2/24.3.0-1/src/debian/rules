@@ -17,6 +17,7 @@ $(BINARIES):
 	make $@
 
 override_dh_auto_build: $(BINARIES)
+	chmod +x scripts/run-beacon-node.sh
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation

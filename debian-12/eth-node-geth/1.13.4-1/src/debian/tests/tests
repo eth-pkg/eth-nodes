@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which geth)"
+  assertEquals "/usr/bin/geth" "$output"
+}
+
+test_invocation(){
+  output="$(geth --version)"
+  assertEquals "geth version 1.13.4-stable" "$output"
+}
+
+. shunit2

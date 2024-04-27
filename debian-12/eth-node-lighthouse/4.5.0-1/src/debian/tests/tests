@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which lighthouse)"
+  assertEquals "/usr/bin/lighthouse" "$output"
+}
+
+test_invocation(){
+  output="$(lighthouse)"
+  assertContains "Lighthouse v4.5.0" "$output"
+  assertContains "BLS library: blst" "$output"
+  assertContains "SHA256 hardware acceleration: true" "$output"
+  assertContains "Allocator: jemalloc" "$output"
+  assertContains "Profile: release" "$output"
+  assertContains "Specs: mainnet (true), minimal (false), gnosis (true)" "$output"
+}
+
+. shunit2

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which nethermind)"
+  assertEquals "/usr/bin/nethermind" "$output"
+}
+
+test_invocation_with_dotnet(){
+  output="$(nethermind --version)"
+  assertContains "Version: 1.21.1+Nethermi" "$output"
+  # TODO not sure if this is good
+  assertContains "Commit: Nethermind" "$output"
+  assertContains "OS: Linux x64" "$output"
+  assertContains "Runtime: .NET 7.0.18" "$output"
+}
+
+. shunit2

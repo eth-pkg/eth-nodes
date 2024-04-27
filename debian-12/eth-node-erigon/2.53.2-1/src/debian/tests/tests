@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which erigon)"
+  assertEquals "/usr/bin/erigon" "$output"
+}
+
+test_invocation(){
+  output="$(erigon)"
+  assertEquals "erigon version 2.53.2" "$output"
+}
+
+. shunit2

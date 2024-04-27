@@ -27,7 +27,7 @@ pkg_builder_version="0.1"
 debcrafter_version = "latest"
 run_lintian=true
 run_piuparts=true
-run_autopkgtest=false
+run_autopkgtest=true
 # package directory
 workdir="~/.pkg-builder/packages"
 

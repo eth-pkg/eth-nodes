@@ -10,8 +10,8 @@ add_files = [
 "bazel-bin/cmd/validator/validator_/validator /usr/lib/eth-node-prysm/bin"
 ]
 add_links = [
-"/usr/lib/eth-node-prysm/bin/beacon-chain /usr/bin/prysm-beacon-chain",
-"/usr/lib/eth-node-prysm/bin/validator /usr/bin/prysm-validator"
+"/usr/lib/eth-node-prysm/bin/beacon-chain /usr/bin/beacon-chain",
+"/usr/lib/eth-node-prysm/bin/beacon-chain /usr/bin/prysm",
 ]
 add_manpages = []
 long_doc = """Prysm

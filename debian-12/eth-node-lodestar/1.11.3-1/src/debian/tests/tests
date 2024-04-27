@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which lodestar)"
+  assertEquals "/usr/bin/lodestar" "$output"
+}
+
+test_invocation(){
+  output="$(lodestar --version)"
+  assertEquals "TODO" "$output"
+}
+
+. shunit2

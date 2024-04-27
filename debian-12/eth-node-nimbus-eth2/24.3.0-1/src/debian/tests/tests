@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which run-beacon-node)"
+  assertEquals "/usr/bin/run-beacon-node" "$output"
+}
+
+test_invocation(){
+  output="$(run-beacon-node --version)"
+  assertEquals "TODO" "$output"
+}
+
+test_binary_in_path_nimbus_eth2(){
+  output="$(which nimbus-eth2)"
+  assertEquals "/usr/bin/nimbus-eth2" "$output"
+}
+
+test_invocation(){
+  output="$(nimbus-eth2 --version)"
+  assertEquals "TODO" "$output"
+}
+
+test_that_links_are_same(){
+  output1="$(run-beacon-node --version)"
+  output2="$(nimbus-eth2 --version)"
+  assertEquals "$output1" "$output2"
+}
+
+. shunit2
