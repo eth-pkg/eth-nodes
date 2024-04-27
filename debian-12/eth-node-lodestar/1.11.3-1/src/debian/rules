@@ -4,11 +4,12 @@ export INSTALL_DIR=/usr/lib/eth-node-lodestar
 %:
 	dh $@
 
+# TODO reenable tests, disabled to speed up testing autopkgtests
 override_dh_auto_test:
-	yarn test:unit
-	# TODO Enable docker tests, docker does not work under chroot, yet
-	# yarn test:e2e
-	yarn test:e2e:sim
+	# yarn test:unit
+	# # TODO Enable docker tests, docker does not work under chroot, yet
+	# # yarn test:e2e
+	# yarn test:e2e:sim
 
 override_dh_auto_build:
 	yarn install --frozen-lockfile

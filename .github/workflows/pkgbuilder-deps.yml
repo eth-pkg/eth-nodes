@@ -73,8 +73,11 @@ jobs:
         pkg-builder build-env create ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
         echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
-    - name: Create package
-      run: pkg-builder package ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml false false 
+    - name: package
+      run: pkg-builder package ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml false false false
+
+    - name: lintian
+      run: pkg-builder lintian ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
     - name: piuparts
       run: |

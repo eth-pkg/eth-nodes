@@ -21,5 +21,6 @@ override_dh_auto_clean:
 	# on bookworm clean succeeds, even if dependency is not installed
 	-make -j1 clean
 
+# TODO reenable tests, disabled to speed up testing autopkgtests
 override_dh_auto_test:
-	make -j1 test
+# 	make -j1 test

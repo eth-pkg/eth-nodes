@@ -10,7 +10,8 @@ override_dh_auto_build:
 	# TODO this should come from the build specs
 	find src/Nethermind/Nethermind.Runner/bin/release/net7.0/runtimes -mindepth 1 -maxdepth 1 -type d ! -name 'linux-x64' -exec rm -r {} \;
 
-
+# TODO reenable tests, disabled to speed up testing autopkgtests
+# TODO fix tests
 override_dh_auto_test:
 	# # Skip tests as they are failing
 	# Run Nethermind tests:
