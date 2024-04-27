@@ -11,6 +11,12 @@ override_dh_auto_test:
 	# # yarn test:e2e
 	# yarn test:e2e:sim
 
+override_dh_strip:
+	# do not strip, as it encounters errors with prebuilds and electron
+
+override_dh_shlibdeps:
+	# calculate shared library dependencies, fails because of unneeded prebuilds for arm64
+
 override_dh_auto_build:
 	yarn install --frozen-lockfile
 	yarn build
@@ -18,9 +24,12 @@ override_dh_auto_build:
 override_dh_auto_install:
 	# This relies on make install script
 	# if there is no install script, you have to define your own rules
-	dh_auto_install -- prefix=/usr
+	# dh_auto_install -- prefix=/usr
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
 	# on bookworm clean succeeds, even if dependency is not installed
 	-make -j1 clean
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz

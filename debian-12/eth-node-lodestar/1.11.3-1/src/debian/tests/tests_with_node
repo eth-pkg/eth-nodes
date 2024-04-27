@@ -22,7 +22,11 @@ test_binary_in_path(){
 
 test_invocation(){
   output="$(lodestar --version)"
-  assertEquals "TODO" "$output"
+  # if output contains dot, assertContains fail
+  output=$(echo "$output" | sed 's/\./_/g')
+  assertContains "🌟 Lodestar: TypeScript Implementation of the Ethereum Consensus Beacon Chain" "$output"
+  assertContains "* Version: v1.11.3" "$output"
+  assertContains "* by ChainSafe Systems, 2018-2024" "$output"
 }
 
 . shunit2

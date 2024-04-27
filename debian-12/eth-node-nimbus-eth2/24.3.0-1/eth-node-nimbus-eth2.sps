@@ -7,13 +7,11 @@ provides = ["eth-node-consensus-client (= 1)"]
 suggests = ["eth-node (= 1)"]
 add_files = [
     "build /usr/lib/eth-node-nimbus-eth2",
-    "scripts/run-beacon-node.sh /usr/lib/eth-node-nimbus-eth2/scripts",
     "docker/dist/README.md.tpl /usr/lib/eth-node-nimbus-eth2/README"
 ]
 add_links = [
-    "/usr/lib/eth-node-nimbus-eth2/scripts/run-beacon-node.sh /usr/bin/nimbus-eth2",
-    "/usr/lib/eth-node-nimbus-eth2/scripts/run-beacon-node.sh /usr/bin/run-beacon-node",
-    ]
+    "/usr/lib/eth-node-nimbus-eth2/build/nimbus_beacon_node /usr/bin/nimbus_beacon_node",
+]
 
 add_manpages = []
 long_doc = """

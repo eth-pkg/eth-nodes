@@ -5,7 +5,11 @@ conflicts = []
 recommends = []
 provides = ["eth-node-consensus-client (= 1)"]
 suggests = ["eth-node (= 1)"]
-add_files = ["lodestar /usr/lib/eth-node-lodestar/bin", "packages /usr/lib/eth-node-lodestar"]
+add_files = [
+    "debian/lodestar /usr/lib/eth-node-lodestar/bin", 
+    "packages /usr/lib/eth-node-lodestar",
+    "node_modules /usr/lib/eth-node-lodestar"
+    ]
 add_links = ["/usr/lib/eth-node-lodestar/bin/lodestar /usr/bin/lodestar"]
 add_manpages = []
 long_doc = """

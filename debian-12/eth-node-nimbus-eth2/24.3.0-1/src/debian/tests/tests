@@ -5,29 +5,16 @@ exec 2>&1
 set -e
 
 test_binary_in_path(){
-  output="$(which run-beacon-node)"
-  assertEquals "/usr/bin/run-beacon-node" "$output"
+  output="$(which nimbus_beacon_node)"
+  assertEquals "/usr/bin/nimbus_beacon_node" "$output"
 }
 
-test_invocation(){
-  output="$(run-beacon-node --version)"
-  assertEquals "TODO" "$output"
-}
-
-test_binary_in_path_nimbus_eth2(){
-  output="$(which nimbus-eth2)"
-  assertEquals "/usr/bin/nimbus-eth2" "$output"
-}
-
-test_invocation(){
-  output="$(nimbus-eth2 --version)"
-  assertEquals "TODO" "$output"
-}
-
-test_that_links_are_same(){
-  output1="$(run-beacon-node --version)"
-  output2="$(nimbus-eth2 --version)"
-  assertEquals "$output1" "$output2"
+test_invocation_run_beacon_node(){
+  output="$(nimbus_beacon_node --version)"
+  assertContains "Nimbus beacon node v24.3.0-" "$output"
+  assertContains "Copyright (c) 2019-2024 Status Research & Development GmbH" "$output"
+  assertContains "eth2 specification v1.4.0" "$output"
+  assertContains "Nim Compiler Version 2.0.2 [Linux: amd64]" "$output"
 }
 
 . shunit2

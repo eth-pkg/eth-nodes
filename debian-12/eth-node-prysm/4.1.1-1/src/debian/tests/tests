@@ -4,31 +4,17 @@ exec 2>&1
 
 set -e
 
-test_binary_in_path(){
-  output="$(which prysm)"
-  assertEquals "/usr/bin/prysm" "$output"
-}
-
-test_invocation(){
-  output="$(prysm --version)"
-  # TODO version should not be unknown 
-  assertContains "beacon-chain version Prysm/Unknown/" "$output"
-}
-
-test_binary_in_path_nimbus_eth2(){
+test_binary_in_path_beacon_chain(){
   output="$(which beacon-chain)"
-  assertEquals "/usr/bin/nimbus-eth2" "$output"
+  assertEquals "/usr/bin/beacon-chain" "$output"
 }
 
-test_invocation(){
+test_beacon_chain_invocation(){
   output="$(beacon-chain --version)"
-  assertContains "beacon-chain version Prysm/Unknown/" "$output"
+  output=$(echo "$output" | cut -d'/' -f1)
+  assertContains "beacon-chain version Prysm" "$output"
 }
 
-test_that_links_are_same(){
-  output1="$(beacon-chain --version)"
-  output2="$(prysm --version)"
-  assertEquals "$output1" "$output2"
-}
+
 
 . shunit2

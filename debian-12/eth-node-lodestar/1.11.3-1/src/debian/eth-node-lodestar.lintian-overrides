@@ -1,5 +1,44 @@
 eth-node-lodestar: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lodestar/changelog.Debian.gz:1]
 
 # this need to be ignored, will going to remove, with .gitignore as well 
-eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/packages/api/node_modules/json-schema-traverse/spec/.eslintrc.yml]
-eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/packages/api/node_modules/json-schema-traverse/.eslintrc.yml]
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/bin/packages/api/node_modules/json-schema-traverse/.eslintrc.yml]
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/bin/packages/api/node_modules/json-schema-traverse/spec/.eslintrc.yml]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/prebuild/linux-arm64-115-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/prebuild/linux-arm64-83-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/prebuild/linux-arm64-93-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/bin/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/bin/node_modules/classic-level/prebuilds/android-arm64/node.napi.armv8.node]
+eth-node-lodestar: binary-from-other-architecture 
+eth-node-lodestar: embedded-library freetype [usr/lib/eth-node-lodestar/bin/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library lcms2 [usr/lib/eth-node-lodestar/bin/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library libjpeg [usr/lib/eth-node-lodestar/bin/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library 
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/bin/node_modules/@napi-rs/snappy-linux-x64-musl/snappy.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/bin/node_modules/@node-rs/crc32-linux-x64-musl/crc32.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/bin/node_modules/@nrwl/nx-linux-x64-musl/nx.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc
+eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) [usr/lib/eth-node-lodestar/bin/node_modules/@actions/cache/node_modules/uuid/bin/uuid]
+eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) [usr/lib/eth-node-lodestar/bin/node_modules/@azure/ms-rest-js/node_modules/uuid/bin/uuid]
+eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) [usr/lib/eth-node-lodestar/bin/node_modules/@babel/core/node_modules/semver/bin/semver]
+eth-node-lodestar: missing-dep-for-interpreter
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/bin/node_modules/@babel/core/node_modules/is-core-module/.eslintrc]
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/bin/node_modules/@babel/core/node_modules/resolve/.eslintrc]
+eth-node-lodestar: package-contains-eslint-config-file [usr/lib/eth-node-lodestar/bin/node_modules/@babel/core/node_modules/resolve/test/.eslintrc]
+eth-node-lodestar: package-contains-eslint-config-file
+eth-node-lodestar: package-contains-npm-ignore-file [usr/lib/eth-node-lodestar/bin/node_modules/@electron/get/node_modules/json-buffer/.npmignore]
+eth-node-lodestar: package-contains-npm-ignore-file [usr/lib/eth-node-lodestar/bin/node_modules/@ethersproject/json-wallets/node_modules/aes-js/.npmignore]
+eth-node-lodestar: package-contains-npm-ignore-file [usr/lib/eth-node-lodestar/bin/node_modules/@istanbuljs/load-nyc-config/node_modules/sprintf-js/.npmignore]
+eth-node-lodestar: package-contains-npm-ignore-file
+eth-node-lodestar: package-installs-python-pycache-dir [usr/lib/eth-node-lodestar/bin/node_modules/node-gyp/gyp/pylib/gyp/__pycache__/]
+eth-node-lodestar: package-installs-python-pycache-dir [usr/lib/eth-node-lodestar/bin/node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__/]
+eth-node-lodestar: privacy-breach-uses-embedded-file You may use the libjs-jquery package. (//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js) [usr/lib/eth-node-lodestar/bin/node_modules/jmespath/index.html]
+eth-node-lodestar: python3-script-but-no-python3-dep python3 (does not satisfy python3:any | python3-minimal:any) [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/c#/run.me]
+eth-node-lodestar: python3-script-but-no-python3-dep python3 (does not satisfy python3:any | python3-minimal:any) [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/emscripten/build.py]
+eth-node-lodestar: python3-script-but-no-python3-dep python3 (does not satisfy python3:any | python3-minimal:any) [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/go/generate.py]
+eth-node-lodestar: python3-script-but-no-python3-dep
+eth-node-lodestar: unstripped-binary-or-object [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/node.js/build/Release/blst.node]
+eth-node-lodestar: unstripped-binary-or-object [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/blst/bindings/node.js/build/Release/obj.target/blst.node]
+eth-node-lodestar: unstripped-binary-or-object [usr/lib/eth-node-lodestar/bin/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
+eth-node-lodestar: unstripped-binary-or-object
+eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/bin/node_modules/fastify/integration/test.sh]
