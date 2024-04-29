@@ -9,7 +9,6 @@ homepage="https://github.com/sigp/lighthouse"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/sigp/lighthouse/archive/refs/tags/v4.5.0.tar.gz"
-# TODO no hash provided for source code 
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "13744ef206244957c48a7af3c7b43ae84878216a8f57040032ed742658713d37"
 
@@ -39,9 +38,7 @@ KGFMBQELjcFWLGcBVE45DRuVR8E3XYunjSdgLFXjfZfeGF3uiS6fNHGCH41ryqfj
 [build_env]
 codename="bookworm"
 arch = "amd64"
-# TODO not used yet
 pkg_builder_version="0.1"
-# TODO not used yet
 debcrafter_version = "latest"
 # needed for tests
 docker=true
@@ -50,18 +47,3 @@ run_piuparts=true
 run_autopkgtest=true
 # package directory
 workdir="~/.pkg-builder/packages"
-
-[cli_options]
-# not used
-is_ci=false
-log="info"
-log_to="file"
-reuse_previous_build=false
-
-[verify]
-# if tarball_url is specified
-tarball_hash=""
-# if git_source is specified and package_is_git
-git_commit=""
-# output hash
-bin_bash=""

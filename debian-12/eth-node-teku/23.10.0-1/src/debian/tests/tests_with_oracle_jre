@@ -16,7 +16,8 @@ test_binary_in_path(){
 test_invocation(){
   output="$(teku --version)"
   # TODO fix version numbers
-  assertEquals "teku/vUNKNOWN+develop/linux-x86_64/oracle-java-17" "$output"
+  # checked against https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/23.10.0/teku-23.10.0.tar.gz
+  assertEquals  "$output" "teku/v23.10.0/linux-x86_64/oracle-java-17"
 }
 
 . shunit2

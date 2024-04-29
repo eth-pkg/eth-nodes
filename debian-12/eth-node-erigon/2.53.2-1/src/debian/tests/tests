@@ -11,6 +11,7 @@ test_binary_in_path(){
 
 test_invocation(){
   output="$(erigon --version)"
+  # checked againts https://github.com/ledgerwatch/erigon/releases/download/v2.53.2/erigon_2.53.2_linux_amd64.tar.gz
   assertEquals "erigon version 2.53.2" "$output"
 }
 

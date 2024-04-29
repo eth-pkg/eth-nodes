@@ -9,7 +9,6 @@ homepage="https://github.com/Consensys/teku"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/Consensys/teku/archive/refs/tags/23.10.0.tar.gz"
-# TODO no hash provided for source code 
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "a937490de8afb8c8eb8f6ab486cff116bc7c6d87e97006ff69fbea0ecd2d5530"
 
@@ -29,27 +28,10 @@ gradle_binary_checksum="38f66cd6eef217b4c35855bb11ea4e9fbc53594ccccb5fb82dfd317e
 [build_env]
 codename="bookworm"
 arch = "amd64"
-# TODO not used yet
 pkg_builder_version="0.1"
-# TODO not used yet
 debcrafter_version = "latest"
 run_lintian=true
 run_piuparts=true
 run_autopkgtest=true
 # package directory
 workdir="~/.pkg-builder/packages"
-
-[cli_options]
-# not used
-is_ci=false
-log="info"
-log_to="file"
-reuse_previous_build=false
-
-[verify]
-# if tarball_url is specified
-tarball_hash=""
-# if git_source is specified and package_is_git
-git_commit=""
-# output hash
-bin_bash=""

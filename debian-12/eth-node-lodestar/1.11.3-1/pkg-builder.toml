@@ -9,7 +9,6 @@ homepage="https://github.com/ChainSafe/lodestar"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/ChainSafe/lodestar/archive/refs/tags/v1.11.3.tar.gz"
-# TODO no hash provided for source code 
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "7625dfb89a85df2372fcf4e085d1f7e0177a7ea036ce7c39f5d0f32ee19e8f39"
 
@@ -24,27 +23,10 @@ yarn_version = "1.22.19"
 [build_env]
 codename="bookworm"
 arch = "amd64"
-# TODO not used yet
 pkg_builder_version="0.1"
-# TODO not used yet
 debcrafter_version = "latest"
 run_lintian=true
 run_piuparts=true
 run_autopkgtest=true
 # package directory
 workdir="~/.pkg-builder/packages"
-
-[cli_options]
-# not used
-is_ci=false
-log="info"
-log_to="file"
-reuse_previous_build=false
-
-[verify]
-# if tarball_url is specified
-tarball_hash=""
-# if git_source is specified and package_is_git
-git_commit=""
-# output hash
-bin_bash=""

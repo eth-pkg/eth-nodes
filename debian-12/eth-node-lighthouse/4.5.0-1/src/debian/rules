@@ -13,7 +13,7 @@ export FEATURES=gnosis,slasher-lmdb,slasher-mdbx,jemalloc
 	dh $@
 
 override_dh_auto_build:  
-	dh_auto_build
+	PROFILE=maxperf dh_auto_build
 
 # TODO reenable tests, disabled to speed up testing autopkgtests
 override_dh_auto_test:

@@ -9,7 +9,6 @@ homepage="https://github.com/NethermindEth/nethermind"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/NethermindEth/nethermind/archive/refs/tags/1.21.1.tar.gz"
-# TODO no hash provided for source code 
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "8c24a4ad0671fc8a2cec03d9cfb19aa3f8b82b3e572720ab224726dad05ea324"
 
@@ -20,27 +19,10 @@ dotnet_version = "7.0"
 [build_env]
 codename="bookworm"
 arch = "amd64"
-# TODO not used yet
 pkg_builder_version="0.1"
-# TODO not used yet
 debcrafter_version = "latest"
 run_lintian=true
 run_piuparts=true
 run_autopkgtest=true
 # package directory
 workdir="~/.pkg-builder/packages"
-
-[cli_options]
-# not used
-is_ci=false
-log="info"
-log_to="file"
-reuse_previous_build=false
-
-[verify]
-# if tarball_url is specified
-tarball_hash=""
-# if git_source is specified and package_is_git
-git_commit=""
-# output hash
-bin_bash=""

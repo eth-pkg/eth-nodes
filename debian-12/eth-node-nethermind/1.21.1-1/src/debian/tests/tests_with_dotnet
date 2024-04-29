@@ -11,11 +11,12 @@ test_binary_in_path(){
 
 test_invocation_with_dotnet(){
   output="$(nethermind --version)"
+  # checked against https://github.com/NethermindEth/nethermind/releases/download/1.21.1/nethermind-1.21.1-9b435ba0-linux-x64.zip
   assertContains "Version: 1.21.1+Nethermi" "$output"
-  # TODO not sure if this is good
   assertContains "Commit: Nethermind" "$output"
   assertContains "OS: Linux x64" "$output"
-  assertContains "Runtime: .NET 7.0" "$output"
+  # TODO need to fix version to 7.0.18, should be same as actual built Nethermind
+  assertContains "Runtime: .NET 7.0.18" "$output"
 }
 
 . shunit2

@@ -28,27 +28,10 @@ gradle_binary_checksum="7ba68c54029790ab444b39d7e293d3236b2632631fb5f2e012bb28b4
 [build_env]
 codename="bookworm"
 arch = "amd64"
-# TODO not used yet
 pkg_builder_version="0.1"
-# TODO not used yet
 debcrafter_version = "latest"
 run_lintian=true
 run_piuparts=true
 run_autopkgtest=true
 # package directory
 workdir="~/.pkg-builder/packages"
-
-[cli_options]
-# not used
-is_ci=false
-log="info"
-log_to="file"
-reuse_previous_build=false
-
-[verify]
-# if tarball_url is specified
-tarball_hash=""
-# if git_source is specified and package_is_git
-git_commit=""
-# output hash
-bin_bash=""
