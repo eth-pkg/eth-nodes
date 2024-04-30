@@ -92,7 +92,7 @@ jobs:
         sudo cp -R ${HOME}/.pkg-builder /root
         sudo ${HOME}/.local/bin/pkg-builder autopkgtest ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
-    - name: autopkgtests
+    - name: verify
       run: |
         ${HOME}/.local/bin/pkg-builder verify --config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml  --verify-config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml  --no-package true # do not need to repackage it, as we run it multiple times on CI, and hashes should come from locally built sources
             
