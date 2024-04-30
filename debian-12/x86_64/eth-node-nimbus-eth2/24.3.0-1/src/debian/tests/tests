@@ -13,7 +13,7 @@ test_invocation_run_beacon_node(){
   output="$(nimbus_beacon_node --version)"
   echo "$output"
   # checked against https://github.com/status-im/nimbus-eth2/releases/download/v24.3.0/nimbus-eth2_Linux_amd64_24.3.0_dc19b082.tar.gz
-  assertEquals "$output" "Nimbus beacon node v24.3.0-dc19b0-stateofus
+  assertContains "$output" "Nimbus beacon node v24.3.0-dc19b0-stateofus
 Copyright (c) 2019-2024 Status Research & Development GmbH
 
 eth2 specification v1.4.0

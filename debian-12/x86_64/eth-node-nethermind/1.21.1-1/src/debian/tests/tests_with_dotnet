@@ -17,8 +17,7 @@ test_invocation_with_dotnet(){
 Commit: Nethermind
 Build Date: 2024-04-25 04:56:03Z
 OS: Linux x64
-Runtime: .NET 7.0.18
-"
+Runtime: .NET 7.0.18"
 }
 
 . shunit2
