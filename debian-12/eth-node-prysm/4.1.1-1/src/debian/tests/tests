@@ -11,7 +11,7 @@ test_binary_in_path_beacon_chain(){
 
 test_beacon_chain_invocation(){
   output="$(beacon-chain --version)"
-  output=$(echo "$output" | cut -d'/' -f1)
+  echo "$output"
   # checked against https://github.com/prysmaticlabs/prysm/releases/download/v4.1.1/beacon-chain-v4.1.1-linux-amd64
   assertContains "$output" "beacon-chain version Prysm/v4.1.1/bc9151d647e70cf5e0b6dbcee01998c430a96cb5" 
 }

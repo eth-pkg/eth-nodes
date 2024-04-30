@@ -11,6 +11,7 @@ test_binary_in_path(){
 
 test_invocation_with_dotnet(){
   output="$(nethermind --version)"
+  echo "$output"
   # checked against https://github.com/NethermindEth/nethermind/releases/download/1.21.1/nethermind-1.21.1-9b435ba0-linux-x64.zip
   assertContains "Version: 1.21.1+Nethermi" "$output"
   assertContains "Commit: Nethermind" "$output"

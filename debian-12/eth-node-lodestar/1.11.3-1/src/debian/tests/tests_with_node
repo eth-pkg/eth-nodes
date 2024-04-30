@@ -22,10 +22,14 @@ test_binary_in_path(){
 
 test_invocation(){
   output="$(lodestar --version)"
+  echo "$output"
   # tested against 
   # docker pull chainsafe/lodestar:v1.11.3
   # docker run chainsafe/lodestar:v1.11.3 --version
   assertContains "$output" "🌟 Lodestar: TypeScript Implementation of the Ethereum Consensus Beacon Chain"
+  # Remove git commit, as we working from concrete version from github
+  # with hashed sources can ignore the commit
+  # Version: v1.11.3/9ade975
   assertContains "$output" "* Version: v1.11.3/9ade975"
   assertContains "$output" "* by ChainSafe Systems, 2018-2024"
 }

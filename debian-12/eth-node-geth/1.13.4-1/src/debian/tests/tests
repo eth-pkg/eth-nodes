@@ -11,6 +11,7 @@ test_binary_in_path(){
 
 test_invocation(){
   output="$(geth --version)"
+  echo "$output"
   # check against
   # https://gethstore.blob.core.windows.net/builds/geth-alltools-linux-amd64-1.13.4-3f907d6a.tar.gz
   assertEquals "geth version 1.13.4-stable" "$output"

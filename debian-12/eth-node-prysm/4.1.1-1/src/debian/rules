@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 export GO_BIN_HOME=$(HOME)/go
 export PATH:=$(PATH):$(GO_BIN_HOME)/bin
+export STABLE_GIT_COMMIT=bc9151d647e70cf5e0b6dbcee01998c430a96cb5
 
 %:
 	go install github.com/bazelbuild/bazelisk@v1.18.0
