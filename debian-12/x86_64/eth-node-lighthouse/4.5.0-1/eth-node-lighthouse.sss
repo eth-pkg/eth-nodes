@@ -5,13 +5,14 @@ variants = []
 build_depends = [ 
 "curl",
 "git", 
-"cmake", 
+"cmake (>= 3.12)", 
 "pkg-config", 
 "llvm-dev", 
 "libclang-dev", 
 "libpq-dev",
 "clang", 
 "libsnappy-dev",
+"librust-cmake-dev"
 ]
 packages = ["eth-node-lighthouse"]
 skip_debug_symbols = true
