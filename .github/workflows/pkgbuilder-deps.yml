@@ -75,10 +75,8 @@ jobs:
         echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
     - name: package
-      run: pkg-builder package ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml \
-       --run-piuparts false \
-       --run-autopkgtests false \
-       --run-lintian false
+      run: pkg-builder package --run-piuparts false --run-autopkgtests false --run-lintian false \
+       ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml 
 
     - name: lintian
       run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
