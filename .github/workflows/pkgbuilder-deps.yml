@@ -71,23 +71,23 @@ jobs:
     
     - name: Create chroot env
       run: |
-        pkg-builder build-env create ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+        pkg-builder build-env create ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
         echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
     - name: package
-      run: pkg-builder package ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml false false false
+      run: pkg-builder package ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml false false false
 
     - name: lintian
-      run: pkg-builder lintian ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+      run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
     - name: piuparts
       run: |
         # Install debian-archive-keyring but fails, as it is already installed
         # sudo apt-get install -y debian-archive-keyring
-        ${HOME}/.local/bin/pkg-builder piuparts ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+        ${HOME}/.local/bin/pkg-builder piuparts ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
     - name: autopkgtests
       run: |
         # Copy files under root
         sudo cp -R ${HOME}/.pkg-builder /root
-        sudo ${HOME}/.local/bin/pkg-builder autopkgtest ${{ inputs.codename }}/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+        sudo ${HOME}/.local/bin/pkg-builder autopkgtest ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
