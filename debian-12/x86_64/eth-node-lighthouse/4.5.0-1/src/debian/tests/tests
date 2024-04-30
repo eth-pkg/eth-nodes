@@ -13,12 +13,12 @@ test_invocation(){
   output="$(lighthouse --version)"
   echo "$output"
  # checked against https://github.com/sigp/lighthouse/releases/download/v4.5.0/lighthouse-v4.5.0-x86_64-unknown-linux-gnu.tar.gz
-  assertContains "Lighthouse v4.5.0" "$output"
-  assertContains "BLS library: blst-modern" "$output"
-  assertContains "SHA256 hardware acceleration: true" "$output"
-  assertContains "Allocator: jemalloc" "$output"
-  assertContains "Profile: maxperf" "$output"
-  assertContains "Specs: mainnet (true), minimal (false), gnosis (true)" "$output"
+  assertEquals "$output" "Lighthouse v4.5.0
+BLS library: blst
+SHA256 hardware acceleration: true
+Allocator: jemalloc
+Profile: release
+Specs: mainnet (true), minimal (false), gnosis (true)"
 }
 
 . shunit2

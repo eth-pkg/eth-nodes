@@ -1,1 +1,2 @@
 000-patch-Nethermind.Runner.csproj
+001-build-date.patch
