@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 export INSTALL_DIR=/usr/lib/eth-node-lodestar
+# Let's see if this affects anything
+export npm_config_local_prefix=/tmp
 
 %:
 	dh $@
@@ -19,7 +21,30 @@ override_dh_shlibdeps:
 
 override_dh_auto_build:
 	yarn install --frozen-lockfile
+	ls -al /build
 	yarn build
+	ls -al
+	# no need for lerna cache
+	rm -rf node_modules/.cache 
+
+	# Makefiles not needed, for sure, so you can safely remove it
+	rm node_modules/bcrypto/build/Makefile
+	rm node_modules/bigint-buffer/build/Makefile
+	rm node_modules/c-kzg/build/Makefile
+	rm node_modules/cpu-features/build/Makefile
+	rm node_modules/ssh2/lib/protocol/crypto/build/Makefile
+	rm node_modules/c-kzg/build/kzg.target.mk
+
+	# not sure what python3 is doing there, in those folders
+	rm node_modules/bcrypto/build/node_gyp_bins/python3
+	rm node_modules/bigint-buffer/build/node_gyp_bins/python3
+	rm node_modules/c-kzg/build/node_gyp_bins/python3
+	rm node_modules/cpu-features/build/node_gyp_bins/python3
+	rm node_modules/ssh2/lib/protocol/crypto/build/node_gyp_bins/python3
+
+    # Not sure about pycache, let's remove it
+	rm -rf node_modules/node-gyp/gyp/pylib/gyp/__pycache__
+	rm -rf node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__
 	chmod +x debian/lodestar
 
 override_dh_auto_install:

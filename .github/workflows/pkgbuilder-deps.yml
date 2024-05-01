@@ -25,8 +25,8 @@ jobs:
         sudo apt-get -y install pkg-config libssl-dev uidmap
         sudo apt-get install -y libfilesys-df-perl libmime-lite-perl
         sudo apt-get install -y autopkgtest vmdb2 qemu-system-x86
-        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/sbuild_0.85.6_all.deb
-        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6/libsbuild-perl_0.85.6_all.deb
+        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
         sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
 
 
