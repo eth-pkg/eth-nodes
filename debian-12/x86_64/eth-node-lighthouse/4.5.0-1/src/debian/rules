@@ -6,7 +6,7 @@ export PATH:=$(PATH):$(CARGO)/bin
 # cross uses dockerized environment for building, which we don't need
 # pkg-builder uses chroot instead of docker, chroot is much more lightweight
 # chroot is the debian way
-export FEATURES=gnosis,slasher-lmdb,slasher-mdbx,jemalloc
+export FEATURES=modern,gnosis,slasher-lmdb,slasher-mdbx,jemalloc
 
 
 %:
