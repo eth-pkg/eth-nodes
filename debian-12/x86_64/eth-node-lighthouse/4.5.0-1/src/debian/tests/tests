@@ -14,7 +14,7 @@ test_invocation(){
   echo "$output"
  # checked against https://github.com/sigp/lighthouse/releases/download/v4.5.0/lighthouse-v4.5.0-x86_64-unknown-linux-gnu.tar.gz
   assertEquals "$output" "Lighthouse v4.5.0
-BLS library: blst
+BLS library: blst-modern
 SHA256 hardware acceleration: true
 Allocator: jemalloc
 Profile: release
