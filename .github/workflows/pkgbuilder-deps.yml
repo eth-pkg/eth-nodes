@@ -78,25 +78,7 @@ jobs:
       run: |
         pkg-builder package --run-piuparts false --run-autopkgtests false --run-lintian false ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml 
 
-    - name: cleanup 
-      run: | 
-        version=$(echo ${{inputs.package-version-with-revision}} | cut -d'-' -f1)
-        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
-        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}
-        # copy pkg-builder configs to artifacts
-        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
-        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
-        cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
-        rm *:*
-        rm *dbgsym* || true # possible there is none
 
-
-    # This should come after verify, but sometimes it is good to have it, to check why the verify fails
-    - name: Save results
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
-        path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}  
 
     - name: lintian
       run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
@@ -118,7 +100,25 @@ jobs:
       run: |
         ${HOME}/.local/bin/pkg-builder verify --config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml  --verify-config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml  --no-package true # do not need to repackage it, as we run it multiple times on CI, and hashes should come from locally built sources
     
-
+    - name: cleanup 
+      run: | 
+        version=$(echo ${{inputs.package-version-with-revision}} | cut -d'-' -f1)
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}
+        # copy pkg-builder configs to artifacts
+        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        rm *:*
+        rm *dbgsym* || true # possible there is none
+  
+  
+      # This should come after verify, but sometimes it is good to have it, to check why the verify fails
+    - name: Save results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
+        path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}  
 
 
    
