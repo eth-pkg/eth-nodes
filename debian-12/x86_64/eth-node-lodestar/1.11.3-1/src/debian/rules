@@ -11,6 +11,11 @@ override_dh_auto_test:
 	# TODO Enable docker tests, docker does not work under chroot, yet
 	# yarn test:e2e
 	yarn test:e2e:sim
+	# no need for lerna cache, also tests create these waste, remove them from package
+	rm -rf node_modules/.cache
+	find node_modules -type d -name ".nyc_output" -exec rm -rf {} +
+	find packages -type d -name ".nyc_output" -exec rm -rf {} +
+
 
 override_dh_strip:
 	# do not strip, as it encounters errors with prebuilds and electron

@@ -6,7 +6,7 @@ recommends = []
 provides = ["eth-node-consensus-client (= 1)"]
 suggests = ["eth-node (= 1)"]
 # node-gyp, not entirely sure if needed, let's add it 
-depends = ["python3"]
+depends = ["python3", "libc6"]
 add_files = [
     "debian/lodestar /usr/lib/eth-node-lodestar/bin", 
     "packages /usr/lib/eth-node-lodestar",
