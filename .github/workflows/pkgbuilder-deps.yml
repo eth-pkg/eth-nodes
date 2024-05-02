@@ -77,7 +77,6 @@ jobs:
     - name: package
       run: |
         pkg-builder package --run-piuparts false --run-autopkgtests false --run-lintian false ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml 
-        ls -al ${HOME}/.pkg-builder
 
     - name: lintian
       run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
@@ -108,4 +107,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
-        path: /home/runner/.pkg-builder/${{inputs.package-name}}   
+        path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}   
