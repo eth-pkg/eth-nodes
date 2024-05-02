@@ -80,8 +80,9 @@ jobs:
 
     - name: cleanup 
       run: | 
-        version=$(echo "1.21.1-1" | cut -d'-' -f1)
+        version=$(echo ${{inputs.package-version-with-revision}} | cut -d'-' -f1)
         rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}
         cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
         rm *:*
     # This should come after verify, but it needed to investigate
