@@ -24,6 +24,5 @@ override_dh_auto_clean:
 override_dh_auto_build:
 	make all 	
 
-# TODO reenable tests, disabled to speed up testing autopkgtests
 override_dh_auto_test:
-# 	make -j1 test
+	make -j1 test

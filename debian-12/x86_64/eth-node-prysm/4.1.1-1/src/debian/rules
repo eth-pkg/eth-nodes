@@ -7,9 +7,8 @@ export STABLE_GIT_COMMIT=bc9151d647e70cf5e0b6dbcee01998c430a96cb5
 	go install github.com/bazelbuild/bazelisk@v1.18.0
 	dh $@
 
-# TODO reenable tests, disabled to speed up testing autopkgtests
 override_dh_auto_test:
-    # CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
+    CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
 
 override_dh_auto_build:
 	bazelisk build //cmd/beacon-chain:beacon-chain --config=release

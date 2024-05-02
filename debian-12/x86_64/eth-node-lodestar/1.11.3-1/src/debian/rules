@@ -6,12 +6,11 @@ export npm_config_local_prefix=/tmp
 %:
 	dh $@
 
-# TODO reenable tests, disabled to speed up testing autopkgtests
 override_dh_auto_test:
-	# yarn test:unit
-	# # TODO Enable docker tests, docker does not work under chroot, yet
-	# # yarn test:e2e
-	# yarn test:e2e:sim
+	yarn test:unit
+	# TODO Enable docker tests, docker does not work under chroot, yet
+	# yarn test:e2e
+	yarn test:e2e:sim
 
 override_dh_strip:
 	# do not strip, as it encounters errors with prebuilds and electron
