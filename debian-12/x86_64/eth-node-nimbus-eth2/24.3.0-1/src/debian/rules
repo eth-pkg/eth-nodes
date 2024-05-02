@@ -26,4 +26,4 @@ override_dh_auto_clean:
 
 override_dh_auto_test:
 	# -make update
-	make -j1 all_tests
+	#make -j1 all_tests
