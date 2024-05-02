@@ -83,12 +83,13 @@ jobs:
         version=$(echo ${{inputs.package-version-with-revision}} | cut -d'-' -f1)
         rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
         rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}
+        # copy pkg-builder configs to artifacts
+        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
         cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
         rm *:*
         rm *dbgsym* || true # possible there is none
-        # copy pkg-builder configs to artifacts
-        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml .
-        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml .
+
 
     # This should come after verify, but sometimes it is good to have it, to check why the verify fails
     - name: Save results
