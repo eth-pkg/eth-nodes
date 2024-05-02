@@ -78,9 +78,23 @@ jobs:
       run: |
         pkg-builder package --run-piuparts false --run-autopkgtests false --run-lintian false ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml 
 
+    - name: cleanup 
+      run: | 
+        version=$(echo "1.21.1-1" | cut -d'-' -f1)
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
+        cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        rm *:*
+    # This should come after verify, but it needed to investigate
+    - name: Save results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
+        path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}  
+
     - name: lintian
       run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
+      
     - name: piuparts
       run: |
         # Install debian-archive-keyring but fails, as it is already installed
@@ -97,17 +111,8 @@ jobs:
       run: |
         ${HOME}/.local/bin/pkg-builder verify --config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml  --verify-config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml  --no-package true # do not need to repackage it, as we run it multiple times on CI, and hashes should come from locally built sources
     
-    - name: cleanup 
-      run: | 
-        version=$(echo "1.21.1-1" | cut -d'-' -f1)
-        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$(version)
-        cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
-        rm *:*
 
 
-    - name: Save results
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
-        path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}   
+
+   
     
