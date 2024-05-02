@@ -100,7 +100,9 @@ jobs:
     - name: cleanup 
       run: | 
         version=$(echo "1.21.1-1" | cut -d'-' -f1)
-        rm -rf /home/runner/.pkg-builder/${{inputs.package-name}}/${{inputs.package-name}}-$(version)
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$(version)
+        cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        rm *:*
 
 
     - name: Save results
@@ -108,3 +110,4 @@ jobs:
       with:
         name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
         path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}   
+    
