@@ -76,18 +76,18 @@ jobs:
         package-version-with-revision: ${{ matrix.package-version-with-revision }}
         codename:  ${{ matrix.codename }}   
         
-  # eth-node-nethermind:
-  #   strategy:
-  #     matrix:
-  #       package-name: ["eth-node-nethermind"]
-  #       package-version-with-revision: ["1.21.1-1"]
-  #       codename: ["debian-12"]
-  #     fail-fast: false
-  #   uses: ./.github/workflows/pkgbuilder-deps.yml
-  #   with:
-  #     package-name: ${{ matrix.package-name }}
-  #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
-  #     codename:  ${{ matrix.codename }}      
+  eth-node-nethermind:
+    strategy:
+      matrix:
+        package-name: ["eth-node-nethermind"]
+        package-version-with-revision: ["1.26.0-1"]
+        codename: ["debian-12"]
+      fail-fast: false
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}      
 
   eth-node-nimbus-eth2:
     strategy:

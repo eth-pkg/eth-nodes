@@ -1,0 +1,12 @@
+
+eth-node-nethermind: embedded-library bzip2 [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
+eth-node-nethermind: embedded-library bzip2 [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb.so]
+eth-node-nethermind: embedded-library gmp [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/libgmp.so]
+eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/ClearScriptV8.linux-x64.so]
+eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/libgrpc_csharp_ext.x64.so]
+eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
+eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb.so]
+
+# Most likely a bug
+eth-node-nethermind: library-not-linked-against-libc [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
+
