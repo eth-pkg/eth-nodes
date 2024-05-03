@@ -8,6 +8,9 @@ export GIT_COMMIT="dc19b08"
 export PARTIAL_STATIC_LINKING=1
 export QUICK_AND_DIRTY_COMPILER=1
 export LOG_LEVEL="TRACE"
+export CFLAGS += -O
+export CFLAGS += -D__BLST_PORTABLE__
+export CFLAGS += -fPIC -D_FORTIFY_SOURCE=2
 
 %:
 	dh $@
