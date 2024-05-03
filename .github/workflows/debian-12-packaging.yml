@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         package-name: ["eth-node-besu"]
-        package-version-with-revision: ["23.3.3-1"]
+        package-version-with-revision: ["24.3.3-1"]
         codename: ["debian-12"]
       fail-fast: false
     uses: ./.github/workflows/pkgbuilder-deps.yml
