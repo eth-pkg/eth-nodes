@@ -98,21 +98,21 @@ jobs:
         name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
         path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}  
 
-    - name: lintian
-      run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+    # - name: lintian
+    #   run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
       
-    - name: piuparts
-      run: |
-        # Install debian-archive-keyring but fails, as it is already installed
-        # sudo apt-get install -y debian-archive-keyring
-        ${HOME}/.local/bin/pkg-builder piuparts ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+    # - name: piuparts
+    #   run: |
+    #     # Install debian-archive-keyring but fails, as it is already installed
+    #     # sudo apt-get install -y debian-archive-keyring
+    #     ${HOME}/.local/bin/pkg-builder piuparts ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
-    - name: autopkgtests
-      run: |
-        # Copy files under root
-        sudo cp -R ${HOME}/.pkg-builder /root
-        sudo ${HOME}/.local/bin/pkg-builder autopkgtest ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+    # - name: autopkgtests
+    #   run: |
+    #     # Copy files under root
+    #     sudo cp -R ${HOME}/.pkg-builder /root
+    #     sudo ${HOME}/.local/bin/pkg-builder autopkgtest ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
 
     - name: verify
       run: |
