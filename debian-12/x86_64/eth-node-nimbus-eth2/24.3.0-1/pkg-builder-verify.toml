@@ -1,7 +1,7 @@
 [verify]
 package_hash=[
-    { hash="d6f470dc118cb3bc9920a4b665ad33318451a289", name= "eth-node-nimbus-eth2_24.3.0-1.dsc"},
+    { hash="f01bf5d118287e42d03c6060b8a0f9a1a3fd4597", name= "eth-node-nimbus-eth2_24.3.0-1.dsc"},
     { hash="f0773b315ea03acaaca3d3959877e4d02758a5fd", name= "eth-node-nimbus-eth2_24.3.0.orig.tar.gz"},
     { hash="3e044af98c1eb35ad50bec1c89a1f85b902a3c23", name= "eth-node-nimbus-eth2_24.3.0-1.debian.tar.xz"},
-    { hash="310b6066036de512eba87312a0db9b9e3dc4bb19", name= "eth-node-nimbus-eth2_24.3.0-1_amd64.deb"},
+    { hash="14268ebece546e134e634acfa88c012f5ec92918", name= "eth-node-nimbus-eth2_24.3.0-1_amd64.deb"},
 ]
