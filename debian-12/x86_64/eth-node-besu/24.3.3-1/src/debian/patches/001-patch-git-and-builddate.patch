@@ -1,0 +1,20 @@
+--- a/build.gradle
++++ b/build.gradle
+@@ -1028,7 +1028,7 @@
+ def buildTime() {
+   def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+   df.setTimeZone(TimeZone.getTimeZone("UTC"))
+-  return df.format(new Date())
++  return "2024-05-03-12T23:20:50.52Z"
+ }
+ 
+ // Takes the version, and if -SNAPSHOT is part of it replaces SNAPSHOT
+@@ -1066,7 +1066,7 @@
+   } catch (Exception e) {
+     logger.warn('Could not calculate git commit, using "xxxxxxxx" (run with --info for stacktrace)')
+     logger.info('Error retrieving git commit', e)
+-    return "xxxxxxxx"
++    return "6ef546a0"
+   }
+ }
+ 

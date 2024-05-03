@@ -1,5 +1,0 @@
-eth-node-besu (23.10.1-1) bookworm; urgency=medium
-
-  * Change the packaging version to reflect the besu versioning
-
- -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 24 Apr 2024 13:14:17 +0700
