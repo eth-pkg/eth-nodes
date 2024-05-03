@@ -32,4 +32,6 @@ override_dh_auto_clean:
 
 override_dh_auto_test:
 	# -make update
-	#make -j1 all_tests
+	make -j1 all_tests
+	# remove all_tests, no need to ship it
+	rm build/all_tests
