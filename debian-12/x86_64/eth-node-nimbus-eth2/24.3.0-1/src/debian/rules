@@ -1,15 +1,15 @@
 #!/usr/bin/make -f
 export NIM_DIR=/opt/lib/nim/nim-2.0.2
 export USE_SYSTEM_NIM=1
-export BINARIES=nimbus_beacon_node nimbus_validator_client deposit_contract nimbus_signing_node nimbus_light_client logtrace
-#export NIMFLAGS="-d:disableMarchNative --gcc.options.debug:'-g1' --clang.options.debug:'-gline-tables-only'"
-export NIMFLAGS="-d:release"
+#export BINARIES=nimbus_beacon_node nimbus_validator_client deposit_contract nimbus_signing_node nimbus_light_client logtrace
+export BINARIES=nimbus_beacon_node
+export NIMFLAGS="-d:disableMarchNative --gcc.options.debug:'-g1' --clang.options.debug:'-gline-tables-only'"
+export NIMFLAGS+="-d:release -d:marchOptimized"
 export GIT_COMMIT="dc19b08"
 export PARTIAL_STATIC_LINKING=1
 export QUICK_AND_DIRTY_COMPILER=1
 export LOG_LEVEL="TRACE"
 export CFLAGS += -O
-export CFLAGS += -D__BLST_PORTABLE__
 export CFLAGS += -fPIC -D_FORTIFY_SOURCE=2
 
 %:
