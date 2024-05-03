@@ -78,7 +78,7 @@ jobs:
       run: |
         pkg-builder package --run-piuparts false --run-autopkgtests false --run-lintian false ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml 
 
-    - name: cleanup 
+    - name: upload cleanup 
       run: | 
         version=$(echo ${{inputs.package-version-with-revision}} | cut -d'-' -f1)
         rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
