@@ -1,9 +1,9 @@
 #!/usr/bin/make -f
 export CGO_ENABLED=0 
 
-export GIT_COMMIT ?= 4fc8c374cfcdce19cea612846a0634f4de186cb8
+export GIT_COMMIT ?= 87246f3cbaf10f83f56bc4d45f0f3e36e83e71e9
 export GIT_BRANCH ?= main
-export GIT_TAG    ?= v2.53.2
+export GIT_TAG    ?= v1.14.4
 
 %:
 	dh $@
@@ -11,10 +11,6 @@ export GIT_TAG    ?= v2.53.2
 override_dh_dwz:
 	# skip of optimization of DWARF debug information in ELF binaries via dwz
 
-override_dh_auto_install:
-	# This relies on make install script
-	# if there is no install script, you have to define your own rules
-	#dh_auto_install -- prefix=/usr
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
@@ -22,7 +18,7 @@ override_dh_auto_clean:
 	-make -j1 clean
 
 override_dh_auto_build:
-	make all 	
+	make all
 
 override_dh_auto_test:
 	make -j1 test
