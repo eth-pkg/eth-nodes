@@ -46,3 +46,4 @@ eth-node-lodestar: unstripped-binary-or-object [usr/lib/eth-node-lodestar/bin/no
 eth-node-lodestar: unstripped-binary-or-object
 eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/bin/node_modules/fastify/integration/test.sh]
 eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/node_modules/fastify/integration/test.sh]
+eth-node-lodestar: statically-linked-binary [usr/lib/eth-node-lodestar/node_modules/@esbuild/linux-x64/bin/esbuild]

@@ -38,18 +38,18 @@ jobs:
       package-version-with-revision: ${{ matrix.package-version-with-revision }}
       codename:  ${{ matrix.codename }}
 
-  # eth-node-geth:
-  #   strategy:
-  #     matrix:
-  #       package-name: ["eth-node-geth"]
-  #       package-version-with-revision: ["1.13.4-1"]
-  #       codename: ["debian-12"]
-  #     fail-fast: false
-  #   uses: ./.github/workflows/pkgbuilder-deps.yml
-  #   with:
-  #     package-name: ${{ matrix.package-name }}
-  #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
-  #     codename:  ${{ matrix.codename }}
+  eth-node-geth:
+    strategy:
+      matrix:
+        package-name: ["eth-node-geth"]
+        package-version-with-revision: ["1.14.0-1"]
+        codename: ["debian-12"]
+      fail-fast: false
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}
 
   # eth-node-lighthouse:
   #   strategy:
@@ -63,18 +63,18 @@ jobs:
   #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
   #     codename:  ${{ matrix.codename }}    
     
-  # eth-node-lodestar:
-  #   strategy:
-  #     matrix:
-  #       package-name: ["eth-node-lodestar"]
-  #       package-version-with-revision: ["1.11.3-1"]
-  #       codename: ["debian-12"]
-  #     fail-fast: false
-  #   uses: ./.github/workflows/pkgbuilder-deps.yml
-  #   with:
-  #       package-name: ${{ matrix.package-name }}
-  #       package-version-with-revision: ${{ matrix.package-version-with-revision }}
-  #       codename:  ${{ matrix.codename }}   
+  eth-node-lodestar:
+    strategy:
+      matrix:
+        package-name: ["eth-node-lodestar"]
+        package-version-with-revision: ["1.18.0-1"]
+        codename: ["debian-12"]
+      fail-fast: false
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+        package-name: ${{ matrix.package-name }}
+        package-version-with-revision: ${{ matrix.package-version-with-revision }}
+        codename:  ${{ matrix.codename }}   
         
   # eth-node-nethermind:
   #   strategy:

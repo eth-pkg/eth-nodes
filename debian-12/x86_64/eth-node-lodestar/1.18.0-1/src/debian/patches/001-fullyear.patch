@@ -17,7 +17,7 @@
      }
 +  }else {
 +    // for reproducible builds
-+    parts.push("9ade975")
++    parts.push("778a171")
    }
  
    return {
@@ -59,7 +59,7 @@
      }
 +  } else {
 +    // patch override to bake in version number for reproducible build
-+    parts.push("9ade975")
++    parts.push("778a171")
    }
  
    return {

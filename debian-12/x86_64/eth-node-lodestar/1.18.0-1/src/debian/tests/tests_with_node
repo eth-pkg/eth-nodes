@@ -24,10 +24,10 @@ test_invocation(){
   output="$(lodestar --version)"
   echo "$output"
   # tested against 
-  # docker pull chainsafe/lodestar:v1.11.3
-  # docker run chainsafe/lodestar:v1.11.3 --version
+  # docker pull chainsafe/lodestar:v1.18.0
+  # docker run chainsafe/lodestar:v1.18.0 --version
   assertEquals "$output" "🌟 Lodestar: TypeScript Implementation of the Ethereum Consensus Beacon Chain.
-  * Version: v1.11.3/9ade975
+  * Version: v1.18.0/778a171
   * by ChainSafe Systems, 2018-2024"
 }
 
