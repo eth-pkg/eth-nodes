@@ -1,16 +1,16 @@
 [package_fields]
 spec_file = "eth-node-teku.sss"
 package_name = "eth-node-teku"
-version_number = "23.10.0"
+version_number = "24.4.0"
 revision_number = "1"
 homepage="https://github.com/Consensys/teku"
 
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/Consensys/teku/archive/refs/tags/23.10.0.tar.gz"
+tarball_url = "https://github.com/Consensys/teku/archive/refs/tags/24.4.0.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "a937490de8afb8c8eb8f6ab486cff116bc7c6d87e97006ff69fbea0ecd2d5530"
+tarball_hash = "48cf4673a219ab468d4ef707751739449abe64bdd6ef1a3d952c18d1240d8478"
 
 [package_type.language_env]
 language_env = "java"
@@ -20,9 +20,9 @@ jdk_binary_url="https://download.oracle.com/java/17/archive/jdk-17.0.10_linux-x6
 jdk_binary_checksum="e4fb2df9a32a876afb0a6e17f54c594c2780e18badfa2e8fc99bc2656b0a57b1"
 
 [package_type.language_env.gradle]
-gradle_version="8.2"
-gradle_binary_url="https://github.com/gradle/gradle-distributions/releases/download/v8.2.0/gradle-8.2-bin.zip"
-gradle_binary_checksum="38f66cd6eef217b4c35855bb11ea4e9fbc53594ccccb5fb82dfd317ef8c2c5a3"
+gradle_version="8.4"
+gradle_binary_url="https://github.com/gradle/gradle-distributions/releases/download/v8.4.0/gradle-8.4-bin.zip"
+gradle_binary_checksum="3e1af3ae886920c3ac87f7a91f816c0c7c436f276a6eefdb3da152100fef72ae"
 
 
 [build_env]

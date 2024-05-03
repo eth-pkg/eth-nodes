@@ -89,41 +89,41 @@ jobs:
   #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
   #     codename:  ${{ matrix.codename }}      
 
-  # eth-node-nimbus-eth2:
-  #   strategy:
-  #     matrix:
-  #       package-name: ["eth-node-nimbus-eth2"]
-  #       package-version-with-revision: ["24.3.0-1"]
-  #       codename: ["debian-12"]
-  #     fail-fast: false 
-  #   uses: ./.github/workflows/pkgbuilder-deps.yml
-  #   with:
-  #     package-name: ${{ matrix.package-name }}
-  #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
-  #     codename:  ${{ matrix.codename }}    
+  eth-node-nimbus-eth2:
+    strategy:
+      matrix:
+        package-name: ["eth-node-nimbus-eth2"]
+        package-version-with-revision: ["24.3.0-1"]
+        codename: ["debian-12"]
+      fail-fast: false 
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}    
 
-  # eth-node-prysm:
-  #   strategy:
-  #     matrix:
-  #       package-name: ["eth-node-prysm"]
-  #       package-version-with-revision: ["4.1.1-1"]
-  #       codename: ["debian-12"]
-  #     fail-fast: false
-  #   uses: ./.github/workflows/pkgbuilder-deps.yml
-  #   with:
-  #     package-name: ${{ matrix.package-name }}
-  #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
-  #     codename:  ${{ matrix.codename }}
+  eth-node-prysm:
+    strategy:
+      matrix:
+        package-name: ["eth-node-prysm"]
+        package-version-with-revision: ["5.0.3-1"]
+        codename: ["debian-12"]
+      fail-fast: false
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}
      
-  # eth-node-teku:
-  #   strategy:
-  #     matrix:
-  #       package-name: ["eth-node-teku"]
-  #       package-version-with-revision: ["23.10.0-1"]
-  #       codename: ["debian-12"]
-  #     fail-fast: false
-  #   uses: ./.github/workflows/pkgbuilder-deps.yml
-  #   with:
-  #     package-name: ${{ matrix.package-name }}
-  #     package-version-with-revision: ${{ matrix.package-version-with-revision }}
-  #     codename:  ${{ matrix.codename }}    
+  eth-node-teku:
+    strategy:
+      matrix:
+        package-name: ["eth-node-teku"]
+        package-version-with-revision: ["24.4.0-1"]
+        codename: ["debian-12"]
+      fail-fast: false
+    uses: ./.github/workflows/pkgbuilder-deps.yml
+    with:
+      package-name: ${{ matrix.package-name }}
+      package-version-with-revision: ${{ matrix.package-version-with-revision }}
+      codename:  ${{ matrix.codename }}    
