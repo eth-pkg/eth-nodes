@@ -7,8 +7,7 @@ provides = ["eth-node-execution-client (= 1)"]
 suggests = ["eth-node (= 1)"]
 # TODO can't add depends, piuparts are failing 
 #depends = ["aspnetcore-runtime-7.0", "ca-certificates"]
-
-depends = []
+depends = ["libc6 (>= 2.16)", "libgcc-s1 (>= 3.0)", "libstdc++6 (>= 5.2)"]
 add_files = [
     "src/Nethermind/artifacts/bin /usr/lib/eth-node-nethermind",
     "src/Nethermind/artifacts/obj /usr/lib/eth-node-nethermind"
