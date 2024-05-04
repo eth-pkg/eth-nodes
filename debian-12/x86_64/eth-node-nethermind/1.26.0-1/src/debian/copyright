@@ -1,0 +1,43 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: nethermind
+Upstream-Contact: https://github.com/NethermindEth/nethermind/
+Source: <https://github.com/NethermindEth/nethermind/>
+#
+# Please double check copyright with the licensecheck(1) command.
+
+Files:     *
+License:   LGPL-3.0+
+
+Files:     src/Nethermind/Nethermind.Evm.Test/Eip6780Tests.cs
+Copyright: 2021 Demerzel Solutions Limited
+License:   LGPL-3.0+
+
+Files:     LICENSE-GPL
+Copyright: 2007 Free Software Foundation, Inc.
+License:   __HEADER___
+
+Files:     LICENSE-LGPL
+Copyright: 2007 Free Software Foundation, Inc.
+License:   __HEADER___
+
+Files:     src/Nethermind/Nethermind.Evm/Tracing/FeesTracer.cs
+Copyright: 2022 Demerzel Solutions Limited
+License:   __UNKNOWN__
+
+Files:     scripts/deployment/debian/copyright
+Copyright: : 2023 Demerzel Solutions Limited License: LGPL-3 On Debian systems, the full text of the GNU Lesser General Public License v3 can be found in "/usr/share/common-licenses/LGPL-3".
+License:   __NO_LICENSE__
+
+
+
+
+Files: debian/*
+License: GPL-3+
+
+License: Apache-2.0
+ The full text of the Apache License, Version 2.0 is distributed in
+ /usr/share/common-licenses/Apache-2.0 on Debian systems.
+
+License: GPL-3+
+ The full text of the GPL version 3 is distributed in
+ /usr/share/common-licenses/GPL-3 on Debian systems.

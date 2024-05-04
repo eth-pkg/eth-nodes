@@ -1,0 +1,126 @@
+name: pkbuilder-deps
+
+on:
+  workflow_call:
+    inputs:
+      package-name:
+        required: true
+        type: string
+      package-version-with-revision:
+          required: true
+          type: string  
+      codename:
+          required: true
+          type: string      
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sbuild setup
+      run: |
+        sudo apt-get update
+        # Note this is an older version of sbuild, no need to patch it, yet
+        sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts
+        sudo apt-get -y install pkg-config libssl-dev uidmap
+        sudo apt-get install -y libfilesys-df-perl libmime-lite-perl
+        sudo apt-get install -y autopkgtest vmdb2 qemu-system-x86
+        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+        wget -q https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
+        sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+
+
+    # - name: pkg-builder
+    #   run: |
+    #     wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/pkg-builder
+    #     wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+    #     mkdir -p ${HOME}/.local/bin 
+    #     mv pkg-builder ${HOME}/.local/bin
+    #     mv debcrafter ${HOME}/.local/bin 
+    #     chmod +x ${HOME}/.local/bin/pkg-builder
+    #     chmod +x ${HOME}/.local/bin/debcrafter
+    #     echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+    - name: Checkout dependency repository
+      uses: actions/checkout@v4
+      with:
+        repository: eenagy/pkg-builder  
+        ref: main
+        path: pkg-builder
+
+    - name: Install pkg-builder
+      run: |
+        cd pkg-builder
+        cargo build --release
+        mkdir -p ${HOME}/.local/bin 
+        mv target/release/pkg-builder ${HOME}/.local/bin
+        chmod +x ${HOME}/.local/bin/pkg-builder
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+        cd .. && rm -rf pkg-builder
+
+    - name: Install debcrafter
+      run: |
+        wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+        mkdir -p ${HOME}/.local/bin 
+        mv debcrafter ${HOME}/.local/bin
+        chmod +x ${HOME}/.local/bin/debcrafter
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+    - name: Checkout repository
+      uses: actions/checkout@v4    
+    
+    - name: Create chroot env
+      run: |
+        pkg-builder env create ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+        echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
+
+    - name: package
+      run: |
+        pkg-builder package --run-piuparts false --run-autopkgtests false --run-lintian false ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml 
+
+ 
+    - name: lintian
+      run: pkg-builder lintian ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+
+      
+    - name: piuparts
+      run: |
+        # Install debian-archive-keyring but fails, as it is already installed
+        # sudo apt-get install -y debian-archive-keyring
+        ${HOME}/.local/bin/pkg-builder piuparts ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+
+    - name: autopkgtests
+      run: |
+        # Copy files under root
+        sudo cp -R ${HOME}/.pkg-builder /root
+        sudo ${HOME}/.local/bin/pkg-builder autopkgtest ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml
+
+    - name: verify
+      run: |
+        ${HOME}/.local/bin/pkg-builder verify --config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml  --verify-config-file ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml  --no-package true # do not need to repackage it, as we run it multiple times on CI, and hashes should come from locally built sources
+    
+    - name: upload cleanup 
+      run: | 
+        version=$(echo ${{inputs.package-version-with-revision}} | cut -d'-' -f1)
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
+        rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}
+        # copy pkg-builder configs to artifacts
+        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+        rm *:*
+        rm *dbgsym* || true # possible there is none
+      
+      
+          # This should come after verify, but sometimes it is good to have it, to check why the verify fails
+    - name: Save results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{inputs.package-name}}-${{ inputs.codename }}-${{ inputs.package-version-with-revision }}
+        path: /home/runner/.pkg-builder/packages/${{inputs.package-name}}  
+      
+
+
+
+   
+    
