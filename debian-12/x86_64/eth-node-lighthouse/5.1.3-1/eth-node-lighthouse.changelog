@@ -1,4 +1,4 @@
-eth-node-lighthouse (4.5.0-1) bookworm; urgency=medium
+eth-node-lighthouse (5.1.3-1) bookworm; urgency=medium
 
   * Use correct lighthouse versioning version number + git commit
 

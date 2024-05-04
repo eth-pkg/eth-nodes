@@ -5,7 +5,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-consensus-client (= 1)"]
 suggests = ["eth-node (= 1)"]
-add_files = ["target/release/lighthouse /usr/lib/eth-node-lighthouse/bin"]
+add_files = ["target/maxperf/lighthouse /usr/lib/eth-node-lighthouse/bin"]
 add_links = ["/usr/lib/eth-node-lighthouse/bin/lighthouse /usr/bin/lighthouse"]
 
 add_manpages = []

@@ -37,6 +37,14 @@ pkg-builder env create pkg-builder-verify.toml
 pkg-builder verify --config-file pkg-builder.toml --verfiy-config-file pkg-builder-verify.toml 
 ```
 
+### Verifying packages 
+
+```bash
+mkdir /tmp/tempdir | cd -
+sudo apt-get download <package_name>
+sha1sum  <package_name>*.deb
+```
+
 ### How It Works
 
 This process leverages `debcrafter` and `pkg-builder` to establish reproducible environments. Debcrafter aids in creating reproducible Debian directories based on detailed specification files ending with `.sss` and `.sps`. Meanwhile, pkg-builder utilizes debcrafter, and extends it to setup minimal environments to build and adheres to Debian's best practices, including `sbuild`, `piuparts`, `lintian`, and `autopkgtest`, to build the packages and test them thoroughly, ensuring they are not merely packages but functional ones.
