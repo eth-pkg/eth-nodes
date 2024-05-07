@@ -1,8 +1,0 @@
-[verify]
-package_hash=[
-    { hash="884067f71167fa12e9e4ae9aae3046f380679e62", name= "eth-node-nimbus-eth2_24.3.0-1.dsc"},
-    # disable as it fails day by day, we don't care about this, until the other hashes are the same
-    # { hash="f0773b315ea03acaaca3d3959877e4d02758a5fd", name= "eth-node-nimbus-eth2_24.3.0.orig.tar.gz"},
-    { hash="3177fdb7cf82cd0f3bc4a3815a5ead47b2498294", name= "eth-node-nimbus-eth2_24.3.0-1.debian.tar.xz"},
-    { hash="5b34853d0c780355eb4ecde5e7acadc48bb5297b", name= "eth-node-nimbus-eth2_24.3.0-1_amd64.deb"},
-]

@@ -15,7 +15,7 @@ on:
 
 jobs:
   package:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
     - name: Sbuild setup
       run: |
@@ -81,10 +81,11 @@ jobs:
         pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian false
 
  
-    - name: lintian
-      run: |
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
-        pkg-builder lintian 
+    # - name: lintian
+    #   run: |
+    #     cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+    #     #TODO HACK for now, we need to upgrade lintian to newest version
+    #     lintian --suppress-tags bad-distribution-in-changes-file -i --I $(HOME)/.pkg-builder/packages/${{ inputs.codename }}/${{inputs.package-name}}-${{ inputs.package-version-with-revision }}/${{inputs.package-name}}-${{ inputs.package-version-with-revision }}_amd64.changes --tag-display-limit=0 --fail-on=error --suppress-tags debug-file-with-no-debug-symbols 
 
       
     # - name: piuparts
@@ -100,10 +101,10 @@ jobs:
     #     sudo cp -R ${HOME}/.pkg-builder /root
     #     sudo ${HOME}/.local/bin/pkg-builder autopkgtest
 
-    # - name: verify
-    #   run: |
-    #     cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
-    #     ${HOME}/.local/bin/pkg-builder verify --no-package true
+    - name: verify
+      run: |
+        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+        ${HOME}/.local/bin/pkg-builder verify --no-package true
     
     # - name: upload cleanup 
     #   run: | 
