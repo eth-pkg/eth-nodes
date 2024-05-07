@@ -28,10 +28,14 @@ gradle_binary_checksum="7ba68c54029790ab444b39d7e293d3236b2632631fb5f2e012bb28b4
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.1"
-debcrafter_version = "latest"
+pkg_builder_version="0.2"
+debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true
 run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
 # package directory
-workdir="~/.pkg-builder/packages"
+workdir="~/.pkg-builder/packages/bookworm"
