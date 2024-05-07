@@ -38,4 +38,11 @@ eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/
 eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/twofish.html]
 eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/utils.html]
 
-eth-node-nimbus-eth2 source: debian-rules-ignores-make-clean-error [debian/rules:26]
+eth-node-nimbus-eth2 source: debian-rules-ignores-make-clean-error [debian/rules:31]
+eth-node-nimbus-eth2 source: missing-field-in-dep5-copyright Copyright [debian/copyright:10]
+
+#TODO remove this
+eth-node-nimbus-eth2 source: source-contains-prebuilt-windows-binary [vendor/nim-bearssl/bearssl/csources/T0Comp.exe]
+
+eth-node-nimbus-eth2 source: missing-field-in-dep5-copyright Copyright [debian/copyright:14]
+eth-node-nimbus-eth2 source: no-newline-at-end [debian/changelog]

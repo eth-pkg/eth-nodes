@@ -1,3 +1,5 @@
-eth-node-lighthosue: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lighthosue/changelog.Debian.gz:1]
-eth-node-lighthosue: maintainer-script-ignores-errors [postrm]
-eth-node-lighthosue: no-manual-page [usr/bin/nethermind]
+eth-node-lighthouse: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lighthouse/changelog.Debian.gz:1]
+eth-node-lighthouse: maintainer-script-ignores-errors [postrm]
+eth-node-lighthouse: no-manual-page [usr/bin/lighthouse]
+eth-node-lighthouse: description-synopsis-starts-with-article
+eth-node-lighthouse: synopsis-too-long

@@ -1,4 +1,9 @@
 #!/usr/bin/make -f
+# Flags based on https://wiki.debian.org/Hardening 
+export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
+export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 %:
 	dh $@
@@ -9,6 +14,9 @@ override_dh_dwz:
 # TODO reenable before verify
 override_dh_auto_test:
 	#make -j1 test
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation

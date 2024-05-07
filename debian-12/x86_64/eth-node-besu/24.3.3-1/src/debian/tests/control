@@ -5,6 +5,6 @@ Depends: @, shunit2, which
 
 # generally it is not a good idea to test as a root
 # better to define third-party repository which depends can be installed from
-Tests: tests_with_oracle_jre
+Tests: tests-with-oracle-jre
 Depends: @, shunit2, which, curl, ca-certificates
 Restrictions:needs-root # for installing oracle-jre

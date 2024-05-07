@@ -18,3 +18,6 @@ override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
 	# on bookworm clean succeeds, even if dependency is not installed
 	-make -j1 clean
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym

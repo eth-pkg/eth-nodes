@@ -5,6 +5,11 @@ export GIT_COMMIT ?= 87246f3cbaf10f83f56bc4d45f0f3e36e83e71e9
 export GIT_BRANCH ?= main
 export GIT_TAG    ?= v1.14.4
 
+export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
+export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+
 %:
 	dh $@
 
@@ -22,3 +27,6 @@ override_dh_auto_build:
 
 override_dh_auto_test:
 	# make -j1 test
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
