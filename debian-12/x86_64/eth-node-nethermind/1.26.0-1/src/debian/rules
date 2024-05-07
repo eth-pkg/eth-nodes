@@ -9,6 +9,7 @@ override_dh_auto_build:
 	cd src/Nethermind/Nethermind.Runner && dotnet build -c release
 	# Delete all other archs then x64
 	find src/Nethermind/artifacts/obj -type f -name '*.AssemblyReference.cache' -delete
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-arm64
 
 # TODO fix tests
 override_dh_auto_test:
@@ -32,4 +33,5 @@ override_dh_strip:
 	# error: strip --remove-section=.comment --remove-section=.note --strip-unneeded debian/eth-node-nethermind/usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-arm64/native/libgmp.so returned exit code 1
 
 override_dh_shlibdeps: 
-	# error: cannot find library libc.musl-x86_64.so.1 needed by debian/eth-node-nethermind/usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so (ELF format: 'elf64-x86-64' abi: '0201003e00000000'; RPATH: '')
+	# cannot find library libjemalloc.so.1 needed
+	dh_shlibdeps --exclude=librocksdb-musl.so --exclude=librocksdb-jemalloc.so

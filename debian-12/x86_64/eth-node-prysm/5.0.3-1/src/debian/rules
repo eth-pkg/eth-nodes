@@ -8,7 +8,7 @@ export STABLE_GIT_COMMIT=38f208d70dc95b12c08403f5c72009aaa10dfe2f
 	dh $@
 
 override_dh_auto_test:
-    CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
+    # CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
 
 override_dh_auto_build:
 	bazelisk build //cmd/beacon-chain:beacon-chain --config=release

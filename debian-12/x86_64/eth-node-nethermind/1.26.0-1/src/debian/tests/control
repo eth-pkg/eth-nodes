@@ -3,5 +3,5 @@
 Tests: tests
 Depends: @, shunit2, which
 
-Tests: tests_with_dotnet
+Tests: tests-with-dotnet
 Depends: @, shunit2, which, aspnetcore-runtime-8.0

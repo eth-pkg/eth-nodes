@@ -1,0 +1,3 @@
+eth-node-prysm: initial-upload-closes-no-bugs [usr/share/doc/eth-node-prysm/changelog.Debian.gz:1]
+eth-node-prysm: maintainer-script-ignores-errors [postrm]
+eth-node-prysm: no-manual-page [usr/bin/nethermind]
