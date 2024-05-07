@@ -85,7 +85,7 @@ jobs:
       run: |
         cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         #TODO HACK for now, we need to upgrade lintian to newest version
-        lintian --suppress-tags bad-distribution-in-changes-file -i --I ${HOME}/.pkg-builder/packages/${{ inputs.codename }}/${{inputs.package-name}}-${{ inputs.package-version-with-revision }}/${{inputs.package-name}}-${{ inputs.package-version-with-revision }}_amd64.changes --tag-display-limit=0 --fail-on=error --suppress-tags debug-file-with-no-debug-symbols 
+        lintian --suppress-tags bad-distribution-in-changes-file -i --I ${HOME}/.pkg-builder/packages/${{ inputs.codename }}/${{inputs.package-name}}-${{ inputs.package-version-with-revision }}/${{inputs.package-name}}_${{ inputs.package-version-with-revision }}_amd64.changes --tag-display-limit=0 --fail-on=error --suppress-tags debug-file-with-no-debug-symbols 
 
       
     - name: piuparts
