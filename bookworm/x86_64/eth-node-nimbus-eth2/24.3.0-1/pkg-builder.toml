@@ -71,7 +71,7 @@ nim_version_checksum = "b2852fc9a54da97bf51231324f1f2bd2b44b617f99327394658e62f8
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.0"
+pkg_builder_version="0.2.2"
 debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true

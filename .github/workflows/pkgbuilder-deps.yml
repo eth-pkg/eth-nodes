@@ -45,7 +45,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: eenagy/pkg-builder  
-        ref: feat/noble
+        ref: fix/lintian-autopkgtest
         path: pkg-builder
 
     - name: Install pkg-builder
@@ -78,14 +78,7 @@ jobs:
     - name: package
       run: |
         cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
-        pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian false
-
- 
-    - name: lintian
-      run: |
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
-        #TODO HACK for now, we need to upgrade lintian to newest version
-        lintian --suppress-tags bad-distribution-in-changes-file -i --I ${HOME}/.pkg-builder/packages/${{ inputs.codename }}/${{inputs.package-name}}-${{ inputs.package-version-with-revision }}/${{inputs.package-name}}_${{ inputs.package-version-with-revision }}_amd64.changes --tag-display-limit=0 --fail-on=error --suppress-tags debug-file-with-no-debug-symbols 
+        pkg-builder package --run-piuparts false --run-autopkgtest false 
 
       
     - name: piuparts
