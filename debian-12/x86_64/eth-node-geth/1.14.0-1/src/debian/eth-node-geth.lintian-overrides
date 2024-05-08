@@ -1,1 +1,0 @@
-eth-node-geth: statically-linked-binary [usr/lib/eth-node-geth/bin/rlpdump]
