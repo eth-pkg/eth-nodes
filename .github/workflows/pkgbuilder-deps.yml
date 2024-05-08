@@ -92,6 +92,7 @@ jobs:
       run: |
         # Copy files under root
         sudo cp -R ${HOME}/.pkg-builder /root
+        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         sudo ${HOME}/.local/bin/pkg-builder autopkgtest
 
     - name: verify
