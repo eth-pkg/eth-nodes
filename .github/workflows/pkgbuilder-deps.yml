@@ -71,13 +71,13 @@ jobs:
     
     - name: Create chroot env
       run: |
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+        cd ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         pkg-builder env create
         echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
     - name: package
       run: |
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+        cd ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         pkg-builder package --run-piuparts false --run-autopkgtest false 
 
       
@@ -85,19 +85,19 @@ jobs:
       run: |
         # Install debian-archive-keyring but fails, as it is already installed
         # sudo apt-get install -y debian-archive-keyring
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+        cd ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         ${HOME}/.local/bin/pkg-builder piuparts 
 
     - name: autopkgtests
       run: |
         # Copy files under root
         sudo cp -R ${HOME}/.pkg-builder /root
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+        cd ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         sudo ${HOME}/.local/bin/pkg-builder autopkgtest
 
     - name: verify
       run: |
-        cd ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
+        cd ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}
         ${HOME}/.local/bin/pkg-builder verify --no-package true
     
     # - name: upload cleanup 
@@ -106,8 +106,8 @@ jobs:
     #     rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}-$version
     #     rm -rf /home/runner/.pkg-builder/packages/${{inputs.package-name}}/${{inputs.package-name}}
     #     # copy pkg-builder configs to artifacts
-    #     cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
-    #     cp ${{ inputs.codename }}/x86_64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+    #     cp ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
+    #     cp ${{ inputs.codename }}/amd64/${{inputs.package-name}}/${{ inputs.package-version-with-revision }}/pkg-builder-verify.toml /home/runner/.pkg-builder/packages/${{inputs.package-name}}
     #     cd /home/runner/.pkg-builder/packages/${{inputs.package-name}}
     #     rm *:*
     #     rm *dbgsym* || true # possible there is none

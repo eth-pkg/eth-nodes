@@ -14,7 +14,7 @@ Begin by installing `pkg-builder`. Refer to the README for installation instruct
 
 ```bash
 # Change into the directoy which you want to package
-cd debian-12/x86_64/eth-node-nimbus-eth2/24.3.0-1
+cd debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
 # Create an environment once for each distribution/architecture pairing
 pkg-builder env create pkg-builder-verify.toml
 
@@ -29,7 +29,7 @@ pkg-builder verify --config-file pkg-builder.toml --verfiy-config-file pkg-build
 If you're not building but simply ensuring the built client matches a specific hash:
 
 ```bash
-debian-12/x86_64/eth-node-nimbus-eth2/24.3.0-1
+debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
 # Create an environment once for each distribution/architecture pairing
 pkg-builder env create pkg-builder-verify.toml
 
