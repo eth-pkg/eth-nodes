@@ -45,17 +45,22 @@ jobs:
             wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
             sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
   
-        - name: Build
+        - name: Checkout dependency repository
+          uses: actions/checkout@v4
+          with:
+            repository: eenagy/pkg-builder  
+            ref: main
+            path: pkg-builder
+      
+        - name: Install pkg-builder
           run: |
-            cargo build --verbose
-  
-        - name: Install
-          run: |
-            cargo build --release
-            mkdir -p ${HOME}/.local/bin
-            mv target/release/pkg-builder ${HOME}/.local/bin
-            chmod +x ${HOME}/.local/bin/pkg-builder
-            echo "${HOME}/.local/bin" >> $GITHUB_PATH
+              cd pkg-builder
+              cargo build --release
+              mkdir -p ${HOME}/.local/bin 
+              mv target/release/pkg-builder ${HOME}/.local/bin
+              chmod +x ${HOME}/.local/bin/pkg-builder
+              echo "${HOME}/.local/bin" >> $GITHUB_PATH
+              cd .. && rm -rf pkg-builder
   
         - name: Install debcrafter
           run: |
