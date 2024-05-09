@@ -27,12 +27,14 @@ jobs:
             PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
             VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
             VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
+            BUILD_DIR="/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER"
             echo "::set-output name=tag_name::$TAG_NAME"
             echo "::set-output name=codename::$CODENAME"
             echo "::set-output name=package_name::$PACKAGE_NAME"
             echo "::set-output name=folder::$FOLDER"
             echo "::set-output name=version_number::$VERSION_NUMBER"
             echo "::set-output name=version_number_without_revision::$VERSION_NUMBER_WITHOUT_REVISON"
+            echo "::set-output name=build_dir::$BUILD_DIR"
             echo "::set-output name=arch::$ARCH"  
 
         - name: Sbuild setup
@@ -106,6 +108,9 @@ jobs:
            cd ${{ steps.extract_dirs.outputs.tag_name }}
            ${HOME}/.local/bin/pkg-builder verify  --no-package true
   
+        - name: Pkg specs
+          run: tar -czvf pkg_specs.tar.gz  ${{ steps.extract_dirs.outputs.tag_name }}  
+
         - name: Create Release
           id: create_release
           uses: actions/create-release@v1
@@ -148,15 +153,15 @@ jobs:
             asset_name: pkg-builder-verify.toml
             asset_content_type: text/toml
   
-        - name: Save .orig.tar
+        - name: Save .orig.tar.gz
           uses: actions/upload-release-asset@v1
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: /home/runner/.pkg-builder/packages/${{steps.extract_dirs.outputs.codename}}/${{steps.extract_dirs.outputs.package_name}}-${{steps.extract_dirs.outputs.version_number}}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number_without_revision}}.orig.tar.gz
+            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number_without_revision}}.orig.tar.gz
             asset_name: ${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number_without_revision}}.orig.tar.gz
-            asset_content_type: application/octet-stream
+            asset_content_type: application/x-tar+gzip
   
         - name: Save .debian.tar.xz
           uses: actions/upload-release-asset@v1
@@ -164,9 +169,9 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: /home/runner/.pkg-builder/packages/${{steps.extract_dirs.outputs.codename}}/${{steps.extract_dirs.outputs.package_name}}-${{steps.extract_dirs.outputs.version_number}}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}.debian.tar.xz
+            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}.debian.tar.xz
             asset_name: ${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}.debian.tar.xz
-            asset_content_type: application/octet-stream
+            asset_content_type: application/x-tar
   
         - name: Save .dsc
           uses: actions/upload-release-asset@v1
@@ -174,16 +179,38 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: /home/runner/.pkg-builder/packages/${{steps.extract_dirs.outputs.codename}}/${{steps.extract_dirs.outputs.package_name}}-${{steps.extract_dirs.outputs.version_number}}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}.dsc
+            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}.dsc
             asset_name: ${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}.dsc
-            asset_content_type: application/octet-stream
-  
+            asset_content_type: text/plain
+        
+        - name: Save .deb
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url }}
+            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.arch}}_${{steps.extract_dirs.outputs.version_number}}.deb
+            asset_name: ${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.arch}}_${{steps.extract_dirs.outputs.version_number}}.deb
+            asset_content_type: application/vnd.debian.binary-package
+
         - name: Save .build
           uses: actions/upload-release-asset@v1
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: /home/runner/.pkg-builder/packages/${{steps.extract_dirs.outputs.codename}}/${{steps.extract_dirs.outputs.package_name}}-${{steps.extract_dirs.outputs.version_number}}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}_${{steps.extract_dirs.outputs.arch}}.build
+            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}_${{steps.extract_dirs.outputs.arch}}.build
             asset_name: ${{steps.extract_dirs.outputs.package_name}}_${{steps.extract_dirs.outputs.version_number}}_${{steps.extract_dirs.outputs.arch}}.build
-            asset_content_type: application/octet-stream
+            asset_content_type: text/plain
+
+        - name: Save pkg-specs
+          uses: actions/upload-release-asset@v1
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          with:
+            upload_url: ${{ steps.create_release.outputs.upload_url  }}
+            asset_path: pkg_specs.tar.gz
+            asset_name: pkg_specs.tar.gz
+            asset_content_type: application/x-tar+gzip
+            token: ${{ secrets.GITHUB_TOKEN }}
+    
