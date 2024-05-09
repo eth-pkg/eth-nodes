@@ -145,27 +145,7 @@ jobs:
             asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
             asset_name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
             asset_content_type: application/octet-stream
-  
-        - name: Save pkg-builder.toml
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path:  ${{steps.env.outputs.tag_name}}/pkg-builder.toml
-            asset_name: pkg-builder.toml
-            asset_content_type: text/toml
-  
-        - name: Save pkg-builder-verify.toml
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{steps.env.outputs.tag_name}}/pkg-builder-verify.toml
-            asset_name: pkg-builder-verify.toml
-            asset_content_type: text/toml
-  
+
         - name: Save .orig.tar.gz
           uses: actions/upload-release-asset@v1
           env:
@@ -203,7 +183,7 @@ jobs:
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
             asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
-            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.arch}}_${{steps.env.outputs.version_number}}.deb
+            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
             asset_content_type: application/vnd.debian.binary-package
 
         - name: Save .build
