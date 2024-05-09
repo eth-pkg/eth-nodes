@@ -8,7 +8,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-
+    # needed for release, but completely undocumented of what permissions are available and what they do
+    permissions:
+      contents: read
+      issues: write
     steps:
         - name: Checkout code
           uses: actions/checkout@v4
@@ -111,9 +114,9 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             tag_name: ${{ github.ref }}
-            release_name: "Release ${{ steps.extract_dirs.outputs.package_name }} distribution: ${{ steps.extract_dirs.outputs.codename }} arch: ${{ steps.extract_dirs.outputs.codename }} version_number: ${{ steps.extract_dirs.outputs.version_number }}"
+            release_name: "Release ${{ steps.extract_dirs.outputs.package_name }} distribution: ${{ steps.extract_dirs.outputs.codename }} arch: ${{ steps.extract_dirs.outputs.arch }} version_number: ${{ steps.extract_dirs.outputs.version_number }}"
             draft: false
-            prerelease: false
+            prerelease: true
   
         # This should come after verify, but sometimes it is good to have it, to check why the verify fails
         - name: Save ${{ steps.extract_dirs.outputs.codename }}-${{ steps.extract_dirs.outputs.arch }}.tar.gz
