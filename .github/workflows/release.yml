@@ -26,7 +26,7 @@ jobs:
             ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
             PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
             VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
-            VERSION_NUMBER_WITHOUT_REVISON=$(echo $TAG_NAME | cut -d'-' -f1)
+            VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
             echo "::set-output name=tag_name::$TAG_NAME"
             echo "::set-output name=codename::$CODENAME"
             echo "::set-output name=package_name::$PACKAGE_NAME"
