@@ -172,7 +172,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
+            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
             asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
             asset_content_type: application/x-tar+gzip
   
@@ -182,7 +182,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
+            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
             asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
             asset_content_type: application/x-tar
   
@@ -192,7 +192,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
+            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
             asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
             asset_content_type: text/plain
         
@@ -202,7 +202,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.arch}}_${{steps.env.outputs.version_number}}.deb
+            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.arch}}_${{steps.env.outputs.version_number}}.deb
             asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.arch}}_${{steps.env.outputs.version_number}}.deb
             asset_content_type: application/vnd.debian.binary-package
 
@@ -212,7 +212,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.create_release.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
+            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
             asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
             asset_content_type: text/plain
 
