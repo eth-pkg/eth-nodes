@@ -8,9 +8,8 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # needed for release, but completely undocumented of what permissions are available and what they do
     permissions:
-      contents: read
+      contents: write
       issues: write
     steps:
         - name: Checkout code
