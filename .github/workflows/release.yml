@@ -202,7 +202,7 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.arch}}_${{steps.env.outputs.version_number}}.deb
+            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
             asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.arch}}_${{steps.env.outputs.version_number}}.deb
             asset_content_type: application/vnd.debian.binary-package
 
