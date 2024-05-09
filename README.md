@@ -10,8 +10,6 @@ Begin by installing `pkg-builder`. Refer to the README for installation instruct
 
 #### Building Debian Packages
 
-**Building Debian Packages**:
-
 ```bash
 # Change into the directoy which you want to package
 cd debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
