@@ -19,7 +19,7 @@ jobs:
         - name: Env variables
           id: env
           run: |
-            TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+            TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
             FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
             # Extract the second and third directories from the tag name
             CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
@@ -97,10 +97,8 @@ jobs:
         - name: package
           run: |
             cd ${{ steps.env.outputs.tag_name }}
-            pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian false
+            pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
             echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
-        
-  
         
         - name: piuparts
           run: |
