@@ -34,4 +34,4 @@ Please see the patches folder for the complete source code modification list.
 - Prebuilt sbuild and debcrafter were used for packaging. However, this is fine as you can repackage them (the source is on GitHub under this organization) and verify, ensuring that hashes are the same, locally and CI.
 - It was built using two machines, and the hashes have been checked. However, both machines have AMD64 architecture and the hashes still need to be tested on other architectures. Sbuild, the isolated environment, should not impose hash changes, but incorrectly used build flags can interfere with reproducibility. 
 
-For instructions on verifying, see the Verify.md under releases/bookworm/amd64/eth-node-besu/24.3.3-1. 
+For instructions on verifying, see the Verify.md. 
