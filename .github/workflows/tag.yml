@@ -1,0 +1,45 @@
+name: Create Tag on Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create_tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if branch matches structure and create tag
+        run: |
+          if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
+            merged_branch="main"
+            target_branch=$(git rev-parse --abbrev-ref "$GITHUB_REF")
+            
+            matches_structure() {
+                if [[ "$1" =~ ^releases/[^/]+/[^/]+/[^/]+/[^/]+$ ]]; then
+                    return 0
+                else
+                    return 1
+                fi
+            }
+            
+            # Get the commit hash of the latest commit
+            commit_hash=$(git rev-parse HEAD)
+            
+            # Count the number of parents for the commit
+            parent_count=$(git cat-file -p $commit_hash | grep parent | wc -l)
+            
+            # Check if the commit has more than one parent
+            if [ $parent_count -gt 1 ]; then
+                echo "Push was a merge"
+                if matches_structure "$target_branch"; then
+                    # Create a tag with the name of the target branch
+                    git tag -a "$target_branch" -m "Tagging after merging $target_branch into $merged_branch"
+                    echo "Tag $target_branch created"
+                fi
+            else
+                echo "Push was not a merge"
+            fi
+          else
+            echo "Merged branch does not match desired structure, skipping tag creation."
+          fi
