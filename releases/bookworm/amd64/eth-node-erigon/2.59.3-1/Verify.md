@@ -108,7 +108,7 @@ run `pkg-builder env create`.
 
 ### 2. Verifying on GitHub Actions CI
 
-Fork the `eth-pkg/eth-nodes` repository and create a branch called `verify/releases/bookworm/amd64/eth-node-erigon/2.59.3-1`. Create an empty markdown file in the project outside the `src` directories. Push and wait for GitHub Actions to run.
+Fork the `eth-pkg/eth-nodes` repository and create a branch called `verify/bookworm/amd64/eth-node-erigon/2.59.3-1`. Create an empty markdown file in the project outside the `src` directories. Push and wait for GitHub Actions to run.
 Please note that this will not run on `eth-pkg/eth-nodes`; to avoid too many runs, it will run `<your_github_account>/eth-nodes`.
 
 ### 3. Verifying Debian hashes through download
