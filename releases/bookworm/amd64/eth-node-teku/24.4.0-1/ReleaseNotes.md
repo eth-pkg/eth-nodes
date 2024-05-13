@@ -1,12 +1,12 @@
 # Release Notes
 
-## <CLIENT_NAME>
+## eth-node-teku
 
-**version**: <CLIENT_VERSION> <br/>
+**version**: 24.4.0-1 <br/>
 **arch**: amd64 <br/>
 **distribution**: bookworm (Debian-12) <br/>
 
-This release is a Debian package for <CLIENT_URL>. The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
+This release is a Debian package for [teku](https://github.com/Consensys/teku). The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
 
 *Note*: The built binary has not yet been run against any network but has been packaged against official sources; this is the first release meant to create working, reproducible binary-to-binary builds. Please note that bugs can be expected as this is the first release meant to be working, but more emphasis was placed on reproducibility as the following milestones will be around node running. While the source is minimally modified, the toolchain and distribution could introduce unintended, unintentional bugs. 
 
