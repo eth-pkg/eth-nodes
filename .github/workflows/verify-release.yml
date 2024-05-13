@@ -20,6 +20,8 @@ jobs:
           id: env
           run: |
             TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
+            TAG_NAME=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
+            TAG_NAME=$(echo "releases/$TAG_NAME")
             # Extract the second and third directories from the tag name
             CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
             ARCH=$(echo $TAG_NAME | cut -d'/' -f3)

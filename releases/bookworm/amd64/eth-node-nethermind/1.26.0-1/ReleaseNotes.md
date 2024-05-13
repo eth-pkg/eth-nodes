@@ -1,12 +1,12 @@
 # Release Notes
 
-## eth-node-lighthouse
+## <CLIENT_NAME>
 
-**version**: 5.1.3-1 <br/>
+**version**: <CLIENT_VERSION> <br/>
 **arch**: amd64 <br/>
 **distribution**: bookworm (Debian-12) <br/>
 
-This release is a Debian package for [lighthouse](https://github.com/sigp/lighthouse). The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
+This release is a Debian package for <CLIENT_URL>. The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
 
 *Note*: The built binary has not yet been run against any network but has been packaged against official sources; this is the first release meant to create working, reproducible binary-to-binary builds. Please note that bugs can be expected as this is the first release meant to be working, but more emphasis was placed on reproducibility as the following milestones will be around node running. While the source is minimally modified, the toolchain and distribution could introduce unintended, unintentional bugs. 
 
@@ -18,7 +18,6 @@ This release is a Debian package for [lighthouse](https://github.com/sigp/lighth
 
 ### Changed compared to upstream
 - Pinned dependencies in `pkg-builder.toml`, there might be incompatible dependency, please check to make sure.
-- Docker tests are disabled, as of now docker doesn't run inside chroot env.
 
 Please see the patches folder for the complete source code modification list.
 

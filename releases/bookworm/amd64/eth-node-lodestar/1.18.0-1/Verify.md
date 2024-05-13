@@ -21,9 +21,9 @@ Check out the main repo and navigate to the release you want to verify.
 From git 
 
 ```bash
-git clone --branch releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1 git@github.com:eth-pkg/eth-nodes.git 
+git clone --branch <RELATIVE_PATH> git@github.com:eth-pkg/eth-nodes.git 
 cd eth-nodes
-cd releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1 
+cd <RELATIVE_PATH> 
 ```
 
 From the release source on GitHub 
@@ -32,7 +32,7 @@ From the release source on GitHub
 wget https://github.com/eth-pkg/eth-nodes/releases/download/<path_to_release>/pkg_specs.tar.gz
 tar -tvf pkg_specs.tar.gz
 cd pkg_specs
-cd releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1 
+cd <RELATIVE_PATH> 
 ```
 
 ### 1. Running verification locally/cloud vm
@@ -108,7 +108,7 @@ run `pkg-builder env create`.
 
 ### 2. Verifying on GitHub Actions CI
 
-Fork the `eth-pkg/eth-nodes` repository and create a branch called `releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1`. Create an empty markdown file in the project outside the `src` directories. Push and wait for GitHub Actions to run.
+Fork the `eth-pkg/eth-nodes` repository and create a branch called `<RELATIVE_PATH>`. Create an empty markdown file in the project outside the `src` directories. Push and wait for GitHub Actions to run.
 Please note that this will not run on `eth-pkg/eth-nodes`; to avoid too many runs, it will run `<your_github_account>/eth-nodes`.
 
 ### 3. Verifying Debian hashes through download
@@ -116,7 +116,7 @@ Please note that this will not run on `eth-pkg/eth-nodes`; to avoid too many run
 Obtain the `.deb` package. 
 
 ```bash 
-sha1sum eth-node-lighthouse_5.1.3_amd64.deb 
+sha1sum <CLIENT_NAME>_<CLIENT_VERSION>_<ARCH>.deb 
 ```
 
 Check the hash of the '.deb' package against the hash specified in the `pkg-builder-verify.toml` file. This file contains the expected hash values for the software package, and comparing the actual hash with the expected hash is a crucial step in the verification process.
