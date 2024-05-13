@@ -6,7 +6,7 @@
 **arch**: amd64 <br/>
 **distribution**: bookworm (Debian-12) <br/>
 
-This release is a Debian package for https://github.com/hyperledger/besu. The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
+This release is a Debian package for [besu](https://github.com/hyperledger/besu). The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
 
 It is packaged against Oracle JDK 17; alternative versions can be supported; please submit a pull request if you prefer JDK 21 or alternatives. Offering each version as a separate package allows for simultaneous support. 
 
