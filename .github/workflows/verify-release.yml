@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - verify/**
+      - releases/**
 
 jobs:
   release:
@@ -20,7 +20,6 @@ jobs:
           id: env
           run: |
             TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
-            TAG_NAME=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
             # Extract the second and third directories from the tag name
             CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
             ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
