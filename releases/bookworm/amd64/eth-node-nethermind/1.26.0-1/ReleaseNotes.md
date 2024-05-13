@@ -1,12 +1,12 @@
 # Release Notes
 
-## <CLIENT_NAME>
+## eth-node-nethermind
 
-**version**: <CLIENT_VERSION> <br/>
+**version**: 1.26.0-1 <br/>
 **arch**: amd64 <br/>
 **distribution**: bookworm (Debian-12) <br/>
 
-This release is a Debian package for <CLIENT_URL>. The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
+This release is a Debian package for [nethermind](https://github.com/NethermindEth/nethermind/). The source is taken from the release tarball, which has been modified minimally through patches to ensure reproducibility. 
 
 *Note*: The built binary has not yet been run against any network but has been packaged against official sources; this is the first release meant to create working, reproducible binary-to-binary builds. Please note that bugs can be expected as this is the first release meant to be working, but more emphasis was placed on reproducibility as the following milestones will be around node running. While the source is minimally modified, the toolchain and distribution could introduce unintended, unintentional bugs. 
 
@@ -30,5 +30,7 @@ Please see the patches folder for the complete source code modification list.
 - Debcrafter does not yet support versioning.
 - Prebuilt sbuild and debcrafter were used for packaging. However, this is fine as you can repackage them (the source is on GitHub under this organization) and verify, ensuring that hashes are the same, locally and CI.
 - It was built using two machines, and the hashes have been checked. However, both machines have AMD64 architecture and the hashes still need to be tested on other architectures. Sbuild, the isolated environment, should not impose hash changes, but incorrectly used build flags can interfere with reproducibility. 
+- Some dependencies are not linked against libc, this could cause problems with the debian package.
+- Tests are disabled, as seem to be failing on debian.
 
 For instructions on verifying, see the Verify.md.
