@@ -1,9 +1,9 @@
-name: Release
+name: Verify
 
 on:
   push:
     branches:
-      - releases/**
+      - verify/**
 
 jobs:
   release:
