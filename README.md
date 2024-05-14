@@ -1,27 +1,183 @@
-## Ethereum Node Packaging
+# Ethereum Node Packaging
 
 This initiative streamlines the process of packaging diverse Ethereum nodes for Debian-based systems. It offers a systematic approach to generate Debian packages for various Ethereum clients.
 
-### Usage
 
-#### Prerequisites
+## Installing clients 
+
+Clients are available for bookworm/amd64, Ubuntu builds are in progress. 
+
+### Add repository 
+
+```bash 
+sudo curl -fsSL http://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
+
+sudo chmod a+r /etc/apt/keyrings/ethpkg.asc
+
+# Add repository to sources.list
+sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com bookworm main" | tee -a /etc/apt/sources.list.d/ethpkg.list
+
+# Update package lists
+sudo apt-get update
+```
+
+### besu 
+```bash
+sudo apt -y install wget curl
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
+sudo apt install ./jdk-17_linux-x64_bin.deb
+
+cat <<'EOF' | sudo tee /etc/profile.d/jdk.sh
+export JAVA_HOME=/usr/lib/jvm/jdk-17/
+export PATH=\$PATH:\$JAVA_HOME/bin
+EOF
+
+source /etc/profile.d/jdk.sh
+sudo ln -s /usr/lib/jvm/jdk-17-oracle-x64  /usr/lib/jvm/jdk-17
+java -version
+
+sudo apt install eth-node-besu 
+```
+
+Check if besu is available in PATH
+
+```bash
+besu --data-path <YOUR_DATA_DIR>
+```
+
+### erigon
+
+```bash 
+sudo apt install eth-node-erigon
+```
+
+Check if erigon is available in PATH
+
+```bash
+erigon
+```
+
+### geth
+
+```bash
+sudo apt install eth-node-geth
+```
+
+Check if geth is available in PATH
+
+```bash
+geth
+```
+
+### lodestar
+```bash
+curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &&\
+sudo apt-get install -y nodejs
+sudo apt install eth-node-lodestar
+```
+
+
+Check if lodestar is available in PATH
+
+```bash
+lodestar
+```
+
+### nethermind
+```bash
+wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+sudo dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+sudo apt-get update 
+sudo apt-get install -y aspnetcore-runtime-7.0
+
+sudo apt install eth-node-nethermind
+```
+
+
+Check if nethermind is available in PATH
+
+```bash
+nethermind -dd <YOUR_DATA_DIR>
+```
+
+### lighthouse
+```bash
+sudo apt install eth-node-lighthouse
+```
+
+Check if lighthouse is installed
+
+```bash
+lighthouse
+```
+
+### nimbus-eth2
+
+```bash
+sudo apt install eth-node-nimbus-eth2
+```
+
+Check if nimbus is available in PATH
+```bash
+nimbus_beacon_node
+```
+
+### prysm
+
+```bash
+sudo apt install eth-node-prysm
+```
+
+Check if prysm is available in PATH
+```bash
+beacon-chain
+```
+
+### teku
+
+```bash 
+sudo apt -y install wget curl
+wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
+sudo apt install ./jdk-17_linux-x64_bin.deb
+
+cat <<'EOF' | sudo tee /etc/profile.d/jdk.sh
+export JAVA_HOME=/usr/lib/jvm/jdk-17/
+export PATH=\$PATH:\$JAVA_HOME/bin
+EOF
+
+source /etc/profile.d/jdk.sh
+sudo ln -s /usr/lib/jvm/jdk-17-oracle-x64  /usr/lib/jvm/jdk-17
+java -version
+
+sudo apt install eth-node-teku
+```
+
+Check if teku is available in PATH
+```bash
+teku
+```
+
+## Building packages
+
+### Prerequisites
 
 Begin by installing `pkg-builder`. Refer to the README for installation instructions: [https://github.com/eth-pkg/pkg-builder](https://github.com/eth-pkg/pkg-builder)
 
-#### Building Debian Packages
+### Building Debian Packages and verifying the build
 
 ```bash
 # Change into the directoy which you want to package
 cd debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
 # Create an environment once for each distribution/architecture pairing
-pkg-builder env create pkg-builder-verify.toml
+pkg-builder env create 
 
 # This command installs dependencies, downloads source code, builds the client, and conducts tests against it
 # Note: Autopkgtests and piuparts may require elevated permissions
-pkg-builder package pkg-builder.toml
+pkg-builder package 
 
 # To verify a successful build without running tests, you can use this command
-pkg-builder verify --config-file pkg-builder.toml --verfiy-config-file pkg-builder-verify.toml 
+pkg-builder verify 
 ```
 
 If you're not building but simply ensuring the built client matches a specific hash:
@@ -29,13 +185,13 @@ If you're not building but simply ensuring the built client matches a specific h
 ```bash
 debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
 # Create an environment once for each distribution/architecture pairing
-pkg-builder env create pkg-builder-verify.toml
+pkg-builder env create 
 
 # Verify the successful build without running tests
-pkg-builder verify --config-file pkg-builder.toml --verfiy-config-file pkg-builder-verify.toml 
+pkg-builder verify
 ```
 
-### Verifying packages 
+## Verifying distributed packages 
 
 ```bash
 mkdir /tmp/tempdir | cd -
@@ -43,7 +199,17 @@ sudo apt-get download <package_name>
 sha1sum  <package_name>*.deb
 ```
 
-### How It Works
+Check the appropriate folder `pkg-builder-verify.toml` for hash. 
+
+So for example if you want to verify teku 
+```bash
+sudo apt-get download eth-node-teku
+# Get:1 http://packages.eth-pkg.com bookworm/main amd64 eth-node-teku amd64 24.4.0-1 [176 MB]
+sha1sum eth-node-teku_24.4.0-1_amd64.deb # 541013cb73f767d94e19169c5685d01f8d145803
+cat releases/bookworm/amd64/eth-node-teku/24.4.0-1/pkg-builder-verify.toml # check if the hash is indeed the same
+```
+
+## How It Works
 
 This process leverages `debcrafter` and `pkg-builder` to establish reproducible environments. Debcrafter aids in creating reproducible Debian directories based on detailed specification files ending with `.sss` and `.sps`. Meanwhile, pkg-builder utilizes debcrafter, and extends it to setup minimal environments to build and adheres to Debian's best practices, including `sbuild`, `piuparts`, `lintian`, and `autopkgtest`, to build the packages and test them thoroughly, ensuring they are not merely packages but functional ones.
 
