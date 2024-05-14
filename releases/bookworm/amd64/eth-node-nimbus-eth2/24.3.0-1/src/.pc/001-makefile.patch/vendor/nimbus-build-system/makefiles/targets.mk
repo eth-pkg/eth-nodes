@@ -165,8 +165,8 @@ mrproper: clean
 
 # for when you want to use SSH keys with GitHub
 github-ssh:
-	git config url."git@github.com:".insteadOf "https://github.com/"
-	git submodule foreach --recursive 'git config url."git@github.com:".insteadOf "https://github.com/"'
+	git config url."https://github.com/".insteadOf "https://github.com/"
+	git submodule foreach --recursive 'git config url."https://github.com/".insteadOf "https://github.com/"'
 
 # runs `git status` in all Git repos
 status: | $(REPOS)

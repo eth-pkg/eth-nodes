@@ -75,7 +75,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # rust if you don
 ```
 
 ```bash 
-git clone --branch v0.2.2 git@github.com:eth-pkg/pkg-builder.git
+git clone --branch v0.2.2 https://github.com/eth-pkg/pkg-builder.git
 cd pkg-builder 
 cargo build --release && cargo install --path .
 pkg-builder --version # should be available in PATH

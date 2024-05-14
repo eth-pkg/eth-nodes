@@ -21,7 +21,7 @@ Check out the main repo and navigate to the release you want to verify.
 From git 
 
 ```bash
-git clone --branch <RELATIVE_PATH> git@github.com:eth-pkg/eth-nodes.git 
+git clone --branch <RELATIVE_PATH> https://github.com/eth-pkg/eth-nodes.git 
 cd eth-nodes
 cd <RELATIVE_PATH> 
 ```
@@ -80,7 +80,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # rust if you don
 ```
 
 ```bash 
-git clone --branch v0.2.2 git@github.com:eth-pkg/pkg-builder.git
+git clone --branch v0.2.2 https://github.com/eth-pkg/pkg-builder.git
 cd pkg-builder 
 cargo build --release && cargo install --path .
 pkg-builder --version # should be available in PATH
