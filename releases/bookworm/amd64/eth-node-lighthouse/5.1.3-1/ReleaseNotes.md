@@ -18,7 +18,6 @@ This release is a Debian package for [lighthouse](https://github.com/sigp/lighth
 
 ### Changed compared to upstream
 - Pinned dependencies in `pkg-builder.toml`, there might be incompatible dependency, please check to make sure.
-- Docker tests are disabled, as of now docker doesn't run inside chroot env.
 
 Please see the patches folder for the complete source code modification list.
 
@@ -31,5 +30,6 @@ Please see the patches folder for the complete source code modification list.
 - Debcrafter does not yet support versioning.
 - Prebuilt sbuild and debcrafter were used for packaging. However, this is fine as you can repackage them (the source is on GitHub under this organization) and verify, ensuring that hashes are the same, locally and CI.
 - It was built using two machines, and the hashes have been checked. However, both machines have AMD64 architecture and the hashes still need to be tested on other architectures. Sbuild, the isolated environment, should not impose hash changes, but incorrectly used build flags can interfere with reproducibility. 
+- Docker tests are disabled, as of now docker doesn't run inside chroot env.
 
 For instructions on verifying, see the Verify.md.
