@@ -190,7 +190,7 @@ debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
 pkg-builder env create 
 
 # Verify the successful build without running tests
-pkg-builder verify
+pkg-builder verify  --no-package true
 ```
 
 ## Verifying distributed packages 
