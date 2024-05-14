@@ -165,7 +165,7 @@ Begin by installing `pkg-builder`. Refer to the README for installation instruct
 ### Building Debian Packages and verifying the build
 
 ```bash
-# Change into the directoy which you want to package
+# Change into the directory which you want to package
 cd debian-12/amd64/eth-node-nimbus-eth2/24.3.0-1
 # Create an environment once for each distribution/architecture pairing
 pkg-builder env create 
@@ -175,6 +175,7 @@ pkg-builder env create
 pkg-builder package 
 
 # To verify a successful build without running tests, you can use this command
+
 pkg-builder verify 
 ```
 
