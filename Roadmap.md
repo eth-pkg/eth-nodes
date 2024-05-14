@@ -50,7 +50,7 @@ sudo chmod a+r /etc/apt/keyrings/ethpkg.asc
 sudo echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/ethpkg.asc] $REPO_URL bookworm testing" | tee -a /etc/apt/sources.list/ethpkg.list
 
 # Update package lists
-sudo apt-get update
+sudo apt update
 
 
 # Install besu
@@ -77,7 +77,7 @@ sudo apt install eth-node-erigon
 
 # Install lodestar
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 sudo apt install eth-node-lodestar
 
 
@@ -87,8 +87,8 @@ sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 
   # Install the runtime
-sudo apt-get update 
-sudo apt-get install -y aspnetcore-runtime-7.0
+sudo apt update 
+sudo apt install -y aspnetcore-runtime-7.0
 
 sudo apt install eth-node-nethermind
 
@@ -179,7 +179,7 @@ sudo chmod a+r /etc/apt/keyrings/ethpkg.asc
 sudo echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/ethpkg.asc] $REPO_URL bookworm testing" | tee -a /etc/apt/sources.list/ethpkg.list
 
 # Update package lists
-sudo apt-get update
+sudo apt update
 
 # Install dependencies (node.js, dotnet, java) to satisfy dependencies
 # If you know which client pairs you want, you can ignore the dependencies if not needed
@@ -199,7 +199,7 @@ java -version
 
 # Install node.js
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 
 # Install dotnet
 wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -207,8 +207,8 @@ sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 
   # Install the runtime
-sudo apt-get update 
-sudo apt-get install -y aspnetcore-runtime-7.0
+sudo apt update 
+sudo apt install -y aspnetcore-runtime-7.0
 
 # Install any of the following
 
@@ -277,7 +277,7 @@ sudo chmod a+r /etc/apt/keyrings/ethpkg.asc
 sudo echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/ethpkg.asc] $REPO_URL bookworm testing" | tee -a /etc/apt/sources.list/ethpkg.list
 
 # Update package lists
-sudo apt-get update
+sudo apt update
 
 # Install any of the following
 

@@ -73,7 +73,7 @@ geth
 ### lodestar
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 sudo apt install eth-node-lodestar
 ```
 
@@ -89,8 +89,8 @@ lodestar
 wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
-sudo apt-get update 
-sudo apt-get install -y aspnetcore-runtime-7.0
+sudo apt update 
+sudo apt install -y aspnetcore-runtime-7.0
 
 sudo apt install eth-node-nethermind
 ```
@@ -198,7 +198,7 @@ For more details and options of verification refer to `verify.md` in correspondi
 
 ```bash
 mkdir /tmp/tempdir | cd -
-sudo apt-get download <package_name>
+sudo apt download <package_name>
 sha1sum  <package_name>*.deb
 ```
 
@@ -206,7 +206,7 @@ Check the appropriate folder `pkg-builder-verify.toml` for hash.
 
 So for example if you want to verify teku 
 ```bash
-sudo apt-get download eth-node-teku
+sudo apt download eth-node-teku
 # Get:1 http://packages.eth-pkg.com bookworm/main amd64 eth-node-teku amd64 24.4.0-1 [176 MB]
 sha1sum eth-node-teku_24.4.0-1_amd64.deb # 541013cb73f767d94e19169c5685d01f8d145803
 cat releases/bookworm/amd64/eth-node-teku/24.4.0-1/pkg-builder-verify.toml # check if the hash is indeed the same

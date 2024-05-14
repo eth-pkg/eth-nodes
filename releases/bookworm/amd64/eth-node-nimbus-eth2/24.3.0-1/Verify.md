@@ -40,12 +40,12 @@ cd releases/bookworm/amd64/eth-node-nimbus-eth2/24.3.0-1
 
 #### Install sbuild if you don't have it yet
 ```bash 
-sudo apt-get update
-sudo apt-get -y remove sbuild # remove old sbuild if you had installed it
+sudo apt update
+sudo apt -y remove sbuild # remove old sbuild if you had installed it
 # Note this is an older version of sbuild; there is no need to patch it yet
 sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts autopkgtest vmdb2 qemu-system-x86 pkg-config libssl-dev uidmap lifeless-df-perl libmime-lite-perl
  # change this into the built version and cache it
-sudo apt-get install dh-python dh-sequence-python3 libyaml-tiny-perl python3-all            
+sudo apt install dh-python dh-sequence-python3 libyaml-tiny-perl python3-all            
 ```
 
 If you are on *Ubuntu* clone 
