@@ -21,7 +21,7 @@ Check out the main repo and navigate to the release you want to verify.
 From git 
 
 ```bash
-git clone --branch releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1 git@github.com:eth-pkg/eth-nodes.git 
+git clone --branch releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1 https://github.com/eth-pkg/eth-nodes.git 
 cd eth-nodes
 cd releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1 
 ```
@@ -40,12 +40,12 @@ cd releases/bookworm/amd64/eth-node-lighthouse/5.1.3-1
 
 #### Install sbuild if you don't have it yet
 ```bash 
-sudo apt-get update
-sudo apt-get -y remove sbuild # remove old sbuild if you had installed it
+sudo apt update
+sudo apt -y remove sbuild # remove old sbuild if you had installed it
 # Note this is an older version of sbuild; there is no need to patch it yet
 sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts autopkgtest vmdb2 qemu-system-x86 pkg-config libssl-dev uidmap lifeless-df-perl libmime-lite-perl
  # change this into the built version and cache it
-sudo apt-get install dh-python dh-sequence-python3 libyaml-tiny-perl python3-all            
+sudo apt install dh-python dh-sequence-python3 libyaml-tiny-perl python3-all            
 ```
 
 If you are on *Ubuntu* clone 
@@ -80,7 +80,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh # rust if you don
 ```
 
 ```bash 
-git clone --branch v0.2.2 git@github.com:eth-pkg/pkg-builder.git
+git clone --branch v0.2.2 https://github.com/eth-pkg/pkg-builder.git
 cd pkg-builder 
 cargo build --release && cargo install --path .
 pkg-builder --version # should be available in PATH
