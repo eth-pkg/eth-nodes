@@ -12,8 +12,6 @@ Clients are available for bookworm/amd64, Ubuntu builds are in progress.
 ```bash 
 sudo curl -fsSL http://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
 
-sudo chmod a+r /etc/apt/keyrings/ethpkg.asc
-
 # Add repository to sources.list
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com bookworm main" | tee -a /etc/apt/sources.list.d/ethpkg.list
 
