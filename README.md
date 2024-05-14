@@ -2,6 +2,7 @@
 
 This initiative streamlines the process of packaging diverse Ethereum nodes for Debian-based systems. It offers a systematic approach to generate Debian packages for various Ethereum clients.
 
+The project is still under active development, check out the [roadmap](/Roadmap.md) for upcoming features. 
 
 ## Installing clients 
 
@@ -16,8 +17,10 @@ sudo curl -fsSL http://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com bookworm main" | tee -a /etc/apt/sources.list.d/ethpkg.list
 
 # Update package lists
-sudo apt-get update
+sudo apt update
 ```
+
+With the repository added, client releases are now available to be simply istalled using apt. Some clients might need additional runtime dependencies. 
 
 ### besu 
 ```bash
@@ -191,6 +194,8 @@ pkg-builder verify
 
 ## Verifying distributed packages 
 
+For more details and options of verification refer to `verify.md` in corresponding client release.  
+
 ```bash
 mkdir /tmp/tempdir | cd -
 sudo apt-get download <package_name>
@@ -209,6 +214,6 @@ cat releases/bookworm/amd64/eth-node-teku/24.4.0-1/pkg-builder-verify.toml # che
 
 ## How It Works
 
-This process leverages `debcrafter` and `pkg-builder` to establish reproducible environments. Debcrafter aids in creating reproducible Debian directories based on detailed specification files ending with `.sss` and `.sps`. Meanwhile, pkg-builder utilizes debcrafter, and extends it to setup minimal environments to build and adheres to Debian's best practices, including `sbuild`, `piuparts`, `lintian`, and `autopkgtest`, to build the packages and test them thoroughly, ensuring they are not merely packages but functional ones.
+This process leverages [`debcrafter`](https://github.com/Kixunil/debcrafter) and [`pkg-builder`](https://github.com/eth-pkg/pkg-builder/) to establish reproducible environments. Debcrafter aids in creating reproducible Debian directories based on detailed specification files ending with `.sss` and `.sps`. Meanwhile, pkg-builder utilizes debcrafter, and extends it to setup minimal environments to build and adheres to Debian's best practices, including `sbuild`, `piuparts`, `lintian`, and `autopkgtest`, to build the packages and test them thoroughly, ensuring they are not merely packages but functional ones.
 
 Currently, a significant obstacle in Debian packaging is the requirement for a separate git repository per package, which might hinder the support for numerous applications. Despite Debian packaging already facilitating reproducible builds, this aspect is still in its infancy. This project aims to adhere to distribution best practices to the fullest extent possible, only deviating when necessary or when certain support structures are not yet in place.
