@@ -1,0 +1,12 @@
+eth-node-erigon (2.60.0-1) bookworm; urgency=medium
+
+  * Support version 2.60.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 15 May 2024 13:14:17 +0700
+
+
+eth-node-erigon (2.59.3-1) bookworm; urgency=medium
+
+  * Change the packaging version to reflect the go-ethereum versioning
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 3 May 2024 13:14:17 +0700
