@@ -1,0 +1,20 @@
+--- a/build.gradle
++++ b/build.gradle
+@@ -925,7 +925,7 @@
+ def buildTime() {
+   def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+   df.setTimeZone(TimeZone.getTimeZone("UTC"))
+-  return df.format(new Date())
++  return "2024-05-15-12T23:20:50.52Z"
+ }
+ 
+ @Memoized
+@@ -971,7 +971,7 @@
+   } catch (Exception e) {
+     logger.warn('Could not calculate git commit details, using defaults (run with --info for stacktrace)')
+     logger.info('Error retrieving git commit details', e)
+-    return [hash: "xxxxxxxx", date: "00.0"]
++    return [hash: "f1d3a7d5", date: "00.0"]
+   }
+ }
+ 
