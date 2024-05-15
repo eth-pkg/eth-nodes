@@ -1,0 +1,120 @@
+name: Upcoming
+
+on:
+  push:
+    branches:
+      - upcoming/**
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+
+        - name: Env variables
+          id: env
+          run: |
+            TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+            FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
+            # Extract the second and third directories from the tag name
+            CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
+            ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
+            PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
+            VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
+            VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
+            BUILD_DIR=$(echo "/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER")
+        
+        
+            # Write outputs to GITHUB_OUTPUT environment file
+            echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+            echo "codename=$CODENAME" >> $GITHUB_OUTPUT
+            echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+            echo "folder=$FOLDER" >> $GITHUB_OUTPUT
+            echo "version_number=$VERSION_NUMBER" >> $GITHUB_OUTPUT
+            echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON" >> $GITHUB_OUTPUT
+            echo "build_dir=$BUILD_DIR" >> $GITHUB_OUTPUT
+            echo "arch=$ARCH" >> $GITHUB_OUTPUT
+
+            # values 
+            echo "tag_name=$TAG_NAME"
+            echo "folder=$FOLDER"
+            echo "codename=$CODENAME"
+            echo "arch=$ARCH"
+            echo "package_name=$PACKAGE_NAME"
+            echo "version_number=$VERSION_NUMBER"
+            echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON"
+            echo "build_dir=$BUILD_DIR"
+        
+        - name: Sbuild setup
+          run: |
+            sudo apt update
+            # Note this is an older version of sbuild, no need to patch it, yet
+            sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts autopkgtest vmdb2 qemu-system-x86
+            sudo apt install -y pkg-config libssl-dev uidmap
+            sudo apt install -y libfilesys-df-perl libmime-lite-perl
+            # change this into actually built version and cache it
+            wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+            wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
+            sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+  
+        - name: Checkout dependency repository
+          uses: actions/checkout@v4
+          with:
+            repository: eth-pkg/pkg-builder  
+            ref: main
+            path: pkg-builder
+      
+        - name: Install pkg-builder
+          run: |
+              cd pkg-builder
+              cargo build --release
+              mkdir -p ${HOME}/.local/bin 
+              mv target/release/pkg-builder ${HOME}/.local/bin
+              chmod +x ${HOME}/.local/bin/pkg-builder
+              echo "${HOME}/.local/bin" >> $GITHUB_PATH
+              cd .. && rm -rf pkg-builder
+  
+        - name: Install debcrafter
+          run: |
+            wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+            mkdir -p ${HOME}/.local/bin
+            mv debcrafter ${HOME}/.local/bin
+            chmod +x ${HOME}/.local/bin/debcrafter
+            echo "${HOME}/.local/bin" >> $GITHUB_PATH
+  
+        - name: Create chroot env
+          run: |
+            cd ${{ steps.env.outputs.tag_name }}
+            sudo ln -s /usr/share/debootstrap/scripts/gutsy /usr/share/debootstrap/scripts/noble
+            pkg-builder env create
+            echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
+  
+        - name: package
+          run: |
+            cd ${{ steps.env.outputs.tag_name }}
+            pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
+            echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
+        
+        - name: piuparts
+          run: |
+           # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
+           # sudo apt install -y debian-archive-keyring
+           cd ${{ steps.env.outputs.tag_name }}
+           ${HOME}/.local/bin/pkg-builder piuparts
+  
+        - name: autopkgtest
+          run: |
+           sudo cp -R ${HOME}/.pkg-builder /root
+           apt list --installed autopkgtest
+           cd ${{ steps.env.outputs.tag_name }}
+           sudo ${HOME}/.local/bin/pkg-builder autopkgtest
+  
+        - name: verify
+          run: |
+           cd ${{ steps.env.outputs.tag_name }}
+           ${HOME}/.local/bin/pkg-builder verify  --no-package true

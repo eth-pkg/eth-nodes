@@ -1,0 +1,11 @@
+--- a/src/Nethermind/Nethermind.Runner/Nethermind.Runner.csproj
++++ b/src/Nethermind/Nethermind.Runner/Nethermind.Runner.csproj
+@@ -111,7 +111,7 @@
+   </Target>
+ 
+   <Target Name="CommitFallback" AfterTargets="BeforeBuild" Condition="'$(Commit)' == ''">
+-    <Exec Command="git describe --always --exclude=* --abbrev=40" ConsoleToMSBuild="True" IgnoreExitCode="False" StandardOutputImportance="low">
++    <Exec Command="basename `dirname $(pwd)`" ConsoleToMSBuild="True" IgnoreExitCode="False" StandardOutputImportance="low">
+       <Output PropertyName="Commit" TaskParameter="ConsoleOutput" />
+     </Exec>
+     <PropertyGroup>
