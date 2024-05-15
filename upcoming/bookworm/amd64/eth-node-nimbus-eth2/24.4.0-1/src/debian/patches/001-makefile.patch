@@ -1,0 +1,45 @@
+--- a/vendor/nimbus-build-system/makefiles/targets.mk
++++ b/vendor/nimbus-build-system/makefiles/targets.mk
+@@ -78,14 +78,6 @@
+ #- macOS is also a special case, with its "ln" not supporting "-r"
+ #- the AppVeyor 32-bit build is done on a 64-bit image, so we need to override the architecture detection with ARCH_OVERRIDE
+ build-nim: | sanity-checks
+-	+ if [[ -z "$(NIM_COMMIT)" ]]; then git submodule update --init --recursive "$(BUILD_SYSTEM_DIR)"; fi; \
+-		NIM_BUILD_MSG="$(BUILD_MSG) Nim compiler" \
+-		V=$(V) \
+-		CC=$(CC) \
+-		MAKE="$(MAKE)" \
+-		ARCH_OVERRIDE=$(ARCH_OVERRIDE) \
+-		QUICK_AND_DIRTY_COMPILER=$(QUICK_AND_DIRTY_COMPILER) \
+-		"$(CURDIR)/$(BUILD_SYSTEM_DIR)/scripts/build_nim.sh" "$(NIM_DIR)" ../Nim-csources ../nimble "$(CI_CACHE)"
+ 
+ # Check if the update might cause loss of work. Abort, if so, while allowing an override mechanism.
+ update-test:
+@@ -125,7 +117,6 @@
+ 
+ # don't use this target, or you risk updating dependency repos that are not ready to be used in Nimbus
+ update-remote:
+-	git submodule update --remote
+ 
+ nat-libs: | libminiupnpc.a libnatpmp.a
+ 
+@@ -149,8 +140,6 @@
+ #  for runtime path (i.e.: the second line in $(NIMBLE_DIR)/pkgs/*/*.nimble-link)
+ $(NIMBLE_DIR):
+ 	mkdir -p $(NIMBLE_DIR)/pkgs
+-	NIMBLE_DIR="$(CURDIR)/$(NIMBLE_DIR)" PWD_CMD="$(PWD)" EXCLUDED_NIM_PACKAGES="$(EXCLUDED_NIM_PACKAGES)" \
+-		git submodule foreach --recursive --quiet '"$(CURDIR)/$(BUILD_SYSTEM_DIR)/scripts/create_nimble_link.sh" "$$sm_path"'
+ 
+ clean-cross:
+ 	+ [[ -e vendor/nim-nat-traversal/vendor/miniupnp/miniupnpc ]] && "$(MAKE)" -C vendor/nim-nat-traversal/vendor/miniupnp/miniupnpc CC=$(CC) clean $(HANDLE_OUTPUT) || true
+--- a/vendor/nimbus-build-system/scripts/build_nim.sh
++++ b/vendor/nimbus-build-system/scripts/build_nim.sh
+@@ -79,7 +79,7 @@
+ 		NIM_COMMIT_HASH="$(git rev-list -n 1 ${NIM_COMMIT})"
+ 	else
+ 		# NIM_COMMIT is empty, so assume the commit we need is already checked out
+-		NIM_COMMIT_HASH="$(git rev-list -n 1 HEAD)"
++		#NIM_COMMIT_HASH="$(git rev-list -n 1 HEAD)"
+ 	fi
+ 	popd >/dev/null
+ 
