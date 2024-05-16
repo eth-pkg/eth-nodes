@@ -1,6 +1,9 @@
 eth-node-erigon (2.60.0-1) bookworm; urgency=medium
 
   * Support version 2.60.0-1
+  * capcli is not included in this build, as it breaks reproducibility, need more time to figure out why
+  * downloader is not included in this build, as it breaks reproducibility, need more time to figure out why
+  * snapshots is not included in this build, as it breaks reproducibility, need more time to figure out why
 
  -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 15 May 2024 13:14:17 +0700
 
