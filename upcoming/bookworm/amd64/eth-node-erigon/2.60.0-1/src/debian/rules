@@ -5,6 +5,14 @@ export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
 export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
+export CGO_ENABLED=0 
+
+export GO_FLAGS += -trimpath -buildvcs=false
+export GO_FLAGS += -ldflags="-s -w -buildid="
+export GO_FLAGS += -p 1
+export CGO_FLAGS += -O
+export CGO_FLAGS += -fPIC -D_FORTIFY_SOURCE=2
+
 %:
 	dh $@
 
