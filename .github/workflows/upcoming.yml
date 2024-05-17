@@ -21,13 +21,13 @@ jobs:
           run: |
             TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
             FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
-            if [ ! -d "$TAGNAME" ]; then
+            if [ ! -d "$TAG_NAME" ]; then
               # if the folder does not exist we switched to merge
               echo "Switching to before merge"
               TAG_NAME="releases/$FOLDER"
             fi
-            if [ ! -d "$TAGNAME" ]; then
-              echo "TAGNAME folder does not exist. Neither with upcoming or releases"
+            if [ ! -d "$TAG_NAME" ]; then
+              echo "TAG_NAME folder does not exist. Neither with upcoming or releases"
               exit 1
             fi
             # Extract the second and third directories from the tag name
