@@ -21,6 +21,15 @@ jobs:
           run: |
             TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/heads\///')
             FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
+            if [ ! -d "$TAGNAME" ]; then
+              # if the folder does not exist we switched to merge
+              echo "Switching to before merge"
+              TAG_NAME="releases/$FOLDER"
+            fi
+            if [ ! -d "$TAGNAME" ]; then
+              echo "TAGNAME folder does not exist. Neither with upcoming or releases"
+              exit 1
+            fi
             # Extract the second and third directories from the tag name
             CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
             ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
@@ -49,7 +58,7 @@ jobs:
             echo "version_number=$VERSION_NUMBER"
             echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON"
             echo "build_dir=$BUILD_DIR"
-        
+      
         - name: Sbuild setup
           run: |
             sudo apt update
