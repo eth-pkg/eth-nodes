@@ -6,7 +6,7 @@ on:
       - upcoming/**
 
 jobs:
-  release:
+  upcoming:
     runs-on: ubuntu-latest
     permissions:
       contents: write

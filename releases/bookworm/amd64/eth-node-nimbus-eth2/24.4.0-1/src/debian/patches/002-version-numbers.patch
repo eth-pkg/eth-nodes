@@ -1,0 +1,28 @@
+--- a/beacon_chain/version.nim
++++ b/beacon_chain/version.nim
+@@ -15,7 +15,7 @@
+ const
+   compileYear = CompileDate[0 ..< 4]  # YYYY-MM-DD (UTC)
+   copyrights* =
+-    "Copyright (c) 2019-" & compileYear & " Status Research & Development GmbH"
++    "Copyright (c) 2019-2024" & " Status Research & Development GmbH"
+ 
+   versionMajor* = 24
+   versionMinor* = 4
+@@ -41,7 +41,6 @@
+   else:
+     git_revision_override
+ 
+-  gitRevision* = strip(gitRevisionLong)[0..5]
+ 
+   nimFullBanner* = staticExec("nim --version")
+   nimBanner* = staticExec("nim --version | grep Version")
+@@ -49,6 +48,8 @@
+   versionAsStr* =
+     $versionMajor & "." & $versionMinor & "." & $versionBuild
+ 
++  gitRevision* = "f20a21c"
++
+   fullVersionStr* = "v" & versionAsStr & "-" & gitRevision & "-" & versionBlob
+ 
+ func getNimGitHash*(): string =
