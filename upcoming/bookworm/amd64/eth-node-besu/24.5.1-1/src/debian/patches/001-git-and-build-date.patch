@@ -9,7 +9,23 @@
  }
  
  @Memoized
-@@ -971,7 +971,7 @@
+@@ -933,13 +933,14 @@
+   // Regex pattern for basic calendar versioning, with provision to omit patch rev
+   def calVerPattern = ~/\d+\.\d+(\.\d+)?(-.*)?/
+ 
++
+   if (project.hasProperty('version') && (project.version =~ calVerPattern)) {
+     return "${project.version}"
+   } else {
+     // If no version is supplied or it doesn't match the semantic versioning, calculate from git
+     println("Generating project version as supplied is version not semver: ${project.version}")
+     def gitDetails = getGitCommitDetails(7) // Adjust length as needed
+-    return "${gitDetails.date}-develop-${gitDetails.hash}"
++    return "24.5.1"
+   }
+ }
+ 
+@@ -971,7 +972,7 @@
    } catch (Exception e) {
      logger.warn('Could not calculate git commit details, using defaults (run with --info for stacktrace)')
      logger.info('Error retrieving git commit details', e)
