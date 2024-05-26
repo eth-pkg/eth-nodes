@@ -1,0 +1,5 @@
+eth-node-besu (24.3.3-1) noble; urgency=medium
+
+  * Change the packaging version to reflect the besu versioning
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 326 May 2024 12:09:17 +0100
