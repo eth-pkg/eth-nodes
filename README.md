@@ -316,7 +316,6 @@ sha1sum eth-node-teku_24.4.0-1_amd64.deb
 cat releases/bookworm/amd64/eth-node-teku/24.4.0-1/pkg-builder-verify.toml
 ```
 
-## How It Works
 
 ## How It Works
 
