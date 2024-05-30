@@ -1,5 +1,3 @@
-Here is the updated version of your document with foldable client installation sections:
-
 # Ethereum Node Packaging
 
 This project aims to simplify the packaging of various Ethereum nodes for Debian-based systems, providing a streamlined approach to generate Debian packages for multiple Ethereum clients. It is actively under development, and you can check the [roadmap](/Roadmap.md) for upcoming features.
