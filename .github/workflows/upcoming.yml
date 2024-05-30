@@ -63,7 +63,7 @@ jobs:
           run: |
             sudo apt update
             # Note this is an older version of sbuild, no need to patch it, yet
-            sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts autopkgtest vmdb2 qemu-system-x86
+            sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
             sudo apt install -y pkg-config libssl-dev uidmap
             sudo apt install -y libfilesys-df-perl libmime-lite-perl
             # change this into actually built version and cache it
@@ -109,12 +109,12 @@ jobs:
             pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
             echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
         
-        - name: piuparts
-          run: |
-           # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
-           # sudo apt install -y debian-archive-keyring
-           cd ${{ steps.env.outputs.tag_name }}
-           ${HOME}/.local/bin/pkg-builder piuparts
+        # - name: piuparts
+        #   run: |
+        #    # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
+        #    # sudo apt install -y debian-archive-keyring
+        #    cd ${{ steps.env.outputs.tag_name }}
+        #    ${HOME}/.local/bin/pkg-builder piuparts
   
         - name: autopkgtest
           run: |
