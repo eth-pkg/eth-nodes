@@ -4,7 +4,7 @@ export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
 export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
-
+export BINARIES=capcli caplin devnet downloader erigon evm hack integration observer pics rpcdaemon rpctest sentinel sentry snapshots state txpool verkle diag
 
 %:
 	dh $@
@@ -12,31 +12,16 @@ export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 override_dh_dwz:
 	# skip of optimization of DWARF debug information in ELF binaries via dwz
 
+override_dh_auto_build:
+	dh_auto_build
+	for bin in $(BINARIES) ; do \
+		llvm-objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
+	done
 override_dh_auto_test:
-	make -j1 test
+	#make -j1 test
 
 override_dh_strip:
 	dh_strip --no-automatic-dbgsym
-	#strip as well this, not sure what introduced it in the build 
-	# llvm-objcopy --remove-section .note.gnu.build-id output-binary
-	# have to use both llvm-objcopy and objcopy as some are only removed by objcopy
-	# some sections only removed by llvm-objcopy
-	for bin in downloader snapshots; do \
-		llvm-objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
-		llvm-objcopy --remove-section .note.gnu.buildid build/bin/$$bin build/bin/$$bin; \
-		objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
-		objcopy --remove-section .note.gnu.buildid build/bin/$$bin build/bin/$$bin; \
-	done
-	# for bin in  downloader; do \
-	# 	objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
-	# 	objcopy --remove-section .note.gnu.buildid build/bin/$$bin build/bin/$$bin; \
-	# 	llvm-objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
-	# 	llvm-objcopy --remove-section .note.gnu.buildid build/bin/$$bin build/bin/$$bin; \
-	# done
-
-	for bin in capcli ; do \
-		llvm-objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
-	done
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation

@@ -6,12 +6,10 @@ recommends = []
 provides = ["eth-node-execution-client (= 1)"]
 suggests = ["eth-node (= 1)"]
 add_files = [
-# not copying, buildid is included, and remove is non-determistic, sometimes works, sometimes not
-#"build/bin/capcli /usr/lib/eth-node-erigon/bin",
+"build/bin/capcli /usr/lib/eth-node-erigon/bin",
 "build/bin/caplin /usr/lib/eth-node-erigon/bin",
 "build/bin/devnet /usr/lib/eth-node-erigon/bin",
-# # Same, build id cannot be removed
-# "build/bin/downloader /usr/lib/eth-node-erigon/bin",
+"build/bin/downloader /usr/lib/eth-node-erigon/bin",
 "build/bin/erigon /usr/lib/eth-node-erigon/bin",
 "build/bin/evm /usr/lib/eth-node-erigon/bin",
 "build/bin/hack /usr/lib/eth-node-erigon/bin",
@@ -22,8 +20,7 @@ add_files = [
 "build/bin/rpctest /usr/lib/eth-node-erigon/bin",
 "build/bin/sentinel /usr/lib/eth-node-erigon/bin",
 "build/bin/sentry /usr/lib/eth-node-erigon/bin",
-# Same, build id cannot be removed
-# "build/bin/snapshots /usr/lib/eth-node-erigon/bin",
+"build/bin/snapshots /usr/lib/eth-node-erigon/bin",
 "build/bin/state /usr/lib/eth-node-erigon/bin",
 "build/bin/txpool /usr/lib/eth-node-erigon/bin",
 "build/bin/verkle /usr/lib/eth-node-erigon/bin",
