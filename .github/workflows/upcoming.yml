@@ -131,6 +131,7 @@ jobs:
           run: |
            # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
            # sudo apt install -y debian-archive-keyring
+           sudo apt install piuparts
            cd ${{ steps.env.outputs.tag_name }}
            ${HOME}/.local/bin/pkg-builder piuparts
   

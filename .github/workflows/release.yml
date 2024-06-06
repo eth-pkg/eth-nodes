@@ -54,7 +54,7 @@ jobs:
           run: |
             sudo apt update
             # Note this is an older version of sbuild, no need to patch it, yet
-            sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts autopkgtest vmdb2 qemu-system-x86
+            sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
             sudo apt install -y pkg-config libssl-dev uidmap
             sudo apt install -y libfilesys-df-perl libmime-lite-perl
             # change this into actually built version and cache it
@@ -105,6 +105,7 @@ jobs:
           run: |
            # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
            # sudo apt install -y debian-archive-keyring
+           sudo apt install piuparts
            cd ${{ steps.env.outputs.tag_name }}
            ${HOME}/.local/bin/pkg-builder piuparts
   
