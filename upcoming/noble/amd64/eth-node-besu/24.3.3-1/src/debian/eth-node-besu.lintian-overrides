@@ -13,3 +13,6 @@ eth-node-besu: executable-not-elf-or-script [usr/lib/eth-node-besu/besu/bin/besu
 eth-node-besu: executable-not-elf-or-script [usr/lib/eth-node-besu/besu/bin/evmtool.bat]
 eth-node-besu: extended-description-line-too-long 
 eth-node-besu: synopsis-too-long
+
+eth-node-besu: syntax-error-in-debian-changelog "badly formatted trailer line" [usr/share/doc/eth-node-besu/changelog.Debian.gz:5]
+eth-node-besu: syntax-error-in-debian-changelog "found eof where expected more change data or trailer" [usr/share/doc/eth-node-besu/changelog.Debian.gz:6]
