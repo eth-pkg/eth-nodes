@@ -4,7 +4,8 @@ export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
 export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
-export BINARIES=capcli caplin devnet downloader erigon evm hack integration observer pics rpcdaemon rpctest sentinel sentry snapshots state txpool verkle diag
+#export BINARIES=capcli caplin devnet downloader erigon evm hack integration observer pics rpcdaemon rpctest sentinel sentry snapshots state txpool verkle diag
+export BINARIES=erigon
 
 %:
 	dh $@
@@ -13,7 +14,7 @@ override_dh_dwz:
 	# skip of optimization of DWARF debug information in ELF binaries via dwz
 
 override_dh_auto_build:
-	dh_auto_build
+	make erigon.cmd
 	for bin in $(BINARIES) ; do \
 		llvm-objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
 	done
