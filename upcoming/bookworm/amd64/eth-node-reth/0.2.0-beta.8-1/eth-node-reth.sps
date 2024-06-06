@@ -5,7 +5,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-execution-client (= 1)"]
 suggests = ["eth-node (= 1)"]
-add_files = ["target/release/reth /usr/lib/eth-node-reth/bin"]
+add_files = ["target/maxperf/reth /usr/lib/eth-node-reth/bin"]
 add_links = ["/usr/lib/eth-node-reth/bin/reth /usr/bin/reth"]
 
 add_manpages = []
