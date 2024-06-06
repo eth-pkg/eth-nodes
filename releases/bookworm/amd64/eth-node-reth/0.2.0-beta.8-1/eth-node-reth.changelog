@@ -1,0 +1,5 @@
+eth-node-reth (0.2.0-beta.8-1) bookworm; urgency=medium
+
+  * Beta version for reth
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 06 Jun 2024 08:42:17 +0200
