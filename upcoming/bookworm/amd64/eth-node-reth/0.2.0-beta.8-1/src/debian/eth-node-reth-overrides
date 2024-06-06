@@ -1,4 +1,0 @@
-eth-node-reth: initial-upload-closes-no-bugs [usr/share/doc/eth-node-reth/changelog.Debian.gz:1]
-eth-node-reth: maintainer-script-ignores-errors [postrm]
-eth-node-reth: no-manual-page [usr/bin/reth]
-eth-node-reth: synopsis-too-long
