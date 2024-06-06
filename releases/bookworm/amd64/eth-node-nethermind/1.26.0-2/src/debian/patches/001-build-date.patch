@@ -1,0 +1,11 @@
+--- a/src/Nethermind/Nethermind.Runner/Program.cs
++++ b/src/Nethermind/Nethermind.Runner/Program.cs
+@@ -542,7 +542,7 @@
+         info
+             .Append("Version: ").AppendLine(ProductInfo.Version)
+             .Append("Commit: ").AppendLine(ProductInfo.Commit)
+-            .Append("Build Date: ").AppendLine(ProductInfo.BuildTimestamp.ToString("u"))
++            .Append("Build Date: ").AppendLine("2024-04-25 04:56:03Z")
+             .Append("OS: ")
+             .Append(ProductInfo.OS)
+             .Append(' ')
