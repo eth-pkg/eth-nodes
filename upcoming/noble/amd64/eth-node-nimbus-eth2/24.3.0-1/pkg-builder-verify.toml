@@ -1,6 +1,7 @@
 [verify]
 package_hash=[
-    { hash="d4cdab3f9c388064874e86216a122471002a4a49", name= "eth-node-nimbus-eth2_24.3.0-1.dsc"},
+    # this contains orig.tar as well, so disable it as well
+    # { hash="d4cdab3f9c388064874e86216a122471002a4a49", name= "eth-node-nimbus-eth2_24.3.0-1.dsc"},
     # disable as it fails day by day, we don't care about this, until the other hashes are the same
     # { hash="f0773b315ea03acaaca3d3959877e4d02758a5fd", name= "eth-node-nimbus-eth2_24.3.0.orig.tar.gz"},
     { hash="d653ec522a0ad5990b2936642643ce692d41a2ec", name= "eth-node-nimbus-eth2_24.3.0-1.debian.tar.xz"},
