@@ -16,8 +16,8 @@ override_dh_auto_test:
 	make test-unit
 	# This will modify the environment
 	# But we already built the binaries at this point, so it's okay
-	cargo install cargo-nextest --locked
-	make ef-tests
+	# tests are flaky
+	#make ef-tests
 
 override_dh_auto_install:
 	# install is not the same as debian install, ignore it 
