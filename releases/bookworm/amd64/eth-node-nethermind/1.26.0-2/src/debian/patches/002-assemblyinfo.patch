@@ -1,0 +1,21 @@
+--- a/src/Nethermind/Directory.Build.props
++++ b/src/Nethermind/Directory.Build.props
+@@ -5,7 +5,6 @@
+   </PropertyGroup>
+ 
+   <PropertyGroup Label="ProductInfo">
+-    <BuildTimestamp Condition="'$(BuildTimestamp)' == ''">$([System.DateTimeOffset]::UtcNow.ToUnixTimeSeconds())</BuildTimestamp>
+     <Copyright>Demerzel Solutions Limited</Copyright>
+     <Product>Nethermind</Product>
+     <SourceRevisionId Condition="'$(Commit)' != ''">$(Commit.Substring(0, 8))</SourceRevisionId>
+@@ -14,10 +13,6 @@
+   </PropertyGroup>
+ 
+   <ItemGroup Label="AssemblyCustomMetadata">
+-    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+-      <_Parameter1>BuildTimestamp</_Parameter1>
+-      <_Parameter2>$(BuildTimestamp)</_Parameter2>
+-    </AssemblyAttribute>
+     <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute" Condition="'$(Commit)' != ''">
+       <_Parameter1>Commit</_Parameter1>
+       <_Parameter2>$(Commit)</_Parameter2>
