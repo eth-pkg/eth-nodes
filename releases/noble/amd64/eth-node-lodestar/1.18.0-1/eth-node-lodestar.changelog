@@ -1,0 +1,5 @@
+eth-node-lodestar (1.18.0-1) noble; urgency=medium
+
+  * Use correct lodestar versioning version number + git commit
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 26 May 2024 14:47:17 +0100
