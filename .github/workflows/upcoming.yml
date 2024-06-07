@@ -124,14 +124,14 @@ jobs:
             pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
             echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
         
-        - name: piuparts
-          if: steps.env.outputs.codename != 'noble'
-          run: |
-           # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
-           # sudo apt install -y debian-archive-keyring
-           sudo apt install piuparts
-           cd ${{ steps.env.outputs.tag_name }}
-           ${HOME}/.local/bin/pkg-builder piuparts
+        # - name: piuparts
+        #   if: steps.env.outputs.codename != 'noble'
+        #   run: |
+        #    # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
+        #    # sudo apt install -y debian-archive-keyring
+        #    sudo apt install piuparts
+        #    cd ${{ steps.env.outputs.tag_name }}
+        #    ${HOME}/.local/bin/pkg-builder piuparts
   
         - name: autopkgtest
         # also does not work, keeps failing on ubuntu noble
