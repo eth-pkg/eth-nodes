@@ -1,0 +1,31 @@
+eth-node-geth: statically-linked-binary [usr/lib/eth-node-geth/bin/rlpdump]
+
+eth-node-geth: initial-upload-closes-no-bugs [usr/share/doc/eth-node-geth/changelog.Debian.gz:1]
+eth-node-geth: maintainer-script-ignores-errors [postrm]
+eth-node-geth: no-manual-page [usr/bin/geth]
+
+eth-node-geth: copyright-without-copyright-notice
+
+eth-node-geth: extended-description-line-too-long 
+
+#TODO 
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/abidump]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/abigen]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/blsync]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/bootnode]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/clef]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/devp2p]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/ethkey]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/evm]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/geth]
+eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/p2psim]
+
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/abigen]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/blsync]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/bootnode]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/clef]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/devp2p]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/ethkey]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/evm]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/geth]
+eth-node-geth: embedded-library libzstd [usr/lib/eth-node-geth/bin/p2psim]

@@ -1,0 +1,5 @@
+eth-node-nimbus-eth2 (24.3.0-1) noble; urgency=medium
+
+  * Use correct nimbus-eth2 versioning version number + git commit
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 26 May 2024 14:53:17 +0700

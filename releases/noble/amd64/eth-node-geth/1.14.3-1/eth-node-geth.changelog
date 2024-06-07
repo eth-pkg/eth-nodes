@@ -1,0 +1,11 @@
+eth-node-geth (1.14.3-1) noble; urgency=medium
+
+  * Support for 1.14.3-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 26 May 2024 12:44:17 +0100
+
+eth-node-geth (1.14.0-1) noble; urgency=medium
+
+  * Change the packaging version to reflect the go-ethereum versioning
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 26 May 2024 12:17:17 +0100
