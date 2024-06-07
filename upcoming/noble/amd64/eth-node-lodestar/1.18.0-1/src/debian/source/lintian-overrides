@@ -4,4 +4,4 @@ eth-node-lodestar source: missing-license-paragraph-in-dep5-copyright lgpl-3.0+ 
 
 eth-node-lodestar source: no-newline-at-end [debian/changelog]
 
-eth-node-lodestar source: debian-rules-ignores-make-clean-error [debian/rules:66]
+eth-node-lodestar source: debian-rules-ignores-make-clean-error [debian/rules:68]
