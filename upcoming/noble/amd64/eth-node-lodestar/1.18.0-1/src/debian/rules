@@ -18,6 +18,8 @@ override_dh_auto_test:
 	find node_modules -type d -name ".vite" -exec rm -rf {} +
 	find packages -type d -name ".vite" -exec rm -rf {} +
 	find node_modules -type d -name "obj.target" -exec rm -rf {} +
+	rm -rf node_modules/bcrypto/build/Release
+	rm -rf node_modules/cpu-features/build/Release
 
 override_dh_strip:
 	# do not strip, as it encounters errors with prebuilds and electron
