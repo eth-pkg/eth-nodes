@@ -19,7 +19,7 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 - [Building Packages](#building-packages)
   - [Prerequisites](#prerequisites)
   - [Building and Verifying Packages](#building-and-verifying-packages)
-- [Verifying Distributed Packages](#verifying-distributed-packages)
+- [Verifying](#verifying)
 - [How It Works](#how-it-works)
 
 ## Installation
@@ -45,7 +45,8 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 
 Once the repository is added, you can install the clients using `apt`. Note that some clients might require additional runtime dependencies.
 
-#### Besu
+<details>
+<summary><b>Besu</b></summary>
 
 1. **Install Java 17:**
     ```bash
@@ -76,7 +77,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     besu --data-path <YOUR_DATA_DIR>
     ```
 
-#### Erigon
+</details>
+
+<details>
+<summary><b>Erigon</b></summary>
 
 1. **Install Erigon:**
     ```bash
@@ -88,7 +92,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     erigon
     ```
 
-#### Geth
+</details>
+
+<details>
+<summary><b>Geth</b></summary>
 
 1. **Install Geth:**
     ```bash
@@ -100,7 +107,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     geth
     ```
 
-#### Lodestar
+</details>
+
+<details>
+<summary><b>Lodestar</b></summary>
 
 1. **Install Node.js:**
     ```bash
@@ -118,7 +128,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     lodestar
     ```
 
-#### Nethermind
+</details>
+
+<details>
+<summary><b>Nethermind</b></summary>
 
 1. **Install .NET runtime:**
     ```bash
@@ -139,7 +152,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     nethermind -dd <YOUR_DATA_DIR>
     ```
 
-#### Lighthouse
+</details>
+
+<details>
+<summary><b>Lighthouse</b></summary>
 
 1. **Install Lighthouse:**
     ```bash
@@ -151,7 +167,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     lighthouse
     ```
 
-#### Nimbus-eth2
+</details>
+
+<details>
+<summary><b>Nimbus-eth2</b></summary>
 
 1. **Install Nimbus-eth2:**
     ```bash
@@ -163,7 +182,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     nimbus_beacon_node
     ```
 
-#### Prysm
+</details>
+
+<details>
+<summary><b>Prysm</b></summary>
 
 1. **Install Prysm:**
     ```bash
@@ -175,7 +197,10 @@ Once the repository is added, you can install the clients using `apt`. Note that
     beacon-chain
     ```
 
-#### Teku
+</details>
+
+<details>
+<summary><b>Teku</b></summary>
 
 1. **Install Java 17:**
     ```bash
@@ -206,6 +231,8 @@ Once the repository is added, you can install the clients using `apt`. Note that
     teku
     ```
 
+</details>
+
 ## Building Packages
 
 ### Prerequisites
@@ -234,14 +261,41 @@ To begin building packages, you need to install `pkg-builder`. Refer to the [pkg
     pkg-builder verify --no-package true
     ```
 
+## Verifying
 
-## Verifying Packages downloaded through apt
+There are several methods to verify builds:
 
-For more detailed verification options, refer to `verify.md` in the corresponding client release.
+1. Verify by rebuilding on your own machine.
+2. Verify by building using GitHub Actions.
+3. Verify that the hashes of distributed packages through apt match those provided in `pkg-builder-verify.toml`.
+
+### Verifying by Rebuilding on Your Machine or Cloud Instance
+
+For detailed instructions, please refer to the section on [how to build packages](#building-packages).
+
+Note that verification cannot be performed inside a Docker image due to the current lack of support for stacking kernel namespaces with sbuild.
+
+### Verifying Builds through GitHub Actions
+
+This method offers weak verifiability because GitHub Actions runners use uniform machines, which increases the likelihood of matching hashes. However, hashes might differ on locally built packages due to non-uniformity of machines. Running this verification is still recommended as it guarantees reproducibility on GitHub Actions and is easy to perform. (note: The built packages are built against multiple machines to check hashes.)
+
+To verify through GitHub Actions:
+
+1. Fork the repository.
+2. Select a release to verify (e.g., `releases/bookworm/amd64/eth-node-erigon/2.60.0-1`).
+3. Create a branch named `verify/bookworm/amd64/eth-node-erigon/2.60.0-1` (replace `releases` with `verify`).
+4. Push the branch to GitHub and create a PR.
+5. Wait for the action runner to complete.
+
+Note: You cannot create any branch starting with `verify/*` on this repository to avoid dummy PRs.
+
+### Verifying Package Hashes with `pkg-builder-verify.toml`
+
+Packages distributed through apt or downloadable from GitHub releases can be verified to ensure their hashes match the ones in `pkg-builder-verify.toml`. Follow these steps:
 
 1. **Download the package:**
     ```bash
-    mkdir /tmp/tempdir | cd -
+    mkdir /tmp/tempdir && cd /tmp/tempdir
     sudo apt download <package_name>
     ```
 
@@ -262,9 +316,13 @@ sha1sum eth-node-teku_24.4.0-1_amd64.deb
 cat releases/bookworm/amd64/eth-node-teku/24.4.0-1/pkg-builder-verify.toml
 ```
 
+
 ## How It Works
 
-This process leverages [`debcrafter`](https://github.com/Kixunil/debcrafter) and [`pkg-builder`](https://github.com/eth-pkg/pkg-builder/) to establish reproducible environments. `Debcrafter` helps in creating reproducible Debian directories based on detailed specification files (`.sss` and `.sps`). `Pkg-builder` uses `debcrafter` to set up minimal environments for building packages according to Debian's best practices, including `sbuild`, `piuparts`, `lintian`, and `autopkgtest`, to ensure fully functional packages.
+This process utilizes [`debcrafter`](https://github.com/Kixunil/debcrafter) and [`pkg-builder`](https://github.com/eth-pkg/pkg-builder/) to create reproducible environments. `debcrafter` aids in generating reproducible Debian directories from detailed specification files (`.sss` and `.sps`). While `debcrafter` already supports reproducible builds, it doesn't pin environment dependencies, which led to the development of `pkg-builder`. `Pkg-builder` employs `debcrafter` to establish minimal environments for building packages in line with Debian's best practices. This includes tools like `sbuild`, `piuparts`, `lintian`, and `autopkgtest` to ensure fully functional packages.
 
-A key challenge in Debian packaging is the need for a separate git repository per package, which can limit support for many applications. While Debian packaging facilitates reproducible builds, at some level, this project aims to adhere closely to best practices while extending where reproducibility is missing, only deviating when necessary.
+`pkg-builder` enhances `debcrafter` by adding package pinning, checking against hashes, and supporting multiple programming languages such as C, .NET, Java, Rust, Go, and Nim. It also supports various Linux backends for packaging, including Noble Numbat, Jammy, and Debian 12. Additionally, `pkg-builder` ensures that all tools work together in a uniform manner, addressing the challenge of using these tools consistently and correctly.
 
+`debcrafter` also makes it possible to create modular and dependent Debian packages, simplifying the handling of package relationships. Without `debcrafter`, the `eth-node` project would not be possible.
+
+One significant challenge in Debian packaging is the requirement for a separate git repository per package, which can hinder support for numerous applications. While Debian packaging promotes reproducible builds, this requirement poses some limitations. Furthermore, not everyone uses git repositories, making it difficult to track which packages are updated. Having a monorepo simplifies this by providing a clear view of what is shipped and what is in development. Through `debcrafter`, it is very easy to have one organization’s interconnected packages in one repository and manage different versions, updates, and relationships together without having to rehost the source code of the original packages. Since the source code is just one input to the package process, tracking it in the packaging repository host makes little sense. Simple patching allows for including only the patched files with their patches in the repository, saving cognitive overhead and git space.
