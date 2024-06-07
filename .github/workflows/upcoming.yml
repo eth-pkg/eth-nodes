@@ -31,7 +31,6 @@ jobs:
             docker-images: true
             swap-storage: true
             
-
         - name: Env variables
           id: env
           run: |
