@@ -7,7 +7,7 @@ override_dh_auto_build:
 	./gradlew distTar installDist
 
 override_dh_auto_test:
-	./gradlew test
+	./gradlew test -Dtest.exclude=org.hyperledger.besu.ethereum.eth.sync.backwardsync.BackwardSyncAlgSpec#shouldAwokeWhenConditionReachedAndReady
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation

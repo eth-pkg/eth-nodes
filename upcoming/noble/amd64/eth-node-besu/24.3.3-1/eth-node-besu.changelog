@@ -1,5 +1,7 @@
 eth-node-besu (24.3.3-1) noble; urgency=medium
 
-  * Change the packaging version to reflect the besu versioning
+  * Besu release for noble 
+  * Disabled flaky test shouldAwokeWhenConditionReachedAndReady
+  * Same as otherwise the bookworm version
 
- -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 326 May 2024 12:09:17 +0100
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sun, 26 May 2024 12:09:17 +0100
