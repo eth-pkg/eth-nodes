@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="1111111111111111111111111111111111111111", name= "eth-node-lodestar_1.19.0-1.dsc"},
+    { hash="1111111111111111111111111111111111111111", name= "eth-node-lodestar_1.19.0.orig.tar.gz"},
+    { hash="1111111111111111111111111111111111111111", name= "eth-node-lodestar_1.19.0-1.debian.tar.xz"},
+    { hash="1111111111111111111111111111111111111111", name= "eth-node-lodestar_1.19.0-1_amd64.deb"},
+]
