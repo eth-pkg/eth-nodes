@@ -1,0 +1,4 @@
+# These tests are run by autopkgtests
+
+Tests: tests
+Depends: @, shunit2, which
