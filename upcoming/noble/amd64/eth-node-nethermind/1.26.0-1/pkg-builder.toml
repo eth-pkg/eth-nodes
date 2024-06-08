@@ -16,16 +16,21 @@ tarball_hash = "4dffe64e5683cebaab0ab02c559141b844a57f4a579afeb3975608b30b7816c5
 language_env = "dotnet"
 # Because MS force pushes the security update onto packages, without using revision numbers
 dotnet_packages = [
-    { name = "netstandard-targeting-pack-2.1_2.1.0-1_amd64", hash = "c849f17d5e8cdce4b068e2897939be7de4b839d3", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/netstandard-targeting-pack-2.1_2.1.0-1_amd64.deb" },
-    { name = "dotnet-apphost-pack-8.0_8.0.5-1_amd64", hash = "18b0d4bed3b62495564c18a6d1c30181c33831b4", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-apphost-pack-8.0_8.0.5-1_amd64.deb" },
-    { name = "dotnet-targeting-pack-8.0_8.0.5-1_amd64", hash = "2727152580762a636e62f9c490c19e18339401a9", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-targeting-pack-8.0_8.0.5-1_amd64.deb" },
-    { name = "dotnet-runtime-deps-8.0_8.0.5-1_amd64", hash="1f7f67a6fef920983ab2243c1c660d08e228cedf", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-runtime-deps-8.0_8.0.5-1_amd64.deb"},
-    { name = "dotnet-host_8.0.5-1_amd64", hash="87414e005e39785e1ba32ce8cca97878ca4c6828", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-host_8.0.5-1_amd64.deb"}, 
-    { name = "dotnet-hostfxr-8.0_8.0.5-1_amd64", hash="e1ec0e6b838dabfb5b47ae1b15706026996d6a7c", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-hostfxr-8.0_8.0.5-1_amd64.deb"},
-    { name = "dotnet-runtime-8.0_8.0.5-1_amd64", hash = "8d2443146631a861ade47a184a5b44446c6b636d", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-runtime-8.0_8.0.5-1_amd64.deb" },
-    { name = "aspnetcore-targeting-pack-8.0_8.0.5-1_amd64", hash="4b6bcf15e50db2d177e6e0298a72eeae7c43d2a3", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/aspnetcore-targeting-pack-8.0_8.0.5-1_amd64.deb"},
-    { name = "aspnetcore-runtime-8.0_8.0.5-1_amd64", hash = "7676b5b02bbc37393089418e8a03320b10e914fd", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/aspnetcore-runtime-8.0_8.0.5-1_amd64.deb"},
-    { name = "dotnet-sdk-8.0_8.0.204-1_amd64", hash = "a94237cb852aae05b67a5c8428a6c4f9cfb4beaa", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-sdk-8.0_8.0.204-1_amd64.deb" },
+    { name = "netstandard-targeting-pack-2.1-8.0_8.0.104-0ubuntu1_amd64", hash = "a6ae63e8976c79fe9ef531b986d8fb111e877503", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/netstandard-targeting-pack-2.1-8.0_8.0.104-0ubuntu1_amd64.deb" },
+    { name = "dotnet-apphost-pack-8.0_8.0.4-0ubuntu1_amd64", hash = "ece9f96b2cac32af01b7f9c146daada89bc6310f", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-apphost-pack-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-targeting-pack-8.0_8.0.4-0ubuntu1_amd64", hash = "852d5128329fb83f32f61cc921a68494f6181370", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-targeting-pack-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-host-8.0_8.0.4-0ubuntu1_amd64", hash = "a690adbf019032cddf97cf7a80db4b9cc6d90e7e", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-host-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-hostfxr-8.0_8.0.4-0ubuntu1_amd64", hash = "db2b83859ff903d272819f14bac4ec6125843394", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-hostfxr-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "libnuma1_2.0.18-1build1_amd64", hash = "a599f9b145c689cd68e4fd6aa528c0ee14fb9e5b", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/libnuma1_2.0.18-1build1_amd64.deb" },
+    { name = "liblttng-ust-common1t64_2.13.7-1.1ubuntu2_amd64", hash = "d4356e86d8b402041ed9d3e968c139c34d335798", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/liblttng-ust-common1t64_2.13.7-1.1ubuntu2_amd64.deb" },
+    { name = "liblttng-ust-ctl5t64_2.13.7-1.1ubuntu2_amd64", hash = "a1441f38c98d1cc1ba4d53db993d37678a39dcb3", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/liblttng-ust-ctl5t64_2.13.7-1.1ubuntu2_amd64.deb" },
+    { name = "liblttng-ust1t64_2.13.7-1.1ubuntu2_amd64", hash = "1aa8801b5f5228edfb5d577d456e5a23d9c64e6a", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/liblttng-ust1t64_2.13.7-1.1ubuntu2_amd64.deb" },
+    { name = "dotnet-runtime-8.0_8.0.4-0ubuntu1_amd64", hash = "4bb4c314fd3315f0cb872ba116908be299e7e429", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-runtime-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "aspnetcore-targeting-pack-8.0_8.0.4-0ubuntu1_amd64", hash = "76c84a5e08f12af30f6764ea773f2dd8c756a920", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/aspnetcore-targeting-pack-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "aspnetcore-runtime-8.0_8.0.4-0ubuntu1_amd64", hash = "17f4b7c511729bb1424ec760cd035d91fe51cb79", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/aspnetcore-runtime-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-templates-8.0_8.0.104-0ubuntu1_amd64", hash = "c1b234dcf4ac1db094600d5636590ff53d9225cd", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-templates-8.0_8.0.104-0ubuntu1_amd64.deb"},
+    { name = "dotnet-sdk-8.0_8.0.104-0ubuntu1_amd64", hash = "d5bc66de113c1798283839006317182b44bce338", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-sdk-8.0_8.0.104-0ubuntu1_amd64.deb" },
+    { name = "dotnet8_8.0.104-8.0.4-0ubuntu1_amd64", hash = "a2ada74cdc4a74a7f22aa48205cfc45999c94974", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet8_8.0.104-8.0.4-0ubuntu1_amd64.deb" },
 ]
 use_backup_version = false
 
