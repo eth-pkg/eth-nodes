@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+# conditionally enable tests, default is true
+# there are times you want to do quick rebuilding to verify hash without running the tests
+export RUN_TESTS?=true 
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	./gradlew distTar installDist
+
+override_dh_auto_test:
+ifeq ($(strip $(RUN_TESTS)),true)
+	./gradlew test
+else
+	@echo "Skipping tests."
+endif
+
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean

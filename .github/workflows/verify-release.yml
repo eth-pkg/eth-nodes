@@ -7,7 +7,7 @@ on:
 
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
       issues: write
@@ -53,7 +53,7 @@ jobs:
           run: |
             sudo apt update
             # Note this is an older version of sbuild, no need to patch it, yet
-            sudo apt install -y debhelper schroot ubuntu-dev-tools piuparts autopkgtest vmdb2 qemu-system-x86
+            sudo apt install -y debhelper schroot ubuntu-dev-tools vmdb2 qemu-system-x86
             sudo apt install -y pkg-config libssl-dev uidmap
             sudo apt install -y libfilesys-df-perl libmime-lite-perl
             # change this into actually built version and cache it
@@ -89,7 +89,7 @@ jobs:
         - name: Create chroot env
           run: |
             cd ${{ steps.env.outputs.tag_name }}
-            sudo ln -s /usr/share/debootstrap/scripts/gutsy /usr/share/debootstrap/scripts/noble
+            #sudo ln -s /usr/share/debootstrap/scripts/gutsy /usr/share/debootstrap/scripts/noble
             pkg-builder env create
             echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
   
