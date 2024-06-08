@@ -1,0 +1,6 @@
+eth-node-nethermind (1.26.0-1) noble; urgency=medium
+
+  * Change the packaging version to reflect the nethermind versioning
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 3 May 2024 13:14:17 +0700
+ 
