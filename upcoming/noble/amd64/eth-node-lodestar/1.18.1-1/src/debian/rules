@@ -17,6 +17,9 @@ override_dh_auto_test:
 	find packages -type d -name ".nyc_output" -exec rm -rf {} +
 	find node_modules -type d -name ".vite" -exec rm -rf {} +
 	find packages -type d -name ".vite" -exec rm -rf {} +
+	find node_modules -type d -name "obj.target" -exec rm -rf {} +
+	rm -rf node_modules/bcrypto/build/Release
+	rm -rf node_modules/cpu-features/build/Release
 
 override_dh_strip:
 	# do not strip, as it encounters errors with prebuilds and electron
@@ -25,6 +28,7 @@ override_dh_shlibdeps:
 	# calculate shared library dependencies, fails because of unneeded prebuilds for arm64
 
 override_dh_auto_build:
+	#install distutils dependency for node-gyp
 	yarn install --frozen-lockfile
 	ls -al /build
 	yarn build
@@ -51,6 +55,7 @@ override_dh_auto_build:
 	rm -rf node_modules/node-gyp/gyp/pylib/gyp/__pycache__
 	rm -rf node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__
 	chmod +x debian/lodestar
+
 
 override_dh_auto_install:
 	# This relies on make install script
