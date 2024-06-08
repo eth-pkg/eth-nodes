@@ -14,3 +14,6 @@ eth-node-prysm: mismatched-override no-manual-page [usr/bin/nethermind] [usr/sha
 eth-node-prysm: no-manual-page [usr/bin/beacon-chain]
 
 eth-node-prysm: copyright-without-copyright-notice
+
+eth-node-prysm: embedded-library libzstd [usr/lib/eth-node-prysm/bin/beacon-chain]
+eth-node-prysm: embedded-library libzstd [usr/lib/eth-node-prysm/bin/validator]
