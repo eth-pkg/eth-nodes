@@ -8,3 +8,4 @@ eth-node-reth: extended-description-line-too-long line 3
 eth-node-reth: extended-description-line-too-long line 4
 eth-node-reth: initial-upload-closes-no-bugs [usr/share/doc/eth-node-reth/changelog.Debian.gz:1]
 eth-node-reth: zero-byte-file-in-doc-directory [usr/share/doc/eth-node-reth/copyright]
+eth-node-reth: embedded-library libzstd [usr/lib/eth-node-reth/bin/reth]
