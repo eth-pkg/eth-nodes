@@ -15,14 +15,15 @@ export CARGO_INSTALL_EXTRA_FLAGS
 
 
 override_dh_auto_test:
-	# Reenable tests, not sure which to run, going to ignore all of them
-	# # # # Install additional test dependency
-	# cd /tmp && curl -s -L https://github.com/foundry-rs/foundry/releases/download/nightly-ca67d15f4abd46394b324c50e21e66f306a1162d/foundry_nightly_linux_amd64.tar.gz -o foundry_nightly_linux_amd64.tar.gz
-	# cd /tmp && tar xvf foundry_nightly_linux_amd64.tar.gz 
-	# cp /tmp/anvil $(HOME)/.cargo/bin
-	# anvil --version # check if it correctly installed
-	# make test-release
-	# make run-ef-tests
+	# Install additional test dependency
+	cd /tmp && curl -s -L https://github.com/foundry-rs/foundry/releases/download/nightly-ca67d15f4abd46394b324c50e21e66f306a1162d/foundry_nightly_linux_amd64.tar.gz -o foundry_nightly_linux_amd64.tar.gz
+	cd /tmp && tar xvf foundry_nightly_linux_amd64.tar.gz 
+	cp /tmp/anvil $(HOME)/.cargo/bin
+	anvil --version # check if it correctly installed
+	cargo test --workspace --release --features "$(TEST_FEATURES)" \
+ 		--exclude ef_tests --exclude beacon_chain --exclude slasher --exclude network \
+		--exclude watch # Same as make test-release, except additionally disabling docker tests
+	make run-ef-tests
 
 
 override_dh_auto_install:
