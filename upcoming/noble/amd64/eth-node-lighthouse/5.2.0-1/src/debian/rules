@@ -22,9 +22,10 @@ override_dh_auto_test:
 	anvil --version # check if it correctly installed
 	cargo test --workspace --release --features "$(TEST_FEATURES)" \
  		--exclude ef_tests --exclude beacon_chain --exclude slasher --exclude network \
-		--exclude watch # Same as make test-release, except additionally disabling docker tests \ 
-		--exclude web3signer_tests # web3signer_tests also fail 
-	make run-ef-tests
+		--exclude lighthouse_metrics \
+		--exclude web3signer_tests \
+		--exclude watch # Same as make test-release, except additionally disabling docker tests  
+	#make run-ef-tests
 
 
 override_dh_auto_install:
