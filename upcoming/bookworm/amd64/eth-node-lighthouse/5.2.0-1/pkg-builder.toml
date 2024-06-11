@@ -10,7 +10,7 @@ homepage="https://github.com/sigp/lighthouse"
 package_type="default"
 tarball_url = "https://github.com/sigp/lighthouse/archive/refs/tags/v5.2.0.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "e33edf3636ff435706eeb03f4ce9cad4abd939ddfc4b3156944f8b56695f734e"
+tarball_hash = "e5cc916f78235721d2ae3db510ec1eba88687c7d4abf469eb0e8a1fe51714a69"
 
 [package_type.language_env]
 language_env = "rust"
