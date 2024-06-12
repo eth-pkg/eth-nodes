@@ -1,0 +1,5 @@
+eth-node-lighthouse (5.2.0-1) bookworm; urgency=medium
+
+  * lighthouse version 5.2.0
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 12 Jun 2024 08:14:17 +0200
