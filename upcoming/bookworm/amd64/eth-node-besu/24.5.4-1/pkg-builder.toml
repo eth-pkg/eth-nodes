@@ -9,7 +9,7 @@ homepage="https://github.com/hyperledger/besu"
 # virtual | git | default
 package_type="default"
 tarball_url = "https://github.com/hyperledger/besu/archive/refs/tags/24.5.4.tar.gz"
-tarball_hash = "17638bdd49f7fa03e190323f83d50c434fff36db11183159c6aac13f925e802d"
+tarball_hash = "c6c67070916da5a6e6fe33840185cd2f5f70a2a2e83c3b5e72ed7ad38b06f573"
 
 [package_type.language_env]
 language_env = "java"
