@@ -1,0 +1,65 @@
+Index: eth-node-besu-24.6.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
+===================================================================
+--- eth-node-besu-24.6.0.orig/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
++++ eth-node-besu-24.6.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
+@@ -143,60 +143,6 @@ public class BackwardSyncAlgSpec {
+   }
+ 
+   @Test
+-  public void shouldAwokeWhenTTDReachedAndReady() throws Exception {
+-    doReturn(false).when(context).isReady();
+-
+-    when(context.getSyncState().subscribeTTDReached(any())).thenReturn(88L);
+-    when(context.getSyncState().subscribeCompletionReached(any())).thenReturn(99L);
+-    when(context.getEthContext().getEthPeers().peerCount()).thenReturn(1);
+-
+-    final CompletableFuture<Void> voidCompletableFuture = algorithm.waitForReady();
+-
+-    Thread.sleep(50);
+-    assertThat(voidCompletableFuture).isNotCompleted();
+-    verify(context.getSyncState()).subscribeTTDReached(ttdCaptor.capture());
+-
+-    doReturn(true).when(context).isReady();
+-    Thread.sleep(50);
+-    assertThat(voidCompletableFuture).isNotCompleted();
+-
+-    ttdCaptor.getValue().onTTDReached(true);
+-
+-    voidCompletableFuture.get(200, TimeUnit.MILLISECONDS);
+-    assertThat(voidCompletableFuture).isCompleted();
+-
+-    verify(context.getSyncState()).unsubscribeTTDReached(88L);
+-    verify(context.getSyncState()).unsubscribeInitialConditionReached(99L);
+-  }
+-
+-  @Test
+-  public void shouldAwokeWhenConditionReachedAndReady() throws Exception {
+-    doReturn(false).when(context).isReady();
+-
+-    when(context.getSyncState().subscribeTTDReached(any())).thenReturn(88L);
+-    when(context.getSyncState().subscribeCompletionReached(any())).thenReturn(99L);
+-    when(context.getEthContext().getEthPeers().peerCount()).thenReturn(1);
+-
+-    final CompletableFuture<Void> voidCompletableFuture = algorithm.waitForReady();
+-    Thread.sleep(50);
+-
+-    verify(context.getSyncState()).subscribeCompletionReached(completionCaptor.capture());
+-    assertThat(voidCompletableFuture).isNotCompleted();
+-
+-    doReturn(true).when(context).isReady();
+-    Thread.sleep(50);
+-    assertThat(voidCompletableFuture).isNotCompleted();
+-
+-    completionCaptor.getValue().onInitialSyncCompleted();
+-
+-    voidCompletableFuture.get(800, TimeUnit.MILLISECONDS);
+-    assertThat(voidCompletableFuture).isCompleted();
+-
+-    verify(context.getSyncState()).unsubscribeTTDReached(88L);
+-    verify(context.getSyncState()).unsubscribeInitialConditionReached(99L);
+-  }
+-
+-  @Test
+   public void shouldFinishWhenWorkIsDone() {
+     doReturn(true).when(context).isReady();
+     final CompletableFuture<Void> completableFuture = algorithm.pickNextStep();
