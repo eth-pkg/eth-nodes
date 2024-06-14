@@ -1,15 +1,15 @@
 [package_fields]
 spec_file = "eth-node-besu.sss"
 package_name = "eth-node-besu"
-version_number = "24.5.1"
+version_number = "24.5.4"
 revision_number = "1"
 homepage="https://github.com/hyperledger/besu"
 
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/hyperledger/besu/archive/refs/tags/24.5.1.tar.gz"
-tarball_hash = "795c7455b359131c6e17fe5daea52c1c48a580aafc771f8fa3b727253866fa7c"
+tarball_url = "https://github.com/hyperledger/besu/archive/refs/tags/24.5.4.tar.gz"
+tarball_hash = "c6c67070916da5a6e6fe33840185cd2f5f70a2a2e83c3b5e72ed7ad38b06f573"
 
 [package_type.language_env]
 language_env = "java"

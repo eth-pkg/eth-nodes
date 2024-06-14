@@ -1,0 +1,5 @@
+eth-node-besu (24.5.4-1) noble; urgency=medium
+
+  * Support new version 24.5.4.
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 13 Jun 2024 19:18:17 +0700
