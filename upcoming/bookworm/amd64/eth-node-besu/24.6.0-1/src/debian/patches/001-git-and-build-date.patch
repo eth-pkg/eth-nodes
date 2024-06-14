@@ -1,7 +1,7 @@
-Index: eth-node-besu-24.5.4/build.gradle
+Index: eth-node-besu-24.6.0/build.gradle
 ===================================================================
---- eth-node-besu-24.5.4.orig/build.gradle
-+++ eth-node-besu-24.5.4/build.gradle
+--- eth-node-besu-24.6.0.orig/build.gradle
++++ eth-node-besu-24.6.0/build.gradle
 @@ -923,7 +923,7 @@ task jacocoRootReport(type: org.gradle.t
  def buildTime() {
    def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
@@ -23,7 +23,7 @@ Index: eth-node-besu-24.5.4/build.gradle
      println("Generating project version as supplied is version not semver: ${project.version}")
      def gitDetails = getGitCommitDetails(7) // Adjust length as needed
 -    return "${gitDetails.date}-develop-${gitDetails.hash}"
-+    return "24.5.4"
++    return "24.6.0"
    }
  }
  
