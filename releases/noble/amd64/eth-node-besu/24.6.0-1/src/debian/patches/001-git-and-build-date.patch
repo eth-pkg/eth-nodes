@@ -1,0 +1,38 @@
+Index: eth-node-besu-24.6.0/build.gradle
+===================================================================
+--- eth-node-besu-24.6.0.orig/build.gradle
++++ eth-node-besu-24.6.0/build.gradle
+@@ -923,7 +923,7 @@ task jacocoRootReport(type: org.gradle.t
+ def buildTime() {
+   def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
+   df.setTimeZone(TimeZone.getTimeZone("UTC"))
+-  return df.format(new Date())
++  return "2024-05-15-12T23:20:50.52Z"
+ }
+ 
+ @Memoized
+@@ -931,13 +931,14 @@ def calculateVersion() {
+   // Regex pattern for basic calendar versioning, with provision to omit patch rev
+   def calVerPattern = ~/\d+\.\d+(\.\d+)?(-.*)?/
+ 
++
+   if (project.hasProperty('version') && (project.version =~ calVerPattern)) {
+     return "${project.version}"
+   } else {
+     // If no version is supplied or it doesn't match the semantic versioning, calculate from git
+     println("Generating project version as supplied is version not semver: ${project.version}")
+     def gitDetails = getGitCommitDetails(7) // Adjust length as needed
+-    return "${gitDetails.date}-develop-${gitDetails.hash}"
++    return "24.6.0"
+   }
+ }
+ 
+@@ -969,7 +970,7 @@ def getGitCommitDetails(length = 8) {
+   } catch (Exception e) {
+     logger.warn('Could not calculate git commit details, using defaults (run with --info for stacktrace)')
+     logger.info('Error retrieving git commit details', e)
+-    return [hash: "xxxxxxxx", date: "00.0"]
++    return [hash: "8425b1e", date: "00.0"]
+   }
+ }
+ 
