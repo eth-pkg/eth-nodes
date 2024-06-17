@@ -26,7 +26,7 @@ jobs:
             ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
             PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
             VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
-            VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
+            VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | rev | cut -d'-' -f2- | rev)
             BUILD_DIR=$(echo "/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER")
         
         
