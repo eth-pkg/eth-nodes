@@ -9,6 +9,8 @@ eth-node-prysm: extended-description-line-too-long line 6
 eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/beacon-chain]
 
 eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/validator]
+eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/prysmctl]
+eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/client-stats]
 eth-node-prysm: mismatched-override no-manual-page [usr/bin/nethermind] [usr/share/lintian/overrides/eth-node-prysm:3]
 
 eth-node-prysm: no-manual-page [usr/bin/beacon-chain]

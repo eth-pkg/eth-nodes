@@ -8,13 +8,13 @@ export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
 export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 
 %:
-	go install github.com/bazelbuild/bazelisk@v1.18.0
 	dh $@
 
 override_dh_auto_test:
     CGO_CFLAGS="-O2 -D__BLST_PORTABLE__" bazelisk test //..
 
 override_dh_auto_build:
+	go install github.com/bazelbuild/bazelisk@v1.18.0
 	bazelisk build //cmd/prysmctl:prysmctl --config=release 
 	bazelisk build //cmd/client-stats:client-stats --config=release 
 	bazelisk build //cmd/beacon-chain:beacon-chain --config=release
