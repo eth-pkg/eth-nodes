@@ -8,8 +8,8 @@ suggests = ["eth-node (= 1)"]
 add_files = [
 "bazel-bin/cmd/beacon-chain/beacon-chain_/beacon-chain /usr/lib/eth-node-prysm/bin",
 "bazel-bin/cmd/validator/validator_/validator /usr/lib/eth-node-prysm/bin",
-"bazel-bin/cmd/validator/validator_/prysmctl /usr/lib/eth-node-prysm/bin",
-"bazel-bin/cmd/validator/validator_/client-stats /usr/lib/eth-node-prysm/bin"
+"bazel-bin/cmd/prysmctl/prysmctl_/prysmctl /usr/lib/eth-node-prysm/bin",
+"bazel-bin/cmd/client-stats/client-stats_/client-stats /usr/lib/eth-node-prysm/bin"
 ]
 add_links = [
 "/usr/lib/eth-node-prysm/bin/beacon-chain /usr/bin/beacon-chain",
