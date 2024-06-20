@@ -1,0 +1,5 @@
+eth-node-teku (24.6.0-1) noble; urgency=medium
+
+  * Use correct teku versioning version number + git commit
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 20 Jun 2024 08:02:17 +0200
