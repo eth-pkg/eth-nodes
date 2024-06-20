@@ -17,7 +17,7 @@ language_env = "rust"
 rust_version="1.79.0"
 rust_binary_url="https://static.rust-lang.org/dist/rust-1.79.0-x86_64-unknown-linux-gnu.tar.xz"
 rust_binary_gpg_asc="""
------BEGIN PGP SIGNATURE-----
+
 wsFcBAABCgAQBQJmavahCRCFq5bm+hvl/gAA1O8QANQwzb3HJMM94DBcFEsDXCZE
 UF072iFir6diq1VQVBXJy7eG0ufJJuD+JnrDKPVKhj5MELWWwZuXJuksHiTci98f
 sNsG/PTEiNkSQ14xm5xjDCODBJriixjKiDqEwBnkIds9l6K8tJMkT7WwpyNqoMXF
@@ -31,7 +31,6 @@ GhlQ0gbGqmBqXFkI8AueKKcxDxNOqIX9rc4twTcZAqP9MfSTM9K0vkPapt+JvOkX
 ahdOXBX/LsiTZLaxCNO86gTJHb0u9v3Y4AHDVwQq9kBPXribw6MHzb06ldtjpGq+
 GmbSc03ZAiC1DDQqE1QQ
 =+i4h
------END PGP SIGNATURE-----
 """
 
 [build_env]
