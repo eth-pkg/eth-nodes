@@ -1,5 +1,5 @@
 #!/usr/bin/make -f
-export TEKU_VERSION=24.6.0 
+export TEKU_VERSION=24.6.0
 
 %:
 	dh $@
