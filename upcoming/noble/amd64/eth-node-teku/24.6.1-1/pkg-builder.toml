@@ -8,7 +8,7 @@ homepage="https://github.com/Consensys/teku"
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/Consensys/teku/archive/refs/tags/24.6.0.tar.gz"
+tarball_url = "https://github.com/Consensys/teku/archive/refs/tags/24.6.1.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "3009ef6b539d8ae88876ea176219f0f0cad7d0c31e2550fc1f1998ba9b642fbf"
 
