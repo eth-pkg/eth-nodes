@@ -1,0 +1,50 @@
+[package_fields]
+spec_file = "eth-node-nethermind.sss"
+package_name = "eth-node-nethermind"
+version_number = "1.27.0"
+revision_number = "1"
+homepage="https://github.com/NethermindEth/nethermind"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/NethermindEth/nethermind/archive/refs/tags/1.27.0.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "517d13bd36132a5793794e8934b20b316a4b2fb64fb9ae5f6c47b6400e30aed6"
+
+[package_type.language_env]
+language_env = "dotnet"
+# Because MS force pushes the security update onto packages, without using revision numbers
+dotnet_packages = [
+    { name = "netstandard-targeting-pack-2.1-8.0_8.0.104-0ubuntu1_amd64", hash = "a6ae63e8976c79fe9ef531b986d8fb111e877503", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/netstandard-targeting-pack-2.1-8.0_8.0.104-0ubuntu1_amd64.deb" },
+    { name = "dotnet-apphost-pack-8.0_8.0.4-0ubuntu1_amd64", hash = "ece9f96b2cac32af01b7f9c146daada89bc6310f", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-apphost-pack-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-targeting-pack-8.0_8.0.4-0ubuntu1_amd64", hash = "852d5128329fb83f32f61cc921a68494f6181370", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-targeting-pack-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-host-8.0_8.0.4-0ubuntu1_amd64", hash = "a690adbf019032cddf97cf7a80db4b9cc6d90e7e", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-host-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-hostfxr-8.0_8.0.4-0ubuntu1_amd64", hash = "db2b83859ff903d272819f14bac4ec6125843394", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-hostfxr-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "libnuma1_2.0.18-1build1_amd64", hash = "a599f9b145c689cd68e4fd6aa528c0ee14fb9e5b", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/libnuma1_2.0.18-1build1_amd64.deb" },
+    { name = "liblttng-ust-common1t64_2.13.7-1.1ubuntu2_amd64", hash = "d4356e86d8b402041ed9d3e968c139c34d335798", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/liblttng-ust-common1t64_2.13.7-1.1ubuntu2_amd64.deb" },
+    { name = "liblttng-ust-ctl5t64_2.13.7-1.1ubuntu2_amd64", hash = "a1441f38c98d1cc1ba4d53db993d37678a39dcb3", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/liblttng-ust-ctl5t64_2.13.7-1.1ubuntu2_amd64.deb" },
+    { name = "liblttng-ust1t64_2.13.7-1.1ubuntu2_amd64", hash = "1aa8801b5f5228edfb5d577d456e5a23d9c64e6a", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/liblttng-ust1t64_2.13.7-1.1ubuntu2_amd64.deb" },
+    { name = "dotnet-runtime-8.0_8.0.4-0ubuntu1_amd64", hash = "4bb4c314fd3315f0cb872ba116908be299e7e429", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-runtime-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "aspnetcore-targeting-pack-8.0_8.0.4-0ubuntu1_amd64", hash = "76c84a5e08f12af30f6764ea773f2dd8c756a920", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/aspnetcore-targeting-pack-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "aspnetcore-runtime-8.0_8.0.4-0ubuntu1_amd64", hash = "17f4b7c511729bb1424ec760cd035d91fe51cb79", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/aspnetcore-runtime-8.0_8.0.4-0ubuntu1_amd64.deb" },
+    { name = "dotnet-templates-8.0_8.0.104-0ubuntu1_amd64", hash = "c1b234dcf4ac1db094600d5636590ff53d9225cd", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-templates-8.0_8.0.104-0ubuntu1_amd64.deb"},
+    { name = "dotnet-sdk-8.0_8.0.104-0ubuntu1_amd64", hash = "d5bc66de113c1798283839006317182b44bce338", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet-sdk-8.0_8.0.104-0ubuntu1_amd64.deb" },
+    { name = "dotnet8_8.0.104-8.0.4-0ubuntu1_amd64", hash = "a2ada74cdc4a74a7f22aa48205cfc45999c94974", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529-noble/dotnet8_8.0.104-8.0.4-0ubuntu1_amd64.deb" },
+]
+use_backup_version = false
+
+[build_env]
+codename="noble numbat"
+arch = "amd64"
+pkg_builder_version="0.2.5"
+debcrafter_version = "2711b53"
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/noble"
