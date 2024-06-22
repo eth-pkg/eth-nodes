@@ -20,16 +20,15 @@ Index: eth-node-prysm-5.0.4/runtime/version/version.go
 ===================================================================
 --- eth-node-prysm-5.0.4.orig/runtime/version/version.go
 +++ eth-node-prysm-5.0.4/runtime/version/version.go
-@@ -5,7 +5,7 @@ package version
+@@ -5,6 +5,7 @@ package version
  import (
  	"fmt"
  	"log"
--	"os/exec"
 +	"os"
+ 	"os/exec"
  	"strconv"
  	"strings"
- 	"time"
-@@ -45,5 +45,7 @@ func BuildData() string {
+@@ -45,5 +46,7 @@ func BuildData() string {
  			gitCommit = strings.TrimRight(string(commit), "\r\n")
  		}
  	}
