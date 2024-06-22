@@ -1,0 +1,18 @@
+eth-node-prysm: initial-upload-closes-no-bugs [usr/share/doc/eth-node-prysm/changelog.Debian.gz:1]
+eth-node-prysm: maintainer-script-ignores-errors [postrm]
+
+
+
+eth-node-prysm: extended-description-line-too-long line 4
+
+eth-node-prysm: extended-description-line-too-long line 6
+eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/beacon-chain]
+
+eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/validator]
+eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/prysmctl]
+eth-node-prysm: hardening-no-pie [usr/lib/eth-node-prysm/bin/client-stats]
+eth-node-prysm: mismatched-override no-manual-page [usr/bin/nethermind] [usr/share/lintian/overrides/eth-node-prysm:3]
+
+eth-node-prysm: no-manual-page [usr/bin/beacon-chain]
+
+eth-node-prysm: copyright-without-copyright-notice

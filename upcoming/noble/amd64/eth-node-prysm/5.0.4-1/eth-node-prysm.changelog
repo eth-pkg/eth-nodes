@@ -1,0 +1,5 @@
+eth-node-prysm (5.0.4-2) bookworm; urgency=medium
+
+  * Add prysmctl and client-stats
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sat, 22 Jun 2024 10:16:17 +0200
