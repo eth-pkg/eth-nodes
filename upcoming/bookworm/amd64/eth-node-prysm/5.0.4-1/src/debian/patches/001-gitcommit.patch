@@ -1,0 +1,39 @@
+Index: eth-node-prysm-5.0.4/hack/workspace_status.sh
+===================================================================
+--- eth-node-prysm-5.0.4.orig/hack/workspace_status.sh
++++ eth-node-prysm-5.0.4/hack/workspace_status.sh
+@@ -1,9 +1,9 @@
+ #!/bin/bash
+ 
+ # Note: The STABLE_ prefix will force a relink when the value changes when using rules_go x_defs.
+-
+-echo STABLE_GIT_COMMIT "$(git rev-parse HEAD)"
+-echo DATE "$(date --rfc-3339=seconds --utc)"
+-echo DATE_UNIX "$(date --utc +%s)"
++# Patch for reproducibility
++echo $STABLE_GIT_COMMIT 
++echo DATE "2024-04-30 01:44:55+00:00"
++echo DATE_UNIX "1714441523"
+ echo DOCKER_TAG "$(git rev-parse --abbrev-ref HEAD)-$(git rev-parse --short=6 HEAD)"
+ echo STABLE_GIT_TAG "$(git describe --tags --abbrev=0)"
+Index: eth-node-prysm-5.0.4/runtime/version/version.go
+===================================================================
+--- eth-node-prysm-5.0.4.orig/runtime/version/version.go
++++ eth-node-prysm-5.0.4/runtime/version/version.go
+@@ -5,7 +5,7 @@ package version
+ import (
+ 	"fmt"
+ 	"log"
+-	"os/exec"
++	"os"
+ 	"strconv"
+ 	"strings"
+ 	"time"
+@@ -45,5 +45,7 @@ func BuildData() string {
+ 			gitCommit = strings.TrimRight(string(commit), "\r\n")
+ 		}
+ 	}
++  gitTag = os.Getenv("GIT_TAG");
++  gitCommit = os.Getenv("GIT_COMMIT");
+ 	return fmt.Sprintf("Prysm/%s/%s", gitTag, gitCommit)
+ }
