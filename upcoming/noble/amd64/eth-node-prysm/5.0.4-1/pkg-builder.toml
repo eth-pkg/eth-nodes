@@ -22,7 +22,7 @@ go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471
 bazelisk_version="1.18.0"
 
 [build_env]
-codename="bookworm"
+codename="noble numbat"
 arch = "amd64"
 pkg_builder_version="0.2.5"
 debcrafter_version = "2711b53"
@@ -34,4 +34,4 @@ piuparts_version="1.1.7"
 autopkgtest_version="5.28"
 sbuild_version="0.85.6"
 # package directory
-workdir="~/.pkg-builder/packages/bookworm"
+workdir="~/.pkg-builder/packages/noble"
