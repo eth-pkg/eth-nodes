@@ -1,0 +1,5 @@
+eth-node-reth (1.0.0-1) bookworm; urgency=medium
+
+  * First official release of reth
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 26 Jun 2024 08:16:17 +0200
