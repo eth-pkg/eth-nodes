@@ -1,0 +1,34 @@
+[package_fields]
+spec_file = "eth-node-erigon.sss"
+package_name = "eth-node-erigon"
+version_number = "2.60.2"
+revision_number = "1"
+homepage="https://github.com/ledgerwatch/erigon"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/ledgerwatch/erigon/archive/refs/tags/v2.60.2.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "0b5bfba1d9a012aa90f4505478e4e4bf2b9a6687e0aea1d4b44c717ca508881d"
+
+[package_type.language_env]
+language_env = "go"
+go_version = "1.22.2"
+go_binary_url = "https://go.dev/dl/go1.22.2.linux-amd64.tar.gz"
+go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471216a17"
+
+[build_env]
+codename="noble numbat"
+arch = "amd64"
+pkg_builder_version="0.2.5"
+debcrafter_version = "2711b53"
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/noble"
