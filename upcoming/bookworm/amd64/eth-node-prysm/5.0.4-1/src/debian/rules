@@ -10,6 +10,11 @@ export STABLE_GIT_TAG=5.0.4
 export BUILD_DATE=2024-04-30 01:44:55+00:00
 export DATE_UNIX=1714441523
 export DOCKER_TAG=5.0.4
+TARGETS = \
+    //cmd/prysmctl:prysmctl \
+    //cmd/client-stats:client-stats \
+    //cmd/beacon-chain:beacon-chain \
+    //cmd/validator:validator
 
 %:
 	dh $@
@@ -19,10 +24,14 @@ override_dh_auto_test:
 
 override_dh_auto_build:
 	go install github.com/bazelbuild/bazelisk@v1.18.0
-	bazelisk build //cmd/prysmctl:prysmctl --config=release 
-	bazelisk build //cmd/client-stats:client-stats --config=release 
-	bazelisk build //cmd/beacon-chain:beacon-chain --config=release
-	bazelisk build //cmd/validator:validator --config=release 
+	for target in ${TARGETS}; do \
+	    bazelisk build "$$target" --config=release \
+	        --action_env=GIT_COMMIT \
+	        --action_env=BUILD_DATE \
+	        --action_env=DATE_UNIX \
+	        --action_env=DOCKER_TAG \
+	        --action_env=GIT_TAG; \
+	done
 
 override_dh_auto_install:
 	
