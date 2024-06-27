@@ -2,28 +2,30 @@ Index: eth-node-prysm-5.0.4/hack/workspace_status.sh
 ===================================================================
 --- eth-node-prysm-5.0.4.orig/hack/workspace_status.sh
 +++ eth-node-prysm-5.0.4/hack/workspace_status.sh
-@@ -1,9 +1,16 @@
+@@ -1,9 +1,18 @@
  #!/bin/bash
  
  # Note: The STABLE_ prefix will force a relink when the value changes when using rules_go x_defs.
 +# Patch for reproducibility
 +#
-+export STABLE_GIT_COMMIT=$GIT_COMMIT
-+export DATE=$BUILD_DATE
-+export DATE_UNIX=$DATE_UNIX
-+export DOCKER_TAG=$DOCKER_TAG
-+export STABLE_GIT_TAG=$GIT_TAG
++export STABLE_GIT_COMMIT="$GIT_COMMIT"
++export DATE="$BUILD_DATE"
++export DATE_UNIX="$DATE_UNIX"
++export DOCKER_TAG="$DOCKER_TAG"
++export STABLE_GIT_TAG="$GIT_TAG"
  
 -echo STABLE_GIT_COMMIT "$(git rev-parse HEAD)"
 -echo DATE "$(date --rfc-3339=seconds --utc)"
 -echo DATE_UNIX "$(date --utc +%s)"
 -echo DOCKER_TAG "$(git rev-parse --abbrev-ref HEAD)-$(git rev-parse --short=6 HEAD)"
 -echo STABLE_GIT_TAG "$(git describe --tags --abbrev=0)"
-+echo STABLE_GIT_COMMIT $STABLE_GIT_COMMIT
-+echo DATE $BUILD_DATE
-+echo DATE_UNIX $DATE_UNIX
-+echo DOCKER_TAG $DOCKER_TAG
-+echo STABLE_GIT_TAG $GIT_TAG
++echo STABLE_GIT_COMMIT "$STABLE_GIT_COMMIT"
++echo GIT_COMMIT "$GIT_COMMIT"
++echo GIT_TAG "$GIT_TAG"
++echo DATE "$BUILD_DATE"
++echo DATE_UNIX "$DATE_UNIX"
++echo DOCKER_TAG "$DOCKER_TAG"
++echo STABLE_GIT_TAG "$GIT_TAG"
 Index: eth-node-prysm-5.0.4/runtime/version/version.go
 ===================================================================
 --- eth-node-prysm-5.0.4.orig/runtime/version/version.go
