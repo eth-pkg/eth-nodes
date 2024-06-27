@@ -7,7 +7,7 @@ provides = ["eth-node-consensus-client (= 1)"]
 suggests = ["eth-node (= 1)"]
 add_files = [
     "build/nimbus_beacon_node /usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node",
-    "build/validator /usr/lib/eth-node-nimbus-eth2/bin/validator",
+    "build/nimbus_validator_client /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client",
     "build/deposit_contract /usr/lib/eth-node-nimbus-eth2/bin/deposit_contract",
     "build/nimbus_signing_node /usr/lib/eth-node-nimbus-eth2/bin/nimbus_signing_node",
     "build/nimbus_light_client /usr/lib/eth-node-nimbus-eth2/bin/nimbus_light_client",

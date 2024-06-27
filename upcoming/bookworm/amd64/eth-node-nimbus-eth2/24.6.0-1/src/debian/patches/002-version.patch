@@ -2,7 +2,7 @@ Index: eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
 ===================================================================
 --- eth-node-nimbus-eth2-24.6.0.orig/beacon_chain/version.nim
 +++ eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
-@@ -11,11 +11,12 @@
+@@ -11,15 +11,16 @@
  ## in the Nimbus release process (i.e. beacon_node, validator_client, etc)
  
  import std/[strutils, compilesettings]
@@ -14,9 +14,16 @@ Index: eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
 -    "Copyright (c) 2019-" & compileYear & " Status Research & Development GmbH"
 +    "Copyright (c) 2019-2024" & " Status Research & Development GmbH"
  
-   versionMajor* = 24
-   versionMinor* = 6
-@@ -41,11 +42,10 @@ const
+-  versionMajor* = 24
+-  versionMinor* = 6
+-  versionBuild* = 0
++  versionMajor* = parseInt(getEnv("VERSION_MAJOR", "24"))
++  versionMinor* = parseInt(getEnv("VERSION_MINOR", "6"))
++  versionBuild* = parseInt(getEnv("VERSION_BUILD", "0"))
+ 
+   versionBlob* = "stateofus" # Single word - ends up in the default graffiti
+ 
+@@ -41,12 +42,11 @@ const
    else:
      git_revision_override
  
@@ -25,10 +32,12 @@ Index: eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
    nimFullBanner* = staticExec("nim --version")
    nimBanner* = staticExec("nim --version | grep Version")
  
+-  versionAsStr* =
 +  gitRevision* = getEnv("GIT_REVISION", "xxxxxx")
-   versionAsStr* =
++    versionAsStr* =
      $versionMajor & "." & $versionMinor & "." & $versionBuild
  
+   fullVersionStr* = "v" & versionAsStr & "-" & gitRevision & "-" & versionBlob
 Index: eth-node-nimbus-eth2-24.6.0/vendor/nimbus-build-system/makefiles/targets.mk
 ===================================================================
 --- eth-node-nimbus-eth2-24.6.0.orig/vendor/nimbus-build-system/makefiles/targets.mk
