@@ -1,13 +1,12 @@
 #!/usr/bin/make -f
 export GO_BIN_HOME=$(HOME)/go
 export PATH:=$(PATH):$(GO_BIN_HOME)/bin
-export STABLE_GIT_COMMIT=38f208d70dc95b12c08403f5c72009aaa10dfe2f
 export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
 export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
-export GIT_TAG=5.0.4
-export GIT_COMMIT=3b184f43c86baf6c36478f65a5113e7cf0836d41
+export STABLE_GIT_COMMIT=38f208d70dc95b12c08403f5c72009aaa10dfe2f
+export STABLE_GIT_TAG=5.0.4
 export BUILD_DATE=2024-04-30 01:44:55+00:00
 export DATE_UNIX=1714441523
 export DOCKER_TAG=5.0.4
