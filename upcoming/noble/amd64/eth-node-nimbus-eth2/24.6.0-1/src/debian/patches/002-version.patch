@@ -23,7 +23,7 @@ Index: eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
  
    versionBlob* = "stateofus" # Single word - ends up in the default graffiti
  
-@@ -41,12 +42,11 @@ const
+@@ -41,11 +42,10 @@ const
    else:
      git_revision_override
  
@@ -32,12 +32,10 @@ Index: eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
    nimFullBanner* = staticExec("nim --version")
    nimBanner* = staticExec("nim --version | grep Version")
  
--  versionAsStr* =
 +  gitRevision* = getEnv("GIT_REVISION", "xxxxxx")
-+    versionAsStr* =
+   versionAsStr* =
      $versionMajor & "." & $versionMinor & "." & $versionBuild
  
-   fullVersionStr* = "v" & versionAsStr & "-" & gitRevision & "-" & versionBlob
 Index: eth-node-nimbus-eth2-24.6.0/vendor/nimbus-build-system/makefiles/targets.mk
 ===================================================================
 --- eth-node-nimbus-eth2-24.6.0.orig/vendor/nimbus-build-system/makefiles/targets.mk
