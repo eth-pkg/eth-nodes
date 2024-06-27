@@ -46,3 +46,21 @@ Index: eth-node-prysm-5.0.4/runtime/version/version.go
 +  gitCommit = os.Getenv("GIT_COMMIT");
  	return fmt.Sprintf("Prysm/%s/%s", gitTag, gitCommit)
  }
+Index: eth-node-prysm-5.0.4/.bazelrc
+===================================================================
+--- eth-node-prysm-5.0.4.orig/.bazelrc
++++ eth-node-prysm-5.0.4/.bazelrc
+@@ -19,7 +19,12 @@ test:e2e --define gotags=debug
+ coverage --define=coverage_enabled=1
+ 
+ # Stamp binaries with git information
+-build --workspace_status_command=./hack/workspace_status.sh
++build --workspace_status_command=./hack/workspace_status.sh \
++    --action_env=GIT_COMMIT \
++    --action_env=BUILD_DATE \
++    --action_env=DATE_UNIX \
++    --action_env=DOCKER_TAG \
++    --action_env=GIT_TAG
+ 
+ build --define blst_disabled=false
+ run --define blst_disabled=false
