@@ -6,7 +6,7 @@ export ADDITIONAL_BINARIES=generate_makefile
 export NIMFLAGS=-d:disableMarchNative --gcc.options.debug:'-g1' --clang.options.debug:'-gline-tables-only'
 export NIMFLAGS+=-d:marchOptimized
 #export NIMFLAGS+="--mm:refc -d:limitStackUsage"
-export GIT_REVISION="7d00786"
+export GIT_REVISION=7d00786
 export PARTIAL_STATIC_LINKING=1
 export QUICK_AND_DIRTY_COMPILER=1
 export LOG_LEVEL="TRACE"
@@ -23,6 +23,7 @@ override_dh_dwz:
 	# skip of optimization of DWARF as it makes no sense, the optimized size is bigger than the original
 
 override_dh_auto_build:
+	make ntu
 	for bin in $(BINARIES) ; do \
 		NIMFLAGS="$(NIMFLAGS)" make "$${bin}"; \
 		llvm-objcopy --remove-section .note.gnu.property "build/$${bin}" "build/$${bin}"; \
