@@ -23,7 +23,7 @@ override_dh_dwz:
 	# skip of optimization of DWARF as it makes no sense, the optimized size is bigger than the original
 
 override_dh_auto_build:
-	ln -s vendor/nimbus-build-system/scripts/nimble.sh nimble
+	make ntu
 	for bin in $(BINARIES) ; do \
 		NIMFLAGS="$(NIMFLAGS)" make "$${bin}"; \
 		llvm-objcopy --remove-section .note.gnu.property "build/$${bin}" "build/$${bin}"; \
