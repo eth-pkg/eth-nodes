@@ -8,5 +8,5 @@ eth-node-nimbus-eth2: extended-description-line-too-long line 1
 eth-node-nimbus-eth2: extended-description-line-too-long line 3
 eth-node-nimbus-eth2: no-manual-page [usr/bin/nimbus_beacon_node]
 
-eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/build/nimbus_beacon_node]
-eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/build/nimbus_light_client]
+eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node/nimbus_beacon_node]
+eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/bin/nimbus_light_client/nimbus_light_client]
