@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which lighthouse)"
+  assertEquals "/usr/bin/lighthouse" "$output"
+}
+
+test_invocation(){
+  output="$(lighthouse --version)"
+  echo "$output"
+ # checked against https://github.com/sigp/lighthouse/releases/download/v4.5.0/lighthouse-v4.5.0-x86_64-unknown-linux-gnu.tar.gz
+  assertEquals "$output" "Lighthouse v5.2.1
+BLS library: blst-modern
+SHA256 hardware acceleration: true
+Allocator: jemalloc
+Profile: maxperf
+Specs: mainnet (true), minimal (false), gnosis (true)"
+}
+
+. shunit2
