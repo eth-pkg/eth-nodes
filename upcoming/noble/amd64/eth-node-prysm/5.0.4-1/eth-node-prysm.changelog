@@ -1,4 +1,4 @@
-eth-node-prysm (5.0.4-2) noble; urgency=medium
+eth-node-prysm (5.0.4-1) noble; urgency=medium
 
   * Add prysmctl and client-stats
 
