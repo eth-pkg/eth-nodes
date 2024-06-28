@@ -14,41 +14,16 @@ Index: eth-node-prysm-5.0.4/hack/workspace_status.sh
 -echo STABLE_GIT_TAG "$(git describe --tags --abbrev=0)"
 +# Patch for reproducibility
 +#
-Index: eth-node-prysm-5.0.4/runtime/version/version.go
-===================================================================
---- eth-node-prysm-5.0.4.orig/runtime/version/version.go
-+++ eth-node-prysm-5.0.4/runtime/version/version.go
-@@ -5,6 +5,7 @@ package version
- import (
- 	"fmt"
- 	"log"
-+	"os"
- 	"os/exec"
- 	"strconv"
- 	"strings"
-@@ -45,5 +46,7 @@ func BuildData() string {
- 			gitCommit = strings.TrimRight(string(commit), "\r\n")
- 		}
- 	}
-+  gitTag = os.Getenv("GIT_TAG");
-+  gitCommit = os.Getenv("GIT_COMMIT");
- 	return fmt.Sprintf("Prysm/%s/%s", gitTag, gitCommit)
- }
 Index: eth-node-prysm-5.0.4/.bazelrc
 ===================================================================
 --- eth-node-prysm-5.0.4.orig/.bazelrc
 +++ eth-node-prysm-5.0.4/.bazelrc
-@@ -19,7 +19,12 @@ test:e2e --define gotags=debug
+@@ -19,7 +19,7 @@ test:e2e --define gotags=debug
  coverage --define=coverage_enabled=1
  
  # Stamp binaries with git information
 -build --workspace_status_command=./hack/workspace_status.sh
-+build --workspace_status_command=./hack/workspace_status.sh \
-+    --action_env=GIT_COMMIT \
-+    --action_env=BUILD_DATE \
-+    --action_env=DATE_UNIX \
-+    --action_env=DOCKER_TAG \
-+    --action_env=GIT_TAG
++build --workspace_status_command=./debian/hack/workspace_status.sh 
  
  build --define blst_disabled=false
  run --define blst_disabled=false
