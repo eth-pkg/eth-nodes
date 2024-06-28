@@ -1,0 +1,60 @@
+Index: eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
+===================================================================
+--- eth-node-nimbus-eth2-24.6.0.orig/beacon_chain/version.nim
++++ eth-node-nimbus-eth2-24.6.0/beacon_chain/version.nim
+@@ -11,15 +11,16 @@
+ ## in the Nimbus release process (i.e. beacon_node, validator_client, etc)
+ 
+ import std/[strutils, compilesettings]
++import os
+ 
+ const
+   compileYear = CompileDate[0 ..< 4]  # YYYY-MM-DD (UTC)
+   copyrights* =
+-    "Copyright (c) 2019-" & compileYear & " Status Research & Development GmbH"
++    "Copyright (c) 2019-2024" & " Status Research & Development GmbH"
+ 
+-  versionMajor* = 24
+-  versionMinor* = 6
+-  versionBuild* = 0
++  versionMajor* = parseInt(getEnv("VERSION_MAJOR", "24"))
++  versionMinor* = parseInt(getEnv("VERSION_MINOR", "6"))
++  versionBuild* = parseInt(getEnv("VERSION_BUILD", "0"))
+ 
+   versionBlob* = "stateofus" # Single word - ends up in the default graffiti
+ 
+@@ -41,11 +42,10 @@ const
+   else:
+     git_revision_override
+ 
+-  gitRevision* = strip(gitRevisionLong)[0..5]
+-
+   nimFullBanner* = staticExec("nim --version")
+   nimBanner* = staticExec("nim --version | grep Version")
+ 
++  gitRevision* = getEnv("GIT_REVISION", "xxxxxx")
+   versionAsStr* =
+     $versionMajor & "." & $versionMinor & "." & $versionBuild
+ 
+Index: eth-node-nimbus-eth2-24.6.0/vendor/nimbus-build-system/makefiles/targets.mk
+===================================================================
+--- eth-node-nimbus-eth2-24.6.0.orig/vendor/nimbus-build-system/makefiles/targets.mk
++++ eth-node-nimbus-eth2-24.6.0/vendor/nimbus-build-system/makefiles/targets.mk
+@@ -107,7 +107,6 @@ $(NIM_BINARY): | sanity-checks
+ 
+ # don't use this target, or you risk updating dependency repos that are not ready to be used in Nimbus
+ update-remote:
+-	git submodule update --remote
+ 
+ nat-libs: | libminiupnpc.a libnatpmp.a
+ 
+@@ -130,9 +129,6 @@ endif
+ #- fakes a Nimble package repository with the minimum info needed by the Nim compiler
+ #  for runtime path (i.e.: the second line in $(NIMBLE_DIR)/pkgs/*/*.nimble-link)
+ $(NIMBLE_DIR):
+-	mkdir -p $(NIMBLE_DIR)/pkgs
+-	NIMBLE_DIR="$(CURDIR)/$(NIMBLE_DIR)" PWD_CMD="$(PWD)" EXCLUDED_NIM_PACKAGES="$(EXCLUDED_NIM_PACKAGES)" \
+-		git submodule foreach --recursive --quiet '"$(CURDIR)/$(BUILD_SYSTEM_DIR)/scripts/create_nimble_link.sh" "$$sm_path"'
+ 
+ clean-cross:
+ 	+ [[ -e vendor/nim-nat-traversal/vendor/miniupnp/miniupnpc ]] && "$(MAKE)" -C vendor/nim-nat-traversal/vendor/miniupnp/miniupnpc CC=$(CC) clean $(HANDLE_OUTPUT) || true
