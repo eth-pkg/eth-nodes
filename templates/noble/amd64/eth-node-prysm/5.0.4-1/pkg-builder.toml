@@ -1,8 +1,8 @@
 [package_fields]
 spec_file = "eth-node-prysm.sss"
 package_name = "eth-node-prysm"
-version_number = "5.0.4"
-revision_number = "1"
+version_number = "<CLIENT_VERSION>"
+revision_number = "<CLIENT_REVISION>"
 homepage="https://github.com/prysmaticlabs/prysm"
 
 [package_type]

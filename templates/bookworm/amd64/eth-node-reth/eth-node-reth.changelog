@@ -1,5 +1,6 @@
-eth-node-reth (1.0.0-1) bookworm; urgency=medium
+eth-node-reth (<CLIENT_VERSION>-<CLIENT_REVISION>) bookworm; urgency=medium
 
-  * First official release of reth
+  * <CHANGELOG_MSG>
 
- -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 26 Jun 2024 08:16:17 +0200
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  <CHANGELOG_MSG>
+

@@ -1,8 +1,8 @@
 [package_fields]
 spec_file = "eth-node-nimbus-eth2.sss"
 package_name = "eth-node-nimbus-eth2"
-version_number = "24.6.0"
-revision_number = "1"
+version_number = "<CLIENT_VERSION>"
+revision_number = "<CLIENT_REVISION>"
 homepage = "https://github.com/status-im/nimbus-eth2"
 
 [package_type]

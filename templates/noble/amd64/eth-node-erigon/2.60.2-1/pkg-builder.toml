@@ -1,8 +1,8 @@
 [package_fields]
 spec_file = "eth-node-erigon.sss"
 package_name = "eth-node-erigon"
-version_number = "2.60.2"
-revision_number = "1"
+version_number = "<CLIENT_VERSION>"
+revision_number = "<CLIENT_REVISION>"
 homepage="https://github.com/ledgerwatch/erigon"
 
 [package_type]

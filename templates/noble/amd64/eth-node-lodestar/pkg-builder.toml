@@ -1,8 +1,8 @@
 [package_fields]
 spec_file = "eth-node-lodestar.sss"
 package_name = "eth-node-lodestar"
-version_number = "1.19.0"
-revision_number = "1"
+version_number = "<CLIENT_VERSION>"
+revision_number = "<CLIENT_REVISION>"
 homepage="https://github.com/ChainSafe/lodestar"
 
 [package_type]

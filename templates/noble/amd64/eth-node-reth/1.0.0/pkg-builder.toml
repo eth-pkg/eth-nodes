@@ -1,8 +1,8 @@
 [package_fields]
 spec_file = "eth-node-reth.sss"
 package_name = "eth-node-reth"
-version_number = "1.0.0"
-revision_number = "1"
+version_number = "<CLIENT_VERSION>"
+revision_number = "<CLIENT_REVISION>"
 homepage="https://github.com/paradigmxyz/reth"
 
 [package_type]
