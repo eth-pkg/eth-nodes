@@ -1,0 +1,53 @@
+[package_fields]
+spec_file = "eth-node-lighthouse.sss"
+package_name = "eth-node-lighthouse"
+version_number = "5.2.1"
+revision_number = "1"
+homepage="https://github.com/sigp/lighthouse"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/sigp/lighthouse/archive/refs/tags/v5.2.1.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "ce63b50815b0b9af6be317d1856578871ea45bb9f76b416fce010a6429dfd8b9"
+
+[package_type.language_env]
+language_env = "rust"
+rust_version="1.77.2"
+rust_binary_url="https://static.rust-lang.org/dist/rust-1.77.2-x86_64-unknown-linux-gnu.tar.xz"
+rust_binary_gpg_asc="""
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAABCgAQBQJmFa+iCRCFq5bm+hvl/gAAc4oP/12rJYjE54yHsCgcpf6Lg+jz
+h8HPP4uCET7gt7LZPBPaQPEllssvBE+OZPNXs2J/Bf9Dk+3Za2uEfSaEwRkuf2TV
+EjLRkbxxjAx6e5FczAV0Qdd9u8O2LimndsRPOpjvIJtU4+wXnlHpPQ0lydr0rJso
+/K9wdxvA3NgmNBa0SAKtGBwuziMk5tR+7gFFebJikXqnBsGgdifszL41tKSl5VkK
+FUyb6xn0tA+wGmCVNiCV8JeTacr7+upJhAcMEqYWH/AuhA2vgF21W5jDPeA3VfoJ
+RgPYUkbTKSdmUd68sUS5pzixxnYa6LXMBewshTim/kbxlMHxrZ+YSoOjBSuMUA/9
+ZcvqR/fdVNLXI/2oFIT4VPNM1cYmR15xBI1G5AbfOzYWoPGU9OTu4hs11Y3DCTCz
+E5obQCVAm4/H8gO3hTvDiJE0Rb2M0h1uV12LkCMymzuIBrhLkVhQeekDZadJmWq0
+XlT/N86YFd8P393xYE3fpKaGqZ0fBJfX4nLdZHdZeFrov6ADjf7NLsfY0S9AnRnK
+SAytDb5EQMcBZXlNKnF+mLG9l0Y4JtijEsaiMaJgzVInTIUTtkW/GlgpAgzIBQ8m
+KGFMBQELjcFWLGcBVE45DRuVR8E3XYunjSdgLFXjfZfeGF3uiS6fNHGCH41ryqfj
+2jwoU0cewz4tgDucAWWC
+=sCT4
+-----END PGP SIGNATURE-----
+"""
+
+[build_env]
+codename="bookworm"
+arch = "amd64"
+pkg_builder_version="0.2.5"
+debcrafter_version = "2711b53"
+# needed for tests
+docker=true
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/bookworm"

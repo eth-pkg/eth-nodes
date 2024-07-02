@@ -1,0 +1,5 @@
+eth-node-prysm (5.0.4-1) bookworm; urgency=medium
+
+  * New prysm release
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sat, 22 Jun 2024 07:03:17 +0200

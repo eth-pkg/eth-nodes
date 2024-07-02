@@ -1,0 +1,41 @@
+#!/usr/bin/make -f
+export CARGO_HOME=$(HOME)/.cargo
+export PATH:=$(PATH):$(CARGO_HOME)/bin
+# same as CROSS_FEATURES, but packaging don't use cross
+# cross relies on rustup, which pkg-builder doesn't use
+# cross uses dockerized environment for building, which we don't need
+# pkg-builder uses chroot instead of docker, chroot is much more lightweight
+# chroot is the debian way
+export FEATURES=modern,gnosis,jemalloc
+export PROFILE=maxperf
+export CARGO_INSTALL_EXTRA_FLAGS
+
+%:
+	dh $@
+
+
+override_dh_auto_test:
+	# Install additional test dependency
+	cd /tmp && curl -s -L https://github.com/foundry-rs/foundry/releases/download/nightly-ca67d15f4abd46394b324c50e21e66f306a1162d/foundry_nightly_linux_amd64.tar.gz -o foundry_nightly_linux_amd64.tar.gz
+	cd /tmp && tar xvf foundry_nightly_linux_amd64.tar.gz 
+	cp /tmp/anvil $(HOME)/.cargo/bin
+	anvil --version # check if it correctly installed
+	cargo test --workspace --release --features "$(TEST_FEATURES)" \
+ 		--exclude ef_tests --exclude beacon_chain --exclude slasher --exclude network \
+		--exclude lighthouse_metrics \
+		--exclude web3signer_tests \
+		--exclude watch # Same as make test-release, except additionally disabling docker tests  
+	#make run-ef-tests
+
+
+override_dh_auto_install:
+	# install is not the same as debian install, ignore it 
+	# don't want to compile the client twice
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym

@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+cd /tmp
+curl https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb --output jdk-21.0.2_linux-x64_bin.deb
+dpkg -i jdk-21.0.2_linux-x64_bin.deb
+
+test_binary_in_path(){
+  output="$(which teku)"
+  assertEquals "/usr/bin/teku" "$output"
+}
+
+test_invocation(){
+  output="$(teku --version)"
+  echo "$output"
+  # TODO fix version numbers
+  # checked against https://artifacts.consensys.net/public/teku/raw/names/teku.tar.gz/versions/23.10.0/teku-23.10.0.tar.gz
+  assertEquals  "$output" "teku/v24.6.1/linux-x86_64/oracle-java-21"
+}
+
+. shunit2
