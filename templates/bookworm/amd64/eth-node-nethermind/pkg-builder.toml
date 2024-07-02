@@ -8,9 +8,9 @@ homepage="https://github.com/NethermindEth/nethermind"
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/NethermindEth/nethermind/archive/refs/tags/1.27.0.tar.gz"
+tarball_url = "https://github.com/NethermindEth/nethermind/archive/refs/tags/<CLIENT_VERSION>.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "517d13bd36132a5793794e8934b20b316a4b2fb64fb9ae5f6c47b6400e30aed6"
+tarball_hash = "<CLIENT_PACKAGE_HASH>"
 
 [package_type.language_env]
 language_env = "dotnet"
@@ -32,7 +32,7 @@ use_backup_version = false
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.5"
+pkg_builder_version="<PKG_BUILDER_VERSION>"
 debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true

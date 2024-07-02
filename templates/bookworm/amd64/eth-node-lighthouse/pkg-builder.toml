@@ -8,9 +8,9 @@ homepage="https://github.com/sigp/lighthouse"
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/sigp/lighthouse/archive/refs/tags/v5.2.1.tar.gz"
+tarball_url = "https://github.com/sigp/lighthouse/archive/refs/tags/v<CLIENT_VERSION>.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "ce63b50815b0b9af6be317d1856578871ea45bb9f76b416fce010a6429dfd8b9"
+tarball_hash = "<CLIENT_PACKAGE_HASH>"
 
 [package_type.language_env]
 language_env = "rust"
@@ -38,7 +38,7 @@ KGFMBQELjcFWLGcBVE45DRuVR8E3XYunjSdgLFXjfZfeGF3uiS6fNHGCH41ryqfj
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.5"
+pkg_builder_version="<PKG_BUILDER_VERSION>"
 debcrafter_version = "2711b53"
 # needed for tests
 docker=true

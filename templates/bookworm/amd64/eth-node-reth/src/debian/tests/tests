@@ -13,7 +13,7 @@ test_invocation() {
 	output="$(reth --version)"
 	echo "$output"
 	# checked against https://github.com/paradigmxyz/reth/releases/download/v0.2.0-beta.8/reth-v0.2.0-beta.8-x86_64-unknown-linux-gnu.tar.gz
-	assertEquals "$output" "reth Version: 1.0.0
+	assertEquals "$output" "reth Version: <CLIENT_VERSION>
 Commit SHA: 83d412d
 Build Timestamp: 2024-06-26T12:34:56Z
 Build Features: jemalloc

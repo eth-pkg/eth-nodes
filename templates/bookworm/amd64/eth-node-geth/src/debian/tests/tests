@@ -14,7 +14,7 @@ test_invocation(){
   echo "$output"
   # check against
   # https://gethstore.blob.core.windows.net/builds/geth-alltools-linux-amd64-1.13.4-3f907d6a.tar.gz
-  assertEquals "geth version 1.14.5-stable" "$output"
+  assertEquals "geth version <CLIENT_VERSION>-stable" "$output"
 }
 
 . shunit2

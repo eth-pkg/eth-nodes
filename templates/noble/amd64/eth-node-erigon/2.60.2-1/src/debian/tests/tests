@@ -13,7 +13,7 @@ test_invocation(){
   output="$(erigon --version)"
   echo "$output"
   # checked againts https://github.com/ledgerwatch/erigon/releases/download/v2.53.2/erigon_2.53.2_linux_amd64.tar.gz
-  assertEquals "erigon version 2.60.1" "$output"
+  assertEquals "erigon version <CLIENT_VERSION>" "$output"
 }
 
 . shunit2

@@ -8,9 +8,9 @@ homepage="https://github.com/ethereum/go-ethereum"
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/ethereum/go-ethereum/archive/refs/tags/v1.14.5.tar.gz"
+tarball_url = "https://github.com/ethereum/go-ethereum/archive/refs/tags/v<CLIENT_VERSION>.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "d062f7206769e2b3acd851d9d3dcfbdaea39dd379f95af3add7114fc2e7264df"
+tarball_hash = "<CLIENT_PACKAGE_HASH>"
 
 [package_type.language_env]
 language_env = "go"
@@ -21,7 +21,7 @@ go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471
 [build_env]
 codename="noble numbat"
 arch = "amd64"
-pkg_builder_version="0.2.5"
+pkg_builder_version="<PKG_BUILDER_VERSION>"
 debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true

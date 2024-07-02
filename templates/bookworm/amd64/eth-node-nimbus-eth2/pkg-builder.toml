@@ -9,7 +9,7 @@ homepage = "https://github.com/status-im/nimbus-eth2"
 # virtual | git | default
 package_type = "git"
 git_url = "https://github.com/status-im/nimbus-eth2.git"
-git_tag = "v24.6.0"
+git_tag = "v<CLIENT_VERSION>"
 submodules = [
     { "commit" = "73fbb29019c19887235c1da456cfbfd5b4835184", "path" = "vendor/EIPs" },
     { "commit" = "ab3ff9fad45fa7e20d749d0a03a7567225f5dd4a", "path" = "vendor/NimYAML" },
