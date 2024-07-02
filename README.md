@@ -5,17 +5,19 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 ## Table of Contents
 
 - [Installation](#installation)
-  - [Add Repository](#add-repository)
-  - [Install Clients](#install-clients)
-    - [Besu](#besu)
-    - [Erigon](#erigon)
-    - [Geth](#geth)
-    - [Lodestar](#lodestar)
-    - [Nethermind](#nethermind)
-    - [Lighthouse](#lighthouse)
-    - [Nimbus-eth2](#nimbus-eth2)
-    - [Prysm](#prysm)
-    - [Teku](#teku)
+  - [Debian 12](#add-repository)
+  - [Ubuntu 24.04 LTS](#debian-12-bookworm)
+  - [Install Clients](#ubuntu-2404-lts-noble-numbat)
+    - [besu](#besu)
+    - [erigon](#erigon)
+    - [geth](#geth)
+    - [lodestar](#lodestar)
+    - [nethermind](#nethermind)
+    - [lighthouse](#lighthouse)
+    - [nimbus-eth2](#nimbus-eth2)
+    - [prysm](#prysm)
+    - [reth](#reth)
+    - [teku](#teku)
 - [Building Packages](#building-packages)
   - [Prerequisites](#prerequisites)
   - [Building and Verifying Packages](#building-and-verifying-packages)
@@ -24,7 +26,7 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 
 ## Installation
 
-### Add Repository
+### Debian 12 (bookworm)
 
 1. **Add the repository signing key:**
     ```bash
@@ -33,41 +35,58 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 
 2. **Add the repository to sources.list:**
     ```bash
-    sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com bookworm main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
+    sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/bookworm-main bookworm main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
     ```
 
 3. **Update package lists:**
     ```bash
     sudo apt update
     ```
+    
+### Ubuntu 24.04 LTS (noble numbat)
 
+1. **Add the repository signing key:**
+    ```bash
+    sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
+    ```
+
+2. **Add the repository to sources.list:**
+    ```bash
+    sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
+    ```
+
+3. **Update package lists:**
+    ```bash
+    sudo apt update
+    ```
+    
 ### Install Clients
 
 Once the repository is added, you can install the clients using `apt`. Note that some clients might require additional runtime dependencies.
 
 <details>
-<summary><b>Besu</b></summary>
+<summary><b>besu</b></summary>
 
-1. **Install Java 17:**
+1. **Install Java 21:**
     ```bash
     sudo apt -y install wget curl
-    wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
-    sudo apt install ./jdk-17_linux-x64_bin.deb
+    wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+    sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
     ```
 
 2. **Set up Java environment:**
     ```bash
     cat <<'EOF' | sudo tee /etc/profile.d/jdk.sh
-    export JAVA_HOME=/usr/lib/jvm/jdk-17/
+    export JAVA_HOME=/usr/lib/jvm/jdk-21/
     export PATH=\$PATH:\$JAVA_HOME/bin
     EOF
 
     source /etc/profile.d/jdk.sh
-    sudo ln -s /usr/lib/jvm/jdk-17-oracle-x64 /usr/lib/jvm/jdk-17
+    sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
     java -version
     ```
 
-3. **Install Besu:**
+3. **Install besu:**
     ```bash
     sudo apt install eth-node-besu
     ```
@@ -80,9 +99,9 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Erigon</b></summary>
+<summary><b>erigon</b></summary>
 
-1. **Install Erigon:**
+1. **Install erigon:**
     ```bash
     sudo apt install eth-node-erigon
     ```
@@ -95,9 +114,9 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Geth</b></summary>
+<summary><b>geth</b></summary>
 
-1. **Install Geth:**
+1. **Install geth:**
     ```bash
     sudo apt install eth-node-geth
     ```
@@ -110,7 +129,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Lodestar</b></summary>
+<summary><b>lodestar</b></summary>
 
 1. **Install Node.js:**
     ```bash
@@ -118,7 +137,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
     sudo apt install -y nodejs
     ```
 
-2. **Install Lodestar:**
+2. **Install lodestar:**
     ```bash
     sudo apt install eth-node-lodestar
     ```
@@ -131,7 +150,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Nethermind</b></summary>
+<summary><b>nethermind</b></summary>
 
 1. **Install .NET runtime:**
     ```bash
@@ -142,7 +161,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
     sudo apt install -y aspnetcore-runtime-7.0
     ```
 
-2. **Install Nethermind:**
+2. **Install nethermind:**
     ```bash
     sudo apt install eth-node-nethermind
     ```
@@ -155,9 +174,9 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Lighthouse</b></summary>
+<summary><b>lighthouse</b></summary>
 
-1. **Install Lighthouse:**
+1. **Install lighthouse:**
     ```bash
     sudo apt install eth-node-lighthouse
     ```
@@ -170,9 +189,9 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Nimbus-eth2</b></summary>
+<summary><b>nimbus-eth2</b></summary>
 
-1. **Install Nimbus-eth2:**
+1. **Install nimbus-eth2:**
     ```bash
     sudo apt install eth-node-nimbus-eth2
     ```
@@ -185,9 +204,9 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Prysm</b></summary>
+<summary><b>prysm</b></summary>
 
-1. **Install Prysm:**
+1. **Install prysm:**
     ```bash
     sudo apt install eth-node-prysm
     ```
@@ -200,28 +219,43 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>Teku</b></summary>
+<summary><b>reth</b></summary>
 
-1. **Install Java 17:**
+1. **Install reth:**
+    ```bash
+    sudo apt install eth-node-reth
+    ```
+
+2. **Verify installation:**
+    ```bash
+    reth
+    ```
+
+</details>
+
+<details>  
+<summary><b>teku</b></summary>
+
+1. **Install Java 21:**
     ```bash
     sudo apt -y install wget curl
-    wget https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.deb
-    sudo apt install ./jdk-17_linux-x64_bin.deb
+    wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+    sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
     ```
 
 2. **Set up Java environment:**
     ```bash
     cat <<'EOF' | sudo tee /etc/profile.d/jdk.sh
-    export JAVA_HOME=/usr/lib/jvm/jdk-17/
+    export JAVA_HOME=/usr/lib/jvm/jdk-21/
     export PATH=\$PATH:\$JAVA_HOME/bin
     EOF
 
     source /etc/profile.d/jdk.sh
-    sudo ln -s /usr/lib/jvm/jdk-17-oracle-x64 /usr/lib/jvm/jdk-17
+    sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
     java -version
     ```
 
-3. **Install Teku:**
+3. **Install teku:**
     ```bash
     sudo apt install eth-node-teku
     ```
