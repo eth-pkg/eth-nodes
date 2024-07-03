@@ -288,7 +288,10 @@ function main(){
     cp -R "$TEMPLATE_DIR"/* "$UPCOMING_DIR"
     DOWNLOAD_URL=$(get_download_url "$LATEST_RELEASE" )
     CLIENT_PACKAGE_HASH=$(get_hash "$DOWNLOAD_URL")
-
+    VERSION_MAJOR=
+    VERSION_MINOR=
+    VERSION_BUILD=
+    
     if [ "$CLIENT_NAME" = "nimbus-eth2" ];then 
       GIT_SUBMODULES=$(get_submodules_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
       VERSION_MAJOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 1)
