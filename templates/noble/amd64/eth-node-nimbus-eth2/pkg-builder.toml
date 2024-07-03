@@ -10,53 +10,8 @@ homepage="https://github.com/status-im/nimbus-eth2"
 package_type="git"
 git_url="https://github.com/status-im/nimbus-eth2.git"
 git_tag="v<CLIENT_VERSION>"
-submodules = [
-    { "commit" = "73fbb29019c19887235c1da456cfbfd5b4835184", "path" = "vendor/EIPs" },
-    { "commit" = "ab3ff9fad45fa7e20d749d0a03a7567225f5dd4a", "path" = "vendor/NimYAML" },
-    { "commit" = "9ed6c63314899d17e2c3f669adbe2bc915610982", "path" = "vendor/gnosis-chain-configs" },
-    { "commit" = "bc5dfed5d939f611ad519a89d84ae227e83b5570", "path" = "vendor/holesky" },
-    { "commit" = "f6b7882618a5ad2c1d2731ae35e5d16a660d5bb7", "path" = "vendor/mainnet" },
-    { "commit" = "a806cbfab5fe8de49c76139f8705fff79daf99ee", "path" = "vendor/nim-bearssl" },
-    { "commit" = "f29698d2e9a59453d99db7315a5af58add3c8715", "path" = "vendor/nim-blscurve" },
-    { "commit" = "33761a5f77610d3f87f774244490eae43a9ac5a1", "path" = "vendor/nim-chronicles" },
-    { "commit" = "1b9d9253e89445d585d0fff39cc0d19254fdfd0d", "path" = "vendor/nim-chronos" },
-    { "commit" = "0adf3b7db70736061bf12fa23c2fc51f395b289e", "path" = "vendor/nim-confutils" },
-    { "commit" = "f169068df6c11a2aeba27584c60e354e19c42e94", "path" = "vendor/nim-eth" },
-    { "commit" = "54675b5f1fd8156a508e75991693df57a281642e", "path" = "vendor/nim-eth2-scenarios" },
-    { "commit" = "11b9d952a80ec87e2443405a6a5382f9daac51f8", "path" = "vendor/nim-faststreams" },
-    { "commit" = "be57dbc902d36f37540897e98c69aa80f868cb45", "path" = "vendor/nim-http-utils" },
-    { "commit" = "ad8721e0f3c6925597b5a93b6c53e040f26b5fb3", "path" = "vendor/nim-json-rpc" },
-    { "commit" = "4d0b0662ed960ab2c5a1ddbd08f77048bac13ae7", "path" = "vendor/nim-json-serialization" },
-    { "commit" = "f12616d0675d9f6346141ca95f0840ab227eb213", "path" = "vendor/nim-kzg4844" },
-    { "commit" = "aab85b6d242df38706664373f089675235953ab8", "path" = "vendor/nim-libbacktrace" },
-    { "commit" = "2fa2c4425f4bb835c0517efc03009925dcd28239", "path" = "vendor/nim-libp2p" },
-    { "commit" = "2e29df095059a7a787b234f040612b742567b2bc", "path" = "vendor/nim-metrics" },
-    { "commit" = "9c7dc8c58ff9c3dfb11c2d333171b47659ed824c", "path" = "vendor/nim-nat-traversal" },
-    { "commit" = "b828f07037c87382b7f20f96e6cca6e85788dd25", "path" = "vendor/nim-normalize" },
-    { "commit" = "a9687dda1c3e20d5b066d42b33c2a63f018af93f", "path" = "vendor/nim-presto" },
-    { "commit" = "e2adf66b8bc2f41606e8469a5f0a850d1e545b55", "path" = "vendor/nim-results" },
-    { "commit" = "194b715b16766e383b5aef92dd779fb182faf45d", "path" = "vendor/nim-secp256k1" },
-    { "commit" = "005ee90cb6aa563cdd690910455ea05f916ead3f", "path" = "vendor/nim-serialization" },
-    { "commit" = "913c426d571cf82601452642e01cd11ea26f7ac6", "path" = "vendor/nim-snappy" },
-    { "commit" = "1453b19b1a3cac24002dead15e02bd978cb52355", "path" = "vendor/nim-sqlite3-abi" },
-    { "commit" = "f8b6e036a00b227c8c0f7cae1394718b5c556f03", "path" = "vendor/nim-ssz-serialization" },
-    { "commit" = "a0a53c911606cace989074f6b806eb0546a64ef6", "path" = "vendor/nim-stew" },
-    { "commit" = "9d2b382c5dc34f0d6bbd93b2a5d65dde85067e0f", "path" = "vendor/nim-stint" },
-    { "commit" = "d4c43137c0590cb47f893a66ca8cb027fa6c217e", "path" = "vendor/nim-taskpools" },
-    { "commit" = "ae476c67314ac4b294d21040315e0f716189a70e", "path" = "vendor/nim-testutils" },
-    { "commit" = "24bbfcb8e4e256883fc959dc6f5c15fe7a84fca5", "path" = "vendor/nim-toml-serialization" },
-    { "commit" = "3db16f8ece5d0eba310c8f1ed812c6ff5a21a34a", "path" = "vendor/nim-unicodedb" },
-    { "commit" = "e96f3215030cbfa13abc2f5827069b6f8ba87e38", "path" = "vendor/nim-unittest2" },
-    { "commit" = "b705f816439f0068ece8c234336bc7093222d00f", "path" = "vendor/nim-web3" },
-    { "commit" = "63bcc2902d884c63101e144555ad99421734a70a", "path" = "vendor/nim-websock" },
-    { "commit" = "45b06fca15ce0f09586067d950da30c10227865a", "path" = "vendor/nim-zlib" },
-    { "commit" = "d0fb557f74a28912ff129ce0ba24008b00b1019b", "path" = "vendor/nim-zxcvbn" },
-    { "commit" = "dff3634b5d843f9b63425086f1b13245e26b6177", "path" = "vendor/nimbus-benchmarking" },
-    { "commit" = "8cdaec502b5a48f2514e11209f0d81a001d2a2b1", "path" = "vendor/nimbus-build-system" },
-    { "commit" = "ce9945b1b159d4c9b628f8c4cd2d262964692810", "path" = "vendor/nimbus-security-resources" },
-    { "commit" = "485f7b3cfa83c1beecc0e31be0e964d697aa74d7", "path" = "vendor/nimcrypto" },
-    { "commit" = "ff09a161f61959285c64b355d452cd25eae094bd", "path" = "vendor/sepolia" },
-]
+submodules = <GIT_SUBMODULES>
+
 
 
 [package_type.language_env]

@@ -100,6 +100,35 @@ get_commit_hash_for_tag() {
     rm -rf "$temp_dir"
 }
 
+get_submodules_for_tag() {
+    local repo=$1
+    local tag=$2
+    local temp_dir
+    temp_dir=$(mktemp -d)
+    git clone -q --depth 1 --branch "$tag" "https://github.com/$repo.git" "$temp_dir" > /dev/null 2>&1
+    (
+        cd "$temp_dir" > /dev/null 2>&1 || { echo "Failed to change directory"; rm -rf "$temp_dir"; return 1; }
+
+        output="["
+
+        while read -r line; do
+        commit_hash=$(echo $line | awk '{print $1}' | tr -d '-')
+        submodule_path=$(echo $line | awk '{print $2}')
+        
+        output="${output}
+        { \"commit\" = \"$commit_hash\", \"path\" = \"$submodule_path\" },"
+        done < <(git submodule status)
+
+        output="${output%,}
+        ]"
+
+        echo "$output"
+
+   
+    )
+    rm -rf "$temp_dir"
+}
+
 format_changelog_date() {
     local datetime=$1
     date -d "$datetime" +"%a, %d %b %Y %H:%M:%S %z"
@@ -125,13 +154,16 @@ replace_in_files() {
     local pattern=$2
     local replacement=$3
     echo "pattern: $pattern, replacement: $replacement"
+    
+    local temp_file=$(mktemp)
+    echo "$replacement" > "$temp_file"
 
     files=$(find "$dir" -type f -print0 | xargs -0 grep -l "$pattern" 2>/dev/null) || true
     if [ $? -ne 0 ]; then
         echo "No matches found for pattern $pattern. Continuing to next pattern."
         return 0
     fi
-  
+    
     for file in $files; do
         echo "Processing file: $file"
         sed -i "s/$pattern/$replacement/g" "$file"
@@ -191,6 +223,34 @@ if ! is_supported "$CODENAME" "${SUPPORTED_CODENAMES[@]}"; then
     exit 1
 fi
 
+replace_git_submodules_in_file() {
+    local file=$1
+    local pattern=$2
+    local replacement=$3
+    echo "pattern: $pattern, replacement: $replacement"
+
+    # Escape special characters in the pattern for awk
+    escaped_pattern=$(echo "$pattern" | sed 's/[][\\.^$*]/\\&/g')
+
+    # Perform the replacement using awk
+    awk -v pattern="$escaped_pattern" -v replacement="submodules = $replacement" '
+        BEGIN { found = 0 }
+        {
+            if ($0 ~ pattern && !found) {
+                print replacement
+                found = 1
+            } else {
+                print $0
+            }
+        }
+    ' "$file" > tmp && mv tmp "$file"
+
+    if [ $? -ne 0 ]; then
+        echo "Error: awk failed for file $file with pattern $pattern"
+        return 1
+    fi
+}
+
 function main(){
     CLIENT_REPOSITORY=${REPOSITORIES[$CLIENT_NAME]}
     LATEST_RELEASE=$(get_latest_release "$CLIENT_REPOSITORY")
@@ -207,7 +267,7 @@ function main(){
     if [ -d "$UPCOMING_DIR" ]; then 
       echo "$UPCOMING_DIR already exists"
       exit 0
-    fi 
+    fi
 
     CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S %z")
     CHANGELOG_BUILD_DATE=$(format_changelog_date "$CURRENT_DATETIME")
@@ -228,6 +288,11 @@ function main(){
     cp -R "$TEMPLATE_DIR"/* "$UPCOMING_DIR"
     DOWNLOAD_URL=$(get_download_url "$LATEST_RELEASE" )
     CLIENT_PACKAGE_HASH=$(get_hash "$DOWNLOAD_URL")
+
+    if [ "$CLIENT_NAME" = "nimbus-eth2" ];then 
+      GIT_SUBMODULES=$(get_submodules_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
+      replace_git_submodules_in_file "$UPCOMING_DIR/pkg-builder.toml" "<GIT_SUBMODULES>" "$GIT_SUBMODULES"
+    fi 
 
     declare -A REPLACEMENTS=(
         ["<CLIENT_VERSION>"]="$CLIENT_VERSION"
@@ -254,6 +319,8 @@ function main(){
         continue
       fi
     done
+
+
 }
 
 main 
