@@ -8,7 +8,7 @@ homepage="https://github.com/ledgerwatch/erigon"
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/ledgerwatch/erigon/archive/refs/tags/<CLIENT_VERSION>.tar.gz"
+tarball_url = "https://github.com/ledgerwatch/erigon/archive/refs/tags/v<CLIENT_VERSION>.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "<CLIENT_PACKAGE_HASH>"
 
