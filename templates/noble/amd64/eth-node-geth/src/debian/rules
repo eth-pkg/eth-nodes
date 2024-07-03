@@ -1,9 +1,9 @@
 #!/usr/bin/make -f
 export CGO_ENABLED=0 
 
-export GIT_COMMIT ?= 87246f3cbaf10f83f56bc4d45f0f3e36e83e71e9
+export GIT_COMMIT ?= <GIT_COMMIT_FULL>
 export GIT_BRANCH ?= main
-export GIT_TAG    ?= v1.14.5
+export GIT_TAG    ?= v<GIT_VERSION>
 
 export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)

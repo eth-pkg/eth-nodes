@@ -1,7 +1,8 @@
-#! /usr/bin/env bash 
+#!/usr/bin/env bash
 
-set -e 
+set -euo pipefail
 
+# Constants
 SUPPORTED_CLIENTS=(
   "besu"
   "erigon"
@@ -15,43 +16,38 @@ SUPPORTED_CLIENTS=(
   "teku"
 )
 
-declare -A repositories
-repositories=(
-    ["besu"]="hyperledger/besu"
-    ["erigon"]="ledgerwatch/erigon"
-    ["geth"]="ethereum/go-ethereum"
-    ["lighthouse"]="sigp/lighthouse"
-    ["lodestar"]="ChainSafe/lodestar"
-    ["nethermind"]="NethermindEth/nethermind"
-    ["nimbus-eth2"]="status-im/nimbus-eth2"
-    ["prysm"]="prysmaticlabs/prysm"
-    ["reth"]="paradigmxyz/reth"
-    ["teku"]="ConsenSys/teku"
+declare -A REPOSITORIES=(
+  ["besu"]="hyperledger/besu"
+  ["erigon"]="ledgerwatch/erigon"
+  ["geth"]="ethereum/go-ethereum"
+  ["lighthouse"]="sigp/lighthouse"
+  ["lodestar"]="ChainSafe/lodestar"
+  ["nethermind"]="NethermindEth/nethermind"
+  ["nimbus-eth2"]="status-im/nimbus-eth2"
+  ["prysm"]="prysmaticlabs/prysm"
+  ["reth"]="paradigmxyz/reth"
+  ["teku"]="ConsenSys/teku"
 )
 
+SUPPORTED_ARCHS=("amd64")
+SUPPORTED_CODENAMES=("bookworm" "noble")
 
-SUPPORTED_ARCHS=(
-  "amd64"
-)
-
-SUPPORTED_CODENAMES=(
-  "bookworm"
-  "noble"
-)
-
-# VARIABLES to replace 
 CLIENT_REVISION=1
 
+# Functions
 display_help() {
-    echo "Usage: $0 [OPTIONS]"
-    echo ""
-    echo "Options:"
-    echo "  --client-name <name>          Sets the client name."
-    echo "  --arch <architecture>         Sets the architecture."
-    echo "  --codename <codename>         Sets the codename."
-    echo "  --help, -h                    Displays this help text and exits."
+    cat <<EOF
+Usage: $0 [OPTIONS]
+
+Options:
+  --client-name <name>          Sets the client name.
+  --arch <architecture>         Sets the architecture.
+  --codename <codename>         Sets the codename.
+  --help, -h                    Displays this help text and exits.
+EOF
     exit 0
 }
+
 is_supported() {
     local value=$1
     shift
@@ -64,11 +60,65 @@ is_supported() {
     return 1
 }
 
+get_latest_release() {
+    local owner=$(echo "$1" | cut -d'/' -f1)
+    local repo=$(echo "$1" | cut -d'/' -f2)
+    local url="https://github.com/$owner/$repo/releases/latest"
+    local latest_release=$(curl -I -L -s "$url" | grep -i "location:" | tail -n1 | cut -d ' ' -f2)
+    latest_release=$(echo $latest_release | tr -d '\r\n')
+
+    echo "$latest_release"
+}
+
+get_hash() {
+    local url=$1
+    curl -sL "$url" | sha256sum | awk '{print $1}'
+}
+
+get_commit_hash_for_tag() {
+    local repo=$1
+    local tag=$2
+    local temp_dir
+    temp_dir=$(mktemp -d)
+    git clone -q --depth 1 --branch "$tag" "https://github.com/$repo.git" "$temp_dir" > /dev/null 2>&1
+    (
+        cd "$temp_dir" > /dev/null 2>&1 || { echo "Failed to change directory"; rm -rf "$temp_dir"; return 1; }
+        git rev-parse HEAD
+    )
+    rm -rf "$temp_dir"
+}
+
+format_changelog_date() {
+    local datetime=$1
+    date -d "$datetime" +"%a, %d %b %Y %H:%M:%S %z"
+}
+
+replace_in_files() {
+    local dir=$1
+    local pattern=$2
+    local replacement=$3
+    echo "pattern: $pattern, replacement: $replacement"
+
+    files=$(find "$dir" -type f -print0 | xargs -0 grep -l "$pattern" 2>/dev/null) || true
+    if [ $? -ne 0 ]; then
+        echo "No matches found for pattern $pattern. Continuing to next pattern."
+        return 0
+    fi
+  
+    for file in $files; do
+        echo "Processing file: $file"
+        sed -i "s/$pattern/$replacement/g" "$file"
+        if [ $? -ne 0 ]; then
+            echo "Error: sed failed for file $file with pattern $pattern"
+            return 1
+        fi
+    done
+}
 
 HELP=false
 CLIENT_NAME=""
 CODENAME=""
-ARCH=""
+ARCH="amd64"
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -99,143 +149,78 @@ if [ "$HELP" = true ]; then
     display_help
 fi
 
-# Check if client name is supported
 if ! is_supported "$CLIENT_NAME" "${SUPPORTED_CLIENTS[@]}"; then
-    echo "Error: Unsupported client name '$CLIENT_NAME'. Supported client names are: ${SUPPORTED_CLIENTS[*]}"
+    echo "Error: Unsupported client name '$CLIENT_NAME'"
     exit 1
 fi
 
-# Check if architecture is supported
 if ! is_supported "$ARCH" "${SUPPORTED_ARCHS[@]}"; then
-    echo "Error: Unsupported architecture '$ARCH'. Supported architectures are: ${SUPPORTED_ARCHS[*]}"
+    echo "Error: Unsupported architecture '$ARCH'"
     exit 1
 fi
 
-# Check if codename is supported
 if ! is_supported "$CODENAME" "${SUPPORTED_CODENAMES[@]}"; then
-    echo "Error: Unsupported codename '$CODENAME'. Supported codenames are: ${SUPPORTED_CODENAMES[*]}"
+    echo "Error: Unsupported codename '$CODENAME'"
     exit 1
 fi
 
-get_repository_url() {
-    local repo_name=$1
-    echo "${repositories[$repo_name]}"
-}
+function main(){
+    CLIENT_REPOSITORY=${REPOSITORIES[$CLIENT_NAME]}
+    LATEST_RELEASE=$(get_latest_release "$CLIENT_REPOSITORY")
+    TAG_NAME=$(echo "$LATEST_RELEASE" | tr '/' '\n' | tail -n1)
+    CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
+    RELEASE_DIR="releases/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
+    UPCOMING_DIR="upcoming/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
 
-CLIENT_REPOSITORY=$(get_repository_url "$CLIENT_NAME")
-TEMPLATE_DIR="templates/bookworm/amd64/eth-node-$CLIENT_NAME"
-REPOSITORY_URL="git@github.com:$CLIENT_REPOSITORY.git"
+    if [ -d "$RELEASE_DIR" ]; then 
+    echo "$RELEASE_DIR already exists"
+    exit 0
+    fi 
 
+    if [ -d "$UPCOMING_DIR" ]; then 
+    echo "$UPCOMING_DIR already exists"
+    exit 0
+    fi 
 
-get_latest_release() {
-    local owner=$(echo "$1" | cut -d'/' -f1)
-    local repo=$(echo "$1" | cut -d'/' -f2)
-    local url="https://github.com/$owner/$repo/releases/latest"
-    local latest_release=$(curl -I -L -s "$url" | grep -i "location:" | tail -n1 | cut -d ' ' -f2)
-    latest_release=$(echo $latest_release | tr -d '\r\n')
+    CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S %z")
+    CHANGELOG_BUILD_DATE=$(format_changelog_date "$CURRENT_DATETIME")
+    CHANGELOG_MSG="Support for $CLIENT_VERSION-$CLIENT_REVISION"
+    PKG_BUILDER_LATEST_RELEASE=$(get_latest_release "eth-pkg/pkg-builder")
+    PKG_BUILDER_TAG_NAME=$(echo "$PKG_BUILDER_LATEST_RELEASE" | tr '/' '\n' | tail -n1)
+    PKG_BUILDER_VERSION=$(echo "$PKG_BUILDER_TAG_NAME" | sed 's/^v//g')
 
-    echo "$latest_release"
-}
+    GIT_COMMIT_LONG=$(get_commit_hash_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
+    GIT_COMMIT_SHORT=${GIT_COMMIT_LONG:0:7}
+    TEMPLATE_DIR="templates/$CODENAME/$ARCH/eth-node-$CLIENT_NAME"
 
-get_hash() {
-  local latest_release="$1"
-  local tmp_dir
-  local download_url
-  local downloaded_file
-  local hash
+    mkdir -p "$UPCOMING_DIR"
+    cp -R "$TEMPLATE_DIR"/* "$UPCOMING_DIR"
+    CLIENT_PACKAGE_HASH=$(get_hash "$LATEST_RELEASE")
 
-  tmp_dir=$(mktemp -d) || { echo "Failed to create temporary directory"; return 1; }
+  
 
-  download_url=$(echo "$latest_release" | sed 's/releases/archives/' | sed 's/tag/tags/')
-  download_url="${download_url}.tar.gz"
+    declare -A REPLACEMENTS=(
+        ["<CLIENT_VERSION>"]="$CLIENT_VERSION"
+        ["<CLIENT_PACKAGE_HASH>"]="$CLIENT_PACKAGE_HASH"
+        ["<CLIENT_REVISION>"]="$CLIENT_REVISION"
+        ["<CHANGELOG_BUILD_DATE>"]="$CHANGELOG_BUILD_DATE"
+        ["<CHANGELOG_MSG>"]="$CHANGELOG_MSG"
+        ["<GIT_COMMIT_LONG>"]="$GIT_COMMIT_LONG"
+        ["<GIT_COMMIT_SHORT>"]="$GIT_COMMIT_SHORT"
+        ["<PKG_BUILDER_VERSION>"]="$PKG_BUILDER_VERSION"
+    )
 
-  cd "$tmp_dir" || { echo "Failed to change directory to temporary directory"; return 1; }
-  wget -q "$download_url" -O downloaded_file || { echo "Failed to download file"; return 1; }
-
-  # Calculate the hash
-  hash=$(sha256sum downloaded_file | awk '{ print $1 }') || { echo "Failed to calculate hash"; return 1; }
-
-  # Clean up
-  rm downloaded_file
-  cd - > /dev/null
-  rm -r "$tmp_dir"
-
-  # Return the hash
-  echo "$hash"
-}
-
-get_commit_hash_for_tag() {
-    local repo_url=$1
-    local tag_name=$2
-
-    local temp_dir=$(mktemp -d)
-
-    git clone --depth 1 --branch "$tag_name" "$repo_url" "$temp_dir" > /dev/null 2>&1
-    if [ $? -ne 0 ]; then
-        echo "Failed to clone repository"
-        rm -rf "$temp_dir"
-        return 1
-    fi
-
-    cd "$temp_dir" || { echo "Failed to change directory"; rm -rf "$temp_dir"; return 1; }
-
-    local commit_hash=$(git rev-parse HEAD)
-
-    cd - > /dev/null
-    rm -rf "$temp_dir"
-
-    echo "$commit_hash"
-}
-
-format_changelog_date() {
-    local datetime=$1
-    echo $(date -d "$datetime" +"%a, %d %b %Y %H:%M:%S %z")
-}
-
-latest_release=$(get_latest_release $CLIENT_REPOSITORY)
-tag_name=$(echo "$latest_release" | tr '/' '\n' | tail -n1)
-CLIENT_VERSION=$(echo "$tag_name" | sed 's/^v//g')
-release_dir="releases/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
-upcoming_dir="upcoming/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
-
-
-if [ -d "$release_dir" ]; then 
-  echo "$release_dir already exist"
-  exit 0
-fi 
-if [ -d "$upcoming_dir" ]; then 
-  echo "$upcoming_dir already exist"
-  exit 0
-fi 
-
-
-current_datetime=$(date +"%Y-%m-%d %H:%M:%S %z")
-echo $current_datetime
-CHANGELOG_BUILD_DATE=$(format_changelog_date "$current_datetime")
-CHANGELOG_MSG="Support for $CLIENT_VERSION-$CLIENT_REVISION"
-PKG_BUILDER_VERSION="0.2.5"
-GIT_COMMIT_LONG=$(get_commit_hash_for_tag $REPOSITORY_URL $tag_name)
-GIT_COMMIT_SHORT=${GIT_COMMIT_LONG:0:7}
-
-mkdir -p $upcoming_dir
-cp -R $TEMPLATE_DIR/* $upcoming_dir
-CLIENT_PACKAGE_HASH=$(get_hash $latest_release)
-
-
-declare -A replacements
-replacements=(
-    ["<CLIENT_VERSION>"]="$CLIENT_VERSION"
-    ["<CLIENT_PACKAGE_HASH>"]="$CLIENT_PACKAGE_HASH"
-    ["<CLIENT_REVISION>"]="$CLIENT_REVISION"
-    ["<CHANGELOG_BUILD_DATE>"]="$CHANGELOG_BUILD_DATE"
-    ["<CHANGELOG_MSG>"]="$CHANGELOG_MSG"
-    ["<GIT_COMMIT_LONG>"]="$GIT_COMMIT_LONG"
-    ["<GIT_COMMIT_SHORT>"]="$GIT_COMMIT_SHORT"
-    ["<PKG_BUILDER_VERSION>"]="$PKG_BUILDER_VERSION"
-)
-
-for pattern in "${!replacements[@]}"; do
-    grep -rl "$pattern" "$upcoming_dir" | while read -r file; do
-        sed -i "s/$pattern/${replacements[$pattern]}/g" "$file"
+    for key in "${!REPLACEMENTS[@]}"; do
+      echo "$key: ${REPLACEMENTS[$key]}"
     done
-done
+
+    for pattern in "${!REPLACEMENTS[@]}"; do
+      replace_in_files "$UPCOMING_DIR" "$pattern" "${REPLACEMENTS[$pattern]}"
+      if [ $? -ne 0 ]; then
+        echo "Error: replacement failed for pattern $pattern"
+        continue
+      fi
+    done
+}
+
+main 
