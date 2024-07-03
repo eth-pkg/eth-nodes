@@ -110,6 +110,16 @@ format_build_date() {
     date -d "$datetime" +"%Y-%m-%dT%H:%MZ"
 }
 
+format_date() {
+    local datetime=$1
+    date -d "$datetime" +"%Y-%m-%d %H:%M:%S+00:00"
+}
+
+format_unix_timestamp() {
+    local datetime=$1
+    date -d "$datetime" +%s
+}
+
 replace_in_files() {
     local dir=$1
     local pattern=$2
@@ -202,6 +212,9 @@ function main(){
     CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S %z")
     CHANGELOG_BUILD_DATE=$(format_changelog_date "$CURRENT_DATETIME")
     BUILD_DATE=$(format_build_date "$CURRENT_DATETIME")
+    BUILD_DATE_UTC=$(format_date "$CURRENT_DATETIME")
+    BUILD_DATE_UNIX_TIMESTAMP=$(format_unix_timestamp "$CURRENT_DATETIME")
+
     CHANGELOG_MSG="Support for $CLIENT_VERSION-$CLIENT_REVISION"
     PKG_BUILDER_LATEST_RELEASE=$(get_latest_release "eth-pkg/pkg-builder")
     PKG_BUILDER_TAG_NAME=$(echo "$PKG_BUILDER_LATEST_RELEASE" | tr '/' '\n' | tail -n1)
@@ -226,6 +239,8 @@ function main(){
         ["<GIT_COMMIT_SHORT>"]="$GIT_COMMIT_SHORT"
         ["<PKG_BUILDER_VERSION>"]="$PKG_BUILDER_VERSION"
         ["<BUILD_DATE>"]="$BUILD_DATE"
+        ["<BUILD_DATE_UTC>"]="$BUILD_DATE_UTC"
+        ["<BUILD_DATE_UNIX_TIMESTAMP>"]="$BUILD_DATE_UNIX_TIMESTAMP"
     )
 
     for key in "${!REPLACEMENTS[@]}"; do
