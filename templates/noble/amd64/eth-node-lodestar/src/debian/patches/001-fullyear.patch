@@ -15,13 +15,17 @@ Index: eth-node-lodestar-1.19.0/packages/cli/src/util/version.ts
 ===================================================================
 --- eth-node-lodestar-1.19.0.orig/packages/cli/src/util/version.ts
 +++ eth-node-lodestar-1.19.0/packages/cli/src/util/version.ts
-@@ -47,6 +47,9 @@ export function getVersionData(): {
+@@ -47,6 +47,13 @@ export function getVersionData(): {
      if (!localVersion || !localVersion.includes(commitShort)) {
        parts.push(commitShort);
      }
 +  }else {
-+    // for reproducible builds
-+    parts.push("c5b4c1c")
++    const commitShort = process.env.GIT_COMMIT;
++    if (commitShort){
++       parts.push(commitShort)
++    } else {
++       parts.push("c5b4c1c")
++    }
    }
  
    return {
@@ -63,13 +67,17 @@ Index: eth-node-lodestar-1.19.0/packages/prover/src/utils/version.ts
    // Add branch only if not present and not an ignore value
    if (branch && !BRANCH_IGNORE.test(branch)) parts.push(branch);
  
-@@ -47,6 +48,9 @@ export function getVersionData(): {
+@@ -47,6 +48,13 @@ export function getVersionData(): {
      if (!localVersion || !localVersion.includes(commitShort)) {
        parts.push(commitShort);
      }
 +  } else {
-+    // patch override to bake in version number for reproducible build
-+    parts.push("c5b4c1c")
++    const commitShort = process.env.GIT_COMMIT;
++    if (commitShort){
++       parts.push(commitShort)
++    } else {
++       parts.push("c5b4c1c")
++    }
    }
  
    return {
