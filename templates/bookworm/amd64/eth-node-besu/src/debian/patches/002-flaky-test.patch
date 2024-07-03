@@ -67,7 +67,7 @@ Index: eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethe
 ===================================================================
 --- eth-node-besu-24.6.0.orig/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
 +++ eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
-@@ -72,48 +72,6 @@ class DNSDaemonTest {
+@@ -72,49 +72,6 @@ class DNSDaemonTest {
      vertx.deployVerticle(dnsDaemon, options);
    }
  
@@ -113,6 +113,7 @@ Index: eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethe
 -            .setWorkerPoolSize(1);
 -    vertx.deployVerticle(dnsDaemon, options);
 -  }
- 
+-
    @AfterEach
    @DisplayName("Check that the vertx worker verticle is still there")
+   void lastChecks(final Vertx vertx) {

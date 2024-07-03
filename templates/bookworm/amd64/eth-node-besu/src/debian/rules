@@ -1,4 +1,6 @@
 #!/usr/bin/make -f
+export GIT_COMMIT=<GIT_COMMIT_SHORT>
+export BUILD_DATE=<BUILD_DATE>
 
 %:
 	dh $@

@@ -105,6 +105,11 @@ format_changelog_date() {
     date -d "$datetime" +"%a, %d %b %Y %H:%M:%S %z"
 }
 
+format_build_date() {
+    local datetime=$1
+    date -d "$datetime" +"%Y-%m-%dT%H:%MZ"
+}
+
 replace_in_files() {
     local dir=$1
     local pattern=$2
@@ -184,18 +189,19 @@ function main(){
     RELEASE_DIR="releases/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
     UPCOMING_DIR="upcoming/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
 
-    if [ -d "$RELEASE_DIR" ]; then 
-    echo "$RELEASE_DIR already exists"
-    exit 0
-    fi 
+    #if [ -d "$RELEASE_DIR" ]; then 
+    #  echo "$RELEASE_DIR already exists"
+    #  exit 0
+    #fi 
 
     if [ -d "$UPCOMING_DIR" ]; then 
-    echo "$UPCOMING_DIR already exists"
-    exit 0
+      echo "$UPCOMING_DIR already exists"
+      exit 0
     fi 
 
     CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S %z")
     CHANGELOG_BUILD_DATE=$(format_changelog_date "$CURRENT_DATETIME")
+    BUILD_DATE=$(format_build_date "$CURRENT_DATETIME")
     CHANGELOG_MSG="Support for $CLIENT_VERSION-$CLIENT_REVISION"
     PKG_BUILDER_LATEST_RELEASE=$(get_latest_release "eth-pkg/pkg-builder")
     PKG_BUILDER_TAG_NAME=$(echo "$PKG_BUILDER_LATEST_RELEASE" | tr '/' '\n' | tail -n1)
@@ -219,6 +225,7 @@ function main(){
         ["<GIT_COMMIT_LONG>"]="$GIT_COMMIT_LONG"
         ["<GIT_COMMIT_SHORT>"]="$GIT_COMMIT_SHORT"
         ["<PKG_BUILDER_VERSION>"]="$PKG_BUILDER_VERSION"
+        ["<BUILD_DATE>"]="$BUILD_DATE"
     )
 
     for key in "${!REPLACEMENTS[@]}"; do
