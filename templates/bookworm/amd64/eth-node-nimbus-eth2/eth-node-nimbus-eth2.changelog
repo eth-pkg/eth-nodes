@@ -1,4 +1,4 @@
-eth-node-nimbus-eth2 (<CLIENT_VERSION>-<CLIENT_REVISION>) noble; urgency=medium
+eth-node-nimbus-eth2 (<CLIENT_VERSION>-<CLIENT_REVISION>) bookworm; urgency=medium
 
   * <CHANGELOG_MSG>
 
