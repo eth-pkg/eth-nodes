@@ -1,4 +1,4 @@
-eth-node-geth (1.14.6-1) noble; urgency=medium
+eth-node-geth (1.14.6-1) bookworm; urgency=medium
 
   * Support for 1.14.6-1
 
