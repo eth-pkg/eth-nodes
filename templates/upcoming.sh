@@ -70,6 +70,18 @@ get_latest_release() {
     echo "$latest_release"
 }
 
+get_download_url() {
+  local latest_release="$1"
+  local download_url
+
+  # Rewrite the download URL
+  download_url=$(echo "$latest_release" | sed 's/releases/archive\/refs/' | sed 's/tag/tags/')
+  download_url="${download_url}.tar.gz"
+
+  echo "$download_url"
+}
+
+
 get_hash() {
     local url=$1
     curl -sL "$url" | sha256sum | awk '{print $1}'
@@ -195,9 +207,8 @@ function main(){
 
     mkdir -p "$UPCOMING_DIR"
     cp -R "$TEMPLATE_DIR"/* "$UPCOMING_DIR"
-    CLIENT_PACKAGE_HASH=$(get_hash "$LATEST_RELEASE")
-
-  
+    DOWNLOAD_URL=$(get_download_url "$LATEST_RELEASE" )
+    CLIENT_PACKAGE_HASH=$(get_hash "$DOWNLOAD_URL")
 
     declare -A REPLACEMENTS=(
         ["<CLIENT_VERSION>"]="$CLIENT_VERSION"
