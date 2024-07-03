@@ -18,7 +18,7 @@ Index: eth-node-besu-24.6.0/build.gradle
      logger.warn('Could not calculate git commit details, using defaults (run with --info for stacktrace)')
      logger.info('Error retrieving git commit details', e)
 +    def gitCommit = System.getenv("GIT_COMMIT")
-+    if (buildDate){
++    if (gitCommit){
 +      return [hash: gitCommit, date: "00.0"]
 +    }
 +
