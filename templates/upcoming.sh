@@ -291,6 +291,9 @@ function main(){
 
     if [ "$CLIENT_NAME" = "nimbus-eth2" ];then 
       GIT_SUBMODULES=$(get_submodules_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
+      VERSION_MAJOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 1)
+      VERSION_MINOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 2)
+      VERSION_BUILD=$(echo "$CLIENT_VERSION" | cut -d '.' -f 3)
       replace_git_submodules_in_file "$UPCOMING_DIR/pkg-builder.toml" "<GIT_SUBMODULES>" "$GIT_SUBMODULES"
     fi 
 
@@ -306,6 +309,9 @@ function main(){
         ["<BUILD_DATE>"]="$BUILD_DATE"
         ["<BUILD_DATE_UTC>"]="$BUILD_DATE_UTC"
         ["<BUILD_DATE_UNIX_TIMESTAMP>"]="$BUILD_DATE_UNIX_TIMESTAMP"
+        ["<VERSION_MAJOR>"]="$VERSION_MAJOR"
+        ["<VERSION_MINOR>"]="$VERSION_MINOR"
+        ["<VERSION_BUILD>"]="$VERSION_BUILD"
     )
 
     for key in "${!REPLACEMENTS[@]}"; do
