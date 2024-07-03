@@ -174,6 +174,34 @@ replace_in_files() {
     done
 }
 
+replace_git_submodules_in_file() {
+    local file=$1
+    local pattern=$2
+    local replacement=$3
+    echo "pattern: $pattern, replacement: $replacement"
+
+    # Escape special characters in the pattern for awk
+    escaped_pattern=$(echo "$pattern" | sed 's/[][\\.^$*]/\\&/g')
+
+    # Perform the replacement using awk
+    awk -v pattern="$escaped_pattern" -v replacement="submodules = $replacement" '
+        BEGIN { found = 0 }
+        {
+            if ($0 ~ pattern && !found) {
+                print replacement
+                found = 1
+            } else {
+                print $0
+            }
+        }
+    ' "$file" > tmp && mv tmp "$file"
+
+    if [ $? -ne 0 ]; then
+        echo "Error: awk failed for file $file with pattern $pattern"
+        return 1
+    fi
+}
+
 HELP=false
 CLIENT_NAME=""
 CODENAME=""
@@ -223,33 +251,7 @@ if ! is_supported "$CODENAME" "${SUPPORTED_CODENAMES[@]}"; then
     exit 1
 fi
 
-replace_git_submodules_in_file() {
-    local file=$1
-    local pattern=$2
-    local replacement=$3
-    echo "pattern: $pattern, replacement: $replacement"
 
-    # Escape special characters in the pattern for awk
-    escaped_pattern=$(echo "$pattern" | sed 's/[][\\.^$*]/\\&/g')
-
-    # Perform the replacement using awk
-    awk -v pattern="$escaped_pattern" -v replacement="submodules = $replacement" '
-        BEGIN { found = 0 }
-        {
-            if ($0 ~ pattern && !found) {
-                print replacement
-                found = 1
-            } else {
-                print $0
-            }
-        }
-    ' "$file" > tmp && mv tmp "$file"
-
-    if [ $? -ne 0 ]; then
-        echo "Error: awk failed for file $file with pattern $pattern"
-        return 1
-    fi
-}
 
 function main(){
     CLIENT_REPOSITORY=${REPOSITORIES[$CLIENT_NAME]}
