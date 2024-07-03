@@ -13,7 +13,24 @@ Index: eth-node-besu-24.6.0/build.gradle
    return df.format(new Date())
  }
  
-@@ -969,6 +973,11 @@ def getGitCommitDetails(length = 8) {
+@@ -934,9 +938,16 @@ def calculateVersion() {
+   if (project.hasProperty('version') && (project.version =~ calVerPattern)) {
+     return "${project.version}"
+   } else {
++
++    def gitVersion = System.getenv("GIT_VERSION")
++    if (gitVersion){
++      println("Using project version from GIT_VERSION env variable: ${gitVersion}")
++      return gitVersion
++    }
+     // If no version is supplied or it doesn't match the semantic versioning, calculate from git
+     println("Generating project version as supplied is version not semver: ${project.version}")
+     def gitDetails = getGitCommitDetails(7) // Adjust length as needed
++
+     return "${gitDetails.date}-develop-${gitDetails.hash}"
+   }
+ }
+@@ -969,6 +980,11 @@ def getGitCommitDetails(length = 8) {
    } catch (Exception e) {
      logger.warn('Could not calculate git commit details, using defaults (run with --info for stacktrace)')
      logger.info('Error retrieving git commit details', e)
