@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 export GIT_COMMIT=<GIT_COMMIT_SHORT>
+export GIT_VERSION=<CLIENT_VERSION>
 export BUILD_DATE=<BUILD_DATE>
 
 %:

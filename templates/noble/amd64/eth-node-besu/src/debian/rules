@@ -3,6 +3,8 @@
 # there are times you want to do quick rebuilding to verify hash without running the tests
 export GIT_COMMIT=<GIT_COMMIT_SHORT>
 export BUILD_DATE=<BUILD_DATE>
+export GIT_VERSION=<CLIENT_VERSION>
+
 %:
 	dh $@
 
