@@ -1,0 +1,7 @@
+#!/bin/bash
+
+systemctl enable eth-node-testnet-besu.service
+systemctl start eth-node-testnet-besu.service
+
+systemctl enable eth-node-testnet-lighthouse-besu.service
+systemctl start eth-node-testnet-lighthouse-besu.service
