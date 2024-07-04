@@ -1,0 +1,19 @@
+#!/usr/bin/make -f
+export GIT_COMMIT=<GIT_COMMIT_SHORT>
+export GIT_VERSION=<CLIENT_VERSION>
+export BUILD_DATE=<BUILD_DATE>
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	./gradlew distTar installDist
+
+override_dh_auto_test:
+	./gradlew test
+
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean

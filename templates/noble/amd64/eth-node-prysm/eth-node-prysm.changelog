@@ -1,0 +1,6 @@
+eth-node-prysm (<CLIENT_VERSION>-<CLIENT_REVISION>) noble; urgency=medium
+
+  * <CHANGELOG_MSG>
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  <CHANGELOG_BUILD_DATE>
+
