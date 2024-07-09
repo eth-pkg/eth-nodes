@@ -38,7 +38,7 @@ GmbSc03ZAiC1DDQqE1QQ
 [build_env]
 codename="noble numbat"
 arch = "amd64"
-pkg_builder_version="0.2.5"
+pkg_builder_version="0.2.6"
 debcrafter_version = "2711b53"
 # needed for tests
 docker=true
