@@ -1,6 +1,7 @@
-eth-node-lodestar (1.19.0-1) noble; urgency=medium
+eth-node-lodestar (1.19.0-2) noble; urgency=medium
 
-  * Support for 1.19.0-1
+  * Support for 1.19.0-2
+  * bycrpto folder removal will resolve package not building 
 
  -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 09 Jul 2024 11:54:57 +0200
 
