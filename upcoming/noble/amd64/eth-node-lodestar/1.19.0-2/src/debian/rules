@@ -1,0 +1,72 @@
+#!/usr/bin/make -f
+export INSTALL_DIR=/usr/lib/eth-node-lodestar
+# Let's see if this affects anything
+export npm_config_local_prefix=/tmp
+export GIT_COMMIT=c5b4c1c
+
+%:
+	dh $@
+
+override_dh_auto_test:
+	yarn test:unit
+	# TODO Enable docker tests, docker does not work under chroot, yet
+	# yarn test:e2e
+	yarn test:e2e:sim
+	# no need for lerna cache, also tests create these waste, remove them from package
+	rm -rf node_modules/.cache
+	find node_modules -type d -name ".nyc_output" -exec rm -rf {} +
+	find packages -type d -name ".nyc_output" -exec rm -rf {} +
+	find node_modules -type d -name ".vite" -exec rm -rf {} +
+	find packages -type d -name ".vite" -exec rm -rf {} +
+	find node_modules -type d -name "obj.target" -exec rm -rf {} +
+	rm -rf node_modules/bcrypto/build/Release
+	rm -rf node_modules/cpu-features/build/Release
+
+override_dh_strip:
+	# do not strip, as it encounters errors with prebuilds and electron
+
+override_dh_shlibdeps:
+	# calculate shared library dependencies, fails because of unneeded prebuilds for arm64
+
+override_dh_auto_build:
+	#install distutils dependency for node-gyp
+	yarn install --frozen-lockfile
+	ls -al /build
+	yarn build
+	ls -al
+	# no need for lerna cache
+	rm -rf node_modules/.cache 
+
+	# Makefiles not needed, for sure, so you can safely remove it
+	rm node_modules/bcrypto/build/Makefile
+	rm node_modules/bigint-buffer/build/Makefile
+	rm node_modules/c-kzg/build/Makefile
+	rm node_modules/cpu-features/build/Makefile
+	rm node_modules/ssh2/lib/protocol/crypto/build/Makefile
+	rm node_modules/c-kzg/build/kzg.target.mk
+
+	# not sure what python3 is doing there, in those folders
+	rm node_modules/bcrypto/build/node_gyp_bins/python3
+	rm node_modules/bigint-buffer/build/node_gyp_bins/python3
+	rm node_modules/c-kzg/build/node_gyp_bins/python3
+	rm node_modules/cpu-features/build/node_gyp_bins/python3
+	rm node_modules/ssh2/lib/protocol/crypto/build/node_gyp_bins/python3
+
+    # Not sure about pycache, let's remove it
+	rm -rf node_modules/node-gyp/gyp/pylib/gyp/__pycache__
+	rm -rf node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__
+	chmod +x debian/lodestar
+
+
+override_dh_auto_install:
+	# This relies on make install script
+	# if there is no install script, you have to define your own rules
+	# dh_auto_install -- prefix=/usr
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz

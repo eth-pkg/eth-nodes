@@ -1,0 +1,6 @@
+eth-node-lodestar source: debian-rules-ignores-make-clean-error [debian/rules:69]
+eth-node-lodestar source: missing-field-in-dep5-copyright Copyright [debian/copyright:13]
+
+eth-node-lodestar source: missing-license-paragraph-in-dep5-copyright lgpl-3.0+ [debian/copyright:10]
+
+eth-node-lodestar source: no-newline-at-end [debian/changelog]
