@@ -8,11 +8,10 @@ export GIT_COMMIT=c5b4c1c
 	dh $@
 
 override_dh_auto_test:
-	# REENABLE after reproducible build testing 
-	# yarn test:unit
-	# # TODO Enable docker tests, docker does not work under chroot, yet
-	# # yarn test:e2e
-	# yarn test:e2e:sim
+	yarn test:unit
+	# TODO Enable docker tests, docker does not work under chroot, yet
+	# yarn test:e2e
+	yarn test:e2e:sim
 	# no need for lerna cache, also tests create these waste, remove them from package
 	rm -rf node_modules/.cache
 	find node_modules -type d -name ".nyc_output" -exec rm -rf {} +
