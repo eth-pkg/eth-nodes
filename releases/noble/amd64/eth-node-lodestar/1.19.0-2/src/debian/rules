@@ -2,7 +2,7 @@
 export INSTALL_DIR=/usr/lib/eth-node-lodestar
 # Let's see if this affects anything
 export npm_config_local_prefix=/tmp
-export GIT_COMMIT=<GIT_COMMIT_SHORT>
+export GIT_COMMIT=c5b4c1c
 
 %:
 	dh $@
@@ -58,7 +58,6 @@ override_dh_auto_build:
 	rm node_modules/cpu-features/build/Release/cpu_features.a
 	rm node_modules/bcrypto/build/Release/secp256k1.a
 	rm node_modules/bcrypto/build/Release/torsion.a
-
 
 override_dh_auto_install:
 	# This relies on make install script

@@ -1,0 +1,182 @@
+eth-node-lodestar: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lodestar/changelog.Debian.gz:1]
+eth-node-lodestar: maintainer-script-ignores-errors [postrm]
+eth-node-lodestar: no-manual-page [usr/bin/lodestar]
+
+# TODO delete these
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-115-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-83-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-93-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/bare-fs/prebuilds/linux-arm64/bare-fs.bare]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/bare-os/prebuilds/linux-arm64/bare-os.bare]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm64/node.napi.armv8.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-arm/node.napi.armv6.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-arm/node.napi.armv7.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-arm64/node.napi.armv8.node]
+
+# not a problem 
+eth-node-lodestar: embedded-library freetype [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library lcms2 [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library libjpeg [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library libjsoncpp [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library libpng [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library openjpeg [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library srtp [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library tiff [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+
+# TODO potentional problems
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@napi-rs/snappy-linux-x64-musl/snappy.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@node-rs/crc32-linux-x64-musl/crc32.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@nx/nx-linux-x64-musl/nx.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@parcel/watcher/prebuilds/linux-x64/node.napi.musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@rollup/rollup-linux-x64-musl/rollup.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm64/node.napi.armv8.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-x64/node.napi.musl.node]
+eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) *
+
+
+# potentional problem 
+eth-node-lodestar: missing-dependency-on-libc *
+
+# TODO delete these 
+eth-node-lodestar: package-contains-eslint-config-file *
+
+# TODO delete these 
+eth-node-lodestar: package-contains-npm-ignore-file *
+
+eth-node-lodestar: privacy-breach-uses-embedded-file You may use the libjs-jquery package. (//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js) [usr/lib/eth-node-lodestar/node_modules/jmespath/index.html]
+
+eth-node-lodestar: statically-linked-binary [usr/lib/eth-node-lodestar/node_modules/@esbuild/linux-x64/bin/esbuild]
+
+eth-node-lodestar: unstripped-binary-or-object *
+
+eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/node_modules/fastify/integration/test.sh]
+
+eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/console-control-strings/README.md~]
+eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/.History.md.un~]
+eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/.Readme.md.un~]
+eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/.package.json.un~]
+eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/test/.index.js.un~]
+
+eth-node-lodestar: broken-gz [usr/lib/eth-node-lodestar/node_modules/@fastify/static/test/static-pre-compressed/all-three.html.gz]
+eth-node-lodestar: broken-gz [usr/lib/eth-node-lodestar/node_modules/@fastify/static/test/static-pre-compressed/gzip-only.html.gz]
+
+eth-node-lodestar: copyright-without-copyright-notice
+
+
+
+
+# not sure 
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@eslint/eslintrc/node_modules/ajv/lib/compile/async.js]
+
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.scandir/out/providers/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.stat/out/providers/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.walk/out/providers/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.walk/out/readers/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@vitest/utils/node_modules/estree-walker/src/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/archiver/node_modules/async/dist/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/archiver/node_modules/async/dist/async.min.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/async/dist/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/async/dist/async.min.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/asynckit/lib/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/bluebird/js/release/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/eslint/node_modules/ajv/lib/compile/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/estree-walker/src/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/fast-glob/out/providers/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/fast-glob/out/readers/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/neo-async/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/neo-async/async.min.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/one-time/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/pbkdf2/lib/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/example/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/lib/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/test/resolver/nested_symlinks/mylib/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/cjs/internal/scheduler/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/esm/internal/scheduler/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/esm5/internal/scheduler/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/through/test/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-chai [usr/lib/eth-node-lodestar/node_modules/chai/chai.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-chai [usr/lib/eth-node-lodestar/node_modules/chai/lib/chai.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/bin/mocha.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/lib/mocha.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/mocha.css]
+eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/mocha.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-prototype [usr/lib/eth-node-lodestar/node_modules/moment/src/lib/duration/prototype.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-prototype [usr/lib/eth-node-lodestar/node_modules/moment/src/lib/locale/prototype.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-prototype [usr/lib/eth-node-lodestar/node_modules/moment/src/lib/moment/prototype.js]
+
+eth-node-lodestar: executable-not-elf-or-script *
+
+
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/bcrypto.node [usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/obj.target/bcrypto.node]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/obj.target/secp256k1.a [usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/secp256k1.a]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/obj.target/torsion.a [usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/torsion.a]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bigint-buffer/build/Release/bigint_buffer.node [usr/lib/eth-node-lodestar/node_modules/bigint-buffer/build/Release/obj.target/bigint_buffer.node]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/c-kzg/build/Release/kzg.node [usr/lib/eth-node-lodestar/node_modules/c-kzg/build/Release/obj.target/kzg.node]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/cpu_features.a [usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/obj.target/deps/cpu_features/cpu_features.a]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/cpufeatures.node [usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/obj.target/cpufeatures.node]
+eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/ssh2/lib/protocol/crypto/build/Release/obj.target/sshcrypto.node [usr/lib/eth-node-lodestar/node_modules/ssh2/lib/protocol/crypto/build/Release/sshcrypto.node]
+
+eth-node-lodestar: package-contains-vcs-control-file *
+
+eth-node-lodestar: package-has-unnecessary-activation-of-ldconfig-trigger
+
+# privacy issues 
+eth-node-lodestar: privacy-breach-generic [<link href="https://fonts.googleapis.com/css2?family=readex+pro:wght@300;400&display=swap" rel="stylesheet">] (https://fonts.googleapis.com/css2?family=readex+pro:wght@300;400&display=swap) [usr/lib/eth-node-lodestar/node_modules/@vitest/browser/dist/client/__vitest__/index.html]
+eth-node-lodestar: privacy-breach-generic [<link rel="preconnect" href="https://fonts.googleapis.com">] (https://fonts.googleapis.com) [usr/lib/eth-node-lodestar/node_modules/@vitest/browser/dist/client/__vitest__/index.html]
+eth-node-lodestar: privacy-breach-generic [<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>] (https://fonts.gstatic.com) [usr/lib/eth-node-lodestar/node_modules/@vitest/browser/dist/client/__vitest__/index.html]
+eth-node-lodestar: privacy-breach-generic [<link rel="stylesheet" href="//unpkg.com/docsify-themeable/dist/css/theme-simple.css">] (//unpkg.com/docsify-themeable/dist/css/theme-simple.css) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
+eth-node-lodestar: privacy-breach-generic [<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js">] (//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
+eth-node-lodestar: privacy-breach-generic [<script src="//unpkg.com/docsify/lib/docsify.min.js">] (//unpkg.com/docsify/lib/docsify.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
+eth-node-lodestar: privacy-breach-generic [<script src="//unpkg.com/docsify/lib/plugins/ga.min.js">] (//unpkg.com/docsify/lib/plugins/ga.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
+eth-node-lodestar: privacy-breach-generic [<script src="//unpkg.com/docsify/lib/plugins/search.min.js">] (//unpkg.com/docsify/lib/plugins/search.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
+
+eth-node-lodestar: script-not-executable *
+
+eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/lib/downloadTestsCli.d.ts]
+eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/lib/downloadTestsCli.js]
+eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/src/downloadTestsCli.ts]
+
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-127-binding.node]
+
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/ajv/lib/compile/async.js]
+
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/example/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/lib/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/test/resolver/nested_symlinks/mylib/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@rushstack/node-core-library/lib/Async.js]
+eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:17]
+
+eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:18]
+eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm/node.napi.armv6.node] [usr/share/lintian/overrides/eth-node-lodestar:19]
+eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:20]
+eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:21]
+eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:43]
+eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:44]
+eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-x64/node.napi.musl.node] [usr/share/lintian/overrides/eth-node-lodestar:45]
+eth-node-lodestar: mismatched-override privacy-breach-generic [<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js">] (https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js) [usr/lib/eth-node-lodestar/node_modules/@yarnpkg/parsers/node_modules/sprintf-js/demo/angular.html] [usr/share/lintian/overrides/eth-node-lodestar:145]
+eth-node-lodestar: privacy-breach-generic [<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js">] (https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js) [usr/lib/eth-node-lodestar/node_modules/sprintf-js/demo/angular.html]
+
+eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/_baseLodash.js]
+
+eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/fp/wrapperLodash.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/lodash.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/lodash.min.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/wrapperLodash.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/aws-sdk/node_modules/punycode/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-libs-browser/mock/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-libs-browser/node_modules/punycode/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-stdlib-browser/cjs/mock/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-stdlib-browser/esm/mock/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-stdlib-browser/node_modules/punycode/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/punycode/punycode.es6.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/punycode/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/url/node_modules/punycode/punycode.js]
+eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_deflate.js]
+eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_deflate.min.js]
+eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_inflate.js]
+eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_inflate.min.js]
