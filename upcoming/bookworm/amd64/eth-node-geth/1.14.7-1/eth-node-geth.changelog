@@ -1,0 +1,6 @@
+eth-node-geth (1.14.7-1) bookworm; urgency=medium
+
+  * Support for 1.14.7-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 11 Jul 2024 15:24:05 +0200
+
