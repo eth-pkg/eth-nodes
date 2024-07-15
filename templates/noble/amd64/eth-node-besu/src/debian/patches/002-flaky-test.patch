@@ -1,7 +1,7 @@
-Index: eth-node-besu-24.6.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
+Index: eth-node-besu-24.7.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
 ===================================================================
---- eth-node-besu-24.6.0.orig/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
-+++ eth-node-besu-24.6.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
+--- eth-node-besu-24.7.0.orig/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
++++ eth-node-besu-24.7.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethereum/eth/sync/backwardsync/BackwardSyncAlgSpec.java
 @@ -143,60 +143,6 @@ public class BackwardSyncAlgSpec {
    }
  
@@ -63,11 +63,11 @@ Index: eth-node-besu-24.6.0/ethereum/eth/src/test/java/org/hyperledger/besu/ethe
    public void shouldFinishWhenWorkIsDone() {
      doReturn(true).when(context).isReady();
      final CompletableFuture<Void> completableFuture = algorithm.pickNextStep();
-Index: eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
+Index: eth-node-besu-24.7.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
 ===================================================================
---- eth-node-besu-24.6.0.orig/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
-+++ eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
-@@ -72,49 +72,6 @@ class DNSDaemonTest {
+--- eth-node-besu-24.7.0.orig/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
++++ eth-node-besu-24.7.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethereum/p2p/discovery/dns/DNSDaemonTest.java
+@@ -84,59 +84,6 @@ class DNSDaemonTest {
      vertx.deployVerticle(dnsDaemon, options);
    }
  
@@ -84,18 +84,28 @@ Index: eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethe
 -            (seq, records) -> {
 -              switch (pass.incrementAndGet()) {
 -                case 1:
--                  testContext.verify(
--                      () -> {
--                        assertThat(seq).isEqualTo(932);
--                        assertThat(records).hasSize(115);
--                      });
+-                  if (seq != EXPECTED_SEQ) {
+-                    testContext.failNow(
+-                        String.format(
+-                            "Expecting sequence to be %d in first pass but got: %d",
+-                            EXPECTED_SEQ, seq));
+-                  }
+-                  if (records.size() != 115) {
+-                    testContext.failNow(
+-                        "Expecting 115 records in first pass but got: " + records.size());
+-                  }
 -                  break;
 -                case 2:
--                  testContext.verify(
--                      () -> {
--                        assertThat(seq).isEqualTo(932);
--                        assertThat(records).isEmpty();
--                      });
+-                  if (seq != EXPECTED_SEQ) {
+-                    testContext.failNow(
+-                        String.format(
+-                            "Expecting sequence to be %d in second pass but got: %d",
+-                            EXPECTED_SEQ, seq));
+-                  }
+-                  if (!records.isEmpty()) {
+-                    testContext.failNow(
+-                        "Expecting 0 records in second pass but got: " + records.size());
+-                  }
 -                  break;
 -                default:
 -                  testContext.failNow("Third pass is not expected");
@@ -104,7 +114,7 @@ Index: eth-node-besu-24.6.0/ethereum/p2p/src/test/java/org/hyperledger/besu/ethe
 -            },
 -            0,
 -            1, // initial delay
--            300, // second lookup after 300 ms (due to Mock DNS server, we are very quick).
+-            3000, // second lookup after 3 seconds (the thread scheduling can be slower in CI)
 -            "localhost:" + mockDnsServerVerticle.port());
 -
 -    final DeploymentOptions options =
