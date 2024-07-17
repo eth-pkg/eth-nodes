@@ -1,0 +1,7 @@
+eth-node-erigon (2.60.4-2) bookworm; urgency=medium
+
+  * Support for 2.60.4-2
+  * Erigon go rereleased
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 17 Jul 2024 15:50:56 +0200
+
