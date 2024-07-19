@@ -1,0 +1,6 @@
+eth-node-reth (1.0.2-1) noble; urgency=medium
+
+  * Support for 1.0.2-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 17 Jul 2024 19:31:28 +0200
+
