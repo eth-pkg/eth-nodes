@@ -1,7 +1,7 @@
 [verify]
 package_hash=[
-    { hash="baa5124646de3735ce1b094861c12c11f409ec6b", name= "eth2-val-tools_0.1.1-1.dsc"},
-    { hash="8f25748c43984d267cec5b03445ff9666f904102", name= "eth2-val-tools_0.1.1.orig.tar.gz"},
-    { hash="9d64b062c7c8e78908b7c6541ad7567415fd69cf", name= "eth2-val-tools_0.1.1-1.debian.tar.xz"},
-    { hash="58f20bc8ff720981b77b70f6d0a91c79b123aa7d", name= "eth2-val-tools_0.1.1-1_amd64.deb"},
+    { hash="9c37d78c2b4e034836353c857c1c3e0958b67d39", name= "eth2-val-tools_0.1.1-1.dsc"},
+    { hash="00ba9046d405fb31c00a30c2ef08f1d4703b5bb4", name= "eth2-val-tools_0.1.1.orig.tar.gz"},
+    { hash="b4bd3e5ee1aee785bcec71de8168240dda577184", name= "eth2-val-tools_0.1.1-1.debian.tar.xz"},
+    { hash="9474a23e5bdccf990841d18f8f8272178c601fc6", name= "eth2-val-tools_0.1.1-1_amd64.deb"},
 ]
