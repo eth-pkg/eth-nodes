@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
+override_dh_auto_build:
+	python3 -m venv venv
+	. venv/bin/activate && pip install -r apps/el-gen/requirements.txt
+	. venv/bin/activate && pip install pyinstaller
+	. venv/bin/activate && pyinstaller --onefile apps/el-gen/genesis_besu.py
+	. venv/bin/activate && pyinstaller --onefile apps/el-gen/genesis_chainspec.py
+	. venv/bin/activate && pyinstaller --onefile apps/el-gen/genesis_geth.py
+	chmod +x dist/genesis_besu
+	chmod +x dist/genesis_chainspec
+	chmod +x dist/genesis_geth
+
+override_dh_auto_install:
+	# do nothing
