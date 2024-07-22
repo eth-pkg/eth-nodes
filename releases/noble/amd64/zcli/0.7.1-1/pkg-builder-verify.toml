@@ -1,7 +1,7 @@
 [verify]
 package_hash=[
-    { hash="29c123265843eec26803aaa68bffb1ea6da65729", name= "zcli_0.7.1-1.dsc"},
+    { hash="e9ca14ca3c05447355c090ca3b17fcb8ffe7917f", name= "zcli_0.7.1-1.dsc"},
     { hash="8acf27763233d87bf59968f0561692fce6f923fe", name= "zcli_0.7.1.orig.tar.gz"},
-    { hash="93d16883a3dbeea90fefd7eb994093bddf35433c", name= "zcli_0.7.1-1.debian.tar.xz"},
-    { hash="085c6cb90dc72ee79a7f9dfcdba6894beb587077", name= "zcli_0.7.1-1_amd64.deb"},
+    { hash="aa7c67db61d97289764a8d6b01009115f5f1d722", name= "zcli_0.7.1-1.debian.tar.xz"},
+    { hash="a39d30e6d12757b4bdc22349e289d4b035385160", name= "zcli_0.7.1-1_amd64.deb"},
 ]
