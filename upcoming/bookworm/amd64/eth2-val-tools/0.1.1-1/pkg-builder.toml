@@ -1,7 +1,7 @@
 [package_fields]
 spec_file = "eth2-val-tools.sss"
 package_name = "eth2-val-tools"
-version_number = "0.9.0"
+version_number = "0.1.1"
 revision_number = "1"
 homepage="https://github.com/protolambda/eth2-val-tools"
 
