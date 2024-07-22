@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which geth)"
+  assertEquals "/usr/bin/zcli" "$output"
+}
+
+
+. shunit2
