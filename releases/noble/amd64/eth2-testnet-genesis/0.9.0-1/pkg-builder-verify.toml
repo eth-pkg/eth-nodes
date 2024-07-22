@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="3e447fd5e190bd3b506d460eb0a28e918b0b3ae5", name= "eth2-testnet-genesis_0.9.0-1.dsc"},
+    { hash="8f25748c43984d267cec5b03445ff9666f904102", name= "eth2-testnet-genesis_0.9.0.orig.tar.gz"},
+    { hash="4d4b5fce02af36b13d9849e2cedcc1f1365f8d8f", name= "eth2-testnet-genesis_0.9.0-1.debian.tar.xz"},
+    { hash="bfbe27179e987f7d0cf7fb0ca281e3fcb3185cb4", name= "eth2-testnet-genesis_0.9.0-1_amd64.deb"},
+]

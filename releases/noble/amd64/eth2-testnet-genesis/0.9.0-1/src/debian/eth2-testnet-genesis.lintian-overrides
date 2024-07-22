@@ -1,0 +1,6 @@
+ eth2-testnet-genesis: no-copyright-file
+ eth2-testnet-genesis: hardening-no-pie [usr/lib/eth2-testnet-gensis/bin/eth2-testnet-genesis]
+ eth2-testnet-genesis: initial-upload-closes-no-bugs [usr/share/doc/eth2-testnet-genesis/changelog.Debian.gz:1]
+ eth2-testnet-genesis: maintainer-script-ignores-errors [postrm]
+ eth2-testnet-genesis: no-manual-page [usr/bin/eth2-testnet-genesis]
+ eth2-testnet-genesis: embedded-library libzstd [usr/lib/eth2-testnet-gensis/bin/eth2-testnet-genesis]
