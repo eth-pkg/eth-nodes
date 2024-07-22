@@ -1,7 +1,7 @@
 [package_fields]
 spec_file = "eth2-testnet-genesis.sss"
-package_name = "eth-node-geth"
-version_number = "1.14.7"
+package_name = "eth2-testnet-genesis"
+version_number = "0.9.0"
 revision_number = "1"
 homepage="https://github.com/protolambda/eth2-testnet-genesis"
 
@@ -10,7 +10,7 @@ homepage="https://github.com/protolambda/eth2-testnet-genesis"
 package_type="default"
 tarball_url = "https://github.com/protolambda/eth2-testnet-genesis/archive/refs/tags/v0.9.0.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "c5ba6f30385f761207cdf307b95cc024ce6fd9700830a2626d17005486b18766"
+tarball_hash = "887011bcdcdbf3b6ef5c93c8e091bc4d90a6e353fda4b91e872bcc571cf0576c"
 
 [package_type.language_env]
 language_env = "go"

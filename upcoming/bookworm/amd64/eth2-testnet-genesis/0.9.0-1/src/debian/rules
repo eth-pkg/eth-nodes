@@ -1,14 +1,15 @@
 #!/usr/bin/make -f
 export CGO_ENABLED=0 
 
-export GIT_COMMIT ?= <GIT_COMMIT_FULL>
+export GIT_COMMIT ?= 885b5e2efd451ecc16791daa299615605a622b12
 export GIT_BRANCH ?= main
-export GIT_TAG    ?= v<GIT_VERSION>
+export GIT_TAG    ?= v0.9.0
 
 export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
 export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
 export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
 export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+export LDFLAGS=-X main.GitCommit=$(GIT_COMMIT) -X main.GitBranch=${GIT_BRANCH}
 
 %:
 	dh $@
@@ -16,17 +17,11 @@ export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
 override_dh_dwz:
 	# skip of optimization of DWARF debug information in ELF binaries via dwz
 
-
-override_dh_auto_clean:
-	# on ubuntu clean fails, before dependency installation
-	# on bookworm clean succeeds, even if dependency is not installed
-	-make -j1 clean
-
 override_dh_auto_build:
-	make all
+	go build -ldflags "${LDFLAGS}"
 
-override_dh_auto_test:
-	make -j1 test
+override_dh_auto_install:
+	# do nothing
 
 override_dh_strip:
 	dh_strip --no-automatic-dbgsym
