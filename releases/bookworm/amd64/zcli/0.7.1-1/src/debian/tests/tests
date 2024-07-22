@@ -5,7 +5,7 @@ exec 2>&1
 set -e
 
 test_binary_in_path(){
-  output="$(which geth)"
+  output="$(which zcli)"
   assertEquals "/usr/bin/zcli" "$output"
 }
 
