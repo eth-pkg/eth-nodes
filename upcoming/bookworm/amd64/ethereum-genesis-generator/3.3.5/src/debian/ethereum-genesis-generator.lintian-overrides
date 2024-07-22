@@ -1,0 +1,8 @@
+ethereum-genesis-generator: description-synopsis-is-duplicated line 1
+ethereum-genesis-generator: no-copyright-file
+ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/bin/genesis_besu]
+ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/bin/genesis_chainspec]
+ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/bin/genesis_geth]
+ethereum-genesis-generator: initial-upload-closes-no-bugs [usr/share/doc/ethereum-genesis-generator/changelog.Debian.gz:1]
+ethereum-genesis-generator: maintainer-script-ignores-errors [postrm]
+ethereum-genesis-generator: no-manual-page [usr/bin/ethereum-genesis-generator]

@@ -1,1 +1,2 @@
-zcli source: no-debian-copyright-in-source
+ethereum-genesis-generator source: alien-tag zcli [debian/source/lintian-overrides:1]
+ethereum-genesis-generator source: no-debian-copyright-in-source
