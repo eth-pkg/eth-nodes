@@ -1,4 +1,4 @@
-eth-node-mainnet-besu-lighthouse (1.0.0-1) bookworm; urgency=medium
+eth-node-mainnet (1.0.0-1) bookworm; urgency=medium
 
   * Initial packaging
 
