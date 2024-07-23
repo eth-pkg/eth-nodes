@@ -117,9 +117,9 @@ Index: ethereum-genesis-generator-3.3.5/entrypoint.sh
 -        python3 /apps/el-gen/genesis_besu.py $tmp_dir/genesis-config.yaml > /data/metadata/besu.json
 +        mkdir -p data/metadata
 +        envsubst < /etc/ethereum-genesis-generator/config/el/genesis-config.yaml > $tmp_dir/genesis-config.yaml
-+        python3 /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth $tmp_dir/genesis-config.yaml      > data/metadata/genesis.json
-+        python3 /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec $tmp_dir/genesis-config.yaml > data/metadata/chainspec.json
-+        python3 /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu $tmp_dir/genesis-config.yaml > data/metadata/besu.json
++        /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth $tmp_dir/genesis-config.yaml      > data/metadata/genesis.json
++        /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec $tmp_dir/genesis-config.yaml > data/metadata/chainspec.json
++        /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu $tmp_dir/genesis-config.yaml > data/metadata/besu.json
      else
          echo "el genesis already exists. skipping generation..."
      fi

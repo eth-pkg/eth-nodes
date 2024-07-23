@@ -9,10 +9,23 @@ override_dh_dwz:
 override_dh_auto_build:
 	cd apps/el-gen && python3 -m venv .venv
 	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
+	cd apps/el-gen && . .venv/bin/activate && pip install pyinstaller
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller --onefile genesis_geth.py
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller --onefile genesis_chainspec.py
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller --onefile genesis_besu.py
 	ls -al apps/el-gen
 	cp -R config-example config
 	chmod +x entrypoint.sh
+	chmod +x apps/el-gen/dist/genesis_besu
+	chmod +x apps/el-gen/dist/genesis_chainspec
+	chmod +x apps/el-gen/dist/genesis_geth
+	mv apps/el-gen/dist/genesis_besu apps/el-gen
+	mv apps/el-gen/dist/genesis_chainspec apps/el-gen
+	mv apps/el-gen/dist/genesis_geth apps/el-gen
 	chmod +x apps/el-gen/.venv/bin/activate
 
 override_dh_auto_install:
 	# do nothing
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
