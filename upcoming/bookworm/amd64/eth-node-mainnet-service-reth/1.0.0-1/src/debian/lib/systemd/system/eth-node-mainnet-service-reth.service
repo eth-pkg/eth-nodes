@@ -5,7 +5,7 @@ Description=eth-node-mainnet-reth service
 CapabilityBoundingSet=
 ExecStart=/bin/bash run-reth.sh \
     --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-reth-config/conf.d/reth-mainnet.conf
+    --conf-file /etc/eth-node-mainnet-config-reth/conf.d/reth-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

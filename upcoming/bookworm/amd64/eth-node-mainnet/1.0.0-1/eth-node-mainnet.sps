@@ -10,5 +10,8 @@ add_files = []
 add_links = []
 add_manpages = []
 long_doc = """eth-node-mainnet
-TODO 
+Package that install two random Ethereum consensus and execution client and
+starts them running.
+This package comes without validator. If you would like to have validator running
+please install eth-node-mainnet-with-validator instead.
 """
