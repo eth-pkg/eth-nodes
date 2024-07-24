@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+adduser --system --quiet --group eth-node-mainnet-service-prysm 
+mkdir -p /var/lib/eth-node-mainnet/prysm
+chown eth-node-mainnet-service-prysm:eth-node-mainnet-service-prysm /var/lib/eth-node-mainnet/prysm 
+
+if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
+then
+	deb-systemd-invoke restart eth-node-mainnet-service-prysm
+fi
+
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-mainnet-service-prysm-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0
