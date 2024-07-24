@@ -1,0 +1,19 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: nethermind
+Upstream-Contact: https://github.com/NethermindEth/nethermind/
+Source: <https://github.com/NethermindEth/nethermind/>
+
+Files:     *
+License:   LGPL-3.0
+
+
+Files: debian/*
+License: GPL-3+
+
+License: LGPL-3.0
+ The full text of the LGPL version 3.0 is distributed in
+ /usr/share/common-licenses/LGPL-3.0 on Debian systems.
+
+License: GPL-3+
+ The full text of the GPL version 3 is distributed in
+ /usr/share/common-licenses/GPL-3 on Debian systems.
