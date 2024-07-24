@@ -16,6 +16,6 @@ long_doc = """eth-node-reth-config
 By installing this package,
 it will automatically it will install run-reth.sh script and 
 reth minimal configs for each supported network, which you can use in tandem
-with eth-node-{network}-config to spin up reth. 
-See eth-node-{network}-service-reth package for how that is working.
+with eth-node-[network]-config to spin up reth. 
+See eth-node-[network]-service-reth package for how that is working.
 """

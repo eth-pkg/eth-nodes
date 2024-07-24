@@ -16,6 +16,6 @@ long_doc = """eth-node-erigon-config
 By installing this package,
 it will automatically it will install run-erigon.sh script and 
 erigon minimal configs for each supported network, which you can use in tandem
-with eth-node-{network}-config to spin up erigon. 
-See eth-node-{network}-service-erigon package for how that is working.
+with eth-node-[network]-config to spin up erigon. 
+See eth-node-[network]-service-erigon package for how that is working.
 """

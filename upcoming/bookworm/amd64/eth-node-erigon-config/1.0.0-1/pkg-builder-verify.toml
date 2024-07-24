@@ -1,10 +1,8 @@
 [verify]
 package_hash=[
-    # { hash="5fa53247e184c57798d7cc5f6067afbfa9d3588f", name= "eth-node_1.0.0-1.dsc"},
-    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-erigon-conf.0.0.orig.tar.gz"},
-    # TODO debian.tar.xz is not reproducible, not priority
-    # { hash="036fff0b4ed98f5614af3de36ebeee9b45ade9fa", name= "eth-node-testnet_1.0.0-1.debian.tar.xz"},
-    # erigon
-    { hash="d7a83b680a300348d8facc9e9d13bb87b89ee83e", name= "eth-node-erigon-conf_1.0.0-1_amd64.deb"},
+    { hash="042ffd8fe6d3d29610c896d3f4ae593db424b22f", name= "eth-node-erigon-config_1.0.0-1.dsc"},
+    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-erigon-config_1.0.0.orig.tar.gz"},
+    { hash="504fa25be6f2be7a60878034a826c0b4ba14f1c8", name= "eth-node-erigon-config_1.0.0-1.debian.tar.xz"},
+    { hash="f30fa2d24cf29eb3018f7219369f16769980edfc", name= "eth-node-erigon-config_1.0.0-1_amd64.deb"},
   
 ]

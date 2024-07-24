@@ -16,6 +16,6 @@ long_doc = """eth-node-geth-config
 By installing this package,
 it will automatically it will install run-geth.sh script and 
 geth minimal configs for each supported network, which you can use in tandem
-with eth-node-{network}-config to spin up geth. 
-See eth-node-{network}-service-geth package for how that is working.
+with eth-node-[network]-config to spin up geth. 
+See eth-node-[network]-service-geth package for how that is working.
 """

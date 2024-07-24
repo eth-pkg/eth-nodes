@@ -16,6 +16,6 @@ long_doc = """eth-node-nethermind-config
 By installing this package,
 it will automatically it will install run-nethermind.sh script and 
 nethermind minimal configs for each supported network, which you can use in tandem
-with eth-node-{network}-config to spin up nethermind. 
-See eth-node-{network}-service-nethermind package for how that is working.
+with eth-node-[network]-config to spin up nethermind. 
+See eth-node-[network]-service-nethermind package for how that is working.
 """

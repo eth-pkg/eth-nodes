@@ -16,6 +16,6 @@ long_doc = """eth-node-ligthhouse-config
 By installing this package,
 it will automatically it will install run-ligthhouse.sh script and 
 ligthhouse minimal configs for each supported network, which you can use in tandem
-with eth-node-{network}-config to spin up ligthhouse. 
-See eth-node-{network}-service-ligthhouse package for how that is working.
+with eth-node-[network]-config to spin up ligthhouse. 
+See eth-node-[network]-service-ligthhouse package for how that is working.
 """

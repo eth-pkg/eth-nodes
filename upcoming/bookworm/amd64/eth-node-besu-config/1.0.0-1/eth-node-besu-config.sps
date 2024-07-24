@@ -16,6 +16,6 @@ long_doc = """eth-node-besu-config
 By installing this package,
 it will automatically it will install run-besu.sh script and 
 besu minimal configs for each supported network, which you can use in tandem
-with eth-node-{network}-config to spin up besu. 
-See eth-node-{network}-service-besu package for how that is working.
+with eth-node-[network]-config to spin up besu. 
+See eth-node-[network]-service-besu package for how that is working.
 """
