@@ -1,6 +1,6 @@
-name = "eth-node-mainnet-service-lighthouse"
-bin_package = "eth-node-lighthouse-config"
-binary = "/usr/bin/run-lighthouse.sh"
+name = "eth-node-mainnet-service-nimbus-eth2"
+bin_package = "eth-node-mainnet-service-nimbus-eth2"
+binary = "/usr/bin/run-nimbus-eth2.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
 runtime_dir = { mode = "750" }
@@ -10,5 +10,5 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-cl-service"]
 conflicts = ["eth-node-mainnet-cl-service"]
-depends=["eth-node-lighthouse-config", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-lighthouse using eth-node-lighthouse-config and eth-node-mainnet-config"
+depends=["eth-node-config-nimbus-eth2", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-nimbus-eth2 using eth-node-config-nimbus-eth2 and eth-node-mainnet-config"

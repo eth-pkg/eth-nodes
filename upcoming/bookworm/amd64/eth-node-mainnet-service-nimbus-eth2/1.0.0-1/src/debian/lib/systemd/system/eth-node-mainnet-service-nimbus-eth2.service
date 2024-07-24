@@ -1,11 +1,11 @@
 [Unit]
-Description=eth-node-mainnet-lighthouse service
+Description=eth-node-mainnet-nimbus-eth2 service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-lighthouse.sh \
+ExecStart=/bin/bash run-nimbus-eth2.sh \
     --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-lighthouse-config/conf.d/lighthouse-mainnet.conf
+    --conf-file /etc/eth-node-config-nimbus-eth2/conf.d/nimbus-eth2-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true
@@ -23,7 +23,7 @@ ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
-ReadWritePaths=/var/lib/eth-node-mainnet/lighthouse
+ReadWritePaths=/var/lib/eth-node-mainnet/nimbus-eth2
 ReadOnlyPaths=/var/lib/eth-node-mainnet
 RemoveIPC=true
 RestrictAddressFamilies=AF_INET AF_INET6
@@ -34,8 +34,8 @@ SystemCallArchitectures=native
 SystemCallFilter=@system-service
 SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-mainnet-service-lighthouse
-WorkingDirectory=/var/lib/eth-node-mainnet/lighthouse
+User=eth-node-mainnet-service-nimbus-eth2
+WorkingDirectory=/var/lib/eth-node-mainnet/nimbus-eth2
 
 [Install]
 WantedBy=multi-user.target

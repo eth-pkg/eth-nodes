@@ -1,8 +1,0 @@
-[verify]
-package_hash=[
-    { hash="042ffd8fe6d3d29610c896d3f4ae593db424b22f", name= "eth-node-mainnet-config-erigon_1.0.0-1.dsc"},
-    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-config-erigon_1.0.0.orig.tar.gz"},
-    { hash="504fa25be6f2be7a60878034a826c0b4ba14f1c8", name= "eth-node-mainnet-config-erigon_1.0.0-1.debian.tar.xz"},
-    { hash="f30fa2d24cf29eb3018f7219369f16769980edfc", name= "eth-node-mainnet-config-erigon_1.0.0-1_amd64.deb"},
-  
-]

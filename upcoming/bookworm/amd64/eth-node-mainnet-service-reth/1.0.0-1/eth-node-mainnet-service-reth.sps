@@ -1,5 +1,5 @@
 name = "eth-node-mainnet-service-reth"
-bin_package = "eth-node-mainnet-config-reth"
+bin_package = "eth-node-config-reth"
 binary = "/usr/bin/run-reth.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-el-service"]
 conflicts = ["eth-node-mainnet-el-service"]
-depends=["eth-node-mainnet-config-reth", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-reth using eth-node-mainnet-config-reth and eth-node-mainnet-config"
+depends=["eth-node-config-reth", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-reth using eth-node-config-reth and eth-node-mainnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

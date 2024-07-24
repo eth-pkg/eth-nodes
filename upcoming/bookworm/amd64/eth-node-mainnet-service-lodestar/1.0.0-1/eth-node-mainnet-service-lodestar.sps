@@ -1,6 +1,6 @@
-name = "eth-node-mainnet-service-lighthouse"
-bin_package = "eth-node-lighthouse-config"
-binary = "/usr/bin/run-lighthouse.sh"
+name = "eth-node-mainnet-service-lodestar"
+bin_package = "eth-node-config-lodestar"
+binary = "/usr/bin/run-lodestar.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
 runtime_dir = { mode = "750" }
@@ -10,5 +10,5 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-cl-service"]
 conflicts = ["eth-node-mainnet-cl-service"]
-depends=["eth-node-lighthouse-config", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-lighthouse using eth-node-lighthouse-config and eth-node-mainnet-config"
+depends=["eth-node-config-lodestar", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-lodestar using eth-node-config-lodestar and eth-node-mainnet-config"

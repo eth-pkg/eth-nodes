@@ -5,7 +5,7 @@ Description=eth-node-mainnet-lighthouse service
 CapabilityBoundingSet=
 ExecStart=/bin/bash run-lighthouse.sh \
     --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-lighthouse-config/conf.d/lighthouse-mainnet.conf
+    --conf-file /etc/eth-node-config-lighthouse/conf.d/lighthouse-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

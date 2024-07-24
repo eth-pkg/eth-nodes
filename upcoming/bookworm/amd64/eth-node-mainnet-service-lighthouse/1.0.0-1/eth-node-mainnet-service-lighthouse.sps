@@ -1,5 +1,5 @@
 name = "eth-node-mainnet-service-lighthouse"
-bin_package = "eth-node-lighthouse-config"
+bin_package = "eth-node-config-lighthouse"
 binary = "/usr/bin/run-lighthouse.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,5 +10,5 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-cl-service"]
 conflicts = ["eth-node-mainnet-cl-service"]
-depends=["eth-node-lighthouse-config", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-lighthouse using eth-node-lighthouse-config and eth-node-mainnet-config"
+depends=["eth-node-config-lighthouse", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-lighthouse using eth-node-config-lighthouse and eth-node-mainnet-config"

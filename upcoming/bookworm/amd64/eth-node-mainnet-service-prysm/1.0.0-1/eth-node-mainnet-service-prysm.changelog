@@ -1,4 +1,4 @@
-eth-node-mainnet-service-lighthouse (1.0.0-1) bookworm; urgency=medium
+eth-node-mainnet-service-prysm (1.0.0-1) bookworm; urgency=medium
 
   * Initial packaging
 
