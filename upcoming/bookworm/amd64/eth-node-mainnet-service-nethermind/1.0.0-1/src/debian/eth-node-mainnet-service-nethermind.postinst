@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+adduser --system --quiet --group eth-node-mainnet-service-nethermind 
+mkdir -p /var/lib/eth-node-mainnet/nethermind
+chown eth-node-mainnet-service-nethermind:eth-node-mainnet-service-nethermind /var/lib/eth-node-mainnet/nethermind 
+
+if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
+then
+	deb-systemd-invoke restart eth-node-mainnet-service-nethermind
+fi
+
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-mainnet-service-nethermind-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0

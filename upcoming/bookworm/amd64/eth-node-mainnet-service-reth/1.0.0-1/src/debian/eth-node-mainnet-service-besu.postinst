@@ -1,0 +1,24 @@
+#!/bin/bash
+set -e
+
+. /usr/share/debconf/confmodule
+
+declare -A CONFIG
+
+adduser --system --quiet --group eth-node-mainnet-service-reth 
+mkdir -p /var/lib/eth-node-mainnet/reth
+chown eth-node-mainnet-service-reth:eth-node-mainnet-service-reth /var/lib/eth-node-mainnet/reth 
+
+if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
+then
+	deb-systemd-invoke restart eth-node-mainnet-service-reth
+fi
+
+if [ "$1" '!=' triggered ];
+then
+	dpkg-trigger eth-node-mainnet-service-reth-config-changed
+
+fi
+#DEBHELPER#
+
+exit 0
