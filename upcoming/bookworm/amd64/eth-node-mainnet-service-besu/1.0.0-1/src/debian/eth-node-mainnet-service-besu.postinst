@@ -5,17 +5,20 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-mainnet-service-besu 
+adduser --system --quiet --group eth-node-mainnet-service-besu
 mkdir -p /var/lib/eth-node-mainnet/besu
-chown eth-node-mainnet-service-besu:eth-node-mainnet-service-besu /var/lib/eth-node-mainnet/besu 
+chown eth-node-mainnet-service-besu:eth-node-mainnet-service-besu /var/lib/eth-node-mainnet/besu
 
-if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
-then
+jwt_file=/etc/eth-node-mainnet
+if [ ! -f "$jwt_file" ]; then
+	openssl rand -hex 32 | tr -d "\n" | tee "$jwt_file" >/dev/null
+fi
+
+if [ "$1" = triggered -a "$service_was_running" '!=' 0 ]; then
 	deb-systemd-invoke restart eth-node-mainnet-service-besu
 fi
 
-if [ "$1" '!=' triggered ];
-then
+if [ "$1" '!=' triggered ]; then
 	dpkg-trigger eth-node-mainnet-service-besu-config-changed
 
 fi

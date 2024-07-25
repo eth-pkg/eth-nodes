@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-cl-config"]
 suggests = []
-depends=[]
+depends=["eth-node-teku"]
 add_files = [
     "debian/scripts/run-teku.sh /usr/lib/eth-node-config-teku/bin/",
     "debian/conf.d /etc/eth-node-mainnet/teku"

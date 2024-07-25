@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-el-config"]
 suggests = []
-depends=[]
+depends=["eth-node-nethermind"]
 add_files = [
     "debian/scripts/run-nethermind.sh /usr/lib/eth-node-config-nethermind/bin/",
     "debian/conf.d /etc/eth-node-mainnet/nethermind"

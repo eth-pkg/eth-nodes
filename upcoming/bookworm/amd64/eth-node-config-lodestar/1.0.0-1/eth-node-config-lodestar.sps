@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-cl-config"]
 suggests = []
-depends=[]
+depends=["eth-node-lodestar"]
 add_files = [
     "debian/scripts/run-lodestar.sh /usr/lib/eth-node-config-lodestar/bin/",
     "debian/conf.d /etc/eth-node-mainnet/lodestar"

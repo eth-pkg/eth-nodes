@@ -3,9 +3,9 @@ Description=eth-node-mainnet-lighthouse service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-lighthouse.sh \
-    --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-config-lighthouse/conf.d/lighthouse-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-lighthouse/bin/run-lighthouse.sh \
+    --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
+    --conf-file /etc/eth-node-mainnet/lighthouse/conf.d/lighthouse-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

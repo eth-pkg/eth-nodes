@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-el-config"]
 suggests = []
-depends=[]
+depends=["eth-node-erigon"]
 add_files = [
     "debian/scripts/run-erigon.sh /usr/lib/eth-node-config-erigon/bin/",
     "debian/conf.d /etc/eth-node-mainnet/erigon"

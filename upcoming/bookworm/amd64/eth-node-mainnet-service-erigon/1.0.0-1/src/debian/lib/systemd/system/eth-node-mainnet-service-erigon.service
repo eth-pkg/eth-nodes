@@ -3,9 +3,9 @@ Description=eth-node-mainnet-erigon service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-erigon.sh \
-    --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-erigon-config/conf.d/erigon-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-erigon/bin/run-erigon.sh \
+    --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
+    --conf-file /etc/eth-node-mainnet/erigon/conf.d/erigon-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

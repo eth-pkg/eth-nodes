@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-el-config"]
 suggests = []
-depends=[]
+depends=["eth-node-besu"]
 add_files = [
     "debian/scripts/run-besu.sh /usr/lib/eth-node-config-besu/bin/",
     "debian/conf.d /etc/eth-node-mainnet/besu"

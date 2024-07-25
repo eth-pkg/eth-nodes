@@ -3,9 +3,9 @@ Description=eth-node-mainnet-reth service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-reth.sh \
-    --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-config-reth/conf.d/reth-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-reth/bin/run-reth.sh \
+    --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
+    --conf-file /etc/eth-node-mainnet/reth/conf.d/reth-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

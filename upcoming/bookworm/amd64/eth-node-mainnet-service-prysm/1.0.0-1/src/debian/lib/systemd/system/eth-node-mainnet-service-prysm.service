@@ -3,9 +3,9 @@ Description=eth-node-mainnet-prysm service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-prysm.sh \
-    --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-config-prysm/conf.d/prysm-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-prysm/bin/run-prysm.sh \
+    --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
+    --conf-file /etc/eth-node-mainnet/prysm/conf.d/prysm-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

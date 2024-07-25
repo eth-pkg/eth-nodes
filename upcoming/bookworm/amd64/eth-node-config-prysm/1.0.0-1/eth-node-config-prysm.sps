@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-cl-config"]
 suggests = []
-depends=[]
+depends=["eth-node-prysm"]
 add_files = [
     "debian/scripts/run-prysm.sh /usr/lib/eth-node-config-prysm/bin/",
     "debian/conf.d /etc/eth-node-mainnet/config-prysm"

@@ -3,9 +3,9 @@ Description=eth-node-mainnet-nethermind service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-nethermind.sh \
-    --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-nethermind-config/conf.d/nethermind-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-nethermind/bin/run-nethermind.sh \
+    --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
+    --conf-file /etc/eth-node-mainnet/nethermind/conf.d/nethermind-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

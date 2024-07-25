@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-cl-config"]
 suggests = []
-depends=[]
+depends=["eth-node-lighthouse"]
 add_files = [
     "debian/scripts/run-lighthouse.sh /usr/lib/eth-node-config-lighthouse/bin/",
     "debian/conf.d /etc/eth-node-mainnet/lighthouse"

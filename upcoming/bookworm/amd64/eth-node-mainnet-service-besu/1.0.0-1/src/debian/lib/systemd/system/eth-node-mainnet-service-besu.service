@@ -3,9 +3,9 @@ Description=eth-node-mainnet-besu service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash run-besu.sh \
-    --conf-file /etc/eth-node-mainnet-config/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-besu-config/conf.d/besu-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-besu/bin/run-besu.sh \
+    --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
+    --conf-file /etc/eth-node-mainnet/besu/conf.d/besu/besu-mainnet.conf
 IPAddressDeny=any
 IPAddressAllow=localhost
 LockPersonality=true

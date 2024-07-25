@@ -4,7 +4,7 @@ conflicts = []
 recommends = []
 provides = ["eth-node-mainnet-el-config"]
 suggests = []
-depends=[]
+depends=["eth-node-reth"]
 add_files = [
     "debian/scripts/run-reth.sh /usr/lib/eth-node-config-reth/bin/",
     "debian/conf.d /etc/eth-node-mainnet/reth"
