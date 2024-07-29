@@ -1,0 +1,6 @@
+eth-node-nimbus-eth2 (24.7.0-1) noble; urgency=medium
+
+  * Support for 24.7.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Mon, 29 Jul 2024 10:40:10 +0200
+
