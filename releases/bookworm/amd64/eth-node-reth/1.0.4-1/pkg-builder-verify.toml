@@ -2,6 +2,6 @@
 package_hash=[
     { hash="a4ccb478ae02d27c0f67e27c70d147a0dff1167d", name= "eth-node-reth_1.0.4-1.dsc"},
     { hash="f3edecd81d8aa989abf80a032e811aaec11aa930", name= "eth-node-reth_1.0.4.orig.tar.gz"},
-    { hash="eb3b654b1c846548ef7e6c06409668f24feab8fe9bd68b6846ae29853dd6447dde21fba0547b4061", name= "eth-node-reth_1.0.4-1.debian.tar.xz"},
+    { hash="46548ef7e6c06409668f24feab8fe9bd68b6846a", name= "eth-node-reth_1.0.4-1.debian.tar.xz"},
     { hash="6fe75da69b9cd0ffe902e0f6ccb1018fc9b1dd0a", name= "eth-node-reth_1.0.4-1_amd64.deb"},
 ]
