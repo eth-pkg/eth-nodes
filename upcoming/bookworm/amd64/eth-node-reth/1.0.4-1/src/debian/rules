@@ -4,7 +4,7 @@ export PATH:=$(PATH):$(CARGO_HOME)/bin
 export FEATURES=jemalloc
 export PROFILE=maxperf
 export VERGEN_BUILD_TIMESTAMP=2024-08-07T11:39Z
-export VERGEN_GIT_SHA=e24e4c7
+export VERGEN_GIT_SHA=e24e4c773d7571a5a54dba7854643c02d0b0a841
 
 %:
 	dh $@
