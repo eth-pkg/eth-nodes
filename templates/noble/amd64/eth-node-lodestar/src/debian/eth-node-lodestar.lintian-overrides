@@ -3,10 +3,6 @@ eth-node-lodestar: maintainer-script-ignores-errors [postrm]
 eth-node-lodestar: no-manual-page [usr/bin/lodestar]
 
 # TODO delete these
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-115-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-83-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-93-binding.node]
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/bare-fs/prebuilds/linux-arm64/bare-fs.bare]
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/bare-os/prebuilds/linux-arm64/bare-os.bare]
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
@@ -125,23 +121,12 @@ eth-node-lodestar: package-contains-vcs-control-file *
 
 eth-node-lodestar: package-has-unnecessary-activation-of-ldconfig-trigger
 
-# privacy issues 
-eth-node-lodestar: privacy-breach-generic [<link href="https://fonts.googleapis.com/css2?family=readex+pro:wght@300;400&display=swap" rel="stylesheet">] (https://fonts.googleapis.com/css2?family=readex+pro:wght@300;400&display=swap) [usr/lib/eth-node-lodestar/node_modules/@vitest/browser/dist/client/__vitest__/index.html]
-eth-node-lodestar: privacy-breach-generic [<link rel="preconnect" href="https://fonts.googleapis.com">] (https://fonts.googleapis.com) [usr/lib/eth-node-lodestar/node_modules/@vitest/browser/dist/client/__vitest__/index.html]
-eth-node-lodestar: privacy-breach-generic [<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>] (https://fonts.gstatic.com) [usr/lib/eth-node-lodestar/node_modules/@vitest/browser/dist/client/__vitest__/index.html]
-eth-node-lodestar: privacy-breach-generic [<link rel="stylesheet" href="//unpkg.com/docsify-themeable/dist/css/theme-simple.css">] (//unpkg.com/docsify-themeable/dist/css/theme-simple.css) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
-eth-node-lodestar: privacy-breach-generic [<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js">] (//cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
-eth-node-lodestar: privacy-breach-generic [<script src="//unpkg.com/docsify/lib/docsify.min.js">] (//unpkg.com/docsify/lib/docsify.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
-eth-node-lodestar: privacy-breach-generic [<script src="//unpkg.com/docsify/lib/plugins/ga.min.js">] (//unpkg.com/docsify/lib/plugins/ga.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
-eth-node-lodestar: privacy-breach-generic [<script src="//unpkg.com/docsify/lib/plugins/search.min.js">] (//unpkg.com/docsify/lib/plugins/search.min.js) [usr/lib/eth-node-lodestar/node_modules/pino/index.html]
-
 eth-node-lodestar: script-not-executable *
 
 eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/lib/downloadTestsCli.d.ts]
 eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/lib/downloadTestsCli.js]
 eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/src/downloadTestsCli.ts]
 
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst/prebuild/linux-arm64-127-binding.node]
 
 eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/ajv/lib/compile/async.js]
 
@@ -158,25 +143,13 @@ eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/e
 eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:43]
 eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:44]
 eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-x64/node.napi.musl.node] [usr/share/lintian/overrides/eth-node-lodestar:45]
-eth-node-lodestar: mismatched-override privacy-breach-generic [<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js">] (https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js) [usr/lib/eth-node-lodestar/node_modules/@yarnpkg/parsers/node_modules/sprintf-js/demo/angular.html] [usr/share/lintian/overrides/eth-node-lodestar:145]
-eth-node-lodestar: privacy-breach-generic [<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js">] (https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js) [usr/lib/eth-node-lodestar/node_modules/sprintf-js/demo/angular.html]
 
-eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/_baseLodash.js]
 
-eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/fp/wrapperLodash.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/lodash.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/lodash.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-lodash [usr/lib/eth-node-lodestar/node_modules/lodash/wrapperLodash.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/aws-sdk/node_modules/punycode/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-libs-browser/mock/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-libs-browser/node_modules/punycode/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-stdlib-browser/cjs/mock/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-stdlib-browser/esm/mock/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/node-stdlib-browser/node_modules/punycode/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/punycode/punycode.es6.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/punycode/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-punycode [usr/lib/eth-node-lodestar/node_modules/url/node_modules/punycode/punycode.js]
-eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_deflate.js]
-eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_deflate.min.js]
-eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_inflate.js]
-eth-node-lodestar: embedded-javascript-library please use node-pako [usr/lib/eth-node-lodestar/node_modules/pako/dist/pako_inflate.min.js]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-115-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-127-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-83-binding.node]
+eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-93-binding.node]
+eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst-linux-x64-musl/blst.linux-x64-musl.node]
+
+eth-node-lodestar: privacy-breach-generic *
