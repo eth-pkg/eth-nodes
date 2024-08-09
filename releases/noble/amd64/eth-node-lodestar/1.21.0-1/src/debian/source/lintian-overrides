@@ -4,3 +4,4 @@ eth-node-lodestar source: missing-field-in-dep5-copyright Copyright [debian/copy
 eth-node-lodestar source: missing-license-paragraph-in-dep5-copyright lgpl-3.0+ [debian/copyright:10]
 
 eth-node-lodestar source: no-newline-at-end [debian/changelog]
+

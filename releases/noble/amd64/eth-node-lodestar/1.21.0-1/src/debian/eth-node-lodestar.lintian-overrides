@@ -66,44 +66,6 @@ eth-node-lodestar: copyright-without-copyright-notice
 
 
 # not sure 
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@eslint/eslintrc/node_modules/ajv/lib/compile/async.js]
-
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.scandir/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.stat/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.walk/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.walk/out/readers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@vitest/utils/node_modules/estree-walker/src/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/archiver/node_modules/async/dist/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/archiver/node_modules/async/dist/async.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/async/dist/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/async/dist/async.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/asynckit/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/bluebird/js/release/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/eslint/node_modules/ajv/lib/compile/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/estree-walker/src/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/fast-glob/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/fast-glob/out/readers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/neo-async/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/neo-async/async.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/one-time/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/pbkdf2/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/example/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/test/resolver/nested_symlinks/mylib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/cjs/internal/scheduler/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/esm/internal/scheduler/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/esm5/internal/scheduler/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/through/test/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-chai [usr/lib/eth-node-lodestar/node_modules/chai/chai.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-chai [usr/lib/eth-node-lodestar/node_modules/chai/lib/chai.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/bin/mocha.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/lib/mocha.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/mocha.css]
-eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/mocha.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-prototype [usr/lib/eth-node-lodestar/node_modules/moment/src/lib/duration/prototype.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-prototype [usr/lib/eth-node-lodestar/node_modules/moment/src/lib/locale/prototype.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-prototype [usr/lib/eth-node-lodestar/node_modules/moment/src/lib/moment/prototype.js]
 
 eth-node-lodestar: executable-not-elf-or-script *
 
@@ -128,12 +90,6 @@ eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packag
 eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/src/downloadTestsCli.ts]
 
 
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/ajv/lib/compile/async.js]
-
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/example/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/test/resolver/nested_symlinks/mylib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@rushstack/node-core-library/lib/Async.js]
 eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:17]
 
 eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:18]
@@ -153,3 +109,4 @@ eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/pac
 eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst-linux-x64-musl/blst.linux-x64-musl.node]
 
 eth-node-lodestar: privacy-breach-generic *
+eth-node-lodestar: embedded-javascript-library * 
