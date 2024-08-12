@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-nethermind"]
 add_files = [
     "debian/scripts/run-nethermind.sh /usr/lib/eth-node-config-nethermind/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/nethermind"
+    "debian/conf.d/nethermind-mainnet.conf /etc/eth-node-mainnet/nethermind/conf.d/"
 ]
 add_links = []
 add_manpages = []

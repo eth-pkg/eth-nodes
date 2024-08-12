@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-nimbus-eth2"]
 add_files = [
     "debian/scripts/run-nimbus-eth2.sh /usr/lib/eth-node-config-nimbus-eth2/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/nimbus-eth2"
+    "debian/conf.d/nimbus-eth2-mainnet.conf /etc/eth-node-mainnet/nimbus-eth2/conf.d/"
 ]
 add_links = []
 add_manpages = []

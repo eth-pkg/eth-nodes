@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-lighthouse"]
 add_files = [
     "debian/scripts/run-lighthouse.sh /usr/lib/eth-node-config-lighthouse/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/lighthouse"
+    "debian/conf.d/lighthouse-mainnet.conf /etc/eth-node-mainnet/lighthouse/conf.d/"
 ]
 add_links = []
 add_manpages = []

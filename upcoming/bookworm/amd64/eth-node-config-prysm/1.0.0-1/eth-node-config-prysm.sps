@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-prysm"]
 add_files = [
     "debian/scripts/run-prysm.sh /usr/lib/eth-node-config-prysm/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/config-prysm"
+    "debian/conf.d/prysm-mainnet.conf /etc/eth-node-mainnet/prysm/conf.d/"
 ]
 add_links = []
 add_manpages = []

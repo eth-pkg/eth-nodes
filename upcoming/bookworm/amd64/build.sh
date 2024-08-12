@@ -22,25 +22,25 @@ SERVE_DIR=$HOME/debs/bookworm-testing
 
 rm -rf $HOME/debs/bookworm-testing/*
 
-# cd eth-node-mainnet/1.0.0-1
-# pkg-builder verify
-# cd ../..
+cd eth-node-mainnet/1.0.0-1
+pkg-builder verify
+cd ../..
 
-# cd eth-node-mainnet-config/1.0.0-1
-# pkg-builder verify
-# cd ../..
+cd eth-node-mainnet-config/1.0.0-1
+pkg-builder verify
+cd ../..
 
 echo "Start building configs"
 
-# for client in "${CLIENTS[@]}"; do
-#     if [ -e "$PACKAGE_DIR/eth-node-config-$client-1.0.0-1/eth-node-mainnet-$client-1.0.0-1_$ARCH.deb" ] && [ "$REBUILD" == "false" ]; then
-#         echo "Skipping rebuild as file exists, and no REBUILD flag specified"
-#     else
-#         cd eth-node-config-$client/1.0.0-1
-#         pkg-builder verify
-#         cd ../..
-#     fi
-# done
+for client in "${CLIENTS[@]}"; do
+    if [ -e "$PACKAGE_DIR/eth-node-config-$client-1.0.0-1/eth-node-mainnet-$client-1.0.0-1_$ARCH.deb" ] && [ "$REBUILD" == "false" ]; then
+        echo "Skipping rebuild as file exists, and no REBUILD flag specified"
+    else
+        cd eth-node-config-$client/1.0.0-1
+        pkg-builder verify
+        cd ../..
+    fi
+done
 
 echo "Start building services"
 

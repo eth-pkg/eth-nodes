@@ -9,7 +9,8 @@ adduser --system --quiet --group eth-node-mainnet-service-prysm
 mkdir -p /var/lib/eth-node-mainnet/prysm
 chown eth-node-mainnet-service-prysm:eth-node-mainnet-service-prysm /var/lib/eth-node-mainnet/prysm 
 
-jwt_file=/etc/eth-node-mainnet
+mkdir -p /var/lib/eth-node-mainnet/besu
+jwt_file=/etc/eth-node-mainnet/jwt.hex
 if [ ! -f "$jwt_file" ]; then
 	openssl rand -hex 32 | tr -d "\n" | tee "$jwt_file" >/dev/null
 fi

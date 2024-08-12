@@ -1,10 +1,10 @@
 [verify]
 package_hash=[
     # { hash="5fa53247e184c57798d7cc5f6067afbfa9d3588f", name= "eth-node_1.0.0-1.dsc"},
-    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-besu-lighthouse.1.0.0.orig.tar.gz"},
+    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-service-teku.1.0.0.orig.tar.gz"},
     # TODO debian.tar.xz is not reproducible, not priority
     # { hash="036fff0b4ed98f5614af3de36ebeee9b45ade9fa", name= "eth-node-testnet_1.0.0-1.debian.tar.xz"},
     # besu
-    { hash="d7a83b680a300348d8facc9e9d13bb87b89ee83e", name= "eth-node-mainnet-besu-lighthouse_1.0.0-1_amd64.deb"},
+    { hash="d7a83b680a300348d8facc9e9d13bb87b89ee83e", name= "eth-node-mainnet-service-teku.0.0-1_amd64.deb"},
   
 ]

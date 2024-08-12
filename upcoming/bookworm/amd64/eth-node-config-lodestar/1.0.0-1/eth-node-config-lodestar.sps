@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-lodestar"]
 add_files = [
     "debian/scripts/run-lodestar.sh /usr/lib/eth-node-config-lodestar/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/lodestar"
+    "debian/conf.d/lodestar-mainnet.conf /etc/eth-node-mainnet/lodestar/conf.d/"
 ]
 add_links = []
 add_manpages = []

@@ -7,7 +7,8 @@ suggests = []
 depends=["eth-node-besu"]
 add_files = [
     "debian/scripts/run-besu.sh /usr/lib/eth-node-config-besu/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/besu"
+    "debian/conf.d/besu-mainnet.conf /etc/eth-node-mainnet/besu/conf.d/"
+
 ]
 add_links = []
 add_manpages = []

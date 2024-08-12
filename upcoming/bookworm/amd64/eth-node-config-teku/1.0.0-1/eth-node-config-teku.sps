@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-teku"]
 add_files = [
     "debian/scripts/run-teku.sh /usr/lib/eth-node-config-teku/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/teku"
+    "debian/conf.d/teku-mainnet.conf /etc/eth-node-mainnet/teku/conf.d/"
 ]
 add_links = []
 add_manpages = []

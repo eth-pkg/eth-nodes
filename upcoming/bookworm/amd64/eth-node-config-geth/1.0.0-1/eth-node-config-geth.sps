@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-geth"]
 add_files = [
     "debian/scripts/run-geth.sh /usr/lib/eth-node-config-geth/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/geth"
+    "debian/conf.d/geth-mainnet.conf /etc/eth-node-mainnet/geth/conf.d/"
 ]
 add_links = []
 add_manpages = []

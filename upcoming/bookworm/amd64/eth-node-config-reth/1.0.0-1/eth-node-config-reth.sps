@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-reth"]
 add_files = [
     "debian/scripts/run-reth.sh /usr/lib/eth-node-config-reth/bin/",
-    "debian/conf.d /etc/eth-node-mainnet/reth"
+    "debian/conf.d/reth-mainnet.conf /etc/eth-node-mainnet/reth/conf.d/"
 ]
 add_links = []
 add_manpages = []
