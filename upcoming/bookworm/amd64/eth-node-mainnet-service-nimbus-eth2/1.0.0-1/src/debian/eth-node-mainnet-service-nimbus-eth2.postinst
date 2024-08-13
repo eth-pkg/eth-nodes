@@ -5,9 +5,9 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-mainnet-service-nimbus-eth2 
+adduser --system --quiet --group eth-node-mainnet-nimbus-eth-2
 mkdir -p /var/lib/eth-node-mainnet/nimbus-eth2
-chown eth-node-mainnet-service-nimbus-eth2:eth-node-mainnet-service-nimbus-eth2 /var/lib/eth-node-mainnet/nimbus-eth2 
+chown eth-node-mainnet-nimbus-eth-2:eth-node-mainnet-nimbus-eth-2 /var/lib/eth-node-mainnet/nimbus-eth2
 
 mkdir -p /var/lib/eth-node-mainnet/besu
 jwt_file=/etc/eth-node-mainnet/jwt.hex

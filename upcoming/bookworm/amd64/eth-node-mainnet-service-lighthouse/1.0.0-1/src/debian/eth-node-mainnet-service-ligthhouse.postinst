@@ -5,9 +5,9 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-mainnet-service-ligthhouse 
+adduser --system --quiet --group eth-node-mainnet-ligthhouse 
 mkdir -p /var/lib/eth-node-mainnet/ligthhouse
-chown eth-node-mainnet-service-ligthhouse:eth-node-mainnet-service-ligthhouse /var/lib/eth-node-mainnet/ligthhouse 
+chown eth-node-mainnet-ligthhouse:eth-node-mainnet-ligthhouse /var/lib/eth-node-mainnet/ligthhouse 
 
 mkdir -p /var/lib/eth-node-mainnet/besu
 jwt_file=/etc/eth-node-mainnet/jwt.hex

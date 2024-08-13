@@ -5,9 +5,9 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-mainnet-service-prysm 
+adduser --system --quiet --group eth-node-mainnet-prysm 
 mkdir -p /var/lib/eth-node-mainnet/prysm
-chown eth-node-mainnet-service-prysm:eth-node-mainnet-service-prysm /var/lib/eth-node-mainnet/prysm 
+chown eth-node-mainnet-prysm:eth-node-mainnet-prysm /var/lib/eth-node-mainnet/prysm 
 
 mkdir -p /var/lib/eth-node-mainnet/besu
 jwt_file=/etc/eth-node-mainnet/jwt.hex

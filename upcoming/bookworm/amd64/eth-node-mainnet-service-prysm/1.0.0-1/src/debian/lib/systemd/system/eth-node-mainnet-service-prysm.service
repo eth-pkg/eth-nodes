@@ -25,16 +25,17 @@ ProtectSystem=strict
 ReadWritePaths=/var/lib/eth-node-mainnet/prysm
 ReadOnlyPaths=/var/lib/eth-node-mainnet
 RemoveIPC=true
-RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK AF_VSOCK
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
 
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# TODO not working for prysm
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-mainnet-service-prysm
+User=eth-node-mainnet-prysm
 WorkingDirectory=/var/lib/eth-node-mainnet/prysm
 
 [Install]

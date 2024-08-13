@@ -5,9 +5,9 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-mainnet-service-besu
+adduser --system --quiet --group eth-node-mainnet-besu
 mkdir -p /var/lib/eth-node-mainnet/besu
-chown eth-node-mainnet-service-besu:eth-node-mainnet-service-besu /var/lib/eth-node-mainnet/besu
+chown eth-node-mainnet-besu:eth-node-mainnet-besu /var/lib/eth-node-mainnet/besu
 
 mkdir -p /var/lib/eth-node-mainnet/besu
 jwt_file=/etc/eth-node-mainnet/jwt.hex

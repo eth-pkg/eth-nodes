@@ -5,9 +5,9 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-mainnet-service-erigon 
+adduser --system --quiet --group eth-node-mainnet-erigon 
 mkdir -p /var/lib/eth-node-mainnet/erigon
-chown eth-node-mainnet-service-erigon:eth-node-mainnet-service-erigon /var/lib/eth-node-mainnet/erigon 
+chown eth-node-mainnet-erigon:eth-node-mainnet-erigon /var/lib/eth-node-mainnet/erigon 
 
 mkdir -p /var/lib/eth-node-mainnet/besu
 jwt_file=/etc/eth-node-mainnet/jwt.hex

@@ -25,7 +25,7 @@ ProtectSystem=strict
 ReadWritePaths=/var/lib/eth-node-mainnet/lodestar
 ReadOnlyPaths=/var/lib/eth-node-mainnet
 RemoveIPC=true
-RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK AF_VSOCK
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
 
 RestrictNamespaces=true
 RestrictRealtime=true
@@ -34,7 +34,7 @@ SystemCallArchitectures=native
 SystemCallFilter=@system-service
 SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-mainnet-service-lodestar
+User=eth-node-mainnet-lodestar
 WorkingDirectory=/var/lib/eth-node-mainnet/lodestar
 
 [Install]
