@@ -11,11 +11,11 @@ add_files = [
 ]
 add_links = []
 add_manpages = []
-summary = "Simple config and run script to run ligthhouse through standardized config files, based on eth-pkg/run-a-node"
+summary = "Simple config and run script to run lighthouse through standardized config files, based on eth-pkg/run-a-node"
 long_doc = """eth-node-config-lighthouse
 By installing this package,
-it will automatically it will install run-ligthhouse.sh script and 
-ligthhouse minimal configs for each supported network, which you can use in tandem
-with eth-node-[network]-config to spin up ligthhouse. 
-See eth-node-[network]-service-ligthhouse package for how that is working.
+it will automatically it will install run-lighthouse.sh script and 
+lighthouse minimal configs for each supported network, which you can use in tandem
+with eth-node-[network]-config to spin up lighthouse. 
+See eth-node-[network]-service-lighthouse package for how that is working.
 """

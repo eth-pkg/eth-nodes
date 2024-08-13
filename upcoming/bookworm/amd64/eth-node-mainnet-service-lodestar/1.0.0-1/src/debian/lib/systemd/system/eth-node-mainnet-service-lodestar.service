@@ -31,8 +31,10 @@ RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
-SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# TODO: this specially not working with only lodestar
+# SystemCallFilter=@system-service
+# does not work with lodestar as well
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
 User=eth-node-mainnet-lodestar
 WorkingDirectory=/var/lib/eth-node-mainnet/lodestar

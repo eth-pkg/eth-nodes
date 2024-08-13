@@ -32,7 +32,8 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# not working for lighthouse as well
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
 User=eth-node-mainnet-lighthouse
 WorkingDirectory=/var/lib/eth-node-mainnet/lighthouse

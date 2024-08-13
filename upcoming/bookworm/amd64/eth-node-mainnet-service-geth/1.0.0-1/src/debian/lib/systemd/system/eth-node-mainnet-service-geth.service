@@ -32,7 +32,8 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# not working for geth either
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
 User=eth-node-mainnet-geth
 WorkingDirectory=/var/lib/eth-node-mainnet/geth

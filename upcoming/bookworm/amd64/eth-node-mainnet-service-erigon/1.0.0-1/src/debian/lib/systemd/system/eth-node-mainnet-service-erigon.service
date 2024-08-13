@@ -32,7 +32,8 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# not working for erigon either
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
 User=eth-node-mainnet-erigon
 WorkingDirectory=/var/lib/eth-node-mainnet/erigon

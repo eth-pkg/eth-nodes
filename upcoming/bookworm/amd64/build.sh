@@ -20,7 +20,7 @@ PACKAGE_DIR=$HOME/.pkg-builder/packages/bookworm
 ARCH=amd64
 SERVE_DIR=$HOME/debs/bookworm-testing
 
-rm -rf $HOME/debs/bookworm-testing/*
+# rm -rf $HOME/debs/bookworm-testing/*
 
 cd eth-node-mainnet/1.0.0-1
 pkg-builder verify

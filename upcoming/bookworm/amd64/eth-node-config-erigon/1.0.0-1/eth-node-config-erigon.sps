@@ -7,7 +7,7 @@ suggests = []
 depends=["eth-node-erigon"]
 add_files = [
     "debian/scripts/run-erigon.sh /usr/lib/eth-node-config-erigon/bin/",
-    "debian/conf.d/erigon-mainnet.conf /etc/eth-node-mainnet/erigon/conf.d/s"
+    "debian/conf.d/erigon-mainnet.conf /etc/eth-node-mainnet/erigon/conf.d/"
 ]
 add_links = []
 add_manpages = []
