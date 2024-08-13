@@ -1,5 +1,5 @@
 name = "eth-node-mainnet-service-besu"
-bin_package = "eth-node-besu-config"
+bin_package = "eth-node-config-besu"
 binary = "/usr/bin/run-besu.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-el-service"]
 conflicts = ["eth-node-mainnet-el-service"]
-depends=["eth-node-besu-config", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-besu using eth-node-besu-config and eth-node-mainnet-config"
+depends=["eth-node-config-besu", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-besu using eth-node-config-besu and eth-node-mainnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

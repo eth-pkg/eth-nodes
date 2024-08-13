@@ -1,5 +1,5 @@
 name = "eth-node-mainnet-service-erigon"
-bin_package = "eth-node-erigon-config"
+bin_package = "eth-node-config-erigon"
 binary = "/usr/bin/run-erigon.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-el-service"]
 conflicts = ["eth-node-mainnet-el-service"]
-depends=["eth-node-erigon-config", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-erigon using eth-node-erigon-config and eth-node-mainnet-config"
+depends=["eth-node-config-erigon", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-erigon using eth-node-config-erigon and eth-node-mainnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

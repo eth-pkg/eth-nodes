@@ -1,5 +1,5 @@
 name = "eth-node-mainnet-service-geth"
-bin_package = "eth-node-geth-config"
+bin_package = "eth-node-config-geth"
 binary = "/usr/bin/run-geth.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd /lib"]
 provides = ["eth-node-mainnet-el-service"]
 conflicts = ["eth-node-mainnet-el-service"]
-depends=["eth-node-geth-config", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-geth using eth-node-geth-config and eth-node-mainnet-config"
+depends=["eth-node-config-geth", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-geth using eth-node-config-geth and eth-node-mainnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]
