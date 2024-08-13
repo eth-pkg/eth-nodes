@@ -6,8 +6,7 @@ CapabilityBoundingSet=
 ExecStart=/bin/bash /usr/lib/eth-node-config-lodestar/bin/run-lodestar.sh \
     --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
     --conf-file /etc/eth-node-mainnet/lodestar/conf.d/lodestar-mainnet.conf
-IPAddressDeny=any
-IPAddressAllow=localhost
+IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
 PrivateDevices=true
@@ -26,7 +25,8 @@ ProtectSystem=strict
 ReadWritePaths=/var/lib/eth-node-mainnet/lodestar
 ReadOnlyPaths=/var/lib/eth-node-mainnet
 RemoveIPC=true
-RestrictAddressFamilies=AF_INET AF_INET6
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK AF_VSOCK
+
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
