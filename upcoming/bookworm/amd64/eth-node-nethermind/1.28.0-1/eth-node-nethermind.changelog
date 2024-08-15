@@ -1,0 +1,6 @@
+eth-node-nethermind (1.28.0-1) bookworm; urgency=medium
+
+  * Support for 1.28.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 15 Aug 2024 16:40:45 +0200
+
