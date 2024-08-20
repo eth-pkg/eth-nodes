@@ -5,7 +5,13 @@ conflicts = []
 recommends = []
 provides = []
 suggests = []
-depends = ["python3", "zcli", "eth2-testnet-genesis"]
+depends = ["python3", 
+  "zcli", 
+ "eth2-testnet-genesis",
+ "python3-ruamel.yaml (>= 0.17.16)", 
+ "python3-web3 (>= 6.15.0)", 
+ "python3-setuptools (>= 69.1.0)"
+]
 add_files = [
     "apps /usr/lib/ethereum-genesis-generator",
     "config /etc/ethereum-genesis-generator",
