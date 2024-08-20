@@ -1,0 +1,6 @@
+eth-node-besu (24.8.0-1) noble; urgency=medium
+
+  * Support for 24.8.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 20 Aug 2024 07:18:37 +0200
+
