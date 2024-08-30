@@ -37,7 +37,12 @@ eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/
 eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/sysrand.html]
 eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/twofish.html]
 eth-node-nimbus-eth2 source: source-is-missing [vendor/nimcrypto/docs/nimcrypto/utils.html]
-
+eth-node-nimbus-eth2 source: source-is-missing [vendor/nimbus-build-system/vendor/Nim/nimdoc/extlinks/project/expected/_._/util.html]
+eth-node-nimbus-eth2 source: source-is-missing [vendor/nimbus-build-system/vendor/Nim/nimdoc/extlinks/project/expected/doc/manual.html]
+eth-node-nimbus-eth2 source: source-is-missing [vendor/nimbus-build-system/vendor/Nim/nimdoc/extlinks/project/expected/main.html]
+eth-node-nimbus-eth2 source: source-is-missing [vendor/nimbus-build-system/vendor/Nim/nimdoc/extlinks/project/expected/sub/submodule.html]
+eth-node-nimbus-eth2 source: source-is-missing [vendor/nimbus-build-system/vendor/Nim/nimdoc/extlinks/project/expected/theindex.html]
+eth-node-nimbus-eth2 source: source-is-missing [vendor/nimbus-build-system/vendor/Nim/nimdoc/test_doctype/expected/test_doctype.html]
 eth-node-nimbus-eth2 source: missing-field-in-dep5-copyright Copyright [debian/copyright:10]
 
 #TODO remove this
