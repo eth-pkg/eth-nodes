@@ -1,8 +1,8 @@
-Index: eth-node-nimbus-eth2-24.7.0/beacon_chain/version.nim
+Index: eth-node-nimbus-eth2-24.8.0/beacon_chain/version.nim
 ===================================================================
---- eth-node-nimbus-eth2-24.7.0.orig/beacon_chain/version.nim
-+++ eth-node-nimbus-eth2-24.7.0/beacon_chain/version.nim
-@@ -11,37 +11,22 @@
+--- eth-node-nimbus-eth2-24.8.0.orig/beacon_chain/version.nim
++++ eth-node-nimbus-eth2-24.8.0/beacon_chain/version.nim
+@@ -11,37 +11,21 @@
  ## in the Nimbus release process (i.e. beacon_node, validator_client, etc)
  
  import std/[strutils, compilesettings]
@@ -16,13 +16,13 @@ Index: eth-node-nimbus-eth2-24.7.0/beacon_chain/version.nim
 +    "Copyright (c) 2019-" & reproducibleYear & " Status Research & Development GmbH"
  
 -  versionMajor* = 24
--  versionMinor* = 7
+-  versionMinor* = 8
 -  versionBuild* = 0
 +  versionMajor* = parseInt(getEnv("VERSION_MAJOR", "24"))
 +  versionMinor* = parseInt(getEnv("VERSION_MINOR", "7"))
 +  versionBuild* = parseInt(getEnv("VERSION_BUILD", "0"))
  
--  versionBlob* = "stateofus" # Single word - ends up in the default graffiti
+   versionBlob* = "stateofus" # Single word - ends up in the default graffiti
  
 -  ## You can override this if you are building the
 -  ## sources outside the git tree of Nimbus:
@@ -41,8 +41,7 @@ Index: eth-node-nimbus-eth2-24.7.0/beacon_chain/version.nim
 -    staticExec "git rev-parse --short HEAD"
 -  else:
 -    git_revision_override
-+  versionBlob* = "stateofus" # Single word - ends up in the default graffiti
- 
+-
 -  gitRevision* = strip(gitRevisionLong)[0..5]
 +  gitRevision* = getEnv("GIT_REVISION", "12345")
  
