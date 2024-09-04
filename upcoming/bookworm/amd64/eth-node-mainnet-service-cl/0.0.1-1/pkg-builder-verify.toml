@@ -1,0 +1,18 @@
+[verify]
+package_hash=[
+    { hash="11e6526c8511e0234241bc2a49d896de44587a3a", name= "eth-node-mainnet-service_0.0.1-1.dsc"},
+    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-service_0.0.1.orig.tar.gz"},
+    { hash="9c41bc337d1ee49b98254f5ce2f31824a1d3da3b", name= "eth-node-mainnet-service_0.0.1-1.debian.tar.xz"},
+    { hash="c4436274387ea6f4aa4f2a81a49ba1535e1a1380", name= "eth-node-mainnet-service-erigon_0.0.1-1_amd64.deb"},
+    # lighthouse
+    { hash="02643d258a6b06f7fbb8da49293a9c8fa7afd4d0", name= "eth-node-mainnet-service-lighthouse_0.0.1-1_amd64.deb"},
+    # lodestar
+    { hash="22692fc215610fbd30eb3b049537da1c4474ea32", name= "eth-node-mainnet-service-lodestar_0.0.1-1_amd64.deb"},
+    # nimbus-eth2
+    { hash="5419ed20fd38fe02a28ca50d31bcabedbccf9ca9", name= "eth-node-mainnet-service-nimbus-eth2_0.0.1-1_amd64.deb"},
+    # prysm
+    { hash="6c94a72a1e2f0d1abb6dfa535a4900aa67a8c42d", name= "eth-node-mainnet-service-prysm_0.0.1-1_amd64.deb"},
+    # teku
+    { hash="ad16bd8d7c87ce1e898fe2c7c7723d82c8bd29b6", name= "eth-node-mainnet-service-teku_0.0.1-1_amd64.deb"},
+
+]
