@@ -1,11 +1,11 @@
 [Unit]
-Description=eth-node-testnet-reth service
+Description=eth-node-testnet-prysm service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-reth/bin/run-reth.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/reth/conf.d/reth-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-prysm/bin/run-prysm.sh \
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/prysm/conf.d/prysm-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
@@ -22,7 +22,7 @@ ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
-ReadWritePaths=/var/lib/eth-node-testnet/reth
+ReadWritePaths=/var/lib/eth-node-testnet/prysm
 ReadOnlyPaths=/var/lib/eth-node-testnet
 RemoveIPC=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
@@ -32,12 +32,11 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# TODO not working for prysm
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-testnet-reth
-WorkingDirectory=/var/lib/eth-node-testnet/reth
+User=eth-node-testnet-prysm
+WorkingDirectory=/var/lib/eth-node-testnet/prysm
 
 [Install]
 WantedBy=multi-user.target
-
-

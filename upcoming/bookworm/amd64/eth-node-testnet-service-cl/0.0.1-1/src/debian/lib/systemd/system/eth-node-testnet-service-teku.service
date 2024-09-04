@@ -1,11 +1,11 @@
 [Unit]
-Description=eth-node-testnet-lodestar service
+Description=eth-node-testnet-teku service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-lodestar/bin/run-lodestar.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/lodestar/conf.d/lodestar-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-teku/bin/run-teku.sh \
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/teku/conf.d/teku-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
@@ -22,22 +22,19 @@ ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
-ReadWritePaths=/var/lib/eth-node-testnet/lodestar
+ReadWritePaths=/var/lib/eth-node-testnet/teku
 ReadOnlyPaths=/var/lib/eth-node-testnet
 RemoveIPC=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
-
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
-# TODO: this specially not working with only lodestar
-# SystemCallFilter=@system-service
-# does not work with lodestar as well
-#SystemCallFilter=~@privileged @resources @obsolete
+SystemCallFilter=@system-service
+SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-testnet-lodestar
-WorkingDirectory=/var/lib/eth-node-testnet/lodestar
+User=eth-node-testnet-service-teku
+WorkingDirectory=/var/lib/eth-node-testnet/teku
 
 [Install]
 WantedBy=multi-user.target

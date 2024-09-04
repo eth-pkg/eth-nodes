@@ -1,11 +1,11 @@
 [Unit]
-Description=eth-node-testnet-nimbus-eth2 service
+Description=eth-node-testnet-lighthouse service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-nimbus-eth2/bin/run-nimbus-eth2.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/nimbus-eth2/conf.d/nimbus-eth2-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-lighthouse/bin/run-lighthouse.sh \
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/lighthouse/conf.d/lighthouse-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
@@ -22,7 +22,7 @@ ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
-ReadWritePaths=/var/lib/eth-node-testnet/nimbus-eth2
+ReadWritePaths=/var/lib/eth-node-testnet/lighthouse
 ReadOnlyPaths=/var/lib/eth-node-testnet
 RemoveIPC=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
@@ -32,10 +32,11 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# not working for lighthouse as well
+#SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-testnet-nimbus-eth2
-WorkingDirectory=/var/lib/eth-node-testnet/nimbus-eth2
+User=eth-node-testnet-lighthouse
+WorkingDirectory=/var/lib/eth-node-testnet/lighthouse
 
 [Install]
 WantedBy=multi-user.target

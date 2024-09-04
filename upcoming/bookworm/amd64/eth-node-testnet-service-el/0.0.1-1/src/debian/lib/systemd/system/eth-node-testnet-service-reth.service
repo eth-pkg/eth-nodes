@@ -1,11 +1,11 @@
 [Unit]
-Description=eth-node-testnet-teku service
+Description=eth-node-testnet-reth service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-teku/bin/run-teku.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/teku/conf.d/teku-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-reth/bin/run-reth.sh \
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/reth/conf.d/reth-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
@@ -22,10 +22,11 @@ ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
-ReadWritePaths=/var/lib/eth-node-testnet/teku
+ReadWritePaths=/var/lib/eth-node-testnet/reth
 ReadOnlyPaths=/var/lib/eth-node-testnet
 RemoveIPC=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
+
 RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
@@ -33,8 +34,10 @@ SystemCallArchitectures=native
 SystemCallFilter=@system-service
 SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-testnet-service-teku
-WorkingDirectory=/var/lib/eth-node-testnet/teku
+User=eth-node-testnet-reth
+WorkingDirectory=/var/lib/eth-node-testnet/reth
 
 [Install]
 WantedBy=multi-user.target
+
+

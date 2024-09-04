@@ -1,11 +1,11 @@
 [Unit]
-Description=eth-node-testnet-erigon service
+Description=eth-node-testnet-geth service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-erigon/bin/run-erigon.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/erigon/conf.d/erigon-mainnet.conf
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-geth/bin/run-geth.sh \
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/geth/conf.d/geth-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
@@ -22,7 +22,7 @@ ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
 ProtectSystem=strict
-ReadWritePaths=/var/lib/eth-node-testnet/erigon
+ReadWritePaths=/var/lib/eth-node-testnet/geth
 ReadOnlyPaths=/var/lib/eth-node-testnet
 RemoveIPC=true
 RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
@@ -32,11 +32,11 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-# not working for erigon either
+# not working for geth either
 #SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-testnet-erigon
-WorkingDirectory=/var/lib/eth-node-testnet/erigon
+User=eth-node-testnet-geth
+WorkingDirectory=/var/lib/eth-node-testnet/geth
 
 [Install]
 WantedBy=multi-user.target

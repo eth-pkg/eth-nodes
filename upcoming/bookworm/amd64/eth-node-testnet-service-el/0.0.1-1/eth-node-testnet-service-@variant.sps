@@ -1,5 +1,5 @@
 name = "eth-node-testnet-service-@variant"
-bin_package = "eth-node-config-testnet-@variant"
+bin_package = "eth-node-config-testnet-{variant}"
 binary = "/usr/bin/run-{variant}.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }

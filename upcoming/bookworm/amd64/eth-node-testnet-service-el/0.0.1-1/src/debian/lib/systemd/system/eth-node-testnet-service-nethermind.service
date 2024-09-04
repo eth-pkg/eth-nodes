@@ -4,8 +4,8 @@ Description=eth-node-testnet-nethermind service
 [Service]
 CapabilityBoundingSet=
 ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-nethermind/bin/run-nethermind.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/nethermind/conf.d/nethermind-mainnet.conf
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/nethermind/conf.d/nethermind-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true

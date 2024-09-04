@@ -4,8 +4,8 @@ Description=eth-node-testnet-besu service
 [Service]
 CapabilityBoundingSet=
 ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-besu/bin/run-besu.sh \
-    --conf-file /etc/eth-node-testnet/conf.d/mainnet.conf \
-    --conf-file /etc/eth-node-testnet/besu/conf.d/besu-mainnet.conf
+    --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
+    --conf-file /etc/eth-node-testnet/besu/conf.d/besu-testnet.conf
 IPAddressDeny=none
 LockPersonality=true
 NoNewPrivileges=true
