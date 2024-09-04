@@ -1,8 +1,10 @@
 [verify]
 package_hash=[
-    { hash="11e6526c8511e0234241bc2a49d896de44587a3a", name= "eth-node-mainnet-service_0.0.1-1.dsc"},
-    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-service_0.0.1.orig.tar.gz"},
-    { hash="9c41bc337d1ee49b98254f5ce2f31824a1d3da3b", name= "eth-node-mainnet-service_0.0.1-1.debian.tar.xz"},
+        # does not matter eth-node-mainnet-service-el won't be published
+
+    # { hash="11e6526c8511e0234241bc2a49d896de44587a3a", name= "eth-node-mainnet-service-el_0.0.1-1.dsc"},
+    # { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-service-el_0.0.1.orig.tar.gz"},
+    # { hash="9c41bc337d1ee49b98254f5ce2f31824a1d3da3b", name= "eth-node-mainnet-service-el_0.0.1-1.debian.tar.xz"},
     # besu 
     { hash="7edba73ede2d189a78c4021bbfc16f85b97774b1", name= "eth-node-mainnet-service-besu_0.0.1-1_amd64.deb"},
     # erigon 

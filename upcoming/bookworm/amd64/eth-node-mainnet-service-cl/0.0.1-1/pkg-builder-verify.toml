@@ -1,8 +1,10 @@
 [verify]
 package_hash=[
-    { hash="11e6526c8511e0234241bc2a49d896de44587a3a", name= "eth-node-mainnet-service_0.0.1-1.dsc"},
-    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-service_0.0.1.orig.tar.gz"},
-    { hash="9c41bc337d1ee49b98254f5ce2f31824a1d3da3b", name= "eth-node-mainnet-service_0.0.1-1.debian.tar.xz"},
+    # does not matter eth-node-mainnet-service-cl won't be published
+    # { hash="11e6526c8511e0234241bc2a49d896de44587a3a", name= "eth-node-mainnet-service-cl_0.0.1-1.dsc"},
+    # { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-mainnet-service-cl_0.0.1.orig.tar.gz"},
+    # { hash="9c41bc337d1ee49b98254f5ce2f31824a1d3da3b", name= "eth-node-mainnet-service-cl_0.0.1-1.debian.tar.xz"},
+
     { hash="c4436274387ea6f4aa4f2a81a49ba1535e1a1380", name= "eth-node-mainnet-service-erigon_0.0.1-1_amd64.deb"},
     # lighthouse
     { hash="02643d258a6b06f7fbb8da49293a9c8fa7afd4d0", name= "eth-node-mainnet-service-lighthouse_0.0.1-1_amd64.deb"},
