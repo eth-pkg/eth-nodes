@@ -1,5 +1,5 @@
 name = "eth-node-mainnet-service-@variant"
-bin_package = "eth-node-config-@variant"
+bin_package = "eth-node-config-mainnet-@variant"
 binary = "/usr/bin/run-{variant}.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd/system/eth-node-mainnet-service-{variant}.service /lib/systemd/system/"]
 provides = ["eth-node-mainnet-el-service"]
 conflicts = ["eth-node-mainnet-el-service"]
-depends=["eth-node-config-{variant}", "eth-node-mainnet-config"]
-summary = "systemd service files for eth-node-besu using eth-node-config-{variant} and eth-node-mainnet-config"
+depends=["eth-node-config-mainnet-{variant}", "eth-node-mainnet-config"]
+summary = "systemd service files for eth-node-besu using eth-node-config-mainnet-{variant} and eth-node-mainnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

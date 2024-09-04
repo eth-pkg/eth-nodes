@@ -3,7 +3,7 @@ Description=eth-node-mainnet-reth service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-reth/bin/run-reth.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-mainnet-reth/bin/run-reth.sh \
     --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
     --conf-file /etc/eth-node-mainnet/reth/conf.d/reth-mainnet.conf
 IPAddressDeny=none

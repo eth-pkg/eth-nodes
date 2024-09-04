@@ -3,7 +3,7 @@ Description=eth-node-mainnet-geth service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-geth/bin/run-geth.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-mainnet-geth/bin/run-geth.sh \
     --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
     --conf-file /etc/eth-node-mainnet/geth/conf.d/geth-mainnet.conf
 IPAddressDeny=none

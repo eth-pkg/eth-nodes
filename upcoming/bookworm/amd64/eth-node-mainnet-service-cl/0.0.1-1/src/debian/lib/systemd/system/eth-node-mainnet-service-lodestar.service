@@ -3,7 +3,7 @@ Description=eth-node-mainnet-lodestar service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-lodestar/bin/run-lodestar.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-mainnet-lodestar/bin/run-lodestar.sh \
     --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
     --conf-file /etc/eth-node-mainnet/lodestar/conf.d/lodestar-mainnet.conf
 IPAddressDeny=none

@@ -1,0 +1,19 @@
+[verify]
+package_hash=[
+        # does not matter eth-node-testnet-service-el won't be published
+
+    # { hash="11e6526c8511e0234241bc2a49d896de44587a3a", name= "eth-node-testnet-service-el_0.0.1-1.dsc"},
+    # { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-testnet-service-el_0.0.1.orig.tar.gz"},
+    # { hash="9c41bc337d1ee49b98254f5ce2f31824a1d3da3b", name= "eth-node-testnet-service-el_0.0.1-1.debian.tar.xz"},
+    # besu 
+    { hash="7edba73ede2d189a78c4021bbfc16f85b97774b1", name= "eth-node-testnet-service-besu_0.0.1-1_amd64.deb"},
+    # erigon 
+    { hash="c4436274387ea6f4aa4f2a81a49ba1535e1a1380", name= "eth-node-testnet-service-erigon_0.0.1-1_amd64.deb"},
+    # nethermind
+    { hash="2f771560eaa8dc890626a32d3ee8ca3a5597e78f", name= "eth-node-testnet-service-nethermind_0.0.1-1_amd64.deb"},
+    # reth 
+    { hash="a6b2b2b64849c437208e5b37e5a7c1d18539e5de", name= "eth-node-testnet-service-reth_0.0.1-1_amd64.deb"},
+    # getn
+    { hash="ad16bd8d7c87ce1e898fe2c7c7723d82c8bd29b6", name= "eth-node-testnet-service-geth_0.0.1-1_amd64.deb"},
+
+]

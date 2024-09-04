@@ -3,7 +3,7 @@ Description=eth-node-mainnet-teku service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-teku/bin/run-teku.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-mainnet-teku/bin/run-teku.sh \
     --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
     --conf-file /etc/eth-node-mainnet/teku/conf.d/teku-mainnet.conf
 IPAddressDeny=none

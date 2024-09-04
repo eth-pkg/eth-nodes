@@ -1,0 +1,14 @@
+name = "eth-node-config-mainnet"
+maintainer = "Eniko Nagy <mail+ethnodes@eenagy.com>"
+section = "net"
+variants = [
+    "besu", "erigon", "geth", 
+    "lighthouse", "lodestar", "nethermind", 
+    "nimbus-eth2", "prysm", "reth", 
+    "teku"
+]
+build_depends = []
+packages = [
+    "eth-node-config-mainnet-@variant"
+]
+skip_debug_symbols = true

@@ -3,7 +3,7 @@ Description=eth-node-mainnet-prysm service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-prysm/bin/run-prysm.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-mainnet-prysm/bin/run-prysm.sh \
     --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
     --conf-file /etc/eth-node-mainnet/prysm/conf.d/prysm-mainnet.conf
 IPAddressDeny=none
