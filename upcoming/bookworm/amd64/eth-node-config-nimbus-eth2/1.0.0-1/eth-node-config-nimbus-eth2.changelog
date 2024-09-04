@@ -1,6 +1,0 @@
-eth-node-config-nimbus-eth2 (1.0.0-1) bookworm; urgency=medium
-
-  * Initial packaging
-
- -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 4 Jul 2043 07:15:27 +0200
- 
