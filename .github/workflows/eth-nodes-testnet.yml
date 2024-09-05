@@ -1,4 +1,4 @@
-name: nodes-testnet
+name: eth-nodes-testnet
 
 on:
   push:
@@ -37,6 +37,7 @@ jobs:
       - name: Create chroot env
         run: |
           cd upcoming/bookworm/amd64/eth-node-config-mainnet/1.0.0-1
+          ls -al
           pkg-builder env create
           echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
