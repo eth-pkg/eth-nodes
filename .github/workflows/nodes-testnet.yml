@@ -3,7 +3,7 @@ name: nodes-testnet
 on:
   push:
     branches:
-      - feat/eth-nodes
+      - feat/eth-node
 
 jobs:
   setup:
