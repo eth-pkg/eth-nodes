@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
-      
+
       - name: Checkout dependency repository
         uses: actions/checkout@v4
         with:
@@ -37,7 +37,19 @@ jobs:
           mv debcrafter ${HOME}/.local/bin
           chmod +x ${HOME}/.local/bin/debcrafter
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
-      
+
+      - name: Sbuild setup
+        run: |
+          sudo apt update
+          # Note this is an older version of sbuild, no need to patch it, yet
+          sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
+          sudo apt install -y pkg-config libssl-dev uidmap
+          sudo apt install -y libfilesys-df-perl libmime-lite-perl
+          # change this into actually built version and cache it
+          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
+          sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+
       - name: Create chroot env
         run: |
           pwd && ls -al
@@ -59,8 +71,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-            distribution: 'oracle'
-            java-version: '21'
+          distribution: "oracle"
+          java-version: "21"
 
       - name: Install dotnet
         run: |
@@ -68,7 +80,7 @@ jobs:
           sudo apt install -y aspnetcore-runtime-8.0
 
       - name: Install node.js dep
-        run: | 
+        run: |
           curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
           sudo apt install -y nodejs
       # caches packages not to hit the repository in each CI run
