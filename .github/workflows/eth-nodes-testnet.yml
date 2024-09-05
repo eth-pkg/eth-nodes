@@ -10,6 +10,9 @@ jobs:
     name: Setup Environment
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+      
       - name: Checkout dependency repository
         uses: actions/checkout@v4
         with:
@@ -34,15 +37,13 @@ jobs:
           mv debcrafter ${HOME}/.local/bin
           chmod +x ${HOME}/.local/bin/debcrafter
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
+      
       - name: Create chroot env
         run: |
           pwd && ls -al
           cd upcoming/bookworm/amd64/eth-node-config-mainnet/1.0.0-1
           pkg-builder env create
           echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
-
-      - name: Checkout Code
-        uses: actions/checkout@v4
 
       - name: Build packages
         run: |
