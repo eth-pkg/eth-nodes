@@ -36,8 +36,8 @@ jobs:
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
       - name: Create chroot env
         run: |
-          cd upcoming/bookworm/amd64/eth-node-config-mainnet/1.0.0-1
           ls -al
+          cd upcoming/bookworm/amd64/eth-node-config-mainnet/1.0.0-1
           pkg-builder env create
           echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
@@ -56,6 +56,21 @@ jobs:
           echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
           sudo apt update
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+            distribution: 'oracle'
+            java-version: '21'
+
+      - name: Install dotnet
+        run: |
+          sudo apt update
+          sudo apt install -y aspnetcore-runtime-8.0
+
+      - name: Install node.js dep
+        run: | 
+          curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+          sudo apt install -y nodejs
       # caches packages not to hit the repository in each CI run
       - name: Cache apt packages
         uses: eth-pkg/apt-deb-cache@v0.2.4
