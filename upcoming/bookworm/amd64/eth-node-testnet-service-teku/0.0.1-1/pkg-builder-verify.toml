@@ -5,6 +5,6 @@ package_hash=[
     # { hash="228f338fa408c43acb1f08da4bb14062d38b7812", name= "eth-node-testnet-service-teku_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-testnet-service-teku_0.0.1.orig.tar.gz"},
     # { hash="11da8cbe542c6445efd8d67fa5adfc00ecfd84cd", name= "eth-node-testnet-service-teku_0.0.1-1.debian.tar.xz"},
-    { hash="d86cc0ae4949689d35100ead9d2ae0d7d2256a91", name= "eth-node-testnet-service-teku_0.0.1-1_all.deb"},
+    { hash="94b624ef1691ec2e6d41944d663db321ede32314", name= "eth-node-testnet-service-teku_0.0.1-1_all.deb"},
 
 ]

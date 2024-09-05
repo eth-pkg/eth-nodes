@@ -1,0 +1,84 @@
+name: nodes-testnet
+
+on:
+  push:
+    branches:
+      - feat/eth-nodes
+
+jobs:
+  setup:
+    name: Setup Environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dependency repository
+        uses: actions/checkout@v4
+        with:
+          repository: eth-pkg/pkg-builder  
+          ref: main
+          path: pkg-builder
+
+      - name: Install pkg-builder
+        run: |
+            cd pkg-builder
+            cargo build --release
+            mkdir -p ${HOME}/.local/bin 
+            mv target/release/pkg-builder ${HOME}/.local/bin
+            chmod +x ${HOME}/.local/bin/pkg-builder
+            echo "${HOME}/.local/bin" >> $GITHUB_PATH
+            cd .. && rm -rf pkg-builder
+  
+      - name: Install debcrafter
+        run: |
+          wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+          mkdir -p ${HOME}/.local/bin
+          mv debcrafter ${HOME}/.local/bin
+          chmod +x ${HOME}/.local/bin/debcrafter
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Setup Script
+        run: |
+          ./scripts/build.sh
+          echo "${HOME}/packages" >> $GITHUB_PATH
+
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: setup # This job will only run after the `setup` job is complete
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Add eth-nodes repository
+        run: |
+          sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
+          sudo apt update
+
+    # caches packages not to hit the repository in each CI run 
+      - name: Cache apt packages
+        uses: eth-pkg/apt-deb-cache@v0.2.4
+        with:
+          packages: |
+            eth-node-besu \
+            eth-node-erigon \
+            eth-node-geth \
+            eth-node-nethermind eth-node-reth \
+            eth-node-lighthouse \
+            eth-node-lodestar \
+            eth-node-nimbus-eth2 \
+            eth-node-prysm \
+            eth-node-teku
+
+      - name: Run Tests
+        run: |
+          sudo dpkg -i $HOME/packages/eth-node-testnet-config
+          sudo dpkg -i $HOME/packages/eth-node-config-testnet-besu_0.0.1-1_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-config-testnet-lighthouse_0.0.1-1_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-testnet
+
+

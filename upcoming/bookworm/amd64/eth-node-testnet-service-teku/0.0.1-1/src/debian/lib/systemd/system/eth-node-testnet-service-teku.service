@@ -31,9 +31,9 @@ RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
-SystemCallFilter=~@privileged @resources @obsolete
+# SystemCallFilter=~@privileged @resources @obsolete
 UMask=0077
-User=eth-node-testnet-service-teku
+User=eth-node-testnet-teku
 WorkingDirectory=/var/lib/eth-node-testnet/teku
 
 [Install]

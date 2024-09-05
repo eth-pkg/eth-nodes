@@ -25,7 +25,7 @@ ALLOWED_NETWORKS=(
 REBUILD=false
 PACKAGE_DIR=$HOME/.pkg-builder/packages/bookworm
 ARCH=amd64
-SERVE_DIR=$HOME/debs/bookworm-testing
+SERVE_DIR=/home/runner/packages
 NETWORK_CONFIG_VERSION=0.0.1-1
 EL_SERVICE_VERSION=0.0.1-1
 CL_SERVICE_VERSION=0.0.1-1
@@ -63,29 +63,29 @@ else
     display_help
 fi
 
-# rm -rf $HOME/debs/bookworm-testing/*
+cd upcoming/bookworm/amd64
 
-# cd eth-node-$NETWORK/1.0.0-1
-# pkg-builder verify
-# cd ../..
+cd eth-node-$NETWORK/1.0.0-1
+pkg-builder verify
+cd ../..
 
-# # network configs, not the same as client configs
-# cd eth-node-$NETWORK-config/1.0.0-1
-# pkg-builder verify
-# cd ../..
+# network configs, not the same as client configs
+cd eth-node-$NETWORK-config/1.0.0-1
+pkg-builder verify
+cd ../..
 
-# # build client configs 
-# cd eth-node-config-$NETWORK/$NETWORK_CONFIG_VERSION
-# pkg-builder verify
-# cd ../..
+# build client configs 
+cd eth-node-config-$NETWORK/$NETWORK_CONFIG_VERSION
+pkg-builder verify
+cd ../..
 
 
-# for client in "${EL_CLIENTS[@]}"; do
-#     cd eth-node-$NETWORK-service-${client}/$CL_SERVICE_VERSION
-#     pkg-builder verify
-#     cd ../..
+for client in "${EL_CLIENTS[@]}"; do
+    cd eth-node-$NETWORK-service-${client}/$CL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
 
-# done
+done
 
 for client in "${CL_CLIENTS[@]}"; do
     cd eth-node-$NETWORK-service-${client}/$EL_SERVICE_VERSION
