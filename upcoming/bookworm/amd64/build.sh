@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -E
+set -euo pipefail
 
 EL_CLIENTS=(
     "besu"
@@ -26,9 +26,9 @@ REBUILD=false
 PACKAGE_DIR=$HOME/.pkg-builder/packages/bookworm
 ARCH=amd64
 SERVE_DIR=$HOME/debs/bookworm-testing
-ETH_NODE_CONFIG_MAINNET_VERSION=0.0.1-1
-ETH_MAINNET_SERVICE_EL_VERSION=0.0.1-1
-ETH_MAINNET_SERVICE_CL_VERSION=0.0.1-1
+NETWORK_CONFIG_VERSION=0.0.1-1
+EL_SERVICE_VERSION=0.0.1-1
+CL_SERVICE_VERSION=0.0.1-1
 NETWORK=mainnet
 
 display_help() {
@@ -63,29 +63,35 @@ else
     display_help
 fi
 
-# rm -rf $HOME/debs/bookworm-testing/*
+rm -rf $HOME/debs/bookworm-testing/*
 
-# cd eth-node-$NETWORK/1.0.0-1
-# pkg-builder verify
-# cd ../..
+cd eth-node-$NETWORK/1.0.0-1
+pkg-builder verify
+cd ../..
 
-# network configs, not the same as client configs
-# cd eth-node-$NETWORK-config/1.0.0-1
-# pkg-builder verify
-# cd ../..
+network configs, not the same as client configs
+cd eth-node-$NETWORK-config/1.0.0-1
+pkg-builder verify
+cd ../..
 
 # build client configs 
-# cd eth-node-config-$NETWORK/$ETH_NODE_CONFIG_MAINNET_VERSION
-# pkg-builder verify
-# cd ../..
+cd eth-node-config-$NETWORK/$NETWORK_CONFIG_VERSION
+pkg-builder verify
+cd ../..
 
-# cd eth-node-$NETWORK-service-cl/$ETH_MAINNET_SERVICE_CL_VERSION
-# pkg-builder verify
-# cd ../..
 
-# cd eth-node-$NETWORK-service-el/$ETH_MAINNET_SERVICE_EL_VERSION
-# pkg-builder verify
-# cd ../..
+for client in "${EL_CLIENTS[@]}"; do
+    cd eth-node-$NETWORK-service-${client}/$CL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
+
+done
+
+for client in "${CL_CLIENTS[@]}"; do
+    cd eth-node-$NETWORK-service-${client}/$EL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
+done
 
 
 echo "Copy built binaries"
@@ -93,21 +99,21 @@ echo "Copy built binaries"
 cp "$PACKAGE_DIR/eth-node-$NETWORK-1.0.0-1/eth-node-${NETWORK}_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
 cp "$PACKAGE_DIR/eth-node-$NETWORK-config-1.0.0-1/eth-node-$NETWORK-config_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
 
-#copy eth-node-config-{variant} configs
+# copy eth-node-config-{variant} configs
 for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$ETH_NODE_CONFIG_MAINNET_VERSION/eth-node-config-$NETWORK-${client}_${ETH_NODE_CONFIG_MAINNET_VERSION}_$ARCH.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$ETH_NODE_CONFIG_MAINNET_VERSION/eth-node-config-$NETWORK-${client}_${ETH_NODE_CONFIG_MAINNET_VERSION}_$ARCH.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-cl-$ETH_MAINNET_SERVICE_CL_VERSION/eth-node-$NETWORK-service-${client}_${ETH_MAINNET_SERVICE_EL_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-cl-$CL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-el-$ETH_MAINNET_SERVICE_EL_VERSION/eth-node-$NETWORK-service-${client}_${ETH_MAINNET_SERVICE_EL_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-el-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 
