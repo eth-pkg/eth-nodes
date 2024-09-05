@@ -41,7 +41,7 @@ jobs:
       - name: Create chroot env
         run: |
           pwd && ls -al
-          cd upcoming/bookworm/amd64/eth-node-config-mainnet/0.0.1-1 && pkg-builder env create
+          cd upcoming/bookworm/amd64/eth-node-mainnet/1.0.0-1 && pkg-builder env create
           echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
 
       - name: Build packages
