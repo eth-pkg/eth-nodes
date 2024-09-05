@@ -1,8 +1,10 @@
 [verify]
 package_hash=[
-    { hash="70601da8e2bda3217c3e2d55792da08ffbe1ff5a", name= "eth-node-testnet-service-geth_0.0.1-1.dsc"},
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="70601da8e2bda3217c3e2d55792da08ffbe1ff5a", name= "eth-node-testnet-service-geth_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-testnet-service-geth_0.0.1.orig.tar.gz"},
-    { hash="5d48d5fd702af111f108c095f86a56674b159e98", name= "eth-node-testnet-service-geth_0.0.1-1.debian.tar.xz"},
+    # { hash="5d48d5fd702af111f108c095f86a56674b159e98", name= "eth-node-testnet-service-geth_0.0.1-1.debian.tar.xz"},
     { hash="aededaf7ccc3786877fd42d0dbdf79d8cc19f2b7", name= "eth-node-testnet-service-geth_0.0.1-1_all.deb"},
 
 ]

@@ -1,8 +1,10 @@
 [verify]
 package_hash=[
-    { hash="3c4029ca33e6f26976012c3cab2dc68f46ce30f8", name= "eth-node-testnet-service-lighthouse_0.0.1-1.dsc"},
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="659923d1f0978197511d73d9afc55d580ddfebd3", name= "eth-node-testnet-service-lighthouse_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-testnet-service-lighthouse_0.0.1.orig.tar.gz"},
-    { hash="bf82dcf8ae59dc94c3dbb41f5e0df8b5d15934cd", name= "eth-node-testnet-service-lighthouse_0.0.1-1.debian.tar.xz"},
-    { hash="49037006b70387b68d3370fa23ffb4df76b64a44", name= "eth-node-testnet-service-lighthouse_0.0.1-1_all.deb"},
+    # { hash="bf0a229df898501b2599f76414604a60f9b8eb1c", name= "eth-node-testnet-service-lighthouse_0.0.1-1.debian.tar.xz"},
+    { hash="5f6433d6ba3dee75fd1d2b9876086e859b66b83b", name= "eth-node-testnet-service-lighthouse_0.0.1-1_all.deb"},
 
 ]

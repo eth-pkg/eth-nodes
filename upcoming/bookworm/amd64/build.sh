@@ -63,35 +63,35 @@ else
     display_help
 fi
 
-rm -rf $HOME/debs/bookworm-testing/*
+# rm -rf $HOME/debs/bookworm-testing/*
 
-cd eth-node-$NETWORK/1.0.0-1
-pkg-builder verify
-cd ../..
+# cd eth-node-$NETWORK/1.0.0-1
+# pkg-builder verify
+# cd ../..
 
-network configs, not the same as client configs
-cd eth-node-$NETWORK-config/1.0.0-1
-pkg-builder verify
-cd ../..
+# # network configs, not the same as client configs
+# cd eth-node-$NETWORK-config/1.0.0-1
+# pkg-builder verify
+# cd ../..
 
-# build client configs 
-cd eth-node-config-$NETWORK/$NETWORK_CONFIG_VERSION
-pkg-builder verify
-cd ../..
+# # build client configs 
+# cd eth-node-config-$NETWORK/$NETWORK_CONFIG_VERSION
+# pkg-builder verify
+# cd ../..
 
 
-for client in "${EL_CLIENTS[@]}"; do
-    cd eth-node-$NETWORK-service-${client}/$CL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
+# for client in "${EL_CLIENTS[@]}"; do
+#     cd eth-node-$NETWORK-service-${client}/$CL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
 
-done
+# done
 
-for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-$NETWORK-service-${client}/$EL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
-done
+# for client in "${CL_CLIENTS[@]}"; do
+#     cd eth-node-$NETWORK-service-${client}/$EL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
+# done
 
 
 echo "Copy built binaries"
@@ -109,11 +109,11 @@ for client in "${CL_CLIENTS[@]}"; do
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-cl-$CL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$CL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-el-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 

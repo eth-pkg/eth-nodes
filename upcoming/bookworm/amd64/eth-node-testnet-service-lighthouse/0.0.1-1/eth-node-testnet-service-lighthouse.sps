@@ -7,7 +7,7 @@ runtime_dir = { mode = "750" }
 extra_service_config = """
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
-add_files = ["debian/lib/systemd/system/eth-node-testnet-service-lighhtouse.service /lib/systemd/system/"]
+add_files = ["debian/lib/systemd/system/eth-node-testnet-service-lighthouse.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-cl-service"]
 conflicts = ["eth-node-testnet-cl-service"]
 depends=["eth-node-config-testnet-lighthouse", "eth-node-testnet-config", "eth-node-testnet"]
