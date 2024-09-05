@@ -44,14 +44,6 @@ jobs:
           bash scripts/build.sh --network testnet
           echo "${HOME}/packages" >> $GITHUB_PATH
 
-  test:
-    name: Run Tests
-    runs-on: ubuntu-latest
-    needs: setup # This job will only run after the `setup` job is complete
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
       - name: Add eth-nodes repository
         run: |
           sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
