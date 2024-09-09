@@ -94,7 +94,7 @@ for client in "${CL_CLIENTS[@]}"; do
 done
 
 
-echo "Copy built binaries"
+echo "Copying built binaries"
 
 cp "$PACKAGE_DIR/eth-node-$NETWORK-1.0.0-1/eth-node-${NETWORK}_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
 cp "$PACKAGE_DIR/eth-node-$NETWORK-config-1.0.0-1/eth-node-$NETWORK-config_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
@@ -116,5 +116,5 @@ for client in "${EL_CLIENTS[@]}"; do
     cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
-
+ls -al $SERVE_DIR
 
