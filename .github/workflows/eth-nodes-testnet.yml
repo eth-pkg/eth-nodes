@@ -22,20 +22,12 @@ jobs:
 
       - name: Install pkg-builder
         run: |
-          cd pkg-builder
           cargo build --release
-          mkdir -p ${HOME}/.local/bin 
-          mv target/release/pkg-builder ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/pkg-builder
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
-          cd .. && rm -rf pkg-builder
-
-      - name: Install debcrafter
-        run: |
-          wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
           mkdir -p ${HOME}/.local/bin
-          mv debcrafter ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/debcrafter
+          mv target/release/pkg-builder ${HOME}/.local/bin
+          # add to path the prebuilt debcrafter binaries as well
+          cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
+          chmod +x ${HOME}/.local/bin/pkg-builder
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
       - name: Sbuild setup

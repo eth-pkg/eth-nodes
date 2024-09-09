@@ -11,8 +11,8 @@ package_type="virtual"
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.7"
-debcrafter_version = "2711b53"
+pkg_builder_version="0.2.8"
+debcrafter_version = "8189263"
 run_lintian=true
 run_piuparts=true
 run_autopkgtest=false
