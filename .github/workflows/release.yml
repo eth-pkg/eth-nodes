@@ -80,14 +80,6 @@ jobs:
           chmod +x ${HOME}/.local/bin/debcrafter_*
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
-      - name: Install debcrafter
-        run: |
-          wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
-          mkdir -p ${HOME}/.local/bin
-          mv debcrafter ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/debcrafter
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
-
       - name: Create chroot env
         run: |
           cd ${{ steps.env.outputs.tag_name }}
