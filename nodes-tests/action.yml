@@ -1,135 +1,136 @@
 name: nodes-tests
 inputs:
   cl_name:
-    description: 'cl name'
+    description: "cl name"
     required: true
   el_name:
-    description: 'el name'
+    description: "el name"
     required: true
   network:
-    description: 'Ethereum network name'
+    description: "Ethereum network name"
     required: true
 
 runs:
-    using: composite
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+  using: composite
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      - name: Checkout dependency repository
-        uses: actions/checkout@v4
-        with:
-          repository: eth-pkg/pkg-builder
-          ref: main
-          path: pkg-builder
+    - name: Checkout dependency repository
+      uses: actions/checkout@v4
+      with:
+        repository: eth-pkg/pkg-builder
+        ref: main
+        path: pkg-builder
 
-      - name: Install pkg-builder
-        run: |
-          cd pkg-builder
-          cargo build --release
-          mkdir -p ${HOME}/.local/bin
-          mv target/release/pkg-builder ${HOME}/.local/bin
-          # add to path the prebuilt debcrafter binaries as well
-          cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/pkg-builder
-          chmod +x ${HOME}/.local/bin/debcrafter_*
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
-        shell: bash   
+    - name: Install pkg-builder
+      run: |
+        cd pkg-builder
+        cargo build --release
+        mkdir -p ${HOME}/.local/bin
+        mv target/release/pkg-builder ${HOME}/.local/bin
+        # add to path the prebuilt debcrafter binaries as well
+        cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
+        chmod +x ${HOME}/.local/bin/pkg-builder
+        chmod +x ${HOME}/.local/bin/debcrafter_*
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+      shell: bash
 
-      - name: Sbuild setup
-        run: |
-          sudo apt update
-          # Note this is an older version of sbuild, no need to patch it, yet
-          sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
-          sudo apt install -y pkg-config libssl-dev uidmap
-          sudo apt install -y libfilesys-df-perl libmime-lite-perl
-          # change this into actually built version and cache it
-          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
-          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
-          sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
-        shell: bash     
+    - name: Sbuild setup
+      run: |
+        sudo apt update
+        # Note this is an older version of sbuild, no need to patch it, yet
+        sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
+        sudo apt install -y pkg-config libssl-dev uidmap
+        sudo apt install -y libfilesys-df-perl libmime-lite-perl
+        # change this into actually built version and cache it
+        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
+        sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+      shell: bash
 
-      - name: Create chroot env
-        run: |
-          pwd && ls -al
-          cd upcoming/bookworm/amd64/eth-node-mainnet/1.0.0-1 && pkg-builder env create
-          echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
-        shell: bash     
+    - name: Create chroot env
+      run: |
+        pwd && ls -al
+        cd upcoming/bookworm/amd64/eth-node-mainnet/1.0.0-1 && pkg-builder env create
+        echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
+      shell: bash
 
-      - name: Build packages
-        run: |
-          chmod +x scripts/build.sh
-          bash scripts/build.sh --network ${{ inputs.network }}
-          echo "${HOME}/packages" >> $GITHUB_PATH
-        shell: bash     
+    - name: Build packages
+      run: |
+        chmod +x scripts/build.sh
+        bash scripts/build.sh --network ${{ inputs.network }}
+        echo "${HOME}/packages" >> $GITHUB_PATH
+      shell: bash
 
-      - name: Add eth-nodes repository
-        run: |
-          sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
-          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
-          sudo apt update
-        shell: bash     
+    - name: Add eth-nodes repository
+      run: |
+        sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
+        sudo apt update
+      shell: bash
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: "oracle"
-          java-version: "21.0.2"
+    - name: Setup Java
+      run: |
+        sudo apt -y install wget curl
+        wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+        sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
+      shell: bash
 
-      - name: Install dotnet
-        run: |
-          sudo apt update
-          sudo apt install -y aspnetcore-runtime-8.0
-        shell: bash     
+    - name: Install dotnet
+      run: |
+        sudo apt update
+        sudo apt install -y aspnetcore-runtime-8.0
+      shell: bash
 
-      - name: Install node.js dep
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-          sudo apt install -y nodejs
-        shell: bash     
-      # caches packages not to hit the repository in each CI run
-      - name: Cache apt packages
-        uses: eth-pkg/apt-deb-cache@v0.2.4
-        with:
-          packages: |
-            eth-node-besu \
-            eth-node-erigon \
-            eth-node-geth \
-            eth-node-nethermind eth-node-reth \
-            eth-node-lighthouse \
-            eth-node-lodestar \
-            eth-node-nimbus-eth2 \
-            eth-node-prysm \
-            eth-node-teku
+    - name: Install node.js dep
+      run: |
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        sudo apt install -y nodejs
+      shell: bash
+    # caches packages not to hit the repository in each CI run
+    - name: Cache apt packages
+      uses: eth-pkg/apt-deb-cache@v0.2.4
+      with:
+        packages: |
+          eth-node-besu \
+          eth-node-erigon \
+          eth-node-geth \
+          eth-node-nethermind eth-node-reth \
+          eth-node-lighthouse \
+          eth-node-lodestar \
+          eth-node-nimbus-eth2 \
+          eth-node-prysm \
+          eth-node-teku
 
-      - name: Run Tests
-        run: |
-          java --version 
-          which java 
-          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.el_name }}_0.0.1-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.cl_name }}_0.0.1-1_amd64.deb
-          # have to install in one go 
-          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb \
-            $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}_0.0.1-1_all.deb \
-            $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}_0.0.1-1_all.deb
-          echo "Waiting for 60 seconds for nodes to check successful startup..."
-          sleep 60
-          if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service; then
-            echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is active"
-          else
-            echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is not active" >&2
-            echo "Fetching logs for eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}..."
-            journalctl -u eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service --no-pager -n 100
-            exit 1
-          fi
+    - name: Run Tests
+      run: |
+        java --version 
+        which java 
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb
+        sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.el_name }}_0.0.1-1_amd64.deb
+        sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.cl_name }}_0.0.1-1_amd64.deb
+        # have to install in one go 
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb \
+          $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}_0.0.1-1_all.deb \
+          $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}_0.0.1-1_all.deb
+        echo "Waiting for 60 seconds for nodes to check successful startup..."
+        sleep 60
+        if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service; then
+          echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is active"
+        else
+          echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is not active" >&2
+          echo "Fetching logs for eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}..."
+          journalctl -u eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service --no-pager -n 100
+          exit 1
+        fi
 
-          if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}.service; then
-            echo "eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }} is active"
-          else
-            echo "eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }} is not active" >&2
-            echo "Fetching logs for eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}..."
-            journalctl -u eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}.service --no-pager -n 100
-            exit 1
-          fi
-        shell: bash     
+        if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}.service; then
+          echo "eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }} is active"
+        else
+          echo "eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }} is not active" >&2
+          echo "Fetching logs for eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}..."
+          journalctl -u eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}.service --no-pager -n 100
+          exit 1
+        fi
+      shell: bash
