@@ -26,8 +26,9 @@ jobs:
           mkdir -p ${HOME}/.local/bin
           cd pkg-builder && mv target/release/pkg-builder ${HOME}/.local/bin
           # add to path the prebuilt debcrafter binaries as well
-          cp pkg-builder/bin_dependencies/debcrafter_* ${HOME}/.local/bin
+          cd pkg-builder && cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
           chmod +x ${HOME}/.local/bin/pkg-builder
+          chmod +x ${HOME}/.local/bin/debcrafter_*
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
       - name: Sbuild setup
