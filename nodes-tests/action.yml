@@ -59,7 +59,7 @@ runs:
       - name: Build packages
         run: |
           chmod +x scripts/build.sh
-          bash scripts/build.sh --network testnet
+          bash scripts/build.sh --network ${{ inputs.network }}
           echo "${HOME}/packages" >> $GITHUB_PATH
         shell: bash     
 
@@ -104,30 +104,30 @@ runs:
 
       - name: Run Tests
         run: |
-          sudo dpkg -i $HOME/packages/eth-node-testnet-config_1.0.0-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-config-testnet-besu_0.0.1-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-config-testnet-lighthouse_0.0.1-1_amd64.deb
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb
+          sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.el_name }}_0.0.1-1_amd64.deb
+          sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.cl_name }}_0.0.1-1_amd64.deb
           # have to install in one go 
-          sudo dpkg -i $HOME/packages/eth-node-testnet_1.0.0-1_amd64.deb \
-            $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb \
-            $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb \
+            $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}_0.0.1-1_all.deb \
+            $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}_0.0.1-1_all.deb
           # echo "Waiting for 60 seconds for nodes to check successful startup..."
           # sleep 60
-          if systemctl is-active --quiet eth-node-testnet-service-besu.service; then
-            echo "eth-node-testnet-service-besu is active"
+          if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service; then
+            echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is active"
           else
-            echo "eth-node-testnet-service-besu is not active" >&2
-            echo "Fetching logs for eth-node-testnet-service-besu..."
-            journalctl -u eth-node-testnet-service-besu.service --no-pager -n 100
+            echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is not active" >&2
+            echo "Fetching logs for eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}..."
+            journalctl -u eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service --no-pager -n 100
             exit 1
           fi
 
-          if systemctl is-active --quiet eth-node-testnet-service-lighthouse.service; then
-            echo "eth-node-testnet-service-lighthouse is active"
+          if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}.service; then
+            echo "eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }} is active"
           else
-            echo "eth-node-testnet-service-lighthouse is not active" >&2
-            echo "Fetching logs for eth-node-testnet-service-lighthouse..."
-            journalctl -u eth-node-testnet-service-lighthouse.service --no-pager -n 100
+            echo "eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }} is not active" >&2
+            echo "Fetching logs for eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}..."
+            journalctl -u eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}.service --no-pager -n 100
             exit 1
           fi
         shell: bash     
