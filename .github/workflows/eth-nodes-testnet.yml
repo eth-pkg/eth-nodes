@@ -22,7 +22,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: ./runners/nodes-tests.yml
+      - uses: ./nodes-tests
         with:
           network: testnet
           el_name: besu
