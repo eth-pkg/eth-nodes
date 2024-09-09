@@ -23,9 +23,9 @@ ALLOWED_NETWORKS=(
 )
 
 REBUILD=false
-PACKAGE_DIR=$HOME/.pkg-builder/packages/bookworm
+PACKAGE_DIR="$HOME/.pkg-builder/packages/bookworm"
 ARCH=amd64
-SERVE_DIR=$HOME/packages
+SERVE_DIR="$HOME/packages/"
 NETWORK_CONFIG_VERSION=0.0.1-1
 EL_SERVICE_VERSION=0.0.1-1
 CL_SERVICE_VERSION=0.0.1-1
@@ -62,6 +62,8 @@ if [[ " ${ALLOWED_NETWORKS[@]} " =~ " ${NETWORK} " ]]; then
 else
     display_help
 fi
+
+mkdir -p $SERVE_DIR
 
 cd upcoming/bookworm/amd64
 
