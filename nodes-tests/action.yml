@@ -107,9 +107,10 @@ runs:
           sudo dpkg -i $HOME/packages/eth-node-testnet-config_1.0.0-1_amd64.deb
           sudo dpkg -i $HOME/packages/eth-node-config-testnet-besu_0.0.1-1_amd64.deb
           sudo dpkg -i $HOME/packages/eth-node-config-testnet-lighthouse_0.0.1-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet_1.0.0-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
+          # have to install in one go 
+          sudo dpkg -i $HOME/packages/eth-node-testnet_1.0.0-1_amd64.deb \
+            $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb \
+            $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
           echo "Waiting for 60 seconds for nodes to check successful startup..."
           sleep 60
           systemctl is-active --quiet eth-node-testnet-service-besu.service 
