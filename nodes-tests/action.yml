@@ -74,7 +74,7 @@ runs:
         uses: actions/setup-java@v4
         with:
           distribution: "oracle"
-          java-version: "21"
+          java-version: "21.0.2"
 
       - name: Install dotnet
         run: |
@@ -104,6 +104,8 @@ runs:
 
       - name: Run Tests
         run: |
+          java --version 
+          which java 
           sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb
           sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.el_name }}_0.0.1-1_amd64.deb
           sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.cl_name }}_0.0.1-1_amd64.deb
