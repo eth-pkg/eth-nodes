@@ -110,4 +110,6 @@ runs:
           sudo dpkg -i $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-testnet_1.0.0-1_amd64
+          systemctl is-active --quiet eth-node-testnet-service-besu.service 
+          systemctl is-active --quiet eth-node-testnet-service-lighthouse.service 
         shell: bash     
