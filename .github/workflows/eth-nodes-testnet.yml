@@ -54,8 +54,9 @@ jobs:
         run: |
           chmod +x scripts/build.sh
           bash scripts/build.sh --network testnet
+          ls -al $HOME/packages
           echo "${HOME}/packages" >> $GITHUB_PATH
-          ls -al /home/runner/packages
+          exit 1
 
       - name: Add eth-nodes repository
         run: |
@@ -95,9 +96,9 @@ jobs:
 
       - name: Run Tests
         run: |
-          sudo dpkg -i $HOME/packages/eth-node-testnet-config
+          sudo dpkg -i $HOME/packages/eth-node-testnet-config_1.0.0-1_amd64.deb
           sudo dpkg -i $HOME/packages/eth-node-config-testnet-besu_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-config-testnet-lighthouse_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet
+          sudo dpkg -i $HOME/packages/eth-node-testnet_1.0.0-1_amd64.deb
