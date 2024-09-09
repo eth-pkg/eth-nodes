@@ -6,8 +6,8 @@ on:
       - feat/eth-node
 
 jobs:
-  besue:
-    name: Setup Environment
+  besu:
+    name: tests besu against consensus client
     runs-on: ubuntu-24.04
     strategy:
       matrix:
