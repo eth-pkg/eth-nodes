@@ -56,6 +56,7 @@ jobs:
           bash scripts/build.sh --network testnet
           ls -al $HOME/packages
           echo "${HOME}/packages" >> $GITHUB_PATH
+          ls -al ~/.pkg-builder/packages/bookworm/eth-node-testnet-config-1.0.0-1
           exit 1
 
       - name: Add eth-nodes repository

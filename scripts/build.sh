@@ -93,27 +93,45 @@ for client in "${CL_CLIENTS[@]}"; do
     cd ../..
 done
 
+cp_or_fail() {
+    local sourcefile="$1"
+    local destination="$2"
+
+    if [ ! -f "$sourcefile" ]; then
+        echo "Error: $sourcefile does not exist."
+        return 1  
+    fi
+
+    cp "$sourcefile" "$destination"
+    
+    if [ $? -eq 0 ]; then
+        echo "File copied successfully."
+    else
+        echo "Error: Failed to copy the file."
+        return 1
+    fi
+}
 
 echo "Copying built binaries"
 
-cp "$PACKAGE_DIR/eth-node-$NETWORK-1.0.0-1/eth-node-${NETWORK}_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
-cp "$PACKAGE_DIR/eth-node-$NETWORK-config-1.0.0-1/eth-node-$NETWORK-config_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
+cp_or_fail "$PACKAGE_DIR/eth-node-$NETWORK-1.0.0-1/eth-node-${NETWORK}_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
+cp_or_fail "$PACKAGE_DIR/eth-node-$NETWORK-config-1.0.0-1/eth-node-$NETWORK-config_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
 
 # copy eth-node-config-{variant} configs
 for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
+    cp_or_fail "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
+    cp_or_fail "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$CL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp_or_fail "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$CL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp_or_fail "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 ls -al $SERVE_DIR
