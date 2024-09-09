@@ -12,196 +12,196 @@ jobs:
       contents: write
       issues: write
     steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Env variables
+        id: env
+        run: |
+          TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
+          FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
+          # Extract the second and third directories from the tag name
+          CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
+          ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
+          PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
+          VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
+          VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | rev | cut -d'-' -f2- | rev)
+          BUILD_DIR=$(echo "/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER")
 
 
-        - name: Env variables
-          id: env
-          run: |
-            TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
-            FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
-            # Extract the second and third directories from the tag name
-            CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
-            ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
-            PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
-            VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
-            VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | rev | cut -d'-' -f2- | rev)
-            BUILD_DIR=$(echo "/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER")
-        
-        
-            # Write outputs to GITHUB_OUTPUT environment file
-            echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
-            echo "codename=$CODENAME" >> $GITHUB_OUTPUT
-            echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-            echo "folder=$FOLDER" >> $GITHUB_OUTPUT
-            echo "version_number=$VERSION_NUMBER" >> $GITHUB_OUTPUT
-            echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON" >> $GITHUB_OUTPUT
-            echo "build_dir=$BUILD_DIR" >> $GITHUB_OUTPUT
-            echo "arch=$ARCH" >> $GITHUB_OUTPUT
+          # Write outputs to GITHUB_OUTPUT environment file
+          echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "codename=$CODENAME" >> $GITHUB_OUTPUT
+          echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "folder=$FOLDER" >> $GITHUB_OUTPUT
+          echo "version_number=$VERSION_NUMBER" >> $GITHUB_OUTPUT
+          echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON" >> $GITHUB_OUTPUT
+          echo "build_dir=$BUILD_DIR" >> $GITHUB_OUTPUT
+          echo "arch=$ARCH" >> $GITHUB_OUTPUT
 
-            # values 
-            echo "tag_name=$TAG_NAME"
-            echo "folder=$FOLDER"
-            echo "codename=$CODENAME"
-            echo "arch=$ARCH"
-            echo "package_name=$PACKAGE_NAME"
-            echo "version_number=$VERSION_NUMBER"
-            echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON"
-            echo "build_dir=$BUILD_DIR"
-        
-        - name: Sbuild setup
-          run: |
-            sudo apt update
-            # Note this is an older version of sbuild, no need to patch it, yet
-            sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
-            sudo apt install -y pkg-config libssl-dev uidmap
-            sudo apt install -y libfilesys-df-perl libmime-lite-perl
-            # change this into actually built version and cache it
-            wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
-            wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
-            sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
-  
-        - name: Checkout dependency repository
-          uses: actions/checkout@v4
-          with:
-            repository: eth-pkg/pkg-builder  
-            ref: main
-            path: pkg-builder
-      
-        - name: Install pkg-builder
-          run: |
-              cd pkg-builder
-              cargo build --release
-              mkdir -p ${HOME}/.local/bin 
-              mv target/release/pkg-builder ${HOME}/.local/bin
-              chmod +x ${HOME}/.local/bin/pkg-builder
-              echo "${HOME}/.local/bin" >> $GITHUB_PATH
-              cd .. && rm -rf pkg-builder
-  
-        - name: Install debcrafter
-          run: |
-            wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
-            mkdir -p ${HOME}/.local/bin
-            mv debcrafter ${HOME}/.local/bin
-            chmod +x ${HOME}/.local/bin/debcrafter
-            echo "${HOME}/.local/bin" >> $GITHUB_PATH
-  
-        - name: Create chroot env
-          run: |
-            cd ${{ steps.env.outputs.tag_name }}
-            pkg-builder env create
-            echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
-  
-        - name: package
-          run: |
-            cd ${{ steps.env.outputs.tag_name }}
-            pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
-            echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
-        
-        # - name: piuparts
-        #   if: steps.env.outputs.codename != 'noble'
-        #   run: |
-        #    # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
-        #    # sudo apt install -y debian-archive-keyring
-        #    sudo apt install piuparts
-        #    cd ${{ steps.env.outputs.tag_name }}
-        #    ${HOME}/.local/bin/pkg-builder piuparts
-  
-        - name: autopkgtest
-          if: steps.env.outputs.codename != 'noble'
-          run: |
-           sudo cp -R ${HOME}/.pkg-builder /root
-           apt list --installed autopkgtest
-           cd ${{ steps.env.outputs.tag_name }}
-           sudo ${HOME}/.local/bin/pkg-builder autopkgtest
-  
-        - name: verify
-          run: |
-           cd ${{ steps.env.outputs.tag_name }}
-           ${HOME}/.local/bin/pkg-builder verify  --no-package true
-  
-        - name: Pkg specs
-          run: tar -czvf pkg_specs.tar.gz  ${{ steps.env.outputs.tag_name }}  
+          # values 
+          echo "tag_name=$TAG_NAME"
+          echo "folder=$FOLDER"
+          echo "codename=$CODENAME"
+          echo "arch=$ARCH"
+          echo "package_name=$PACKAGE_NAME"
+          echo "version_number=$VERSION_NUMBER"
+          echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON"
+          echo "build_dir=$BUILD_DIR"
 
-        - name: Create Release
-          id: create_release
-          uses: ncipollo/release-action@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            draft: false
-            prerelease: true
-  
-        # This should come after verify, but sometimes it is good to have it, to check why the verify fails
-        - name: Save ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
-            asset_name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
-            asset_content_type: application/octet-stream
+      - name: Sbuild setup
+        run: |
+          sudo apt update
+          # Note this is an older version of sbuild, no need to patch it, yet
+          sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
+          sudo apt install -y pkg-config libssl-dev uidmap
+          sudo apt install -y libfilesys-df-perl libmime-lite-perl
+          # change this into actually built version and cache it
+          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
+          sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
 
-        - name: Save .orig.tar.gz
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
-            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
-            asset_content_type: application/x-tar+gzip
-  
-        - name: Save .debian.tar.xz
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
-            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
-            asset_content_type: application/x-tar
-  
-        - name: Save .dsc
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
-            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
-            asset_content_type: text/plain
-        
-        - name: Save .deb
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
-            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
-            asset_content_type: application/vnd.debian.binary-package
+      - name: Checkout dependency repository
+        uses: actions/checkout@v4
+        with:
+          repository: eth-pkg/pkg-builder
+          ref: main
+          path: pkg-builder
 
-        - name: Save .build
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
-            asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
-            asset_content_type: text/plain
+      - name: Install pkg-builder
+        run: |
+          cd pkg-builder
+          cargo build --release
+          mkdir -p ${HOME}/.local/bin
+          mv target/release/pkg-builder ${HOME}/.local/bin
+          # add to path the prebuilt debcrafter binaries as well
+          cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
+          chmod +x ${HOME}/.local/bin/pkg-builder
+          chmod +x ${HOME}/.local/bin/debcrafter_*
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
-        - name: Save pkg-specs
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url  }}
-            asset_path: pkg_specs.tar.gz
-            asset_name: pkg_specs.tar.gz
-            asset_content_type: application/x-tar+gzip
-            token: ${{ secrets.GITHUB_TOKEN }}
-    
+      - name: Install debcrafter
+        run: |
+          wget -q https://github.com/eth-pkg/pkg-builder/releases/download/v0.1/debcrafter
+          mkdir -p ${HOME}/.local/bin
+          mv debcrafter ${HOME}/.local/bin
+          chmod +x ${HOME}/.local/bin/debcrafter
+          echo "${HOME}/.local/bin" >> $GITHUB_PATH
+
+      - name: Create chroot env
+        run: |
+          cd ${{ steps.env.outputs.tag_name }}
+          pkg-builder env create
+          echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
+
+      - name: package
+        run: |
+          cd ${{ steps.env.outputs.tag_name }}
+          pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
+          echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
+
+      # - name: piuparts
+      #   if: steps.env.outputs.codename != 'noble'
+      #   run: |
+      #    # installing debian-archive-keyring fails on ubuntu LTS, not sure why, but it says it is already installed
+      #    # sudo apt install -y debian-archive-keyring
+      #    sudo apt install piuparts
+      #    cd ${{ steps.env.outputs.tag_name }}
+      #    ${HOME}/.local/bin/pkg-builder piuparts
+
+      - name: autopkgtest
+        if: steps.env.outputs.codename != 'noble'
+        run: |
+          sudo cp -R ${HOME}/.pkg-builder /root
+          apt list --installed autopkgtest
+          cd ${{ steps.env.outputs.tag_name }}
+          sudo ${HOME}/.local/bin/pkg-builder autopkgtest
+
+      - name: verify
+        run: |
+          cd ${{ steps.env.outputs.tag_name }}
+          ${HOME}/.local/bin/pkg-builder verify  --no-package true
+
+      - name: Pkg specs
+        run: tar -czvf pkg_specs.tar.gz  ${{ steps.env.outputs.tag_name }}
+
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          draft: false
+          prerelease: true
+
+      # This should come after verify, but sometimes it is good to have it, to check why the verify fails
+      - name: Save ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
+          asset_name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
+          asset_content_type: application/octet-stream
+
+      - name: Save .orig.tar.gz
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
+          asset_content_type: application/x-tar+gzip
+
+      - name: Save .debian.tar.xz
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
+          asset_content_type: application/x-tar
+
+      - name: Save .dsc
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
+          asset_content_type: text/plain
+
+      - name: Save .deb
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
+          asset_content_type: application/vnd.debian.binary-package
+
+      - name: Save .build
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
+          asset_content_type: text/plain
+
+      - name: Save pkg-specs
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url  }}
+          asset_path: pkg_specs.tar.gz
+          asset_name: pkg_specs.tar.gz
+          asset_content_type: application/x-tar+gzip
+          token: ${{ secrets.GITHUB_TOKEN }}
