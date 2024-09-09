@@ -28,7 +28,7 @@ jobs:
           el_name: besu
           cl_name: ${{matrix.cl_name}}
   erigon:
-    name: erigon besu
+    name: testnet erigon besu
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -50,7 +50,7 @@ jobs:
           cl_name: ${{matrix.cl_name}}
 
   geth:
-    name: geth besu
+    name: testnet geth besu
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -72,7 +72,7 @@ jobs:
           cl_name: ${{matrix.cl_name}}
 
   nethermind:
-    name: nethermind besu
+    name: testnet nethermind besu
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -94,7 +94,7 @@ jobs:
           cl_name: ${{matrix.cl_name}}              
 
   reth:
-    name: reth besu
+    name: testnet reth besu
     runs-on: ubuntu-24.04
     strategy:
       matrix:

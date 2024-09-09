@@ -111,8 +111,8 @@ runs:
           sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb \
             $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}_0.0.1-1_all.deb \
             $HOME/packages/eth-node-${{ inputs.network }}-service-${{ inputs.cl_name }}_0.0.1-1_all.deb
-          # echo "Waiting for 60 seconds for nodes to check successful startup..."
-          # sleep 60
+          echo "Waiting for 60 seconds for nodes to check successful startup..."
+          sleep 60
           if systemctl is-active --quiet eth-node-${{ inputs.network }}-service-${{ inputs.el_name }}.service; then
             echo "eth-node-${{ inputs.network }}-service-${{ inputs.el_name }} is active"
           else
