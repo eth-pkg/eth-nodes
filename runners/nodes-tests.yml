@@ -1,4 +1,4 @@
-name: eth-nodes-testnet
+name: nodes-tests
 inputs:
   cl_name:
     description: 'cl name'

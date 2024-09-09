@@ -6,100 +6,24 @@ on:
       - feat/eth-node
 
 jobs:
-  setup:
+  besue:
     name: Setup Environment
     runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cl_name:
+          - lighthouse
+          # - lodestar
+          # - nimbus-eth2
+          # - prysm
+          # - teku
+      fail-fast: false
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Checkout dependency repository
-        uses: actions/checkout@v4
+      - uses: ./runners/nodes-tests.yml
         with:
-          repository: eth-pkg/pkg-builder
-          ref: main
-          path: pkg-builder
-
-      - name: Install pkg-builder
-        run: |
-          cd pkg-builder
-          cargo build --release
-          mkdir -p ${HOME}/.local/bin
-          mv target/release/pkg-builder ${HOME}/.local/bin
-          # add to path the prebuilt debcrafter binaries as well
-          cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
-          chmod +x ${HOME}/.local/bin/pkg-builder
-          chmod +x ${HOME}/.local/bin/debcrafter_*
-          echo "${HOME}/.local/bin" >> $GITHUB_PATH
-
-      - name: Sbuild setup
-        run: |
-          sudo apt update
-          # Note this is an older version of sbuild, no need to patch it, yet
-          sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
-          sudo apt install -y pkg-config libssl-dev uidmap
-          sudo apt install -y libfilesys-df-perl libmime-lite-perl
-          # change this into actually built version and cache it
-          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
-          wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
-          sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
-
-      - name: Create chroot env
-        run: |
-          pwd && ls -al
-          cd upcoming/bookworm/amd64/eth-node-mainnet/1.0.0-1 && pkg-builder env create
-          echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
-
-      - name: Build packages
-        run: |
-          chmod +x scripts/build.sh
-          bash scripts/build.sh --network testnet
-          ls -al $HOME/packages
-          echo "${HOME}/packages" >> $GITHUB_PATH
-          ls -al ~/.pkg-builder/packages/bookworm/eth-node-testnet-config-1.0.0-1
-          exit 1
-
-      - name: Add eth-nodes repository
-        run: |
-          sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
-          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
-          sudo apt update
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: "oracle"
-          java-version: "21"
-
-      - name: Install dotnet
-        run: |
-          sudo apt update
-          sudo apt install -y aspnetcore-runtime-8.0
-
-      - name: Install node.js dep
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-          sudo apt install -y nodejs
-      # caches packages not to hit the repository in each CI run
-      - name: Cache apt packages
-        uses: eth-pkg/apt-deb-cache@v0.2.4
-        with:
-          packages: |
-            eth-node-besu \
-            eth-node-erigon \
-            eth-node-geth \
-            eth-node-nethermind eth-node-reth \
-            eth-node-lighthouse \
-            eth-node-lodestar \
-            eth-node-nimbus-eth2 \
-            eth-node-prysm \
-            eth-node-teku
-
-      - name: Run Tests
-        run: |
-          sudo dpkg -i $HOME/packages/eth-node-testnet-config_1.0.0-1_amd64.deb
-          sudo dpkg -i $HOME/packages/eth-node-config-testnet-besu_0.0.1-1_all.deb
-          sudo dpkg -i $HOME/packages/eth-node-config-testnet-lighthouse_0.0.1-1_all.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
-          sudo dpkg -i $HOME/packages/eth-node-testnet_1.0.0-1_amd64.deb
+          network: testnet
+          el_name: besu
+          cl_name: ${{matrix.cl_name}}

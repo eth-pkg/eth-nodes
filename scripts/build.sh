@@ -107,7 +107,7 @@ cp_or_fail() {
     cp "$sourcefile" "$destination"
     
     if [ $? -eq 0 ]; then
-        echo "File copied successfully."
+        echo "$sourcefile copied successfully."
     else
         echo "Error: Failed to copy the file."
         return 1
