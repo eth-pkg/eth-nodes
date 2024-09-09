@@ -1,14 +1,17 @@
 name: eth-nodes-testnet
+inputs:
+  cl_name:
+    description: 'cl name'
+    required: true
+  el_name:
+    description: 'el name'
+    required: true
+  network:
+    description: 'Ethereum network name'
+    required: true
 
-on:
-  push:
-    branches:
-      - feat/eth-node
-
-jobs:
-  setup:
-    name: Setup Environment
-    runs-on: ubuntu-24.04
+runs:
+    using: composite
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -31,6 +34,7 @@ jobs:
           chmod +x ${HOME}/.local/bin/pkg-builder
           chmod +x ${HOME}/.local/bin/debcrafter_*
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
+        shell: bash   
 
       - name: Sbuild setup
         run: |
@@ -43,25 +47,28 @@ jobs:
           wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
           wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
           sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+        shell: bash     
 
       - name: Create chroot env
         run: |
           pwd && ls -al
           cd upcoming/bookworm/amd64/eth-node-mainnet/1.0.0-1 && pkg-builder env create
           echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
+        shell: bash     
 
       - name: Build packages
         run: |
           chmod +x scripts/build.sh
           bash scripts/build.sh --network testnet
           echo "${HOME}/packages" >> $GITHUB_PATH
-          ls -al /home/runner/packages
+        shell: bash     
 
       - name: Add eth-nodes repository
         run: |
           sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
           echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
           sudo apt update
+        shell: bash     
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -73,11 +80,13 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y aspnetcore-runtime-8.0
+        shell: bash     
 
       - name: Install node.js dep
         run: |
           curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
           sudo apt install -y nodejs
+        shell: bash     
       # caches packages not to hit the repository in each CI run
       - name: Cache apt packages
         uses: eth-pkg/apt-deb-cache@v0.2.4
@@ -101,3 +110,4 @@ jobs:
           sudo dpkg -i $HOME/packages/eth-node-testnet-service-besu_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-testnet-service-lighthouse_0.0.1-1_all.deb
           sudo dpkg -i $HOME/packages/eth-node-testnet
+        shell: bash     
