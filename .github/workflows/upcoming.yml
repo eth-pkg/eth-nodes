@@ -105,7 +105,6 @@ jobs:
           chmod +x ${HOME}/.local/bin/debcrafter_*
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
 
-
       - name: Create chroot env
         run: |
           cd ${{ steps.env.outputs.tag_name }}
