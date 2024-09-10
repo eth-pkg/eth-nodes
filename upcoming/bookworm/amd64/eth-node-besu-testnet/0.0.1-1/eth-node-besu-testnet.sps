@@ -47,7 +47,7 @@ add_files = ["debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet"]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]
 depends=["eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-besu using eth-node-config-besu-testnet and eth-node-testnet-config"
+summary = "systemd service files for eth-node-besu using eth-node-config-testnet-besu and eth-node-testnet-config"
 
 
 [config."service.conf"]
@@ -56,20 +56,20 @@ format = "plain"
 [config."service.conf".ivars.shared_file]
 type = "string"
 default = "/etc/eth-node-testnet/conf.d/testnet.conf"
-priority = "high"
+priority = "low"
 summary = "Shared configuration file"
 
 [config."service.conf".ivars.client_config]
 type = "string"
 default = "/etc/eth-node-testnet/besu/conf.d/besu-testnet.conf"
-priority = "high"
+priority = "low"
 summary = "Besu config, based on shared file"
 
 
 # [config."conf.d/credentials.conf".evars."bitcoin".datadir]
 # store = false
 
-# [config."../eth-node-testnet/besu/conf.d/besu-testnet.conf".evars."eth-node-config-besu-testnet"."BESU_CLI_DATA_PATH"]
+# [config."../eth-node-testnet/besu/conf.d/besu-testnet.conf".evars."eth-node-config-testnet-besu"."BESU_CLI_DATA_PATH"]
 # BESU_CLI_DATA_PATH = "$BASE_CONFIG_DATA_DIR/besu"
 
 

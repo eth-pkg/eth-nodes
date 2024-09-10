@@ -1,5 +1,5 @@
 name = "eth-node-lodestar-testnet"
-bin_package = "eth-node-config-lodestar-testnet"
+bin_package = "eth-node-config-testnet-lodestar"
 binary = "/usr/lib/eth-node-config-testnet/bin/run-lodestar.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd/system/eth-node-lodestar-testnet.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-cl-service"]
 conflicts = ["eth-node-testnet-cl-service"]
-depends=["eth-node-config-lodestar-testnet", "eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-lodestar using eth-node-config-lodestar-testnet and eth-node-testnet-config"
+depends=["eth-node-config-testnet-lodestar", "eth-node-testnet-config", "eth-node-testnet"]
+summary = "systemd service files for eth-node-lodestar using eth-node-config-testnet-lodestar and eth-node-testnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

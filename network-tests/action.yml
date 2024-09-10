@@ -92,6 +92,7 @@ runs:
         echo "/usr/lib/jvm/jdk-21/bin" >> $GITHUB_PATH
         echo "JAVA_HOME=/usr/lib/jvm/jdk-21" >> $GITHUB_ENV
         echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+        sudo update-alternatives --set java "$JAVA_HOME/bin/java"
       shell: bash
 
     - name: Install dotnet

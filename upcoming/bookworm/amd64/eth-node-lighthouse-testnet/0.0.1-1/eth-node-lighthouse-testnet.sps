@@ -1,5 +1,5 @@
 name = "eth-node-lighthouse-testnet"
-bin_package = "eth-node-config-lighthouse-testnet"
+bin_package = "eth-node-config-testnet-lighthouse"
 binary = "/usr/lib/eth-node-config-testnet/bin/run-lighthouse.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd/system/eth-node-lighthouse-testnet.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-cl-service"]
 conflicts = ["eth-node-testnet-cl-service"]
-depends=["eth-node-config-lighthouse-testnet", "eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-lighthouse using eth-node-config-lighthouse-testnet and eth-node-testnet-config"
+depends=["eth-node-config-testnet-lighthouse", "eth-node-testnet-config", "eth-node-testnet"]
+summary = "systemd service files for eth-node-lighthouse using eth-node-config-testnet-lighthouse and eth-node-testnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

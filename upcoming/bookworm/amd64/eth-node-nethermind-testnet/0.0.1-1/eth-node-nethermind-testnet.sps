@@ -1,5 +1,5 @@
 name = "eth-node-nethermind-testnet"
-bin_package = "eth-node-config-nethermind-testnet"
+bin_package = "eth-node-config-testnet-nethermind"
 binary = "/usr/lib/eth-node-config-testnet/bin/run-nethermind.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd/system/eth-node-nethermind-testnet.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]
-depends=["eth-node-config-nethermind-testnet", "eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-nethermind using eth-node-config-nethermind-testnet and eth-node-testnet-config"
+depends=["eth-node-config-testnet-nethermind", "eth-node-testnet-config", "eth-node-testnet"]
+summary = "systemd service files for eth-node-nethermind using eth-node-config-testnet-nethermind and eth-node-testnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

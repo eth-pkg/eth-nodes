@@ -5,6 +5,6 @@ package_hash=[
     # { hash="94c6b57202cb9b77fb50115a245ad1ef910311e7", name= "eth-node-nethermind-testnet_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-nethermind-testnet_0.0.1.orig.tar.gz"},
     # { hash="3ea42533489ce49a17de2ff40f7d52f45d0a2499", name= "eth-node-nethermind-testnet_0.0.1-1.debian.tar.xz"},
-    { hash="ade883ddaba3c28e6aaa5ba2a49631427316ae4c", name= "eth-node-nethermind-testnet_0.0.1-1_all.deb"},
+    { hash="ed5ec4a16cba5df437d7bc18ed7dc6e7b977d25a", name= "eth-node-nethermind-testnet_0.0.1-1_all.deb"},
 
 ]

@@ -1,5 +1,5 @@
 name = "eth-node-prysm-testnet"
-bin_package = "eth-node-config-prysm-testnet"
+bin_package = "eth-node-config-testnet-prysm"
 binary = "/usr/lib/eth-node-config-testnet/bin/run-prysm.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd/system/eth-node-prysm-testnet.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-cl-service"]
 conflicts = ["eth-node-testnet-cl-service"]
-depends=["eth-node-config-prysm-testnet", "eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-prysm using eth-node-config-prysm-testnet and eth-node-testnet-config"
+depends=["eth-node-config-testnet-prysm", "eth-node-testnet-config", "eth-node-testnet"]
+summary = "systemd service files for eth-node-prysm using eth-node-config-testnet-prysm and eth-node-testnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

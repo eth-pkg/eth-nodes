@@ -5,6 +5,6 @@ package_hash=[
     # { hash="b27fcd453e0aeeedb0eeec234d31fb082c640862", name= "eth-node-reth-testnet_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-reth-testnet_0.0.1.orig.tar.gz"},
     # { hash="1d9b624e03e911fab5c115a18bbf19e45bef23d0", name= "eth-node-reth-testnet_0.0.1-1.debian.tar.xz"},
-    { hash="66ec8e82ac8aa04e1c61af970fe2c7a09ea24b6d", name= "eth-node-reth-testnet_0.0.1-1_all.deb"},
+    { hash="36aaaa02d7d06d36f5808e44bbdc5777363e4e37", name= "eth-node-reth-testnet_0.0.1-1_all.deb"},
 
 ]

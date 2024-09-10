@@ -1,5 +1,5 @@
 name = "eth-node-geth-testnet"
-bin_package = "eth-node-config-geth-testnet"
+bin_package = "eth-node-config-testnet-geth"
 binary = "/usr/lib/eth-node-config-testnet/bin/run-geth.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -10,8 +10,8 @@ extra_service_config = """
 add_files = ["debian/lib/systemd/system/eth-node-geth-testnet.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]
-depends=["eth-node-config-geth-testnet", "eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-geth using eth-node-config-geth-testnet and eth-node-testnet-config"
+depends=["eth-node-config-testnet-geth", "eth-node-testnet-config", "eth-node-testnet"]
+summary = "systemd service files for eth-node-geth using eth-node-config-testnet-geth and eth-node-testnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

@@ -5,6 +5,6 @@ package_hash=[
     # { hash="659923d1f0978197511d73d9afc55d580ddfebd3", name= "eth-node-lighthouse-testnet_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-lighthouse-testnet_0.0.1.orig.tar.gz"},
     # { hash="bf0a229df898501b2599f76414604a60f9b8eb1c", name= "eth-node-lighthouse-testnet_0.0.1-1.debian.tar.xz"},
-    { hash="e1034f0c84568f98dac8c9985c9919fd165409dc", name= "eth-node-lighthouse-testnet_0.0.1-1_all.deb"},
+    { hash="8d465d2ceaa75af22feed0d68d6d12904b0ab7de", name= "eth-node-lighthouse-testnet_0.0.1-1_all.deb"},
 
 ]
