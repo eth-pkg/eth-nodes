@@ -70,6 +70,13 @@ runs:
         sudo apt update
       shell: bash
 
+    - name: Remove OpenJDK
+      run: |
+        sudo apt-get purge -y openjdk-*
+        sudo apt-get autoremove -y
+        sudo apt-get clean
+      shell: bash
+
     - name: Setup Java
       run: |
         sudo apt -y install wget curl
