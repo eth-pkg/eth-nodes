@@ -5,9 +5,9 @@ set -e
 
 declare -A CONFIG
 
-adduser --system --quiet --group eth-node-testnet-teku 
-mkdir -p /var/lib/eth-node-testnet/teku
-chown eth-node-testnet-teku:eth-node-testnet-teku /var/lib/eth-node-testnet/teku 
+adduser --system --quiet --group eth-node-reth-testnet 
+mkdir -p /var/lib/eth-node-testnet/reth
+chown eth-node-reth-testnet:eth-node-reth-testnet /var/lib/eth-node-testnet/reth 
 
 jwt_file=/etc/eth-node-testnet/jwt.hex
 if [ ! -f "$jwt_file" ]; then
@@ -16,12 +16,12 @@ fi
 
 if [ "$1" = triggered -a "$service_was_running" '!=' 0 ];
 then
-	deb-systemd-invoke restart eth-node-testnet-service-teku
+	deb-systemd-invoke restart eth-node-testnet-service-reth
 fi
 
 if [ "$1" '!=' triggered ];
 then
-	dpkg-trigger eth-node-testnet-service-teku-config-changed
+	dpkg-trigger eth-node-testnet-service-reth-config-changed
 
 fi
 #DEBHELPER#

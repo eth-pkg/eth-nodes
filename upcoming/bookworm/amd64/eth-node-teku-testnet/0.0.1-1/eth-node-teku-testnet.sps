@@ -1,5 +1,5 @@
-name = "eth-node-testnet-teku"
-bin_package = "eth-node-config-testnet-teku"
+name = "eth-node-teku-testnet"
+bin_package = "eth-node-config-teku-testnet"
 binary = "/usr/lib/eth-node-config-testnet/bin/run-teku.sh"
 conf_param = "--conf-file"
 user = { group = true, create = { home = false } }
@@ -7,11 +7,11 @@ runtime_dir = { mode = "750" }
 extra_service_config = """
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
-add_files = ["debian/lib/systemd/system/eth-node-testnet-teku.service /lib/systemd/system/"]
+add_files = ["debian/lib/systemd/system/eth-node-teku-testnet.service /lib/systemd/system/"]
 provides = ["eth-node-testnet-cl-service"]
 conflicts = ["eth-node-testnet-cl-service"]
-depends=["eth-node-config-testnet-teku", "eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-teku using eth-node-config-testnet-teku and eth-node-testnet-config"
+depends=["eth-node-config-teku-testnet", "eth-node-testnet-config", "eth-node-testnet"]
+summary = "systemd service files for eth-node-teku using eth-node-config-teku-testnet and eth-node-testnet-config"
 
 # TODO debcrafter should do this
 # [config."vars"]

@@ -1,4 +1,4 @@
-eth-node-testnet-teku (0.0.1-1) bookworm; urgency=medium
+eth-node-teku-testnet (0.0.1-1) bookworm; urgency=medium
 
   * Initial packaging
 

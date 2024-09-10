@@ -1,6 +1,6 @@
 [package_fields]
-spec_file =    "eth-node-testnet-reth.sss"
-package_name = "eth-node-testnet-reth"
+spec_file =    "eth-node-reth-testnet.sss"
+package_name = "eth-node-reth-testnet"
 version_number = "0.0.1"
 revision_number = "1"
 homepage = "https://github.com/eth-pkg/eth-nodes"

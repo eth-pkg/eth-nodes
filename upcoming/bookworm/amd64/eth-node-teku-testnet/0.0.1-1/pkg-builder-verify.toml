@@ -2,9 +2,9 @@
 package_hash=[
     # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
     # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
-    # { hash="228f338fa408c43acb1f08da4bb14062d38b7812", name= "eth-node-testnet-teku_0.0.1-1.dsc"},
-    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-testnet-teku_0.0.1.orig.tar.gz"},
-    # { hash="11da8cbe542c6445efd8d67fa5adfc00ecfd84cd", name= "eth-node-testnet-teku_0.0.1-1.debian.tar.xz"},
-    { hash="2c04c16aa91d9a8a543ee02a31166935bd7ccae1", name= "eth-node-testnet-teku_0.0.1-1_all.deb"},
+    # { hash="228f338fa408c43acb1f08da4bb14062d38b7812", name= "eth-node-teku-testnet_0.0.1-1.dsc"},
+    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-teku-testnet_0.0.1.orig.tar.gz"},
+    # { hash="11da8cbe542c6445efd8d67fa5adfc00ecfd84cd", name= "eth-node-teku-testnet_0.0.1-1.debian.tar.xz"},
+    { hash="637dc3bc75aa519b17988ebd6b85deb289e12400", name= "eth-node-teku-testnet_0.0.1-1_all.deb"},
 
 ]
