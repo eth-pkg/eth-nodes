@@ -81,14 +81,14 @@ cd ../..
 
 
 for client in "${EL_CLIENTS[@]}"; do
-    cd eth-node-$NETWORK-service-${client}/$CL_SERVICE_VERSION
+    cd eth-node-$NETWORK-${client}/$CL_SERVICE_VERSION
     pkg-builder verify
     cd ../..
 
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-$NETWORK-service-${client}/$EL_SERVICE_VERSION
+    cd eth-node-$NETWORK-${client}/$EL_SERVICE_VERSION
     pkg-builder verify
     cd ../..
 done
@@ -109,11 +109,11 @@ for client in "${CL_CLIENTS[@]}"; do
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$CL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-$NETWORK-${client}-$CL_SERVICE_VERSION/eth-node-$NETWORK-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-$NETWORK-service-${client}-$EL_SERVICE_VERSION/eth-node-$NETWORK-service-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-$NETWORK-${client}-$EL_SERVICE_VERSION/eth-node-$NETWORK-${client}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 
