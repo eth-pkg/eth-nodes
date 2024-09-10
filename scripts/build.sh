@@ -83,14 +83,14 @@ cd ../..
 
 
 for client in "${EL_CLIENTS[@]}"; do
-    cd eth-node-$NETWORK-${client}/$CL_SERVICE_VERSION
+    cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
     pkg-builder verify
     cd ../..
 
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-$NETWORK-${client}/$EL_SERVICE_VERSION
+    cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
     pkg-builder verify
     cd ../..
 done
