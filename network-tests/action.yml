@@ -57,13 +57,6 @@ runs:
         echo "${HOME}/.cache/sbuild/bookworm-amd64.tar.gz" >> $GITHUB_PATH
       shell: bash
 
-    - name: Build packages
-      run: |
-        chmod +x scripts/build.sh
-        bash scripts/build.sh --network ${{ inputs.network }}
-        echo "${HOME}/packages" >> $GITHUB_PATH
-      shell: bash
-
     - name: Add eth-nodes repository
       run: |
         sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
@@ -121,6 +114,42 @@ runs:
           eth-node-prysm \
           eth-node-teku
 
+    - name: Build clients 
+      run: |
+        echo "hello world"
+        cd upcoming/noble/amd64
+
+        cd eth-node-${{ inputs.network }}/1.0.0-1
+        pkg-builder verify
+        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-1.0.0-1/eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb" ${HOME}/packages/
+        cd ../..
+
+        # network configs, not the same as client configs
+        cd eth-node-${{ inputs.network }}-config/1.0.0-1
+        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
+        pkg-builder verify
+        cd ../..
+
+        # build client configs 
+        cd eth-node-config-${{ inputs.network }}/0.0.1-1
+        pkg-builder verify
+        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
+        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
+        cd ../..
+
+        cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
+        pkg-builder verify
+        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb" ${HOME}/packages/
+        cd ../..
+
+        cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
+        pkg-builder verify
+        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb" ${HOME}/packages/
+        cd ../..
+
+        echo "${HOME}/packages" >> $GITHUB_PATH
+
+      shell: bash 
     - name: Run Tests
       run: |
         java --version 
