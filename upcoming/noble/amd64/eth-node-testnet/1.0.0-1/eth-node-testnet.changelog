@@ -1,4 +1,4 @@
-eth-node-testnet (1.0.0-1) bookworm; urgency=medium
+eth-node-testnet (1.0.0-1) noble; urgency=medium
 
   * Initial packaging
 

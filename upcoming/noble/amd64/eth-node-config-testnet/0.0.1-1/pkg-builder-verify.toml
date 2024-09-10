@@ -6,23 +6,23 @@ package_hash=[
     # check for hash changes, but subpackages would already track if files are changed or not
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-config-testnet_0.0.1.orig.tar.gz"},
     # besu 
-    { hash="0953469b04f11ca31f22a78cf325b4930d500d03", name= "eth-node-config-testnet-besu_0.0.1-1_amd64.deb"},
+    { hash="99582b5dc3585657c4b1b2b7056d16a0ba7cf626", name= "eth-node-config-testnet-besu_0.0.1-1_amd64.deb"},
     # erigon 
-    { hash="3c11052d855cc76ced7ec5ad11823c2bc94ff6e8", name= "eth-node-config-testnet-erigon_0.0.1-1_amd64.deb"},
+    { hash="65f61897cc83b9414ef174e37effb52a43223ab2", name= "eth-node-config-testnet-erigon_0.0.1-1_amd64.deb"},
     # lighthouse
-    { hash="bb3835115e7649358a781268605e48b144838f5a", name= "eth-node-config-testnet-lighthouse_0.0.1-1_amd64.deb"},
+    { hash="ace4c406726009766c58e835cc5df6db6fcf5f92", name= "eth-node-config-testnet-lighthouse_0.0.1-1_amd64.deb"},
     # lodestar
-    { hash="9afd5f8ddb2942a631fb0089bbb300266d423d8e", name= "eth-node-config-testnet-lodestar_0.0.1-1_amd64.deb"},
+    { hash="bd2bebf42db98328c4c217f9a99fa5c3263a6997", name= "eth-node-config-testnet-lodestar_0.0.1-1_amd64.deb"},
     # nethermind
-    { hash="80e75bf7c6339d5a642e69dd9bdd71e38520376a", name= "eth-node-config-testnet-nethermind_0.0.1-1_amd64.deb"},
+    { hash="b6d71116eee888e16b730fc5ff7f444d950b82e9", name= "eth-node-config-testnet-nethermind_0.0.1-1_amd64.deb"},
     # nimbus-eth2
-    { hash="ea45b93edf8ba180a56ed00d550e451308280223", name= "eth-node-config-testnet-nimbus-eth2_0.0.1-1_amd64.deb"},
+    { hash="c6da26c0d24fa9e17e997a675ceae7908f82d17d", name= "eth-node-config-testnet-nimbus-eth2_0.0.1-1_amd64.deb"},
     # prysm
-    { hash="b4855916e111eb81fa556f0d4ca0087990df7758", name= "eth-node-config-testnet-prysm_0.0.1-1_amd64.deb"},
+    { hash="0bb506b878c8945e93e3f4d6a5b74147167bb040", name= "eth-node-config-testnet-prysm_0.0.1-1_amd64.deb"},
     # reth 
-    { hash="486b27b9d4acac94758462c5d1174d8734840555", name= "eth-node-config-testnet-reth_0.0.1-1_amd64.deb"},
+    { hash="5f398da99741eb5a67a2bcf4a2cf2a9c645ac50c", name= "eth-node-config-testnet-reth_0.0.1-1_amd64.deb"},
     # teku
-    { hash="dec4e5025b5c8927dc90d12d64680129bced404f", name= "eth-node-config-testnet-teku_0.0.1-1_amd64.deb"},
+    { hash="c2ffd4a280f2e760d5d3acafe81a4e413e6fe85a", name= "eth-node-config-testnet-teku_0.0.1-1_amd64.deb"},
     # geth
-    { hash="27ba31da07d368999b7d9ae056ff16f5a75a3787", name= "eth-node-config-testnet-geth_0.0.1-1_amd64.deb"},
+    { hash="c704da72ca7185990e5a523bffa0b29c487cff85", name= "eth-node-config-testnet-geth_0.0.1-1_amd64.deb"},
 ]

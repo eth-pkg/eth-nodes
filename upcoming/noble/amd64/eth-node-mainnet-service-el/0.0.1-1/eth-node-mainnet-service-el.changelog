@@ -1,4 +1,4 @@
-eth-node-mainnet-service-el (0.0.1-1) bookworm; urgency=medium
+eth-node-mainnet-service-el (0.0.1-1) noble; urgency=medium
 
   * Initial packaging
 

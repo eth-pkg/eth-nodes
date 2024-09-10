@@ -9,7 +9,7 @@ homepage="https://github.com/eth-pkg/eth-nodes"
 package_type="virtual"
 
 [build_env]
-codename="bookworm"
+codename="noble numbat"
 arch = "amd64"
 pkg_builder_version="0.2.8"
 debcrafter_version = "8189263"
@@ -21,4 +21,4 @@ piuparts_version="1.1.7"
 autopkgtest_version="5.28"
 sbuild_version="0.85.6"
 # package directory
-workdir="~/.pkg-builder/packages/bookworm"
+workdir="~/.pkg-builder/packages/noble"

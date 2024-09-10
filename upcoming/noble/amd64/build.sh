@@ -23,9 +23,9 @@ ALLOWED_NETWORKS=(
 )
 
 REBUILD=false
-PACKAGE_DIR=$HOME/.pkg-builder/packages/bookworm
+PACKAGE_DIR=$HOME/.pkg-builder/packages/noble
 ARCH=amd64
-SERVE_DIR=$HOME/debs/bookworm-testing
+SERVE_DIR=$HOME/debs/noble-testing
 NETWORK_CONFIG_VERSION=0.0.1-1
 EL_SERVICE_VERSION=0.0.1-1
 CL_SERVICE_VERSION=0.0.1-1
@@ -63,7 +63,7 @@ else
     display_help
 fi
 
-# rm -rf $HOME/debs/bookworm-testing/*
+# rm -rf $HOME/debs/noble-testing/*
 
 # cd eth-node-$NETWORK/1.0.0-1
 # pkg-builder verify
