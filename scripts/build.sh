@@ -129,11 +129,11 @@ for client in "${CL_CLIENTS[@]}"; do
 done
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp_or_fail "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$CL_SERVICE_VERSION/eth-node-${client}-$NETWORK_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp_or_fail "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$CL_SERVICE_VERSION/eth-node-${client}-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 for client in "${EL_CLIENTS[@]}"; do
-    cp_or_fail "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$EL_SERVICE_VERSION/eth-node-${client}-$NETWORK_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp_or_fail "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$EL_SERVICE_VERSION/eth-node-${client}-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
 ls -al $SERVE_DIR
