@@ -1,6 +1,6 @@
 name = "eth-node-besu-testnet"
 bin_package = "eth-node-besu"
-binary = "/usr/lib/eth-node-besu-testnet/run-service.sh"
+binary = "/usr/lib/eth-node-besu-testnet/run-besu-service.sh"
 user = { name = "eth-node-besu-testnet", group = true, create = { home = false } }
 runtime_dir = { mode = "750" }
 # Service Fields
@@ -42,9 +42,8 @@ WorkingDirectory=/var/lib/eth-node-testnet/besu
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet/", 
+    "debian/scripts/run-besu-service.sh /usr/lib/eth-node-besu-testnet/", 
     "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-testnet/bin/",
-    # "debian/conf/besu-testnet.conf /etc/eth-node-besu-testnet/",
     "debian/tmp/eth-node-besu-testnet.service /lib/systemd/system/",
 ]
 provides = ["eth-node-testnet-el-service"]
@@ -52,8 +51,13 @@ conflicts = ["eth-node-testnet-el-service"]
 depends=["eth-node-testnet-config", "eth-node-testnet"]
 summary = "service file for eth-node-besu for network: testnet"
 
-# [extra_groups."eth-node-testnet"]
-# create = true
+[[plug]]
+run_as_user = "root"
+register_cmd = ["bash", "-c", 
+"adduser --system --quiet --group eth-node-testnet && mkdir -p /var/lib/eth-node-testnet && chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet &&  mkdir -p /var/lib/eth-node-testnet/besu && chown eth-node-besu-testnet:eth-node-besu-testnet /var/lib/eth-node-testnet/besu"]
+unregister_cmd = ["echo", "hello_world > /dev/null"]
+
+
 
 [config."besu-testnet.conf"]
 format = "plain"
@@ -136,12 +140,6 @@ type = "string"
 default = "$BASE_CONFIG_EL_RPC_PORT"
 priority = "low"
 summary = "Set the RPC HTTP port"
-
-[[plug]]
-run_as_user = "root"
-register_cmd = ["bash", "-c", 
-"adduser --system --quiet --group eth-node-testnet && mkdir -p /var/lib/eth-node-testnet && chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet &&  mkdir -p /var/lib/eth-node-testnet/besu && chown eth-node-besu-testnet:eth-node-besu-testnet /var/lib/eth-node-testnet/besu"]
-unregister_cmd = ["echo", "hello_world > /dev/null"]
 
 
 
