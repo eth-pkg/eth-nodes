@@ -17,6 +17,31 @@ runs:
     - name: Checkout Code
       uses: actions/checkout@v4
 
+    - name: Remove OpenJDK
+      run: |
+        sudo apt-get purge -y openjdk-*
+        sudo apt-get autoremove -y
+        sudo apt-get clean
+      shell: bash
+
+    - name: Setup Java
+      run: |
+        sudo apt -y install wget curl
+        wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+        sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
+        echo "export JAVA_HOME=/usr/lib/jvm/jdk-21" | sudo tee /etc/profile.d/jdk.sh
+        echo "export export PATH=\$PATH:\$JAVA_HOME/bin" | sudo tee -a /etc/profile.d/jdk.sh
+        sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
+        source /etc/profile.d/jdk.sh
+        echo "/etc/profile.d/jdk.sh" >> $GITHUB_PATH
+        echo "/usr/lib/jvm/jdk-21-oracle-x64" >> $GITHUB_PATH
+        echo "/usr/lib/jvm/jdk-21/bin" >> $GITHUB_PATH
+        echo "JAVA_HOME=/usr/lib/jvm/jdk-21" >> $GITHUB_ENV
+        echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+        sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21/bin/java 1
+        sudo update-alternatives --set java "$JAVA_HOME/bin/java"
+      shell: bash
+
     - name: Checkout dependency repository
       uses: actions/checkout@v4
       with:
@@ -62,31 +87,6 @@ runs:
         sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
         sudo apt update
-      shell: bash
-
-    - name: Remove OpenJDK
-      run: |
-        sudo apt-get purge -y openjdk-*
-        sudo apt-get autoremove -y
-        sudo apt-get clean
-      shell: bash
-
-    - name: Setup Java
-      run: |
-        sudo apt -y install wget curl
-        wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
-        sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
-        echo "export JAVA_HOME=/usr/lib/jvm/jdk-21" | sudo tee /etc/profile.d/jdk.sh
-        echo "export export PATH=\$PATH:\$JAVA_HOME/bin" | sudo tee -a /etc/profile.d/jdk.sh
-        sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
-        source /etc/profile.d/jdk.sh
-        echo "/etc/profile.d/jdk.sh" >> $GITHUB_PATH
-        echo "/usr/lib/jvm/jdk-21-oracle-x64" >> $GITHUB_PATH
-        echo "/usr/lib/jvm/jdk-21/bin" >> $GITHUB_PATH
-        echo "JAVA_HOME=/usr/lib/jvm/jdk-21" >> $GITHUB_ENV
-        echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
-        sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21/bin/java 1
-        sudo update-alternatives --set java "$JAVA_HOME/bin/java"
       shell: bash
 
     - name: Install dotnet
