@@ -128,7 +128,7 @@ runs:
         cp eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb ${HOME}/packages/
 
         # network configs, not the same as client configs
-        cd $HOME/eth-nodes/upcoming/noble/amd64
+        cd $HOME/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.network }}-config/1.0.0-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
@@ -136,7 +136,7 @@ runs:
         cp eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb ${HOME}/packages/
 
         # build client configs 
-        cd $HOME/eth-nodes/upcoming/noble/amd64
+        cd $HOME/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-config-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
@@ -144,14 +144,14 @@ runs:
         cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb ${HOME}/packages/
         cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb ${HOME}/packages/
 
-        cd $HOME/eth-nodes/upcoming/noble/amd64
+        cd $HOME/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1
         ls
         cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb ${HOME}/packages/
 
-        cd $HOME/eth-nodes/upcoming/noble/amd64
+        cd $HOME/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1
