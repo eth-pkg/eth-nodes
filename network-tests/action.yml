@@ -128,33 +128,34 @@ runs:
         cd ../..
 
         # network configs, not the same as client configs
+        pwd
         cd eth-node-${{ inputs.network }}-config/1.0.0-1
         pkg-builder verify
         ls $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
         cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
         cd ../..
 
-        # build client configs 
-        cd eth-node-config-${{ inputs.network }}/0.0.1-1
-        pkg-builder verify
-        ls cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
-        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
-        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
-        cd ../..
+        # # build client configs 
+        # cd eth-node-config-${{ inputs.network }}/0.0.1-1
+        # pkg-builder verify
+        # ls cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
+        # cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
+        # cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-config_1.0.0-1_amd64.deb" ${HOME}/packages/
+        # cd ../..
 
-        cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
-        pkg-builder verify
-        ls $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1
-        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb" ${HOME}/packages/
-        cd ../..
+        # cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
+        # pkg-builder verify
+        # ls $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1
+        # cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb" ${HOME}/packages/
+        # cd ../..
 
-        cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
-        pkg-builder verify
-        ls $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1
-        cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb" ${HOME}/packages/
-        cd ../..
+        # cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
+        # pkg-builder verify
+        # ls $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1
+        # cp $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_amd64.deb" ${HOME}/packages/
+        # cd ../..
 
-        echo "${HOME}/packages" >> $GITHUB_PATH
+        # echo "${HOME}/packages" >> $GITHUB_PATH
 
       shell: bash 
     - name: Run Tests
