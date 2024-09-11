@@ -7,25 +7,29 @@ runtime_dir = { mode = "750" }
 after = "multi-user.target"
 service_type = "simple"
 extra_service_config = """
-CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-besu-testnet/run-service.sh
+# no need to specify, these come from debcrafter
+# User=eth-node-besu-testnet
+# NoNewPrivileges=true
+# ProtectHome=true
+# PrivateTmp=true
+# PrivateDevices=true
+
+# we overwrite this
+ProtectSystem=strict
+
+# additional flags not specified by debcrafter
 CapabilityBoundingSet=
 IPAddressDeny=none
 LockPersonality=true
-NoNewPrivileges=true
-PrivateDevices=true
 PrivateIPC=true
-PrivateTmp=true
 PrivateUsers=true
 ProtectClock=true
 ProtectControlGroups=true
-ProtectHome=true
 ProtectHostname=true
 ProtectKernelLogs=true
 ProtectKernelModules=true
 ProtectKernelTunables=true
 ProtectProc=invisible
-ProtectSystem=strict
 ReadWritePaths=/var/lib/eth-node-testnet/besu
 ReadOnlyPaths=/var/lib/eth-node-testnet
 RemoveIPC=true
@@ -37,17 +41,18 @@ RestrictSUIDSGID=true
 SystemCallArchitectures=native
 SystemCallFilter=@system-service
 UMask=0077
-User=eth-node-besu-testnet
 WorkingDirectory=/var/lib/eth-node-testnet/besu
 """
 add_dirs = ["/var/lib/eth-node-testnet"]
 ## hack to actually use system.d but let debcrafter manage the user creation
-# add_files = ["debian/lib/systemd/system/eth-node-besu-testnet.service /lib/systemd/system/"]
-add_files = ["debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet"]
+add_files = [
+    "debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet", 
+    "debian/eth-node-besu-testnet.service /lib/systemd/system/"
+    ]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]
 depends=["eth-node-testnet-config", "eth-node-testnet"]
-summary = "systemd service files for eth-node-besu using eth-node-config-testnet-besu and eth-node-testnet-config"
+summary = "service file for eth-node-besu for network: testnet"
 
 
 [config."service.conf"]
