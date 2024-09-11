@@ -3,7 +3,7 @@ Description=eth-node-lighthouse-testnet service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-lighthouse-testnet/bin/run-lighthouse.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-lighthouse/bin/run-lighthouse.sh \
     --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
     --conf-file /etc/eth-node-testnet/lighthouse/conf.d/lighthouse-testnet.conf
 IPAddressDeny=none

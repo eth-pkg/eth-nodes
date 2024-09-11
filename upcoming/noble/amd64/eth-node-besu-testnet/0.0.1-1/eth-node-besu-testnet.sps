@@ -44,7 +44,7 @@ WorkingDirectory=/var/lib/eth-node-testnet/besu
 add_files = [
     "debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet/", 
     "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-testnet/bin/",
-    "debian/conf/besu-testnet.conf /etc/eth-node-besu-testnet/",
+    # "debian/conf/besu-testnet.conf /etc/eth-node-besu-testnet/",
     "debian/tmp/eth-node-besu-testnet.service /lib/systemd/system/",
 ]
 provides = ["eth-node-testnet-el-service"]
@@ -55,20 +55,87 @@ summary = "service file for eth-node-besu for network: testnet"
 # [extra_groups."eth-node-testnet"]
 # create = true
 
-[config."service.conf"]
+[config."besu-testnet.conf"]
 format = "plain"
 
-[config."service.conf".ivars.shared_file]
+[config."besu-testnet.conf".ivars."BESU_CLI_DATA_PATH"]
 type = "string"
-default = "/etc/eth-node-testnet/conf.d/testnet.conf"
+default = "/var/lib/eth-node-testnet/besu"
 priority = "low"
-summary = "Shared configuration file"
+summary = "Path to Besu data directory (default: /var/lib/eth-node-testnet/besu)"
 
-[config."service.conf".ivars.client_config]
+[config."besu-testnet.conf".ivars."BESU_CLI_ENGINE_JWT_SECRET"]
 type = "string"
-default = "/etc/eth-node-testnet/besu/conf.d/besu-testnet.conf"
+default = "/etc/eth-node-testnet/jwt.hex"
 priority = "low"
-summary = "Besu config, based on shared file"
+summary = "Path to file containing shared secret key for JWT signature verification"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_NETWORK"]
+type = "string"
+default = ""
+priority = "low"
+summary = "Synchronize against the indicated network: MAINNET, SEPOLIA, GOERLI, HOLESKY, DEV, FUTURE_EIPS, EXPERIMENTAL_EIPS, CLASSIC, MORDOR. (default: MAINNET) leave it empty for custom network"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_BOOTNODES"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENODE"
+priority = "low"
+summary = "P2P network identifier. (default: the selected network chain ID or custom genesis chain ID)"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_NETWORK_ID"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_NETWORK_ID"
+priority = "low"
+summary = "P2P network identifier. (default: the selected network chain ID or custom genesis chain ID)"
+
+
+[config."besu-testnet.conf".ivars."BESU_CLI_ENGINE_RPC_ENABLED"]
+type = "string"
+default = "true"
+priority = "low"
+summary = "Enable the engine API, even in the absence of merge-specific configurations (default: false)"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_SYNC_MODE"]
+type = "string"
+default = "full"
+priority = "low"
+summary = "Synchronization mode, possible values are FULL, FAST, SNAP, CHECKPOINT, X_SNAP, X_CHECKPOINT (default: SNAP if a --network is supplied and privacy isn't enabled. FULL otherwise.)"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_GENESIS_FILE"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/besu.json"
+priority = "low"
+summary = "Path to genesis file for your custom network"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_BONSAI_LIMIT_TRIE_LOGS_ENABLED"]
+type = "string"
+default = "false"
+priority = "low"
+summary = "--bonsai-limit-trie-logs-enabled"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_P2P_ENABLED"]
+type = "string"
+default = "false"
+priority = "low"
+summary = "Enable P2P functionality (default: true). Only running one EL client on testnet."
+
+[config."besu-testnet.conf".ivars."BESU_CLI_RPC_HTTP_API"]
+type = "string"
+default = "ETH"
+priority = "low"
+summary = "Set RPC HTTP API to ETH"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_RPC_HTTP_ENABLED"]
+type = "string"
+default = "true"
+priority = "low"
+summary = "Enable RPC HTTP functionality"
+
+[config."besu-testnet.conf".ivars."BESU_CLI_RPC_HTTP_PORT"]
+type = "string"
+default = "$BASE_CONFIG_EL_RPC_PORT"
+priority = "low"
+summary = "Set the RPC HTTP port"
 
 [[plug]]
 run_as_user = "root"
@@ -76,10 +143,5 @@ register_cmd = ["bash", "-c",
 "adduser --system --quiet --group eth-node-testnet && mkdir -p /var/lib/eth-node-testnet && chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet &&  mkdir -p /var/lib/eth-node-testnet/besu && chown eth-node-besu-testnet:eth-node-besu-testnet /var/lib/eth-node-testnet/besu"]
 unregister_cmd = ["echo", "hello_world > /dev/null"]
 
-# [config."conf.d/credentials.conf".evars."bitcoin".datadir]
-# store = false
-
-# [config."../eth-node-testnet/besu/conf.d/besu-testnet.conf".evars."eth-node-config-testnet-besu"."BESU_CLI_DATA_PATH"]
-# BESU_CLI_DATA_PATH = "$BASE_CONFIG_DATA_DIR/besu"
 
 
