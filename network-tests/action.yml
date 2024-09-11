@@ -119,6 +119,7 @@ runs:
       run: |
         echo "hello world"
         cd upcoming/noble/amd64
+        mkdir ${HOME}/packages
 
         cd eth-node-${{ inputs.network }}/1.0.0-1
         pkg-builder verify
