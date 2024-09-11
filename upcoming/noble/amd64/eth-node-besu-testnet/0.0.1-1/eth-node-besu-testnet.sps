@@ -47,7 +47,7 @@ add_dirs = ["/var/lib/eth-node-testnet"]
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
     "debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet", 
-    "debian/eth-node-besu-testnet.service /lib/systemd/system/"
+    "debian/tmp/eth-node-besu-testnet.service /lib/systemd/system/"
     ]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]

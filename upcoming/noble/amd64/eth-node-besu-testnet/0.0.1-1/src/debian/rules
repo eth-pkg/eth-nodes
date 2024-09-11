@@ -8,6 +8,7 @@ export SOURCE_DATE_EPOCH=1720044000
 
 override_dh_dwz:
 
-override_dh_auto_build:
-	dh_auto_build 
-	cp debian/eth-node-besu-testnet.eth-node-besu-testnet.service debian/eth-node-besu-testnet.service
+override_dh_install:
+	mkdir debian/tmp
+	cp debian/eth-node-besu-testnet.eth-node-besu-testnet.service debian/tmp/eth-node-besu-testnet.service
+	dh_auto_install
