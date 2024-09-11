@@ -3,7 +3,7 @@ Description=eth-node-teku-testnet service
 
 [Service]
 CapabilityBoundingSet=
-ExecStart=/bin/bash /usr/lib/eth-node-config-teku-testnet/bin/run-teku.sh \
+ExecStart=/bin/bash /usr/lib/eth-node-config-testnet-teku/bin/run-teku.sh \
     --conf-file /etc/eth-node-testnet/conf.d/testnet.conf \
     --conf-file /etc/eth-node-testnet/teku/conf.d/teku-testnet.conf
 IPAddressDeny=none
