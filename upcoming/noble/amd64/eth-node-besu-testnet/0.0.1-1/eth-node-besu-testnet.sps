@@ -14,9 +14,6 @@ extra_service_config = """
 # PrivateTmp=true
 # PrivateDevices=true
 
-# we overwrite this
-ProtectSystem=strict
-
 # additional flags not specified by debcrafter
 CapabilityBoundingSet=
 IPAddressDeny=none
@@ -43,17 +40,20 @@ SystemCallFilter=@system-service
 UMask=0077
 WorkingDirectory=/var/lib/eth-node-testnet/besu
 """
-add_dirs = ["/var/lib/eth-node-testnet"]
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet", 
-    "debian/tmp/eth-node-besu-testnet.service /lib/systemd/system/"
-    ]
+    "debian/scripts/run-service.sh /usr/lib/eth-node-besu-testnet/", 
+    "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-testnet/bin/",
+    "debian/conf/besu-testnet.conf /etc/eth-node-besu-testnet/",
+    "debian/tmp/eth-node-besu-testnet.service /lib/systemd/system/",
+]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]
 depends=["eth-node-testnet-config", "eth-node-testnet"]
 summary = "service file for eth-node-besu for network: testnet"
 
+# [extra_groups."eth-node-testnet"]
+# create = true
 
 [config."service.conf"]
 format = "plain"
@@ -70,6 +70,11 @@ default = "/etc/eth-node-testnet/besu/conf.d/besu-testnet.conf"
 priority = "low"
 summary = "Besu config, based on shared file"
 
+[[plug]]
+run_as_user = "root"
+register_cmd = ["bash", "-c", 
+"adduser --system --quiet --group eth-node-testnet && mkdir -p /var/lib/eth-node-testnet && chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet &&  mkdir -p /var/lib/eth-node-testnet/besu && chown eth-node-besu-testnet:eth-node-besu-testnet /var/lib/eth-node-testnet/besu"]
+unregister_cmd = ["echo", "hello_world > /dev/null"]
 
 # [config."conf.d/credentials.conf".evars."bitcoin".datadir]
 # store = false
