@@ -78,7 +78,7 @@ runs:
     - name: Create chroot env
       run: |
         pwd && ls -al
-        cd upcoming/noble/amd64/eth-node-mainnet/1.0.0-1 && pkg-builder env create
+        cd upcoming/noble/amd64/eth-node-testnet/1.0.0-1 && pkg-builder env create
         echo "${HOME}/.cache/sbuild/noble-amd64.tar.gz" >> $GITHUB_PATH
       shell: bash
 
