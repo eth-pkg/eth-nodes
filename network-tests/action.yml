@@ -130,12 +130,13 @@ runs:
 
         # network configs, not the same as client configs
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
-        cd eth-node-${{ inputs.network }}-config/1.0.0-1
+        cd eth-node-${{ inputs.network }}-config/0.0.0-1
         pkg-builder verify
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-0.0.1-1
         ls
+        cp eth-node-${{ inputs.network }}-config_0.0.1-1_amd64.deb ${HOME}/packages/
 
-        cp eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb ${HOME}/packages/
+
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
@@ -157,7 +158,7 @@ runs:
       run: |
         java --version 
         which java 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.0-1_amd64.deb
         sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.el_name }}_0.0.1-1_amd64.deb
         sudo dpkg -i $HOME/packages/eth-node-config-${{ inputs.network }}-${{ inputs.cl_name }}_0.0.1-1_amd64.deb
         # have to install in one go 
