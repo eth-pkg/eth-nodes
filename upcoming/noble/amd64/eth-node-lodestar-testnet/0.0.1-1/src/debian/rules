@@ -7,3 +7,9 @@ export SOURCE_DATE_EPOCH=1720044000
 	dh $@
 
 override_dh_dwz:
+
+override_dh_prep:
+	mkdir debian/tmp
+	cp debian/eth-node-lodestar-testnet.eth-node-lodestar-testnet.service debian/tmp/eth-node-lodestar-testnet.service 
+	chmod a+x debian/scripts/run-lodestar-service.sh
+	chmod a+x debian/scripts/run-lodestar.sh

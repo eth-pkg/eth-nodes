@@ -13,9 +13,9 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # - lodestar
-          # - nimbus-eth2
-          # - prysm
+          - lodestar
+          - nimbus-eth2
+          - prysm
           - teku
       fail-fast: false
     steps:
