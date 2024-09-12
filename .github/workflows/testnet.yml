@@ -43,7 +43,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: ./nodes-tests
+      - uses: ./network-tests
         with:
           network: testnet
           el_name: erigon
@@ -65,7 +65,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: ./nodes-tests
+      - uses: ./network-tests
         with:
           network: testnet
           el_name: geth
@@ -87,7 +87,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: ./nodes-tests
+      - uses: ./network-tests
         with:
           network: testnet
           el_name: nethermind
@@ -109,7 +109,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - uses: ./nodes-tests
+      - uses: ./network-tests
         with:
           network: testnet
           el_name: reth
