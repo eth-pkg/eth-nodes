@@ -14,13 +14,16 @@ mkdir -p /var/lib/eth-node-testnet
 echo "Setting ownership of /var/lib/eth-node-testnet to eth-node-testnet"
 chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet 
 
-echo "Creating /var/lib/eth-node-testnet/teku directory"
-mkdir -p /var/lib/eth-node-testnet/teku 
+echo "Creating /var/lib/eth-node-testnet/teku-validator directory"
+mkdir -p /var/lib/eth-node-testnet/teku-validator
 
-echo "Setting ownership of /var/lib/eth-node-testnet/teku to eth-node-teku-testnet"
-chown -R eth-node-teku-testnet:eth-node-teku-testnet /var/lib/eth-node-testnet/teku
+mkdir -p /var/lib/eth-node-testnet/teku-validator-logs
+
+echo "Setting ownership of /var/lib/eth-node-testnet/teku-validator to eth-node-teku-val-testnet"
+chown -R eth-node-teku-val-testnet:eth-node-teku-val-testnet /var/lib/eth-node-testnet/teku-validator
+chown -R eth-node-teku-val-testnet:eth-node-teku-val-testnet /var/lib/eth-node-testnet/teku-validator-logs
 
 echo "Adding eth-node-teku-testnet to eth-node-testnet group"
-usermod -aG eth-node-testnet eth-node-teku-testnet || true 
+usermod -aG eth-node-testnet eth-node-teku-val-testnet || true 
 
 exit 0

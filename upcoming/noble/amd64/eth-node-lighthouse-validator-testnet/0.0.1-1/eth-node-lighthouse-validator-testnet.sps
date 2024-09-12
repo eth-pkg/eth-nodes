@@ -6,6 +6,7 @@ runtime_dir = { mode = "750" }
 # Service Fields
 after = "multi-user.target"
 service_type = "simple"
+extends="eth-node-lighthouse-testnet"
 extra_service_config = """
 # no need to specify, these come from debcrafter
 # User=eth-node-lighthouse-validator-testnet
@@ -59,3 +60,8 @@ command = ["bash", "/usr/lib/eth-node-lighthouse-validator-testnet/postprocess.s
 format = "plain"
 
 
+[config."lighthouse-testnet.conf".evars."LIGHTHOUSE_CLI_BN_ETH1"]
+type = "string"
+default = ""  
+priority = "low"
+summary = "Name of the Eth2 chain Lighthouse will sync and follow."
