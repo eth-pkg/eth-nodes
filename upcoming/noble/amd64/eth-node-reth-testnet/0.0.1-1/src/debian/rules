@@ -7,3 +7,9 @@ export SOURCE_DATE_EPOCH=1720044000
 	dh $@
 
 override_dh_dwz:
+
+override_dh_prep:
+	mkdir debian/tmp
+	cp debian/eth-node-reth-testnet.eth-node-reth-testnet.service debian/tmp/eth-node-reth-testnet.service 
+	chmod a+x debian/scripts/run-reth-service.sh
+	chmod a+x debian/scripts/run-reth.sh
