@@ -8,6 +8,8 @@ get_debconf_value() {
     debconf-show "$package" | grep "$key" | awk -F ': ' '{print $2}'
 }
 
+echo "Creating user and group eth-node-testnet"
+adduser --system --quiet --group eth-node-testnet || true
 
 package=eth-node-testnet-config
 value=BASE_CONFIG_SECRETS_FILE
