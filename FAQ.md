@@ -46,15 +46,15 @@ sudo apt install -y eth-node-mainnet eth-node-reth eth-node-teku
 ## To reinstall a node, but with two different clients
 
 ```bash
-sudo apt remove -y eth-node-config-testnet-reth eth-node-config-testnet-teku
+sudo apt remove -y eth-node-reth-testnet eth-node-teku-testnet
 
-sudo apt install -y eth-node-config-testnet-reth eth-node-config-testnet-teku
+sudo apt install -y eth-node-reth-testnet eth-node-teku-testnet
 ```
 
 ## To reinstall a node, but with only changing one client
 
 ```bash
-sudo apt remove -y eth-node-config-testnet-reth
+sudo apt remove -y eth-node-reth-testnet
 # This will only work if you didn't install multiple consensus clients before
 # same for execution clients
 sudo apt install -y eth-node-config-testnet-besu
@@ -64,27 +64,27 @@ sudo apt install -y eth-node-config-testnet-besu
 
 ```bash 
 # Short form 
-systemctl is-active eth-node-testnet-service-reth.service
-systemctl is-active eth-node-testnet-service-teku.service
+systemctl is-active eth-node-reth-testnet.service
+systemctl is-active eth-node-teku-testnet.service
 
 # Long form
-systemctl status eth-node-mainnet-service-reth.service
-systemctl status eth-node-mainnet-service-teku.service
+systemctl status eth-node-reth-mainnet.service
+systemctl status eth-node-teku-mainnet.service
 ```
 
 ## Check logs for running services
 
 ```bash
-journalctl -u eth-node-mainnet-service-reth.service | less -S
-journalctl -u eth-node-mainnet-service-teku.service | less -S
+journalctl -u eth-node-reth-mainnet.service | less -S
+journalctl -u eth-node-teku-mainnet.service | less -S
 ```
 
 ## Run scripts manually, in case systemd.d service halted with seccomp error
 
 ```bash
-sudo -u eth-node-mainnet-reth  /bin/bash /usr/lib/eth-node-config-mainnet-reth/bin/run-reth.sh \
-       --conf-file /etc/eth-node-mainnet/conf.d/mainnet.conf \
-       --conf-file /etc/eth-node-mainnet/reth/conf.d/reth-mainnet.conf
+sudo -u eth-node-reth-testnet  /bin/bash /usr/lib/eth-node-reth-testnet/bin/run-reth.sh \
+       --conf-file /etc/eth-node-testnet-config/testnet.conf \
+       --conf-file /etc/eth-node-reth-testnet/reth-testnet.conf
 ```
 
 
