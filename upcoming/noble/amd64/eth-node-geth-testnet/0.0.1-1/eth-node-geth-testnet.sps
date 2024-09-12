@@ -46,6 +46,7 @@ add_files = [
     "debian/scripts/run-geth.sh /usr/lib/eth-node-geth-testnet/bin/",
     "debian/tmp/eth-node-geth-testnet.service /lib/systemd/system/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-geth-testnet",
+    "debian/keystore /var/lib/eth-node-testnet/geth/",
 ]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]

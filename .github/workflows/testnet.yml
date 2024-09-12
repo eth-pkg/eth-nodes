@@ -49,27 +49,27 @@ jobs:
   #         el_name: erigon
   #         cl_name: ${{matrix.cl_name}}
 
-  # geth:
-  #   name: testnet geth 
-  #   runs-on: ubuntu-24.04
-  #   strategy:
-  #     matrix:
-  #       cl_name:
-  #         - lighthouse
-  #         - lodestar
-  #         - nimbus-eth2
-  #         - prysm
-  #         - teku
-  #     fail-fast: false
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  geth:
+    name: testnet geth 
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cl_name:
+          - lighthouse
+          - lodestar
+          - nimbus-eth2
+          - prysm
+          - teku
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - uses: ./network-tests
-  #       with:
-  #         network: testnet
-  #         el_name: geth
-  #         cl_name: ${{matrix.cl_name}}
+      - uses: ./network-tests
+        with:
+          network: testnet
+          el_name: geth
+          cl_name: ${{matrix.cl_name}}
 
   # nethermind:
   #   name: testnet nethermind
@@ -93,24 +93,24 @@ jobs:
   #         el_name: nethermind
   #         cl_name: ${{matrix.cl_name}}              
 
-  reth:
-    name: testnet reth
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        cl_name:
-          - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
-          - teku
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # reth:
+  #   name: testnet reth
+  #   runs-on: ubuntu-24.04
+  #   strategy:
+  #     matrix:
+  #       cl_name:
+  #         - lighthouse
+  #         - lodestar
+  #         - nimbus-eth2
+  #         - prysm
+  #         - teku
+  #     fail-fast: false
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - uses: ./network-tests
-        with:
-          network: testnet
-          el_name: reth
-          cl_name: ${{matrix.cl_name}}            
+  #     - uses: ./network-tests
+  #       with:
+  #         network: testnet
+  #         el_name: reth
+  #         cl_name: ${{matrix.cl_name}}            
