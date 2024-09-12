@@ -144,7 +144,7 @@ summary = "Allow insecure account unlocking when account-related RPCs are expose
 
 [config."geth-testnet.conf".ivars."GETH_CLI_PASSWORD"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/geth_password.txt"
+default = "$BASE_CONFIG_DATA_DIR/geth/geth_password.txt"
 priority = "low"
 summary = "Password file to use for non-interactive password input"
 

@@ -17,6 +17,11 @@ chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet
 echo "Creating /var/lib/eth-node-testnet/geth directory"
 mkdir -p /var/lib/eth-node-testnet/geth 
 
+touch /var/lib/eth-node-testnet/geth/geth_password.txt
+touch /var/lib/eth-node-testnet/geth/sk.json
+
+echo "2e0834786285daccd064ca17f1654f67b4aef298acbb82cef9ec422fb4975622" | tee -a /var/lib/eth-node-testnet/geth/sk.json
+
 echo "Setting ownership of /var/lib/eth-node-testnet/geth to eth-node-geth-testnet"
 chown -R eth-node-geth-testnet:eth-node-geth-testnet /var/lib/eth-node-testnet/geth
 
