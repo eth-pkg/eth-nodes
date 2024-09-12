@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         cl_name:
-          # - lighthouse
+          - lighthouse
           # - lodestar
           # - nimbus-eth2
           # - prysm

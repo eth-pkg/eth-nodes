@@ -17,6 +17,9 @@ if [ -z "$jwt_file" ];then
     jwt_file="/etc/eth-node-testnet/jwt.hex"
 fi 
 
+mkdir -p $(dirname $jwt_file)
+touch $jwt_file
+
 if [ ! -f "$jwt_file" ] || [ ! -s "$jwt_file" ]; then
     openssl rand -hex 32 | tr -d "\n" | tee "$jwt_file" >/dev/null
 fi
