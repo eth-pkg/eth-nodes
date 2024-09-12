@@ -6,7 +6,10 @@ recommends = []
 provides = [""]
 suggests = []
 depends=[]
-add_files = ["debian/testnet /var/lib/eth-node-testnet"]
+add_files = [
+    "debian/testnet /var/lib/eth-node-testnet",
+    "debian/scripts/postprocess.sh /usr/lib/eth-node-testnet",
+]
 add_links = []
 add_manpages = []
 long_doc = """eth-node-testnet-config
@@ -59,9 +62,10 @@ store = true
 # summary = "Endpoint URL for EL and CL communication"
 
 [config."testnet.conf".ivars."BASE_CONFIG_SECRETS_FILE"]
-type = "string"
+type = "path"
+file_type = "regular"
 default = "/etc/eth-node-testnet/jwt.hex"
-priority = "low"
+priority = "medium"
 summary = "JWT secrets file shared by CL and EL"
 
 [config."testnet.conf".ivars."BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"]
@@ -183,3 +187,7 @@ type = "string"
 default = "0x123463a4b065722e99115d6c222f267d9cabb524"
 priority = "low"
 summary = "Shared fee recipient address for validator"
+
+# going to fill the jwt file with random hex
+[config."testnet.conf".postprocess]
+command = ["bash", "/usr/lib/eth-node-testnet/postprocess.sh"]

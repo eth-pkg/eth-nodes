@@ -121,6 +121,7 @@ runs:
         cd upcoming/noble/amd64
         mkdir ${HOME}/packages
 
+        # main umbrella package
         cd eth-node-${{ inputs.network }}/1.0.0-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-1.0.0-1
@@ -133,17 +134,8 @@ runs:
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-1.0.0-1
         ls
+
         cp eth-node-${{ inputs.network }}-config_1.0.0-1_amd64.deb ${HOME}/packages/
-
-        # build client configs 
-        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
-        cd eth-node-config-${{ inputs.network }}/0.0.1-1
-        pkg-builder verify
-        cd $HOME/.pkg-builder/packages/noble/eth-node-config-${{ inputs.network }}-0.0.1-1
-        ls
-        cp eth-node-config-${{ inputs.network }}-${{ inputs.el_name }}_0.0.1-1_amd64.deb ${HOME}/packages/
-        cp eth-node-config-${{ inputs.network }}-${{ inputs.cl_name }}_0.0.1-1_amd64.deb ${HOME}/packages/
-
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify

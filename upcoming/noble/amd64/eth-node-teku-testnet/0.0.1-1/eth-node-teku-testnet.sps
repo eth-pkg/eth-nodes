@@ -44,6 +44,7 @@ WorkingDirectory=/var/lib/eth-node-testnet/teku
 add_files = [
     "debian/scripts/run-teku-service.sh /usr/lib/eth-node-teku-testnet/", 
     "debian/scripts/run-teku.sh /usr/lib/eth-node-teku-testnet/bin/",
+    "debian/scripts/postprocess.sh /usr/lib/eth-node-teku-testnet",
     "debian/tmp/eth-node-teku-testnet.service /lib/systemd/system/",
 ]
 provides = ["eth-node-testnet-cl-service"]
@@ -51,11 +52,8 @@ conflicts = ["eth-node-testnet-cl-service"]
 depends=["eth-node-testnet-config", "eth-node-testnet"]
 summary = "service file for eth-node-teku for network: testnet"
 
-[[plug]]
-run_as_user = "root"
-register_cmd = ["bash", "-c", 
-"adduser --system --quiet --group eth-node-testnet && mkdir -p /var/lib/eth-node-testnet && chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet &&  mkdir -p /var/lib/eth-node-testnet/teku && chown eth-node-teku-testnet:eth-node-teku-testnet /var/lib/eth-node-testnet/teku"]
-unregister_cmd = ["echo", "hello_world > /dev/null"]
+[config."teku-testnet.conf".postprocess]
+command = ["bash", "/usr/lib/eth-node-teku-testnet/postprocess.sh"]
 
 [config."teku-testnet.conf"]
 format = "plain"
@@ -110,13 +108,13 @@ summary = "Allows syncing outside of the weak subjectivity period. Default: fals
 
 [config."teku-testnet.conf".ivars."TEKU_CLI_REST_API_CORS_ORIGINS"]
 type = "string"
-default = ""
+default = "[]"
 priority = "low"
 summary = "Comma-separated list of origins to allow, or * to allow any origin. Default: []."
 
 [config."teku-testnet.conf".ivars."TEKU_CLI_REST_API_DOCS_ENABLED"]
 type = "string"
-default = ""
+default = "false"
 priority = "low"
 summary = "Enable swagger-docs and swagger-ui endpoints. Default: false."
 
@@ -134,7 +132,7 @@ summary = "Comma-separated list of hostnames to allow, or * to allow any host. D
 
 [config."teku-testnet.conf".ivars."TEKU_CLI_REST_API_INTERFACE"]
 type = "string"
-default = ""
+default = "127.0.0.1"
 priority = "low"
 summary = "Interface of Beacon Rest API. Default: 127.0.0.1."
 

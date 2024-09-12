@@ -45,19 +45,15 @@ add_files = [
     "debian/scripts/run-besu-service.sh /usr/lib/eth-node-besu-testnet/", 
     "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-testnet/bin/",
     "debian/tmp/eth-node-besu-testnet.service /lib/systemd/system/",
+    "debian/scripts/postprocess.sh /usr/lib/eth-node-besu-testnet",
 ]
 provides = ["eth-node-testnet-el-service"]
 conflicts = ["eth-node-testnet-el-service"]
 depends=["eth-node-testnet-config", "eth-node-testnet"]
 summary = "service file for eth-node-besu for network: testnet"
 
-[[plug]]
-run_as_user = "root"
-register_cmd = ["bash", "-c", 
-"adduser --system --quiet --group eth-node-testnet && mkdir -p /var/lib/eth-node-testnet && chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet &&  mkdir -p /var/lib/eth-node-testnet/besu && chown eth-node-besu-testnet:eth-node-besu-testnet /var/lib/eth-node-testnet/besu"]
-unregister_cmd = ["echo", "hello_world > /dev/null"]
-
-
+[config."besu-testnet.conf".postprocess]
+command = ["bash", "/usr/lib/eth-node-besu-testnet/postprocess.sh"]
 
 [config."besu-testnet.conf"]
 format = "plain"

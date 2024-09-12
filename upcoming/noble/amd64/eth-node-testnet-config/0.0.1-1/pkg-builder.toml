@@ -1,7 +1,7 @@
 [package_fields]
 spec_file = "eth-node-testnet-config.sss"
 package_name = "eth-node-testnet-config"
-version_number = "1.0.0"
+version_number = "0.0.1"
 revision_number = "1"
 homepage="https://github.com/eth-pkg/eth-nodes"
 
