@@ -10,7 +10,7 @@ override_dh_auto_build:
 	./gradlew distTar installDist
 
 override_dh_auto_test:
-	./gradlew test
+	./gradlew test --no-parallel
 
 
 override_dh_auto_clean:
