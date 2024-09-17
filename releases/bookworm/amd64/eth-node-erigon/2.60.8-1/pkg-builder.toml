@@ -8,7 +8,7 @@ homepage="https://github.com/ledgerwatch/erigon"
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/ledgerwatch/erigon/archive/refs/tags/v2.60.8.tar.gz"
+tarball_url = "https://github.com/ledgerwatch/erigon/archive/refs/tags/2.60.8.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "8829703fa22fbd4b73ef523b360b5ca2f766ac80f2fe66638133f9e88c41805a"
 
@@ -21,7 +21,7 @@ go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.7"
+pkg_builder_version="0.2.8"
 debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true
