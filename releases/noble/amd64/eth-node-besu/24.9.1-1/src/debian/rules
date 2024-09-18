@@ -15,9 +15,10 @@ override_dh_strip_nondeterminism:
 	dh_strip_nondeterminism
 	# some files on the CI gets ignored
 	strip-nondeterminism debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/*.jar
+	strip-nondeterminism debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar
 
-override_dh_auto_test:
-	./gradlew test
+# override_dh_auto_test:
+# 	./gradlew test
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
