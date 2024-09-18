@@ -19,8 +19,8 @@ override_dh_strip_nondeterminism:
 	strip-nondeterminism debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar -T $(TIMESTAMP)
 	md5sum debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar
 
-# override_dh_auto_test:
-# 	./gradlew test
+override_dh_auto_test:
+	./gradlew test
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
