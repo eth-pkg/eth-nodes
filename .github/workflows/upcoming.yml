@@ -118,6 +118,14 @@ jobs:
           pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
           echo "${HOME}/.pkg-builder/packages/${{steps.env.outputs.codename}}/${{steps.env.outputs.package_name}}-${{steps.env.outputs.version_number}}" >> $GITHUB_PATH
 
+      - name: Save .deb
+        uses: actions/upload-artifact@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
+          name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
+          compression-level: 0
       # - name: piuparts
       #   if: steps.env.outputs.codename != 'noble'
       #   run: |
