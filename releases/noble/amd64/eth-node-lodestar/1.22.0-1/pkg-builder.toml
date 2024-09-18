@@ -23,7 +23,7 @@ yarn_version = "1.22.19"
 [build_env]
 codename="noble numbat"
 arch = "amd64"
-pkg_builder_version="0.2.7"
+pkg_builder_version="0.2.8"
 debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true
