@@ -1,9 +1,7 @@
 #!/usr/bin/make -f
-# conditionally enable tests, default is true
-# there are times you want to do quick rebuilding to verify hash without running the tests
-export GIT_COMMIT=<GIT_COMMIT_SHORT>
-export BUILD_DATE=<BUILD_DATE>
-export GIT_VERSION=<CLIENT_VERSION>
+export GIT_COMMIT=b18d150
+export GIT_VERSION=24.9.1
+export BUILD_DATE=2024-09-17T07:51Z
 
 %:
 	dh $@
@@ -12,7 +10,7 @@ override_dh_auto_build:
 	./gradlew distTar installDist
 
 override_dh_auto_test:
-	./gradlew test
+	./gradlew test --no-parallel
 
 override_dh_strip_nondeterminism:
 	dh_strip_nondeterminism

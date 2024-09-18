@@ -1,15 +1,15 @@
 [package_fields]
 spec_file = "eth-node-besu.sss"
 package_name = "eth-node-besu"
-version_number = "<CLIENT_VERSION>"
-revision_number = "<CLIENT_REVISION>"
+version_number = "24.9.1"
+revision_number = "1"
 homepage="https://github.com/hyperledger/besu"
 
 [package_type]
 # virtual | git | default
 package_type="default"
-tarball_url = "https://github.com/hyperledger/besu/archive/refs/tags/<CLIENT_VERSION>.tar.gz"
-tarball_hash = "<CLIENT_PACKAGE_HASH>"
+tarball_url = "https://github.com/hyperledger/besu/archive/refs/tags/24.9.1.tar.gz"
+tarball_hash = "7fee3ce3232f9d5baf20c7ec9aa52d88d0f467e9c86d5679bab9472ee9f0a8e9"
 
 [package_type.language_env]
 language_env = "java"
@@ -28,7 +28,7 @@ gradle_binary_checksum="7ba68c54029790ab444b39d7e293d3236b2632631fb5f2e012bb28b4
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="<PKG_BUILDER_VERSION>"
+pkg_builder_version="0.2.8"
 debcrafter_version = "8189263"
 run_lintian=true
 run_piuparts=true
