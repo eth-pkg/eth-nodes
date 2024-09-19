@@ -21,7 +21,7 @@ go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471
 [build_env]
 codename="bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.7"
+pkg_builder_version="0.2.8"
 debcrafter_version = "2711b53"
 run_lintian=true
 run_piuparts=true
