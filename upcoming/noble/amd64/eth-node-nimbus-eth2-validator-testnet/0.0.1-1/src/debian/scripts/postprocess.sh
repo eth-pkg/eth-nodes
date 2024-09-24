@@ -14,13 +14,16 @@ mkdir -p /var/lib/eth-node-testnet
 echo "Setting ownership of /var/lib/eth-node-testnet to eth-node-testnet"
 chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet 
 
-echo "Creating /var/lib/eth-node-testnet/nimbus-eth2 directory"
-mkdir -p /var/lib/eth-node-testnet/nimbus-eth2 
+echo "Creating /var/lib/eth-node-testnet/nimbus-eth2-validator directory"
+mkdir -p /var/lib/eth-node-testnet/nimbus-eth2-validator
 
-echo "Setting ownership of /var/lib/eth-node-testnet/nimbus-eth2 to eth-node-nimbus-eth2-testnet"
-chown -R eth-node-nimbus-eth2-testnet:eth-node-nimbus-eth2-testnet /var/lib/eth-node-testnet/nimbus-eth2
+mkdir -p /var/lib/eth-node-testnet/nimbus-eth2-validator/logs
+
+echo "Setting ownership of /var/lib/eth-node-testnet/nimbus-eth2-validator to eth-node-nimbus-eth2-val-testnet"
+chown -R eth-node-nimbus-eth2-val-testnet:eth-node-nimbus-eth2-val-testnet /var/lib/eth-node-testnet/nimbus-eth2-validator
+chown -R eth-node-nimbus-eth2-val-testnet:eth-node-nimbus-eth2-val-testnet /var/lib/eth-node-testnet/nimbus-eth2-validator/logs
 
 echo "Adding eth-node-nimbus-eth2-testnet to eth-node-testnet group"
-usermod -aG eth-node-testnet eth-node-nimbus-eth2-testnet || true 
+usermod -aG eth-node-testnet eth-node-nimbus-eth2-val-testnet || true 
 
 exit 0

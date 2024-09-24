@@ -14,13 +14,16 @@ mkdir -p /var/lib/eth-node-testnet
 echo "Setting ownership of /var/lib/eth-node-testnet to eth-node-testnet"
 chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet 
 
-echo "Creating /var/lib/eth-node-testnet/prysm directory"
-mkdir -p /var/lib/eth-node-testnet/prysm 
+echo "Creating /var/lib/eth-node-testnet/prysm-validator directory"
+mkdir -p /var/lib/eth-node-testnet/prysm-validator
 
-echo "Setting ownership of /var/lib/eth-node-testnet/prysm to eth-node-prysm-testnet"
-chown -R eth-node-prysm-testnet:eth-node-prysm-testnet /var/lib/eth-node-testnet/prysm
+mkdir -p /var/lib/eth-node-testnet/prysm-validator/logs
+
+echo "Setting ownership of /var/lib/eth-node-testnet/prysm-validator to eth-node-prysm-val-testnet"
+chown -R eth-node-prysm-val-testnet:eth-node-prysm-val-testnet /var/lib/eth-node-testnet/prysm-validator
+chown -R eth-node-prysm-val-testnet:eth-node-prysm-val-testnet /var/lib/eth-node-testnet/prysm-validator/logs
 
 echo "Adding eth-node-prysm-testnet to eth-node-testnet group"
-usermod -aG eth-node-testnet eth-node-prysm-testnet || true 
+usermod -aG eth-node-testnet eth-node-prysm-val-testnet || true 
 
 exit 0

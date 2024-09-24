@@ -49,8 +49,8 @@ add_files = [
     "debian/validator/keys /var/lib/eth-node-testnet/teku-validator",
     "debian/validator/passwords /var/lib/eth-node-testnet/teku-validator",
 ]
-provides = ["eth-node-testnet-validator-service"]
-conflicts = ["eth-node-testnet-validator-service"]
+provides = ["eth-node-testnet-validator"]
+conflicts = ["eth-node-testnet-validator"]
 depends=["eth-node-teku-testnet"]
 summary = "validator service file for eth-node-teku for network: testnet"
 

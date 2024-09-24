@@ -10,6 +10,6 @@ override_dh_dwz:
 
 override_dh_prep:
 	mkdir debian/tmp
-	cp debian/eth-node-lodestar-testnet.eth-node-lodestar-testnet.service debian/tmp/eth-node-lodestar-testnet.service 
-	chmod a+x debian/scripts/run-lodestar-service.sh
-	chmod a+x debian/scripts/run-lodestar.sh
+	cp debian/eth-node-lodestar-validator-testnet.eth-node-lodestar-validator-testnet.service debian/tmp/eth-node-lodestar-validator-testnet.service 
+	chmod a+x debian/scripts/run-lodestar-validator-service.sh
+	chmod a+x debian/scripts/run-lodestar-validator.sh

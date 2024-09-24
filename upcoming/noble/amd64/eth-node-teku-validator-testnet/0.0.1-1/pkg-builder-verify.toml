@@ -5,6 +5,6 @@ package_hash=[
     # { hash="228f338fa408c43acb1f08da4bb14062d38b7812", name= "eth-node-teku-validator-testnet_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-teku-validator-testnet_0.0.1.orig.tar.gz"},
     # { hash="11da8cbe542c6445efd8d67fa5adfc00ecfd84cd", name= "eth-node-teku-validator-testnet_0.0.1-1.debian.tar.xz"},
-    { hash="0f8e59eb986a963b8cf6d62fa0edf0cf7fa64d4d", name= "eth-node-teku-validator-testnet_0.0.1-1_all.deb"},
+    { hash="8ba05f51097c34bbb5a013a6f7aec91a4c04f414", name= "eth-node-teku-validator-testnet_0.0.1-1_all.deb"},
 
 ]

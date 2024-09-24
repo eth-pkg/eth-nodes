@@ -28,19 +28,22 @@ Suppported consensus clients
 ## To install a node 
 
 ```bash
-sudo apt install -y eth-node-mainnet
+sudo apt install -y eth-node-testnet
+# or with validator 
+sudo apt install -y eth-node-testnet eth-node-testnet-validator
+
 ``` 
 
 ## To install a node with one client given, but the other randomly
 
 ```bash
-sudo apt install -y eth-node-mainnet eth-node-reth
+sudo apt install -y eth-node-testnet eth-node-reth
 ```
 
 ## To install a node, but both clients as given
 
 ```bash
-sudo apt install -y eth-node-mainnet eth-node-reth eth-node-teku
+sudo apt install -y eth-node-testnet eth-node-reth eth-node-teku
 ```
 
 ## To reinstall a node, but with two different clients
@@ -79,7 +82,7 @@ journalctl -u eth-node-reth-mainnet.service | less -S
 journalctl -u eth-node-teku-mainnet.service | less -S
 ```
 
-## Run scripts manually, in case systemd.d service halted with seccomp error
+## Run client scripts manually, in case systemd.d service halted with seccomp error
 
 ```bash
 sudo -u eth-node-reth-testnet  /bin/bash /usr/lib/eth-node-reth-testnet/bin/run-reth.sh \
@@ -87,6 +90,13 @@ sudo -u eth-node-reth-testnet  /bin/bash /usr/lib/eth-node-reth-testnet/bin/run-
        --conf-file /etc/eth-node-reth-testnet/reth-testnet.conf
 ```
 
+## Run validator scripts manually, in case systemd.d service halted with seccomp error
+
+```bash
+sudo -u eth-node-teku-validator-testnet  /bin/bash /usr/lib/eth-node-teku-validator-testnet/bin/run-teku-validator.sh \
+       --conf-file /etc/eth-node-testnet-config/testnet.conf \
+       --conf-file /etc/eth-node-teku-validator-testnet/teku-validator-testnet.conf
+```
 
 ### Todo elements
 

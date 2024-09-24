@@ -10,6 +10,6 @@ override_dh_dwz:
 
 override_dh_prep:
 	mkdir debian/tmp
-	cp debian/eth-node-prysm-testnet.eth-node-prysm-testnet.service debian/tmp/eth-node-prysm-testnet.service 
-	chmod a+x debian/scripts/run-prysm-service.sh
-	chmod a+x debian/scripts/run-prysm.sh
+	cp debian/eth-node-prysm-validator-testnet.eth-node-prysm-validator-testnet.service debian/tmp/eth-node-prysm-validator-testnet.service 
+	chmod a+x debian/scripts/run-prysm-validator-service.sh
+	chmod a+x debian/scripts/run-prysm-validator.sh
