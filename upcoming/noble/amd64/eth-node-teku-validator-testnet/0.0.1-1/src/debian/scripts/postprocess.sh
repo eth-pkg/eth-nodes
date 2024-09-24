@@ -17,11 +17,11 @@ chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet
 echo "Creating /var/lib/eth-node-testnet/teku-validator directory"
 mkdir -p /var/lib/eth-node-testnet/teku-validator
 
-mkdir -p /var/lib/eth-node-testnet/teku-validator-logs
+mkdir -p /var/lib/eth-node-testnet/teku-validator/logs
 
 echo "Setting ownership of /var/lib/eth-node-testnet/teku-validator to eth-node-teku-val-testnet"
 chown -R eth-node-teku-val-testnet:eth-node-teku-val-testnet /var/lib/eth-node-testnet/teku-validator
-chown -R eth-node-teku-val-testnet:eth-node-teku-val-testnet /var/lib/eth-node-testnet/teku-validator-logs
+chown -R eth-node-teku-val-testnet:eth-node-teku-val-testnet /var/lib/eth-node-testnet/teku-validator/logs
 
 echo "Adding eth-node-teku-testnet to eth-node-testnet group"
 usermod -aG eth-node-testnet eth-node-teku-val-testnet || true 

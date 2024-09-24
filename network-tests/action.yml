@@ -136,7 +136,7 @@ runs:
         ls
         cp eth-node-${{ inputs.network }}-config_0.0.1-1_amd64.deb ${HOME}/packages/
 
-
+        # execution client 
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
@@ -144,12 +144,22 @@ runs:
         ls
         cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
 
+        # consensus client 
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
         cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1
         ls
         cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
+
+
+        # validator 
+        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
+        cd eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}/0.0.1-1
+        pkg-builder verify
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}-0.0.1-1
+        ls
+        cp eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
 
         echo "${HOME}/packages" >> $GITHUB_PATH
 
@@ -163,8 +173,10 @@ runs:
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-1_amd64.deb \
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}_0.0.1-1_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
+        # check if execution client is active 
         if systemctl is-active --quiet eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service; then
           echo "eth-node-${{ inputs.el_name }}-${{ inputs.network }} is active"
         else
@@ -173,13 +185,23 @@ runs:
           journalctl -u eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service --no-pager -n 100
           exit 1
         fi
-
+        # check if consensus client is active 
         if systemctl is-active --quiet eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service; then
           echo "eth-node-${{ inputs.cl_name }}-${{ inputs.network }} is active"
         else
           echo "eth-node-${{ inputs.cl_name }}-${{ inputs.network }} is not active" >&2
           echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
           journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
+          exit 1
+        fi
+
+        # check if validator client is active 
+        if systemctl is-active --quiet eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}.service; then
+          echo "eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }} is active"
+        else
+          echo "eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }} is not active" >&2
+          echo "Fetching logs for eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}..."
+          journalctl -u eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
           exit 1
         fi
       shell: bash

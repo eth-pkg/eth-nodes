@@ -46,6 +46,8 @@ add_files = [
     "debian/scripts/run-teku-validator.sh /usr/lib/eth-node-teku-validator-testnet/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-teku-validator-testnet",
     "debian/tmp/eth-node-teku-validator-testnet.service /lib/systemd/system/",
+    "debian/validator/keys /var/lib/eth-node-testnet/teku-validator",
+    "debian/validator/passwords /var/lib/eth-node-testnet/teku-validator",
 ]
 provides = ["eth-node-testnet-validator-service"]
 conflicts = ["eth-node-testnet-validator-service"]
@@ -65,15 +67,21 @@ default = "http://127.0.0.1:5052"
 priority = "low"
 summary = ""
 
+[config."teku-validator.conf".ivars."TEKU_CLI_VALIDATOR_DATA_BASE_PATH"]
+type = "string"
+default = "/var/lib/eth-node-testnet/teku-validator"  
+priority = "low"
+summary = ""
+
 [config."teku-validator.conf".ivars."TEKU_CLI_VALIDATOR_VALIDATOR_KEYS"]
 type = "string"
-default = "validator/keys:validator/passwords"  
+default = "/var/lib/eth-node-testnet/teku-validator:/var/lib/eth-node-testnet/teku-validator"  
 priority = "low"
 summary = ""
 
 [config."teku-validator.conf".ivars."TEKU_CLI_VALIDATOR_LOG_FILE"]
 type = "string"
-default = "/var/lib/eth-node-testnet/teku-validator-logs/teku.log"  
+default = "/var/lib/eth-node-testnet/teku-validator/logs/teku.log"  
 priority = "low"
 summary = ""
 
