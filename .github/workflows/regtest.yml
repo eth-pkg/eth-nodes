@@ -7,7 +7,7 @@ on:
 
 jobs:
   besu:
-    name: testnet besu
+    name: regtest besu
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -24,11 +24,11 @@ jobs:
 
       - uses: ./network-tests
         with:
-          network: testnet
+          network: regtest
           el_name: besu
           cl_name: ${{matrix.cl_name}}
   erigon:
-    name: testnet erigon
+    name: regtest erigon
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -45,12 +45,12 @@ jobs:
 
       - uses: ./network-tests
         with:
-          network: testnet
+          network: regtest
           el_name: erigon
           cl_name: ${{matrix.cl_name}}
 
   geth:
-    name: testnet geth
+    name: regtest geth
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -67,12 +67,12 @@ jobs:
 
       - uses: ./network-tests
         with:
-          network: testnet
+          network: regtest
           el_name: geth
           cl_name: ${{matrix.cl_name}}
 
   nethermind:
-    name: testnet nethermind
+    name: regtest nethermind
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -89,12 +89,12 @@ jobs:
 
       - uses: ./network-tests
         with:
-          network: testnet
+          network: regtest
           el_name: nethermind
           cl_name: ${{matrix.cl_name}}
 
   reth:
-    name: testnet reth
+    name: regtest reth
     runs-on: ubuntu-24.04
     strategy:
       matrix:
@@ -111,6 +111,6 @@ jobs:
 
       - uses: ./network-tests
         with:
-          network: testnet
+          network: regtest
           el_name: reth
           cl_name: ${{matrix.cl_name}}

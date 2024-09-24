@@ -8,10 +8,10 @@ depends=["eth-node-{variant}"]
 add_files = [
     "debian/scripts/run-{variant}.sh /usr/lib/eth-node-config-mainnet-{variant}/bin/",
     "debian/conf.d/{variant}-mainnet.conf /etc/eth-node-mainnet/{variant}/conf.d/",
-    "debian/conf.d/{variant}-testnet.conf /etc/eth-node-testnet/{variant}/conf.d/",
+    "debian/conf.d/{variant}-regtest.conf /etc/eth-node-regtest/{variant}/conf.d/",
     # "debian/conf.d/@variant-sepolia.conf /etc/eth-node-mainnet/@variant/conf.d/",
     # "debian/conf.d/@variant-holesky.conf /etc/eth-node-mainnet/@variant/conf.d/",
-    # "debian/conf.d/@variant-testnet.conf /etc/eth-node-mainnet/@variant/conf.d/",
+    # "debian/conf.d/@variant-regtest.conf /etc/eth-node-mainnet/@variant/conf.d/",
     # "debian/conf.d/@variant-ephemery.conf /etc/eth-node-mainnet/@variant/conf.d/",
 
 ]
@@ -27,5 +27,5 @@ See eth-node-mainnet-service-{variant} package for how that is working.
 See eth-node-sepolia-service-{variant} package for how that is working. 
 See eth-node-holesky-service-{variant} package for how that is working. 
 See eth-node-ephemery-service-{variant} package for how that is working. 
-See eth-node-testnet-service-{variant} package for how that is working. 
+See eth-node-regtest-service-{variant} package for how that is working. 
 """

@@ -19,7 +19,7 @@ CL_CLIENTS=(
 )
 ALLOWED_NETWORKS=(
     "mainnet"
-    "testnet"
+    "regtest"
 )
 
 REBUILD=false
@@ -29,13 +29,13 @@ SERVE_DIR=$HOME/debs/noble-testing
 NETWORK_CONFIG_VERSION=0.0.1-1
 EL_SERVICE_VERSION=0.0.1-1
 CL_SERVICE_VERSION=0.0.1-1
-NETWORK=testnet
+NETWORK=regtest
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --network mainnet|testnet, -n mainnet|testnet Name of network to build the eth-node packages"   
+    echo "  --network mainnet|regtest, -n mainnet|regtest Name of network to build the eth-node packages"   
     echo "  --version, -v                 Displays the version and exits."
     exit 0
 }
@@ -65,28 +65,35 @@ fi
 
 # rm -rf $HOME/debs/noble-testing/*
 
-# cd eth-node-$NETWORK/0.0.1-1
-# pkg-builder verify
-# cd ../..
+cd eth-node-$NETWORK/0.0.1-1
+pkg-builder verify
+cd ../..
 
-# # network configs, not the same as client configs
-# cd eth-node-$NETWORK-config/0.0.1-1
-# pkg-builder verify
-# cd ../..
+# network configs, not the same as client configs
+cd eth-node-$NETWORK-config/0.0.1-1
+pkg-builder verify
+cd ../..
 
 
-# for client in "${EL_CLIENTS[@]}"; do
-#     cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
-#     pkg-builder verify
-#     cd ../..
+for client in "${EL_CLIENTS[@]}"; do
+    cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
 
-# done
+done
 
-# for client in "${CL_CLIENTS[@]}"; do
-#     cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
-#     pkg-builder verify
-#     cd ../..
-# done
+for client in "${CL_CLIENTS[@]}"; do
+    cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
+done
+
+for client in "${CL_CLIENTS[@]}"; do
+    cd eth-node-${client}-validator-$NETWORK/$EL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
+done
+
 
 
 echo "Copy built binaries"
@@ -104,4 +111,7 @@ for client in "${EL_CLIENTS[@]}"; do
 done
 
 
+for client in "${EL_CLIENTS[@]}"; do
+    cp "$PACKAGE_DIR/eth-node-${client}-validator-$NETWORK-$EL_SERVICE_VERSION/eth-node-${client}-validator-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+done
 

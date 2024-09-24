@@ -7,7 +7,7 @@
 - sepolia
 - holesky
 - ephemery
-- testnet
+- regtest
 
 ## Supported clients
 
@@ -28,47 +28,47 @@ Suppported consensus clients
 ## To install a node 
 
 ```bash
-sudo apt install -y eth-node-testnet
+sudo apt install -y eth-node-regtest
 # or with validator 
-sudo apt install -y eth-node-testnet eth-node-testnet-validator
+sudo apt install -y eth-node-regtest eth-node-regtest-validator
 
 ``` 
 
 ## To install a node with one client given, but the other randomly
 
 ```bash
-sudo apt install -y eth-node-testnet eth-node-reth
+sudo apt install -y eth-node-regtest eth-node-reth
 ```
 
 ## To install a node, but both clients as given
 
 ```bash
-sudo apt install -y eth-node-testnet eth-node-reth eth-node-teku
+sudo apt install -y eth-node-regtest eth-node-reth eth-node-teku
 ```
 
 ## To reinstall a node, but with two different clients
 
 ```bash
-sudo apt remove -y eth-node-reth-testnet eth-node-teku-testnet
+sudo apt remove -y eth-node-reth-regtest eth-node-teku-regtest
 
-sudo apt install -y eth-node-reth-testnet eth-node-teku-testnet
+sudo apt install -y eth-node-reth-regtest eth-node-teku-regtest
 ```
 
 ## To reinstall a node, but with only changing one client
 
 ```bash
-sudo apt remove -y eth-node-reth-testnet
+sudo apt remove -y eth-node-reth-regtest
 # This will only work if you didn't install multiple consensus clients before
 # same for execution clients
-sudo apt install -y eth-node-config-testnet-besu
+sudo apt install -y eth-node-config-regtest-besu
 ```
 
 ## Check if services are up 
 
 ```bash 
 # Short form 
-systemctl is-active eth-node-reth-testnet.service
-systemctl is-active eth-node-teku-testnet.service
+systemctl is-active eth-node-reth-regtest.service
+systemctl is-active eth-node-teku-regtest.service
 
 # Long form
 systemctl status eth-node-reth-mainnet.service
@@ -85,20 +85,20 @@ journalctl -u eth-node-teku-mainnet.service | less -S
 ## Run client scripts manually, in case systemd.d service halted with seccomp error
 
 ```bash
-sudo -u eth-node-reth-testnet  /bin/bash /usr/lib/eth-node-reth-testnet/bin/run-reth.sh \
-       --conf-file /etc/eth-node-testnet-config/testnet.conf \
-       --conf-file /etc/eth-node-reth-testnet/reth-testnet.conf
+sudo -u eth-node-reth-regtest  /bin/bash /usr/lib/eth-node-reth-regtest/bin/run-reth.sh \
+       --conf-file /etc/eth-node-regtest-config/regtest.conf \
+       --conf-file /etc/eth-node-reth-regtest/reth-regtest.conf
 ```
 
 ## Run validator scripts manually, in case systemd.d service halted with seccomp error
 
 ```bash
-sudo -u eth-node-teku-validator-testnet  /bin/bash /usr/lib/eth-node-teku-validator-testnet/bin/run-teku-validator.sh \
-       --conf-file /etc/eth-node-testnet-config/testnet.conf \
-       --conf-file /etc/eth-node-teku-validator-testnet/teku-validator-testnet.conf
+sudo -u eth-node-teku-validator-regtest  /bin/bash /usr/lib/eth-node-teku-validator-regtest/bin/run-teku-validator.sh \
+       --conf-file /etc/eth-node-regtest-config/regtest.conf \
+       --conf-file /etc/eth-node-teku-validator-regtest/teku-validator-regtest.conf
 ```
 
 ### Todo elements
 
-- [ ] creating groups for networks (sudo groupadd eth-node-testnet)
-- [ ] add service users to newtork groups (sudo usermod -aG eth-node-testnet eth-node-testnet-reth)
+- [ ] creating groups for networks (sudo groupadd eth-node-regtest)
+- [ ] add service users to newtork groups (sudo usermod -aG eth-node-regtest eth-node-regtest-reth)
