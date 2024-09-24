@@ -14,13 +14,16 @@ mkdir -p /var/lib/eth-node-testnet
 echo "Setting ownership of /var/lib/eth-node-testnet to eth-node-testnet"
 chown eth-node-testnet:eth-node-testnet /var/lib/eth-node-testnet 
 
-echo "Creating /var/lib/eth-node-testnet/lighthouse directory"
-mkdir -p /var/lib/eth-node-testnet/lighthouse 
+echo "Creating /var/lib/eth-node-testnet/lighthouse-validator directory"
+mkdir -p /var/lib/eth-node-testnet/lighthouse-validator
 
-echo "Setting ownership of /var/lib/eth-node-testnet/lighthouse to eth-node-lighthouse-testnet"
-chown -R eth-node-lighthouse-testnet:eth-node-lighthouse-testnet /var/lib/eth-node-testnet/lighthouse
+mkdir -p /var/lib/eth-node-testnet/lighthouse-validator/logs
+
+echo "Setting ownership of /var/lib/eth-node-testnet/lighthouse-validator to eth-node-lighthouse-val-testnet"
+chown -R eth-node-lighthouse-val-testnet:eth-node-lighthouse-val-testnet /var/lib/eth-node-testnet/lighthouse-validator
+chown -R eth-node-lighthouse-val-testnet:eth-node-lighthouse-val-testnet /var/lib/eth-node-testnet/lighthouse-validator/logs
 
 echo "Adding eth-node-lighthouse-testnet to eth-node-testnet group"
-usermod -aG eth-node-testnet eth-node-lighthouse-testnet || true 
+usermod -aG eth-node-testnet eth-node-lighthouse-val-testnet || true 
 
 exit 0
