@@ -70,7 +70,7 @@ summary = "JWT secrets file shared by CL and EL"
 
 [config."testnet.conf".ivars."BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"]
 type = "string"
-default = "/var/lib/eth-node-testnet/testnet/custom_config_data"
+default = "/var/lib/eth-node-testnet/testnet/genesis"
 priority = "low"
 summary = "Directory for custom network testnet configuration"
 

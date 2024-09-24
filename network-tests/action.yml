@@ -78,7 +78,7 @@ runs:
     - name: Create chroot env
       run: |
         pwd && ls -al
-        cd upcoming/noble/amd64/eth-node-testnet/1.0.0-1 && pkg-builder env create
+        cd upcoming/noble/amd64/eth-node-testnet/0.0.1-1 && pkg-builder env create
         echo "${HOME}/.cache/sbuild/noble-amd64.tar.gz" >> $GITHUB_PATH
       shell: bash
 
@@ -160,7 +160,7 @@ runs:
         which java 
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.1-1_amd64.deb
         # have to install in one go 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_1.0.0-1_amd64.deb \
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-1_amd64.deb \
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb
         echo "Waiting for 60 seconds for nodes to check successful startup..."

@@ -29,7 +29,7 @@ SERVE_DIR=$HOME/debs/noble-testing
 NETWORK_CONFIG_VERSION=0.0.1-1
 EL_SERVICE_VERSION=0.0.1-1
 CL_SERVICE_VERSION=0.0.1-1
-NETWORK=mainnet
+NETWORK=testnet
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
@@ -63,35 +63,30 @@ else
     display_help
 fi
 
-# rm -rf $HOME/debs/noble-testing/*
+rm -rf $HOME/debs/noble-testing/*
 
-# cd eth-node-$NETWORK/1.0.0-1
-# pkg-builder verify
-# cd ../..
+cd eth-node-$NETWORK/0.0.1-1
+pkg-builder verify
+cd ../..
 
-# # network configs, not the same as client configs
-# cd eth-node-$NETWORK-config/1.0.0-1
-# pkg-builder verify
-# cd ../..
-
-# # build client configs 
-# cd eth-node-config-$NETWORK/$NETWORK_CONFIG_VERSION
-# pkg-builder verify
-# cd ../..
+# network configs, not the same as client configs
+cd eth-node-$NETWORK-config/0.0.1-1
+pkg-builder verify
+cd ../..
 
 
-# for client in "${EL_CLIENTS[@]}"; do
-#     cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
-#     pkg-builder verify
-#     cd ../..
+for client in "${EL_CLIENTS[@]}"; do
+    cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
 
-# done
+done
 
-# for client in "${CL_CLIENTS[@]}"; do
-#     cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
-#     pkg-builder verify
-#     cd ../..
-# done
+for client in "${CL_CLIENTS[@]}"; do
+    cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
+    pkg-builder verify
+    cd ../..
+done
 
 
 echo "Copy built binaries"
@@ -99,14 +94,6 @@ echo "Copy built binaries"
 cp "$PACKAGE_DIR/eth-node-$NETWORK-1.0.0-1/eth-node-${NETWORK}_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
 cp "$PACKAGE_DIR/eth-node-$NETWORK-config-1.0.0-1/eth-node-$NETWORK-config_1.0.0-1_$ARCH.deb" "$SERVE_DIR"
 
-# copy eth-node-config-{variant} configs
-for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
-done
-
-for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-config-$NETWORK-$NETWORK_CONFIG_VERSION/eth-node-config-$NETWORK-${client}_${NETWORK_CONFIG_VERSION}_$ARCH.deb" "$SERVE_DIR"
-done
 
 for client in "${CL_CLIENTS[@]}"; do
     cp "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$CL_SERVICE_VERSION/eth-node-${client}-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
