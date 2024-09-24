@@ -68,7 +68,7 @@ default = "/etc/eth-node-regtest/jwt.hex"
 priority = "medium"
 summary = "JWT secrets file shared by CL and EL"
 
-[config."regtest.conf".ivars."BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR"]
+[config."regtest.conf".ivars."BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"]
 type = "string"
 default = "/var/lib/eth-node-regtest/regtest/genesis"
 priority = "low"
@@ -76,19 +76,19 @@ summary = "Directory for custom network regtest configuration"
 
 [config."regtest.conf".hvars."BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE"]
 type = "string"
-template = "{/BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR}/genesis.json"
+template = "{/BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR}/genesis.json"
 # summary = "Custom network genesis file location"
 store = true
 
 [config."regtest.conf".hvars."BASE_CONFIG_CUSTOM_NETWORK_GENESIS_STATE"]
 type = "string"
-template = "{/BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR}/genesis.ssz"
+template = "{/BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR}/genesis.ssz"
 # summary = "Custom network genesis state location"
 store = true 
 
 [config."regtest.conf".hvars."BASE_CONFIG_CUSTOM_NETWORK_CHAINCONFIG"]
 type = "string"
-template = "{/BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR}/config.yaml"
+template = "{/BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR}/config.yaml"
 # summary = "Custom network chain configuration file"
 store = true 
 

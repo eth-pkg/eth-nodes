@@ -108,7 +108,7 @@ summary = "Config file path"
 
 [config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_INIT_CHAIN_SPEC_PATH"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR/chainspec.json"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/chainspec.json"
 priority = "low"
 summary = "Path to the chain spec file"
 

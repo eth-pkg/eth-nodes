@@ -84,7 +84,7 @@ summary = "Path to the base directory for storage. Default: $HOME/.local/share/t
 
 [config."teku-regtest.conf".ivars."TEKU_CLI_NETWORK"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR/config.yaml"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESNET_DIR/config.yaml"
 priority = "low"
 summary = "Represents which network to use. Default: mainnet."
 

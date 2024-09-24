@@ -150,7 +150,7 @@ summary = "The required number of valid peers to connect with before syncing."
 
 [config."prysm-regtest.conf".ivars."PRSYM_CLI_CHAIN_CONFIG_FILE"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR/config.yaml"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Path to a YAML file with chain config values."
 

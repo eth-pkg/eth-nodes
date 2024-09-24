@@ -103,7 +103,7 @@ summary = "Synchronization mode, possible values are FULL, FAST, SNAP, CHECKPOIN
 
 [config."besu-regtest.conf".ivars."BESU_CLI_GENESIS_FILE"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR/besu.json"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/besu.json"
 priority = "low"
 summary = "Path to genesis file for your custom network"
 

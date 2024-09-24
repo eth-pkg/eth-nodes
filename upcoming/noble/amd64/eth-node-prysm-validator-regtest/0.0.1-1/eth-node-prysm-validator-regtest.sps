@@ -80,6 +80,6 @@ summary = ""
 
 [config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_CHAIN_CONFIG_FILE"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR/config.yaml"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Path to a YAML file with chain config values."

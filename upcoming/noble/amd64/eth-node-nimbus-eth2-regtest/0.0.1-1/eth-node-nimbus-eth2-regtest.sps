@@ -66,7 +66,7 @@ summary = "Sets non-interactive mode for Nimbus, meaning it will quit on missing
 
 [config."nimbus-eth2-regtest.conf".ivars."NIMBUS_ETH2_NETWORK"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
 priority = "low"
 summary = "Specifies the Eth2 network to join, typically regtest."
 
