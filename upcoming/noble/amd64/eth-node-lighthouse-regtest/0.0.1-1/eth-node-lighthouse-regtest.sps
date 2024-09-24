@@ -95,9 +95,9 @@ default = "$BASE_CONFIG_SECRETS_FILE"
 priority = "low"
 summary = "File path containing the hex-encoded JWT secret for the execution endpoint."
 
-[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_regtest_DIR"]
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_TESTNET_DIR"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
 priority = "low"
 summary = "Path to directory containing Eth2 regtest specs. Only effective if no existing database is present."
 

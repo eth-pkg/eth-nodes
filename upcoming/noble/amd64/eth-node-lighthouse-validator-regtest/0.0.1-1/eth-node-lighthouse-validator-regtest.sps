@@ -61,9 +61,9 @@ command = ["bash", "/usr/lib/eth-node-lighthouse-validator-regtest/postprocess.s
 format = "plain"
 
 
-[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_regtest_DIR"]
+[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_TESTNET_DIR"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_regtest_DIR"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
 priority = "low"
 summary = "Path to directory containing Eth2 regtest specs. Only effective if no existing database is present."
 
