@@ -1,4 +1,4 @@
-name: testnet
+name: regtest
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
         cl_name:
           - lighthouse
           # - lodestar
-          # - nimbus-eth2
+          - nimbus-eth2
           # - prysm
           - teku
       fail-fast: false
@@ -35,7 +35,7 @@ jobs:
         cl_name:
           - lighthouse
           # - lodestar
-          # - nimbus-eth2
+          - nimbus-eth2
           # - prysm
           - teku
       fail-fast: false
@@ -57,7 +57,7 @@ jobs:
         cl_name:
           - lighthouse
           # - lodestar
-          # - nimbus-eth2
+          - nimbus-eth2
           # - prysm
           - teku
       fail-fast: false
@@ -79,7 +79,7 @@ jobs:
         cl_name:
           - lighthouse
           # - lodestar
-          # - nimbus-eth2
+          - nimbus-eth2
           # - prysm
           - teku
       fail-fast: false
@@ -101,7 +101,7 @@ jobs:
         cl_name:
           - lighthouse
           # - lodestar
-          # - nimbus-eth2
+          - nimbus-eth2
           # - prysm
           - teku
       fail-fast: false

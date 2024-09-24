@@ -86,8 +86,13 @@ append_flag(){
   fi 
 }
 
+append_option "--data-dir" "$NIMBUS_ETH2_CLI_VALIDATOR_DATADIR"
 
-echo "Using Options: $OPTIONS"
+
+echo "Using Options /usr/lib/eth-node-nimbus-eth2/bin/validator: $OPTIONS"
+
+/usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node deposits import \
+  --data-dir:/var/lib/eth-node-testnet/nimbus-eth2 "/var/lib/eth-node-testnet/nimbus-eth2-validator"
 
 # TODO 
-exec /usr/lib/eth-node-nimbus-eth2/bin/validator $OPTIONS
+exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client $OPTIONS

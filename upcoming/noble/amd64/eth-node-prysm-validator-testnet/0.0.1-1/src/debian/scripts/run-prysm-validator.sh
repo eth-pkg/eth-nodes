@@ -170,7 +170,7 @@ append_flag "--write-wallet-password-on-web-onboarding" "$PRYSM_CLI_VALIDATOR_WR
 append_option "--interop-num-validators" "$PRYSM_CLI_VALIDATOR_INTEROP_NUM_VALIDATORS"
 append_option "--interop-start-index" "$PRYSM_CLI_VALIDATOR_INTEROP_START_INDEX"
 
-echo "Using Options: $OPTIONS"
+echo "Using Options  /usr/lib/eth-node-prysm/bin/validator: $OPTIONS"
 
 # TODO 
 exec /usr/lib/eth-node-prysm/bin/validator $OPTIONS

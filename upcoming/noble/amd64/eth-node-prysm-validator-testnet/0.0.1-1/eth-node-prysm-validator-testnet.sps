@@ -59,3 +59,27 @@ command = ["bash", "/usr/lib/eth-node-prysm-validator-testnet/postprocess.sh"]
 
 [config."prysm-validator.conf"]
 format = "plain"
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_DATADIR"]
+type = "string"
+default = "$BASE_CONFIG_DATA_DIR/prysm"
+priority = "low"
+summary = "Data directory for the databases."
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_ACCEPT_TERMS_OF_USE"]
+type = "string"
+default = "true"
+priority = "low"
+summary = "Accepts Terms and Conditions for non-interactive environments."
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_WALLET_DIR"]
+type = "string"
+default = "/var/lib/eth-node-testnet/testnet/prysm-validator"
+priority = "low"
+summary = ""
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_CHAIN_CONFIG_FILE"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/config.yaml"
+priority = "low"
+summary = "Path to a YAML file with chain config values."
