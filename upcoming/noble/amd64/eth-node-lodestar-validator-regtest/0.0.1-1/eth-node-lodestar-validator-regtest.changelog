@@ -1,4 +1,4 @@
-eth-node-lodestar-validator-testnet (0.0.1-1) noble; urgency=medium
+eth-node-lodestar-validator-regtest (0.0.1-1) noble; urgency=medium
 
   * Initial packaging
 

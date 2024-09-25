@@ -133,6 +133,10 @@ append_option "--importKeystoresPassword" "$LODESTAR_CLI_VALIDATOR_IMPORTKEYSTOR
 append_flag "--doppelgangerProtection" "$LODESTAR_CLI_VALIDATOR_DOPPELGANGERPROTECTIONENABLED"
 append_flag "--distributed" "$LODESTAR_CLI_VALIDATOR_DISTRIBUTED"
 
+append_option "--keystoresDir" "$LODESTAR_CLI_VALIDATOR_KEYSTORES_DIR"
+append_option "--secretsDir" "$LODESTAR_CLI_VALIDATOR_SECRETS_DIR"
+append_flag "--disableKeystoresThreadPool" "$LODESTAR_CLI_DISABLE_KEYSTORES_THREADPOOL"
+
 echo "Using Options: $OPTIONS"
 
 exec lodestar validator $OPTIONS

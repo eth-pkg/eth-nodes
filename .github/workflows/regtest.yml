@@ -34,7 +34,8 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # - lodestar
+          # TODO message between beacon node and validator fails
+          - lodestar
           - nimbus-eth2
           # TODO prysm validator is not correctly working, but the service is up, deposit is not seen
           - prysm
@@ -57,7 +58,7 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # - lodestar
+          - lodestar
           - nimbus-eth2
           - prysm
           - teku
@@ -79,7 +80,7 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # - lodestar
+          - lodestar
           - nimbus-eth2
           - prysm
           - teku
@@ -101,7 +102,7 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # - lodestar
+          - lodestar
           - nimbus-eth2
           - prysm
           - teku
