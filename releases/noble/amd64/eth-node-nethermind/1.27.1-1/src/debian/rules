@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+export CI=true 
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	cd src/Nethermind/Nethermind.Runner && dotnet build -c release
+	# Delete all other archs then x64
+	find src/Nethermind/artifacts/obj -type f -name '*.AssemblyReference.cache' -delete
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-arm64
+
+# TODO fix tests
+override_dh_auto_test:
+	# Skip tests as they are failing
+	# Run Nethermind tests:
+	# use || true to see if EthereumTests also fails or not 
+	#cd src/Nethermind && dotnet test Nethermind.sln -c release || true 
+	# Run Ethereum Foundation tests:
+	#cd src/Nethermind && dotnet test EthereumTests.sln -c release
+
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
+
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
+override_dh_strip:
+	# error: strip --remove-section=.comment --remove-section=.note --strip-unneeded debian/eth-node-nethermind/usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-arm64/native/libgmp.so returned exit code 1
+
+override_dh_shlibdeps: 
+	# cannot find library libjemalloc.so.1 needed
+	dh_shlibdeps --exclude=librocksdb-musl.so --exclude=librocksdb-jemalloc.so

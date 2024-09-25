@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+# conditionally enable tests, default is true
+# there are times you want to do quick rebuilding to verify hash without running the tests
+export GIT_COMMIT=b18d150
+export BUILD_DATE=2024-09-17T10:09Z
+export GIT_VERSION=24.9.1
+export TIMESTAMP=$(shell date --date="$(BUILD_DATE)" +%s)
+# correct UTC timezone
+export FORMATTED_DATE=$(shell TZ=Etc/GMT+2 date -d "$(BUILD_DATE)" +"%Y%m%d%H%M.%S")
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	./gradlew distTar installDist
+
+override_dh_strip_nondeterminism:
+	dh_strip_nondeterminism
+	# some files on the CI gets ignored
+	# neither works 
+	#strip-nondeterminism debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/*.jar -T $(TIMESTAMP)
+	#strip-nondeterminism debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar -T $(TIMESTAMP)
+	md5sum debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar
+	# manually fix timestamp information
+	# unzip debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar -d /tmp/temp_folder
+	# find /tmp/temp_folder -exec touch -t $(FORMATTED_DATE) {} +
+	# cd /tmp/temp_folder && zip -r ../besu-metrics-core-$(GIT_VERSION).jar *
+	# mv /tmp/besu-metrics-core-$(GIT_VERSION).jar debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar
+	# md5sum debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/besu-metrics-core-$(GIT_VERSION).jar
+
+override_dh_auto_test:
+	./gradlew test
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean

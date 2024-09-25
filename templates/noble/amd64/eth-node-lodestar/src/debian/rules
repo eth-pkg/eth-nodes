@@ -19,8 +19,6 @@ override_dh_auto_test:
 	find node_modules -type d -name ".vite" -exec rm -rf {} +
 	find packages -type d -name ".vite" -exec rm -rf {} +
 	find node_modules -type d -name "obj.target" -exec rm -rf {} +
-	rm -rf node_modules/bcrypto/build/Release
-	rm -rf node_modules/cpu-features/build/Release
 
 override_dh_strip:
 	# do not strip, as it encounters errors with prebuilds and electron
@@ -56,6 +54,10 @@ override_dh_auto_build:
 	rm -rf node_modules/node-gyp/gyp/pylib/gyp/__pycache__
 	rm -rf node_modules/node-gyp/gyp/pylib/gyp/generator/__pycache__
 	chmod +x debian/lodestar
+
+	rm node_modules/cpu-features/build/Release/cpu_features.a
+	rm node_modules/bcrypto/build/Release/secp256k1.a
+	rm node_modules/bcrypto/build/Release/torsion.a
 
 
 override_dh_auto_install:

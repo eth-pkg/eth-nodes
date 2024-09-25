@@ -1,0 +1,5 @@
+eth2-val-tools: no-copyright-file
+eth2-val-tools: hardening-no-pie [usr/lib/eth2-val-tools/bin/eth2-val-tools]
+eth2-val-tools: initial-upload-closes-no-bugs [usr/share/doc/eth2-val-tools/changelog.Debian.gz:1]
+eth2-val-tools: maintainer-script-ignores-errors [postrm]
+eth2-val-tools: no-manual-page [usr/bin/eth2-val-tools]

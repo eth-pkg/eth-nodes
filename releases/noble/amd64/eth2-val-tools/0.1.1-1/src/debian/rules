@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+export CGO_ENABLED=0 
+
+export GIT_COMMIT ?= d5a451b851cda7a67a455aab0da4c699ca8027f2
+export GIT_BRANCH ?= main
+export GIT_TAG    ?= v0.9.0
+
+export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
+export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+export LDFLAGS=-X main.GitCommit=$(GIT_COMMIT) -X main.GitBranch=${GIT_BRANCH}
+
+%:
+	dh $@
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
+override_dh_auto_build:
+	go build -ldflags "${LDFLAGS}"
+
+override_dh_auto_install:
+	# do nothing
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym

@@ -1,0 +1,11 @@
+eth-node-teku: initial-upload-closes-no-bugs [usr/share/doc/eth-node-teku/changelog.Debian.gz:1]
+eth-node-teku: maintainer-script-ignores-errors [postrm]
+eth-node-teku: no-manual-page [usr/bin/teku]
+eth-node-teku: jar-not-in-usr-share *
+eth-node-teku: codeless-jar *
+eth-node-teku: copyright-without-copyright-notice
+eth-node-teku: executable-not-elf-or-script [usr/lib/eth-node-teku/teku/bin/teku.bat]
+eth-node-teku: extended-description-line-too-long line 1
+eth-node-teku: extended-description-line-too-long line 2
+eth-node-teku: script-not-executable [usr/lib/eth-node-teku/teku/teku.autocomplete.sh]
+

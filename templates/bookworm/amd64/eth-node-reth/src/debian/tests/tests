@@ -14,7 +14,7 @@ test_invocation() {
 	echo "$output"
 	# checked against https://github.com/paradigmxyz/reth/releases/download/v0.2.0-beta.8/reth-v0.2.0-beta.8-x86_64-unknown-linux-gnu.tar.gz
 	assertEquals "$output" "reth Version: <CLIENT_VERSION>
-Commit SHA: <GIT_COMMIT_SHORT>
+Commit SHA: <GIT_COMMIT_LONG>
 Build Timestamp: <BUILD_DATE>
 Build Features: jemalloc
 Build Profile: maxperf"

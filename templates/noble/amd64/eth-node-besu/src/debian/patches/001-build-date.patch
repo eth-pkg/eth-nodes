@@ -1,8 +1,8 @@
-Index: eth-node-besu-24.6.0/build.gradle
+Index: eth-node-besu-24.7.0/build.gradle
 ===================================================================
---- eth-node-besu-24.6.0.orig/build.gradle
-+++ eth-node-besu-24.6.0/build.gradle
-@@ -923,6 +923,10 @@ task jacocoRootReport(type: org.gradle.t
+--- eth-node-besu-24.7.0.orig/build.gradle
++++ eth-node-besu-24.7.0/build.gradle
+@@ -977,6 +977,10 @@ task jacocoRootReport(type: org.gradle.t
  def buildTime() {
    def df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'")
    df.setTimeZone(TimeZone.getTimeZone("UTC"))
@@ -13,8 +13,8 @@ Index: eth-node-besu-24.6.0/build.gradle
    return df.format(new Date())
  }
  
-@@ -934,9 +938,16 @@ def calculateVersion() {
-   if (project.hasProperty('version') && (project.version =~ calVerPattern)) {
+@@ -992,9 +996,16 @@ def calculateVersion() {
+     }
      return "${project.version}"
    } else {
 +
@@ -30,7 +30,7 @@ Index: eth-node-besu-24.6.0/build.gradle
      return "${gitDetails.date}-develop-${gitDetails.hash}"
    }
  }
-@@ -969,6 +980,11 @@ def getGitCommitDetails(length = 8) {
+@@ -1027,6 +1038,11 @@ def getGitCommitDetails(length = 8) {
    } catch (Exception e) {
      logger.warn('Could not calculate git commit details, using defaults (run with --info for stacktrace)')
      logger.info('Error retrieving git commit details', e)
