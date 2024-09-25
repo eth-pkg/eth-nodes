@@ -170,7 +170,17 @@ append_flag "--write-wallet-password-on-web-onboarding" "$PRYSM_CLI_VALIDATOR_WR
 append_option "--interop-num-validators" "$PRYSM_CLI_VALIDATOR_INTEROP_NUM_VALIDATORS"
 append_option "--interop-start-index" "$PRYSM_CLI_VALIDATOR_INTEROP_START_INDEX"
 
+
+
+echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$PRYSM_CLI_VALIDATOR_WALLET_KEYSTORE --wallet-dir=$PRYSM_CLI_VALIDATOR_WALLET_DIR --wallet-password-file=$PRYSM_CLI_VALIDATOR_WALLET_PASSWORD_FILE --account-password-file=$PRYSM_CLI_VALIDATOR_ACCOUNT_PASSWORD_FILE" 
+
+/usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir="$PRYSM_CLI_VALIDATOR_WALLET_KEYSTORE" \
+                                    --wallet-dir="$PRYSM_CLI_VALIDATOR_WALLET_DIR" \
+                                    --wallet-password-file="$PRYSM_CLI_VALIDATOR_WALLET_PASSWORD_FILE" \
+                                    --account-password-file="$PRYSM_CLI_VALIDATOR_ACCOUNT_PASSWORD_FILE" \
+                                    --accept-terms-of-use
+
 echo "Using Options  /usr/lib/eth-node-prysm/bin/validator: $OPTIONS"
 
 # TODO 
-exec /usr/lib/eth-node-prysm/bin/validator $OPTIONS
+/usr/lib/eth-node-prysm/bin/validator $OPTIONS

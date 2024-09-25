@@ -48,6 +48,8 @@ add_files = [
     "debian/tmp/eth-node-prysm-validator-regtest.service /lib/systemd/system/",
     "debian/validator/keys /var/lib/eth-node-regtest/prysm-validator",
     "debian/validator/passwords /var/lib/eth-node-regtest/prysm-validator",
+    "debian/validator/dummy_account_password.txt /var/lib/eth-node-regtest/prysm-validator",
+    "debian/validator/dummy_wallet_password.txt /var/lib/eth-node-regtest/prysm-validator",
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
@@ -62,7 +64,7 @@ format = "plain"
 
 [config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_DATADIR"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/prysm"
+default = "$BASE_CONFIG_DATA_DIR/prysm-validator"
 priority = "low"
 summary = "Data directory for the databases."
 
@@ -74,7 +76,25 @@ summary = "Accepts Terms and Conditions for non-interactive environments."
 
 [config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_WALLET_DIR"]
 type = "string"
-default = "/var/lib/eth-node-regtest/regtest/prysm-validator"
+default = "/var/lib/eth-node-regtest/prysm-validator"
+priority = "low"
+summary = ""
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_WALLET_PASSWORD_FILE"]
+type = "string"
+default = "/var/lib/eth-node-regtest/prysm-validator/dummy_wallet_password.txt"
+priority = "low"
+summary = ""
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_ACCOUNT_PASSWORD_FILE"]
+type = "string"
+default = "/var/lib/eth-node-regtest/prysm-validator/dummy_account_password.txt"
+priority = "low"
+summary = ""
+
+[config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_WALLET_KEYSTORE"]
+type = "string"
+default = "/var/lib/eth-node-regtest/prysm-validator/passwords"
 priority = "low"
 summary = ""
 
