@@ -13,7 +13,7 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # - lodestar
+          - lodestar
           - nimbus-eth2
           - prysm
           - teku
