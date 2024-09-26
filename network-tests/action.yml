@@ -209,14 +209,20 @@ runs:
         sudo apt install curl jq 
         # Check beacon state
         curl http://localhost:5052/eth/v1/beacon/headers
+        echo ""
+        curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
+        echo ""
+
 
         # TEST if they are actually running correctly 
         # Check if execution client is syncing
         EL_SYNCING=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545)
         if [ "$(echo $EL_SYNCING | jq '.result')" == "false" ]; then
           echo "Execution client is already synced"
+          echo "$EL_SYNCING"
         else
           echo "Execution client is still syncing"
+          echo "$CL_SYNCING"
           exit 1
         fi
 
@@ -224,6 +230,7 @@ runs:
         CL_SYNCING=$(curl -s -X GET -H "Content-Type: application/json" http://localhost:5052/eth/v1/node/syncing)
         if [ "$(echo $CL_SYNCING | jq '.data.is_syncing')" == "false" ]; then
           echo "Consensus client is already synced"
+          echo "$CL_SYNCING"
         else
           echo "Consensus client is still syncing"
           echo "$CL_SYNCING"
