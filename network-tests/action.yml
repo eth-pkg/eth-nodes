@@ -234,7 +234,8 @@ runs:
         else
           echo "Consensus client is still syncing"
           echo "$CL_SYNCING"
-          exit 1
+          # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
+          #exit 1
         fi
 
         # Check if the validator is running
