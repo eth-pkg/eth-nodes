@@ -207,6 +207,9 @@ runs:
     - name: Run API tests
       run: |
         sudo apt install curl jq 
+        # Check beacon state
+        curl http://localhost:5052/eth/v1/beacon/headers
+
         # TEST if they are actually running correctly 
         # Check if execution client is syncing
         EL_SYNCING=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545)
@@ -228,6 +231,7 @@ runs:
         fi
 
         # Check if the validator is running
+        # validator pubkey is hardcoded for each case for regtest clients 
         VALIDATOR_STATUS=$(curl -X GET -o /dev/null -s -w "%{http_code}" "http://localhost:5052/eth/v1/beacon/states/head/validators/0xb5176194b1d0301fa78a8098b98be56d312c282211a818861972071b30977be9957a36ab2deda4fe067f9ff05d92be29")
         if [ "$VALIDATOR_STATUS" -eq 200 ]; then
           echo "Validator is running"
