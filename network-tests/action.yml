@@ -245,7 +245,7 @@ runs:
           echo "Validator is running"
         else
           echo "Validator is not included"
-          echo "$VALIDATOR_STATUS"
+          curl -X GET "http://localhost:5052/eth/v1/beacon/states/head/validators"
           exit 1
         fi
 
