@@ -75,7 +75,7 @@ summary = ""
 
 [config."teku-validator.conf".ivars."TEKU_CLI_VALIDATOR_VALIDATOR_KEYS"]
 type = "string"
-default = "/var/lib/eth-node-regtest/teku-validator:/var/lib/eth-node-regtest/teku-validator"  
+default = "/var/lib/eth-node-regtest/teku-validator/keys:/var/lib/eth-node-regtest/teku-validator/passwords"  
 priority = "low"
 summary = ""
 
