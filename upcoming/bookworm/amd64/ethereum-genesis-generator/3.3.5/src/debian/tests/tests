@@ -5,8 +5,8 @@ exec 2>&1
 set -e
 
 test_binary_in_path(){
-  output="$(which el-gen)"
-  assertEquals "/usr/bin/el-gen" "$output"
+  output="$(which ethereum-genesis-generator)"
+  assertEquals "/usr/bin/ethereum-genesis-generator" "$output"
 }
 
 
