@@ -67,10 +67,33 @@ default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
 priority = "low"
 summary = "Path to directory containing Eth2 regtest specs. Only effective if no existing database is present."
 
-
 [config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR"]
 type = "string"
 default = "/var/lib/eth-node-regtest/lighthouse-validator"
 priority = "low"
 summary = "Path to validators dir"
 
+
+[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_DATA_DIR"]
+type = "string"
+default = "/var/lib/eth-node-regtest/lighthouse-validator"
+priority = "low"
+summary = ""
+
+[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_INIT_SLASHING_PROTECTION"]
+type = "string"
+default = "true"
+priority = "low"
+summary = ""
+
+[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_BEACON_NODES"]
+type = "string"
+default = "http://localhost:5052"
+priority = "low"
+summary = ""
+
+[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_SUGGESTED_FEE_RECIPIENT"]
+type = "string"
+default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+priority = "low"
+summary = ""

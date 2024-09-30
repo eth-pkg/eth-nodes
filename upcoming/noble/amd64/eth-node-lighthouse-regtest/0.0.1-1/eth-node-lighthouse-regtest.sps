@@ -172,3 +172,64 @@ type = "string"
 default = "*"
 priority = "low"
 summary = "Allows all origins for HTTP connections. Useful for testing."
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_DISABLE_PEER_SCORING"]
+type = "string"
+default = "true"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_STAKING"]
+type = "string"
+default = "true"
+priority = "low"
+summary = ""
+
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_SYNC_STALLED"]
+type = "string"
+default = "true"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_ENR_ADDRESS"]
+type = "string"
+default = "127.0.0.1"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_ENR_UDP_PORT"]
+type = "string"
+default = "9000"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_ENR_TCP_PORT"]
+type = "string"
+default = "9000"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_ENR_QUIC_PORT"]
+type = "string"
+default = "9100"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_PORT"]
+type = "string"
+default = "9000"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_QUIC_PORT"]
+type = "string"
+default = "9100"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_TARGET_PEERS"]
+type = "string"
+default = "0"
+priority = "low"
+summary = ""
