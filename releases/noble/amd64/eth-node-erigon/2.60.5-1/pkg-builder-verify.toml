@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="027d7b31ab15a4d2e1fd9b79113f6ac60ac4fb2f", name= "eth-node-erigon_2.60.5-1.dsc"},
+    { hash="327fd3f39a0c0faaa758e7c18565f0308cc22966", name= "eth-node-erigon_2.60.5.orig.tar.gz"},
+    { hash="12ec8ba58aa3ac573d22c22e2205d80a7292efe4", name= "eth-node-erigon_2.60.5-1.debian.tar.xz"},
+    { hash="9087870be1b9ec50f031052d29a210830c9421c2", name= "eth-node-erigon_2.60.5-1_amd64.deb"},
+]
