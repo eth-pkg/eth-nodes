@@ -7,44 +7,32 @@ override_dh_dwz:
 	# skip of optimization of DWARF debug information in ELF binaries via dwz
 
 override_dh_auto_build:
-	# TODO need to move this into pkg-buider 
-	rm -rf  /usr/lib/x86_64-linux-gnu/libpython3.11.so
-	mv /usr/lib/x86_64-linux-gnu/libpython3.11.so.1.0  /usr/lib/x86_64-linux-gnu/libpython3.11.so
-	ldconfig -p | grep libpython3.11
-	exit 1
-	
 	cd apps/el-gen && python3 -m venv .venv
 	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
-	cd apps/el-gen && . .venv/bin/activate && pip install pyinstaller
+	cd apps/el-gen && . .venv/bin/activate && pip install cx_Freeze
 	
 	ls -al /usr/lib/x86_64-linux-gnu
 
-	cp debian/specs/genesis_besu.spec apps/el-gen
-	ldconfig -p | grep libpython3.11
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_besu.spec
-	
-	cp debian/specs/genesis_chainspec.spec apps/el-gen
-	ldconfig -p | grep libpython3.11
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_chainspec.spec
-	
-	cp debian/specs/genesis_geth.spec apps/el-gen
-	ldconfig -p | grep libpython3.11
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_geth.spec
+	cp debian/setup.py apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && python setup.py build
 	
 	ls -al apps/el-gen
 	cp -R config-example config
+
 	chmod +x entrypoint.sh
-	chmod +x apps/el-gen/dist/genesis_besu
-	chmod +x apps/el-gen/dist/genesis_chainspec
-	chmod +x apps/el-gen/dist/genesis_geth
-	
-	mv apps/el-gen/dist/genesis_besu apps/el-gen
-	mv apps/el-gen/dist/genesis_chainspec apps/el-gen
-	mv apps/el-gen/dist/genesis_geth apps/el-gen
+	ls -al apps/el-gen/build/exe.linux-x86_64-3.11
+	chmod +x apps/el-gen/build/exe.linux-x86_64-3.11/genesis_besu
+	chmod +x apps/el-gen/build/exe.linux-x86_64-3.11/genesis_chainspec
+	chmod +x apps/el-gen/build/exe.linux-x86_64-3.11/genesis_geth
+
+	mv apps/el-gen/build/exe.linux-x86_64-3.11/genesis_besu apps/el-gen
+	mv apps/el-gen/build/exe.linux-x86_64-3.11/genesis_chainspec apps/el-gen
+	mv apps/el-gen/build/exe.linux-x86_64-3.11/genesis_geth apps/el-gen
 
 	rm -rf apps/el-gen/.venv
 	rm -rf apps/el-gen/build
 	rm -rf apps/el-gen/dist
+	rm apps/el-gen/setup.py
 
 override_dh_auto_install:
 	# do nothing
