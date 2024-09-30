@@ -1,0 +1,227 @@
+Index: ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_besu.py
+===================================================================
+--- ethereum-genesis-generator-3.3.5.orig/apps/el-gen/genesis_besu.py
++++ ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_besu.py
+@@ -5,11 +5,11 @@ import sys
+ 
+ w3.eth.account.enable_unaudited_hdwallet_features()
+ 
+-testnet_config_path = "genesis-config.yaml"
+-mainnet_config_path = "/apps/el-gen/mainnet/besu_genesis.json"
+-sepolia_config_path = "/apps/el-gen/sepolia/besu_genesis.json"
+-goerli_config_path = "/apps/el-gen/goerli/besu_genesis.json"
+-holesky_config_path = "/apps/el-gen/holesky/besu_genesis.json"
++testnet_config_path = "/etc/ethereum-genesis-generator/config/el/genesis-config.yaml"
++mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/besu_genesis.json"
++sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/besu_genesis.json"
++goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/besu_genesis.json"
++holesky_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/holesky/besu_genesis.json"
+ combined_allocs = {}
+ 
+ if len(sys.argv) > 1:
+Index: ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_chainspec.py
+===================================================================
+--- ethereum-genesis-generator-3.3.5.orig/apps/el-gen/genesis_chainspec.py
++++ ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_chainspec.py
+@@ -5,11 +5,11 @@ import sys
+ 
+ w3.eth.account.enable_unaudited_hdwallet_features()
+ 
+-testnet_config_path = "genesis-config.yaml"
+-mainnet_config_path = "/apps/el-gen/mainnet/chainspec.json"
+-sepolia_config_path = "/apps/el-gen/sepolia/chainspec.json"
+-goerli_config_path = "/apps/el-gen/goerli/chainspec.json"
+-holesky_config_path = "/apps/el-gen/holesky/chainspec.json"
++testnet_config_path = "/etc/ethereum-genesis-generator/config/el/genesis-config.yaml"
++mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/chainspec.json"
++sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/chainspec.json"
++goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/chainspec.json"
++holesky_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/holesky/chainspec.json"
+ combined_allocs = {}
+ if len(sys.argv) > 1:
+     testnet_config_path = sys.argv[1]
+Index: ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_geth.py
+===================================================================
+--- ethereum-genesis-generator-3.3.5.orig/apps/el-gen/genesis_geth.py
++++ ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_geth.py
+@@ -5,11 +5,11 @@ import sys
+ 
+ w3.eth.account.enable_unaudited_hdwallet_features()
+ 
+-testnet_config_path = "genesis-config.yaml"
+-mainnet_config_path = "/apps/el-gen/mainnet/genesis.json"
+-sepolia_config_path = "/apps/el-gen/sepolia/genesis.json"
+-goerli_config_path = "/apps/el-gen/goerli/genesis.json"
+-holesky_config_path = "/apps/el-gen/holesky/genesis.json"
++testnet_config_path = "/etc/ethereum-genesis-generator/config/el/genesis-config.yaml"
++mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/genesis.json"
++sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/genesis.json"
++goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/genesis.json"
++holesky_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/holesky/genesis.json"
+ combined_allocs = {}
+ if len(sys.argv) > 1:
+     testnet_config_path = sys.argv[1]
+Index: ethereum-genesis-generator-3.3.5/entrypoint.sh
+===================================================================
+--- ethereum-genesis-generator-3.3.5.orig/entrypoint.sh
++++ ethereum-genesis-generator-3.3.5/entrypoint.sh
+@@ -1,39 +1,39 @@
+ #!/bin/bash -e
+-if [ -f /config/values.env ];
++if [ -f config/values.env ];
+ then
+-    source /config/values.env
++    source config/values.env
+ fi
+-source /defaults/defaults.env
++source /etc/ethereum-genesis-generator/defaults/defaults.env
+ 
+ SERVER_ENABLED="${SERVER_ENABLED:-false}"
+ SERVER_PORT="${SERVER_PORT:-8000}"
+ WITHDRAWAL_ADDRESS="${WITHDRAWAL_ADDRESS:-0xf97e180c050e5Ab072211Ad2C213Eb5AEE4DF134}"
+ PRESET_BASE="${PRESET_BASE:-mainnet}"
+ gen_shared_files(){
+-    . /apps/el-gen/.venv/bin/activate
++    . /usr/lib/ethereum-genesis-generator/apps/el-gen/.venv/bin/activate
+     set -x
+     # Shared files
+-    mkdir -p /data/metadata
+-    if ! [ -f "/data/jwt/jwtsecret" ]; then
+-        mkdir -p /data/jwt
+-        echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > /data/jwt/jwtsecret
++    mkdir -p data/metadata
++    if ! [ -f "data/jwt/jwtsecret" ]; then
++        mkdir -p data/jwt
++        echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > data/jwt/jwtsecret
+     fi
+-    if [ -f "/data/metadata/genesis.json" ]; then
+-        terminalTotalDifficulty=$(cat /data/metadata/genesis.json | jq -r '.config.terminalTotalDifficulty | tostring')
+-        sed -i "s/TERMINAL_TOTAL_DIFFICULTY:.*/TERMINAL_TOTAL_DIFFICULTY: $terminalTotalDifficulty/" /data/metadata/config.yaml
++    if [ -f "data/metadata/genesis.json" ]; then
++        terminalTotalDifficulty=$(cat data/metadata/genesis.json | jq -r '.config.terminalTotalDifficulty | tostring')
++        sed -i "s/TERMINAL_TOTAL_DIFFICULTY:.*/TERMINAL_TOTAL_DIFFICULTY: $terminalTotalDifficulty/" data/metadata/config.yaml
+     fi
+ }
+ 
+ gen_el_config(){
+-    . /apps/el-gen/.venv/bin/activate
++    . /usr/lib/ethereum-genesis-generator/apps/el-gen/.venv/bin/activate
+     set -x
+-    if ! [ -f "/data/metadata/genesis.json" ]; then
++    if ! [ -f "data/metadata/genesis.json" ]; then
+         tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+-        mkdir -p /data/metadata
+-        envsubst < /config/el/genesis-config.yaml > $tmp_dir/genesis-config.yaml
+-        python3 /apps/el-gen/genesis_geth.py $tmp_dir/genesis-config.yaml      > /data/metadata/genesis.json
+-        python3 /apps/el-gen/genesis_chainspec.py $tmp_dir/genesis-config.yaml > /data/metadata/chainspec.json
+-        python3 /apps/el-gen/genesis_besu.py $tmp_dir/genesis-config.yaml > /data/metadata/besu.json
++        mkdir -p data/metadata
++        envsubst < /etc/ethereum-genesis-generator/config/el/genesis-config.yaml > $tmp_dir/genesis-config.yaml
++        python3 /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth.py $tmp_dir/genesis-config.yaml      > data/metadata/genesis.json
++        python3 /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec.py $tmp_dir/genesis-config.yaml > data/metadata/chainspec.json
++        python3 /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu.py $tmp_dir/genesis-config.yaml > data/metadata/besu.json
+     else
+         echo "el genesis already exists. skipping generation..."
+     fi
+@@ -50,38 +50,38 @@ gen_minimal_config() {
+   )
+ 
+   for key in "${!replacements[@]}"; do
+-    sed -i "s/$key:.*/$key: ${replacements[$key]}/" /data/metadata/config.yaml
++    sed -i "s/$key:.*/$key: ${replacements[$key]}/" data/metadata/config.yaml
+   done
+ }
+ 
+ gen_cl_config(){
+-    . /apps/el-gen/.venv/bin/activate
++    . /usr/lib/ethereum-genesis-generator/apps/el-gen/.venv/bin/activate
+     set -x
+     # Consensus layer: Check if genesis already exists
+-    if ! [ -f "/data/metadata/genesis.ssz" ]; then
++    if ! [ -f "data/metadata/genesis.ssz" ]; then
+         tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+-        mkdir -p /data/metadata
+-        mkdir -p /data/parsed
+-        envsubst < /config/cl/config.yaml > /data/metadata/config.yaml
+-        envsubst < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
++        mkdir -p data/metadata
++        mkdir -p data/parsed
++        envsubst < /etc/ethereum-genesis-generator/config/cl/config.yaml > data/metadata/config.yaml
++        envsubst < /etc/ethereum-genesis-generator/config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
+         # Conditionally override values if preset is "minimal"
+         if [[ "$PRESET_BASE" == "minimal" ]]; then
+           gen_minimal_config
+         fi
+-        cp $tmp_dir/mnemonics.yaml /data/metadata/mnemonics.yaml
++        cp $tmp_dir/mnemonics.yaml data/metadata/mnemonics.yaml
+         # Create deposit_contract.txt and deploy_block.txt
+-        grep DEPOSIT_CONTRACT_ADDRESS /data/metadata/config.yaml | cut -d " " -f2 > /data/metadata/deposit_contract.txt
+-        echo $CL_EXEC_BLOCK > /data/metadata/deposit_contract_block.txt
+-        echo $BEACON_STATIC_ENR > /data/metadata/bootstrap_nodes.txt
++        grep DEPOSIT_CONTRACT_ADDRESS data/metadata/config.yaml | cut -d " " -f2 > data/metadata/deposit_contract.txt
++        echo $CL_EXEC_BLOCK > data/metadata/deposit_contract_block.txt
++        echo $BEACON_STATIC_ENR > data/metadata/bootstrap_nodes.txt
+         # Envsubst mnemonics
+-        envsubst < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
++        envsubst < /etc/ethereum-genesis-generator/config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
+         # Generate genesis
+         genesis_args=(
+           deneb
+-          --config /data/metadata/config.yaml
++          --config data/metadata/config.yaml
+           --mnemonics $tmp_dir/mnemonics.yaml
+-          --tranches-dir /data/metadata/tranches
+-          --state-output /data/metadata/genesis.ssz
++          --tranches-dir data/metadata/tranches
++          --state-output data/metadata/genesis.ssz
+           --preset-phase0 $PRESET_BASE
+           --preset-altair $PRESET_BASE
+           --preset-bellatrix $PRESET_BASE
+@@ -96,14 +96,14 @@ gen_cl_config(){
+         elif [[ $SHADOW_FORK_RPC != "" ]]; then
+           genesis_args+=(--shadow-fork-eth1-rpc=$SHADOW_FORK_RPC --eth1-config "")
+         else
+-          genesis_args+=(--eth1-config /data/metadata/genesis.json)
++          genesis_args+=(--eth1-config data/metadata/genesis.json)
+         fi
+         if ! [ -z "$CL_ADDITIONAL_VALIDATORS" ]; then
+           if [[ $CL_ADDITIONAL_VALIDATORS = /* ]]; then
+             validators_file=$CL_ADDITIONAL_VALIDATORS
+           else
+-            validators_file="/config/$CL_ADDITIONAL_VALIDATORS"
+-          fi
++            validators_file="/etc/ethereum-genesis-generator/config/$CL_ADDITIONAL_VALIDATORS"
++          fi  
+           genesis_args+=(--additional-validators $validators_file)
+         fi
+         zcli_args=(
+@@ -115,15 +115,15 @@ gen_cl_config(){
+           --preset-bellatrix $PRESET_BASE
+           --preset-capella $PRESET_BASE
+           --preset-deneb $PRESET_BASE
+-          /data/metadata/genesis.ssz
++          data/metadata/genesis.ssz
+         )
+-        /usr/local/bin/eth2-testnet-genesis "${genesis_args[@]}"
+-        /usr/local/bin/zcli "${zcli_args[@]}" > /data/parsed/parsedConsensusGenesis.json
++        eth2-testnet-genesis "${genesis_args[@]}"
++        zcli "${zcli_args[@]}" > data/parsed/parsedConsensusGenesis.json
+         echo "Genesis args: ${genesis_args[@]}"
+-        echo "Genesis block number: $(jq -r '.latest_execution_payload_header.block_number' /data/parsed/parsedConsensusGenesis.json)"
+-        echo "Genesis block hash: $(jq -r '.latest_execution_payload_header.block_hash' /data/parsed/parsedConsensusGenesis.json)"
+-        jq -r '.eth1_data.block_hash' /data/parsed/parsedConsensusGenesis.json| tr -d '\n' > /data/metadata/deposit_contract_block_hash.txt
+-        jq -r '.genesis_validators_root' /data/parsed/parsedConsensusGenesis.json | tr -d '\n' > /data/metadata/genesis_validators_root.txt
++        echo "Genesis block number: $(jq -r '.latest_execution_payload_header.block_number' data/parsed/parsedConsensusGenesis.json)"
++        echo "Genesis block hash: $(jq -r '.latest_execution_payload_header.block_hash' data/parsed/parsedConsensusGenesis.json)"
++        jq -r '.eth1_data.block_hash' data/parsed/parsedConsensusGenesis.json| tr -d '\n' > data/metadata/deposit_contract_block_hash.txt
++        jq -r '.genesis_validators_root' data/parsed/parsedConsensusGenesis.json | tr -d '\n' > data/metadata/genesis_validators_root.txt
+     else
+         echo "cl genesis already exists. skipping generation..."
+     fi
+@@ -154,5 +154,5 @@ esac
+ 
+ # Start webserver
+ if [ "$SERVER_ENABLED" = true ] ; then
+-  cd /data && exec python3 -m http.server "$SERVER_PORT"
++  cd data && exec python3 -m http.server "$SERVER_PORT"
+ fi
