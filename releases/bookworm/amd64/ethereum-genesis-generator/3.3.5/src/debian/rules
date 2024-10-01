@@ -8,8 +8,8 @@ override_dh_dwz:
 
 override_dh_auto_build:
 	cd apps/el-gen && python3 -m venv .venv
+	cd apps/el-gen && . .venv/bin/activate && pip install -U cx_Freeze
 	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
-	cd apps/el-gen && . .venv/bin/activate && pip install cx_Freeze
 	
 	ls -al /usr/lib/x86_64-linux-gnu
 
@@ -28,6 +28,7 @@ override_dh_auto_build:
 	mv apps/el-gen/build/exe.linux-x86_64-3.11/genesis_besu apps/el-gen
 	mv apps/el-gen/build/exe.linux-x86_64-3.11/genesis_chainspec apps/el-gen
 	mv apps/el-gen/build/exe.linux-x86_64-3.11/genesis_geth apps/el-gen
+	mv apps/el-gen/build/exe.linux-x86_64-3.11/lib apps/el-gen
 
 	rm -rf apps/el-gen/.venv
 	rm -rf apps/el-gen/build
@@ -39,3 +40,6 @@ override_dh_auto_install:
 
 override_dh_strip:
 	dh_strip --no-automatic-dbgsym
+
+override_dh_shlibdeps:
+	# do nothing 
