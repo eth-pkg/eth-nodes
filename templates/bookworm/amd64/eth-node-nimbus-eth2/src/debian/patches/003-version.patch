@@ -1,7 +1,7 @@
-Index: eth-node-nimbus-eth2-24.8.0/beacon_chain/version.nim
+Index: eth-node-nimbus-eth2-24.9.0/beacon_chain/version.nim
 ===================================================================
---- eth-node-nimbus-eth2-24.8.0.orig/beacon_chain/version.nim
-+++ eth-node-nimbus-eth2-24.8.0/beacon_chain/version.nim
+--- eth-node-nimbus-eth2-24.9.0.orig/beacon_chain/version.nim
++++ eth-node-nimbus-eth2-24.9.0/beacon_chain/version.nim
 @@ -11,37 +11,21 @@
  ## in the Nimbus release process (i.e. beacon_node, validator_client, etc)
  
@@ -16,7 +16,7 @@ Index: eth-node-nimbus-eth2-24.8.0/beacon_chain/version.nim
 +    "Copyright (c) 2019-" & reproducibleYear & " Status Research & Development GmbH"
  
 -  versionMajor* = 24
--  versionMinor* = 8
+-  versionMinor* = 9
 -  versionBuild* = 0
 +  versionMajor* = parseInt(getEnv("VERSION_MAJOR", "24"))
 +  versionMinor* = parseInt(getEnv("VERSION_MINOR", "7"))
