@@ -13,7 +13,7 @@ add_files = [
     "apps /usr/lib/ethereum-genesis-generator",
     "config /etc/ethereum-genesis-generator",
     "defaults /etc/ethereum-genesis-generator",
-    "entrypoint.sh /usr/lib/ethereum-genesis-generator/bin"
+    "entrypoint.sh /usr/lib/ethereum-genesis-generator/bin",
     # "el-gen /usr/lib/el-gen/bin",
 ]
 add_links = ["/usr/lib/ethereum-genesis-generator/bin/entrypoint.sh /usr/bin/ethereum-genesis-generator"]
