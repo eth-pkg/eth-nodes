@@ -28,6 +28,23 @@ fi
 
 chmod 750 $jwt_file
 
+tmp_dir=$(mktemp -d)
+
+cd "$tmp_dir"
+cp -R /etc/ethereum-genesis-generator . 
+ethereum-genesis-generator all 
+
+rm -rf /var/lib/eth-node-regtest/regtest/jwt
+rm -rf /var/lib/eth-node-regtest/regtest/genesis
+rm -rf /var/lib/eth-node-regtest/regtest/metadata
+rm -rf /var/lib/eth-node-regtest/regtest/parsed
+
+cp -R data/jwt /var/lib/eth-node-regtest/regtest
+cp -R data/metadata /var/lib/eth-node-regtest/regtest
+cp -R data/parsed /var/lib/eth-node-regtest/regtest
+
+mv /var/lib/eth-node-regtest/regtest/metadata /var/lib/eth-node-regtest/regtest/genesis
+
 chown -R eth-node-regtest:eth-node-regtest /etc/eth-node-regtest 
 
 exit 0
