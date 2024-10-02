@@ -70,9 +70,15 @@ default = "true"
 priority = "low"
 summary = "Whether to enable WebSocket service for JSON-RPC on startup"
 
+[config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_JSON_RPC_ENGINE_ENABLED_MODULES"]
+type = "string"
+default = "net,eth,subscribe,web3"
+priority = "low"
+summary = "An array of JSON-RPC namespaces to enable"
+
 [config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_JSON_RPC_ENABLED_MODULES"]
 type = "string"
-default = "et,eth,consensus,subscribe,web3,admin"
+default = "net,eth,consensus,subscribe,web3,admin"
 priority = "low"
 summary = "An array of JSON-RPC namespaces to enable"
 

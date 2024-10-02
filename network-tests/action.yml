@@ -113,7 +113,8 @@ runs:
           eth-node-lodestar \
           eth-node-nimbus-eth2 \
           eth-node-prysm \
-          eth-node-teku
+          eth-node-teku \
+          ethereum-genesis-generator
 
     - name: Build clients 
       run: |
