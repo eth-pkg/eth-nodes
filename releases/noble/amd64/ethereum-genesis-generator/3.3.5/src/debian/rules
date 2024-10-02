@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
-export LC_COLLATE=C
 export PYTHONHASHSEED=1
-export PURE_PYTHON=1
 
 
 %:
@@ -14,20 +12,20 @@ override_dh_auto_build:
 	cd apps/el-gen && python3 -m venv .venv
 	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
 
-	# cp debian/specs/genesis_besu.spec apps/el-gen
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller --onedir genesis_besu.py
+	cp debian/specs/genesis_besu.spec apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_besu.spec
 
-	# cp debian/specs/genesis_chainspec.spec apps/el-gen
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller --onedir genesis_chainspec.py
+	cp debian/specs/genesis_chainspec.spec apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_chainspec.spec
 
-	#cp debian/specs/genesis_geth.spec apps/el-gen
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller  --onedir genesis_geth.py
+	cp debian/specs/genesis_geth.spec apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_geth.spec
 
 	cp -R config-example config
 	chmod +x entrypoint.sh
-	# chmod +x apps/el-gen/dist/genesis_besu
-	# chmod +x apps/el-gen/dist/genesis_chainspec
-	# chmod +x apps/el-gen/dist/genesis_geth
+	chmod +x apps/el-gen/dist/genesis_besu/genesis_besu
+	chmod +x apps/el-gen/dist/genesis_chainspec/genesis_chainspec
+	chmod +x apps/el-gen/dist/genesis_geth/genesis_geth
 
 	mv apps/el-gen/dist/genesis_besu apps/el-gen
 	mv apps/el-gen/dist/genesis_chainspec apps/el-gen
