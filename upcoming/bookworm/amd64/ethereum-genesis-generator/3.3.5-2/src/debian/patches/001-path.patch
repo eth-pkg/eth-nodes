@@ -11,7 +11,7 @@ Index: ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_besu.py
 -sepolia_config_path = "/apps/el-gen/sepolia/besu_genesis.json"
 -goerli_config_path = "/apps/el-gen/goerli/besu_genesis.json"
 -holesky_config_path = "/apps/el-gen/holesky/besu_genesis.json"
-+testnet_config_path = "/etc/ethereum-genesis-generator/config/el/genesis-config.yaml"
++testnet_config_path = "config/el/genesis-config.yaml"
 +mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/besu_genesis.json"
 +sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/besu_genesis.json"
 +goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/besu_genesis.json"
@@ -32,7 +32,7 @@ Index: ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_chainspec.py
 -sepolia_config_path = "/apps/el-gen/sepolia/chainspec.json"
 -goerli_config_path = "/apps/el-gen/goerli/chainspec.json"
 -holesky_config_path = "/apps/el-gen/holesky/chainspec.json"
-+testnet_config_path = "/etc/ethereum-genesis-generator/config/el/genesis-config.yaml"
++testnet_config_path = "config/el/genesis-config.yaml"
 +mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/chainspec.json"
 +sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/chainspec.json"
 +goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/chainspec.json"
@@ -53,7 +53,7 @@ Index: ethereum-genesis-generator-3.3.5/apps/el-gen/genesis_geth.py
 -sepolia_config_path = "/apps/el-gen/sepolia/genesis.json"
 -goerli_config_path = "/apps/el-gen/goerli/genesis.json"
 -holesky_config_path = "/apps/el-gen/holesky/genesis.json"
-+testnet_config_path = "/etc/ethereum-genesis-generator/config/el/genesis-config.yaml"
++testnet_config_path = "config/el/genesis-config.yaml"
 +mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/genesis.json"
 +sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/genesis.json"
 +goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/genesis.json"
@@ -75,9 +75,9 @@ Index: ethereum-genesis-generator-3.3.5/entrypoint.sh
  fi
 -source /defaults/defaults.env
 +
-+cp -R /etc/ethereum-genesis-generator . 
++cp -R /etc/ethereum-genesis-generator/config . 
 +
-+source defaults/defaults.env
++source config/defaults.env
  
  SERVER_ENABLED="${SERVER_ENABLED:-false}"
  SERVER_PORT="${SERVER_PORT:-8000}"
@@ -163,7 +163,7 @@ Index: ethereum-genesis-generator-3.3.5/entrypoint.sh
 +        echo $BEACON_STATIC_ENR > data/metadata/bootstrap_nodes.txt
          # Envsubst mnemonics
 -        envsubst < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
-+        envsubst < config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
++        envsubst < ./config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
          # Generate genesis
          genesis_args=(
            deneb
@@ -190,7 +190,7 @@ Index: ethereum-genesis-generator-3.3.5/entrypoint.sh
            else
 -            validators_file="/config/$CL_ADDITIONAL_VALIDATORS"
 -          fi
-+            validators_file="config/$CL_ADDITIONAL_VALIDATORS"
++            validators_file="./config/$CL_ADDITIONAL_VALIDATORS"
 +          fi  
            genesis_args+=(--additional-validators $validators_file)
          fi

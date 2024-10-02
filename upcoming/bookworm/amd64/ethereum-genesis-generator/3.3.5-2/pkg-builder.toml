@@ -2,7 +2,7 @@
 spec_file = "ethereum-genesis-generator.sss"
 package_name = "ethereum-genesis-generator"
 version_number = "3.3.5"
-revision_number = "1"
+revision_number = "2"
 homepage="https://github.com/ethpandaops/ethereum-genesis-generator"
 
 [package_type]
