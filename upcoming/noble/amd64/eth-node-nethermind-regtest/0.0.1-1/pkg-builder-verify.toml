@@ -5,6 +5,6 @@ package_hash=[
     # { hash="94c6b57202cb9b77fb50115a245ad1ef910311e7", name= "eth-node-nethermind-regtest_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-nethermind-regtest_0.0.1.orig.tar.gz"},
     # { hash="3ea42533489ce49a17de2ff40f7d52f45d0a2499", name= "eth-node-nethermind-regtest_0.0.1-1.debian.tar.xz"},
-    { hash="3bbfe368689f6c3acfdaa8a58a0ef57293dc4663", name= "eth-node-nethermind-regtest_0.0.1-1_all.deb"},
+    { hash="0211a125f23f43e870eb009774c8926a7a1b51b6", name= "eth-node-nethermind-regtest_0.0.1-1_all.deb"},
 
 ]

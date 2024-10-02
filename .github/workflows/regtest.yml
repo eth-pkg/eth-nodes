@@ -73,30 +73,8 @@ jobs:
   #         el_name: geth
   #         cl_name: ${{matrix.cl_name}}
 
-  nethermind:
-    name: regtest nethermind
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        cl_name:
-          - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
-          - teku
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - uses: ./network-tests
-        with:
-          network: regtest
-          el_name: nethermind
-          cl_name: ${{matrix.cl_name}}
-
-  # reth:
-  #   name: regtest reth
+  # nethermind:
+  #   name: regtest nethermind
   #   runs-on: ubuntu-24.04
   #   strategy:
   #     matrix:
@@ -114,5 +92,27 @@ jobs:
   #     - uses: ./network-tests
   #       with:
   #         network: regtest
-  #         el_name: reth
+  #         el_name: nethermind
   #         cl_name: ${{matrix.cl_name}}
+
+  reth:
+    name: regtest reth
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cl_name:
+          - lighthouse
+          - lodestar
+          - nimbus-eth2
+          - prysm
+          - teku
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: ./network-tests
+        with:
+          network: regtest
+          el_name: reth
+          cl_name: ${{matrix.cl_name}}

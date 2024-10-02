@@ -5,7 +5,7 @@ conflicts = []
 recommends = []
 provides = [""]
 suggests = []
-depends=["ethereum-genesis-generator"]
+depends=["ethereum-genesis-generator (>=3.3.5-2)"]
 add_files = [
     "debian/regtest /var/lib/eth-node-regtest",
     "debian/config /etc/ethereum-genesis-generator",
@@ -185,7 +185,7 @@ summary = "Number of validators"
 
 [config."regtest.conf".ivars."BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"]
 type = "string"
-default = "0x123463a4b065722e99115d6c222f267d9cabb524"
+default = "00cb237b9deadbdccabfedae3f8c270eaf42a4b869a4c3a4eeb490ddc991e9e5"
 priority = "low"
 summary = "Shared fee recipient address for validator"
 

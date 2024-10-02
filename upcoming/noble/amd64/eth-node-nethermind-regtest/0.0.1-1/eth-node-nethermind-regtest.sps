@@ -76,6 +76,14 @@ default = "net,eth,subscribe,web3"
 priority = "low"
 summary = "An array of JSON-RPC namespaces to enable"
 
+
+# [config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_JSON_RPC_ADDITIONAL_RPC_URLS"]
+# type = "string"
+# default = "\"http://localhost:8545|http;ws|eth;web3]\""
+# priority = "low"
+# summary = "An array of JSON-RPC namespaces to enable"
+
+
 [config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_JSON_RPC_ENABLED_MODULES"]
 type = "string"
 default = "net,eth,consensus,subscribe,web3,admin"
