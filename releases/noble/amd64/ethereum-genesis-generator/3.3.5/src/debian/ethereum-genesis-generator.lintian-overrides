@@ -39,3 +39,4 @@ ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum
 ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth/_internal/lib-dynload/_contextvars.cpython-312-x86_64-linux-gnu.so]
 ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth/_internal/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so]
 ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth/_internal/lib-dynload/_queue.cpython-312-x86_64-linux-gnu.so]
+ethereum-genesis-generator: package-has-unnecessary-activation-of-ldconfig-trigger
