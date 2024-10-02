@@ -1,8 +1,5 @@
 ethereum-genesis-generator: description-synopsis-is-duplicated line 1
 ethereum-genesis-generator: no-copyright-file
-ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu]
-ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec]
-ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth]
 ethereum-genesis-generator: initial-upload-closes-no-bugs [usr/share/doc/ethereum-genesis-generator/changelog.Debian.gz:1]
 ethereum-genesis-generator: maintainer-script-ignores-errors [postrm]
 ethereum-genesis-generator: no-manual-page [usr/bin/ethereum-genesis-generator]
@@ -30,10 +27,6 @@ ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator
 ethereum-genesis-generator: hardening-no-relro [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu/_internal/lru.cpython-312-x86_64-linux-gnu.so]
 ethereum-genesis-generator: hardening-no-relro [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec/_internal/lru.cpython-312-x86_64-linux-gnu.so]
 ethereum-genesis-generator: hardening-no-relro [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth/_internal/lru.cpython-312-x86_64-linux-gnu.so]
-ethereum-genesis-generator: mismatched-override hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu] [usr/share/lintian/overrides/ethereum-genesis-generator:3]
-ethereum-genesis-generator: mismatched-override hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec] [usr/share/lintian/overrides/ethereum-genesis-generator:4]
-ethereum-genesis-generator: mismatched-override hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth] [usr/share/lintian/overrides/ethereum-genesis-generator:5]
-ethereum-genesis-generator: package-has-unnecessary-activation-of-ldconfig-trigger
 ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu/_internal/lib-dynload/_asyncio.cpython-312-x86_64-linux-gnu.so]
 ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu/_internal/lib-dynload/_contextvars.cpython-312-x86_64-linux-gnu.so]
 ethereum-genesis-generator: shared-library-lacks-prerequisites [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu/_internal/lib-dynload/_json.cpython-312-x86_64-linux-gnu.so]
