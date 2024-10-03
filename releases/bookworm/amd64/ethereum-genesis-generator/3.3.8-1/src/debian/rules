@@ -10,8 +10,9 @@ override_dh_dwz:
 
 override_dh_auto_build:
 	cd apps/el-gen && python3 -m venv .venv
-	cd apps/el-gen && . .venv/bin/activate && pip install -U pyinstaller
-	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt && pip freeze > requirements.txt
+	#cd apps/el-gen && . .venv/bin/activate && pip install -U pyinstaller
+	#cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt && pip freeze > requirements.txt
+	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
 
 	cp debian/specs/genesis_besu.spec apps/el-gen
 	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_besu.spec
