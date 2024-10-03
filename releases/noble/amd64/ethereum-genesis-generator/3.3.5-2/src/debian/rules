@@ -1,0 +1,46 @@
+#!/usr/bin/make -f
+export PYTHONHASHSEED=1
+
+
+%:
+	dh $@
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
+override_dh_auto_build:
+	cd apps/el-gen && python3 -m venv .venv
+	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
+
+	cp debian/specs/genesis_besu.spec apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_besu.spec
+
+	cp debian/specs/genesis_chainspec.spec apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_chainspec.spec
+
+	cp debian/specs/genesis_geth.spec apps/el-gen
+	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_geth.spec
+
+	cp -R config-example config
+	chmod +x entrypoint.sh
+	chmod +x apps/el-gen/dist/genesis_besu/genesis_besu
+	chmod +x apps/el-gen/dist/genesis_chainspec/genesis_chainspec
+	chmod +x apps/el-gen/dist/genesis_geth/genesis_geth
+
+	mv apps/el-gen/dist/genesis_besu apps/el-gen
+	mv apps/el-gen/dist/genesis_chainspec apps/el-gen
+	mv apps/el-gen/dist/genesis_geth apps/el-gen
+	objcopy --remove-section .note.gnu.build-id apps/el-gen/genesis_besu/_internal/lru.cpython-312-x86_64-linux-gnu.so
+	objcopy --remove-section .note.gnu.build-id apps/el-gen/genesis_chainspec/_internal/lru.cpython-312-x86_64-linux-gnu.so
+	objcopy --remove-section .note.gnu.build-id apps/el-gen/genesis_geth/_internal/lru.cpython-312-x86_64-linux-gnu.so
+
+
+	rm -rf apps/el-gen/.venv
+	rm -rf apps/el-gen/build
+	rm -rf apps/el-gen/dist
+
+override_dh_auto_install:
+	# do nothing
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
