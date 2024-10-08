@@ -98,6 +98,7 @@ fi
 
 echo "Copy built binaries"
 
+mkdir -p $SERVE_DIR 
 cp "$PACKAGE_DIR/eth-node-$NETWORK-0.0.1-1/eth-node-${NETWORK}_0.0.1-1_$ARCH.deb" "$SERVE_DIR"
 cp "$PACKAGE_DIR/eth-node-$NETWORK-config-0.0.1-1/eth-node-$NETWORK-config_0.0.1-1_$ARCH.deb" "$SERVE_DIR"
 

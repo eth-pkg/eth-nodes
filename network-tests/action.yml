@@ -239,12 +239,13 @@ runs:
           echo "Consensus client is still syncing"
           echo "$CL_SYNCING"
           # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
-          #exit 1
+          exit 1
         fi
 
         # Check if the validator is running
         # validator pubkey is hardcoded for each case for regtest clients 
-        VALIDATOR_STATUS=$(curl -X GET -o /dev/null -s -w "%{http_code}" "http://localhost:5052/eth/v1/beacon/states/head/validators/0xb5176194b1d0301fa78a8098b98be56d312c282211a818861972071b30977be9957a36ab2deda4fe067f9ff05d92be29")
+        # Seems like a useless test, as this is always be the case on generator testnet
+        VALIDATOR_STATUS=$(curl -X GET -o /dev/null -s -w "%{http_code}" "http://localhost:5052/eth/v1/beacon/states/head/validators/0xb183ffd1e01fb382d78a6757e726ce3d7d4726bb71175718e7badf717e0b78b1c2b4e0e51bb2bb5069a5027074263f68")
         if [ "$VALIDATOR_STATUS" -eq 200 ]; then
           echo "Validator is running"
         else
