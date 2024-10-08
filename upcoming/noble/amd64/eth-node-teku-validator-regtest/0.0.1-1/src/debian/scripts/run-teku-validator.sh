@@ -142,6 +142,6 @@ append_option "--validators-proposer-config-refresh-enabled" $TEKU_CLI_VALIDATOR
 append_option "--validators-proposer-default-fee-recipient" $TEKU_CLI_VALIDATOR_VALIDATORS_PROPOSER_DEFAULT_FEE_RECIPIENT
 
 
-echo "Using Options: $OPTIONS"
+echo "Using Options teku validator-client $OPTIONS"
 
 exec teku validator-client $OPTIONS

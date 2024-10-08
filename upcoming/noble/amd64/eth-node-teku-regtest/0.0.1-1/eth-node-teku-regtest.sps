@@ -141,3 +141,11 @@ type = "string"
 default = "$BASE_CONFIG_CL_RPC_PORT"
 priority = "low"
 summary = "Port number of Beacon Rest API."
+
+# Needs to be set on BN as well 
+[config."teku-regtest.conf".ivars."TEKU_CLI_VALIDATORS_PROPOSER_DEFAULT_FEE_RECIPIENT"]
+type = "string"
+default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS" 
+priority = "low"
+summary = ""
+

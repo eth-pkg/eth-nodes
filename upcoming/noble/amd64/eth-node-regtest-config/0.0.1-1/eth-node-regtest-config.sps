@@ -185,7 +185,7 @@ summary = "Number of validators"
 
 [config."regtest.conf".ivars."BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"]
 type = "string"
-default = "00cb237b9deadbdccabfedae3f8c270eaf42a4b869a4c3a4eeb490ddc991e9e5"
+default = "0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73"
 priority = "low"
 summary = "Shared fee recipient address for validator"
 
