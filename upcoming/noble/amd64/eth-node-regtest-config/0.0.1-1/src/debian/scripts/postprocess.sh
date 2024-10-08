@@ -37,7 +37,6 @@ generate_testnet(){
     tmp_dir=$(mktemp -d)
 
     cd "$tmp_dir"
-    cp -R /etc/ethereum-genesis-generator .
     cp -R /etc/eth-node-regtest-config . 
     ethereum-genesis-generator all 
 
@@ -56,10 +55,11 @@ remove_regtest(){
     rm -rf /var/lib/eth-node-regtest/regtest
 }
 
-if [ "$1" = "configure" ]; then
+if [ "$1" = "configure" ] || [ "$#" -eq 0 ]; then
     echo "Installing or upgrading the package."
     remove_regtest
     setup_package
+    generate_testnet
 fi
 
 
