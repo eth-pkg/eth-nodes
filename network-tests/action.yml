@@ -1,5 +1,5 @@
 name: network-tests
-description: tests for different networks 
+description: tests for different networks
 inputs:
   cl_name:
     description: "cl name"
@@ -23,6 +23,13 @@ runs:
         sudo apt-get autoremove -y
         sudo apt-get clean
       shell: bash
+
+    - name: Check ethereum-genesis-generator
+      run: |
+        mkdir /tmp/config
+        cp upcoming/noble/amd64/eth-node-regtest-config/0.0.1-1/src/debian/config/values.env cd /tmp/config    
+        ethereum-genesis-generator all
+      shell: bash  
 
     - name: Setup Java
       run: |
@@ -119,7 +126,7 @@ runs:
           eth2-val-tools \
           ethereum-genesis-generator
 
-    - name: Build clients 
+    - name: Build clients
       run: |
         cd upcoming/noble/amd64
         mkdir ${HOME}/packages
@@ -166,7 +173,7 @@ runs:
 
         echo "${HOME}/packages" >> $GITHUB_PATH
 
-      shell: bash 
+      shell: bash
     - name: Run Service Tests
       run: |
         java --version 
@@ -207,7 +214,7 @@ runs:
           journalctl -u eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
           exit 1
         fi
-      shell: bash 
+      shell: bash
     - name: Run API tests
       run: |
         sudo apt install curl jq 
