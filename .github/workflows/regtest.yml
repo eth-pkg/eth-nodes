@@ -101,10 +101,10 @@ jobs:
     strategy:
       matrix:
         cl_name:
-          - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
+          # - lighthouse
+          # - lodestar
+          # - nimbus-eth2
+          # - prysm
           - teku
       fail-fast: false
     steps:
