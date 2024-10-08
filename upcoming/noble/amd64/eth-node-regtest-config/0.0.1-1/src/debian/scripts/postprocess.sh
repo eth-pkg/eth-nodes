@@ -37,6 +37,8 @@ generate_testnet(){
     tmp_dir=$(mktemp -d)
 
     cd "$tmp_dir"
+    mkdir config
+    touch config/defaults.env
     cp -R /etc/eth-node-regtest-config . 
     ethereum-genesis-generator all 
 
