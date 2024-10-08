@@ -1,0 +1,6 @@
+eth-node-nethermind (1.29.0-1) noble; urgency=medium
+
+  * Support for 1.29.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 08 Oct 2024 09:32:32 +0700
+
