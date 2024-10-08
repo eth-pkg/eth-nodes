@@ -27,9 +27,7 @@ runs:
     - name: Check ethereum-genesis-generator
       run: |
         mkdir /tmp/config
-        pwd 
-        ls -al 
-        cp upcoming/noble/amd64/eth-node-regtest-config/0.0.1-1/src/debian/config/values.env 
+        cp upcoming/noble/amd64/eth-node-regtest-config/0.0.1-1/src/debian/config/values.env /tmp/config
         cd /tmp/config    
         ethereum-genesis-generator all
       shell: bash  
