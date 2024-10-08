@@ -114,6 +114,9 @@ runs:
           eth-node-nimbus-eth2 \
           eth-node-prysm \
           eth-node-teku \
+          zcli \ 
+          eth2-testnet-genesis \
+          eth2-val-tools \
           ethereum-genesis-generator
 
     - name: Build clients 
