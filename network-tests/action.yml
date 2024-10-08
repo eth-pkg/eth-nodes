@@ -125,11 +125,12 @@ runs:
       run: |
         mkdir /tmp/config
         cp upcoming/noble/amd64/eth-node-regtest-config/0.0.1-1/src/debian/config/values.env /tmp/config
-        cd /tmp/config    
+        cd /tmp
+        mv /tmp/config/values.env /tmp/config/defaults.env
         ethereum-genesis-generator all
       shell: bash  
 
-      
+
     - name: Build clients
       run: |
         cd upcoming/noble/amd64
