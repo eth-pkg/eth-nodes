@@ -47,7 +47,7 @@ add_files = [
     "debian/scripts/postprocess.sh /usr/lib/eth-node-lighthouse-validator-regtest",
     "debian/tmp/eth-node-lighthouse-validator-regtest.service /lib/systemd/system/",
     "debian/validator/keys /var/lib/eth-node-regtest/lighthouse-validator",
-    "debian/validator/passwords /var/lib/eth-node-regtest/lighthouse-validator",
+    "debian/validator/password /var/lib/eth-node-regtest/lighthouse-validator",
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
@@ -73,6 +73,11 @@ default = "/var/lib/eth-node-regtest/lighthouse-validator"
 priority = "low"
 summary = "Path to validators dir"
 
+[config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_SECRETS_DIR"]
+type = "string"
+default = "/var/lib/eth-node-regtest/lighthouse-validator/password"
+priority = "low"
+summary = ""
 
 [config."lighthouse-validator.conf".ivars."LIGHTHOUSE_CLI_VALIDATOR_DATA_DIR"]
 type = "string"

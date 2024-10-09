@@ -89,6 +89,9 @@ generate_testnet(){
 
     mkdir -p /var/lib/eth-node-regtest/regtest
 
+    # lighthouse validator import expects deploy_block instead of deposit_contract_block.txt
+    cp data/metadata/deposit_contract_block.txt data/metadata/deploy_block.txt
+
     cp -R data/jwt /var/lib/eth-node-regtest/regtest
     cp -R data/metadata /var/lib/eth-node-regtest/regtest
     cp -R data/parsed /var/lib/eth-node-regtest/regtest
