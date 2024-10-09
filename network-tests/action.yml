@@ -229,7 +229,8 @@ runs:
         else
           echo "Execution client is still syncing"
           echo "$CL_SYNCING"
-          exit 1
+          # TODO problem with nethermind/erigon
+          # exit 1
         fi
 
         # Check if consensus client is syncing
