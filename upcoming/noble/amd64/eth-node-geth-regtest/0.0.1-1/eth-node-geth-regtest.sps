@@ -47,6 +47,8 @@ add_files = [
     "debian/tmp/eth-node-geth-regtest.service /lib/systemd/system/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-geth-regtest",
     "debian/keystore /var/lib/eth-node-regtest/geth/",
+    "debian/geth_password.txt /var/lib/eth-node-regtest/geth/",
+    "debian/sk.json /var/lib/eth-node-regtest/geth/",
 ]
 provides = ["eth-node-regtest-el-service"]
 conflicts = ["eth-node-regtest-el-service"]
@@ -149,11 +151,11 @@ default = "$BASE_CONFIG_DATA_DIR/geth/geth_password.txt"
 priority = "low"
 summary = "Password file to use for non-interactive password input"
 
-[config."geth-regtest.conf".ivars."GETH_CLI_UNLOCK"]
-type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
-priority = "low"
-summary = "Comma separated list of accounts to unlock"
+# [config."geth-regtest.conf".ivars."GETH_CLI_UNLOCK"]
+# type = "string"
+# default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+# priority = "low"
+# summary = "Comma separated list of accounts to unlock"
 
 [config."geth-regtest.conf".ivars."GETH_CLI_NODISCOVER"]
 type = "string"
