@@ -260,13 +260,12 @@ runs:
         fi
 
         # Submit example transactions 
-        raw_transaction="0x01f86f8205398085e8d4a5100082520894000000000000000000000000000000000000dead872386f26fc1000080c080a09a4d7c7edb084f4323bdf7dd7f2042a8bf069fd64f32934ee91b50f4398f84a4a017e12b64ab00e30299b01c94e6e297ffbed21752ee7986e0ab5744b6a4a2bf72"
         transaction_response=$(curl -s -X POST \
           -H "Content-Type: application/json" \
           --data '{
               "jsonrpc": "2.0",
               "method": "eth_sendRawTransaction",
-              "params": ["$raw_transaction"],
+              "params": ["0x01f86f8205398085e8d4a5100082520894000000000000000000000000000000000000dead872386f26fc1000080c080a09a4d7c7edb084f4323bdf7dd7f2042a8bf069fd64f32934ee91b50f4398f84a4a017e12b64ab00e30299b01c94e6e297ffbed21752ee7986e0ab5744b6a4a2bf72"],
               "id": 1
           }' http://localhost:8545)
 
@@ -277,7 +276,7 @@ runs:
             echo "Transaction posted successfully. Transaction hash: $txHash"
             exit 0
         elif [ -n "$error" ]; then
-            echo "Transaction failed: $error"
+            echo "Transaction posting failed: $error"
             exit 1
         else
             echo "Unexpected response: $transaction_response"

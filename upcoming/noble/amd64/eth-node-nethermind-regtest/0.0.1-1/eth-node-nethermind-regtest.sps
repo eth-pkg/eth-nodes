@@ -76,6 +76,12 @@ default = "net,eth,subscribe,web3"
 priority = "low"
 summary = "An array of JSON-RPC namespaces to enable"
 
+[config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_JSON_RPC_ENABLED"]
+type = "string"
+default = "true"
+priority = "low"
+summary = ""
+
 
 # [config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_JSON_RPC_ADDITIONAL_RPC_URLS"]
 # type = "string"
