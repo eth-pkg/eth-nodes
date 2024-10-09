@@ -382,7 +382,7 @@ append_option "--Init.StoreReceipts" "$NETHERMIND_CLI_INIT_STORE_RECEIPTS"
 append_option "--Init.WebSocketsEnabled" "$NETHERMIND_CLI_INIT_WEB_SOCKETS_ENABLED"
 #append_option "--JsonRpc.AdditionalRpcUrls" "$NETHERMIND_CLI_JSON_RPC_ADDITIONAL_RPC_URLS"
 # TODO this needs to be refactored
-append_option "--JsonRpc.AdditionalRpcUrls" "\"http://localhost:8545|http;ws|eth;web3\""
+append_option "--JsonRpc.AdditionalRpcUrls" "\"http://127.0.0.1:8545|http;ws|eth;web3\""
 append_option "--JsonRpc.BufferResponses" "$NETHERMIND_CLI_JSON_RPC_BUFFER_RESPONSES"
 append_option "--JsonRpc.CallsFilterFilePath" "$NETHERMIND_CLI_JSON_RPC_CALLS_FILTER_FILE_PATH"
 append_option "--JsonRpc.Enabled" "$NETHERMIND_CLI_JSON_RPC_ENABLED"
