@@ -274,7 +274,6 @@ runs:
 
         if [ -n "$txHash" ]; then
             echo "Transaction posted successfully. Transaction hash: $txHash"
-            exit 0
         elif [ -n "$error" ]; then
             echo "Transaction posting failed: $error"
             exit 1
@@ -305,7 +304,6 @@ runs:
             exit 1
         else
             echo "Transactions is included"
-            exit 0
         fi
 
       shell: bash

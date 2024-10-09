@@ -292,4 +292,9 @@ add_option "--config" "$ERIGON_CLI_CONFIG"
 
 echo "Using Options: erigon $OPTIONS"
 
+if [ -n "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE" ]; then
+    echo "Importing genesis state"
+    erigon init --datadir "$ERIGON_CLI_DATADIR" "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE"
+fi
+
 exec erigon $OPTIONS
