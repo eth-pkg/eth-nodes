@@ -62,6 +62,6 @@ format = "plain"
 
 [config."nimbus-eth2-validator.conf".ivars."NIMBUS_ETH2_CLI_VALIDATOR_DATADIR"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator"
+default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator/validator"
 priority = "low"
 summary = "Specifies the directory where Nimbus will store all blockchain data."

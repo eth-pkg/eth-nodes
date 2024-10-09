@@ -260,23 +260,53 @@ runs:
         fi
 
         # Submit example transactions 
-        curl -X POST \
-        -H "Content-Type: application/json" \
-        --data '{
-          "jsonrpc":"2.0",
-          "method":"eth_sendRawTransaction",
-          "params":["0x01f86f820539808502540be40082520894000000000000000000000000000000000000dead872386f26fc1000080c001a04ecaa3f92ed6bd505ea2521483ad9ca1e1dee9c49bb93f183eb0ed56b44d0829a04b7715a296345d5b0dcc2826672c8904cce8e68537385a648a2bc5018a242efb"],
-          "id":1   
-        }' http://localhost:8545
+        raw_transaction="0x01f86f8205398085e8d4a5100082520894000000000000000000000000000000000000dead872386f26fc1000080c080a09a4d7c7edb084f4323bdf7dd7f2042a8bf069fd64f32934ee91b50f4398f84a4a017e12b64ab00e30299b01c94e6e297ffbed21752ee7986e0ab5744b6a4a2bf72"
+        transaction_response=$(curl -s -X POST \
+          -H "Content-Type: application/json" \
+          --data '{
+              "jsonrpc": "2.0",
+              "method": "eth_sendRawTransaction",
+              "params": ["$raw_transaction"],
+              "id": 1
+          }' http://localhost:8545)
+
+        error=$(echo "$transaction_response" | jq -r '.error.message // empty')
+        txHash=$(echo "$transaction_response" | jq -r '.result // empty')
+
+        if [ -n "$txHash" ]; then
+            echo "Transaction posted successfully. Transaction hash: $txHash"
+            exit 0
+        elif [ -n "$error" ]; then
+            echo "Transaction failed: $error"
+            exit 1
+        else
+            echo "Unexpected response: $transaction_response"
+            exit 1
+        fi
+
 
         echo "Waiting for 60 seconds for the transactions to be included..."
         sleep 60
-        if curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["pending", true],"id":1}' -H "Content-Type: application/json" http://127.0.0.1:8545 | jq -e '.result.transactions | length == 0' > /dev/null; then
-            echo "The transaction pool is empty."
-            exit 0
-        else
-            echo "The transaction pool is not empty."
+
+        response=$(curl -s -X POST http://localhost:8545 \
+        -H "Content-Type: application/json" \
+        --data '{
+            "jsonrpc": "2.0",
+            "method": "eth_getTransactionByHash",
+            "params": ["$txHash"],
+            "id": 1
+        }')
+
+        # Extract blockHash using jq
+        blockHash=$(echo $response | jq -r '.result.blockHash')
+
+        # Test if blockHash is null
+        if [ "$blockHash" == "null" ] || [ -z "$blockHash" ]; then
+            echo "Transaction is not included"
             exit 1
+        else
+            echo "Transactions is included"
+            exit 0
         fi
 
       shell: bash
