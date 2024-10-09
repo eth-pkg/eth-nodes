@@ -258,4 +258,24 @@ runs:
           exit 1
         fi
 
+        # Submit example transactions 
+        curl -X POST \
+        -H "Content-Type: application/json" \
+        --data '{
+          "jsonrpc":"2.0",
+          "method":"eth_sendRawTransaction",
+          "params":["0x01f86f820539808502540be40082520894000000000000000000000000000000000000dead872386f26fc1000080c001a04ecaa3f92ed6bd505ea2521483ad9ca1e1dee9c49bb93f183eb0ed56b44d0829a04b7715a296345d5b0dcc2826672c8904cce8e68537385a648a2bc5018a242efb"],
+          "id":1   
+        }' http://localhost:8545
+
+        echo "Waiting for 60 seconds for the transactions to be included..."
+        sleep 60
+        if curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["pending", true],"id":1}' -H "Content-Type: application/json" http://127.0.0.1:8545 | jq -e '.result.transactions | length == 0' > /dev/null; then
+            echo "The transaction pool is empty."
+            exit 0
+        else
+            echo "The transaction pool is not empty."
+            exit 1
+        fi
+
       shell: bash
