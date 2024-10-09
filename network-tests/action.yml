@@ -291,7 +291,7 @@ runs:
         --data '{
             "jsonrpc": "2.0",
             "method": "eth_getTransactionByHash",
-            "params": ["$txHash"],
+            "params": ["'"$txHash"'"],
             "id": 1
         }')
 
