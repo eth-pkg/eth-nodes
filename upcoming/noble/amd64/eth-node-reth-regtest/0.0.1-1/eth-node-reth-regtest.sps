@@ -123,3 +123,9 @@ type = "string"
 default = "$BASE_CONFIG_DATA_DIR/reth/logs"
 priority = "low"
 summary = "Directory to store log files"
+
+[config."reth-regtest.conf".ivars."RETH_CLI_NODE_BOOTNODES"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+priority = "low"
+summary = "Comma-separated enode list used as boot nodes"

@@ -179,8 +179,8 @@ runs:
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}_0.0.1-1_all.deb  
-        echo "Waiting for 210 seconds for nodes to check successful startup..."
-        sleep 210 # it takes time to include the validators 
+        echo "Waiting for 60 seconds for nodes to check successful startup..."
+        sleep 60
         # check if execution client is active 
         if systemctl is-active --quiet eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service; then
           echo "eth-node-${{ inputs.el_name }}-${{ inputs.network }} is active"
@@ -212,7 +212,8 @@ runs:
       shell: bash
     - name: Run API tests
       run: |
-        sudo apt install curl jq 
+        echo "Waiting for 180 seconds for nodes to check successful startup..."
+        sleep 180 # it takes time to include the validators 
         # Check beacon state
         curl http://localhost:5052/eth/v1/beacon/headers
         echo ""
@@ -246,23 +247,12 @@ runs:
           # exit 1
         fi
 
-        # Check if the validator is running
-        # validator pubkey is hardcoded for each case for regtest clients 
-        # Seems like a useless test, as this is always be the case on generator testnet
-        # this is more useful when you actually trying to model the deposit flow 
-        VALIDATOR_STATUS=$(curl -X GET -o /dev/null -s -w "%{http_code}" "http://localhost:5052/eth/v1/beacon/states/head/validators/0xb183ffd1e01fb382d78a6757e726ce3d7d4726bb71175718e7badf717e0b78b1c2b4e0e51bb2bb5069a5027074263f68")
-        if [ "$VALIDATOR_STATUS" -eq 200 ]; then
-          echo "Validator is active"
-        else
-          echo "Validator is not included"
-          curl -X GET "http://localhost:5052/eth/v1/beacon/states/head/validators"
-          exit 1
-        fi
-
+   
         if [ $(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545 | jq -r '.result') != "0x0" ]; then
-            echo "Block number is not zero."
+            echo "Block number is not zero. Block production started..."
         else
             echo "Block number is zero."
+            exit 1
         fi
 
         # Submit example transactions 

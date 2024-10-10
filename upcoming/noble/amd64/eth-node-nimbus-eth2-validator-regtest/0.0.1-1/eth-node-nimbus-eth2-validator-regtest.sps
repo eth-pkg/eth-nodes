@@ -46,8 +46,8 @@ add_files = [
     "debian/scripts/run-nimbus-eth2-validator.sh /usr/lib/eth-node-nimbus-eth2-validator-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-nimbus-eth2-validator-regtest",
     "debian/tmp/eth-node-nimbus-eth2-validator-regtest.service /lib/systemd/system/",
+    # only included as reference for now, as secrets and validators are generated seperately 
     "debian/validator/keys /var/lib/eth-node-regtest/nimbus-eth2-validator",
-    "debian/validator/passwords /var/lib/eth-node-regtest/nimbus-eth2-validator",
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
@@ -62,6 +62,6 @@ format = "plain"
 
 [config."nimbus-eth2-validator.conf".ivars."NIMBUS_ETH2_CLI_VALIDATOR_DATADIR"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator/validator"
+default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator"
 priority = "low"
 summary = "Specifies the directory where Nimbus will store all blockchain data."
