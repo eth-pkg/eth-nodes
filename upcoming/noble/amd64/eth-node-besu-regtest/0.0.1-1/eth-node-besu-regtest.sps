@@ -121,7 +121,7 @@ summary = "Enable P2P functionality (default: true). Only running one EL client 
 
 [config."besu-regtest.conf".ivars."BESU_CLI_RPC_HTTP_API"]
 type = "string"
-default = "ADMIN,CLIQUE,ETH,NET,DEBUG,TXPOOL,ENGINE,TRACE,WEB3,OTS"
+default = "ADMIN,CLIQUE,ETH,NET,DEBUG,TXPOOL,ENGINE,TRACE,WEB3"
 priority = "low"
 summary = "Set RPC HTTP API to ETH"
 
