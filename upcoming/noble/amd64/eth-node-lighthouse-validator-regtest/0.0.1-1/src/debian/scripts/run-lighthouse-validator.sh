@@ -153,7 +153,8 @@ append_option "--web3-signer-max-idle-connections" "$LIGHTHOUSE_CLI_VALIDATOR_WE
 if [ -n "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR" ]; then
     echo "Importing keys"
     password=$(ls $LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/password | head -n 1)
-    lighthouse --testnet-dir "$LIGHTHOUSE_CLI_VALIDATOR_TESTNET_DIR" account validator import \
+    lighthouse account validator import \
+        --testnet-dir "$LIGHTHOUSE_CLI_VALIDATOR_TESTNET_DIR" \
         --directory "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/keys" \
         --datadir "$LIGHTHOUSE_CLI_VALIDATOR_DATADIR" \
         --password-file "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/password/$password" \

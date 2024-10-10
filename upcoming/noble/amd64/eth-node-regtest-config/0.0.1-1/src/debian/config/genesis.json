@@ -1,0 +1,6 @@
+{
+    "network_name": "testnet",
+    "genesis_fork_version": "00000000",
+    "genesis_validator_root": "0x1ee4312a124695dc3b9412f7adfeb153991a7be70415956e2bca8b84bd858a7a"
+  }
+  

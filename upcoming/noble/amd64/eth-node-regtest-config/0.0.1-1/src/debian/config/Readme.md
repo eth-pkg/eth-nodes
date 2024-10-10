@@ -10,8 +10,9 @@ To generate keys for validators, you can follow these steps:
 
 ```bash
 mkdir validators
+# See genesis.json for example, not you need to change the validator root to match your testnet
 # Run the staking-deposit-cli
-deposit existing-mnemonic --num_validators 200 --chain mainnet --validator_start_index 0 
+deposit existing-mnemonic --chain mainnet --devnet_chain_setting genesis.json
 # Choose English as the language
 # Repeat the index: 0
 # Enter the mnemonic (refer to values.env for details)
