@@ -179,8 +179,8 @@ runs:
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}_0.0.1-1_all.deb  
-        echo "Waiting for 60 seconds for nodes to check successful startup..."
-        sleep 60
+        echo "Waiting for 210 seconds for nodes to check successful startup..."
+        sleep 210 # it takes time to include the validators 
         # check if execution client is active 
         if systemctl is-active --quiet eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service; then
           echo "eth-node-${{ inputs.el_name }}-${{ inputs.network }} is active"
@@ -259,6 +259,12 @@ runs:
           exit 1
         fi
 
+        if [ $(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545 | jq -r '.result') != "0x0" ]; then
+            echo "Block number is not zero."
+        else
+            echo "Block number is zero."
+        fi
+
         # Submit example transactions 
         transaction_response=$(curl -s -X POST \
           -H "Content-Type: application/json" \
@@ -283,8 +289,8 @@ runs:
         fi
 
 
-        echo "Waiting for 60 seconds for the transactions to be included..."
-        sleep 60
+        echo "Waiting for 30 seconds for the transactions to be included..."
+        sleep 30
 
         response=$(curl -s -X POST http://localhost:8545 \
         -H "Content-Type: application/json" \

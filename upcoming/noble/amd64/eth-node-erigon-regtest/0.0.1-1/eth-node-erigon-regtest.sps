@@ -72,7 +72,7 @@ summary = "Data directory for the databases"
 
 [config."erigon-regtest.conf".ivars."ERIGON_CLI_HTTP_API"]
 type = "string"
-default = "eth,erigon,engine,web3,net,debug,trace,txpool,admin"
+default = "eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots"
 priority = "low"
 summary = "APIs offered over the HTTP-RPC interface"
 
@@ -126,6 +126,6 @@ summary = "HTTP-RPC server listening interface"
 
 [config."erigon-regtest.conf".ivars."ERIGON_CLI_HTTP_CORSDOMAIN"]
 type = "string"
-default = "localhost"
+default = "'*'"
 priority = "low"
 summary = "Comma separated list of domains from which to accept cross-origin requests"
