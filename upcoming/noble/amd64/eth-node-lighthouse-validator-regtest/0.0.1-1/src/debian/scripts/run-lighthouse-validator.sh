@@ -150,19 +150,19 @@ append_option "--web3-signer-keep-alive-timeout" "$LIGHTHOUSE_CLI_VALIDATOR_WEB3
 append_option "--web3-signer-max-idle-connections" "$LIGHTHOUSE_CLI_VALIDATOR_WEB3_SIGNER_MAX_IDLE_CONNECTIONS"
 
 
-if [ -n "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR" ]; then
-    echo "Importing keys"
-    password=$(ls $LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/password | head -n 1)
-    lighthouse account validator import \
-        --testnet-dir "$LIGHTHOUSE_CLI_VALIDATOR_TESTNET_DIR" \
-        --directory "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/keys" \
-        --datadir "$LIGHTHOUSE_CLI_VALIDATOR_DATADIR" \
-        --password-file "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/password/$password" \
-        --reuse-password
-    # remove keys otherwise it will registered twice ???
-    rm -rf $LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/keys  
+# if [ -n "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR" ]; then
+#     echo "Importing keys"
+#     password=$(ls $LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/password | head -n 1)
+#     lighthouse account validator import \
+#         --testnet-dir "$LIGHTHOUSE_CLI_VALIDATOR_TESTNET_DIR" \
+#         --directory "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/keys" \
+#         --datadir "$LIGHTHOUSE_CLI_VALIDATOR_DATADIR" \
+#         --password-file "$LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/password/$password" \
+#         --reuse-password
+#     # remove keys otherwise it will registered twice ???
+#     rm -rf $LIGHTHOUSE_CLI_VALIDATOR_VALIDATORS_DIR/keys  
 
-fi
+# fi
 
 echo "Using Options: $OPTIONS"
 

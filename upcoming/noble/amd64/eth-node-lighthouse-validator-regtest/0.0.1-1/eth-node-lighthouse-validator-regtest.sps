@@ -48,6 +48,8 @@ add_files = [
     "debian/tmp/eth-node-lighthouse-validator-regtest.service /lib/systemd/system/",
     "debian/validator/keys /var/lib/eth-node-regtest/lighthouse-validator",
     "debian/validator/password /var/lib/eth-node-regtest/lighthouse-validator",
+    "debian/validator/validators /var/lib/eth-node-regtest/lighthouse-validator",
+    "debian/validator/validator_definitions.yml /var/lib/eth-node-regtest/lighthouse-validator",
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
