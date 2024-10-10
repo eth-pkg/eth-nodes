@@ -137,3 +137,10 @@ type = "string"
 default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
 priority = "low"
 summary = "Comma-separated enode list used as boot nodes"
+
+
+[config."nethermind-regtest.conf".ivars."NETHERMIND_CLI_NETWORK_MAX_ACTIVE_PEERS"]
+type = "string"
+default = "0"
+priority = "low"
+summary = "Comma-separated enode list used as boot nodes"
