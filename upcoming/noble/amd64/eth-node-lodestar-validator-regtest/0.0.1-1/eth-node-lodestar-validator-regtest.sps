@@ -48,7 +48,6 @@ add_files = [
     "debian/tmp/eth-node-lodestar-validator-regtest.service /lib/systemd/system/",
     "debian/validator/keys /var/lib/eth-node-regtest/lodestar-validator",
     "debian/validator/passwords /var/lib/eth-node-regtest/lodestar-validator",
-    "debian/validator/dummy_account_password.txt /var/lib/eth-node-regtest/lodestar-validator",
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
@@ -76,7 +75,7 @@ summary = "Network configuration file"
 
 [config."lodestar-validator.conf".ivars."LODESTAR_CLI_VALIDATOR_BEACONNODES"]
 type = "string"
-default = ""
+default = "http://127.0.0.1:$BASE_CONFIG_CL_RPC_PORT"
 priority = "low"
 summary = "Bootnodes for discv5 discovery"
 
@@ -88,13 +87,13 @@ summary = ""
 
 [config."lodestar-validator.conf".ivars."LODESTAR_CLI_VALIDATOR_IMPORTKEYSTORES"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lodestar-validator/passwords"
+default = "/var/lib/eth-node-regtest/lodestar-validator/keys"
 priority = "low"
 summary = ""
 
 [config."lodestar-validator.conf".ivars."LODESTAR_CLI_VALIDATOR_IMPORTKEYSTORESPASSWORD"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lodestar-validator/dummy_account_password.txt"
+default = "/var/lib/eth-node-regtest/lodestar-validator/passwords/keystore-m_12381_3600_0_0_0-1728531488.txt"
 priority = "low"
 summary = ""
 
@@ -109,3 +108,10 @@ type = "string"
 default = "/var/lib/eth-node-regtest/lodestar-validator"
 priority = "low"
 summary = ""
+
+[config."lodestar-validator.conf".ivars."LODESTAR_CLI_VALIDATOR_SUGGESTEDFEERECIPIENT"]
+type = "string"
+default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+priority = "low"
+summary = ""
+

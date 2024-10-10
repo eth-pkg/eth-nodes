@@ -103,18 +103,6 @@ default = "true"
 priority = "low"
 summary = "Enable HTTP API"
 
-[config."lodestar-regtest.conf".ivars."LODESTAR_CLI_DEV_REST_PORT"]
-type = "string"
-default = "9597"
-priority = "low"
-summary = "Set port for HTTP API"
-
-[config."lodestar-regtest.conf".ivars."LODESTAR_CLI_DEV_PORT"]
-type = "string"
-default = "9000"
-priority = "low"
-summary = "TCP/UDP port for Lodestar"
-
 # [config."lodestar-regtest.conf".ivars."LODESTAR_CLI_BN_REST_NAMESPACE"]
 # type = "string"
 # default = "localhost"
@@ -164,14 +152,20 @@ priority = "low"
 summary = "Bootnodes for discv5 discovery"
 
 
-[config."lodestar-regtest.conf".ivars."LODESTAR_CLI_BN_REST_NAMESPACE"]
-type = "string"
-default = "eth"
-priority = "low"
-summary = "Pick namespaces to expose for HTTP API"
+# [config."lodestar-regtest.conf".ivars."LODESTAR_CLI_BN_REST_NAMESPACE"]
+# type = "string"
+# default = "eth"
+# priority = "low"
+# summary = "Pick namespaces to expose for HTTP API"
 
 [config."lodestar-regtest.conf".ivars."LODESTAR_CLI_BN_REST_PORT"]
 type = "string"
 default = "$BASE_CONFIG_CL_RPC_PORT"
 priority = "low"
 summary = "Set port for HTTP API (custom config)"
+
+[config."lodestar-regtest.conf".ivars."LODESTAR_CLI_BN_SUGGESTED_FEE_RECIPIENT"]
+type = "string"
+default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+priority = "low"
+summary = ""
