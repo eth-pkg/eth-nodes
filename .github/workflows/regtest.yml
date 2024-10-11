@@ -34,10 +34,8 @@ jobs:
       matrix:
         cl_name:
           - lighthouse
-          # # # TODO message between beacon node and validator fails
           - lodestar
           - nimbus-eth2
-          # # TODO prysm validator is not correctly working, but the service is up, deposit is not seen
           - prysm
           - teku
       fail-fast: false
