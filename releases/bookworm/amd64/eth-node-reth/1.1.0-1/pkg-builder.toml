@@ -1,0 +1,53 @@
+[package_fields]
+spec_file = "eth-node-reth.sss"
+package_name = "eth-node-reth"
+version_number = "1.1.0"
+revision_number = "1"
+homepage="https://github.com/paradigmxyz/reth"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/paradigmxyz/reth/archive/refs/tags/v1.1.0.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "ebd7f613f15f906d2841de5a56eec97b29dcfe9d49a176242d49012675eefeee"
+
+[package_type.language_env]
+language_env = "rust"
+rust_version="1.81.0"
+rust_binary_url="https://static.rust-lang.org/dist/rust-1.81.0-x86_64-unknown-linux-gnu.tar.xz"
+rust_binary_gpg_asc="""
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAABCgAQBQJm2dCsCRCFq5bm+hvl/gAAoDIQAMtLnyaXLZXfdP7ZF/OnhJwQ
++zlcjisWAzgZP0BmFDX4GcJT5YBqvdaBBhFD5/Uc5d8K6410hMTp3IrIwPI47YcV
+i/fRhBuCWAMh95VbrT2Dg2IG0a4crPm9E8jPjMGivpqsV16/A6WbLPJ8d+zkbbW+
+whGs6u541PF/qsSCMOuEu+DObH3FRPCfii0O1AN+aivuZxDyzQ3sfdt9r5OYdBZx
+clZWIBlXR6RTGnGNxGLbLMviODeQwJPSEqVgGV70eA4CSFyvDSH5LayB1otbaO6e
+JmwR1QP22lvvDokw2nsRhpjqQNgZdDK3+F5alJLtHNjU5XFRjgZeLUNGK53lSsvj
+WgTm1LMAwbIVOH/AeVlHA50+v+sRfgeXFNvSwrMHdYpqNT9XM8RyJ9Yu05y8zlrX
+QlOMl3aRTArtMWIPtGxKUM4vjqMCPCRu3GQvrBP/syPv1O2hAVbqOuHaYRqJcrHX
+hGcjtRcaUeICieuydRFZajfjAlPbDBaGt2RQT6Ud/Qs2Kx7Plmuoy+UsnjjIxxfZ
+dfieiZBLXL0qnAqWtauJBROMW6/icGElBdhE4w6YXU+0KrL5+k+1botfEajvdX83
+C29rsGZzYt9ecYkhvSPWEEpJ5vPu+4RtRpS/hafiI0glZV5gJRxym2FgLIHyN5CH
+KDpsgWI2B3jXf5YHJJUO
+=m3/x
+-----END PGP SIGNATURE-----
+"""
+
+[build_env]
+codename="bookworm"
+arch = "amd64"
+pkg_builder_version="0.2.8"
+debcrafter_version = "2711b53"
+# needed for tests
+docker=true
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/bookworm"
