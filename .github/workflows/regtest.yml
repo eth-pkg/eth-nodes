@@ -6,27 +6,27 @@ on:
       - feat/eth-node
 
 jobs:
-  besu:
-    name: regtest besu
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        cl_name:
-          # - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
-          - teku
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  # besu:
+  #   name: regtest besu
+  #   runs-on: ubuntu-24.04
+  #   strategy:
+  #     matrix:
+  #       cl_name:
+  #         # - lighthouse
+  #         - lodestar
+  #         - nimbus-eth2
+  #         - prysm
+  #         - teku
+  #     fail-fast: false
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - uses: ./network-tests
-        with:
-          network: regtest
-          el_name: besu
-          cl_name: ${{matrix.cl_name}}
+  #     - uses: ./network-tests
+  #       with:
+  #         network: regtest
+  #         el_name: besu
+  #         cl_name: ${{matrix.cl_name}}
   # works except lighthouse
   # erigon:
   #   name: regtest erigon
@@ -50,27 +50,27 @@ jobs:
   #         el_name: erigon
   #         cl_name: ${{matrix.cl_name}}
 
-  # geth:
-  #   name: regtest geth
-  #   runs-on: ubuntu-24.04
-  #   strategy:
-  #     matrix:
-  #       cl_name:
-  #         - lighthouse
-  #         - lodestar
-  #         - nimbus-eth2
-  #         - prysm
-  #         - teku
-  #     fail-fast: false
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v4
+  geth:
+    name: regtest geth
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cl_name:
+          - lighthouse
+          - lodestar
+          - nimbus-eth2
+          - prysm
+          - teku
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-  #     - uses: ./network-tests
-  #       with:
-  #         network: regtest
-  #         el_name: geth
-  #         cl_name: ${{matrix.cl_name}}
+      - uses: ./network-tests
+        with:
+          network: regtest
+          el_name: geth
+          cl_name: ${{matrix.cl_name}}
 
   # todo works, except lighthouse
   # nethermind:
