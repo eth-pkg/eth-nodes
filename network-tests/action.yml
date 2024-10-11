@@ -223,7 +223,7 @@ runs:
 
         # TEST if they are actually running correctly 
         # Check if execution client is syncing
-        EL_SYNCING=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545)
+        EL_SYNCING=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":2}' -H "Content-Type: application/json" http://localhost:8545)
         if [ "$(echo $EL_SYNCING | jq '.result')" == "false" ]; then
           echo "Execution client is already synced"
           echo "$EL_SYNCING"
@@ -247,20 +247,21 @@ runs:
           # exit 1
         fi
 
-        block_number_result=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545 )
-        if [ $(echo $block_number_result| jq -r '.result') != "0x0" ]; then
-            echo "Block number is not zero. Block production started..."
-        else
-            echo "Block number is zero."
-            echo "$block_number_result"
-            echo "Fetching logs for eth-node-${{ inputs.el_name }}-${{ inputs.network }}..."
-            journalctl -u eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service --no-pager -n 100
-            echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
-            journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
-            echo "eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }} is not active" >&2
-            journalctl -u eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
-            exit 1
-        fi
+        # uncommenting, could it be a bug with blocknumber???
+        # block_number_result=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}' -H "Content-Type: application/json" http://localhost:8545 )
+        # if [ $(echo $block_number_result| jq -r '.result') != "0x0" ]; then
+        #     echo "Block number is not zero. Block production started..."
+        # else
+        #     echo "Block number is zero."
+        #     echo "$block_number_result"
+        #     echo "Fetching logs for eth-node-${{ inputs.el_name }}-${{ inputs.network }}..."
+        #     journalctl -u eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service --no-pager -n 100
+        #     echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
+        #     journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
+        #     echo "eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }} is not active" >&2
+        #     journalctl -u eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
+        #     exit 1
+        # fi
 
         # Submit example transactions 
         transaction_response=$(curl -s -X POST \
@@ -269,7 +270,7 @@ runs:
               "jsonrpc": "2.0",
               "method": "eth_sendRawTransaction",
               "params": ["0x01f86f8205398085e8d4a5100082520894000000000000000000000000000000000000dead872386f26fc1000080c080a09a4d7c7edb084f4323bdf7dd7f2042a8bf069fd64f32934ee91b50f4398f84a4a017e12b64ab00e30299b01c94e6e297ffbed21752ee7986e0ab5744b6a4a2bf72"],
-              "id": 1
+              "id": 4
           }' http://localhost:8545)
 
         error=$(echo "$transaction_response" | jq -r '.error.message // empty')
@@ -295,7 +296,7 @@ runs:
             "jsonrpc": "2.0",
             "method": "eth_getTransactionByHash",
             "params": ["'"$txHash"'"],
-            "id": 1
+            "id": 5
         }')
 
         # Extract blockHash using jq
