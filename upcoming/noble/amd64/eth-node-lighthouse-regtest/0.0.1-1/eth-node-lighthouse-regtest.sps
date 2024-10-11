@@ -101,11 +101,11 @@ default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
 priority = "low"
 summary = "Path to directory containing Eth2 regtest specs. Only effective if no existing database is present."
 
-[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_BOOT_NODES"]
-type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
-priority = "low"
-summary = "One or more comma-delimited base64-encoded ENRs to bootstrap the P2P network."
+# [config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_BOOT_NODES"]
+# type = "string"
+# default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+# priority = "low"
+# summary = "One or more comma-delimited base64-encoded ENRs to bootstrap the P2P network."
 
 [config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_DISABLE_ENR_AUTO_UPDATE"]
 type = "string"
@@ -180,6 +180,18 @@ priority = "low"
 summary = ""
 
 [config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_STAKING"]
+type = "string"
+default = "true"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_SLOTS_PER_RESTORE_POINT"]
+type = "string"
+default = "8192"
+priority = "low"
+summary = ""
+
+[config."lighthouse-regtest.conf".ivars."LIGHTHOUSE_CLI_BN_ALLOW_INSECURE_GENESIS_SYNC"]
 type = "string"
 default = "true"
 priority = "low"

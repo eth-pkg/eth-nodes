@@ -5,6 +5,6 @@ package_hash=[
     # { hash="659923d1f0978197511d73d9afc55d580ddfebd3", name= "eth-node-lighthouse-regtest_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-lighthouse-regtest_0.0.1.orig.tar.gz"},
     # { hash="bf0a229df898501b2599f76414604a60f9b8eb1c", name= "eth-node-lighthouse-regtest_0.0.1-1.debian.tar.xz"},
-    { hash="cc05ebb49bbb7dd3f04dacf7d186e45386b4fc4c", name= "eth-node-lighthouse-regtest_0.0.1-1_all.deb"},
+    { hash="f504b662c38aa0f00ef0fb2e8561bc2e32869a32", name= "eth-node-lighthouse-regtest_0.0.1-1_all.deb"},
 
 ]
