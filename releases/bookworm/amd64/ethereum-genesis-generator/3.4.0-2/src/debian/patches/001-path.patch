@@ -2,15 +2,12 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
 ===================================================================
 --- ethereum-genesis-generator-3.4.0.orig/entrypoint.sh
 +++ ethereum-genesis-generator-3.4.0/entrypoint.sh
-@@ -1,39 +1,45 @@
+@@ -1,39 +1,42 @@
  #!/bin/bash -e
 -if [ -f /config/values.env ];
 +
 +# Copy recursively if not already exists in the current folder, do not overwrite
 +cp -nR /etc/ethereum-genesis-generator/config . 
-+ls -al config
-+ls -al config/el 
-+ls -al config/cl
 +
 +if [ -f config/values.env ];
  then
@@ -66,7 +63,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
      else
          echo "el genesis already exists. skipping generation..."
      fi
-@@ -50,41 +56,40 @@ gen_minimal_config() {
+@@ -50,41 +53,40 @@ gen_minimal_config() {
    )
  
    for key in "${!replacements[@]}"; do
@@ -123,7 +120,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
            --preset-phase0 $PRESET_BASE
            --preset-altair $PRESET_BASE
            --preset-bellatrix $PRESET_BASE
-@@ -99,13 +104,13 @@ gen_cl_config(){
+@@ -99,13 +101,13 @@ gen_cl_config(){
          elif [[ $SHADOW_FORK_RPC != "" ]]; then
            genesis_args+=(--shadow-fork-eth1-rpc=$SHADOW_FORK_RPC --eth1-config "")
          else
@@ -139,7 +136,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
            fi
            genesis_args+=(--additional-validators $validators_file)
          fi
-@@ -118,15 +123,15 @@ gen_cl_config(){
+@@ -118,15 +120,15 @@ gen_cl_config(){
            --preset-bellatrix $PRESET_BASE
            --preset-capella $PRESET_BASE
            --preset-deneb $PRESET_BASE
@@ -162,7 +159,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
      else
          echo "cl genesis already exists. skipping generation..."
      fi
-@@ -157,5 +162,5 @@ esac
+@@ -157,5 +159,5 @@ esac
  
  # Start webserver
  if [ "$SERVER_ENABLED" = true ] ; then
@@ -190,6 +187,15 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_besu.py
  combined_allocs = {}
  
  if len(sys.argv) > 1:
+@@ -183,7 +183,7 @@ else:
+         add_alloc_entry(addr, account)
+ 
+ 
+-if 'electra_fork_epoch' in data:
++if data['electra_fork_epoch'] != None:
+     out['config']['pragueTime'] = \
+         int(data['genesis_timestamp']) + \
+         int(data['genesis_delay']) + \
 Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_chainspec.py
 ===================================================================
 --- ethereum-genesis-generator-3.4.0.orig/apps/el-gen/genesis_chainspec.py
@@ -211,6 +217,15 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_chainspec.py
  combined_allocs = {}
  if len(sys.argv) > 1:
      testnet_config_path = sys.argv[1]
+@@ -223,7 +223,7 @@ else:
+     for addr, account in data['additional_preloaded_contracts'].items():
+         add_alloc_entry(addr, account)
+ 
+-if 'electra_fork_epoch' in data:
++if data['electra_fork_epoch'] != None:
+     out['params']['eip2537TransitionTimestamp']= hex(
+         int(data['genesis_timestamp']) +
+         int(data['genesis_delay']) +
 Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_geth.py
 ===================================================================
 --- ethereum-genesis-generator-3.4.0.orig/apps/el-gen/genesis_geth.py
@@ -232,6 +247,15 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_geth.py
  combined_allocs = {}
  if len(sys.argv) > 1:
      testnet_config_path = sys.argv[1]
+@@ -181,7 +181,7 @@ else:
+     for addr, account in data['additional_preloaded_contracts'].items():
+         add_alloc_entry(addr, account)
+ 
+-if 'electra_fork_epoch' in data:
++if data['electra_fork_epoch'] != None:
+     out['config']['pragueTime'] = \
+         int(data['genesis_timestamp']) + \
+         int(data['genesis_delay']) + \
 Index: ethereum-genesis-generator-3.4.0/apps/el-gen/requirements.txt
 ===================================================================
 --- ethereum-genesis-generator-3.4.0.orig/apps/el-gen/requirements.txt
