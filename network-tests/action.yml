@@ -215,7 +215,6 @@ runs:
         echo "Waiting for 180 seconds for nodes to check successful startup..."
         sleep 180 # it takes time to include the validators 
         # Check beacon state
-        curl http://localhost:5052/eth/v1/beacon/headers
         echo ""
         curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
         echo ""
