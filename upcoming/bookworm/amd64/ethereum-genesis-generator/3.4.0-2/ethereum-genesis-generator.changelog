@@ -1,0 +1,7 @@
+ethereum-genesis-generator (3.4.0-2) bookworm; urgency=medium
+
+  * Support for 3.4.0-2
+  * add support for overwriting files
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 11 Oct 2024 07:41:05 +0700
+
