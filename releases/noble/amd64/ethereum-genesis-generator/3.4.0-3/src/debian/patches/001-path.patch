@@ -54,7 +54,7 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_chainspec.py
          add_alloc_entry(addr, account)
  
 -if 'electra_fork_epoch' in data:
-+if data['eof_activation_epoch'] != None:
++if data['electra_fork_epoch'] != None:
      out['params']['eip2537TransitionTimestamp']= hex(
          int(data['genesis_timestamp']) +
          int(data['genesis_delay']) +
