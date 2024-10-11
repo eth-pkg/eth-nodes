@@ -135,3 +135,10 @@ type = "string"
 default = ""
 priority = "low"
 summary = "Limits access to the REST API to a specific hostname for CORS-enabled clients, such as browsers."
+
+
+[config."nimbus-eth2-regtest.conf".ivars."NIMBUS_ETH2_IN_PROCESS_VALIDATORS"]
+type = "string"
+default = "false"
+priority = "low"
+summary = ""

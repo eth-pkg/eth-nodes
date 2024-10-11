@@ -48,6 +48,8 @@ add_files = [
     "debian/tmp/eth-node-nimbus-eth2-validator-regtest.service /lib/systemd/system/",
     # only included as reference for now, as secrets and validators are generated seperately 
     "debian/validator/keys /var/lib/eth-node-regtest/nimbus-eth2-validator",
+    "debian/validator/validators /var/lib/eth-node-regtest/nimbus-eth2-validator",
+    "debian/validator/secrets /var/lib/eth-node-regtest/nimbus-eth2-validator",
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
@@ -65,3 +67,27 @@ type = "string"
 default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator"
 priority = "low"
 summary = "Specifies the directory where Nimbus will store all blockchain data."
+
+[config."nimbus-eth2-validator.conf".ivars."NIMBUS_ETH2_CLI_VALIDATOR_VALIDATORS_DIR"]
+type = "string"
+default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator/validators"
+priority = "low"
+summary = "Specifies the directory where Nimbus will store all blockchain data."
+
+[config."nimbus-eth2-validator.conf".ivars."NIMBUS_ETH2_CLI_VALIDATOR_SECRETS_DIR"]
+type = "string"
+default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator/secrets"
+priority = "low"
+summary = "Specifies the directory where Nimbus will store all blockchain data."
+
+[config."nimbus-eth2-validator.conf".ivars."NIMBUS_ETH2_CLI_VALIDATOR_BEACON_NODE"]
+type = "string"
+default = "http://127.0.0.1:5052"
+priority = "low"
+summary = "Specifies the directory where Nimbus will store all blockchain data."
+
+[config."nimbus-eth2-validator.conf".ivars."NIMBUS_ETH2_CLI_VALIDATOR_SUGGESTED_FEE_RECIPIENT"]
+type = "string"
+default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+priority = "low"
+summary = ""

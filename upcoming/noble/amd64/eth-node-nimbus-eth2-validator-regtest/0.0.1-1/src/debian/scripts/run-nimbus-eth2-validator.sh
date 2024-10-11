@@ -87,6 +87,10 @@ append_flag(){
 }
 
 append_option "--data-dir" "$NIMBUS_ETH2_CLI_VALIDATOR_DATADIR"
+append_option "--validators-dir" "$NIMBUS_ETH2_CLI_VALIDATOR_VALIDATORS_DIR"
+append_option "--secrets-dir" "$NIMBUS_ETH2_CLI_VALIDATOR_SECRETS_DIR"
+append_option "--beacon-node" "$NIMBUS_ETH2_CLI_VALIDATOR_BEACON_NODE"
+append_option "--suggested-fee-recipient" "$NIMBUS_ETH2_CLI_VALIDATOR_SUGGESTED_FEE_RECIPIENT"
 
 
 echo "Using Options /usr/lib/eth-node-nimbus-eth2/bin/validator: $OPTIONS"
