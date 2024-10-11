@@ -88,13 +88,13 @@ summary = ""
 
 [config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_ACCOUNT_PASSWORD_FILE"]
 type = "string"
-default = "/var/lib/eth-node-regtest/prysm-validator/dummy_account_password.txt"
+default = "/var/lib/eth-node-regtest/prysm-validator/passwords/keystore-m_12381_3600_0_0_0-1726217560.txt"
 priority = "low"
 summary = ""
 
 [config."prysm-validator.conf".ivars."PRYSM_CLI_VALIDATOR_WALLET_KEYSTORE"]
 type = "string"
-default = "/var/lib/eth-node-regtest/prysm-validator/passwords"
+default = "/var/lib/eth-node-regtest/prysm-validator/keys"
 priority = "low"
 summary = ""
 
