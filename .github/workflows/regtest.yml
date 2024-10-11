@@ -27,6 +27,7 @@ jobs:
           network: regtest
           el_name: besu
           cl_name: ${{matrix.cl_name}}
+  # works except lighthouse
   # erigon:
   #   name: regtest erigon
   #   runs-on: ubuntu-24.04
@@ -71,6 +72,7 @@ jobs:
   #         el_name: geth
   #         cl_name: ${{matrix.cl_name}}
 
+  # todo works, except lighthouse
   # nethermind:
   #   name: regtest nethermind
   #   runs-on: ubuntu-24.04

@@ -213,6 +213,7 @@ runs:
     - name: Run API tests
       run: |
         echo "Waiting for 240 seconds for nodes to check successful startup..."
+        # on localhost this is much faster, as keys are imported quicker on a faster machine
         sleep 240 # it takes time to include the validators 
         # Check beacon state
         echo ""
@@ -251,6 +252,12 @@ runs:
             echo "Block number is not zero. Block production started..."
         else
             echo "Block number is zero."
+            echo "Fetching logs for eth-node-${{ inputs.el_name }}-${{ inputs.network }}..."
+            journalctl -u eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service --no-pager -n 100
+            echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
+            journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
+            echo "eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }} is not active" >&2
+            journalctl -u eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
             exit 1
         fi
 
