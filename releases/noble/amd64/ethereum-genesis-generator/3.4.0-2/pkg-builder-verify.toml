@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="7810e0499167938b144ee9da6511715eac707465", name= "ethereum-genesis-generator_3.4.0-2.dsc"},
+    { hash="abb824d5dd0d66b9d9216c7d972e67d32879386f", name= "ethereum-genesis-generator_3.4.0.orig.tar.gz"},
+    { hash="e812f33ffebadf34c29612f64f6d9c34232dee3d", name= "ethereum-genesis-generator_3.4.0-2.debian.tar.xz"},
+    { hash="d1efcb0a10376ab82f369c22a5f561d4346e1c9c", name= "ethereum-genesis-generator_3.4.0-2_amd64.deb"},
+]
