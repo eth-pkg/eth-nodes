@@ -187,13 +187,20 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_besu.py
  combined_allocs = {}
  
  if len(sys.argv) > 1:
-@@ -183,7 +183,7 @@ else:
+@@ -183,13 +183,13 @@ else:
          add_alloc_entry(addr, account)
  
  
 -if 'electra_fork_epoch' in data:
-+if data['electra_fork_epoch'] != None:
++if 'electra_fork_epoch' in data and data['electra_fork_epoch'] is not None:
      out['config']['pragueTime'] = \
+         int(data['genesis_timestamp']) + \
+         int(data['genesis_delay']) + \
+         (int(data['electra_fork_epoch']) * ( 32 if data['preset_base']=='mainnet' else 8 ) * int(data['slot_duration_in_seconds']))
+ 
+-if 'fulu_fork_epoch' in data:
++if 'fulu_fork_epoch' in data and data['fulu_fork_epoch'] is not None:
+     out['config']['osakaTime'] =  \
          int(data['genesis_timestamp']) + \
          int(data['genesis_delay']) + \
 Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_chainspec.py
@@ -222,10 +229,19 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_chainspec.py
          add_alloc_entry(addr, account)
  
 -if 'electra_fork_epoch' in data:
-+if data['electra_fork_epoch'] != None:
++if 'electra_fork_epoch' in data and data['electra_fork_epoch'] is not None:
      out['params']['eip2537TransitionTimestamp']= hex(
          int(data['genesis_timestamp']) +
          int(data['genesis_delay']) +
+@@ -258,7 +258,7 @@ if 'electra_fork_epoch' in data:
+         int(data['electra_fork_epoch']) * ( 32 if data['preset_base']=='mainnet' else 8 ) * int(data['slot_duration_in_seconds'])
+     )
+ 
+-if 'fulu_fork_epoch' in data:
++if 'fulu_fork_epoch' in data and data['fulu_fork_epoch'] is not None:
+     out['params']['eip7692TransitionTimestamp'] = hex(
+         int(data['genesis_timestamp']) + \
+         int(data['genesis_delay']) + \
 Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_geth.py
 ===================================================================
 --- ethereum-genesis-generator-3.4.0.orig/apps/el-gen/genesis_geth.py
@@ -247,13 +263,20 @@ Index: ethereum-genesis-generator-3.4.0/apps/el-gen/genesis_geth.py
  combined_allocs = {}
  if len(sys.argv) > 1:
      testnet_config_path = sys.argv[1]
-@@ -181,7 +181,7 @@ else:
+@@ -181,13 +181,13 @@ else:
      for addr, account in data['additional_preloaded_contracts'].items():
          add_alloc_entry(addr, account)
  
 -if 'electra_fork_epoch' in data:
-+if data['electra_fork_epoch'] != None:
++if 'electra_fork_epoch' in data and data['electra_fork_epoch'] is not None:
      out['config']['pragueTime'] = \
+         int(data['genesis_timestamp']) + \
+         int(data['genesis_delay']) + \
+         int(data['electra_fork_epoch']) * ( 32 if data['preset_base']=='mainnet' else 8 ) * int(data['slot_duration_in_seconds'])
+ 
+-if 'fulu_fork_epoch' in data:
++if 'fulu_fork_epoch' in data and data['fulu_fork_epoch'] is not None:
+     out['config']['osakaTime'] =  \
          int(data['genesis_timestamp']) + \
          int(data['genesis_delay']) + \
 Index: ethereum-genesis-generator-3.4.0/apps/el-gen/requirements.txt
