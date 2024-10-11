@@ -117,7 +117,7 @@ summary = "Enable the WS-RPC server"
 
 [config."geth-regtest.conf".ivars."GETH_CLI_WS_API"]
 type = "string"
-default = "eth,net,web3"
+default = "eth,engine,web3,net,debug,trace,txpool,admin"
 priority = "low"
 summary = "APIs offered over the WS-RPC interface"
 
@@ -162,3 +162,17 @@ type = "string"
 default = "true"
 priority = "low"
 summary = "Disables the peer discovery mechanism (manual peer addition)"
+
+
+[config."geth-regtest.conf".ivars."GETH_CLI_NETWORKID"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_NETWORK_ID"
+priority = "low"
+summary = "Explicitly set network ID (integer)"
+
+
+[config."geth-regtest.conf".ivars."GETH_CLI_BOOTNODES"]
+type = "string"
+default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+priority = "low"
+summary = "Comma separated enode URLs for P2P discovery bootstrap"
