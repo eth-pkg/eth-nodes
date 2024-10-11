@@ -84,7 +84,8 @@ generate_testnet(){
     cd "$tmp_dir"
     mkdir config
     setup_defaults
-    cp -R /etc/eth-node-regtest-config . 
+    cp -R /etc/eth-node-regtest-config/config . 
+    ls -al config
     ethereum-genesis-generator all 
 
     mkdir -p /var/lib/eth-node-regtest/regtest
