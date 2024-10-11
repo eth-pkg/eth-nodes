@@ -2,23 +2,22 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
 ===================================================================
 --- ethereum-genesis-generator-3.4.0.orig/entrypoint.sh
 +++ ethereum-genesis-generator-3.4.0/entrypoint.sh
-@@ -1,39 +1,46 @@
+@@ -1,39 +1,45 @@
  #!/bin/bash -e
 -if [ -f /config/values.env ];
 +
 +# Copy recursively if not already exists in the current folder, do not overwrite
 +cp -nR /etc/ethereum-genesis-generator/config . 
 +ls -al config
-+
-+if [ -f config/defaults.env ];
-+then
-+    source config/defaults.env
-+fi
++ls -al config/el 
++ls -al config/cl
 +
 +if [ -f config/values.env ];
  then
 -    source /config/values.env
-+    source config/values.env
++    source config/values.env 
++else 
++    source config/defaults.env
  fi
 -source /defaults/defaults.env
  
@@ -67,7 +66,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
      else
          echo "el genesis already exists. skipping generation..."
      fi
-@@ -50,41 +57,40 @@ gen_minimal_config() {
+@@ -50,41 +56,40 @@ gen_minimal_config() {
    )
  
    for key in "${!replacements[@]}"; do
@@ -124,7 +123,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
            --preset-phase0 $PRESET_BASE
            --preset-altair $PRESET_BASE
            --preset-bellatrix $PRESET_BASE
-@@ -99,13 +105,13 @@ gen_cl_config(){
+@@ -99,13 +104,13 @@ gen_cl_config(){
          elif [[ $SHADOW_FORK_RPC != "" ]]; then
            genesis_args+=(--shadow-fork-eth1-rpc=$SHADOW_FORK_RPC --eth1-config "")
          else
@@ -140,7 +139,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
            fi
            genesis_args+=(--additional-validators $validators_file)
          fi
-@@ -118,15 +124,15 @@ gen_cl_config(){
+@@ -118,15 +123,15 @@ gen_cl_config(){
            --preset-bellatrix $PRESET_BASE
            --preset-capella $PRESET_BASE
            --preset-deneb $PRESET_BASE
@@ -163,7 +162,7 @@ Index: ethereum-genesis-generator-3.4.0/entrypoint.sh
      else
          echo "cl genesis already exists. skipping generation..."
      fi
-@@ -157,5 +163,5 @@ esac
+@@ -157,5 +162,5 @@ esac
  
  # Start webserver
  if [ "$SERVER_ENABLED" = true ] ; then
