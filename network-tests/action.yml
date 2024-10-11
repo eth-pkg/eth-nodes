@@ -247,11 +247,12 @@ runs:
           # exit 1
         fi
 
-   
-        if [ $(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545 | jq -r '.result') != "0x0" ]; then
+        block_number_result=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545 )
+        if [ $(echo $block_number_result| jq -r '.result') != "0x0" ]; then
             echo "Block number is not zero. Block production started..."
         else
             echo "Block number is zero."
+            echo "$block_number_result"
             echo "Fetching logs for eth-node-${{ inputs.el_name }}-${{ inputs.network }}..."
             journalctl -u eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service --no-pager -n 100
             echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
