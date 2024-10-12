@@ -177,7 +177,7 @@ runs:
         # have to install in one go 
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-1_amd64.deb \
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
-          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb \ 
+          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}_0.0.1-1_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
