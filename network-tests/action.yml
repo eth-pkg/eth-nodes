@@ -80,7 +80,7 @@ runs:
     - name: Create chroot env
       run: |
         pwd && ls -al
-        cd upcoming/noble/amd64/eth-node-regtest/0.0.1-1 && pkg-builder env create
+        cd releases/noble/all/eth-node-regtest/0.0.1-1 && pkg-builder env create
         echo "${HOME}/.cache/sbuild/noble-amd64.tar.gz" >> $GITHUB_PATH
       shell: bash
 
@@ -123,7 +123,7 @@ runs:
 
     - name: Build clients
       run: |
-        cd upcoming/noble/amd64
+        cd releases/noble/all
         mkdir ${HOME}/packages
 
         # main umbrella package
@@ -131,18 +131,18 @@ runs:
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-0.0.1-1
         ls 
-        cp eth-node-${{ inputs.network }}_0.0.1-1_amd64.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
 
         # network configs, not the same as client configs
-        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
+        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
         cd eth-node-${{ inputs.network }}-config/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-0.0.1-1
         ls
-        cp eth-node-${{ inputs.network }}-config_0.0.1-1_amd64.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb ${HOME}/packages/
 
         # execution client 
-        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
+        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
         cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1
@@ -150,7 +150,7 @@ runs:
         cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
 
         # consensus client 
-        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
+        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
         cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1
@@ -159,7 +159,7 @@ runs:
 
 
         # validator 
-        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/amd64
+        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
         cd eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}/0.0.1-1
         pkg-builder verify
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}-0.0.1-1
@@ -173,9 +173,9 @@ runs:
       run: |
         java --version 
         which java 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.1-1_amd64.deb
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb
         # have to install in one go 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-1_amd64.deb \
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-validator-${{ inputs.network }}_0.0.1-1_all.deb  
