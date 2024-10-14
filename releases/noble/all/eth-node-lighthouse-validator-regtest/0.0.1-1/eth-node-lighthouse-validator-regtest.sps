@@ -53,7 +53,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
-depends=["eth-node-lighthouse-regtest"]
+depends=["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-lighthouse for network: regtest"
 
 [config."lighthouse-validator.conf".postprocess]

@@ -51,7 +51,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
-depends=["eth-node-lodestar-regtest"]
+depends=["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-lodestar for network: regtest"
 
 [config."lodestar-validator.conf".postprocess]

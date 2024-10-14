@@ -51,7 +51,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-validator"]
 conflicts = ["eth-node-regtest-validator"]
-depends=["eth-node-teku-regtest"]
+depends=["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-teku for network: regtest"
 
 [config."teku-validator.conf".postprocess]
