@@ -5,6 +5,6 @@ package_hash=[
     # { hash="bc10b4d261d9ab21444fc3952f4d56b759731e91", name= "eth-node-erigon-regtest_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-erigon-regtest_0.0.1.orig.tar.gz"},
     # { hash="bec4f491f962031113d8203e6dfda1c791376621", name= "eth-node-erigon-regtest_0.0.1-1.debian.tar.xz"},
-    { hash="7be8cd5e33e93bb189fdc7d3d53090a0f698a220", name= "eth-node-erigon-regtest_0.0.1-1_all.deb"},
+    { hash="f5f655a62b547abb65296c4943ce032d5d559981", name= "eth-node-erigon-regtest_0.0.1-1_all.deb"},
 
 ]
