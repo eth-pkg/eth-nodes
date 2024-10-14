@@ -101,7 +101,8 @@ sudo -u eth-node-teku-validator-regtest  /bin/bash /usr/lib/eth-node-teku-valida
 ## View logs
 
 ```bash 
-sudo -u eth-node-teku-regtest ls /var/logs/regtest/teku
+#sudo -u eth-node-<client>-<network> ls /var/logs/eth-node-<network>/<client>
+sudo -u eth-node-teku-regtest ls /var/logs/eth-node-regtest/teku
 ```
 
 ### Todo elements

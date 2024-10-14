@@ -6,51 +6,8 @@ on:
       - feat/eth-node
 
 jobs:
-  besu:
-    name: regtest besu
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        cl_name:
-          - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
-          - teku
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - uses: ./network-tests
-        with:
-          network: regtest
-          el_name: besu
-          cl_name: ${{matrix.cl_name}}
-  erigon:
-    name: regtest erigon
-    runs-on: ubuntu-24.04
-    strategy:
-      matrix:
-        cl_name:
-          - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
-          - teku
-      fail-fast: false
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - uses: ./network-tests
-        with:
-          network: regtest
-          el_name: erigon
-          cl_name: ${{matrix.cl_name}}
-
-  # geth:
-  #   name: regtest geth
+  # besu:
+  #   name: regtest besu
   #   runs-on: ubuntu-24.04
   #   strategy:
   #     matrix:
@@ -68,8 +25,51 @@ jobs:
   #     - uses: ./network-tests
   #       with:
   #         network: regtest
-  #         el_name: geth
+  #         el_name: besu
   #         cl_name: ${{matrix.cl_name}}
+  # erigon:
+  #   name: regtest erigon
+  #   runs-on: ubuntu-24.04
+  #   strategy:
+  #     matrix:
+  #       cl_name:
+  #         - lighthouse
+  #         - lodestar
+  #         - nimbus-eth2
+  #         - prysm
+  #         - teku
+  #     fail-fast: false
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
+
+  #     - uses: ./network-tests
+  #       with:
+  #         network: regtest
+  #         el_name: erigon
+  #         cl_name: ${{matrix.cl_name}}
+
+  geth:
+    name: regtest geth
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        cl_name:
+          - lighthouse
+          - lodestar
+          - nimbus-eth2
+          - prysm
+          - teku
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: ./network-tests
+        with:
+          network: regtest
+          el_name: geth
+          cl_name: ${{matrix.cl_name}}
 
   # nethermind:
   #   name: regtest nethermind

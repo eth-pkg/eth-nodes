@@ -25,6 +25,9 @@ echo "2e0834786285daccd064ca17f1654f67b4aef298acbb82cef9ec422fb4975622" | tee -a
 echo "Setting ownership of /var/lib/eth-node-regtest/geth to eth-node-geth-regtest"
 chown -R eth-node-geth-regtest:eth-node-geth-regtest /var/lib/eth-node-regtest/geth
 
+mkdir -p /var/logs/eth-node-regtest/geth 
+chown -R eth-node-geth-regtest:eth-node-geth-regtest /var/logs/eth-node-regtest/geth
+
 echo "Adding eth-node-geth-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-geth-regtest || true 
 
