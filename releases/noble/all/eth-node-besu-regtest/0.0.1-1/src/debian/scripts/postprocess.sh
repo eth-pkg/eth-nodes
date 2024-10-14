@@ -20,6 +20,10 @@ mkdir -p /var/lib/eth-node-regtest/besu
 echo "Setting ownership of /var/lib/eth-node-regtest/besu to eth-node-besu-regtest"
 chown -R eth-node-besu-regtest:eth-node-besu-regtest /var/lib/eth-node-regtest/besu
 
+mkdir -p /var/logs/regtest/besu 
+chown -R eth-node-besu-regtest:eth-node-besu-regtest /var/logs/regtest/besu
+
+
 echo "Adding eth-node-besu-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-besu-regtest || true 
 
