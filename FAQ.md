@@ -98,6 +98,12 @@ sudo -u eth-node-teku-validator-regtest  /bin/bash /usr/lib/eth-node-teku-valida
        --conf-file /etc/eth-node-teku-validator-regtest/teku-validator-regtest.conf
 ```
 
+## View logs
+
+```bash 
+sudo -u eth-node-teku-regtest ls /var/logs/regtest/teku
+```
+
 ### Todo elements
 
 - [ ] creating groups for networks (sudo groupadd eth-node-regtest)

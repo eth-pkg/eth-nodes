@@ -130,6 +130,13 @@ priority = "low"
 summary = "Comma separated list of domains from which to accept cross-origin requests"
 
 
+[config."erigon-regtest.conf".ivars."log_dir_path"]
+type = "string"
+default = "/var/log/regtest/erigon"
+priority = "low"
+summary = "Path to store user and error logs to disk"
+
+
 # # All Default options, commented out the used one
 ### OPTIONS below are all set to default and provided to be used with debconf
 
@@ -1351,11 +1358,11 @@ default = "false"
 priority = "low"
 summary = "Disable disk logging"
 
-[config."erigon-regtest.conf".ivars."log_dir_path"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Path to store user and error logs to disk"
+# [config."erigon-regtest.conf".ivars."log_dir_path"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Path to store user and error logs to disk"
 
 [config."erigon-regtest.conf".ivars."log_dir_prefix"]
 type = "string"
