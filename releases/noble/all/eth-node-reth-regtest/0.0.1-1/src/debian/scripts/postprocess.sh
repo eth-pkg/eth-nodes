@@ -20,6 +20,9 @@ mkdir -p /var/lib/eth-node-regtest/reth
 echo "Setting ownership of /var/lib/eth-node-regtest/reth to eth-node-reth-regtest"
 chown -R eth-node-reth-regtest:eth-node-reth-regtest /var/lib/eth-node-regtest/reth
 
+mkdir -p /var/logs/eth-node-regtest/reth 
+chown -R eth-node-reth-regtest:eth-node-reth-regtest /var/logs/eth-node-regtest/reth
+
 echo "Adding eth-node-reth-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-reth-regtest || true 
 
