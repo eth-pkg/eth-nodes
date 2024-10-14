@@ -93,17 +93,32 @@ jobs:
   #         el_name: nethermind
   #         cl_name: ${{matrix.cl_name}}
 
-  reth:
-    name: regtest reth
+  test:
+    name: regtest
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        cl_name:
-          - lighthouse
-          - lodestar
-          - nimbus-eth2
-          - prysm
-          - teku
+        include: 
+          - el_name: reth 
+            cl_name: lighthouse
+            validator_name: lighthouse
+            
+          - el_name: reth
+            cl_name: lodestar
+            validator_name: lodestar
+
+          - el_name: reth
+            cl_name: nimbus-eth2
+            validator_name: nimbus-eth2
+
+          - el_name: reth
+            cl_name: prysm
+            validator_name: prysm
+
+          - el_name: reth 
+            cl_name: teku
+            validator_name: teku
+
       fail-fast: false
     steps:
       - name: Checkout code
@@ -114,3 +129,4 @@ jobs:
           network: regtest
           el_name: reth
           cl_name: ${{matrix.cl_name}}
+          validator_name: ${{matrix.cl_name}}
