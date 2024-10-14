@@ -12,7 +12,15 @@ jobs:
     strategy:
       matrix:
         include:
-          ### besu + lighthouse
+
+          ### Run only 25 tests, as it takes around 90 minutes to run all the tests
+          ### github only allows 20 tests parallel
+
+
+
+          #####################################
+          ######## besu + lighthouse ##########
+          #####################################
 
           - el_name: besu
             cl_name: lighthouse
@@ -30,7 +38,10 @@ jobs:
           #   cl_name: lighthouse
           #   validator_name: teku
 
-          ### besu + lodestar
+          #####################################
+          ####### besu + lodestar #############
+          #####################################
+
 
           # - el_name: besu
           #   cl_name: lodestar
@@ -48,7 +59,9 @@ jobs:
           #   cl_name: lodestar
           #   validator_name: teku
 
-          ### besu + nimbus-eth2
+          #####################################
+          ####### besu + nimbus-eth2 ##########
+          #####################################
 
           # - el_name: besu
           #   cl_name: nimbus-eth2
@@ -66,8 +79,10 @@ jobs:
           #   cl_name: nimbus-eth2
           #   validator_name: teku
 
+          #####################################
+          ####### besu + prysm ################
+          #####################################
 
-          # besu + prysm
           # - el_name: besu
           #   cl_name: prysm
           #   validator_name: lighthouse
@@ -84,8 +99,10 @@ jobs:
           #   cl_name: prysm
           #   validator_name: teku
 
+          #####################################
+          ####### besu + teku #################
+          #####################################
 
-          # besu + teku 
           # - el_name: besu
           #   cl_name: teku
           #   validator_name: lighthouse
@@ -102,8 +119,10 @@ jobs:
             cl_name: teku
             validator_name: teku
 
+          #####################################
+          ####### erigon + lighthouse #########  
+          #####################################
 
-          # erigon + lighthouse   
           - el_name: erigon
             cl_name: lighthouse
             validator_name: lighthouse
@@ -120,8 +139,11 @@ jobs:
           #   cl_name: lighthouse
           #   validator_name: teku
 
+          #####################################
+          ####### erigon + lodestar ###########
+          #####################################
 
-          # erigon + lodestar 
+
           # - el_name: erigon
           #   cl_name: lodestar
           #   validator_name: lighthouse
@@ -138,8 +160,11 @@ jobs:
           #   cl_name: lodestar
           #   validator_name: teku
 
+          #####################################
+          ####### erigon + nimbus-eth2 ########
+          #####################################
 
-          # erigon + nimbus-eth2
+
           # - el_name: erigon
           #   cl_name: nimbus-eth2
           #   validator_name: lighthouse
@@ -156,8 +181,11 @@ jobs:
           #   cl_name: nimbus-eth2
           #   validator_name: teku
 
+          #####################################
+          ####### erigon + prysm ##############
+          #####################################
 
-          # erigon + prysm
+
           # - el_name: erigon
           #   cl_name: prysm
           #   validator_name: lighthouse
@@ -174,8 +202,10 @@ jobs:
           #   cl_name: prysm
           #   validator_name: teku
 
+          #####################################
+          ####### erigon + teku ###############
+          #####################################
 
-          # erigon + teku 
           # - el_name: erigon
           #   cl_name: teku
           #   validator_name: lighthouse
@@ -193,7 +223,9 @@ jobs:
             validator_name: teku
 
 
-          # geth + lighthouse
+          #####################################
+          ####### geth + lighthouse ###########
+          #####################################
           - el_name: geth
             cl_name: lighthouse
             validator_name: lighthouse
@@ -211,7 +243,9 @@ jobs:
           #   validator_name: teku
 
 
-          # geth + lodestar
+          #####################################
+          ####### geth + lodestar #############
+          #####################################
           # - el_name: geth
           #   cl_name: lodestar
           #   validator_name: lighthouse
@@ -228,8 +262,9 @@ jobs:
           #   cl_name: lodestar
           #   validator_name: teku
 
-
-          # geth + nimbus-eth2
+          #####################################
+          ####### geth + nimbus-eth2 ##########
+          #####################################
           # - el_name: geth
           #   cl_name: nimbus-eth2
           #   validator_name: lighthouse
@@ -246,8 +281,9 @@ jobs:
           #   cl_name: nimbus-eth2
           #   validator_name: teku
 
-
-          # geth + prysm
+          #####################################
+          ####### geth + prysm ################
+          #####################################
           # - el_name: geth
           #   cl_name: prysm
           #   validator_name: lighthouse
@@ -264,8 +300,9 @@ jobs:
           #   cl_name: prysm
           #   validator_name: teku
 
-
-          # geth + teku
+          #####################################
+          ####### geth + teku #################
+          #####################################
           # - el_name: geth
           #   cl_name: teku
           #   validator_name: lighthouse
@@ -282,8 +319,9 @@ jobs:
             cl_name: teku
             validator_name: teku
 
-
-          # nethermind + lighthouse
+          #####################################
+          ####### nethermind + lighthouse #####
+          #####################################
           - el_name: nethermind
             cl_name: lighthouse
             validator_name: lighthouse
@@ -300,7 +338,11 @@ jobs:
           #   cl_name: lighthouse
           #   validator_name: teku
 
-          # nethermind + lodestar
+          #####################################
+          ####### nethermind + lodestar #######
+          #####################################
+
+
           # - el_name: nethermind
           #   cl_name: lodestar
           #   validator_name: lighthouse
@@ -318,8 +360,11 @@ jobs:
           #   cl_name: lodestar
           #   validator_name: teku
 
+          #####################################
+          ####### nethermind + nimbus-eth2 ####
+          #####################################
 
-          # nethermind + nimbus-eth2
+
           # - el_name: nethermind
           #   cl_name: nimbus-eth2
           #   validator_name: lighthouse
@@ -336,7 +381,10 @@ jobs:
           #   cl_name: nimbus-eth2
           #   validator_name: teku
 
-          # nethermind + prysm
+          #####################################
+          ######## nethermind + prysm #########
+          #####################################
+
           # - el_name: nethermind
           #   cl_name: prysm
           #   validator_name: lighthouse
@@ -353,7 +401,10 @@ jobs:
           #   cl_name: prysm
           #   validator_name: teku
 
-          # nethermind + teku
+          #####################################
+          ######## nethermind + teku ##########
+          #####################################
+
           # - el_name: nethermind
           #   cl_name: teku
           #   validator_name: lighthouse
@@ -370,8 +421,9 @@ jobs:
             cl_name: teku
             validator_name: teku
 
-
-          # reth + lighthouse
+          #####################################
+          ######## reth + lighthouse ##########
+          #####################################
           - el_name: reth
             cl_name: lighthouse
             validator_name: lighthouse
@@ -388,8 +440,11 @@ jobs:
           #   cl_name: lighthouse
           #   validator_name: teku
 
+          #####################################
+          ######## reth + lodestar ############
+          #####################################
 
-          # reth + lodestar
+
           # - el_name: reth
           #   cl_name: lodestar
           #   validator_name: lighthouse
@@ -406,8 +461,10 @@ jobs:
           #   cl_name: lodestar
           #   validator_name: teku
 
+          #####################################
+          ######## reth + nimbus-eth2 #########
+          #####################################
 
-          # reth + nimbus-eth2
           # - el_name: reth
           #   cl_name: nimbus-eth2
           #   validator_name: lighthouse
@@ -424,8 +481,11 @@ jobs:
           #   cl_name: nimbus-eth2
           #   validator_name: teku
 
+          #####################################
+          ######## reth + prysm ###############
+          #####################################
 
-          # reth + prysm
+
           # - el_name: reth
           #   cl_name: prysm
           #   validator_name: lighthouse
@@ -442,7 +502,10 @@ jobs:
           #   cl_name: prysm
           #   validator_name: teku
 
-          # reth + teku
+          #####################################
+          ######## reth + teku ################
+          #####################################
+
           # - el_name: reth
           #   cl_name: teku
           #   validator_name: lighthouse
@@ -466,6 +529,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: tests
+      # this works, but the problem it makes it look like that 125 tests are passed, when in practice
+      # only the filtered tests passed, and the others are "fake green"
       #  if: matrix.el_name == 'reth' && matrix.cl_name == matrix.validator_name
         uses: ./network-tests
         with:
