@@ -23,6 +23,9 @@ echo "Setting ownership of /var/lib/eth-node-regtest/teku-validator to eth-node-
 chown -R eth-node-teku-val-regtest:eth-node-teku-val-regtest /var/lib/eth-node-regtest/teku-validator
 chown -R eth-node-teku-val-regtest:eth-node-teku-val-regtest /var/lib/eth-node-regtest/teku-validator/logs
 
+mkdir -p /var/logs/eth-node-regtest/teku-validator 
+chown -R eth-node-teku-val-regtest:eth-node-teku-val-regtest /var/logs/eth-node-regtest/teku-validator
+
 echo "Adding eth-node-teku-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-teku-val-regtest || true 
 
