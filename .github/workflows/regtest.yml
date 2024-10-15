@@ -13,7 +13,7 @@ jobs:
       matrix:
         include:
 
-          ### Run only 25 tests, as it takes around 90 minutes to run all the tests
+          ### Run only 25 tests, as it takes around 2 hours to run all the tests
           ### github only allows 20 tests parallel
 
 

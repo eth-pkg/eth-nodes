@@ -20,6 +20,9 @@ mkdir -p /var/lib/eth-node-regtest/lighthouse
 echo "Setting ownership of /var/lib/eth-node-regtest/lighthouse to eth-node-lighthouse-regtest"
 chown -R eth-node-lighthouse-regtest:eth-node-lighthouse-regtest /var/lib/eth-node-regtest/lighthouse
 
+mkdir -p /var/logs/eth-node-regtest/lighthouse 
+chown -R eth-node-lighthouse-regtest:eth-node-lighthouse-regtest /var/logs/eth-node-regtest/lighthouse
+
 echo "Adding eth-node-lighthouse-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-lighthouse-regtest || true 
 

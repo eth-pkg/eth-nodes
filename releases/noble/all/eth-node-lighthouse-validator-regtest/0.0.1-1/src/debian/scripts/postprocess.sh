@@ -23,6 +23,10 @@ echo "Setting ownership of /var/lib/eth-node-regtest/lighthouse-validator to eth
 chown -R eth-node-lighthouse-val-regtest:eth-node-lighthouse-val-regtest /var/lib/eth-node-regtest/lighthouse-validator
 chown -R eth-node-lighthouse-val-regtest:eth-node-lighthouse-val-regtest /var/lib/eth-node-regtest/lighthouse-validator/logs
 
+
+mkdir -p /var/logs/eth-node-regtest/lighthouse-validator
+chown -R eth-node-lighthouse-val-regtest:eth-node-lighthouse-val-regtest /var/logs/eth-node-regtest/lighthouse-validator
+
 echo "Adding eth-node-lighthouse-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-lighthouse-val-regtest || true 
 
