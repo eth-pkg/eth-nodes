@@ -23,6 +23,10 @@ echo "Setting ownership of /var/lib/eth-node-regtest/nimbus-eth2-validator to et
 chown -R eth-node-nimbus-eth2-val-regtest:eth-node-nimbus-eth2-val-regtest /var/lib/eth-node-regtest/nimbus-eth2-validator
 chown -R eth-node-nimbus-eth2-val-regtest:eth-node-nimbus-eth2-val-regtest /var/lib/eth-node-regtest/nimbus-eth2-validator/logs
 
+mkdir -p /var/logs/eth-node-regtest/nimbus-eth2-validator 
+chown -R eth-node-nimbus-eth2-val-regtest:eth-node-nimbus-eth2-val-regtest /var/logs/eth-node-regtest/nimbus-eth2-validator
+
+
 echo "Adding eth-node-nimbus-eth2-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-nimbus-eth2-val-regtest || true 
 
