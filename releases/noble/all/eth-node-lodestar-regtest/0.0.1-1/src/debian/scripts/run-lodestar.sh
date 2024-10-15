@@ -84,78 +84,106 @@ append_flag(){
   fi 
 }
 
-append_flag "--forceCheckpointSync" "$LODESTAR_CLI_BN_FORCE_CHECKPOINT_SYNC"
-append_flag "--rest" "$LODESTAR_CLI_BN_REST"
-append_flag "--rest.swaggerUI" "$LODESTAR_CLI_BN_REST_SWAGGER_UI"
-append_flag "--emitPayloadAttributes" "$LODESTAR_CLI_BN_EMIT_PAYLOAD_ATTRIBUTES"
-append_option "--eth1" "$LODESTAR_CLI_BN_ETH1"
-append_flag "--builder" "$LODESTAR_CLI_BN_BUILDER"
-append_flag "--metrics" "$LODESTAR_CLI_BN_METRICS"
-append_flag "--discv5" "$LODESTAR_CLI_BN_DISCV5"
-append_flag "--subscribeAllSubnets" "$LODESTAR_CLI_BN_SUBSCRIBE_ALL_SUBNETS"
-append_flag "--disablePeerScoring" "$LODESTAR_CLI_BN_DISABLE_PEER_SCORING"
-append_flag "--mdns" "$LODESTAR_CLI_BN_MDNS"
-append_flag "--private" "$LODESTAR_CLI_BN_PRIVATE"
-append_flag "--validatorMonitorLogs" "$LODESTAR_CLI_BN_VALIDATOR_MONITOR_LOGS"
+# weak subjectivity
+append_option "--checkpointSyncUrl" "$checkpoint_sync_url"
+append_option "--checkpointState" "$checkpoint_state"
+append_option "--wssCheckpoint" "$wss_checkpoint"
+append_flag "--forceCheckpointSync" "$force_checkpoint_sync"
 
-append_option "--checkpointSyncUrl" "$LODESTAR_CLI_BN_CHECKPOINT_SYNC_URL"
-append_option "--checkpointState" "$LODESTAR_CLI_BN_CHECKPOINT_STATE"
-append_option "--wssCheckpoint" "$LODESTAR_CLI_BN_WSS_CHECKPOINT"
-if [ "$LODESTAR_CLI_DEV_REST_NAMESPACE" == "*" ]; then
-    OPTIONS="$OPTIONS --rest.namespace '*'"
-else  
-    append_option "--rest.namespace" "$LODESTAR_CLI_DEV_REST_NAMESPACE"
-fi 
-append_option "--rest.cors" "$LODESTAR_CLI_BN_REST_CORS"
-append_option "--rest.address" "$LODESTAR_CLI_BN_REST_ADDRESS"
-append_option "--rest.port" "$LODESTAR_CLI_BN_REST_PORT"
-append_option "--suggestedFeeRecipient" "$LODESTAR_CLI_BN_SUGGESTED_FEE_RECIPIENT"
-append_option "--chain.archiveBlobEpochs" "$LODESTAR_CLI_BN_CHAIN_ARCHIVE_BLOB_EPOCHS"
-append_option "--eth1.providerUrls" "$LODESTAR_CLI_BN_ETH1_PROVIDER_URLS"
-append_option "--execution.urls" "$LODESTAR_CLI_BN_EXECUTION_URLS"
-append_option "--execution.timeout" "$LODESTAR_CLI_BN_EXECUTION_TIMEOUT"
-append_option "--execution.retries" "$LODESTAR_CLI_BN_EXECUTION_RETRIES"
-append_option "--execution.retryDelay" "$LODESTAR_CLI_BN_EXECUTION_RETRY_DELAY"
-append_option "--jwtSecret" "$LODESTAR_CLI_BN_JWT_SECRET"
-append_option "--jwtId" "$LODESTAR_CLI_BN_JWT_ID"
-append_option "--builder.url" "$LODESTAR_CLI_BN_BUILDER_URL"
-append_option "--builder.timeout" "$LODESTAR_CLI_BN_BUILDER_TIMEOUT"
-append_option "--builder.faultInspectionWindow" "$LODESTAR_CLI_BN_BUILDER_FAULT_INSPECTION_WINDOW"
-append_option "--builder.allowedFaults" "$LODESTAR_CLI_BN_BUILDER_ALLOWED_FAULTS"
-append_option "--metrics.port" "$LODESTAR_CLI_BN_METRICS_PORT"
-append_option "--metrics.address" "$LODESTAR_CLI_BN_METRICS_ADDRESS"
-append_option "--monitoring.endpoint" "$LODESTAR_CLI_BN_MONITORING_ENDPOINT"
-append_option "--monitoring.interval" "$LODESTAR_CLI_BN_MONITORING_INTERVAL"
-append_option "--listenAddress" "$LODESTAR_CLI_BN_LISTEN_ADDRESS"
-append_option "--port" "$LODESTAR_CLI_BN_PORT"
-append_option "--discoveryPort" "$LODESTAR_CLI_BN_DISCOVERY_PORT"
-append_option "--listenAddress6" "$LODESTAR_CLI_BN_LISTEN_ADDRESS6"
-append_option "--port6" "$LODESTAR_CLI_BN_PORT6"
-append_option "--discoveryPort6" "$LODESTAR_CLI_BN_DISCOVERY_PORT6"
-append_option "--bootnodes" "$LODESTAR_CLI_BN_BOOTNODES"
-append_option "--targetPeers" "$LODESTAR_CLI_BN_TARGET_PEERS"
-append_option "--enr.ip" "$LODESTAR_CLI_BN_ENR_IP"
-append_option "--enr.tcp" "$LODESTAR_CLI_BN_ENR_TCP"
-append_option "--enr.udp" "$LODESTAR_CLI_BN_ENR_UDP"
-append_option "--enr.ip6" "$LODESTAR_CLI_BN_ENR_IP6"
-append_option "--enr.tcp6" "$LODESTAR_CLI_BN_ENR_TCP6"
-append_option "--enr.udp6" "$LODESTAR_CLI_BN_ENR_UDP6"
-append_option "--dataDir" "$LODESTAR_CLI_BN_DATA_DIR"
-append_option "--network" "$LODESTAR_CLI_BN_NETWORK"
-append_option "--paramsFile" "$LODESTAR_CLI_BN_PARAMS_FILE"
-append_option "--terminal-total-difficulty-override" "$LODESTAR_CLI_BN_TERMINAL_TOTAL_DIFFICULTY_OVERRIDE"
-append_option "--terminal-block-hash-override" "$LODESTAR_CLI_BN_TERMINAL_BLOCK_HASH_OVERRIDE"
-append_option "--terminal-block-hash-epoch-override" "$LODESTAR_CLI_BN_TERMINAL_BLOCK_HASH_EPOCH_OVERRIDE"
-append_option "--rcConfig" "$LODESTAR_CLI_BN_RC_CONFIG"
+# api
+append_flag "--rest" "$rest"
+append_option "--rest.namespace" "$rest_namespace"
+append_option "--rest.cors" "$rest_cors"
+append_option "--rest.address" "$rest_address"
+append_option "--rest.port" "$rest_port"
+append_flag "--rest.swaggerUI" "$rest_swagger_ui"
 
-append_option "--logLevel" "$LODESTAR_CLI_BN_LOG_LEVEL"
-append_option "--logFile" "$LODESTAR_CLI_BN_LOG_FILE"
-append_option "--logFileLevel" "$LODESTAR_CLI_BN_LOG_FILE_LEVEL"
-append_option "--logFileDailyRotate" "$LODESTAR_CLI_BN_LOG_FILE_DAILY_ROTATE"
+# chain
+append_option "--suggestedFeeRecipient" "$suggested_fee_recipient"
+append_flag "--emitPayloadAttributes" "$emit_payload_attributes"
+append_option "--chain.archiveBlobEpochs" "$chain_archive_blob_epochs"
+
+# eth1
+append_flag "--eth1" "$eth1"
+append_option "--eth1.providerUrls" "$eth1_provider_urls"
+
+# execution
+append_option "--execution.urls" "$execution_urls"
+append_option "--execution.timeout" "$execution_timeout"
+append_option "--execution.retries" "$execution_retries"
+append_option "--execution.retryDelay" "$execution_retry_delay"
+append_flag "--execution.engineMock" "$execution_engine_mock"
+append_option "--jwtSecret" "$jwt_secret"
+append_option "--jwtId" "$jwt_id"
+
+# builder
+append_flag "--builder" "$builder"
+append_option "--builder.url" "$builder_url"
+append_option "--builder.timeout" "$builder_timeout"
+append_option "--builder.faultInspectionWindow" "$builder_fault_inspection_window"
+append_option "--builder.allowedFaults" "$builder_allowed_faults"
+
+# metrics
+append_flag "--metrics" "$metrics"
+append_option "--metrics.port" "$metrics_port"
+append_option "--metrics.address" "$metrics_address"
+
+# monitoring
+append_option "--monitoring.endpoint" "$monitoring_endpoint"
+append_option "--monitoring.interval" "$monitoring_interval"
+
+# network
+append_flag "--discv5" "$discv5"
+append_option "--listenAddress" "$listen_address"
+append_option "--port" "$port"
+append_option "--discoveryPort" "$discovery_port"
+append_option "--listenAddress6" "$listen_address6"
+append_option "--port6" "$port6"
+append_option "--discoveryPort6" "$discovery_port6"
+append_option "--bootnodes" "$bootnodes"
+append_option "--targetPeers" "$target_peers"
+append_flag "--subscribeAllSubnets" "$subscribe_all_subnets"
+append_flag "--disablePeerScoring" "$disable_peer_scoring"
+append_flag "--mdns" "$mdns"
+
+# enr
+append_option "--enr.ip" "$enr_ip"
+append_option "--enr.tcp" "$enr_tcp"
+append_option "--enr.udp" "$enr_udp"
+append_option "--enr.ip6" "$enr_ip6"
+append_option "--enr.tcp6" "$enr_tcp6"
+append_option "--enr.udp6" "$enr_udp6"
+append_flag "--nat" "$nat"
+
+# options
+append_option "--dataDir" "$data_dir"
+append_option "--network" "$network"
+append_option "--paramsFile" "$params_file"
+append_option "--terminal-total-difficulty-override" "$terminal_total_difficulty_override"
+append_option "--terminal-block-hash-override" "$terminal_block_hash_override"
+append_option "--terminal-block-hash-epoch-override" "$terminal_block_hash_epoch_override"
+append_option "--rcConfig" "$rc_config"
+append_flag "--private" "$private"
+append_flag "--validatorMonitorLogs" "$validator_monitor_logs"
+append_flag "--disableLightClientServer" "$disable_light_client_server"
+append_option "--logLevel" "$log_level"
+append_option "--logFile" "$log_file"
+append_option "--logFileLevel" "$log_file_level"
+append_option "--logFileDailyRotate" "$log_file_daily_rotate"
+
+
+
+# if [ "$LODESTAR_CLI_DEV_REST_NAMESPACE" == "*" ]; then
+#     OPTIONS="$OPTIONS --rest.namespace '*'"
+# else  
+#     append_option "--rest.namespace" "$LODESTAR_CLI_DEV_REST_NAMESPACE"
+# fi 
+
 # TODO lodestar undocumented options
-append_option "--eth1.depositContractDeployBlock" "$LODESTAR_CLI_ETH1_DEPOSIT_CONTRACT_DEPLOY_BLOCK"
-append_option "--network.connectToDiscv5Bootnodes" "$LODESTAR_CLI_NETWORK_CONNECT_TO_DISCV5_BOOTNODES"
-append_option "--genesisStateFile" "$LODESTAR_CLI_BN_GENSIS_STATE_FILE"
+append_option "--eth1.depositContractDeployBlock" "$eth1_deposit_contract_deploy_block"
+append_option "--network.connectToDiscv5Bootnodes" "$network_connect_to_discv5_bootnodes"
+append_option "--genesisStateFile" "$genesis_state_file"
+
 
 echo "Starting lodestar beacon $OPTIONS"
 
