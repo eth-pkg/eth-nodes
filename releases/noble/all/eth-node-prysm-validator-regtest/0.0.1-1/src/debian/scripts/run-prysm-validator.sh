@@ -86,98 +86,106 @@ append_flag(){
   fi 
 }
 
-# Capital Case Options
-append_flag "--accept-terms-of-use" "$PRYSM_CLI_VALIDATOR_ACCEPT_TERMS_OF_USE"
-append_option "--api-timeout" "$PRYSM_CLI_VALIDATOR_API_TIMEOUT"
-append_option "--chain-config-file" "$PRYSM_CLI_VALIDATOR_CHAIN_CONFIG_FILE"
-append_flag "--clear-db" "$PRYSM_CLI_VALIDATOR_CLEAR_DB"
-append_option "--config-file" "$PRYSM_CLI_VALIDATOR_CONFIG_FILE"
-append_option "--datadir" "$PRYSM_CLI_VALIDATOR_DATADIR"
-append_option "--db-backup-output-dir" "$PRYSM_CLI_VALIDATOR_DB_BACKUP_OUTPUT_DIR"
-append_flag "--disable-monitoring" "$PRYSM_CLI_VALIDATOR_DISABLE_MONITORING"
-append_flag "--e2e-config" "$PRYSM_CLI_VALIDATOR_E2E_CONFIG"
-append_flag "--enable-db-backup-webhook" "$PRYSM_CLI_VALIDATOR_ENABLE_DB_BACKUP_WEBHOOK"
-append_flag "--enable-tracing" "$PRYSM_CLI_VALIDATOR_ENABLE_TRACING"
-append_flag "--force-clear-db" "$PRYSM_CLI_VALIDATOR_FORCE_CLEAR_DB"
-append_option "--grpc-max-msg-size" "$PRYSM_CLI_VALIDATOR_GRPC_MAX_MSG_SIZE"
-append_option "--log-file" "$PRYSM_CLI_VALIDATOR_LOG_FILE"
-append_option "--log-format" "$PRYSM_CLI_VALIDATOR_LOG_FORMAT"
-append_flag "--minimal-config" "$PRYSM_CLI_VALIDATOR_MINIMAL_CONFIG"
-append_option "--monitoring-host" "$PRYSM_CLI_VALIDATOR_MONITORING_HOST"
-append_option "--monitoring-port" "$PRYSM_CLI_VALIDATOR_MONITORING_PORT"
-append_option "--trace-sample-fraction" "$PRYSM_CLI_VALIDATOR_TRACE_SAMPLE_FRACTION"
-append_option "--tracing-endpoint" "$PRYSM_CLI_VALIDATOR_TRACING_ENDPOINT"
-append_option "--tracing-process-name" "$PRYSM_CLI_VALIDATOR_TRACING_PROCESS_NAME"
-append_option "--verbosity" "$PRYSM_CLI_VALIDATOR_VERBOSITY"
+# cmd options
 
-# Debug Options
-append_option "--blockprofilerate" "$PRYSM_CLI_VALIDATOR_BLOCKPROFILERATE"
-append_option "--cpuprofile" "$PRYSM_CLI_VALIDATOR_CPUPROFILE"
-append_option "--memprofilerate" "$PRYSM_CLI_VALIDATOR_MEMPROFILERATE"
-append_option "--mutexprofilefraction" "$PRYSM_CLI_VALIDATOR_MUTEXPROFILEFRACTION"
-append_flag "--pprof" "$PRYSM_CLI_VALIDATOR_PPROF"
-append_option "--pprofaddr" "$PRYSM_CLI_VALIDATOR_PPROFADDR"
-append_option "--pprofport" "$PRYSM_CLI_VALIDATOR_PPROFPORT"
-append_option "--trace" "$PRYSM_CLI_VALIDATOR_TRACE"
+append_flag   "--accept-terms-of-use" "$accept_terms_of_use"
+append_option "--api-timeout" "$api_timeout"
+append_option "--chain-config-file" "$chain_config_file"
+append_flag   "--clear-db" "$clear_db"
+append_option "--config-file" "$config_file"
+append_option "--datadir" "$datadir"
+append_option "--db-backup-output-dir" "$db_backup_output_dir"
+append_flag   "--disable-monitoring" "$disable_monitoring"
+append_flag   "--e2e-config" "$e2e_config"
+append_flag   "--enable-db-backup-webhook" "$enable_db_backup_webhook"
+append_flag   "--enable-tracing" "$enable_tracing"
+append_flag   "--force-clear-db" "$force_clear_db"
+append_option "--grpc-max-msg-size" "$grpc_max_msg_size"
+append_option "--log-file" "$log_file"
+append_option "--log-format" "$log_format"
+append_flag   "--minimal-config" "$minimal_config"
+append_option "--monitoring-host" "$monitoring_host"
+append_option "--monitoring-port" "$monitoring_port"
+append_option "--trace-sample-fraction" "$trace_sample_fraction"
+append_option "--tracing-endpoint" "$tracing_endpoint"
+append_option "--tracing-process-name" "$tracing_process_name"
+append_option "--verbosity" "$verbosity"
+append_option "--wallet-dir" "$wallet_dir"
+append_option "--wallet-password-file" "$wallet_password_file"
 
-# Validator Options
-append_option "--beacon-rest-api-provider" "$PRYSM_CLI_VALIDATOR_BEACON_REST_API_PROVIDER"
-append_option "--beacon-rpc-gateway-provider" "$PRYSM_CLI_VALIDATOR_BEACON_RPC_GATEWAY_PROVIDER"
-append_option "--beacon-rpc-provider" "$PRYSM_CLI_VALIDATOR_BEACON_RPC_PROVIDER"
-append_flag "--disable-account-metrics" "$PRYSM_CLI_VALIDATOR_DISABLE_ACCOUNT_METRICS"
-append_flag "--disable-rewards-penalties-logging" "$PRYSM_CLI_VALIDATOR_DISABLE_REWARDS_PENALTIES_LOGGING"
-append_flag "--distributed" "$PRYSM_CLI_VALIDATOR_DISTRIBUTED"
-append_flag "--enable-builder" "$PRYSM_CLI_VALIDATOR_ENABLE_BUILDER"
-append_option "--graffiti" "$PRYSM_CLI_VALIDATOR_GRAFFITI"
-append_option "--graffiti-file" "$PRYSM_CLI_VALIDATOR_GRAFFITI_FILE"
-append_option "--grpc-gateway-corsdomain" "$PRYSM_CLI_VALIDATOR_GRPC_GATEWAY_CORSDOMAIN"
-append_option "--grpc-gateway-host" "$PRYSM_CLI_VALIDATOR_GRPC_GATEWAY_HOST"
-append_option "--grpc-gateway-port" "$PRYSM_CLI_VALIDATOR_GRPC_GATEWAY_PORT"
-append_option "--grpc-headers" "$PRYSM_CLI_VALIDATOR_GRPC_HEADERS"
-append_option "--grpc-retries" "$PRYSM_CLI_VALIDATOR_GRPC_RETRIES"
-append_option "--grpc-retry-delay" "$PRYSM_CLI_VALIDATOR_GRPC_RETRY_DELAY"
-append_option "--proposer-settings-file" "$PRYSM_CLI_VALIDATOR_PROPOSER_SETTINGS_FILE"
-append_option "--proposer-settings-url" "$PRYSM_CLI_VALIDATOR_PROPOSER_SETTINGS_URL"
-append_flag "--rpc" "$PRYSM_CLI_VALIDATOR_RPC"
-append_option "--rpc-host" "$PRYSM_CLI_VALIDATOR_RPC_HOST"
-append_option "--rpc-port" "$PRYSM_CLI_VALIDATOR_RPC_PORT"
-append_option "--slasher-rpc-provider" "$PRYSM_CLI_VALIDATOR_SLASHER_RPC_PROVIDER"
-append_option "--slasher-tls-cert" "$PRYSM_CLI_VALIDATOR_SLASHER_TLS_CERT"
-append_option "--suggested-fee-recipient" "$PRYSM_CLI_VALIDATOR_SUGGESTED_FEE_RECIPIENT"
-append_option "--suggested-gas-limit" "$PRYSM_CLI_VALIDATOR_SUGGESTED_GAS_LIMIT"
-append_option "--tls-cert" "$PRYSM_CLI_VALIDATOR_TLS_CERT"
-append_option "--validators-external-signer-public-keys" "$PRYSM_CLI_VALIDATOR_VALIDATORS_EXTERNAL_SIGNER_PUBLIC_KEYS"
-append_option "--validators-external-signer-url" "$PRYSM_CLI_VALIDATOR_VALIDATORS_EXTERNAL_SIGNER_URL"
-append_option "--validators-registration-batch-size" "$PRYSM_CLI_VALIDATOR_VALIDATORS_REGISTRATION_BATCH_SIZE"
-append_option "--wallet-dir" "$PRYSM_CLI_VALIDATOR_WALLET_DIR"
-append_option "--wallet-password-file" "$PRYSM_CLI_VALIDATOR_WALLET_PASSWORD_FILE"
-append_flag "--web" "$PRYSM_CLI_VALIDATOR_WEB"
+# debug options
+
+append_option "--blockprofilerate" "$blockprofilerate"
+append_option "--cpuprofile" "$cpuprofile"
+append_option "--memprofilerate" "$memprofilerate"
+append_option "--mutexprofilefraction" "$mutexprofilefraction"
+append_flag   "--pprof" "$pprof"
+append_option "--pprofaddr" "$pprofaddr"
+append_option "--pprofport" "$pprofport"
+append_option "--trace" "$trace"
+
+# rpc options
+
+append_option "--beacon-rest-api-provider" "$beacon_rest_api_provider"
+append_option "--beacon-rpc-gateway-provider" "$beacon_rpc_gateway_provider"
+append_option "--beacon-rpc-provider" "$beacon_rpc_provider"
+append_option "--grpc-gateway-corsdomain" "$grpc_gateway_corsdomain"
+append_option "--grpc-gateway-host" "$grpc_gateway_host"
+append_option "--grpc-gateway-port" "$grpc_gateway_port"
+append_option "--grpc-headers" "$grpc_headers"
+append_option "--grpc-retries" "$grpc_retries"
+append_option "--grpc-retry-delay" "$grpc_retry_delay"
+append_flag   "--rpc" "$rpc"
+append_option "--rpc-host" "$rpc_host"
+append_option "--rpc-port" "$rpc_port"
+append_option "--tls-cert" "$tls_cert"
+
+# Proposer Options
+append_flag   "--enable-builder" "$enable_builder"
+append_flag   "--enable-validator-registration" "$enable_validator_registration"
+append_option "--graffiti" "$graffiti"
+append_option "--graffiti-file" "$graffiti_file"
+append_option "--proposer-settings-file" "$proposer_settings_file"
+append_option "--proposer-settings-url" "$proposer_settings_url"
+append_option "--suggested-fee-recipient" "$suggested_fee_recipient"
+append_option "--suggested-gas-limit" "$suggested_gas_limit"
+append_option "--validators-registration-batch-size" "$validators_registration_batch_size"
+
+# Remote Signer Options
+append_option "--validators-external-signer-key-file" "$validators_external_signer_key_file"
+append_option "--validators-external-signer-public-keys" "$validators_external_signer_public_keys"
+append_option "--validators-external-signer-url" "$validators_external_signer_url"
+
+# Slasher Options
+append_option "--slasher-rpc-provider" "$slasher_rpc_provider"
+append_option "--slasher-tls-cert" "$slasher_tls_cert"
+
+# Misc Options
+append_flag   "--disable-account-metrics" "$disable_account_metrics"
+append_flag   "--disable-rewards-penalties-logging" "$disable_rewards_penalties_logging"
+append_flag   "--distributed" "$distributed"
+append_option "--keymanager-token-file" "$keymanager_token_file"
+append_flag   "--web" "$web"
 
 # Features Options
-append_flag "--attest-timely" "$PRYSM_CLI_VALIDATOR_ATTEST_TIMELY"
-append_option "--dynamic-key-reload-debounce-interval" "$PRYSM_CLI_VALIDATOR_DYNAMIC_KEY_RELOAD_DEBOUNCE_INTERVAL"
-append_flag "--enable-beacon-rest-api" "$PRYSM_CLI_VALIDATOR_ENABLE_BEACON_REST_API"
-append_flag "--enable-doppelganger" "$PRYSM_CLI_VALIDATOR_ENABLE_DOPPELGANGER"
-append_flag "--enable-minimal-slashing-protection" "$PRYSM_CLI_VALIDATOR_ENABLE_MINIMAL_SLASHING_PROTECTION"
-append_flag "--enable-slashing-protection-history-pruning" "$PRYSM_CLI_VALIDATOR_ENABLE_SLASHING_PROTECTION_HISTORY_PRUNING"
-append_flag "--holesky" "$PRYSM_CLI_VALIDATOR_HOLESKY"
-append_flag "--mainnet" "$PRYSM_CLI_VALIDATOR_MAINNET"
-append_flag "--prater" "$PRYSM_CLI_VALIDATOR_PRATER"
-append_flag "--sepolia" "$PRYSM_CLI_VALIDATOR_SEPOLIA"
-append_flag "--write-wallet-password-on-web-onboarding" "$PRYSM_CLI_VALIDATOR_WRITE_WALLET_PASSWORD_ON_WEB_ONBOARDING"
-
-# Interop Options
-append_option "--interop-num-validators" "$PRYSM_CLI_VALIDATOR_INTEROP_NUM_VALIDATORS"
-append_option "--interop-start-index" "$PRYSM_CLI_VALIDATOR_INTEROP_START_INDEX"
+append_flag   "--attest-timely" "$attest_timely"
+append_option "--dynamic-key-reload-debounce-interval" "$dynamic_key_reload_debounce_interval"
+append_flag   "--enable-beacon-rest-api" "$enable_beacon_rest_api"
+append_flag   "--enable-doppelganger" "$enable_doppelganger"
+append_flag   "--enable-minimal-slashing-protection" "$enable_minimal_slashing_protection"
+append_flag   "--enable-slashing-protection-history-pruning" "$enable_slashing_protection_history_pruning"
+append_flag   "--holesky" "$holesky"
+append_flag   "--mainnet" "$mainnet"
+append_flag   "--sepolia" "$sepolia"
+append_flag   "--write-wallet-password-on-web-onboarding" "$write_wallet_password_on_web_onboarding"
 
 
+echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$wallet_keystore --wallet-dir=$wallet_dir --wallet-password-file=$wallet_password_file --account-password-file=$account_password_file" 
 
-echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$PRYSM_CLI_VALIDATOR_WALLET_KEYSTORE --wallet-dir=$PRYSM_CLI_VALIDATOR_WALLET_DIR --wallet-password-file=$PRYSM_CLI_VALIDATOR_WALLET_PASSWORD_FILE --account-password-file=$PRYSM_CLI_VALIDATOR_ACCOUNT_PASSWORD_FILE" 
-
-/usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir="$PRYSM_CLI_VALIDATOR_WALLET_KEYSTORE" \
-                                    --wallet-dir="$PRYSM_CLI_VALIDATOR_WALLET_DIR" \
-                                    --wallet-password-file="$PRYSM_CLI_VALIDATOR_WALLET_PASSWORD_FILE" \
-                                    --account-password-file="$PRYSM_CLI_VALIDATOR_ACCOUNT_PASSWORD_FILE" \
+/usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir="$wallet_keystore" \
+                                    --wallet-dir="$wallet_dir" \
+                                    --wallet-password-file="$wallet_password_file" \
+                                    --account-password-file="$account_password_file" \
                                     --accept-terms-of-use
 
 echo "Using Options  /usr/lib/eth-node-prysm/bin/validator: $OPTIONS"

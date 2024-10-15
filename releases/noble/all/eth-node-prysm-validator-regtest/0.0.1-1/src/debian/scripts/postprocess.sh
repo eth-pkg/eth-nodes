@@ -23,6 +23,9 @@ echo "Setting ownership of /var/lib/eth-node-regtest/prysm-validator to eth-node
 chown -R eth-node-prysm-val-regtest:eth-node-prysm-val-regtest /var/lib/eth-node-regtest/prysm-validator
 chown -R eth-node-prysm-val-regtest:eth-node-prysm-val-regtest /var/lib/eth-node-regtest/prysm-validator/logs
 
+mkdir -p /var/logs/eth-node-regtest/prysm-validator 
+chown -R eth-node-prysm-val-regtest:eth-node-prysm-val-regtest /var/logs/eth-node-regtest/prysm-validator
+
 echo "Adding eth-node-prysm-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-prysm-val-regtest || true 
 
