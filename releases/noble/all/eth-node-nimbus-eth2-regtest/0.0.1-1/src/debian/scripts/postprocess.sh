@@ -20,6 +20,10 @@ mkdir -p /var/lib/eth-node-regtest/nimbus-eth2
 echo "Setting ownership of /var/lib/eth-node-regtest/nimbus-eth2 to eth-node-nimbus-eth2-regtest"
 chown -R eth-node-nimbus-eth2-regtest:eth-node-nimbus-eth2-regtest /var/lib/eth-node-regtest/nimbus-eth2
 
+mkdir -p /var/logs/eth-node-regtest/nimbus-eth2 
+chown -R eth-node-nimbus-eth2-regtest:eth-node-nimbus-eth2-regtest /var/logs/eth-node-regtest/nimbus-eth2
+
+
 echo "Adding eth-node-nimbus-eth2-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-nimbus-eth2-regtest || true 
 
