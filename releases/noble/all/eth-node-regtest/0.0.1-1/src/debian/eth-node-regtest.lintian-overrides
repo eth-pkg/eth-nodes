@@ -1,0 +1,6 @@
+eth-node-regtest: description-too-short TODO
+eth-node-regtest: no-copyright-file
+eth-node-regtest: debian-changelog-has-wrong-day-of-week 2043-07-04 was a Saturday [usr/share/doc/eth-node-regtest/changelog.Debian.gz:1]
+eth-node-regtest: empty-binary-package
+eth-node-regtest: maintainer-script-ignores-errors [postrm]
+
