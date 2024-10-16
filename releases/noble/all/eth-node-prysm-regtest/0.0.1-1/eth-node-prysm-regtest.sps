@@ -60,7 +60,7 @@ format = "plain"
 
 [config."prysm-regtest.conf".ivars."execution_endpoint"]
 type = "string"
-default = "$BASE_CONFIG_ENDPOINT_URL"
+default = "$ENDPOINT_URL"
 priority = "low"
 summary = "An execution client HTTP endpoint. Can contain auth header as well in the format (default: 'http://localhost:8551')."
 
@@ -78,25 +78,25 @@ summary = "Runs Prysm configured for the Sepolia test network."
 
 [config."prysm-regtest.conf".ivars."chain_id"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_NETWORK_ID"
+default = "$NETWORK_ID"
 priority = "low"
 summary = "Sets the chain id of the beacon chain. (default: 0)"
 
 [config."prysm-regtest.conf".ivars."jwt_secret"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Path to a file containing a hex-encoded string representing a 32-byte secret for authentication with an execution node via HTTP. REQUIRED if connecting to an execution node via HTTP."
 
 [config."prysm-regtest.conf".ivars."checkpoint_sync_url"]
 type = "string"
-default = "$BASE_CONFIG_CL_CHECKPPOINT_SYNC_URL"
+default = "$CL_CHECKPPOINT_SYNC_URL"
 priority = "low"
 summary = "URL of a synced beacon node to trust in obtaining checkpoint sync data."
 
 [config."prysm-regtest.conf".ivars."genesis_beacon_api_url"]
 type = "string"
-default = "$BASE_CONFIG_CL_BEACON_API_URL"
+default = "$CL_BEACON_API_URL"
 priority = "low"
 summary = "URL of a synced beacon node to trust for obtaining the genesis state."
 
@@ -108,19 +108,19 @@ summary = "Accepts Terms and Conditions (for non-interactive environments). (def
 
 [config."prysm-regtest.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/prysm"
+default = "$DATA_DIR/prysm"
 priority = "low"
 summary = "Data directory for the databases."
 
 [config."prysm-regtest.conf".ivars."genesis_state"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_STATE"
+default = "$TESTNET_DIR/genesis.ssz"
 priority = "low"
 summary = "Load a genesis state from ssz file."
 
 [config."prysm-regtest.conf".ivars."bootstrap_node"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "The address of bootstrap node. Beacon node will connect for peer discovery via DHT. Multiple nodes can be passed by using the flag multiple times but not comma-separated."
 
@@ -150,7 +150,7 @@ summary = "The required number of valid peers to connect with before syncing. (d
 
 [config."prysm-regtest.conf".ivars."chain_config_file"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_CHAINCONFIG"
+default = "$TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Path to a YAML file with chain config values."
 
@@ -174,7 +174,7 @@ summary = "The host on which the gRPC gateway server runs on."
 
 [config."prysm-regtest.conf".ivars."grpc_gateway_port"]
 type = "string"
-default = "$BASE_CONFIG_CL_RPC_PORT"
+default = "$CL_RPC_PORT"
 priority = "low"
 summary = "The port on which the gRPC gateway server runs."
 
@@ -186,7 +186,7 @@ summary = "Comma-separated list of API module names."
 
 [config."prysm-regtest.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Post bellatrix, this address will receive the transaction fees produced by any blocks from this node. (default: \"0x0000000000000000000000000000000000000000\")"
 
@@ -343,7 +343,7 @@ summary = "Filepath to the backed-up database file which will be used to restore
 type = "string"
 default = ""
 priority = "low"
-summary = "Target directory of the restored database. (default: \"/home/eniko/.eth2\")"
+summary = "Target directory of the restored database. (default: \"$HOME/.eth2\")"
 
 [config."prysm-regtest.conf".ivars."rpc_max_page_size"]
 type = "string"

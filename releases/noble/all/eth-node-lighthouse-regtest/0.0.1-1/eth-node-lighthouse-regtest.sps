@@ -68,7 +68,7 @@ summary = "Specify the name of the Eth2 chain to sync and follow (e.g., mainnet,
 
 [config."lighthouse-regtest.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/lighthouse"
+default = "$DATA_DIR/lighthouse"
 priority = "low"
 summary = "Specify a custom root data directory for Lighthouse keys and databases."
 
@@ -114,7 +114,7 @@ summary = "Specify the address Lighthouse will listen on for UDP and TCP connect
 
 [config."lighthouse-regtest.conf".ivars."port"]
 type = "string"
-default = "$BASE_CONFIG_CL_P2P_PORT"
+default = "$CL_P2P_PORT"
 priority = "low"
 summary = "Set the TCP/UDP port for listening. Defaults to 9000 for IPv4."
 
@@ -132,7 +132,7 @@ summary = "Set the listen address for the RESTful HTTP API server."
 
 [config."lighthouse-regtest.conf".ivars."http_port"]
 type = "string"
-default = "$BASE_CONFIG_CL_RPC_PORT"
+default = "$CL_RPC_PORT"
 priority = "low"
 summary = "Set the listen TCP port for the RESTful HTTP API server."
 
@@ -150,20 +150,20 @@ summary = "Disable the discovery packet filter, useful for testing in smaller ne
 
 [config."lighthouse-regtest.conf".ivars."execution_endpoint"]
 type = "string"
-default = "$BASE_CONFIG_ENDPOINT_URL"
+default = "$ENDPOINT_URL"
 priority = "low"
 summary = "Server endpoint for an execution layer JWT-authenticated HTTP JSON-RPC connection."
 
 
 [config."lighthouse-regtest.conf".ivars."execution_jwt"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "File path containing the hex-encoded JWT secret for the execution endpoint."
 
 [config."lighthouse-regtest.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Specify an emergency fallback fee recipient for block production in case the validator client lacks one."
 
@@ -177,13 +177,13 @@ summary = "Enable the discovery of private IP addresses to allow connection atte
 
 [config."lighthouse-regtest.conf".ivars."testnet_dir"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
+default = "$TESTNET_DIR"
 priority = "low"
 summary = "Path to directory containing eth2_testnet specs. Defaults to a hard-coded Lighthouse testnet. Only effective if there is no existing database."
 
 [config."lighthouse-regtest.conf".ivars."boot_nodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "Comma-delimited list of base64-encoded ENR's or Multiaddrs to bootstrap the p2p network."
 

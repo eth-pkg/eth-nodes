@@ -60,37 +60,37 @@ format = "plain"
 
 [config."teku-regtest.conf".ivars."ee_endpoint"]
 type = "string"
-default = "$BASE_CONFIG_ENDPOINT_URL"
+default = "$ENDPOINT_URL"
 priority = "low"
 summary = "URL for Execution Engine node."
 
 [config."teku-regtest.conf".ivars."ee_jwt_secret_file"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Location of the file specifying the hex-encoded 256 bit secret key to be used for verifying/generating JWT tokens."
 
 [config."teku-regtest.conf".ivars."data_path"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/teku"
+default = "$DATA_DIR/teku"
 priority = "low"
 summary = "Path to the base directory for storage. Default: $HOME/.local/share/teku."
 
 [config."teku-regtest.conf".ivars."network"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/config.yaml"
+default = "$TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Represents which network to use. Default: mainnet."
 
 [config."teku-regtest.conf".ivars."p2p_discovery_bootnodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "List of ENRs of the bootnodes."
 
 [config."teku-regtest.conf".ivars."genesis_state"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_STATE"
+default = "$TESTNET_DIR/genesis.ssz"
 priority = "low"
 summary = "The genesis state. This value should be a file or URL pointing to an SSZ-encoded finalized checkpoint state."
 
@@ -132,14 +132,14 @@ summary = "Interface of Beacon Rest API. Default: 127.0.0.1."
 
 [config."teku-regtest.conf".ivars."rest_api_port"]
 type = "string"
-default = "$BASE_CONFIG_CL_RPC_PORT"
+default = "$CL_RPC_PORT"
 priority = "low"
 summary = "Port number of Beacon Rest API."
 
 # Needs to be set on BN as well 
 [config."teku-regtest.conf".ivars."validators_proposer_default_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS" 
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS" 
 priority = "low"
 summary = ""
 

@@ -65,13 +65,13 @@ format = "plain"
 
 [config."lighthouse-validator.conf".ivars."testnet_dir"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
+default = "$TESTNET_DIR"
 priority = "low"
 summary = "Path to directory containing Eth2 testnet specs."
 
 [config."lighthouse-validator.conf".ivars."validators_dir"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lighthouse-validator"
+default = "$DATA_DIR/lighthouse-validator"
 priority = "low"
 summary = "Directory containing validator keystores, deposit data, and the slashing protection database."
 
@@ -105,7 +105,7 @@ summary = "Comma-separated addresses of one or more beacon node HTTP APIs."
 
 [config."lighthouse-validator.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "The address that will receive transaction fees post-merge."
 

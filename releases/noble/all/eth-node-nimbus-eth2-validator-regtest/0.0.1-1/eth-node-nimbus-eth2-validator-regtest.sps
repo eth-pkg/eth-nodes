@@ -64,19 +64,19 @@ format = "plain"
 
 [config."nimbus-eth2-validator.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator"
+default = "$DATA_DIR/nimbus-eth2-validator"
 priority = "low"
 summary = "The directory where Nimbus will store all blockchain data."
 
 [config."nimbus-eth2-validator.conf".ivars."validators_dir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator/validators"
+default = "$DATA_DIR/nimbus-eth2-validator/validators"
 priority = "low"
 summary = "A directory containing validator keystores."
 
 [config."nimbus-eth2-validator.conf".ivars."secrets_dir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2-validator/secrets"
+default = "$DATA_DIR/nimbus-eth2-validator/secrets"
 priority = "low"
 summary = "A directory containing validator keystore passwords."
 
@@ -88,7 +88,7 @@ summary = "URL addresses to one or more beacon node HTTP REST APIs [=$defaultBea
 
 [config."nimbus-eth2-validator.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Suggested fee recipient."
 

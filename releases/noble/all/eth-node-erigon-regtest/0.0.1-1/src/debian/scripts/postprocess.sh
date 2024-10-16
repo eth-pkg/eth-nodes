@@ -20,8 +20,8 @@ mkdir -p /var/lib/eth-node-regtest/erigon
 echo "Setting ownership of /var/lib/eth-node-regtest/erigon to eth-node-erigon-regtest"
 chown -R eth-node-erigon-regtest:eth-node-erigon-regtest /var/lib/eth-node-regtest/erigon
 
-mkdir -p /var/logs/regtest/erigon 
-chown -R eth-node-erigon-regtest:eth-node-erigon-regtest /var/logs/regtest/erigon
+mkdir -p /var/logs/eth-node-regtest/erigon 
+chown -R eth-node-erigon-regtest:eth-node-erigon-regtest /var/logs/eth-node-regtest/erigon
 
 echo "Adding eth-node-erigon-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-erigon-regtest || true 

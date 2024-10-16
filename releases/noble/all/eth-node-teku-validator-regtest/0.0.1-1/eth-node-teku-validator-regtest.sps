@@ -70,27 +70,27 @@ summary = "Beacon Node REST API endpoint(s). If more than one endpoint is define
 
 [config."teku-validator.conf".ivars."data_base_path"]
 type = "string"
-default = "/var/lib/eth-node-regtest/teku-validator"  
+default = "$DATADIR/teku-validator"  
 priority = "low"
 summary = "Path to the base directory for storage. Default: $HOME/.local/share/teku."
 
 [config."teku-validator.conf".ivars."validator_keys"]
 type = "string"
-default = "/var/lib/eth-node-regtest/teku-validator/keys:/var/lib/eth-node-regtest/teku-validator/passwords"  
+default = "$DATADIR/teku-validator/keys:$DATADIR/teku-validator/passwords"  
 priority = "low"
 summary = "<KEY_DIR>:<PASS_DIR> will find <KEY_DIR>/**.json and expect to find <PASS_DIR>/**.txt. <KEY_FILE>:<PASS_FILE> will expect that the file <KEY_FILE> exists, and the file containing the password for it is <PASS_FILE>. The path separator is operating system dependent, and should be ';' in Windows rather than ':'. Default: []"
 
 
 [config."teku-validator.conf".ivars."log_file"]
 type = "string"
-default = "/var/lib/eth-node-regtest/teku-validator/logs/teku.log"  
+default = "$DATADIR/teku-validator/logs/teku.log"  
 priority = "low"
 summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
 
 
 [config."teku-validator.conf".ivars."validators_proposer_default_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS" 
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS" 
 priority = "low"
 summary = "Default fee recipient sent to the execution engine, which could use it as a fee recipient when producing a new execution block."
 
@@ -131,7 +131,7 @@ summary = "Path/filename of the YAML config file."
 # type = "string"
 # default = ""
 # priority = "low"
-# summary = "Path to the base directory for storage. Default: /home/eniko/.local/share/teku."
+# summary = "Path to the base directory for storage. Default: $HOME/.local/share/teku."
 
 [config."teku-validator.conf".ivars."data_validator_path"]
 type = "string"

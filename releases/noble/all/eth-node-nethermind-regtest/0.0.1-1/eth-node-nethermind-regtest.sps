@@ -60,7 +60,7 @@ format = "plain"
 
 [config."nethermind-regtest.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nethermind"
+default = "$DATA_DIR/nethermind"
 priority = "low"
 summary = "Data directory for Nethermind"
 
@@ -104,7 +104,7 @@ summary = "The Engine API port"
 
 [config."nethermind-regtest.conf".ivars."jsonrpc_jwt_secret_file"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Path to JWT secret file for Engine API authentication"
 
@@ -116,13 +116,13 @@ summary = "Config file path"
 
 [config."nethermind-regtest.conf".ivars."init_chain_spec_path"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/chainspec.json"
+default = "$TESTNET_DIR/chainspec.json"
 priority = "low"
 summary = "Path to the chain spec file"
 
 [config."nethermind-regtest.conf".ivars."network_bootnodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "Comma-separated enode list used as boot nodes"
 
@@ -136,7 +136,7 @@ summary = "Max allowed number of connected peers."
 
 [config."nethermind-regtest.conf".ivars."init_log_directory"]
 type = "string"
-default = "/var/logs/eth-node-regtest/nethermind"
+default = "$LOG_DIR/nethermind"
 priority = "low"
 summary = "Path to the Nethermind logs directory."
 

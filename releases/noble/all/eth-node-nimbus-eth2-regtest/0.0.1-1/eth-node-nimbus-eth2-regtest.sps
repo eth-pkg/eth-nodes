@@ -66,25 +66,25 @@ summary = "Do not display interactive prompts. Quit on missing configuration."
 
 [config."nimbus-eth2-regtest.conf".ivars."network"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR"
+default = "$TESTNET_DIR"
 priority = "low"
 summary = "The Eth2 network to join [=mainnet]."
 
 [config."nimbus-eth2-regtest.conf".ivars."data_dir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/nimbus-eth2"
+default = "$DATA_DIR/nimbus-eth2"
 priority = "low"
 summary = "The directory where nimbus will store all blockchain data."
 
 [config."nimbus-eth2-regtest.conf".ivars."web3_url"]
 type = "string"
-default = "$BASE_CONFIG_ENDPOINT_URL"
+default = "$ENDPOINT_URL"
 priority = "low"
 summary = "One or more execution layer Engine API URLs."
 
 [config."nimbus-eth2-regtest.conf".ivars."jwt_secret"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "A file containing the hex-encoded 256 bit secret key to be used for verifying/generating JWT tokens."
 
@@ -119,7 +119,7 @@ summary = "Enable the REST server [=false]."
 
 [config."nimbus-eth2-regtest.conf".ivars."rest_port"]
 type = "string"
-default = "$BASE_CONFIG_CL_RPC_PORT"
+default = "$CL_RPC_PORT"
 priority = "low"
 summary = "Port for the REST server [=5052]."
 

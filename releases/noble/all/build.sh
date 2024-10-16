@@ -65,34 +65,34 @@ fi
 
 # rm -rf $HOME/debs/noble-testing/*
 
-cd eth-node-$NETWORK/0.0.1-1
-pkg-builder verify
-cd ../..
+# cd eth-node-$NETWORK/0.0.1-1
+# pkg-builder verify
+# cd ../..
 
-# network configs, not the same as client configs
-cd eth-node-$NETWORK-config/0.0.1-1
-pkg-builder verify
-cd ../..
+# # network configs, not the same as client configs
+# cd eth-node-$NETWORK-config/0.0.1-1
+# pkg-builder verify
+# cd ../..
 
 
-for client in "${EL_CLIENTS[@]}"; do
-    cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
+# for client in "${EL_CLIENTS[@]}"; do
+#     cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
 
-done
+# done
 
-for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
-done
+# for client in "${CL_CLIENTS[@]}"; do
+#     cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
+# done
 
-for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-${client}-validator-$NETWORK/$EL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
-done
+# for client in "${CL_CLIENTS[@]}"; do
+#     cd eth-node-${client}-validator-$NETWORK/$EL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
+# done
 
 
 

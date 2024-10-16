@@ -60,14 +60,14 @@ format = "plain"
 
 [config."reth-regtest.conf".ivars."chain"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE"
+default = "$TESTNET_DIR/genesis.json"
 priority = "low"
 summary = "The chain this node is running."
 
 
 [config."reth-regtest.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/reth"
+default = "$DATA_DIR/reth"
 priority = "low"
 summary = '''
 The path to the data dir for all reth files and subdirectories.
@@ -75,7 +75,7 @@ The path to the data dir for all reth files and subdirectories.
 
 [config."reth-regtest.conf".ivars."authrpc_jwtsecret"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = '''
 Path to a JWT secret to use for the authenticated engine-API RPC server.
@@ -83,7 +83,7 @@ Path to a JWT secret to use for the authenticated engine-API RPC server.
 
 [config."reth-regtest.conf".ivars."authrpc_addr"]
 type = "string"
-default = "$BASE_CONFIG_ENGINE_IP"
+default = "$ENGINE_IP"
 priority = "low"
 summary = '''
 Auth server address to listen on.
@@ -91,7 +91,7 @@ Auth server address to listen on.
 
 [config."reth-regtest.conf".ivars."authrpc_port"]
 type = "string"
-default = "$BASE_CONFIG_ENGINE_API_PORT"
+default = "$ENGINE_API_PORT"
 priority = "low"
 summary = '''
 Auth server port to listen on.
@@ -114,7 +114,7 @@ HTTP server address to listen on.
 
 [config."reth-regtest.conf".ivars."http_port"]
 type = "string"
-default = "$BASE_CONFIG_EL_RPC_PORT"
+default = "$EL_RPC_PORT"
 priority = "low"
 summary = '''
 HTTP server port to listen on.
@@ -148,7 +148,7 @@ The path to put log files in.
 
 [config."reth-regtest.conf".ivars."bootnodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = '''
 Comma-separated enode URLs for P2P discovery bootstrap.

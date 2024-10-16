@@ -63,13 +63,13 @@ format = "plain"
 
 [config."geth-regtest.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/geth"
+default = "$DATA_DIR/geth"
 priority = "low"
 summary = "Data directory for the databases and keystore"
 
 [config."geth-regtest.conf".ivars."authrpc_jwtsecret"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Path to a JWT secret to use for authenticated RPC endpoints"
 
@@ -118,7 +118,7 @@ summary = "Allow insecure account unlocking when account-related RPCs are expose
 
 [config."geth-regtest.conf".ivars."password"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/geth/geth_password.txt"
+default = "$DATA_DIR/geth/geth_password.txt"
 priority = "low"
 summary = "Password file to use for non-interactive password input"
 
@@ -132,21 +132,21 @@ summary = "Disables the peer discovery mechanism (manual peer addition)"
 
 [config."geth-regtest.conf".ivars."networkid"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_NETWORK_ID"
+default = "$NETWORK_ID"
 priority = "low"
 summary = "Explicitly set network ID (integer)"
 
 
 [config."geth-regtest.conf".ivars."bootnodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "Comma separated enode URLs for P2P discovery bootstrap"
 
 
 [config."geth-regtest.conf".ivars."log_file"]
 type = "string"
-default = "/var/logs/eth-node-regtest/geth/geth.log"
+default = "$LOG_DIR/geth/geth.log"
 priority = "low"
 summary = "Write logs to a file."
 

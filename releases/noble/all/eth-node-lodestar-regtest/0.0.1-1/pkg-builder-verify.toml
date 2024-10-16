@@ -5,6 +5,6 @@ package_hash=[
     # { hash="9ec55e9c0b1ac0a7ef744e02f2080f361c703c1f", name= "eth-node-lodestar-regtest_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-lodestar-regtest_0.0.1.orig.tar.gz"},
     # { hash="dd7da20cafcbbeaf2a8fcb79aaedcfebc2681842", name= "eth-node-lodestar-regtest_0.0.1-1.debian.tar.xz"},
-    { hash="e4704a3f5315d67eca92abf4ef12f1a55dee4ae4", name= "eth-node-lodestar-regtest_0.0.1-1_all.deb"},
+    { hash="8ec0ac25c9acc11ece12432f866b64a96b03bdf7", name= "eth-node-lodestar-regtest_0.0.1-1_all.deb"},
 
 ]

@@ -63,7 +63,7 @@ format = "plain"
 
 [config."lodestar-regtest.conf".ivars."data_dir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/lodestar"
+default = "$DATA_DIR/lodestar"
 priority = "low"
 summary = "Lodestar root data directory"
 
@@ -124,19 +124,19 @@ summary = "Subscribe to all subnets regardless of validator count"
 
 [config."lodestar-regtest.conf".ivars."jwt_secret"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Path to shared JWT secret for authentication with EL client's RPC server"
 
 [config."lodestar-regtest.conf".ivars."params_file"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_CHAINCONFIG"
+default = "$TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Network configuration file"
 
 [config."lodestar-regtest.conf".ivars."genesis_state_file"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_STATE"
+default = "$TESTNET_DIR/genesis.ssz"
 priority = "low"
 summary = "Genesis state file for custom network"
 
@@ -149,13 +149,13 @@ summary = "Bootnodes for discv5 discovery"
 
 [config."lodestar-regtest.conf".ivars."rest_port"]
 type = "string"
-default = "$BASE_CONFIG_CL_RPC_PORT"
+default = "$CL_RPC_PORT"
 priority = "low"
 summary = "Set port for HTTP API (custom config)"
 
 [config."lodestar-regtest.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = ""
 

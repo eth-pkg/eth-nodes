@@ -63,13 +63,13 @@ format = "plain"
 
 [config."besu-regtest.conf".ivars."data_path"]
 type = "string"
-default = "/var/lib/eth-node-regtest/besu"
+default = "$DATA_DIR/besu"
 priority = "low"
-summary = "Path to Besu data directory (default: /var/lib/eth-node-regtest/besu)"
+summary = "Path to Besu data directory (default: $DATA_DIR/besu)"
 
 [config."besu-regtest.conf".ivars."engine_jwt_secret"]
 type = "string"
-default = "/etc/eth-node-regtest/jwt.hex"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Disable authentication for Engine APIs (default: false)."
 
@@ -81,13 +81,13 @@ summary = "Synchronize against the indicated network: MAINNET, SEPOLIA, GOERLI, 
 
 [config."besu-regtest.conf".ivars."bootnodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENODE"
+default = "$BOOTNODES_ENODE"
 priority = "low"
 summary = "Comma separated enode URLs for P2P discovery bootstrap."
 
 [config."besu-regtest.conf".ivars."network_id"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_NETWORK_ID"
+default = "$NETWORK_ID"
 priority = "low"
 summary = "P2P network identifier. (default: the selected network chain ID or custom genesis chain ID)"
 
@@ -106,7 +106,7 @@ summary = "Synchronization mode, possible values are FULL, FAST, SNAP, CHECKPOIN
 
 [config."besu-regtest.conf".ivars."genesis_file"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/besu.json"
+default = "$TESTNET_DIR/besu.json"
 priority = "low"
 summary = "Genesis file for your custom network. Requires --network-id to be set. Cannot be used with --network."
 

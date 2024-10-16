@@ -64,7 +64,7 @@ format = "plain"
 
 [config."prysm-validator.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/prysm-validator"
+default = "$DATA_DIR/prysm-validator"
 priority = "low"
 summary = "Data directory for the databases."
 
@@ -76,38 +76,38 @@ summary = "Accepts Terms and Conditions (for non-interactive environments). (def
 
 [config."prysm-validator.conf".ivars."wallet_dir"]
 type = "string"
-default = "/var/lib/eth-node-regtest/prysm-validator"
+default = "$DATADIR/prysm-validator"
 priority = "low"
 summary = "Path to a wallet directory on-disk for Prysm validator accounts. (default: \"$HOME/.eth2validators/prysm-wallet-v2\")"
 
 [config."prysm-validator.conf".ivars."wallet_password_file"]
 type = "string"
-default = "/var/lib/eth-node-regtest/prysm-validator/dummy_wallet_password.txt"
+default = "$DATADIR/prysm-validator/dummy_wallet_password.txt"
 priority = "low"
 summary = "Path to a plain-text, .txt file containing your wallet password."
 
 
 [config."prysm-validator.conf".ivars."account_password_file"]
 type = "string"
-default = "/var/lib/eth-node-regtest/prysm-validator/passwords/keystore-m_12381_3600_0_0_0-1726217560.txt"
+default = "$DATADIR/prysm-validator/passwords/keystore-m_12381_3600_0_0_0-1726217560.txt"
 priority = "low"
 summary = ""
 
 [config."prysm-validator.conf".ivars."wallet_keystore"]
 type = "string"
-default = "/var/lib/eth-node-regtest/prysm-validator/keys"
+default = "$DATADIR/prysm-validator/keys"
 priority = "low"
 summary = ""
 
 [config."prysm-validator.conf".ivars."chain_config_file"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_TESTNET_DIR/config.yaml"
+default = "$TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Path to a YAML file with chain config values."
 
 [config."prysm-validator.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Sets ALL validators' mapping to a suggested eth address to receive gas fees when proposing a block. This is a suggestion when integrating with a Builder API. (default: \"0x0000000000000000000000000000000000000000\")"
 
@@ -514,7 +514,7 @@ summary = "Enables the use of prysm validator client in Distributed Validator Cl
 type = "string"
 default = ""
 priority = "low"
-summary = "Path to auth token file used for validator APIs. (default: \"/home/eniko/.eth2validators/prysm-wallet-v2/auth-token\")"
+summary = "Path to auth token file used for validator APIs. (default: \"$HOME/.eth2validators/prysm-wallet-v2/auth-token\")"
 
 [config."prysm-validator.conf".ivars."web"]
 type = "string"

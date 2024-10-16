@@ -69,13 +69,13 @@ format = "plain"
 
 [config."lodestar-validator.conf".ivars."params_file"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_CHAINCONFIG"
+default = "$TESTNET_DIR/config.yaml"
 priority = "low"
 summary = "Network configuration file"
 
 [config."lodestar-validator.conf".ivars."beacon_nodes"]
 type = "string"
-default = "http://127.0.0.1:$BASE_CONFIG_CL_RPC_PORT"
+default = "http://127.0.0.1:$CL_RPC_PORT"
 priority = "low"
 summary = "Bootnodes for discv5 discovery"
 
@@ -88,14 +88,14 @@ summary = "Enable/disable usage of produceBlockV3 for block production"
 
 [config."lodestar-validator.conf".ivars."import_keystores"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lodestar-validator/keys"
+default = "$DATADIR/lodestar-validator/keys"
 priority = "low"
 summary = "Path(s) to a directory or single file path to validator keystores"
 
 
 [config."lodestar-validator.conf".ivars."import_keystores_password"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lodestar-validator/passwords/keystore-m_12381_3600_0_0_0-1728531488.txt"
+default = "$DATADIR/lodestar-validator/passwords/keystore-m_12381_3600_0_0_0-1728531488.txt"
 priority = "low"
 summary = "Path to a file with password to decrypt all keystores from importKeystores"
 
@@ -109,14 +109,14 @@ summary = "Disable the thread pool for keystore operations"
 
 [config."lodestar-validator.conf".ivars."data_dir"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lodestar-validator"
+default = "$DATADIR/lodestar-validator"
 priority = "low"
 summary = "Lodestar root data directory"
 
 
 [config."lodestar-validator.conf".ivars."suggested_fee_recipient"]
 type = "string"
-default = "$BASE_CONFIG_VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Specify fee recipient default for collecting EL block fees and rewards"
 

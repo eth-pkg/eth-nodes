@@ -64,13 +64,13 @@ format = "plain"
 
 [config."erigon-regtest.conf".ivars."networkid"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_NETWORK_ID"
+default = "$NETWORK_ID"
 priority = "low"
 summary = "Explicitly set network ID (integer)"
 
 [config."erigon-regtest.conf".ivars."datadir"]
 type = "string"
-default = "$BASE_CONFIG_DATA_DIR/erigon"
+default = "$DATA_DIR/erigon"
 priority = "low"
 summary = "Data directory for the databases"
 
@@ -89,7 +89,7 @@ summary = "Comma separated list of virtual hostnames from which to accept reques
 
 [config."erigon-regtest.conf".ivars."authrpc_addr"]
 type = "string"
-default = "$BASE_CONFIG_ENGINE_IP"
+default = "$ENGINE_IP"
 priority = "low"
 summary = "HTTP-RPC server listening interface for the Engine API"
 
@@ -101,7 +101,7 @@ summary = "Comma separated list of virtual hostnames from which to accept Engine
 
 [config."erigon-regtest.conf".ivars."authrpc_jwtsecret"]
 type = "string"
-default = "$BASE_CONFIG_SECRETS_FILE"
+default = "$JWT_FILE"
 priority = "low"
 summary = "Path to the token that ensures safe connection between CL and EL"
 
@@ -113,13 +113,13 @@ summary = "JSON-RPC server (enabled by default)"
 
 [config."erigon-regtest.conf".ivars."bootnodes"]
 type = "string"
-default = "$BASE_CONFIG_CUSTOM_NETWORK_BOOTNODES_ENR"
+default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "Comma separated enode URLs for P2P discovery bootstrap"
 
 [config."erigon-regtest.conf".ivars."http_addr"]
 type = "string"
-default = "$BASE_CONFIG_ENGINE_IP"
+default = "$ENGINE_IP"
 priority = "low"
 summary = "HTTP-RPC server listening interface"
 
@@ -132,7 +132,7 @@ summary = "Comma separated list of domains from which to accept cross-origin req
 
 [config."erigon-regtest.conf".ivars."log_dir_path"]
 type = "string"
-default = "/var/log/regtest/erigon"
+default = "$LOG_DIR/erigon"
 priority = "low"
 summary = "Path to store user and error logs to disk"
 
