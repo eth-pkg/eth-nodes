@@ -143,6 +143,19 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = ""
 
+[config."teku-regtest.conf".ivars."log_destination"]
+type = "string"
+default = "FILE" 
+priority = "low"
+summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM)."
+
+[config."teku-regtest.conf".ivars."log_file"]
+type = "string"
+default = "$LOG_DIR/teku/teku.log" 
+priority = "low"
+summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
+
+
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
@@ -703,17 +716,17 @@ default = ""
 priority = "low"
 summary = "Whether Status and Event log messages include a console color display code."
 
-[config."teku-regtest.conf".ivars."log_destination"]
-type = "string"
-default = "" 
-priority = "low"
-summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM)."
+# [config."teku-regtest.conf".ivars."log_destination"]
+# type = "string"
+# default = "" 
+# priority = "low"
+# summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM)."
 
-[config."teku-regtest.conf".ivars."log_file"]
-type = "string"
-default = "" 
-priority = "low"
-summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
+# [config."teku-regtest.conf".ivars."log_file"]
+# type = "string"
+# default = "" 
+# priority = "low"
+# summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
 
 [config."teku-regtest.conf".ivars."log_file_name_pattern"]
 type = "string"

@@ -141,6 +141,11 @@ default = "false"
 priority = "low"
 summary = "Disable the push model and load the validators in the beacon node itself [=true]."
 
+[config."nimbus-eth2-regtest.conf".ivars."log_file"]
+type = "string"
+default = "$LOG_DIR/nimbus-eth2/nimbus-eth2.log"
+priority = "low"
+summary = "Specifies a path for the written JSON log file (deprecated)."
 
 #############################################################################################
 #############################################################################################
@@ -161,11 +166,11 @@ default = ""
 priority = "low"
 summary = "Sets the log level for process and topics (e.g. 'DEBUG; TRACE:discv5,libp2p; REQUIRED:none; DISABLED:none') [=INFO]."
 
-[config."nimbus-eth2-regtest.conf".ivars."log_file"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Specifies a path for the written JSON log file (deprecated)."
+# [config."nimbus-eth2-regtest.conf".ivars."log_file"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Specifies a path for the written JSON log file (deprecated)."
 
 # [config."nimbus-eth2-regtest.conf".ivars."network"]
 # type = "string"

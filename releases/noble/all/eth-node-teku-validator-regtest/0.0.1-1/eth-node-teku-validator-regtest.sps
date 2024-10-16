@@ -80,10 +80,16 @@ default = "$DATA_DIR/teku-validator/keys:$DATA_DIR/teku-validator/passwords"
 priority = "low"
 summary = "<KEY_DIR>:<PASS_DIR> will find <KEY_DIR>/**.json and expect to find <PASS_DIR>/**.txt. <KEY_FILE>:<PASS_FILE> will expect that the file <KEY_FILE> exists, and the file containing the password for it is <PASS_FILE>. The path separator is operating system dependent, and should be ';' in Windows rather than ':'. Default: []"
 
+[config."teku-validator.conf".ivars."log_destination"]
+type = "string"
+default = "FILE"
+priority = "low"
+summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM). Default: DEFAULT_BOTH."
+
 
 [config."teku-validator.conf".ivars."log_file"]
 type = "string"
-default = "$DATA_DIR/teku-validator/logs/teku.log"  
+default = "$LOG_DIR/teku-validator/teku.log"  
 priority = "low"
 summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
 
@@ -163,11 +169,11 @@ default = ""
 priority = "low"
 summary = "Whether Status and Event log messages include a console color display code. Default: true."
 
-[config."teku-validator.conf".ivars."log_destination"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM). Default: DEFAULT_BOTH."
+# [config."teku-validator.conf".ivars."log_destination"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM). Default: DEFAULT_BOTH."
 
 # [config."teku-validator.conf".ivars."log_file"]
 # type = "string"

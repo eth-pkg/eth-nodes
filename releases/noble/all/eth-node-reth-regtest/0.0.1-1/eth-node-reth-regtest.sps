@@ -140,7 +140,7 @@ HTTP CORS domain to allow requests from.
 
 [config."reth-regtest.conf".ivars."log_file_directory"]
 type = "string"
-default = "/var/logs/eth-node-regtest/reth/logs"
+default = "$LOG_DIR/reth"
 priority = "low"
 summary = '''
 The path to put log files in.

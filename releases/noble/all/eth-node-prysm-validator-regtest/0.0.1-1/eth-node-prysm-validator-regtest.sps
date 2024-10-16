@@ -111,6 +111,12 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Sets ALL validators' mapping to a suggested eth address to receive gas fees when proposing a block. This is a suggestion when integrating with a Builder API. (default: \"0x0000000000000000000000000000000000000000\")"
 
+[config."prysm-validator.conf".ivars."log_file"]
+type = "string"
+default = "$LOG_DIR/prysm-validator/prysm.log"
+priority = "low"
+summary = "Specifies log file name, relative or absolute."
+
 
 #############################################################################################
 #############################################################################################
@@ -200,11 +206,11 @@ default = ""
 priority = "low"
 summary = "Integer to define max receive message call size (in bytes). Validators with as many as 10000 keys can be run with a max message size of less than 50Mb. The default is set to a high value for local users. (default: 2147483647)"
 
-[config."prysm-validator.conf".ivars."log_file"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Specifies log file name, relative or absolute."
+# [config."prysm-validator.conf".ivars."log_file"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Specifies log file name, relative or absolute."
 
 [config."prysm-validator.conf".ivars."log_format"]
 type = "string"

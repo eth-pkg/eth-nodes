@@ -87,7 +87,7 @@ add_option() {
 
 add_option "--config-file" "$config_file"
 add_option "--log-level" "$log_level"
-add_option "--log-file" "$log_file"
+# add_option "--log-file" "$log_file"
 add_option "--network" "$network"
 add_option "--data-dir" "$data_dir"
 add_option "--validators-dir" "$validators_dir"
@@ -184,4 +184,4 @@ if [ -n "$finalized_checkpoint_state" ]; then
 fi
 
 # on ci the postrm fails, so it not in path
-exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node $OPTIONS
+exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node $OPTIONS > $log_file

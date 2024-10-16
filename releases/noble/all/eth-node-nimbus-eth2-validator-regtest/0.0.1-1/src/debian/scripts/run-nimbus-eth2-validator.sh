@@ -88,7 +88,7 @@ append_flag(){
 
 append_option "--config-file" "$config_file"
 append_option "--log-level" "$log_level"
-append_option "--log-file" "$log_file"
+# append_option "--log-file" "$log_file"
 append_option "--data-dir" "$datadir"
 append_option "--doppelganger-detection" "$doppelganger_detection"
 append_option "--non-interactive" "$non_interactive"
@@ -129,4 +129,4 @@ echo "Using Options /usr/lib/eth-node-nimbus-eth2/bin/validator: $OPTIONS"
 #   --data-dir:/var/lib/eth-node-regtest/nimbus-eth2-validator 
 
 # TODO 
-exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client $OPTIONS
+exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client $OPTIONS > $log_file

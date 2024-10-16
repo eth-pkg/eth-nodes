@@ -190,6 +190,11 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Post bellatrix, this address will receive the transaction fees produced by any blocks from this node. (default: \"0x0000000000000000000000000000000000000000\")"
 
+[config."prysm-regtest.conf".ivars."log_file"]
+type = "string"
+default = "$LOG_DIR/prysm/prysm.log"
+priority = "low"
+summary = "Specifies log file name, relative or absolute."
 
 #############################################################################################
 #############################################################################################
@@ -834,11 +839,11 @@ priority = "low"
 summary = "The size of the pubsub validation and outbound queue for the node. (default: 1000)"
 
 # log options
-[config."prysm-regtest.conf".ivars."log_file"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Specifies log file name, relative or absolute."
+# [config."prysm-regtest.conf".ivars."log_file"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Specifies log file name, relative or absolute."
 
 [config."prysm-regtest.conf".ivars."log_format"]
 type = "string"

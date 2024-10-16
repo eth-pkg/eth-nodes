@@ -92,6 +92,12 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Suggested fee recipient."
 
+[config."nimbus-eth2-validator.conf".ivars."log_file"]
+type = "string"
+default = "$LOG_DIR/nimbus-eth2-validator/nimbus-eth2.log"
+priority = "low"
+summary = "Specifies a path for the written JSON log file (deprecated)."
+
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
@@ -111,11 +117,11 @@ default = ""
 priority = "low"
 summary = "Sets the log level [=INFO]."
 
-[config."nimbus-eth2-validator.conf".ivars."log_file"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Specifies a path for the written JSON log file (deprecated)."
+# [config."nimbus-eth2-validator.conf".ivars."log_file"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Specifies a path for the written JSON log file (deprecated)."
 
 # [config."nimbus-eth2-validator.conf".ivars."datadir"]
 # type = "string"
