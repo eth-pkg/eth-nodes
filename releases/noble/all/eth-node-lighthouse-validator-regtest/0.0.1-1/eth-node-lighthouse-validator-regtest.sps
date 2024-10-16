@@ -109,6 +109,12 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "The address that will receive transaction fees post-merge."
 
+[config."lighthouse-validator.conf".ivars."logfile"]
+type = "string"
+default = "$LOG_DIR/lighthouse.log"
+priority = "low"
+summary = "File path where the log file will be stored."
+
 
 #############################################################################################
 #############################################################################################
@@ -346,11 +352,11 @@ default = ""
 priority = "low"
 summary = "Specifies the format used for terminal logs."
 
-[config."lighthouse-validator.conf".ivars."logfile"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Path for storing log files."
+# [config."lighthouse-validator.conf".ivars."logfile"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Path for storing log files."
 
 [config."lighthouse-validator.conf".ivars."logfile_debug_level"]
 type = "string"

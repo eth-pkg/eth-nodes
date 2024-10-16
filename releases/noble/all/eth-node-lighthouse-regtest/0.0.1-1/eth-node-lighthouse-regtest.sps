@@ -187,6 +187,11 @@ default = "$BOOTNODES_ENR"
 priority = "low"
 summary = "Comma-delimited list of base64-encoded ENR's or Multiaddrs to bootstrap the p2p network."
 
+[config."lighthouse-regtest.conf".ivars."logfile"]
+type = "string"
+default = "$LOG_DIR/lighthouse.log"
+priority = "low"
+summary = "File path where the log file will be stored."
 
 #############################################################################################
 #############################################################################################
@@ -796,11 +801,11 @@ default = ""
 priority = "low"
 summary = "Specify the log format when emitting logs to the terminal."
 
-[config."lighthouse-regtest.conf".ivars."logfile"]
-type = "string"
-default = ""
-priority = "low"
-summary = "File path where the log file will be stored."
+# [config."lighthouse-regtest.conf".ivars."logfile"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "File path where the log file will be stored."
 
 [config."lighthouse-regtest.conf".ivars."logfile_debug_level"]
 type = "string"
