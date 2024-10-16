@@ -76,26 +76,26 @@ summary = "Accepts Terms and Conditions (for non-interactive environments). (def
 
 [config."prysm-validator.conf".ivars."wallet_dir"]
 type = "string"
-default = "$DATADIR/prysm-validator"
+default = "$DATA_DIR/prysm-validator"
 priority = "low"
 summary = "Path to a wallet directory on-disk for Prysm validator accounts. (default: \"$HOME/.eth2validators/prysm-wallet-v2\")"
 
 [config."prysm-validator.conf".ivars."wallet_password_file"]
 type = "string"
-default = "$DATADIR/prysm-validator/dummy_wallet_password.txt"
+default = "$DATA_DIR/prysm-validator/dummy_wallet_password.txt"
 priority = "low"
 summary = "Path to a plain-text, .txt file containing your wallet password."
 
 
 [config."prysm-validator.conf".ivars."account_password_file"]
 type = "string"
-default = "$DATADIR/prysm-validator/passwords/keystore-m_12381_3600_0_0_0-1726217560.txt"
+default = "$DATA_DIR/prysm-validator/passwords/keystore-m_12381_3600_0_0_0-1726217560.txt"
 priority = "low"
 summary = ""
 
 [config."prysm-validator.conf".ivars."wallet_keystore"]
 type = "string"
-default = "$DATADIR/prysm-validator/keys"
+default = "$DATA_DIR/prysm-validator/keys"
 priority = "low"
 summary = ""
 
