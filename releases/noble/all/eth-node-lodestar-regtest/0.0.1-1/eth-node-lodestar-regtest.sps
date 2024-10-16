@@ -159,6 +159,12 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = ""
 
+[config."lodestar-regtest.conf".ivars."log_file"]
+type = "string"
+default = "$LOG_DIR/lodestar/lodestar.log"
+priority = "low"
+summary = "Path to output all logs to a persistent log file"
+
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
@@ -549,11 +555,11 @@ default = ""
 priority = "low"
 summary = "Logging verbosity level for emitting logs to terminal"
 
-[config."lodestar-regtest.conf".ivars."log_file"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Path to output all logs to a persistent log file"
+# [config."lodestar-regtest.conf".ivars."log_file"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Path to output all logs to a persistent log file"
 
 [config."lodestar-regtest.conf".ivars."log_file_level"]
 type = "string"

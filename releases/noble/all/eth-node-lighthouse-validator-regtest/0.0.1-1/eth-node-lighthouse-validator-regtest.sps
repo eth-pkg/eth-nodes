@@ -111,7 +111,7 @@ summary = "The address that will receive transaction fees post-merge."
 
 [config."lighthouse-validator.conf".ivars."logfile"]
 type = "string"
-default = "$LOG_DIR/lighthouse.log"
+default = "$LOG_DIR/lighthouse-validator/lighthouse.log"
 priority = "low"
 summary = "File path where the log file will be stored."
 

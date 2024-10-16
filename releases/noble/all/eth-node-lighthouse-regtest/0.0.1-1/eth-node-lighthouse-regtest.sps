@@ -189,7 +189,7 @@ summary = "Comma-delimited list of base64-encoded ENR's or Multiaddrs to bootstr
 
 [config."lighthouse-regtest.conf".ivars."logfile"]
 type = "string"
-default = "$LOG_DIR/lighthouse.log"
+default = "$LOG_DIR/lighthouse/lighthouse.log"
 priority = "low"
 summary = "File path where the log file will be stored."
 
