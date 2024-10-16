@@ -44,6 +44,7 @@ WorkingDirectory=/var/lib/eth-node-regtest/besu
 add_files = [
     "debian/scripts/run-besu-service.sh /usr/lib/eth-node-besu-regtest/", 
     "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-regtest/bin/",
+    "debian/scripts/admin.xml /usr/lib/eth-node-besu-regtest/",
     "debian/tmp/eth-node-besu-regtest.service /lib/systemd/system/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-besu-regtest",
 ]

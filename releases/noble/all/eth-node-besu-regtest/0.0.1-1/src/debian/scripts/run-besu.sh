@@ -273,6 +273,6 @@ append_option "--rpc-max-trace-filter-range" "$rpc_max_trace_filter_range"
 
 
 
-echo "Running: besu $OPTIONS"
+echo "Running: LOG4J_CONFIGURATION_FILE=/usr/lib/eth-node-besu-regtest/admin.xml besu $OPTIONS"
 
-exec besu $OPTIONS
+LOG4J_CONFIGURATION_FILE=/usr/lib/eth-node-besu-regtest/admin.xml exec besu $OPTIONS
