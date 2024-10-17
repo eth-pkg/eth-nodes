@@ -1,0 +1,36 @@
+Index: eth-node-nethermind-1.27.0/src/Nethermind/Directory.Build.props
+===================================================================
+--- eth-node-nethermind-1.27.0.orig/src/Nethermind/Directory.Build.props
++++ eth-node-nethermind-1.27.0/src/Nethermind/Directory.Build.props
+@@ -10,7 +10,6 @@
+   </PropertyGroup>
+ 
+   <PropertyGroup Label="ProductInfo">
+-    <BuildTimestamp Condition="'$(BuildTimestamp)' == ''">$([System.DateTimeOffset]::UtcNow.ToUnixTimeSeconds())</BuildTimestamp>
+     <Copyright>Demerzel Solutions Limited</Copyright>
+     <Product>Nethermind</Product>
+     <SourceRevisionId Condition="'$(Commit)' != ''">$(Commit)</SourceRevisionId>
+@@ -18,11 +17,4 @@
+     <VersionSuffix></VersionSuffix>
+   </PropertyGroup>
+ 
+-  <ItemGroup Label="AssemblyCustomMetadata">
+-    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+-      <_Parameter1>BuildTimestamp</_Parameter1>
+-      <_Parameter2>$(BuildTimestamp)</_Parameter2>
+-    </AssemblyAttribute>
+-  </ItemGroup>
+-
+ </Project>
+Index: eth-node-nethermind-1.27.0/src/Nethermind/Nethermind.Runner/Program.cs
+===================================================================
+--- eth-node-nethermind-1.27.0.orig/src/Nethermind/Nethermind.Runner/Program.cs
++++ eth-node-nethermind-1.27.0/src/Nethermind/Nethermind.Runner/Program.cs
+@@ -584,7 +584,6 @@ public static class Program
+         info
+             .Append("Version: ").AppendLine(ProductInfo.Version)
+             .Append("Commit: ").AppendLine(ProductInfo.Commit)
+-            .Append("Build Date: ").AppendLine(ProductInfo.BuildTimestamp.ToString("u"))
+             .Append("OS: ")
+             .Append(ProductInfo.OS)
+             .Append(' ')
