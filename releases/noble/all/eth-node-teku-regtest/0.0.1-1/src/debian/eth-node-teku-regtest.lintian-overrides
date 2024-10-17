@@ -1,7 +1,7 @@
 eth-node-teku-regtest: extended-description-is-empty
 eth-node-teku-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-teku-regtest" [postinst:8]
 eth-node-teku-regtest: no-copyright-file
-eth-node-teku-regtest: no-template-description eth-node-teku-regtest/engine_jwt_disabled [templates:441]
+eth-node-teku-regtest: no-template-description *
 eth-node-teku-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-teku-regtest/changelog.Debian.gz:1]
 eth-node-teku-regtest: maintainer-script-ignores-errors [config]
 eth-node-teku-regtest: maintainer-script-ignores-errors [postrm]

@@ -294,9 +294,10 @@ append_option "--vmtrace.jsonconfig" "$vmtrace_jsonconfig"
 
 
 
-if [ -n "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE" ]; then
+
+if [ -n "$TESTNET_DIR" ]; then
     echo "Importing genesis state"
-    geth init --datadir "$GETH_CLI_DATADIR" "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE"
+    geth init --datadir "$datadir" "$TESTNET_DIR/genesis.json"
 fi
 
 echo "Using Options: geth $OPTIONS"
