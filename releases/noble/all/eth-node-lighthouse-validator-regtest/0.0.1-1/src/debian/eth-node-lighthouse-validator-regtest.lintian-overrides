@@ -6,7 +6,6 @@ eth-node-lighthouse-validator-regtest: initial-upload-closes-no-bugs [usr/share/
 eth-node-lighthouse-validator-regtest: maintainer-script-ignores-errors [config]
 eth-node-lighthouse-validator-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-lighthouse-validator-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
-eth-node-lighthouse-validator-regtest: malformed-prompt-in-templates eth-node-lighthouse-validator-regtest/api_gas_price_blocks [templates:749]
 eth-node-lighthouse-validator-regtest: malformed-prompt-in-templates *
 eth-node-lighthouse-validator-regtest: script-not-executable [usr/lib/eth-node-lighthouse-validator-regtest/postprocess.sh]
 eth-node-lighthouse-validator-regtest: too-long-short-description-in-templates *
