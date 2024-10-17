@@ -137,7 +137,7 @@ summary = "Set to start the JSON-RPC HTTP service (default: false)."
 
 [config."besu-regtest.conf".ivars."rpc_http_port"]
 type = "string"
-default = "$BASE_CONFIG_EL_RPC_PORT"
+default = "$EL_RPC_PORT"
 priority = "low"
 summary = "Port for JSON-RPC HTTP to listen on (default: 8545)."
 
