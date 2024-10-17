@@ -6,7 +6,6 @@ eth-node-nethermind-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-no
 eth-node-nethermind-regtest: maintainer-script-ignores-errors [config]
 eth-node-nethermind-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-nethermind-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
-eth-node-nethermind-regtest: malformed-prompt-in-templates eth-node-nethermind-regtest/api_gas_price_blocks [templates:749]
 eth-node-nethermind-regtest: malformed-prompt-in-templates *
 eth-node-nethermind-regtest: script-not-executable [usr/lib/eth-node-nethermind-regtest/postprocess.sh]
 eth-node-nethermind-regtest: too-long-short-description-in-templates *
