@@ -6,7 +6,6 @@ eth-node-besu-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-bes
 eth-node-besu-regtest: maintainer-script-ignores-errors [config]
 eth-node-besu-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-besu-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
-eth-node-besu-regtest: malformed-prompt-in-templates eth-node-besu-regtest/api_gas_price_blocks [templates:749]
 eth-node-besu-regtest: malformed-prompt-in-templates *
 eth-node-besu-regtest: script-not-executable [usr/lib/eth-node-besu-regtest/postprocess.sh]
 eth-node-besu-regtest: too-long-short-description-in-templates *

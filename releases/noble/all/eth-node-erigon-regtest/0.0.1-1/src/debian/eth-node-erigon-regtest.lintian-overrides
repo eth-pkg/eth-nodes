@@ -6,7 +6,6 @@ eth-node-erigon-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-e
 eth-node-erigon-regtest: maintainer-script-ignores-errors [config]
 eth-node-erigon-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-erigon-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
-eth-node-erigon-regtest: malformed-prompt-in-templates eth-node-erigon-regtest/api_gas_price_blocks [templates:749]
 eth-node-erigon-regtest: malformed-prompt-in-templates *
 eth-node-erigon-regtest: script-not-executable [usr/lib/eth-node-erigon-regtest/postprocess.sh]
 eth-node-erigon-regtest: too-long-short-description-in-templates *

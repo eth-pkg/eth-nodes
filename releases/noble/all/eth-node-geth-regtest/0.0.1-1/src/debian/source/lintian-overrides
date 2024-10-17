@@ -3,5 +3,4 @@ eth-node-geth-regtest source: no-newline-at-end [debian/changelog]
 eth-node-geth-regtest source: no-newline-at-end [debian/rules]
 eth-node-geth-regtest source: empty-upstream-sources
 eth-node-geth-regtest source: not-using-po-debconf
-eth-node-geth-regtest source: untranslatable-debconf-templates [debian/eth-node-geth-regtest.templates:104]
 eth-node-geth-regtest source: untranslatable-debconf-templates * 

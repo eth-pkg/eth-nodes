@@ -6,8 +6,7 @@ eth-node-geth-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-get
 eth-node-geth-regtest: maintainer-script-ignores-errors [config]
 eth-node-geth-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-geth-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
-eth-node-geth-regtest: malformed-prompt-in-templates eth-node-geth-regtest/api_gas_price_blocks [templates:749]
 eth-node-geth-regtest: malformed-prompt-in-templates *
 eth-node-geth-regtest: script-not-executable [usr/lib/eth-node-geth-regtest/postprocess.sh]
 eth-node-geth-regtest: too-long-short-description-in-templates *
-
+eth-node-geth-regtest: using-first-person-in-templates eth-node-geth-regtest/dev_period [templates:384]
