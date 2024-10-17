@@ -6,7 +6,6 @@ eth-node-lodestar-validator-regtest: initial-upload-closes-no-bugs [usr/share/do
 eth-node-lodestar-validator-regtest: maintainer-script-ignores-errors [config]
 eth-node-lodestar-validator-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-lodestar-validator-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
-eth-node-lodestar-validator-regtest: malformed-prompt-in-templates eth-node-lodestar-validator-regtest/api_gas_price_blocks [templates:749]
 eth-node-lodestar-validator-regtest: malformed-prompt-in-templates *
 eth-node-lodestar-validator-regtest: script-not-executable [usr/lib/eth-node-lodestar-validator-regtest/postprocess.sh]
 eth-node-lodestar-validator-regtest: too-long-short-description-in-templates *
