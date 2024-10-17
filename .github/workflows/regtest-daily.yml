@@ -3,7 +3,8 @@ name: regtest daily
 on:
   # Run daily at midnight (UTC time)
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # 12:00 AM UTC
+    - cron: '0 12 * * *'  # 12:00 PM UTC
   
 
 
@@ -534,7 +535,7 @@ jobs:
       # this works, but the problem it makes it look like that 125 tests are passed, when in practice
       # only the filtered tests passed, and the others are "fake green"
         if: matrix.cl_name == 'lighthouse' && matrix.cl_name == matrix.validator_name
-        uses: ./network-tests
+        uses: ./network-tests-testing
         with:
           network: regtest
           el_name: ${{matrix.el_name}}
