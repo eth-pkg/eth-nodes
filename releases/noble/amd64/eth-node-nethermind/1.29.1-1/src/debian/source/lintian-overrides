@@ -1,0 +1,11 @@
+eth-node-nethermind source: source-is-missing [src/Nethermind/Nethermind.Evm/Data/JSTracers/evmdisTracer.js]
+eth-node-nethermind source: source-is-missing [src/Nethermind/Nethermind.Evm/Data/JSTracers/_bigInteger.js]
+eth-node-nethermind source: debian-rules-ignores-make-clean-error [debian/rules:27]
+
+# TODO 
+eth-node-nethermind source: missing-field-in-dep5-copyright Copyright [debian/copyright:10]
+
+#TODO 
+eth-node-nethermind source: missing-field-in-dep5-copyright Copyright [debian/copyright:6]
+
+eth-node-nethermind source: no-newline-at-end [debian/changelog]

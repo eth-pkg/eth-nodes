@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  ls -la /usr/lib/eth-node-nethermind/bin || true
+  ls -la /usr/lib/eth-node-nethermind/bin/Nethermind.Runner || true
+  output="$(which nethermind)"
+  assertEquals "/usr/bin/nethermind" "$output"
+}
+
+# test_invocation_with_dotnet(){
+#   output="$(nethermind --version)"
+#   echo "$output"
+#   # checked against https://github.com/NethermindEth/nethermind/releases/download/1.21.1/nethermind-1.21.1-9b435ba0-linux-x64.zip
+#   assertEquals "$output" "Version: 1.27.0
+# OS: Linux x64
+# Runtime: .NET 8.0.6"
+# }
+
+. shunit2
