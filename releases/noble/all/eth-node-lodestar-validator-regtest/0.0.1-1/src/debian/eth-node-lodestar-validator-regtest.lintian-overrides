@@ -9,4 +9,4 @@ eth-node-lodestar-validator-regtest: maintainer-script-needs-depends-on-adduser 
 eth-node-lodestar-validator-regtest: malformed-prompt-in-templates *
 eth-node-lodestar-validator-regtest: script-not-executable [usr/lib/eth-node-lodestar-validator-regtest/postprocess.sh]
 eth-node-lodestar-validator-regtest: too-long-short-description-in-templates *
-
+eth-node-lodestar-validator-regtest: executable-not-elf-or-script [usr/lib/eth-node-lodestar-validator-regtest/bin/run-lodestar-validator.sh]
