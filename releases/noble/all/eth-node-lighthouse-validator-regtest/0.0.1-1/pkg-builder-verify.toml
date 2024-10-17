@@ -5,5 +5,5 @@ package_hash=[
     # { hash="659923d1f0978197511d73d9afc55d580ddfebd3", name= "eth-node-lighthouse-validator-regtest_0.0.1-1.dsc"},
     { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-lighthouse-validator-regtest_0.0.1.orig.tar.gz"},
     # { hash="bf0a229df898501b2599f76414604a60f9b8eb1c", name= "eth-node-lighthouse-validator-regtest_0.0.1-1.debian.tar.xz"},
-    { hash="3bd38a6f3d50c04ceb2b1a0c5a4bf9926a1346c5", name= "eth-node-lighthouse-validator-regtest_0.0.1-1_all.deb"},
+    { hash="ca742b0ea7d94970b03848f8805c08cf2d4f374e", name= "eth-node-lighthouse-validator-regtest_0.0.1-1_all.deb"},
 ]
