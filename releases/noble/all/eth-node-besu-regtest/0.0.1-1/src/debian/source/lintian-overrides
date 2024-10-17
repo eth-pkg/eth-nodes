@@ -1,3 +1,7 @@
-eth-node-regtest source: no-debian-copyright-in-source
-eth-node-regtest source: no-newline-at-end [debian/changelog]
-eth-node-regtest source: empty-upstream-sources
+eth-node-besu-regtest source: no-debian-copyright-in-source
+eth-node-besu-regtest source: no-newline-at-end [debian/changelog]
+eth-node-besu-regtest source: no-newline-at-end [debian/rules]
+eth-node-besu-regtest source: empty-upstream-sources
+eth-node-besu-regtest source: not-using-po-debconf
+eth-node-besu-regtest source: untranslatable-debconf-templates [debian/eth-node-besu-regtest.templates:104]
+eth-node-besu-regtest source: untranslatable-debconf-templates * 
