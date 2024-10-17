@@ -1,0 +1,6 @@
+eth-node-prysm (5.1.2-1) noble; urgency=medium
+
+  * Support for 5.1.2-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 17 Oct 2024 08:12:40 +0700
+
