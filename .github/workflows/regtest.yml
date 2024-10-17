@@ -535,6 +535,6 @@ jobs:
         uses: ./network-tests
         with:
           network: regtest
-          el_name: reth
+          el_name: ${{matrix.el_name}}
           cl_name: ${{matrix.cl_name}}
           validator_name: ${{matrix.cl_name}}
