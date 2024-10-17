@@ -1,0 +1,543 @@
+name: regtest daily
+
+on:
+  # Run daily at midnight (UTC time)
+  schedule:
+    - cron: '0 0 * * *' # 12:00 AM UTC
+    - cron: '0 12 * * *'  # 12:00 PM UTC
+  
+
+
+jobs:
+  test:
+    name: regtest
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        include:
+
+          ### Run only 25 tests, as it takes around 2 hours to run all the tests
+          ### github only allows 20 tests parallel
+
+
+
+          #####################################
+          ######## besu + lighthouse ##########
+          #####################################
+
+          - el_name: besu
+            cl_name: lighthouse
+            validator_name: lighthouse
+          - el_name: besu
+            cl_name: lighthouse
+            validator_name: lodestar
+          - el_name: besu
+            cl_name: lighthouse
+            validator_name: nimbus-eth2
+          - el_name: besu
+            cl_name: lighthouse
+            validator_name: prysm
+          - el_name: besu
+            cl_name: lighthouse
+            validator_name: teku
+
+          #####################################
+          ####### besu + lodestar #############
+          #####################################
+
+
+          - el_name: besu
+            cl_name: lodestar
+            validator_name: lighthouse
+          - el_name: besu
+            cl_name: lodestar
+            validator_name: lodestar
+          - el_name: besu
+            cl_name: lodestar
+            validator_name: nimbus-eth2
+          - el_name: besu
+            cl_name: lodestar
+            validator_name: prysm
+          - el_name: besu
+            cl_name: lodestar
+            validator_name: teku
+
+          #####################################
+          ####### besu + nimbus-eth2 ##########
+          #####################################
+
+          - el_name: besu
+            cl_name: nimbus-eth2
+            validator_name: lighthouse
+          - el_name: besu
+            cl_name: nimbus-eth2
+            validator_name: lodestar
+          - el_name: besu
+            cl_name: nimbus-eth2
+            validator_name: nimbus-eth2
+          - el_name: besu
+            cl_name: nimbus-eth2
+            validator_name: prysm
+          - el_name: besu
+            cl_name: nimbus-eth2
+            validator_name: teku
+
+          #####################################
+          ####### besu + prysm ################
+          #####################################
+
+          - el_name: besu
+            cl_name: prysm
+            validator_name: lighthouse
+          - el_name: besu
+            cl_name: prysm
+            validator_name: lodestar
+          - el_name: besu
+            cl_name: prysm
+            validator_name: nimbus-eth2
+          - el_name: besu
+            cl_name: prysm
+            validator_name: prysm
+          - el_name: besu
+            cl_name: prysm
+            validator_name: teku
+
+          #####################################
+          ####### besu + teku #################
+          #####################################
+
+          - el_name: besu
+            cl_name: teku
+            validator_name: lighthouse
+          - el_name: besu
+            cl_name: teku
+            validator_name: lodestar
+          - el_name: besu
+            cl_name: teku
+            validator_name: nimbus-eth2
+          - el_name: besu
+            cl_name: teku
+            validator_name: prysm
+          - el_name: besu
+            cl_name: teku
+            validator_name: teku
+
+          #####################################
+          ####### erigon + lighthouse #########  
+          #####################################
+
+          - el_name: erigon
+            cl_name: lighthouse
+            validator_name: lighthouse
+          - el_name: erigon
+            cl_name: lighthouse
+            validator_name: lodestar
+          - el_name: erigon
+            cl_name: lighthouse
+            validator_name: nimbus-eth2
+          - el_name: erigon
+            cl_name: lighthouse
+            validator_name: prysm
+          - el_name: erigon
+            cl_name: lighthouse
+            validator_name: teku
+
+          #####################################
+          ####### erigon + lodestar ###########
+          #####################################
+
+
+          - el_name: erigon
+            cl_name: lodestar
+            validator_name: lighthouse
+          - el_name: erigon
+            cl_name: lodestar
+            validator_name: lodestar
+          - el_name: erigon
+            cl_name: lodestar
+            validator_name: nimbus-eth2
+          - el_name: erigon
+            cl_name: lodestar
+            validator_name: prysm
+          - el_name: erigon
+            cl_name: lodestar
+            validator_name: teku
+
+          #####################################
+          ####### erigon + nimbus-eth2 ########
+          #####################################
+
+
+          - el_name: erigon
+            cl_name: nimbus-eth2
+            validator_name: lighthouse
+          - el_name: erigon
+            cl_name: nimbus-eth2
+            validator_name: lodestar
+          - el_name: erigon
+            cl_name: nimbus-eth2
+            validator_name: nimbus-eth2
+          - el_name: erigon
+            cl_name: nimbus-eth2
+            validator_name: prysm
+          - el_name: erigon
+            cl_name: nimbus-eth2
+            validator_name: teku
+
+          #####################################
+          ####### erigon + prysm ##############
+          #####################################
+
+
+          - el_name: erigon
+            cl_name: prysm
+            validator_name: lighthouse
+          - el_name: erigon
+            cl_name: prysm
+            validator_name: lodestar
+          - el_name: erigon
+            cl_name: prysm
+            validator_name: nimbus-eth2
+          - el_name: erigon
+            cl_name: prysm
+            validator_name: prysm
+          - el_name: erigon
+            cl_name: prysm
+            validator_name: teku
+
+          #####################################
+          ####### erigon + teku ###############
+          #####################################
+
+          - el_name: erigon
+            cl_name: teku
+            validator_name: lighthouse
+          - el_name: erigon
+            cl_name: teku
+            validator_name: lodestar
+          - el_name: erigon
+            cl_name: teku
+            validator_name: nimbus-eth2
+          - el_name: erigon
+            cl_name: teku
+            validator_name: prysm
+          - el_name: erigon
+            cl_name: teku
+            validator_name: teku
+
+
+          #####################################
+          ####### geth + lighthouse ###########
+          #####################################
+          - el_name: geth
+            cl_name: lighthouse
+            validator_name: lighthouse
+          - el_name: geth
+            cl_name: lighthouse
+            validator_name: lodestar
+          - el_name: geth
+            cl_name: lighthouse
+            validator_name: nimbus-eth2
+          - el_name: geth
+            cl_name: lighthouse
+            validator_name: prysm
+          - el_name: geth
+            cl_name: lighthouse
+            validator_name: teku
+
+
+          #####################################
+          ####### geth + lodestar #############
+          #####################################
+          - el_name: geth
+            cl_name: lodestar
+            validator_name: lighthouse
+          - el_name: geth
+            cl_name: lodestar
+            validator_name: lodestar
+          - el_name: geth
+            cl_name: lodestar
+            validator_name: nimbus-eth2
+          - el_name: geth
+            cl_name: lodestar
+            validator_name: prysm
+          - el_name: geth
+            cl_name: lodestar
+            validator_name: teku
+
+          #####################################
+          ####### geth + nimbus-eth2 ##########
+          #####################################
+          - el_name: geth
+            cl_name: nimbus-eth2
+            validator_name: lighthouse
+          - el_name: geth
+            cl_name: nimbus-eth2
+            validator_name: lodestar
+          - el_name: geth
+            cl_name: nimbus-eth2
+            validator_name: nimbus-eth2
+          - el_name: geth
+            cl_name: nimbus-eth2
+            validator_name: prysm
+          - el_name: geth
+            cl_name: nimbus-eth2
+            validator_name: teku
+
+          #####################################
+          ####### geth + prysm ################
+          #####################################
+          - el_name: geth
+            cl_name: prysm
+            validator_name: lighthouse
+          - el_name: geth
+            cl_name: prysm
+            validator_name: lodestar
+          - el_name: geth
+            cl_name: prysm
+            validator_name: nimbus-eth2
+          - el_name: geth
+            cl_name: prysm
+            validator_name: prysm
+          - el_name: geth
+            cl_name: prysm
+            validator_name: teku
+
+          #####################################
+          ####### geth + teku #################
+          #####################################
+          - el_name: geth
+            cl_name: teku
+            validator_name: lighthouse
+          - el_name: geth
+            cl_name: teku
+            validator_name: lodestar
+          - el_name: geth
+            cl_name: teku
+            validator_name: nimbus-eth2
+          - el_name: geth
+            cl_name: teku
+            validator_name: prysm
+          - el_name: geth
+            cl_name: teku
+            validator_name: teku
+
+          #####################################
+          ####### nethermind + lighthouse #####
+          #####################################
+          - el_name: nethermind
+            cl_name: lighthouse
+            validator_name: lighthouse
+          - el_name: nethermind
+            cl_name: lighthouse
+            validator_name: lodestar
+          - el_name: nethermind
+            cl_name: lighthouse
+            validator_name: nimbus-eth2
+          - el_name: nethermind
+            cl_name: lighthouse
+            validator_name: prysm
+          - el_name: nethermind
+            cl_name: lighthouse
+            validator_name: teku
+
+          #####################################
+          ####### nethermind + lodestar #######
+          #####################################
+
+
+          - el_name: nethermind
+            cl_name: lodestar
+            validator_name: lighthouse
+          - el_name: nethermind
+            cl_name: lodestar
+            validator_name: lodestar
+          - el_name: nethermind
+            cl_name: lodestar
+            validator_name: nimbus-eth2
+          - el_name: nethermind
+            cl_name: lodestar
+            validator_name: prysm
+
+          - el_name: nethermind
+            cl_name: lodestar
+            validator_name: teku
+
+          #####################################
+          ####### nethermind + nimbus-eth2 ####
+          #####################################
+
+
+          - el_name: nethermind
+            cl_name: nimbus-eth2
+            validator_name: lighthouse
+          - el_name: nethermind
+            cl_name: nimbus-eth2
+            validator_name: lodestar
+          - el_name: nethermind
+            cl_name: nimbus-eth2
+            validator_name: nimbus-eth2
+          - el_name: nethermind
+            cl_name: nimbus-eth2
+            validator_name: prysm
+          - el_name: nethermind
+            cl_name: nimbus-eth2
+            validator_name: teku
+
+          #####################################
+          ######## nethermind + prysm #########
+          #####################################
+
+          - el_name: nethermind
+            cl_name: prysm
+            validator_name: lighthouse
+          - el_name: nethermind
+            cl_name: prysm
+            validator_name: lodestar
+          - el_name: nethermind
+            cl_name: prysm
+            validator_name: nimbus-eth2
+          - el_name: nethermind
+            cl_name: prysm
+            validator_name: prysm
+          - el_name: nethermind
+            cl_name: prysm
+            validator_name: teku
+
+          #####################################
+          ######## nethermind + teku ##########
+          #####################################
+
+          - el_name: nethermind
+            cl_name: teku
+            validator_name: lighthouse
+          - el_name: nethermind
+            cl_name: teku
+            validator_name: lodestar
+          - el_name: nethermind
+            cl_name: teku
+            validator_name: nimbus-eth2
+          - el_name: nethermind
+            cl_name: teku
+            validator_name: prysm
+          - el_name: nethermind
+            cl_name: teku
+            validator_name: teku
+
+          #####################################
+          ######## reth + lighthouse ##########
+          #####################################
+          - el_name: reth
+            cl_name: lighthouse
+            validator_name: lighthouse
+          - el_name: reth
+            cl_name: lighthouse
+            validator_name: lodestar
+          - el_name: reth
+            cl_name: lighthouse
+            validator_name: nimbus-eth2
+          - el_name: reth
+            cl_name: lighthouse
+            validator_name: prysm
+          - el_name: reth
+            cl_name: lighthouse
+            validator_name: teku
+
+          #####################################
+          ######## reth + lodestar ############
+          #####################################
+
+
+          - el_name: reth
+            cl_name: lodestar
+            validator_name: lighthouse
+          - el_name: reth
+            cl_name: lodestar
+            validator_name: lodestar
+          - el_name: reth
+            cl_name: lodestar
+            validator_name: nimbus-eth2
+          - el_name: reth
+            cl_name: lodestar
+            validator_name: prysm
+          - el_name: reth
+            cl_name: lodestar
+            validator_name: teku
+
+          #####################################
+          ######## reth + nimbus-eth2 #########
+          #####################################
+
+          - el_name: reth
+            cl_name: nimbus-eth2
+            validator_name: lighthouse
+          - el_name: reth
+            cl_name: nimbus-eth2
+            validator_name: lodestar
+          - el_name: reth
+            cl_name: nimbus-eth2
+            validator_name: nimbus-eth2
+          - el_name: reth
+            cl_name: nimbus-eth2
+            validator_name: prysm
+          - el_name: reth
+            cl_name: nimbus-eth2
+            validator_name: teku
+
+          #####################################
+          ######## reth + prysm ###############
+          #####################################
+
+
+          - el_name: reth
+            cl_name: prysm
+            validator_name: lighthouse
+          - el_name: reth
+            cl_name: prysm
+            validator_name: lodestar
+          - el_name: reth
+            cl_name: prysm
+            validator_name: nimbus-eth2
+          - el_name: reth
+            cl_name: prysm
+            validator_name: prysm
+          - el_name: reth
+            cl_name: prysm
+            validator_name: teku
+
+          #####################################
+          ######## reth + teku ################
+          #####################################
+
+          - el_name: reth
+            cl_name: teku
+            validator_name: lighthouse
+          - el_name: reth
+            cl_name: teku
+            validator_name: lodestar
+          - el_name: reth
+            cl_name: teku
+            validator_name: nimbus-eth2
+          - el_name: reth
+            cl_name: teku
+            validator_name: prysm
+          - el_name: reth
+            cl_name: teku
+            validator_name: teku
+
+
+      fail-fast: false
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: tests
+      # this works, but the problem it makes it look like that 125 tests are passed, when in practice
+      # only the filtered tests passed, and the others are "fake green"
+        if: matrix.cl_name == 'lighthouse' && matrix.cl_name == matrix.validator_name
+        uses: ./network-tests-testing
+        with:
+          network: regtest
+          el_name: ${{matrix.el_name}}
+          cl_name: ${{matrix.cl_name}}
+          validator_name: ${{matrix.cl_name}}

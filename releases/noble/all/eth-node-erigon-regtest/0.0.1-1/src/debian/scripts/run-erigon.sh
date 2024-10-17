@@ -298,9 +298,9 @@ append_flag "--log.delays" "$log_delays"
 add_option  "--config" "$config"
 
 
-if [ -n "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE" ]; then
+if [ -n "$TESTNET_DIR" ]; then
     echo "Importing genesis state"
-    erigon init --datadir "$datadir" "$BASE_CONFIG_CUSTOM_NETWORK_GENESIS_FILE"
+    erigon init --datadir "$datadir" "$TESTNET_DIR/genesis.json"
 fi
 
 echo "Using Options: erigon $OPTIONS"
