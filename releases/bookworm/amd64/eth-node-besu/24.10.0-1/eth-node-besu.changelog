@@ -1,0 +1,6 @@
+eth-node-besu (24.10.0-1) bookworm; urgency=medium
+
+  * Support for 24.10.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 18 Oct 2024 06:46:07 +0700
+
