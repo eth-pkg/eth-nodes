@@ -89,17 +89,18 @@ runs:
           zcli \ 
           eth2-testnet-genesis \
           eth2-val-tools \
-          ethereum-genesis-generator \
-          eth-node-${{ inputs.network }} \
-          eth-node-${{ inputs.network }}-config \
-          eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
-          eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
-          eth-node-${{ inputs.validator_name }}-${{ inputs.network }} 
+          ethereum-genesis-generator
+          
 
 
     - name: Run Service Tests
       run: |
         java --version 
+        sudo apt install -y eth-node-${{ inputs.network }} \
+          eth-node-${{ inputs.network }}-config \
+          eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
+          eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
+          eth-node-${{ inputs.validator_name }}-${{ inputs.network }} 
         which java 
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
