@@ -61,6 +61,35 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
     ```bash
     sudo apt update
     ```
+
+### Install eth-node-regtest (ALPHA RELEASE)
+
+```bash
+sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
+sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
+sudo apt update 
+```
+
+```bash 
+sudo apt install eth-node-regtest
+sudo apt install eth-node-regtest-validator # choose one of the available validators
+# Package eth-node-regtest-validator is a virtual package provided by:
+  # eth-node-teku-validator-regtest 0.0.1-1
+  # eth-node-prysm-validator-regtest 0.0.1-1
+  # eth-node-nimbus-eth2-validator-regtest 0.0.1-1
+  # eth-node-lodestar-validator-regtest 0.0.1-1
+  # eth-node-lighthouse-validator-regtest 0.0.1-1
+sudo apt install eth-node-lighthouse-validator
+```
+Data directories are under: `/var/lib/eth-node-regtest/`
+Logs are under: `/var/logs/eth-node-regtest/`
+
+Wait for a few minutes and check if blocks are produced
+
+```bash
+curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545
+```
+Check out the [FAQ](/FAQ.md) for more details
     
 ### Install Clients
 
