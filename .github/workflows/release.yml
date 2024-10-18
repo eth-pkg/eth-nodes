@@ -18,14 +18,17 @@ jobs:
       - name: Env variables
         id: env
         run: |
+          sudo apt install yq -y
+
           TAG_NAME=$(echo ${{ github.ref }} | sed 's/refs\/tags\///')
           FOLDER=$(echo $TAG_NAME | sed 's/^[^\/]*\///')
           # Extract the second and third directories from the tag name
           CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
-          ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
+          TARGET_ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
+          BUILD_ARCH=$(tomlq '.build_env.arch' ${{ github.ref }}/pkg-builder.toml  | sed 's/"//g')
           PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
           VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
-          VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | rev | cut -d'-' -f2- | rev)
+          VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
           BUILD_DIR=$(echo "/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER")
 
 
@@ -33,21 +36,22 @@ jobs:
           echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
           echo "codename=$CODENAME" >> $GITHUB_OUTPUT
           echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
-          echo "folder=$FOLDER" >> $GITHUB_OUTPUT
           echo "version_number=$VERSION_NUMBER" >> $GITHUB_OUTPUT
           echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON" >> $GITHUB_OUTPUT
           echo "build_dir=$BUILD_DIR" >> $GITHUB_OUTPUT
-          echo "arch=$ARCH" >> $GITHUB_OUTPUT
+          echo "build_arch=$BUILD_ARCH" >> $GITHUB_OUTPUT
+          echo "target_arch=$TARGET_ARCH" >> $GITHUB_OUTPUT
 
           # values 
           echo "tag_name=$TAG_NAME"
-          echo "folder=$FOLDER"
           echo "codename=$CODENAME"
-          echo "arch=$ARCH"
+          echo "build_arch=$BUILD_ARCH"
+          echo "target_arch=$TARGET_ARCH"
           echo "package_name=$PACKAGE_NAME"
           echo "version_number=$VERSION_NUMBER"
           echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON"
           echo "build_dir=$BUILD_DIR"
+
 
       - name: Sbuild setup
         run: |
@@ -84,11 +88,7 @@ jobs:
         run: |
           cd ${{ steps.env.outputs.tag_name }}
           pkg-builder env create
-          if [ "${{ steps.env.outputs.arch }}" = "all" ]; then
-            echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-amd64.tar.gz" >> $GITHUB_PATH
-          else
-            echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
-          fi
+          echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz" >> $GITHUB_PATH
 
       - name: package
         run: |
@@ -133,14 +133,14 @@ jobs:
 
       # This should come after verify, but sometimes it is good to have it, to check why the verify fails
       # TODO fix arch to support all arch
-      - name: Save ${{ steps.env.outputs.codename }}-amd64.tar.gz
+      - name: Save ${{ steps.env.outputs.codename }}-${{ steps.envs.outputs.build_arch }}.tar.gz
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-amd64.tar.gz
-          asset_name: ${{ steps.env.outputs.codename }}-amd64.tar.gz
+          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.envs.outputs.build_arch }}.tar.gz
+          asset_name: ${{ steps.env.outputs.codename }}-${{ steps.envs.outputs.build_arch }}.tar.gz
           asset_content_type: application/octet-stream
 
       - name: Save .orig.tar.gz
@@ -179,8 +179,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.deb
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.target_arch}}.deb
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.target_arch}}.deb
           asset_content_type: application/vnd.debian.binary-package
 
       - name: Save .build
@@ -189,8 +189,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.arch}}.build
+          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.target_arch}}.build
+          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.target_arch}}.build
           asset_content_type: text/plain
 
       - name: Save pkg-specs
