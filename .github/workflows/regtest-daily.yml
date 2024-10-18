@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: '0 0 * * *' # 12:00 AM UTC
     - cron: '0 12 * * *'  # 12:00 PM UTC
-    - cron: '0 8:30 * * *'  # 12:00 PM UTC
+    - cron: '25 8 * * *'  # 12:00 PM UTC
   
 
 
