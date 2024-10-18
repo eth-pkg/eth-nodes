@@ -110,7 +110,11 @@ jobs:
           cd ${{ steps.env.outputs.tag_name }}
           #sudo ln -s /usr/share/debootstrap/scripts/gutsy /usr/share/debootstrap/scripts/noble || true
           pkg-builder env create
-          echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
+          if [ "${{ steps.env.outputs.codename }}" = "all" ]; then
+            echo "${HOME}/.cache/sbuild/all-amd64.tar.gz" >> $GITHUB_PATH
+          else
+            echo "${HOME}/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz" >> $GITHUB_PATH
+          fi
 
       - name: package
         run: |
