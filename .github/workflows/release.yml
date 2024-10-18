@@ -133,14 +133,14 @@ jobs:
 
       # This should come after verify, but sometimes it is good to have it, to check why the verify fails
       # TODO fix arch to support all arch
-      - name: Save ${{ steps.env.outputs.codename }}-${{ steps.envs.outputs.build_arch }}.tar.gz
+      - name: Save ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.envs.outputs.build_arch }}.tar.gz
-          asset_name: ${{ steps.env.outputs.codename }}-${{ steps.envs.outputs.build_arch }}.tar.gz
+          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
+          asset_name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
           asset_content_type: application/octet-stream
 
       - name: Save .orig.tar.gz
