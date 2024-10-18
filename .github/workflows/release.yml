@@ -132,14 +132,15 @@ jobs:
           prerelease: true
 
       # This should come after verify, but sometimes it is good to have it, to check why the verify fails
-      - name: Save ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
+      # TODO fix arch to support all arch
+      - name: Save ${{ steps.env.outputs.codename }}-amd64.tar.gz
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
-          asset_name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.arch }}.tar.gz
+          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-amd64.tar.gz
+          asset_name: ${{ steps.env.outputs.codename }}-amd64.tar.gz
           asset_content_type: application/octet-stream
 
       - name: Save .orig.tar.gz
