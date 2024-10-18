@@ -26,7 +26,7 @@ jobs:
           # Extract the second and third directories from the tag name
           CODENAME=$(echo $TAG_NAME | cut -d'/' -f2)
           TARGET_ARCH=$(echo $TAG_NAME | cut -d'/' -f3)
-          BUILD_ARCH=$(tomlq '.build_env.arch' ${{ github.ref }}/pkg-builder.toml  | sed 's/"//g')
+          BUILD_ARCH=$(tomlq '.build_env.arch' $FOLDER/pkg-builder.toml  | sed 's/"//g')
           PACKAGE_NAME=$(echo $TAG_NAME | cut -d'/' -f4)
           VERSION_NUMBER=$(echo $TAG_NAME | cut -d'/' -f5)
           VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
