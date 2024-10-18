@@ -1,11 +1,11 @@
 name: regtest daily
 
 on:
+  workflow_dispatch:
   # Run daily at midnight (UTC time)
   schedule:
     - cron: '0 0 * * *' # 12:00 AM UTC
     - cron: '0 12 * * *'  # 12:00 PM UTC
-    - cron: '0 9 * * *'  # 
   
 
 
