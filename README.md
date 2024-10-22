@@ -11,20 +11,20 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
   - [Ubuntu 24.04 LTS](#debian-12-bookworm)
   - [Alpha Release](#install-eth-node-regtest-alpha-release)
   - [Install Clients](#install-clients)
-    - [besu](#besu)
-    - [erigon](#erigon)
-    - [geth](#geth)
-    - [lodestar](#lodestar)
-    - [nethermind](#nethermind)
-    - [lighthouse](#lighthouse)
-    - [nimbus-eth2](#nimbus-eth2)
-    - [prysm](#prysm)
-    - [reth](#reth)
-    - [teku](#teku)
+    - [besu](#besu-install)
+    - [erigon](#erigon-install)
+    - [geth](#geth-install)
+    - [lodestar](#lodestar-install)
+    - [nethermind](#nethermind-install)
+    - [lighthouse](#lighthouse-install)
+    - [nimbus-eth2](#nimbus-eth2-install)
+    - [prysm](#prysm-install)
+    - [reth](#reth-install)
+    - [teku](#teku-install)
   - [Install deps](#install-deps)
-    - [dotnet](#dotnet) 
-    - [java](#java) 
-    - [nodejs](#nodejs) 
+    - [dotnet](#dotnet-install) 
+    - [java](#java-install) 
+    - [nodejs](#nodejs-install) 
 - [Building Packages](#building-packages)
   - [Prerequisites](#prerequisites)
   - [Building and Verifying Packages](#building-and-verifying-packages)
@@ -117,7 +117,7 @@ Check out the [FAQ](/FAQ.md) for more details
 Once the repository is added, you can install the clients using `apt`. Note that some clients might require additional runtime dependencies.
 
 <details>
-<summary><b>besu</b></summary>
+<summary id='besu-install'><b>besu</b></summary>
 
 1. **Install Java 21:**
     ```bash
@@ -151,7 +151,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>erigon</b></summary>
+<summary  id='erigon-install'><b>erigon</b></summary>
 
 1. **Install erigon:**
     ```bash
@@ -166,7 +166,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>geth</b></summary>
+<summary  id='geth-install'><b>geth</b></summary>
 
 1. **Install geth:**
     ```bash
@@ -181,7 +181,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>lodestar</b></summary>
+<summary  id='lodestar-install'><b>lodestar</b></summary>
 
 1. **Install Node.js:**
     ```bash
@@ -202,7 +202,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>nethermind</b></summary>
+<summary  id='nethermind-install'><b>nethermind</b></summary>
 
 1. **Install .NET runtime:**
     ```bash
@@ -226,7 +226,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>lighthouse</b></summary>
+<summary  id='lighthouse-install'><b>lighthouse</b></summary>
 
 1. **Install lighthouse:**
     ```bash
@@ -241,7 +241,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>nimbus-eth2</b></summary>
+<summary  id='nimbus-eth2-install'><b>nimbus-eth2</b></summary>
 
 1. **Install nimbus-eth2:**
     ```bash
@@ -256,7 +256,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>prysm</b></summary>
+<summary  id='prysm-install'><b>prysm</b></summary>
 
 1. **Install prysm:**
     ```bash
@@ -271,7 +271,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>reth</b></summary>
+<summary  id='reth-install'><b>reth</b></summary>
 
 1. **Install reth:**
     ```bash
@@ -286,7 +286,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>  
-<summary><b>teku</b></summary>
+<summary  id='teku-install'><b>teku</b></summary>
 
 1. **Install Java 21:**
     ```bash
@@ -322,7 +322,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 ### Install deps
 
 <details>
-<summary><b>dotnet</b></summary>
+<summary  id='dotnet-install'><b>dotnet</b></summary>
 
     ```bash
         wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -335,7 +335,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 
 
 <details>
-<summary><b>nodejs</b></summary>
+<summary  id='nodejs-install'><b>nodejs</b></summary>
 
     ```bash
     curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
@@ -345,7 +345,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>java</b></summary>
+<summary  id='java-install'><b>java</b></summary>
 
 1. **Install Java 21:**
     ```bash
