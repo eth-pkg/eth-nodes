@@ -67,19 +67,38 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 ```bash
 sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
-sudo apt update 
+sudo apt update
 ```
+Note: Please install Java, Dotnet, and Node.js dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
 
 ```bash 
-sudo apt install eth-node-regtest
-sudo apt install eth-node-regtest-validator # choose one of the available validators
-# Package eth-node-regtest-validator is a virtual package provided by:
-  # eth-node-teku-validator-regtest 0.0.1-1
-  # eth-node-prysm-validator-regtest 0.0.1-1
-  # eth-node-nimbus-eth2-validator-regtest 0.0.1-1
-  # eth-node-lodestar-validator-regtest 0.0.1-1
-  # eth-node-lighthouse-validator-regtest 0.0.1-1
-sudo apt install eth-node-lighthouse-validator
+sudo apt install eth-node-regtest eth-node-regtest-validator
+```
+```bash
+# For available options see
+apt-cache depends eth-node-regtest
+#  Depends: <eth-node-regtest-cl-service>
+#    eth-node-lighthouse-regtest
+#    eth-node-lodestar-regtest
+#    eth-node-nimbus-eth2-regtest
+#    eth-node-prysm-regtest
+#    eth-node-teku-regtest
+#  Depends: <eth-node-regtest-el-service>
+#    eth-node-besu-regtest
+#    eth-node-erigon-regtest
+#    eth-node-geth-regtest
+#    eth-node-nethermind-regtest
+#    eth-node-reth-regtest
+apt-cache depends eth-node-validator-regtest
+# eth-node-validator-regtest
+# Depends: <eth-node-validator-service-regtest>
+#    eth-node-lighthouse-validator-regtest
+#    eth-node-lodestar-validator-regtest
+#    eth-node-nimbus-eth2-validator-regtest
+#    eth-node-prysm-validator-regtest
+#    eth-node-teku-validator-regtest
+# pick the options you want
+sudo apt install eth-node-lodestar-regtest eth-node-besu-regtest eth-node-nimbus-eth2-validator
 ```
 Data directories are under: `/var/lib/eth-node-regtest/`
 Logs are under: `/var/logs/eth-node-regtest/`
