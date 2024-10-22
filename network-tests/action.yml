@@ -176,10 +176,10 @@ runs:
 
         # validator 
         cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
-        cd eth-node-${{inputs.validator_name}}-validator-${{ inputs.network }}/0.0.1-1
+        cd eth-node-${{inputs.validator_name}}-validator-${{ inputs.network }}/0.0.1-2
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}-0.0.1-2
         ls
         cp eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.1-2_all.deb ${HOME}/packages/
 
