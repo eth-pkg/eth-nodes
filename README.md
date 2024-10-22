@@ -9,17 +9,22 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 - [Installation](#installation)
   - [Debian 12](#add-repository)
   - [Ubuntu 24.04 LTS](#debian-12-bookworm)
-  - [Install Clients](#ubuntu-2404-lts-noble-numbat)
-    - [besu](#besu)
-    - [erigon](#erigon)
-    - [geth](#geth)
-    - [lodestar](#lodestar)
-    - [nethermind](#nethermind)
-    - [lighthouse](#lighthouse)
-    - [nimbus-eth2](#nimbus-eth2)
-    - [prysm](#prysm)
-    - [reth](#reth)
-    - [teku](#teku)
+  - [Alpha Release](#install-eth-node-regtest-alpha-release)
+  - [Install Clients](#install-clients)
+    - [besu](#besu-install)
+    - [erigon](#erigon-install)
+    - [geth](#geth-install)
+    - [lodestar](#lodestar-install)
+    - [nethermind](#nethermind-install)
+    - [lighthouse](#lighthouse-install)
+    - [nimbus-eth2](#nimbus-eth2-install)
+    - [prysm](#prysm-install)
+    - [reth](#reth-install)
+    - [teku](#teku-install)
+  - [Install deps](#install-deps)
+    - [dotnet](#dotnet-install) 
+    - [java](#java-install) 
+    - [nodejs](#nodejs-install) 
 - [Building Packages](#building-packages)
   - [Prerequisites](#prerequisites)
   - [Building and Verifying Packages](#building-and-verifying-packages)
@@ -71,7 +76,7 @@ sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o 
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
 sudo apt update
 ```
-Note: Please install Java, Dotnet, and Node.js dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
+Note: Please install [Java](#java), [Dotnet](#dotnet), and [Node.js](#nodejs) dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
 
 ```bash
 # For available options see
@@ -118,7 +123,7 @@ Check out the [FAQ](/FAQ.md) for more details
 Once the repository is added, you can install the clients using `apt`. Note that some clients might require additional runtime dependencies.
 
 <details>
-<summary><b>besu</b></summary>
+<summary id='besu-install'><b>besu</b></summary>
 
 1. **Install Java 21:**
     ```bash
@@ -152,7 +157,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>erigon</b></summary>
+<summary  id='erigon-install'><b>erigon</b></summary>
 
 1. **Install erigon:**
     ```bash
@@ -167,7 +172,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>geth</b></summary>
+<summary  id='geth-install'><b>geth</b></summary>
 
 1. **Install geth:**
     ```bash
@@ -182,7 +187,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>lodestar</b></summary>
+<summary  id='lodestar-install'><b>lodestar</b></summary>
 
 1. **Install Node.js:**
     ```bash
@@ -203,7 +208,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>nethermind</b></summary>
+<summary  id='nethermind-install'><b>nethermind</b></summary>
 
 1. **Install .NET runtime:**
     ```bash
@@ -227,7 +232,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>lighthouse</b></summary>
+<summary  id='lighthouse-install'><b>lighthouse</b></summary>
 
 1. **Install lighthouse:**
     ```bash
@@ -242,7 +247,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>nimbus-eth2</b></summary>
+<summary  id='nimbus-eth2-install'><b>nimbus-eth2</b></summary>
 
 1. **Install nimbus-eth2:**
     ```bash
@@ -257,7 +262,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>prysm</b></summary>
+<summary  id='prysm-install'><b>prysm</b></summary>
 
 1. **Install prysm:**
     ```bash
@@ -272,7 +277,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>
-<summary><b>reth</b></summary>
+<summary  id='reth-install'><b>reth</b></summary>
 
 1. **Install reth:**
     ```bash
@@ -287,7 +292,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
 </details>
 
 <details>  
-<summary><b>teku</b></summary>
+<summary  id='teku-install'><b>teku</b></summary>
 
 1. **Install Java 21:**
     ```bash
@@ -316,6 +321,55 @@ Once the repository is added, you can install the clients using `apt`. Note that
 4. **Verify installation:**
     ```bash
     teku
+    ```
+
+</details>
+
+### Install deps
+
+<details>
+<summary  id='dotnet-install'><b>dotnet</b></summary>
+
+    ```bash
+        wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        rm packages-microsoft-prod.deb
+        sudo apt update
+        sudo apt install -y aspnetcore-runtime-8.0
+    ```
+</details>
+
+
+<details>
+<summary  id='nodejs-install'><b>nodejs</b></summary>
+
+    ```bash
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt install -y nodejs
+    ```
+
+</details>
+
+<details>
+<summary  id='java-install'><b>java</b></summary>
+
+1. **Install Java 21:**
+    ```bash
+    sudo apt -y install wget curl
+    wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+    sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
+    ```
+
+2. **Set up Java environment:**
+    ```bash
+    cat <<'EOF' | sudo tee /etc/profile.d/jdk.sh
+    export JAVA_HOME=/usr/lib/jvm/jdk-21/
+    export PATH=\$PATH:\$JAVA_HOME/bin
+    EOF
+
+    source /etc/profile.d/jdk.sh
+    sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
+    java -version
     ```
 
 </details>
