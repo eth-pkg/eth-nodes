@@ -205,7 +205,7 @@ Once the repository is added, you can install the clients using `apt`. Note that
     sudo dpkg -i packages-microsoft-prod.deb
     rm packages-microsoft-prod.deb
     sudo apt update
-    sudo apt install -y aspnetcore-runtime-7.0
+    sudo apt install -y aspnetcore-runtime-8.0
     ```
 
 2. **Install nethermind:**
