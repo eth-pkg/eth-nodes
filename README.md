@@ -9,7 +9,8 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 - [Installation](#installation)
   - [Debian 12](#add-repository)
   - [Ubuntu 24.04 LTS](#debian-12-bookworm)
-  - [Install Clients](#ubuntu-2404-lts-noble-numbat)
+  - [Alpha Release](#install-eth-node-regtest-alpha-release)
+  - [Install Clients](#install-clients)
     - [besu](#besu)
     - [erigon](#erigon)
     - [geth](#geth)
@@ -20,6 +21,10 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
     - [prysm](#prysm)
     - [reth](#reth)
     - [teku](#teku)
+  - [Install deps](#install-deps)
+    - [dotnet](#dotnet) 
+    - [java](#java) 
+    - [nodejs](#nodejs) 
 - [Building Packages](#building-packages)
   - [Prerequisites](#prerequisites)
   - [Building and Verifying Packages](#building-and-verifying-packages)
@@ -69,7 +74,7 @@ sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o 
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
 sudo apt update
 ```
-Note: Please install Java, Dotnet, and Node.js dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
+Note: Please install [Java](#java), [Dotnet](#dotnet), and [Node.js](#nodejs) dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
 
 ```bash
 # For available options see
@@ -310,6 +315,55 @@ Once the repository is added, you can install the clients using `apt`. Note that
 4. **Verify installation:**
     ```bash
     teku
+    ```
+
+</details>
+
+### Install deps
+
+<details>
+<summary><b>dotnet</b></summary>
+
+    ```bash
+        wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+        sudo dpkg -i packages-microsoft-prod.deb
+        rm packages-microsoft-prod.deb
+        sudo apt update
+        sudo apt install -y aspnetcore-runtime-8.0
+    ```
+</details>
+
+
+<details>
+<summary><b>nodejs</b></summary>
+
+    ```bash
+    curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+    sudo apt install -y nodejs
+    ```
+
+</details>
+
+<details>
+<summary><b>java</b></summary>
+
+1. **Install Java 21:**
+    ```bash
+    sudo apt -y install wget curl
+    wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+    sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
+    ```
+
+2. **Set up Java environment:**
+    ```bash
+    cat <<'EOF' | sudo tee /etc/profile.d/jdk.sh
+    export JAVA_HOME=/usr/lib/jvm/jdk-21/
+    export PATH=\$PATH:\$JAVA_HOME/bin
+    EOF
+
+    source /etc/profile.d/jdk.sh
+    sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
+    java -version
     ```
 
 </details>
