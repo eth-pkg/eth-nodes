@@ -3,7 +3,7 @@ name: regtest
 on:
   push:
     branches:
-      - feat/eth-node-lintian
+      - feat/eth-node-validator
 
 jobs:
   test:
