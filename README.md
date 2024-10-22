@@ -71,9 +71,6 @@ sudo apt update
 ```
 Note: Please install Java, Dotnet, and Node.js dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
 
-```bash 
-sudo apt install eth-node-regtest eth-node-regtest-validator
-```
 ```bash
 # For available options see
 apt-cache depends eth-node-regtest
