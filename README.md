@@ -64,6 +64,8 @@ This project aims to simplify the packaging of various Ethereum nodes for Debian
 
 ### Install eth-node-regtest (ALPHA RELEASE)
 
+
+
 ```bash
 sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
@@ -107,6 +109,10 @@ curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],
 ```
 Check out the [FAQ](/FAQ.md) for more details
     
+![Install](assets/demoinstall.gif)
+![Check regtest network](assets/demotest.gif)
+
+
 ### Install Clients
 
 Once the repository is added, you can install the clients using `apt`. Note that some clients might require additional runtime dependencies.
