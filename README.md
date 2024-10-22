@@ -76,7 +76,7 @@ sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o 
 sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
 sudo apt update
 ```
-Note: Please install [Java](#java), [Dotnet](#dotnet), and [Node.js](#nodejs) dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
+Note: Please install [Java](#java-install), [Dotnet](#dotnet-install), and [Node.js](#nodejs-install) dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
 
 ```bash
 # For available options see
