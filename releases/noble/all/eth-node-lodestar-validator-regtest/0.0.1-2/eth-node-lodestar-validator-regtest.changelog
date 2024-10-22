@@ -1,0 +1,8 @@
+eth-node-lodestar-validator-regtest (0.0.1-2) noble; urgency=medium
+
+  * Initial packaging
+  * rename virtual package
+
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 22 Oct 2024 07:15:27 +0200
+ 
