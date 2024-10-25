@@ -1,4 +1,4 @@
-# Ethereum Node Packaging
+# Reproducible builds for Ethereum Ecosystem (Debian/Ubuntu) 
 
 [![regtest](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest.yml/badge.svg)](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest.yml) 
 
