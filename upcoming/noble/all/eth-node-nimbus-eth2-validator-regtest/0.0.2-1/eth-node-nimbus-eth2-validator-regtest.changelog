@@ -1,4 +1,4 @@
-eth-node-nimbus-eth2-regtest (0.0.2-1) noble; urgency=medium
+eth-node-nimbus-eth2-validator-regtest (0.0.2-1) noble; urgency=medium
 
   * Initial packaging
 
