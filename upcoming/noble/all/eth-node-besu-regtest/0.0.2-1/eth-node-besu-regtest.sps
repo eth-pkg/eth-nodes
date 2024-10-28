@@ -1,6 +1,7 @@
 name = "eth-node-besu-regtest"
 bin_package = "eth-node-besu"
-binary = "/usr/lib/eth-node-besu-regtest/run-besu-service.sh"
+binary = "/usr/lib/eth-node-besu/bin/besu"
+conf_param = "--config-file="
 user = { name = "eth-node-besu-regtest", group = true, create = { home = false } }
 runtime_dir = { mode = "750" }
 # Service Fields
@@ -40,10 +41,10 @@ SystemCallFilter=@system-service
 UMask=0077
 WorkingDirectory=/var/lib/eth-node-regtest/besu
 """
-## hack to actually use system.d but let debcrafter manage the user creation
+## hack to actually use system.d but let debcrafter manage the user creationc
 add_files = [
-    "debian/scripts/run-besu-service.sh /usr/lib/eth-node-besu-regtest/", 
-    "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-regtest/bin/",
+    # "debian/scripts/run-besu-service.sh /usr/lib/eth-node-besu-regtest/", 
+    # "debian/scripts/run-besu.sh /usr/lib/eth-node-besu-regtest/bin/",
     "debian/scripts/admin.xml /usr/lib/eth-node-besu-regtest/",
     "debian/tmp/eth-node-besu-regtest.service /lib/systemd/system/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-besu-regtest",
@@ -59,18 +60,50 @@ command = ["bash", "/usr/lib/eth-node-besu-regtest/postprocess.sh"]
 [config."besu-regtest.conf"]
 format = "plain"
 
+
+### EVARS 
+
+[config."besu-regtest.conf".evars."../eth-node-regtest/0.0.2-1/eth-node-regtest-config"."DATA_DIR"]
+name = "DATA_DIR"
+store = false
+ignore_empty = true
+
+[config."besu-regtest.conf".evars."eth-node-regtest-config"."JWT_FILE"]
+name = "JWT_FILE"
+store = false
+ignore_empty = true
+
+[config."besu-regtest.conf".evars."eth-node-regtest-config"."NETWORK_ID"]
+name = "NETWORK_ID"
+store = false
+ignore_empty = true
+
+
+[config."besu-regtest.conf".evars."eth-node-regtest-config"."TESTNET_DIR"]
+name = "TESTNET_DIR"
+store = false
+ignore_empty = true
+
+[config."besu-regtest.conf".evars."eth-node-regtest-config"."EL_RPC_PORT"]
+name = "EL_RPC_PORT"
+store = false
+ignore_empty = true
+
+
+
 # TESTNET OPTIONS 
 ### USED OPTIONS 
 
 [config."besu-regtest.conf".ivars."data_path"]
 type = "string"
-default = "$DATA_DIR/besu"
+default = "{/DATA_DIR}/besu"
 priority = "low"
 summary = "Path to Besu data directory (default: $DATA_DIR/besu)"
 
-[config."besu-regtest.conf".ivars."engine_jwt_secret"]
+
+[config."besu-regtest.conf".ivars."engine-jwt-secret"]
 type = "string"
-default = "$JWT_FILE"
+default = "{/JWT_FILE}"
 priority = "low"
 summary = "Disable authentication for Engine APIs (default: false)."
 
@@ -82,78 +115,78 @@ summary = "Synchronize against the indicated network: MAINNET, SEPOLIA, GOERLI, 
 
 [config."besu-regtest.conf".ivars."bootnodes"]
 type = "string"
-default = "$BOOTNODES_ENODE"
+default = ""
 priority = "low"
 summary = "Comma separated enode URLs for P2P discovery bootstrap."
 
-[config."besu-regtest.conf".ivars."network_id"]
+[config."besu-regtest.conf".ivars."network-id"]
 type = "string"
-default = "$NETWORK_ID"
+default = "{/NETWORK_ID}"
 priority = "low"
 summary = "P2P network identifier. (default: the selected network chain ID or custom genesis chain ID)"
 
 
-[config."besu-regtest.conf".ivars."engine_rpc_enabled"]
+[config."besu-regtest.conf".ivars."engine-rpc-enabled"]
 type = "string"
 default = "true"
 priority = "low"
 summary = "Enable the engine API even in the absence of merge-specific configurations."
 
-[config."besu-regtest.conf".ivars."sync_mode"]
+[config."besu-regtest.conf".ivars."sync-mode"]
 type = "string"
 default = "full"
 priority = "low"
 summary = "Synchronization mode, possible values are FULL, FAST, SNAP, CHECKPOINT, X_SNAP, X_CHECKPOINT (default: SNAP if a --network is supplied and privacy isn't enabled. FULL otherwise.)"
 
-[config."besu-regtest.conf".ivars."genesis_file"]
+[config."besu-regtest.conf".ivars."genesis-file"]
 type = "string"
-default = "$TESTNET_DIR/besu.json"
+default = "{/TESTNET_DIR}/besu.json"
 priority = "low"
 summary = "Genesis file for your custom network. Requires --network-id to be set. Cannot be used with --network."
 
-[config."besu-regtest.conf".ivars."bonsai_limit_trie_logs_enabled"]
+[config."besu-regtest.conf".ivars."bonsai-limit-trie-logs-enabled"]
 type = "string"
 default = "false"
 priority = "low"
 summary = "Limit the number of trie logs that are retained. (default: true)"
 
-[config."besu-regtest.conf".ivars."p2p_enabled"]
+[config."besu-regtest.conf".ivars."p2p-enabled"]
 type = "string"
 default = "false"
 priority = "low"
 summary = "Enable P2P functionality (default: true)."
 
-[config."besu-regtest.conf".ivars."rpc_http_api"]
+[config."besu-regtest.conf".ivars."rpc-http-api"]
 type = "string"
 default = "ADMIN,CLIQUE,ETH,NET,DEBUG,TXPOOL,ENGINE,TRACE,WEB3"
 priority = "low"
 summary = "Set RPC HTTP API to ETH"
 
-[config."besu-regtest.conf".ivars."rpc_http_enabled"]
+[config."besu-regtest.conf".ivars."rpc-http-enabled"]
 type = "string"
 default = "true"
 priority = "low"
 summary = "Set to start the JSON-RPC HTTP service (default: false)."
 
-[config."besu-regtest.conf".ivars."rpc_http_port"]
+[config."besu-regtest.conf".ivars."rpc-http-port"]
 type = "string"
-default = "$EL_RPC_PORT"
+default = "{/EL_RPC_PORT}"
 priority = "low"
 summary = "Port for JSON-RPC HTTP to listen on (default: 8545)."
 
-[config."besu-regtest.conf".ivars."host_allowlist"]
+[config."besu-regtest.conf".ivars."host-allowlist"]
 type = "string"
 default = "*"
 priority = "low"
 summary = "Comma separated list of hostnames to allow for RPC access, or * to accept any host (default: localhost,127.0.0.1)"
 
-[config."besu-regtest.conf".ivars."rpc_http_cors_origins"]
+[config."besu-regtest.conf".ivars."rpc-http-cors-origins"]
 type = "string"
 default = "*"
 priority = "low"
 summary = "Comma separated origin domain URLs for CORS validation."
 
-[config."besu-regtest.conf".ivars."engine_host_allowlist"]
+[config."besu-regtest.conf".ivars."engine-host-allowlist"]
 type = "string"
 default = "*"
 priority = "low"
