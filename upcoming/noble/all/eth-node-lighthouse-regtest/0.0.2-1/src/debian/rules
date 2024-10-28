@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+#export SOURCE_DATE_EPOCH=$(dpkg-parsechangelog --show-field Date | date --date=- +%s)
+# hack for now, to produce the multiple packages as reproducible
+export SOURCE_DATE_EPOCH=1720044000
+
+%:
+	dh $@
+
+override_dh_dwz:
+
+override_dh_prep:
+	mkdir debian/tmp
+	cp debian/eth-node-lighthouse-regtest.eth-node-lighthouse-regtest.service debian/tmp/eth-node-lighthouse-regtest.service 
+	chmod a+x debian/scripts/run-lighthouse-service.sh
+	chmod a+x debian/scripts/run-lighthouse.sh
