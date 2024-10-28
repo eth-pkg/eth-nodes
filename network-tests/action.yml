@@ -166,12 +166,12 @@ runs:
 
         # validator metapackage
         cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
-        cd eth-node-validator-${{ inputs.network }}/0.0.1-1
+        cd eth-node-validator-${{ inputs.network }}/0.0.1-2
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-validator-${{ inputs.network }}-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-validator-${{ inputs.network }}-0.0.1-2
         ls
-        cp eth-node-validator-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
+        cp eth-node-validator-${{ inputs.network }}_0.0.1-2_all.deb ${HOME}/packages/
 
 
         # validator 
@@ -195,7 +195,7 @@ runs:
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-2_all.deb \
           $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
-          $HOME/packages/eth-node-validator-${{ inputs.network }}_0.0.1-1_all.deb  \
+          $HOME/packages/eth-node-validator-${{ inputs.network }}_0.0.1-2_all.deb  \
           $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.1-2_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
