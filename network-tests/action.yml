@@ -83,7 +83,7 @@ runs:
     - name: Create chroot env
       run: |
         pwd && ls -al
-        cd releases/noble/all/eth-node-regtest/0.0.1-1 && pkg-builder env create
+        cd releases/noble/all/eth-node-regtest/0.0.1-2 && pkg-builder env create
         echo "${HOME}/.cache/sbuild/noble-amd64.tar.gz" >> $GITHUB_PATH
       shell: bash
 
@@ -130,10 +130,10 @@ runs:
         mkdir ${HOME}/packages
 
         # main umbrella package
-        cd eth-node-${{ inputs.network }}/0.0.1-1
+        cd eth-node-${{ inputs.network }}/0.0.1-2
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-0.0.1-2
         ls 
         cp eth-node-${{ inputs.network }}_0.0.1-2_all.deb ${HOME}/packages/
 
