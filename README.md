@@ -79,6 +79,23 @@ sudo apt update
 Note: Please install [Java](#java-install), [Dotnet](#dotnet-install), and [Node.js](#nodejs-install) dependencies for clients whose dependencies depend on them. Currently, these are not auto-installed. 
 
 ```bash
+sudo apt install eth-node-regtest eth-node-validator-regtest
+```
+
+
+Data directories are under: `/var/lib/eth-node-regtest/`
+Logs are under: `/var/logs/eth-node-regtest/`
+
+Wait for a few minutes and check if blocks are produced
+
+```bash
+curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545
+```
+Check out the [FAQ](/FAQ.md) for more details
+
+#### To install specific client pairs 
+
+```bash
 # For available options see
 apt-cache depends eth-node-regtest
 #  Depends: <eth-node-regtest-cl-service>
@@ -102,20 +119,18 @@ apt-cache depends eth-node-validator-regtest
 #    eth-node-prysm-validator-regtest
 #    eth-node-teku-validator-regtest
 # pick the options you want
-sudo apt install eth-node-lodestar-regtest eth-node-besu-regtest eth-node-nimbus-eth2-validator
 ```
-Data directories are under: `/var/lib/eth-node-regtest/`
-Logs are under: `/var/logs/eth-node-regtest/`
 
-Wait for a few minutes and check if blocks are produced
-
-```bash
-curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":0}' -H "Content-Type: application/json" http://localhost:8545
+``` bash
+sudo apt install eth-node-<el_name>-regtest eth-node-<cl_name>-regtest eth-node-<validator_name>-validator
 ```
-Check out the [FAQ](/FAQ.md) for more details
+
+#### Examples
     
 ![Install](assets/demoinstall.gif)
 ![Check regtest network](assets/demotest.gif)
+
+
 
 
 ### Install Clients
