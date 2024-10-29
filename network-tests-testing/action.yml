@@ -96,8 +96,7 @@ runs:
     - name: Run Service Tests
       run: |
         java --version 
-        sudo apt install -y eth-node-${{ inputs.network }}-config \
-          eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
+        sudo apt install -y eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
           eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
           eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }} 
         which java 
