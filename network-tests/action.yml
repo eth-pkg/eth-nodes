@@ -174,8 +174,7 @@ runs:
         which java 
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb
         # have to install in one go 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}_0.0.1-2_all.deb \
-          $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-2_all.deb \
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-2_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-2_all.deb \
           $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.1-2_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
