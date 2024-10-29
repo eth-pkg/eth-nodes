@@ -63,49 +63,71 @@ format = "plain"
 
 ### EVARS 
 
-[config."besu-regtest.conf".evars."../eth-node-regtest/0.0.2-1/eth-node-regtest-config"."DATA_DIR"]
-name = "DATA_DIR"
-store = false
-ignore_empty = true
+# [config."besu-regtest.conf".evars."../../eth-node-regtest-config/0.0.2-1/eth-node-regtest-config"."DATA_DIR"]
+# name = "DATA_DIR"
+# store = false
+# ignore_empty = true
 
-[config."besu-regtest.conf".evars."eth-node-regtest-config"."JWT_FILE"]
-name = "JWT_FILE"
-store = false
-ignore_empty = true
+# [config."besu-regtest.conf".evars."eth-node-regtest-config"."JWT_FILE"]
+# name = "JWT_FILE"
+# store = false
+# ignore_empty = true
 
-[config."besu-regtest.conf".evars."eth-node-regtest-config"."NETWORK_ID"]
-name = "NETWORK_ID"
-store = false
-ignore_empty = true
-
-
-[config."besu-regtest.conf".evars."eth-node-regtest-config"."TESTNET_DIR"]
-name = "TESTNET_DIR"
-store = false
-ignore_empty = true
-
-[config."besu-regtest.conf".evars."eth-node-regtest-config"."EL_RPC_PORT"]
-name = "EL_RPC_PORT"
-store = false
-ignore_empty = true
+# [config."besu-regtest.conf".evars."eth-node-regtest-config"."NETWORK_ID"]
+# name = "NETWORK_ID"
+# store = false
+# ignore_empty = true
 
 
+# [config."besu-regtest.conf".evars."eth-node-regtest-config"."TESTNET_DIR"]
+# name = "TESTNET_DIR"
+# store = false
+# ignore_empty = true
+
+# [config."besu-regtest.conf".evars."eth-node-regtest-config"."EL_RPC_PORT"]
+# name = "EL_RPC_PORT"
+# store = false
+# ignore_empty = true
+
+#### THIS IS A HACK, DO NOT MERGE
+
+[config."besu-regtest.conf".hvars."DATA_DIR"]
+type = "string"
+constant = "/var/lib/eth-node-regtest"
+
+[config."besu-regtest.conf".hvars."JWT_FILE"]
+type = "path"
+file_type = "regular"
+constant = "/etc/eth-node-regtest/jwt.hex"
+
+[config."besu-regtest.conf".hvars."NETWORK_ID"]
+type = "string"
+constant = "1337"
+
+[config."besu-regtest.conf".hvars."TESTNET_DIR"]
+type = "string"
+constant = "/var/lib/eth-node-regtest/regtest/genesis"
+
+[config."besu-regtest.conf".hvars."EL_RPC_PORT"]
+type = "string"
+constant = "8545"
 
 # TESTNET OPTIONS 
 ### USED OPTIONS 
 
-[config."besu-regtest.conf".ivars."data_path"]
+# TODO this should not be hvar
+[config."besu-regtest.conf".hvars."data_path"]
 type = "string"
-default = "{/DATA_DIR}/besu"
-priority = "low"
-summary = "Path to Besu data directory (default: $DATA_DIR/besu)"
+template = "{/DATA_DIR}/besu"
+# priority = "low"
+# summary = "Path to Besu data directory (default: $DATA_DIR/besu)"
 
 
-[config."besu-regtest.conf".ivars."engine-jwt-secret"]
+[config."besu-regtest.conf".hvars."engine-jwt-secret"]
 type = "string"
-default = "{/JWT_FILE}"
-priority = "low"
-summary = "Disable authentication for Engine APIs (default: false)."
+template = "{/JWT_FILE}"
+# priority = "low"
+# summary = "Disable authentication for Engine APIs (default: false)."
 
 [config."besu-regtest.conf".ivars."network"]
 type = "string"
@@ -119,11 +141,11 @@ default = ""
 priority = "low"
 summary = "Comma separated enode URLs for P2P discovery bootstrap."
 
-[config."besu-regtest.conf".ivars."network-id"]
+[config."besu-regtest.conf".hvars."network-id"]
 type = "string"
-default = "{/NETWORK_ID}"
-priority = "low"
-summary = "P2P network identifier. (default: the selected network chain ID or custom genesis chain ID)"
+template = "{/NETWORK_ID}"
+# priority = "low"
+# summary = "P2P network identifier. (default: the selected network chain ID or custom genesis chain ID)"
 
 
 [config."besu-regtest.conf".ivars."engine-rpc-enabled"]
@@ -138,11 +160,11 @@ default = "full"
 priority = "low"
 summary = "Synchronization mode, possible values are FULL, FAST, SNAP, CHECKPOINT, X_SNAP, X_CHECKPOINT (default: SNAP if a --network is supplied and privacy isn't enabled. FULL otherwise.)"
 
-[config."besu-regtest.conf".ivars."genesis-file"]
+[config."besu-regtest.conf".hvars."genesis-file"]
 type = "string"
-default = "{/TESTNET_DIR}/besu.json"
-priority = "low"
-summary = "Genesis file for your custom network. Requires --network-id to be set. Cannot be used with --network."
+template = "{/TESTNET_DIR}/besu.json"
+# priority = "low"
+# summary = "Genesis file for your custom network. Requires --network-id to be set. Cannot be used with --network."
 
 [config."besu-regtest.conf".ivars."bonsai-limit-trie-logs-enabled"]
 type = "string"
@@ -168,11 +190,11 @@ default = "true"
 priority = "low"
 summary = "Set to start the JSON-RPC HTTP service (default: false)."
 
-[config."besu-regtest.conf".ivars."rpc-http-port"]
+[config."besu-regtest.conf".hvars."rpc-http-port"]
 type = "string"
-default = "{/EL_RPC_PORT}"
-priority = "low"
-summary = "Port for JSON-RPC HTTP to listen on (default: 8545)."
+template = "{/EL_RPC_PORT}"
+# priority = "low"
+# summary = "Port for JSON-RPC HTTP to listen on (default: 8545)."
 
 [config."besu-regtest.conf".ivars."host-allowlist"]
 type = "string"
