@@ -1,0 +1,12 @@
+eth-node-nethermind-regtest: extended-description-is-empty
+eth-node-nethermind-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-nethermind-regtest" [postinst:8]
+eth-node-nethermind-regtest: no-copyright-file
+eth-node-nethermind-regtest: no-template-description eth-node-nethermind-regtest/engine_jwt_disabled [templates:441]
+eth-node-nethermind-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-nethermind-regtest/changelog.Debian.gz:1]
+eth-node-nethermind-regtest: maintainer-script-ignores-errors [config]
+eth-node-nethermind-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-nethermind-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-nethermind-regtest: malformed-prompt-in-templates *
+eth-node-nethermind-regtest: script-not-executable [usr/lib/eth-node-nethermind-regtest/postprocess.sh]
+eth-node-nethermind-regtest: too-long-short-description-in-templates *
+
