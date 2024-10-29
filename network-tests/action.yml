@@ -139,30 +139,30 @@ runs:
 
         # network configs, not the same as client configs
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
-        cd eth-node-${{ inputs.network }}-config/0.0.1-1
+        cd eth-node-${{ inputs.network }}-config/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-0.0.2-1
         ls
-        cp eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.network }}-config_0.0.2-1_all.deb ${HOME}/packages/
 
         # execution client 
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
-        cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-1
+        cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.2-1
         ls
-        cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
 
         # consensus client 
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
-        cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-1
+        cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.2-1
         ls
-        cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
 
         # validator metapackage
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
@@ -190,10 +190,10 @@ runs:
       run: |
         java --version 
         which java 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.2-1_all.deb
         # have to install in one go 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
-          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-1_all.deb \
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
+          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
