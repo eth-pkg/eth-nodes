@@ -3,7 +3,7 @@ name: regtest
 on:
   push:
     branches:
-      - feat/eth-node-validator
+      - fix/regtest-daily
 
 jobs:
   test:
