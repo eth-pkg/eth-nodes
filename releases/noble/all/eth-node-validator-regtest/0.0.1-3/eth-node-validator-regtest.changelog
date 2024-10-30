@@ -1,0 +1,6 @@
+eth-node-validator-regtest (0.0.1-3) noble; urgency=medium
+
+  * Initial packaging
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 29 Oct 2024 11:07:27 +0700
+ 
