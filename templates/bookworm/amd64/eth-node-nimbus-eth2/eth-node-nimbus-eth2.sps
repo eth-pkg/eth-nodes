@@ -11,7 +11,6 @@ add_files = [
     "build/deposit_contract /usr/lib/eth-node-nimbus-eth2/bin",
     "build/nimbus_signing_node /usr/lib/eth-node-nimbus-eth2/bin",
     "build/nimbus_light_client /usr/lib/eth-node-nimbus-eth2/bin",
-    "build/logtrace /usr/lib/eth-node-nimbus-eth2/bin",
     "docker/dist/README.md.tpl /usr/lib/eth-node-nimbus-eth2/README"
 ]
 add_links = [
