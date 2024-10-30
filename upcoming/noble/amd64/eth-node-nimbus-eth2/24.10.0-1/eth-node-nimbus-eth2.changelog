@@ -1,0 +1,6 @@
+eth-node-nimbus-eth2 (24.10.0-1) noble; urgency=medium
+
+  * Support for 24.10.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 30 Oct 2024 10:29:09 +0700
+
