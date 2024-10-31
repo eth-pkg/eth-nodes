@@ -129,14 +129,6 @@ runs:
         cd upcoming/noble/all
         mkdir ${HOME}/packages
 
-        # main umbrella package
-        cd eth-node-${{ inputs.network }}/0.0.2-1
-        pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
-        pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-0.0.2-1
-        ls 
-        cp eth-node-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
-
         # network configs, not the same as client configs
         cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
         cd eth-node-${{ inputs.network }}-config/0.0.2-1
@@ -163,15 +155,6 @@ runs:
         cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.2-1
         ls
         cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
-
-        # validator metapackage
-        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
-        cd eth-node-validator-${{ inputs.network }}/0.0.2-1
-        pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
-        pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-validator-${{ inputs.network }}-0.0.2-1
-        ls
-        cp eth-node-validator-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
 
 
         # validator 

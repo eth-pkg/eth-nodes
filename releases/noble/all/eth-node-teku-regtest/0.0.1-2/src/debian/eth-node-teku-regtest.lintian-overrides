@@ -1,0 +1,12 @@
+eth-node-teku-regtest: extended-description-is-empty
+eth-node-teku-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-teku-regtest" [postinst:8]
+eth-node-teku-regtest: no-copyright-file
+eth-node-teku-regtest: no-template-description *
+eth-node-teku-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-teku-regtest/changelog.Debian.gz:1]
+eth-node-teku-regtest: maintainer-script-ignores-errors [config]
+eth-node-teku-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-teku-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-teku-regtest: malformed-prompt-in-templates *
+eth-node-teku-regtest: script-not-executable [usr/lib/eth-node-teku-regtest/postprocess.sh]
+eth-node-teku-regtest: too-long-short-description-in-templates *
+

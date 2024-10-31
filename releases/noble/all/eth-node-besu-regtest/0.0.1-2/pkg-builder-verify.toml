@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="3c4029ca33e6f26976012c3cab2dc68f46ce30f8", name= "eth-node-besu-regtest_0.0.1-2.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-besu-regtest_0.0.1.orig.tar.gz" },
+    # { hash="bf82dcf8ae59dc94c3dbb41f5e0df8b5d15934cd", name= "eth-node-besu-regtest_0.0.1-2.debian.tar.xz"},
+    { hash = "c448a069b4da6f07f91473fee077c3fd38827906", name = "eth-node-besu-regtest_0.0.1-2_all.deb" },
+]

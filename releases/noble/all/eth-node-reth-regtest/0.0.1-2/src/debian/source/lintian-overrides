@@ -1,0 +1,6 @@
+eth-node-reth-regtest source: empty-upstream-sources
+eth-node-reth-regtest source: not-using-po-debconf
+eth-node-reth-regtest source: untranslatable-debconf-templates *
+eth-node-reth-regtest source: no-debian-copyright-in-source
+eth-node-reth-regtest source: no-newline-at-end [debian/changelog]
+eth-node-reth-regtest source: no-newline-at-end [debian/rules]
