@@ -9,5 +9,5 @@ eth-node-besu-regtest: maintainer-script-needs-depends-on-adduser adduser (does 
 eth-node-besu-regtest: malformed-prompt-in-templates *
 eth-node-besu-regtest: script-not-executable [usr/lib/eth-node-besu-regtest/postprocess.sh]
 eth-node-besu-regtest: too-long-short-description-in-templates *
-eth-node-besu-regtest: boolean-template-has-bogus-default eth-node-besu-regtest/auto_log_bloom_caching_enabled
 eth-node-besu-regtest: malformed-question-in-templates *
+eth-node-besu-regtest: boolean-template-has-bogus-default * 
