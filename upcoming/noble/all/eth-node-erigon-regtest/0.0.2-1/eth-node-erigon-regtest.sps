@@ -1,7 +1,8 @@
 name = "eth-node-erigon-regtest"
 bin_package = "eth-node-erigon"
 binary = "/usr/bin/erigon"
-conf_param = "--config="
+## TODO remove http.api from here
+conf_param = "--http.api='eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots' --config="
 user = { name = "eth-node-erigon-regtest", group = true, create = { home = false } }
 runtime_dir = { mode = "750" }
 # Service Fields
@@ -116,12 +117,12 @@ template = "{/DATA_DIR}/erigon"
 ignore_empty = true
 # summary = "Data directory for the databases"
 
-[config."erigon-regtest.yaml".ivars."http.api"]
-type = "string"
-default = "eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots"
-priority = "low"
-ignore_empty = true
-summary = "APIs offered over the HTTP-RPC interface"
+# [config."erigon-regtest.yaml".ivars."http.api"]
+# type = "string"
+# default = "eth,erigon,engine,web3,net,debug,trace,txpool,admin,ots"
+# priority = "low"
+# ignore_empty = true
+# summary = "APIs offered over the HTTP-RPC interface"
 
 [config."erigon-regtest.yaml".ivars."http.vhosts"]
 type = "string"
