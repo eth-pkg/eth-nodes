@@ -49,7 +49,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-el-service"]
 conflicts = ["eth-node-regtest-el-service"]
-depends=["eth-node-regtest-config", "eth-node-regtest"]
+depends=["eth-node-regtest-config"]
 summary = "service file for eth-node-reth for network: regtest"
 
 [config."reth-regtest.conf".postprocess]

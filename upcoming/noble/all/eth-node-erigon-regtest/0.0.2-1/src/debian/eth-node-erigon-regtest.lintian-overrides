@@ -1,7 +1,7 @@
 eth-node-erigon-regtest: extended-description-is-empty
 eth-node-erigon-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-erigon-regtest" [postinst:8]
 eth-node-erigon-regtest: no-copyright-file
-eth-node-erigon-regtest: no-template-description eth-node-erigon-regtest/engine_jwt_disabled [templates:441]
+eth-node-erigon-regtest: no-template-description eth-node-erigon-regtest/engine_jwt_disabled [templates:*]
 eth-node-erigon-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-erigon-regtest/changelog.Debian.gz:1]
 eth-node-erigon-regtest: maintainer-script-ignores-errors [config]
 eth-node-erigon-regtest: maintainer-script-ignores-errors [postrm]

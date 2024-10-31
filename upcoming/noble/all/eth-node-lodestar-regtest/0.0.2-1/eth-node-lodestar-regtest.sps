@@ -52,7 +52,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-cl-service"]
 conflicts = ["eth-node-regtest-cl-service"]
-depends=["eth-node-regtest-config", "eth-node-regtest"]
+depends=["eth-node-regtest-config"]
 summary = "service file for eth-node-lodestar for network: regtest"
 
 [config."lodestar-regtest.conf".postprocess]
