@@ -5,5 +5,5 @@ package_hash = [
     # { hash="3c4029ca33e6f26976012c3cab2dc68f46ce30f8", name= "eth-node-besu-regtest_0.0.2-1.dsc"},
     { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-besu-regtest_0.0.2.orig.tar.gz" },
     # { hash="bf82dcf8ae59dc94c3dbb41f5e0df8b5d15934cd", name= "eth-node-besu-regtest_0.0.2-1.debian.tar.xz"},
-    { hash = "b02d18d3b9c1f002afdb0a8f27fc5ada2dc35b38", name = "eth-node-besu-regtest_0.0.2-1_all.deb" },
+    { hash = "232c674ce71300936ec69635193c8d72b3705a0b", name = "eth-node-besu-regtest_0.0.2-1_all.deb" },
 ]
