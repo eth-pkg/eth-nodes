@@ -153,7 +153,7 @@ ignore_empty = true
 # summary = "Path to the token that ensures safe connection between CL and EL"
 
 [config."erigon-regtest.yaml".ivars."http"]
-type = "string"
+type = "bool"
 default = "true"
 priority = "low"
 ignore_empty = true
@@ -175,7 +175,7 @@ ignore_empty = true
 
 [config."erigon-regtest.yaml".ivars."http.corsdomain"]
 type = "string"
-default = "'*'"
+default = "*"
 priority = "low"
 ignore_empty = true
 summary = "Comma separated list of domains from which to accept cross-origin requests"
@@ -196,7 +196,7 @@ ignore_empty = true
 # type = "string"
 # default = ""
 # priority = "low"
-ignore_empty = true
+# ignore_empty = true
 # summary = "Data directory for the databases"
 
 [config."erigon-regtest.yaml".ivars."ethash_dagdir"]
