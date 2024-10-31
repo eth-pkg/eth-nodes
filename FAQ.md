@@ -82,20 +82,28 @@ journalctl -u eth-node-reth-mainnet.service | less -S
 journalctl -u eth-node-teku-mainnet.service | less -S
 ```
 
-## Run client scripts manually, in case systemd.d service halted with seccomp error
+## Run client scripts manually, in case systemd.d service halted with error
 
 ```bash
-sudo -u eth-node-reth-regtest  /bin/bash /usr/lib/eth-node-reth-regtest/bin/run-reth.sh \
-       --conf-file /etc/eth-node-regtest-config/regtest.conf \
+sudo -u eth-node-besu-regtest besu \
+       --config-file=/etc/eth-node-besu-regtest/besu-regtest.conf
+```
+
+```bash
+sudo -u eth-node-erigon-regtest erigon \
+       --config=/etc/eth-node-erigon-regtest/erigon-regtest.conf
+```
+
+```bash
+sudo -u eth-node-reth-regtest reth \
        --conf-file /etc/eth-node-reth-regtest/reth-regtest.conf
 ```
 
-## Run validator scripts manually, in case systemd.d service halted with seccomp error
+## Run validator scripts manually, in case systemd.d service halted with error
 
 ```bash
-sudo -u eth-node-teku-validator-regtest  /bin/bash /usr/lib/eth-node-teku-validator-regtest/bin/run-teku-validator.sh \
-       --conf-file /etc/eth-node-regtest-config/regtest.conf \
-       --conf-file /etc/eth-node-teku-validator-regtest/teku-validator-regtest.conf
+sudo -u eth-node-teku-validator-regtest  teku \
+       --config-file /etc/eth-node-teku-validator-regtest/teku-validator-regtest.toml
 ```
 
 ## View logs

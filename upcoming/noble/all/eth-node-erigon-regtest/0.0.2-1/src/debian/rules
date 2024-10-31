@@ -11,5 +11,3 @@ override_dh_dwz:
 override_dh_prep:
 	mkdir debian/tmp
 	cp debian/eth-node-erigon-regtest.eth-node-erigon-regtest.service debian/tmp/eth-node-erigon-regtest.service 
-	chmod a+x debian/scripts/run-erigon-service.sh
-	chmod a+x debian/scripts/run-erigon.sh
