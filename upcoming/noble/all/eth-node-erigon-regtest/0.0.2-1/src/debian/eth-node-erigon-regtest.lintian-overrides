@@ -9,4 +9,4 @@ eth-node-erigon-regtest: maintainer-script-needs-depends-on-adduser adduser (doe
 eth-node-erigon-regtest: malformed-prompt-in-templates *
 eth-node-erigon-regtest: script-not-executable [usr/lib/eth-node-erigon-regtest/postprocess.sh]
 eth-node-erigon-regtest: too-long-short-description-in-templates *
-
+eth-node-erigon-regtest: malformed-question-in-templates *
