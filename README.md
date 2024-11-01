@@ -1,6 +1,6 @@
 # Reproducible builds for Ethereum Ecosystem (Debian/Ubuntu) 
 
-[![regtest](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest.yml/badge.svg)](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest.yml) 
+[![regtest daily](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest-daily.yml/badge.svg)](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest-daily.yml)
 
 This project aims to simplify the packaging of various Ethereum nodes for Debian-based systems, providing a streamlined approach to generate Debian packages for multiple Ethereum clients. It is actively under development, and you can check the [roadmap](/Roadmap.md) for upcoming features.
 
