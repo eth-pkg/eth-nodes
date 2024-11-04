@@ -107,12 +107,12 @@ for client in "${CL_CLIENTS[@]}"; do
     cp "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$CL_SERVICE_VERSION/eth-node-${client}-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
-for client in "${EL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$EL_SERVICE_VERSION/eth-node-${client}-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
-done
+# for client in "${EL_CLIENTS[@]}"; do
+#     cp "$PACKAGE_DIR/eth-node-${client}-$NETWORK-$EL_SERVICE_VERSION/eth-node-${client}-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+# done
 
 
 for client in "${CL_CLIENTS[@]}"; do
-    cp "$PACKAGE_DIR/eth-node-${client}-validator-$NETWORK-$EL_SERVICE_VERSION/eth-node-${client}-validator-${NETWORK}_${EL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
+    cp "$PACKAGE_DIR/eth-node-${client}-validator-$NETWORK-$CL_SERVICE_VERSION/eth-node-${client}-validator-${NETWORK}_${CL_SERVICE_VERSION}_all.deb" "$SERVE_DIR"
 done
 
