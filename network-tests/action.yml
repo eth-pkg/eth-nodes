@@ -196,7 +196,7 @@ runs:
           echo "eth-node-${{ inputs.cl_name }}-${{ inputs.network }} is not active" >&2
           echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
           journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
-          cat /etc/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/${{inputs.cl_name}}-${{ inputs.network }}.toml
+          sudo cat /etc/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/${{inputs.cl_name}}-${{ inputs.network }}.toml
           sudo -u eth-node-${{inputs.cl_name}} nimbus_beacon_node --non-interactive --web3-url='http://localhost:8551' --config-file=/etc/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/${{inputs.cl_name}}-${{ inputs.network }}.toml
           exit 1
         fi
