@@ -113,7 +113,8 @@ runs:
           eth-node-besu \
           eth-node-erigon \
           eth-node-geth \
-          eth-node-nethermind eth-node-reth \
+          eth-node-nethermind \
+          eth-node-reth \
           eth-node-lighthouse \
           eth-node-lodestar \
           eth-node-nimbus-eth2 \
@@ -197,7 +198,7 @@ runs:
           echo "Fetching logs for eth-node-${{ inputs.cl_name }}-${{ inputs.network }}..."
           journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
           sudo cat /etc/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/${{inputs.cl_name}}-${{ inputs.network }}.toml
-          sudo -u eth-node-${{inputs.cl_name}}-${{ inputs.network }} nimbus_beacon_node --non-interactive --web3-url='http://localhost:8551' --config-file=/etc/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/${{inputs.cl_name}}-${{ inputs.network }}.toml
+          sudo -u eth-node-${{inputs.cl_name}}-${{ inputs.network }} /usr/bin/nimbus_beacon_node --non-interactive --web3-url='http://localhost:8551' --config-file=/etc/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/${{inputs.cl_name}}-${{ inputs.network }}.toml
           exit 1
         fi
 
