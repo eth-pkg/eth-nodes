@@ -26,4 +26,9 @@ chown -R eth-node-erigon-regtest:eth-node-erigon-regtest /var/logs/eth-node-regt
 echo "Adding eth-node-erigon-regtest to eth-node-regtest group"
 usermod -aG eth-node-regtest eth-node-erigon-regtest || true 
 
+
+echo "Importing genesis state"
+sudo -u eth-node-erigon-regtest erigon init --datadir "/var/lib/eth-node-regtest/erigon" "/var/lib/eth-node-regtest/regtest/genesis/genesis.json"
+
+
 exit 0
