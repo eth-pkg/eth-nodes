@@ -184,7 +184,7 @@ structure = ["JsonRpc", "JwtSecretFile"]
 type = "string"
 template = "{/TESTNET_DIR}/chainspec.json"
 # priority = "low"
-ignore_empty = true
+# ignore_empty = true
 # summary = "Path to the chain spec file"
 structure = ["Init", "ChainSpecPath"]
 
@@ -202,7 +202,7 @@ structure = ["Network", "MaxActivePeers"]
 type = "string"
 template = "{/LOG_DIR}/nethermind"
 # priority = "low"
-ignore_empty = true
+# ignore_empty = true
 # summary = "Path to the Nethermind logs directory."
 structure = ["Init", "LogDirectory"]
 
