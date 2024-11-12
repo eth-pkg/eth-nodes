@@ -22,15 +22,7 @@ eth-node-lodestar: embedded-library srtp [usr/lib/eth-node-lodestar/node_modules
 eth-node-lodestar: embedded-library tiff [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
 
 # TODO potentional problems
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@napi-rs/snappy-linux-x64-musl/snappy.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@node-rs/crc32-linux-x64-musl/crc32.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@nx/nx-linux-x64-musl/nx.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@parcel/watcher/prebuilds/linux-x64/node.napi.musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@rollup/rollup-linux-x64-musl/rollup.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm64/node.napi.armv8.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-x64/node.napi.musl.node]
+eth-node-lodestar: library-not-linked-against-libc *  
 eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) *
 
 
@@ -66,35 +58,8 @@ eth-node-lodestar: copyright-without-copyright-notice
 
 
 # not sure 
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@eslint/eslintrc/node_modules/ajv/lib/compile/async.js]
+eth-node-lodestar: embedded-javascript-library please use libjs-async *  
 
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.scandir/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.stat/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.walk/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@nodelib/fs.walk/out/readers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@vitest/utils/node_modules/estree-walker/src/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/archiver/node_modules/async/dist/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/archiver/node_modules/async/dist/async.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/async/dist/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/async/dist/async.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/asynckit/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/bluebird/js/release/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/eslint/node_modules/ajv/lib/compile/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/estree-walker/src/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/fast-glob/out/providers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/fast-glob/out/readers/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/neo-async/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/neo-async/async.min.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/one-time/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/pbkdf2/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/example/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/lib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/resolve/test/resolver/nested_symlinks/mylib/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/cjs/internal/scheduler/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/esm/internal/scheduler/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/rxjs/dist/esm5/internal/scheduler/async.js]
-eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/through/test/async.js]
 eth-node-lodestar: embedded-javascript-library please use libjs-chai [usr/lib/eth-node-lodestar/node_modules/chai/chai.js]
 eth-node-lodestar: embedded-javascript-library please use libjs-chai [usr/lib/eth-node-lodestar/node_modules/chai/lib/chai.js]
 eth-node-lodestar: embedded-javascript-library please use libjs-mocha [usr/lib/eth-node-lodestar/node_modules/mocha/bin/mocha.js]
@@ -134,15 +99,6 @@ eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/e
 eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/lib/async.js]
 eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@microsoft/tsdoc-config/node_modules/resolve/test/resolver/nested_symlinks/mylib/async.js]
 eth-node-lodestar: embedded-javascript-library please use libjs-async [usr/lib/eth-node-lodestar/node_modules/@rushstack/node-core-library/lib/Async.js]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:17]
-
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:18]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm/node.napi.armv6.node] [usr/share/lintian/overrides/eth-node-lodestar:19]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:20]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:21]
-eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:43]
-eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:44]
-eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-x64/node.napi.musl.node] [usr/share/lintian/overrides/eth-node-lodestar:45]
 
 
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
@@ -153,3 +109,5 @@ eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/pac
 eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst-linux-x64-musl/blst.linux-x64-musl.node]
 
 eth-node-lodestar: privacy-breach-generic *
+
+eth-node-lodestar: shared-library-lacks-prerequisites * 
