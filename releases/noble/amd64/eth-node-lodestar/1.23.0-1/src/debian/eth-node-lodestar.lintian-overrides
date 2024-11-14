@@ -86,7 +86,6 @@ eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/pac
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-127-binding.node]
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-83-binding.node]
 eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-93-binding.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst-linux-x64-musl/blst.linux-x64-musl.node]
 
 eth-node-lodestar: privacy-breach-generic *
 eth-node-lodestar: embedded-javascript-library * 
