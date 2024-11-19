@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="68026aa694ca970a034e693f93908e1b319b4017", name= "eth-node-geth_1.14.12-1.dsc"},
+    { hash="2ad5847cbbc2dfaea98fc52d467ac5ce24d02167", name= "eth-node-geth_1.14.12.orig.tar.gz"},
+    { hash="d7673c6fb48abb715ce0352658b2f2e4518dd850", name= "eth-node-geth_1.14.12-1.debian.tar.xz"},
+    { hash="8c18e9d937be0c675ce99864910b6023212a1fe6", name= "eth-node-geth_1.14.12-1_amd64.deb"},
+]
