@@ -120,7 +120,7 @@ runs:
           eth-node-nimbus-eth2 \
           eth-node-prysm \
           eth-node-teku \
-          zcli \ 
+          zcli \
           eth2-testnet-genesis \
           eth2-val-tools \
           ethereum-genesis-generator
@@ -128,6 +128,7 @@ runs:
     - name: Build clients
       run: |
         apt list --installed | grep eth-node-nimbus-eth2
+        sudo ls -al /usr/lib/eth-node-nimbus-eth2/bin
         which nimbus_beacon_node
         exit 0
         cd upcoming/noble/all
