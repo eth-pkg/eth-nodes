@@ -5,5 +5,5 @@ package_hash = [
     # { hash="2553006e4270f4a70f25cdf4894e6c01294a4e20", name= "eth-node-nimbus-eth2-validator-regtest_0.0.2-1.dsc"},
     { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-nimbus-eth2-validator-regtest_0.0.2.orig.tar.gz" },
     # { hash="7ef6f979c889a5d77808c61cf15605ea8edf8d7f", name= "eth-node-nimbus-eth2-validator-regtest_0.0.2-1.debian.tar.xz"},
-    { hash = "f0359e76f12f6f84e45e07ef32fb36504e48f77b", name = "eth-node-nimbus-eth2-validator-regtest_0.0.2-1_all.deb" },
+    { hash = "b58ddbdca59ab6670e2f8bae05cf57e5e8f9a3a4", name = "eth-node-nimbus-eth2-validator-regtest_0.0.2-1_all.deb" },
 ]
