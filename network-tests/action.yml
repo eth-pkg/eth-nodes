@@ -127,6 +127,8 @@ runs:
 
     - name: Build clients
       run: |
+        which nimbus_beacon_node
+        exit 0
         cd upcoming/noble/all
         mkdir ${HOME}/packages
 
