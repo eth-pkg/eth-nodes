@@ -127,7 +127,7 @@ runs:
 
     - name: Build clients
       run: |
-        apt list --installed | eth-node-nimbus-eth2
+        apt list --installed | grep eth-node-nimbus-eth2
         which nimbus_beacon_node
         exit 0
         cd upcoming/noble/all
