@@ -1,6 +1,7 @@
 name = "eth-node-nimbus-eth2-regtest"
 bin_package = "eth-node-nimbus-eth2"
-binary = "/usr/bin/nimbus_beacon_node"
+# TODO not sure why nimbus_beacon_node fails to be included in the PATH on github CI
+binary = "/usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node"
 ## TODO remove http.api from here
 conf_param = "--non-interactive --web3-url='http://localhost:8551' --config-file="
 user = { name = "eth-node-nimbus-eth2-regtest", group = true, create = { home = false } }
