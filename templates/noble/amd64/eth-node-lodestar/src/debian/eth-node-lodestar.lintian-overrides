@@ -54,7 +54,8 @@ eth-node-lodestar: script-not-executable *
 
 eth-node-lodestar: unusual-interpreter ts-node *
 
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst-linux-x64-musl/blst.linux-x64-musl.node]
-
 eth-node-lodestar: privacy-breach-generic *
 eth-node-lodestar: shared-library-lacks-prerequisites *
+eth-node-lodestar: embedded-javascript-library please use libjs-lodash *
+eth-node-lodestar: embedded-javascript-library please use libjs-punycode * 
+embedded-javascript-library please use node-pako *
