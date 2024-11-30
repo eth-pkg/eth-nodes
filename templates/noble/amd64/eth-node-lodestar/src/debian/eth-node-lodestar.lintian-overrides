@@ -3,34 +3,13 @@ eth-node-lodestar: maintainer-script-ignores-errors [postrm]
 eth-node-lodestar: no-manual-page [usr/bin/lodestar]
 
 # TODO delete these
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/bare-fs/prebuilds/linux-arm64/bare-fs.bare]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/bare-os/prebuilds/linux-arm64/bare-os.bare]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm64/node.napi.armv8.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-arm/node.napi.armv6.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-arm/node.napi.armv7.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-arm64/node.napi.armv8.node]
+eth-node-lodestar: binary-from-other-architecture *
 
 # not a problem 
-eth-node-lodestar: embedded-library freetype [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library lcms2 [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library libjpeg [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library libjsoncpp [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library libpng [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library openjpeg [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library srtp [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
-eth-node-lodestar: embedded-library tiff [usr/lib/eth-node-lodestar/node_modules/electron/dist/electron]
+eth-node-lodestar: embedded-library *
 
 # TODO potentional problems
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@napi-rs/snappy-linux-x64-musl/snappy.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@node-rs/crc32-linux-x64-musl/crc32.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@nx/nx-linux-x64-musl/nx.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@parcel/watcher/prebuilds/linux-x64/node.napi.musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@rollup/rollup-linux-x64-musl/rollup.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@swc/core-linux-x64-musl/swc.linux-x64-musl.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm/node.napi.armv7.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/android-arm64/node.napi.armv8.node]
-eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/classic-level/prebuilds/linux-x64/node.napi.musl.node]
+eth-node-lodestar: library-not-linked-against-libc *
 eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) *
 
 
@@ -51,62 +30,31 @@ eth-node-lodestar: unstripped-binary-or-object *
 
 eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/node_modules/fastify/integration/test.sh]
 
-eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/console-control-strings/README.md~]
-eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/.History.md.un~]
-eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/.Readme.md.un~]
-eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/.package.json.un~]
-eth-node-lodestar: backup-file-in-package [usr/lib/eth-node-lodestar/node_modules/querystring/test/.index.js.un~]
+eth-node-lodestar: backup-file-in-package *
 
-eth-node-lodestar: broken-gz [usr/lib/eth-node-lodestar/node_modules/@fastify/static/test/static-pre-compressed/all-three.html.gz]
-eth-node-lodestar: broken-gz [usr/lib/eth-node-lodestar/node_modules/@fastify/static/test/static-pre-compressed/gzip-only.html.gz]
+eth-node-lodestar: broken-gz *
 
 eth-node-lodestar: copyright-without-copyright-notice
 
-
-
-
 # not sure 
+eth-node-lodestar: embedded-javascript-library please use libjs-async *
+eth-node-lodestar: embedded-javascript-library please use libjs-chai *
+eth-node-lodestar: embedded-javascript-library please use libjs-mocha *
+eth-node-lodestar: embedded-javascript-library please use libjs-prototype *
 
 eth-node-lodestar: executable-not-elf-or-script *
 
 
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/bcrypto.node [usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/obj.target/bcrypto.node]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/obj.target/secp256k1.a [usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/secp256k1.a]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/obj.target/torsion.a [usr/lib/eth-node-lodestar/node_modules/bcrypto/build/Release/torsion.a]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/bigint-buffer/build/Release/bigint_buffer.node [usr/lib/eth-node-lodestar/node_modules/bigint-buffer/build/Release/obj.target/bigint_buffer.node]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/c-kzg/build/Release/kzg.node [usr/lib/eth-node-lodestar/node_modules/c-kzg/build/Release/obj.target/kzg.node]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/cpu_features.a [usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/obj.target/deps/cpu_features/cpu_features.a]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/cpufeatures.node [usr/lib/eth-node-lodestar/node_modules/cpu-features/build/Release/obj.target/cpufeatures.node]
-eth-node-lodestar: package-contains-hardlink pointing to: usr/lib/eth-node-lodestar/node_modules/ssh2/lib/protocol/crypto/build/Release/obj.target/sshcrypto.node [usr/lib/eth-node-lodestar/node_modules/ssh2/lib/protocol/crypto/build/Release/sshcrypto.node]
-
+eth-node-lodestar: package-contains-hardlink pointing to: *
 eth-node-lodestar: package-contains-vcs-control-file *
 
 eth-node-lodestar: package-has-unnecessary-activation-of-ldconfig-trigger
 
 eth-node-lodestar: script-not-executable *
 
-eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/lib/downloadTestsCli.d.ts]
-eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/lib/downloadTestsCli.js]
-eth-node-lodestar: unusual-interpreter ts-node [usr/lib/eth-node-lodestar/packages/spec-test-util/src/downloadTestsCli.ts]
+eth-node-lodestar: unusual-interpreter ts-node *
 
-
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:17]
-
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:18]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm/node.napi.armv6.node] [usr/share/lintian/overrides/eth-node-lodestar:19]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:20]
-eth-node-lodestar: mismatched-override binary-from-other-architecture [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:21]
-eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm/node.napi.armv7.node] [usr/share/lintian/overrides/eth-node-lodestar:43]
-eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/android-arm64/node.napi.armv8.node] [usr/share/lintian/overrides/eth-node-lodestar:44]
-eth-node-lodestar: mismatched-override library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/leveldown/prebuilds/linux-x64/node.napi.musl.node] [usr/share/lintian/overrides/eth-node-lodestar:45]
-
-
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-108-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-115-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-127-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-83-binding.node]
-eth-node-lodestar: binary-from-other-architecture [usr/lib/eth-node-lodestar/packages/light-client/node_modules/@chainsafe/blst/prebuild/linux-arm64-93-binding.node]
 eth-node-lodestar: library-not-linked-against-libc [usr/lib/eth-node-lodestar/node_modules/@chainsafe/blst-linux-x64-musl/blst.linux-x64-musl.node]
 
 eth-node-lodestar: privacy-breach-generic *
-eth-node-lodestar: embedded-javascript-library * 
+eth-node-lodestar: shared-library-lacks-prerequisites *
