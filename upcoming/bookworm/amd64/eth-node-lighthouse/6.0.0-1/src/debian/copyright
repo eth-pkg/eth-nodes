@@ -1,0 +1,31 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: lighthouse
+Upstream-Contact: https://github.com/sigp/lighthouse
+Source: <https://github.com/sigp/lighthouse>
+#
+# Please double check copyright with the licensecheck(1) command.
+
+Files:     *
+Copyright:  Copyright 2018 Sigma Prime Pty Ltd
+License:   Apache-2.0
+
+Files:     consensus/types/src/execution_block_header.rs
+Copyright: 2022 Reth Contributors
+License:   Expat
+
+Files:     beacon_node/execution_layer/src/keccak.rs
+Copyright: 2017-2018 Parity Technologies
+License:   Apache-2.0
+
+
+Files: debian/*
+License: GPL-3+
+
+
+License: Apache-2.0
+ The full text of the Apache License, Version 2.0 is distributed in
+ /usr/share/common-licenses/Apache-2.0 on Debian systems.
+
+License: GPL-3+
+ The full text of the GPL version 3 is distributed in
+ /usr/share/common-licenses/GPL-3 on Debian systems.
