@@ -1,0 +1,4 @@
+eth-node-lighthouse source: debian-rules-ignores-make-clean-error [debian/rules:39]
+eth-node-lighthouse source: missing-field-in-dep5-copyright Copyright [debian/copyright:21]
+eth-node-lighthouse source: missing-license-paragraph-in-dep5-copyright expat [debian/copyright:14]
+eth-node-lighthouse source: no-newline-at-end [debian/changelog]
