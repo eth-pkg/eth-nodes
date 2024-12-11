@@ -1,8 +1,8 @@
-Index: eth-node-nethermind-1.27.0/src/Nethermind/Directory.Build.props
+Index: eth-node-nethermind-1.30.0/src/Nethermind/Directory.Build.props
 ===================================================================
---- eth-node-nethermind-1.27.0.orig/src/Nethermind/Directory.Build.props
-+++ eth-node-nethermind-1.27.0/src/Nethermind/Directory.Build.props
-@@ -10,7 +10,6 @@
+--- eth-node-nethermind-1.30.0.orig/src/Nethermind/Directory.Build.props
++++ eth-node-nethermind-1.30.0/src/Nethermind/Directory.Build.props
+@@ -11,7 +11,6 @@
    </PropertyGroup>
  
    <PropertyGroup Label="ProductInfo">
@@ -10,7 +10,7 @@ Index: eth-node-nethermind-1.27.0/src/Nethermind/Directory.Build.props
      <Copyright>Demerzel Solutions Limited</Copyright>
      <Product>Nethermind</Product>
      <SourceRevisionId Condition="'$(Commit)' != ''">$(Commit)</SourceRevisionId>
-@@ -18,11 +17,4 @@
+@@ -19,11 +18,4 @@
      <VersionSuffix></VersionSuffix>
    </PropertyGroup>
  
@@ -22,15 +22,15 @@ Index: eth-node-nethermind-1.27.0/src/Nethermind/Directory.Build.props
 -  </ItemGroup>
 -
  </Project>
-Index: eth-node-nethermind-1.27.0/src/Nethermind/Nethermind.Runner/Program.cs
+Index: eth-node-nethermind-1.30.0/src/Nethermind/Nethermind.Runner/Program.cs
 ===================================================================
---- eth-node-nethermind-1.27.0.orig/src/Nethermind/Nethermind.Runner/Program.cs
-+++ eth-node-nethermind-1.27.0/src/Nethermind/Nethermind.Runner/Program.cs
-@@ -584,7 +584,6 @@ public static class Program
-         info
-             .Append("Version: ").AppendLine(ProductInfo.Version)
-             .Append("Commit: ").AppendLine(ProductInfo.Commit)
--            .Append("Build Date: ").AppendLine(ProductInfo.BuildTimestamp.ToString("u"))
-             .Append("OS: ")
-             .Append(ProductInfo.OS)
-             .Append(' ')
+--- eth-node-nethermind-1.30.0.orig/src/Nethermind/Nethermind.Runner/Program.cs
++++ eth-node-nethermind-1.30.0/src/Nethermind/Nethermind.Runner/Program.cs
+@@ -316,7 +316,6 @@ CliConfiguration ConfigureCli()
+             Console.WriteLine($"""
+                 Version:    {ProductInfo.Version}
+                 Commit:     {ProductInfo.Commit}
+-                Build date: {ProductInfo.BuildTimestamp:u}
+                 Runtime:    {ProductInfo.Runtime}
+                 Platform:   {ProductInfo.OS} {ProductInfo.OSArchitecture}
+                 """);
