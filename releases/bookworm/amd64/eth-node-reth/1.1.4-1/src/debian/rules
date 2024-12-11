@@ -1,0 +1,32 @@
+#!/usr/bin/make -f
+export CARGO_HOME=$(HOME)/.cargo
+export PATH:=$(PATH):$(CARGO_HOME)/bin
+export FEATURES=jemalloc
+export PROFILE=maxperf
+export VERGEN_BUILD_TIMESTAMP=2024-12-11T13:03Z
+export VERGEN_GIT_SHA=15fac0873e91ea29ab2e605bfba17bedcd7a6084
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	make build
+
+override_dh_auto_test:
+	#make test-unit
+	# This will modify the environment
+	# But we already built the binaries at this point, so it's okay
+	# tests are flaky
+	#make ef-tests
+
+override_dh_auto_install:
+	# install is not the same as debian install, ignore it 
+	# don't want to compile the client twice
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
