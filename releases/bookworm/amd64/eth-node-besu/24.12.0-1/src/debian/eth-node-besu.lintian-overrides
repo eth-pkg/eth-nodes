@@ -1,0 +1,15 @@
+eth-node-besu: initial-upload-closes-no-bugs [usr/share/doc/eth-node-besu/changelog.Debian.gz:1]
+eth-node-besu: maintainer-script-ignores-errors [postrm]
+eth-node-besu: no-manual-page [usr/bin/besu]
+eth-node-besu: jar-not-in-usr-share *
+eth-node-besu: codeless-jar *
+
+#TODO 
+eth-node-besu: copyright-without-copyright-notice
+
+
+eth-node-besu: executable-not-elf-or-script * 
+eth-node-besu: extended-description-line-too-long 
+eth-node-besu: synopsis-too-long
+eth-node-besu: script-not-executable [usr/lib/eth-node-besu/besu/besu.autocomplete.sh]
+eth-node-besu: unknown-java-class-version *

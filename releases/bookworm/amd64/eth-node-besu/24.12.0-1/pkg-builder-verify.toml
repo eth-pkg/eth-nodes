@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="de77ee453bd63fa063f8c984e03519747c43ae3f", name= "eth-node-besu_24.12.0-1.dsc"},
+    { hash="e12c59c9b2a753e4ce33dc845e32e733980a6453", name= "eth-node-besu_24.12.0.orig.tar.gz"},
+    { hash="b3710f90ed4e3011c03f372c34460576f4e7fbe2", name= "eth-node-besu_24.12.0-1.debian.tar.xz"},
+    { hash="338dd0f1cb1fa006ec0fd3e58de05bc585ec7500", name= "eth-node-besu_24.12.0-1_amd64.deb"},
+]
