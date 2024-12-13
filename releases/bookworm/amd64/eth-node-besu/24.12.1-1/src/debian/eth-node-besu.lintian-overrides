@@ -14,4 +14,5 @@ eth-node-besu: executable-not-elf-or-script [usr/lib/eth-node-besu/besu/bin/evmt
 eth-node-besu: extended-description-line-too-long 
 eth-node-besu: synopsis-too-long
 eth-node-besu: script-not-executable [usr/lib/eth-node-besu/besu/besu.autocomplete.sh]
+eth-node-besu: unknown-java-class-version *
 
