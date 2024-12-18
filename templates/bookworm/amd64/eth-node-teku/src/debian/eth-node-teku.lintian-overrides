@@ -8,4 +8,4 @@ eth-node-teku: executable-not-elf-or-script [usr/lib/eth-node-teku/teku/bin/teku
 eth-node-teku: extended-description-line-too-long line 1
 eth-node-teku: extended-description-line-too-long line 2
 eth-node-teku: script-not-executable [usr/lib/eth-node-teku/teku/teku.autocomplete.sh]
-
+eth-node-teku: unknown-java-class-version * 
