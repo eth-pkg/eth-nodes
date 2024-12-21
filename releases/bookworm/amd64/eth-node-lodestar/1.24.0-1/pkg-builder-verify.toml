@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="5b609618a651967a4c0432abf0fe2c361a7748d8", name= "eth-node-lodestar_1.24.0-1.dsc"},
+    { hash="07337db74c65b21f6e5e7431d49d392caa5ca7d6", name= "eth-node-lodestar_1.24.0.orig.tar.gz"},
+    { hash="764df56cd38c023ce78c480a682a42d35415bbff", name= "eth-node-lodestar_1.24.0-1.debian.tar.xz"},
+    { hash="39759ebac5894e803765aecd81f5aeab50d12794", name= "eth-node-lodestar_1.24.0-1_amd64.deb"},
+]
