@@ -1,0 +1,22 @@
+name = "eth-node-lodestar"
+maintainer = "Eniko Nagy <mail+ethnodes@eenagy.com>"
+section = "net"
+variants = []
+build_depends = [
+#"build-essential",
+"libssl-dev",
+"libjpeg-dev",
+"libgif-dev", 
+"libpixman-1-dev",
+"libpango1.0-dev",
+"libffi-dev",
+"git",
+#"docker-ce",
+#"docker-ce-cli",
+#"containerd.io",
+#"docker-buildx-plugin",
+#"docker-compose-plugin"
+]
+packages = ["eth-node-lodestar"]
+skip_debug_symbols = true
+
