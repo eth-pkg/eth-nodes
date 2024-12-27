@@ -10,6 +10,9 @@ override_dh_auto_build:
 	# Delete all other archs then x64
 	find src/Nethermind/artifacts/obj -type f -name '*.AssemblyReference.cache' -delete
 	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-arm64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-arm
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-musl-arm64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-musl-arm
 
 # TODO fix tests
 override_dh_auto_test:
@@ -34,4 +37,7 @@ override_dh_strip:
 
 override_dh_shlibdeps: 
 	# cannot find library libjemalloc.so.1 needed
-	dh_shlibdeps --exclude=librocksdb-musl.so --exclude=librocksdb-jemalloc.so --dpkg-shlibdeps-params=--ignore-missing-info
+	dh_shlibdeps \
+		--exclude=librocksdb-musl.so \
+		--exclude=librocksdb-jemalloc.so \
+		--dpkg-shlibdeps-params=--ignore-missing-info
