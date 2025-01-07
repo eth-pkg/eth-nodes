@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path() {
+	output="$(which reth)"
+	assertEquals "/usr/bin/reth" "$output"
+}
+
+test_invocation() {
+	output="$(reth --version)"
+	echo "$output"
+	# checked against https://github.com/paradigmxyz/reth/releases/download/v0.2.0-beta.8/reth-v0.2.0-beta.8-x86_64-unknown-linux-gnu.tar.gz
+	assertEquals "$output" "reth Version: 1.1.5
+Commit SHA: 3212af2d85a54eb207661361ac9fe1d7de4b5b8e
+Build Timestamp: 2025-01-07T15:04Z
+Build Features: jemalloc
+Build Profile: maxperf"
+}
+
+. shunit2
+
