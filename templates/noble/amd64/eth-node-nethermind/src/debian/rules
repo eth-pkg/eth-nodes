@@ -10,6 +10,13 @@ override_dh_auto_build:
 	# Delete all other archs then x64
 	find src/Nethermind/artifacts/obj -type f -name '*.AssemblyReference.cache' -delete
 	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-arm64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-arm
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-musl-arm64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/linux-musl-arm
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/ios-arm64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/maccatalyst-arm64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/maccatalyst-x64
+	rm -rf src/Nethermind/artifacts/bin/Nethermind.Runner/release/runtimes/tvos-arm64
 
 # TODO fix tests
 override_dh_auto_test:
