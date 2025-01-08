@@ -1,0 +1,45 @@
+[package_fields]
+spec_file = "eth-node-nethermind.sss"
+package_name = "eth-node-nethermind"
+version_number = "1.30.2"
+revision_number = "1"
+homepage="https://github.com/NethermindEth/nethermind"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/NethermindEth/nethermind/archive/refs/tags/1.30.2.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "e2d403862038246fff4295558af3f7dcf147dd248d151cf08663687100c159be"
+
+[package_type.language_env]
+language_env = "dotnet"
+# Because MS force pushes the security update onto packages, without using revision numbers
+dotnet_packages = [
+    { name = "aspnetcore-runtime-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "67d5e89bc094658af2aad53b858e66e115c7f5a1", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/aspnetcore-runtime-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "aspnetcore-targeting-pack-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "69eb6e3307ad8c6c11139eb67bfe9f180f48b45c", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/aspnetcore-targeting-pack-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-apphost-pack-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "6b5331b566ecbb81fc1c4137482d9a050f016f08", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-apphost-pack-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-host-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "a4b6f4eedbef7523ad2c8927f2baf79a437aa664", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-host-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-hostfxr-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "7da909a17153494b0b391e8693f34063e25160f4", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-hostfxr-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-runtime-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "aa377e9742c43222b6db063f01b06a7f68bc400b", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-runtime-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-sdk-9.0_9.0.101-0ubuntu1~24.04.1~ppa1_amd64", hash = "7ffd077e478049cce63ad14a3d1d21b30a1922d7", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-sdk-9.0_9.0.101-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-targeting-pack-9.0_9.0.0-rtm+build1-0ubuntu1~24.04.1~ppa1_amd64", hash = "79d8f651e6c8cd836f747adec9e14ea9a6bf7eda", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-targeting-pack-9.0_9.0.0-rtm%2Bbuild1-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "dotnet-templates-9.0_9.0.101-0ubuntu1~24.04.1~ppa1_amd64", hash = "1d3f028015cc0f1f57e9ad40b0258e619a375411", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/dotnet-templates-9.0_9.0.101-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+    { name = "netstandard-targeting-pack-2.1-9.0_9.0.101-0ubuntu1~24.04.1~ppa1_amd64", hash = "14b6d57f5f56e092d87744b61969e99761f95024", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/noble/20250107/netstandard-targeting-pack-2.1-9.0_9.0.101-0ubuntu1~24.04.1~ppa1_amd64.deb" },
+]
+use_backup_version = false
+
+[build_env]
+codename="noble numbat"
+arch = "amd64"
+pkg_builder_version="0.2.9"
+debcrafter_version = "2711b53"
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/noble"
