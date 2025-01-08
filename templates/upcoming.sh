@@ -4,29 +4,29 @@ set -euo pipefail
 
 # Constants
 SUPPORTED_CLIENTS=(
-  "besu"
-  "erigon"
-  "geth"
-  "lighthouse"
-  "lodestar"
-  "nethermind"
-  "nimbus-eth2"
-  "prysm"
-  "reth"
-  "teku"
+    "besu"
+    "erigon"
+    "geth"
+    "lighthouse"
+    "lodestar"
+    "nethermind"
+    "nimbus-eth2"
+    "prysm"
+    "reth"
+    "teku"
 )
 
 declare -A REPOSITORIES=(
-  ["besu"]="hyperledger/besu"
-  ["erigon"]="ledgerwatch/erigon"
-  ["geth"]="ethereum/go-ethereum"
-  ["lighthouse"]="sigp/lighthouse"
-  ["lodestar"]="ChainSafe/lodestar"
-  ["nethermind"]="NethermindEth/nethermind"
-  ["nimbus-eth2"]="status-im/nimbus-eth2"
-  ["prysm"]="prysmaticlabs/prysm"
-  ["reth"]="paradigmxyz/reth"
-  ["teku"]="ConsenSys/teku"
+    ["besu"]="hyperledger/besu"
+    ["erigon"]="ledgerwatch/erigon"
+    ["geth"]="ethereum/go-ethereum"
+    ["lighthouse"]="sigp/lighthouse"
+    ["lodestar"]="ChainSafe/lodestar"
+    ["nethermind"]="NethermindEth/nethermind"
+    ["nimbus-eth2"]="status-im/nimbus-eth2"
+    ["prysm"]="prysmaticlabs/prysm"
+    ["reth"]="paradigmxyz/reth"
+    ["teku"]="ConsenSys/teku"
 )
 
 SUPPORTED_ARCHS=("amd64")
@@ -43,6 +43,7 @@ Options:
   --client-name <name>          Sets the client name.
   --arch <architecture>         Sets the architecture.
   --codename <codename>         Sets the codename.
+  --version <version_number>    Sets the version number, if not latest.
   --help, -h                    Displays this help text and exits.
 EOF
     exit 0
@@ -66,21 +67,19 @@ get_latest_release() {
     local url="https://github.com/$owner/$repo/releases/latest"
     local latest_release=$(curl -I -L -s "$url" | grep -i "location:" | tail -n1 | cut -d ' ' -f2)
     latest_release=$(echo $latest_release | tr -d '\r\n')
-
     echo "$latest_release"
 }
 
 get_download_url() {
-  local latest_release="$1"
-  local download_url
+    local latest_release="$1"
+    local download_url
 
-  # Rewrite the download URL
-  download_url=$(echo "$latest_release" | sed 's/releases/archive\/refs/' | sed 's/tag/tags/')
-  download_url="${download_url}.tar.gz"
+    # Rewrite the download URL
+    download_url=$(echo "$latest_release" | sed 's/releases/archive\/refs/' | sed 's/tag/tags/')
+    download_url="${download_url}.tar.gz"
 
-  echo "$download_url"
+    echo "$download_url"
 }
-
 
 get_hash() {
     local url=$1
@@ -92,9 +91,13 @@ get_commit_hash_for_tag() {
     local tag=$2
     local temp_dir
     temp_dir=$(mktemp -d)
-    git clone -q --depth 1 --branch "$tag" "https://github.com/$repo.git" "$temp_dir" > /dev/null 2>&1
+    git clone -q --depth 1 --branch "$tag" "https://github.com/$repo.git" "$temp_dir" >/dev/null 2>&1
     (
-        cd "$temp_dir" > /dev/null 2>&1 || { echo "Failed to change directory"; rm -rf "$temp_dir"; return 1; }
+        cd "$temp_dir" >/dev/null 2>&1 || {
+            echo "Failed to change directory"
+            rm -rf "$temp_dir"
+            return 1
+        }
         git rev-parse HEAD
     )
     rm -rf "$temp_dir"
@@ -105,17 +108,21 @@ get_submodules_for_tag() {
     local tag=$2
     local temp_dir
     temp_dir=$(mktemp -d)
-    git clone -q --depth 1 --branch "$tag" "https://github.com/$repo.git" "$temp_dir" > /dev/null 2>&1
+    git clone -q --depth 1 --branch "$tag" "https://github.com/$repo.git" "$temp_dir" >/dev/null 2>&1
     (
-        cd "$temp_dir" > /dev/null 2>&1 || { echo "Failed to change directory"; rm -rf "$temp_dir"; return 1; }
+        cd "$temp_dir" >/dev/null 2>&1 || {
+            echo "Failed to change directory"
+            rm -rf "$temp_dir"
+            return 1
+        }
 
         output="["
 
         while read -r line; do
-        commit_hash=$(echo $line | awk '{print $1}' | tr -d '-')
-        submodule_path=$(echo $line | awk '{print $2}')
-        
-        output="${output}
+            commit_hash=$(echo $line | awk '{print $1}' | tr -d '-')
+            submodule_path=$(echo $line | awk '{print $2}')
+
+            output="${output}
         { \"commit\" = \"$commit_hash\", \"path\" = \"$submodule_path\" },"
         done < <(git submodule status)
 
@@ -124,7 +131,6 @@ get_submodules_for_tag() {
 
         echo "$output"
 
-   
     )
     rm -rf "$temp_dir"
 }
@@ -154,16 +160,16 @@ replace_in_files() {
     local pattern=$2
     local replacement=$3
     echo "pattern: $pattern, replacement: $replacement"
-    
+
     local temp_file=$(mktemp)
-    echo "$replacement" > "$temp_file"
+    echo "$replacement" >"$temp_file"
 
     files=$(find "$dir" -type f -print0 | xargs -0 grep -l "$pattern" 2>/dev/null) || true
     if [ $? -ne 0 ]; then
         echo "No matches found for pattern $pattern. Continuing to next pattern."
         return 0
     fi
-    
+
     for file in $files; do
         echo "Processing file: $file"
         sed -i "s/$pattern/$replacement/g" "$file"
@@ -194,7 +200,7 @@ replace_git_submodules_in_file() {
                 print $0
             }
         }
-    ' "$file" > tmp && mv tmp "$file"
+    ' "$file" >tmp && mv tmp "$file"
 
     if [ $? -ne 0 ]; then
         echo "Error: awk failed for file $file with pattern $pattern"
@@ -206,29 +212,34 @@ HELP=false
 CLIENT_NAME=""
 CODENAME=""
 ARCH="amd64"
+VERSION="latest"
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --client-name)
-            CLIENT_NAME="$2"
-            shift 2
-            ;;
-        --arch)
-            ARCH="$2"
-            shift 2
-            ;;
-        --codename)
-            CODENAME="$2"
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --client-name)
+        CLIENT_NAME="$2"
+        shift 2
+        ;;
+    --arch)
+        ARCH="$2"
+        shift 2
+        ;;
+    --codename)
+        CODENAME="$2"
+        shift 2
+        ;;
+    --version)
+        VERSION="$2"
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -251,24 +262,28 @@ if ! is_supported "$CODENAME" "${SUPPORTED_CODENAMES[@]}"; then
     exit 1
 fi
 
-
-
-function main(){
+function main() {
     CLIENT_REPOSITORY=${REPOSITORIES[$CLIENT_NAME]}
-    LATEST_RELEASE=$(get_latest_release "$CLIENT_REPOSITORY")
+    if [ "$VERSION" = "latest" ]; then
+        LATEST_RELEASE=$(get_latest_release "$CLIENT_REPOSITORY" "tag/$VERSION")
+    else
+        local owner=$(echo "$CLIENT_REPOSITORY" | cut -d'/' -f1)
+        local repo=$(echo "$CLIENT_REPOSITORY" | cut -d'/' -f2)
+        LATEST_RELEASE="https://github.com/$owner/$repo/releases/tag/$VERSION"
+    fi
     TAG_NAME=$(echo "$LATEST_RELEASE" | tr '/' '\n' | tail -n1)
     CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
     RELEASE_DIR="releases/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
     UPCOMING_DIR="upcoming/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
 
-    #if [ -d "$RELEASE_DIR" ]; then 
+    #if [ -d "$RELEASE_DIR" ]; then
     #  echo "$RELEASE_DIR already exists"
     #  exit 0
-    #fi 
+    #fi
 
-    if [ -d "$UPCOMING_DIR" ]; then 
-      echo "$UPCOMING_DIR already exists"
-      exit 0
+    if [ -d "$UPCOMING_DIR" ]; then
+        echo "$UPCOMING_DIR already exists"
+        exit 0
     fi
 
     CURRENT_DATETIME=$(date +"%Y-%m-%d %H:%M:%S %z")
@@ -288,19 +303,19 @@ function main(){
 
     mkdir -p "$UPCOMING_DIR"
     cp -R "$TEMPLATE_DIR"/* "$UPCOMING_DIR"
-    DOWNLOAD_URL=$(get_download_url "$LATEST_RELEASE" )
+    DOWNLOAD_URL=$(get_download_url "$LATEST_RELEASE")
     CLIENT_PACKAGE_HASH=$(get_hash "$DOWNLOAD_URL")
     VERSION_MAJOR=
     VERSION_MINOR=
     VERSION_BUILD=
-    
-    if [ "$CLIENT_NAME" = "nimbus-eth2" ];then 
-      GIT_SUBMODULES=$(get_submodules_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
-      VERSION_MAJOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 1)
-      VERSION_MINOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 2)
-      VERSION_BUILD=$(echo "$CLIENT_VERSION" | cut -d '.' -f 3)
-      replace_git_submodules_in_file "$UPCOMING_DIR/pkg-builder.toml" "<GIT_SUBMODULES>" "$GIT_SUBMODULES"
-    fi 
+
+    if [ "$CLIENT_NAME" = "nimbus-eth2" ]; then
+        GIT_SUBMODULES=$(get_submodules_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
+        VERSION_MAJOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 1)
+        VERSION_MINOR=$(echo "$CLIENT_VERSION" | cut -d '.' -f 2)
+        VERSION_BUILD=$(echo "$CLIENT_VERSION" | cut -d '.' -f 3)
+        replace_git_submodules_in_file "$UPCOMING_DIR/pkg-builder.toml" "<GIT_SUBMODULES>" "$GIT_SUBMODULES"
+    fi
 
     declare -A REPLACEMENTS=(
         ["<CLIENT_VERSION>"]="$CLIENT_VERSION"
@@ -320,18 +335,17 @@ function main(){
     )
 
     for key in "${!REPLACEMENTS[@]}"; do
-      echo "$key: ${REPLACEMENTS[$key]}"
+        echo "$key: ${REPLACEMENTS[$key]}"
     done
 
     for pattern in "${!REPLACEMENTS[@]}"; do
-      replace_in_files "$UPCOMING_DIR" "$pattern" "${REPLACEMENTS[$pattern]}"
-      if [ $? -ne 0 ]; then
-        echo "Error: replacement failed for pattern $pattern"
-        continue
-      fi
+        replace_in_files "$UPCOMING_DIR" "$pattern" "${REPLACEMENTS[$pattern]}"
+        if [ $? -ne 0 ]; then
+            echo "Error: replacement failed for pattern $pattern"
+            continue
+        fi
     done
-
 
 }
 
-main 
+main
