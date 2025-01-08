@@ -257,8 +257,7 @@ function main(){
     CLIENT_REPOSITORY=${REPOSITORIES[$CLIENT_NAME]}
     LATEST_RELEASE=$(get_latest_release "$CLIENT_REPOSITORY")
     TAG_NAME=$(echo "$LATEST_RELEASE" | tr '/' '\n' | tail -n1)
-    #CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
-    CLIENT_VERSION="1.30.0"
+    CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
     RELEASE_DIR="releases/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
     UPCOMING_DIR="upcoming/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
 

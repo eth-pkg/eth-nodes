@@ -1,16 +1,11 @@
 # Not a bug 
-eth-node-nethermind: embedded-library bzip2 [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
-eth-node-nethermind: embedded-library bzip2 [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb.so]
-eth-node-nethermind: embedded-library gmp [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/libgmp.so]
-eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/ClearScriptV8.linux-x64.so]
-eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/libgrpc_csharp_ext.x64.so]
-eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
-eth-node-nethermind: embedded-library zlib [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb.so]
-eth-node-nethermind: embedded-library libzstd [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
-eth-node-nethermind: embedded-library libzstd [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb.so]
+eth-node-nethermind: embedded-library bzip2 *
+eth-node-nethermind: embedded-library gmp *
+eth-node-nethermind: embedded-library zlib *
+eth-node-nethermind: embedded-library libzstd *
 
 # Most likely a bug
-eth-node-nethermind: library-not-linked-against-libc [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
+eth-node-nethermind: library-not-linked-against-libc *
 
 eth-node-nethermind: executable-not-elf-or-script [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/*]
 
@@ -19,10 +14,7 @@ eth-node-nethermind: maintainer-script-ignores-errors [postrm]
 eth-node-nethermind: no-manual-page [usr/bin/nethermind]
 
 
-eth-node-nethermind: unstripped-binary-or-object [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/ckzg.so]
-eth-node-nethermind: unstripped-binary-or-object [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb-musl.so]
-eth-node-nethermind: unstripped-binary-or-object [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/librocksdb.so]
-eth-node-nethermind: unstripped-binary-or-object [usr/lib/eth-node-nethermind/bin/Nethermind.Runner/release/runtimes/linux-x64/native/libsecp256k1.so]
+eth-node-nethermind: unstripped-binary-or-object *
 
 # TODO 
 eth-node-nethermind: extended-description-line-too-long line 1
