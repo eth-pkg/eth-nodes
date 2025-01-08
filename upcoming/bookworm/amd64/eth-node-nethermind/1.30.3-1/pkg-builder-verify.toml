@@ -1,7 +1,0 @@
-[verify]
-package_hash=[
-    { hash="4f966bb21b44e1461e3e7da2f1b2353faedc592d", name= "eth-node-nethermind_1.30.3-1.dsc"},
-    { hash="fe0a78885b8650f379a25ed19e2fad8048d031c1", name= "eth-node-nethermind_1.30.3.orig.tar.gz"},
-    { hash="32f3fe07dd2a6d37f072f58b9bd89b34bd6f7ce0", name= "eth-node-nethermind_1.30.3-1.debian.tar.xz"},
-    { hash="1e4e8d246aacc0d71cf674a869ffc1aa312b8174", name= "eth-node-nethermind_1.30.3-1_amd64.deb"},
-]
