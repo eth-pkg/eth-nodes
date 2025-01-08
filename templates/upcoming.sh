@@ -272,7 +272,8 @@ function main() {
         LATEST_RELEASE="https://github.com/$owner/$repo/releases/tag/$VERSION"
     fi
     TAG_NAME=$(echo "$LATEST_RELEASE" | tr '/' '\n' | tail -n1)
-    CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
+    #CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
+    CLIENT_VERSION="1.30.1"
     RELEASE_DIR="releases/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
     UPCOMING_DIR="upcoming/$CODENAME/$ARCH/eth-node-$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
 
