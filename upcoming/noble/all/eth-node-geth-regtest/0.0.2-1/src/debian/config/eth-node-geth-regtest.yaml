@@ -1,0 +1,27 @@
+# Automtically generated - DO NOT MODIFY!
+
+allow_insecure_unlock=true
+
+authrpc_addr=127.0.0.1
+
+authrpc_jwtsecret=$JWT_FILE
+
+authrpc_port=
+
+authrpc_vhosts=localhost
+
+bootnodes=$BOOTNODES_ENR
+
+datadir=$DATA_DIR/geth
+
+http=true
+
+http_addr=127.0.0.1
+
+http_api=eth,net,web3
+
+log_file=$LOG_DIR/geth/geth.log
+
+log_format=logfmt
+
+password=$DATA_DIR/geth/geth_password.txt
