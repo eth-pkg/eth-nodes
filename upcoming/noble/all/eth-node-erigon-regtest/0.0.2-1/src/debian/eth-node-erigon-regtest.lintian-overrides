@@ -3,7 +3,6 @@ eth-node-erigon-regtest: maintainer-script-lacks-home-in-adduser "adduser --syst
 eth-node-erigon-regtest: no-copyright-file
 eth-node-erigon-regtest: no-template-description eth-node-erigon-regtest/engine_jwt_disabled [templates:*]
 eth-node-erigon-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-erigon-regtest/changelog.Debian.gz:1]
-eth-node-erigon-regtest: maintainer-script-ignores-errors [config]
 eth-node-erigon-regtest: maintainer-script-ignores-errors [postrm]
 eth-node-erigon-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
 eth-node-erigon-regtest: malformed-prompt-in-templates *
