@@ -1,0 +1,36 @@
+[package_fields]
+spec_file = "eth-node-lodestar.sss"
+package_name = "eth-node-lodestar"
+version_number = "1.24.0"
+revision_number = "1"
+homepage="https://github.com/ChainSafe/lodestar"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/ChainSafe/lodestar/archive/refs/tags/v1.24.0.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "d452fac482620ae0176425fb66731b83e8fcd86eac136cf4edebbe0b19ab5289"
+
+[package_type.language_env]
+language_env = "javascript"
+node_version = "20.12.2"
+# https://nodejs.org/download/release/v20.12.2
+node_binary_url = "https://nodejs.org/download/release/v20.12.2/node-v20.12.2-linux-x64.tar.gz"
+node_binary_checksum = "f8f9b6877778ed2d5f920a5bd853f0f8a8be1c42f6d448c763a95625cbbb4b0d"
+yarn_version = "1.22.19"
+
+[build_env]
+codename="bookworm"
+arch = "amd64"
+pkg_builder_version = "0.2.8"
+debcrafter_version = "2711b53"
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/bookworm"

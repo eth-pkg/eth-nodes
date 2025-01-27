@@ -1,0 +1,48 @@
+Index: eth-node-nimbus-eth2-24.12.0/beacon_chain/version.nim
+===================================================================
+--- eth-node-nimbus-eth2-24.12.0.orig/beacon_chain/version.nim
++++ eth-node-nimbus-eth2-24.12.0/beacon_chain/version.nim
+@@ -10,12 +10,14 @@
+ ## This module implements the version tagging details of all binaries included
+ ## in the Nimbus release process (i.e. beacon_node, validator_client, etc)
+ 
+-import std/[strutils, compilesettings]
++import std/[strutils]
++import os
+ 
+ const
+   compileYear = CompileDate[0 ..< 4]  # YYYY-MM-DD (UTC)
++  reproducibleYear = getEnv("BUILD_YEAR", "2024")
+   copyrights* =
+-    "Copyright (c) 2019-" & compileYear & " Status Research & Development GmbH"
++    "Copyright (c) 2019-" & reproducibleYear & " Status Research & Development GmbH"
+ 
+   versionMajor* = 24
+   versionMinor* = 12
+@@ -23,25 +25,7 @@ const
+ 
+   versionBlob* = "stateofus" # Single word - ends up in the default graffiti
+ 
+-  ## You can override this if you are building the
+-  ## sources outside the git tree of Nimbus:
+-  git_revision_override* {.strdefine.} =
+-    when querySetting(SingleValueSetting.command) == "check":
+-      # The staticExec call below returns an empty string
+-      # when `nim check` is used and this leads to a faux
+-      # compile-time error.
+-      # We work-around the problem with this override and
+-      # save some time in executing the external command.
+-      "123456"
+-    else:
+-      ""
+-
+-  gitRevisionLong* = when git_revision_override.len == 0:
+-    staticExec "git rev-parse --short HEAD"
+-  else:
+-    git_revision_override
+-
+-  gitRevision* = strip(gitRevisionLong)[0..5]
++  gitRevision* = getEnv("GIT_REVISION", "12345")
+ 
+   nimFullBanner* = staticExec("nim --version")
+   nimBanner* = staticExec("nim --version | grep Version")

@@ -1,0 +1,6 @@
+eth-node-lodestar (1.24.0-1) bookworm; urgency=medium
+
+  * Support for 1.24.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sat, 21 Dec 2024 09:33:05 +0100
+

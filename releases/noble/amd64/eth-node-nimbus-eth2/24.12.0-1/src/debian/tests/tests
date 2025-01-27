@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which nimbus_beacon_node)"
+  assertEquals "/usr/bin/nimbus_beacon_node" "$output"
+}
+
+test_invocation_run_beacon_node(){
+  output="$(nimbus_beacon_node --version)"
+  echo "$output"
+  # checked against https://github.com/status-im/nimbus-eth2/releases/download/v24.3.0/nimbus-eth2_Linux_amd64_24.3.0_dc19b082.tar.gz
+  assertContains "$output" "Nimbus beacon node v24.12.0-4e44027-stateofus
+Copyright (c) 2019-2024 Status Research & Development GmbH
+
+eth2 specification v1.4.0
+
+Nim Compiler Version 1.2.12 [Linux: amd64]"
+}
+
+. shunit2

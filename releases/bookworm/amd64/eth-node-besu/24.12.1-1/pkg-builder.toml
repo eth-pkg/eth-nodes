@@ -1,0 +1,41 @@
+[package_fields]
+spec_file = "eth-node-besu.sss"
+package_name = "eth-node-besu"
+version_number = "24.12.1"
+revision_number = "1"
+homepage="https://github.com/hyperledger/besu"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/hyperledger/besu/archive/refs/tags/24.12.1.tar.gz"
+tarball_hash = "e7b40a5bec9184ab976227421238b930c5ba8f47a8e18ae9ecdee952f76e0626"
+
+[package_type.language_env]
+language_env = "java"
+is_oracle=true
+jdk_version="21.0"
+jdk_binary_url="https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.tar.gz"
+jdk_binary_checksum="9f1f4a7f25ef6a73255657c40a6d7714f2d269cf15fb2ff1dc9c0c8b56623a6f"
+
+[package_type.language_env.gradle]
+# Gradle 7.6 downloads itself, even if it's the current version is right...
+gradle_version="7.6"
+gradle_binary_url="https://github.com/gradle/gradle-distributions/releases/download/v7.6.0/gradle-7.6-bin.zip"
+gradle_binary_checksum="7ba68c54029790ab444b39d7e293d3236b2632631fb5f2e012bb28b4ff669e4b"
+
+
+[build_env]
+codename="bookworm"
+arch = "amd64"
+pkg_builder_version="0.2.8"
+debcrafter_version = "8189263"
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/bookworm"

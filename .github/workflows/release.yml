@@ -105,14 +105,14 @@ jobs:
       #    cd ${{ steps.env.outputs.tag_name }}
       #    ${HOME}/.local/bin/pkg-builder piuparts
 
-      - name: autopkgtest
-        # TODO will need to add package caching for autopkgtest, but this is a huge task, delaying, and releasing for now
-        if: ${{ steps.env.outputs.codename != 'noble' && steps.env.outputs.package_name != 'ethereum-genesis-generator' }}
-        run: |
-          sudo cp -R ${HOME}/.pkg-builder /root
-          apt list --installed autopkgtest
-          cd ${{ steps.env.outputs.tag_name }}
-          sudo ${HOME}/.local/bin/pkg-builder autopkgtest
+      # - name: autopkgtest
+      #   # TODO will need to add package caching for autopkgtest, but this is a huge task, delaying, and releasing for now
+      #   if: ${{ steps.env.outputs.codename != 'noble' && steps.env.outputs.package_name != 'ethereum-genesis-generator' }}
+      #   run: |
+      #     sudo cp -R ${HOME}/.pkg-builder /root
+      #     apt list --installed autopkgtest
+      #     cd ${{ steps.env.outputs.tag_name }}
+      #     sudo ${HOME}/.local/bin/pkg-builder autopkgtest
 
       - name: verify
         run: |

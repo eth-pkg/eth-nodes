@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Taken from lodestar and added proper location for packages directory 
+
+# Convenience script to run the lodestar binary from built source
+#
+# ./lodestar.sh beacon --network prater
+
+node --trace-deprecation --max-old-space-size=4096 /usr/lib/eth-node-lodestar/packages/cli/bin/lodestar.js "$@"
