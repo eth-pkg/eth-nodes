@@ -1,0 +1,11 @@
+# Automtically generated - DO NOT MODIFY!
+bonsai-limit-trie-logs-enabled = false
+data-path="/var/lib/eth-node-regtest/besu"
+engine-jwt-secret="/etc/eth-node-regtest/jwt.hex"
+engine-rpc-enabled = true
+genesis-file="/var/lib/eth-node-regtest/regtest/genesis/besu.json"
+network-id="1337"
+p2p-enabled = false
+rpc-http-enabled = true
+rpc-http-port="8545"
+sync-mode="full"
