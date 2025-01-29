@@ -4,5 +4,5 @@ package_hash=[
     # disable as it fails day by day, we don't care about this, until the other hashes are the same
     # { hash="f0773b315ea03acaaca3d3959877e4d02758a5fd", name= "eth-node-nimbus-eth2_24.3.0.orig.tar.gz"},
     { hash="2462efd0cc77045dc10f44fb8d40517d12097bb3", name= "eth-node-nimbus-eth2_25.1.0-1.debian.tar.xz"},
-    { hash="4b625c8cec9af69b345d0c31ca13c51b39e5bb84", name= "eth-node-nimbus-eth2_25.1.0-1_amd64.deb"},
+    { hash="d56b27270426f8e470351cf2fb7f63701dfa7c1a", name= "eth-node-nimbus-eth2_25.1.0-1_amd64.deb"},
 ]
