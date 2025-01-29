@@ -1,7 +1,7 @@
-Index: eth-node-nimbus-eth2-24.10.0/beacon_chain/version.nim
+Index: eth-node-nimbus-eth2-25.1.0/beacon_chain/version.nim
 ===================================================================
---- eth-node-nimbus-eth2-24.10.0.orig/beacon_chain/version.nim
-+++ eth-node-nimbus-eth2-24.10.0/beacon_chain/version.nim
+--- eth-node-nimbus-eth2-25.1.0.orig/beacon_chain/version.nim
++++ eth-node-nimbus-eth2-25.1.0/beacon_chain/version.nim
 @@ -10,12 +10,14 @@
  ## This module implements the version tagging details of all binaries included
  ## in the Nimbus release process (i.e. beacon_node, validator_client, etc)
@@ -17,8 +17,8 @@ Index: eth-node-nimbus-eth2-24.10.0/beacon_chain/version.nim
 -    "Copyright (c) 2019-" & compileYear & " Status Research & Development GmbH"
 +    "Copyright (c) 2019-" & reproducibleYear & " Status Research & Development GmbH"
  
-   versionMajor* = 24
-   versionMinor* = 10
+   versionMajor* = 25
+   versionMinor* = 1
 @@ -23,25 +25,7 @@ const
  
    versionBlob* = "stateofus" # Single word - ends up in the default graffiti
