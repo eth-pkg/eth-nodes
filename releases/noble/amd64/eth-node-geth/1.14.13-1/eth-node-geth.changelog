@@ -1,0 +1,6 @@
+eth-node-geth (1.14.13-1) noble; urgency=medium
+
+  * Support for 1.14.13-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 30 Jan 2025 15:05:24 +0100
+
