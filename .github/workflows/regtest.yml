@@ -3,7 +3,7 @@ name: regtest
 on:
   push:
     branches:
-      - fix/regtest-daily
+      - feat/eth-node-configs
 
 jobs:
   test:
@@ -531,7 +531,7 @@ jobs:
       - name: tests
       # this works, but the problem it makes it look like that 125 tests are passed, when in practice
       # only the filtered tests passed, and the others are "fake green"
-        if: matrix.cl_name == matrix.validator_name
+        if: ${{ (matrix.el_name == 'besu' || matrix.el_name == 'erigon' || matrix.el_name == 'geth' ) && matrix.cl_name == matrix.validator_name && matrix.cl_name == 'nimbus-eth2' }}
         uses: ./network-tests
         with:
           network: regtest

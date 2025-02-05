@@ -1,0 +1,62 @@
+SHARED:
+  # Network configuration, set to regtest
+  ENGINE_API_PORT: "8551"
+
+  # Port for Execution Layer (EL) and Consensus Layer (CL) communication
+  ENGINE_SCHEME: "http"
+
+  # Scheme for EL and CL communication
+  ENGINE_HOST: "localhost"
+
+  # Host for EL and CL communication
+  ENGINE_IP: "127.0.0.1"
+
+  # IP address for EL and CL communication
+  DATA_DIR: "/var/lib/eth-node-regtest"
+
+  # Endpoint URL for EL and CL communication
+  JWT_FILE: "/etc/eth-node-regtest/jwt.hex"
+
+  # JWT secrets file shared by CL and EL
+  TESTNET_DIR: "/var/lib/eth-node-regtest/regtest/genesis"
+
+  ENDPOINT_URL: "http://localhost:8551"
+
+  # Custom network chain configuration file
+  NETWORK_ID: "1337"
+  # Shared fee recipient address for validator
+  LOG_DIR: "/var/logs/eth-node-regtest"
+EL:
+  # Network ID for custom network
+  METRICS_PORT: ""
+
+  # Execution Layer (EL) metrics port
+  WS_PORT: ""
+
+  # Execution Layer (EL) WebSocket port
+  RPC_PORT: "8545"
+
+  # Execution Layer (EL) RPC port
+  P2P_PORT: ""
+CL:
+  # Execution Layer (EL) P2P port
+  BEACON_API_URL: ""
+
+  # Consensus Layer (CL) Beacon API URL
+  CHECKPPOINT_SYNC_URL: ""
+
+  # Consensus Layer (CL) checkpoint sync URL
+  METRICS_PORT: ""
+
+  # Consensus Layer (CL) metrics port
+  RPC_PORT: "5052"
+
+  # Consensus Layer (CL) RPC port
+  P2P_PORT: ""
+VALIDATOR: 
+  # Validator beacon RPC provider
+  NUM_VALIDATORS: "64"
+
+  # Number of validators
+  SHARED_FEE_RECEIPENT_ADDRESS: "0xFE3B557E8Fb62b89F4916B721be55cEb828dBd73"
+
