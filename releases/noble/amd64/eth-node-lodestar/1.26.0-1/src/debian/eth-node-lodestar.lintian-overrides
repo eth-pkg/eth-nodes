@@ -39,7 +39,7 @@ eth-node-lodestar: copyright-without-copyright-notice
 # not sure 
 eth-node-lodestar: embedded-javascript-library please use libjs-async *
 eth-node-lodestar: embedded-javascript-library please use libjs-chai *
-eth-node-lodestar: embedded-javascript-library please use libjs-mocha *
+eth-node-lodestar: embedded-javascript-library please use libjs-underscore *
 eth-node-lodestar: embedded-javascript-library please use libjs-prototype *
 
 eth-node-lodestar: executable-not-elf-or-script *
