@@ -1,0 +1,58 @@
+eth-node-lodestar: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lodestar/changelog.Debian.gz:1]
+eth-node-lodestar: maintainer-script-ignores-errors [postrm]
+eth-node-lodestar: no-manual-page [usr/bin/lodestar]
+
+# TODO delete these
+eth-node-lodestar: binary-from-other-architecture *
+
+# not a problem 
+eth-node-lodestar: embedded-library *
+
+# TODO potentional problems
+eth-node-lodestar: library-not-linked-against-libc *
+eth-node-lodestar: missing-dep-for-interpreter node (does not satisfy nodejs:any) *
+
+
+# potentional problem 
+eth-node-lodestar: missing-dependency-on-libc *
+
+# TODO delete these 
+eth-node-lodestar: package-contains-eslint-config-file *
+
+# TODO delete these 
+eth-node-lodestar: package-contains-npm-ignore-file *
+
+eth-node-lodestar: privacy-breach-uses-embedded-file You may use the libjs-jquery package. (//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js) [usr/lib/eth-node-lodestar/node_modules/jmespath/index.html]
+
+eth-node-lodestar: statically-linked-binary [usr/lib/eth-node-lodestar/node_modules/@esbuild/linux-x64/bin/esbuild]
+
+eth-node-lodestar: unstripped-binary-or-object *
+
+eth-node-lodestar: wrong-path-for-interpreter /usr/bin/bash != /bin/bash [usr/lib/eth-node-lodestar/node_modules/fastify/integration/test.sh]
+
+eth-node-lodestar: backup-file-in-package *
+
+eth-node-lodestar: broken-gz *
+
+eth-node-lodestar: copyright-without-copyright-notice
+
+# not sure 
+eth-node-lodestar: embedded-javascript-library please use libjs-async *
+eth-node-lodestar: embedded-javascript-library please use libjs-chai *
+eth-node-lodestar: embedded-javascript-library please use libjs-mocha *
+eth-node-lodestar: embedded-javascript-library please use libjs-prototype *
+
+eth-node-lodestar: executable-not-elf-or-script *
+
+
+eth-node-lodestar: package-contains-hardlink pointing to: *
+eth-node-lodestar: package-contains-vcs-control-file *
+
+eth-node-lodestar: package-has-unnecessary-activation-of-ldconfig-trigger
+
+eth-node-lodestar: script-not-executable *
+
+eth-node-lodestar: unusual-interpreter ts-node *
+
+eth-node-lodestar: privacy-breach-generic *
+eth-node-lodestar: shared-library-lacks-prerequisites *
