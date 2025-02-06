@@ -9,7 +9,6 @@ add_files = [
 "build/bin/abidump /usr/lib/eth-node-geth/bin",
 "build/bin/abigen /usr/lib/eth-node-geth/bin",
 "build/bin/blsync /usr/lib/eth-node-geth/bin",
-"build/bin/bootnode /usr/lib/eth-node-geth/bin",
 "build/bin/clef /usr/lib/eth-node-geth/bin",
 "build/bin/devp2p /usr/lib/eth-node-geth/bin",
 "build/bin/era /usr/lib/eth-node-geth/bin",
