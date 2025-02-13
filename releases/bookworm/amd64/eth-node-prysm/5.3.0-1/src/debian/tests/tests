@@ -1,0 +1,22 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path_beacon_chain(){
+  output="$(which beacon-chain)"
+  assertEquals "/usr/bin/beacon-chain" "$output"
+}
+
+test_beacon_chain_invocation(){
+  output="$(beacon-chain --version)"
+  echo "$output"
+  # checked against https://github.com/prysmaticlabs/prysm/releases/download/v4.1.1/beacon-chain-v4.1.1-linux-amd64
+  # Note build at information is static, to achieve reproducible builds
+  assertEquals "$output" "beacon-chain version Prysm/v5.3.0/8c4ea850baec0a8579e80d44af44943f50a18d3e. Built at: 2025-02-13 12:34:23+00:00" 
+}
+
+
+
+. shunit2
