@@ -1,0 +1,57 @@
+#!/usr/bin/make -f
+export NIM_DIR=/opt/lib/nim/nim-2.0.2
+export USE_SYSTEM_NIM=1
+export BINARIES=nimbus_beacon_node nimbus_validator_client deposit_contract nimbus_signing_node nimbus_light_client
+export ADDITIONAL_BINARIES=generate_makefile
+export NIMFLAGS=-d:disableMarchNative --gcc.options.debug:'-g1' --clang.options.debug:'-gline-tables-only'
+export NIMFLAGS+=-d:marchOptimized
+#export NIMFLAGS+="--mm:refc -d:limitStackUsage"
+export GIT_REVISION=4e4402
+export VERSION_MAJOR=24
+export VERSION_MINOR=12
+export VERSION_BUILD=0
+export PARTIAL_STATIC_LINKING=1
+export QUICK_AND_DIRTY_COMPILER=1
+export LOG_LEVEL="TRACE"
+export CFLAGS += -fPIC
+export CFLAGS += -Wl,--build-id=none
+export LDFLAGS += -Wl,--build-id=none
+
+
+%:
+	dh $@
+
+
+override_dh_dwz:
+	# skip of optimization of DWARF as it makes no sense, the optimized size is bigger than the original
+
+override_dh_auto_build:
+	make ntu
+	for bin in $(BINARIES) ; do \
+		NIMFLAGS="$(NIMFLAGS)" make "$${bin}"; \
+		llvm-objcopy --remove-section .note.gnu.property "build/$${bin}" "build/$${bin}"; \
+		llvm-objcopy --remove-section .note.gnu.build-id "build/$${bin}" "build/$${bin}"; \
+		llvm-objcopy --remove-section .note.ABI-tag "build/$${bin}" "build/$${bin}"; \
+		readelf -n "build/$${bin}"; \
+	done
+	for bin in $(ADDITIONAL_BINARIES) ; do \
+		llvm-objcopy --remove-section .note.gnu.property "build/$${bin}" "build/$${bin}"; \
+		llvm-objcopy --remove-section .note.gnu.build-id "build/$${bin}" "build/$${bin}"; \
+		llvm-objcopy --remove-section .note.ABI-tag "build/$${bin}" "build/$${bin}"; \
+		readelf -n "build/$${bin}"; \
+	done
+	chmod +x scripts/run-beacon-node.sh
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
+
+override_dh_auto_test:
+	## -make update
+	# make -j1 all_tests
+	## remove all_tests, no need to ship it
+	# rm build/all_tests
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym

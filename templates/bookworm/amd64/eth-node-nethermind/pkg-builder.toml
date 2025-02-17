@@ -3,43 +3,43 @@ spec_file = "eth-node-nethermind.sss"
 package_name = "eth-node-nethermind"
 version_number = "<CLIENT_VERSION>"
 revision_number = "<CLIENT_REVISION>"
-homepage="https://github.com/NethermindEth/nethermind"
+homepage = "https://github.com/NethermindEth/nethermind"
 
 [package_type]
 # virtual | git | default
-package_type="default"
+package_type = "default"
 tarball_url = "https://github.com/NethermindEth/nethermind/archive/refs/tags/<CLIENT_VERSION>.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
 tarball_hash = "<CLIENT_PACKAGE_HASH>"
 
 [package_type.language_env]
 language_env = "dotnet"
-# Because MS force pushes the security update onto packages, without using revision numbers
-dotnet_packages = [
-    { name = "netstandard-targeting-pack-2.1_2.1.0-1_amd64", hash = "c849f17d5e8cdce4b068e2897939be7de4b839d3", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/netstandard-targeting-pack-2.1_2.1.0-1_amd64.deb" },
-    { name = "dotnet-apphost-pack-8.0_8.0.5-1_amd64", hash = "18b0d4bed3b62495564c18a6d1c30181c33831b4", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-apphost-pack-8.0_8.0.5-1_amd64.deb" },
-    { name = "dotnet-targeting-pack-8.0_8.0.5-1_amd64", hash = "2727152580762a636e62f9c490c19e18339401a9", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-targeting-pack-8.0_8.0.5-1_amd64.deb" },
-    { name = "dotnet-runtime-deps-8.0_8.0.5-1_amd64", hash="1f7f67a6fef920983ab2243c1c660d08e228cedf", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-runtime-deps-8.0_8.0.5-1_amd64.deb"},
-    { name = "dotnet-host_8.0.5-1_amd64", hash="87414e005e39785e1ba32ce8cca97878ca4c6828", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-host_8.0.5-1_amd64.deb"}, 
-    { name = "dotnet-hostfxr-8.0_8.0.5-1_amd64", hash="e1ec0e6b838dabfb5b47ae1b15706026996d6a7c", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-hostfxr-8.0_8.0.5-1_amd64.deb"},
-    { name = "dotnet-runtime-8.0_8.0.5-1_amd64", hash = "8d2443146631a861ade47a184a5b44446c6b636d", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-runtime-8.0_8.0.5-1_amd64.deb" },
-    { name = "aspnetcore-targeting-pack-8.0_8.0.5-1_amd64", hash="4b6bcf15e50db2d177e6e0298a72eeae7c43d2a3", url="https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/aspnetcore-targeting-pack-8.0_8.0.5-1_amd64.deb"},
-    { name = "aspnetcore-runtime-8.0_8.0.5-1_amd64", hash = "7676b5b02bbc37393089418e8a03320b10e914fd", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/aspnetcore-runtime-8.0_8.0.5-1_amd64.deb"},
-    { name = "dotnet-sdk-8.0_8.0.204-1_amd64", hash = "a94237cb852aae05b67a5c8428a6c4f9cfb4beaa", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/20240529/dotnet-sdk-8.0_8.0.204-1_amd64.deb" },
+## because MS force pushes package version
+dotnet_packages  = [
+    { name = "aspnetcore-runtime-9.0_9.0.0-1_amd64", hash = "2031dd260660a7e7f77f32b7e4c993fd9c23d3c1", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/aspnetcore-runtime-9.0_9.0.0-1_amd64.deb" },
+    { name = "aspnetcore-targeting-pack-9.0_9.0.0-1_amd64", hash = "4038bdc5a54178fe2bfc329680906a14d43b282e", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/aspnetcore-targeting-pack-9.0_9.0.0-1_amd64.deb" },
+    { name = "dotnet-apphost-pack-9.0_9.0.0-1_amd64", hash = "03e19d0580ab4114c64ef12d0c02a4f13f0da717", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/dotnet-apphost-pack-9.0_9.0.0-1_amd64.deb" },
+    { name = "dotnet-hostfxr-9.0_9.0.0-1_amd64", hash = "4b677d008ac0135168bb49074135e213c7d335ac", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/dotnet-hostfxr-9.0_9.0.0-1_amd64.deb" },
+    { name = "dotnet-runtime-9.0_9.0.0-1_amd64", hash = "5ed8ce77eecf489180ab7e366d868e443f2900b4", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/dotnet-runtime-9.0_9.0.0-1_amd64.deb" },
+    { name = "dotnet-sdk-9.0_9.0.101-1_amd64", hash = "e97ce6be21ad8d7401ca45829c708b5c9e2532f0", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/dotnet-sdk-9.0_9.0.101-1_amd64.deb" },
+    { name = "dotnet-targeting-pack-9.0_9.0.0-1_amd64", hash = "cb3967451b497e72ea773a2db1be15b862dd0b0b", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/dotnet-targeting-pack-9.0_9.0.0-1_amd64.deb" },
+    { name = "netstandard-targeting-pack-2.1_2.1.0-1_amd64", hash = "c849f17d5e8cdce4b068e2897939be7de4b839d3", url = "https://s3.eu-central-1.amazonaws.com/eth-pkg.com/backup/bookworm/20250107/netstandard-targeting-pack-2.1_2.1.0-1_amd64.deb" },
 ]
+
 use_backup_version = false
 
 [build_env]
-codename="bookworm"
+codename = "bookworm"
 arch = "amd64"
-pkg_builder_version="<PKG_BUILDER_VERSION>"
+pkg_builder_version = "<PKG_BUILDER_VERSION>"
 debcrafter_version = "2711b53"
-run_lintian=true
-run_piuparts=true
-run_autopkgtest=true
-lintian_version="2.116.3"
-piuparts_version="1.1.7"
-autopkgtest_version="5.28"
-sbuild_version="0.85.6"
+run_lintian = true
+run_piuparts = true
+run_autopkgtest = true
+lintian_version = "2.116.3"
+piuparts_version = "1.1.7"
+autopkgtest_version = "5.28"
+sbuild_version = "0.85.6"
 # package directory
-workdir="~/.pkg-builder/packages/bookworm"
+workdir = "~/.pkg-builder/packages/bookworm"
+language_env = "dotnet"

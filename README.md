@@ -1,4 +1,4 @@
-# Ethereum Node Packages for Debian/Ubuntu
+# Reproducible builds for Ethereum Ecosystem (Debian/Ubuntu) 
 
 [![regtest daily](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest-daily.yml/badge.svg)](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest-daily.yml)
 

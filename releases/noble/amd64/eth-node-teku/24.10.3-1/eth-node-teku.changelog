@@ -1,0 +1,6 @@
+eth-node-teku (24.10.3-1) noble; urgency=medium
+
+  * Support for 24.10.3-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 29 Oct 2024 06:44:47 +0700
+

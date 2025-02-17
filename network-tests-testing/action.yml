@@ -96,11 +96,8 @@ runs:
     - name: Run Service Tests
       run: |
         java --version 
-        sudo apt install -y eth-node-${{ inputs.network }} \
-          eth-node-${{ inputs.network }}-config \
-          eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
+        sudo apt install -y eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
           eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
-          eth-node-validator-${{ inputs.network }} \
           eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }} 
         which java 
         echo "Waiting for 60 seconds for nodes to check successful startup..."

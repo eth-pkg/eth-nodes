@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+cd /tmp
+curl https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb --output jdk-21.0.2_linux-x64_bin.deb
+dpkg -i jdk-21.0.2_linux-x64_bin.deb
+
+test_binary_in_path(){
+  output="$(which besu)"
+  assertEquals "/usr/bin/besu" "$output"
+}
+
+test_invocation(){
+  output="$(besu --version)"
+  echo "$output"
+  # besu/v00.0-develop-f1d3a7d5/linux-x86_64/oracle-java-17
+  # checked against official built binary from 
+  # https://hyperledger.jfrog.io/ui/native/besu-binaries/besu/23.10.1/besu-23.10.1.tar.gz
+  assertEquals "besu/v24.12.1/linux-x86_64/oracle-java-21" "$output"
+}
+
+. shunit2

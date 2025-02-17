@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+# conditionally enable tests, default is true
+# there are times you want to do quick rebuilding to verify hash without running the tests
+export GIT_COMMIT=eaa75ac
+export BUILD_DATE=2024-12-16T15:01Z
+export GIT_VERSION=24.12.2
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	./gradlew distTar installDist
+
+override_dh_auto_test:
+	./gradlew test
+
+override_dh_strip_nondeterminism:
+	dh_strip_nondeterminism
+	# some files on the CI gets ignored
+	strip-nondeterminism debian/eth-node-besu/usr/lib/eth-node-besu/besu/lib/*.jar
+	
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean

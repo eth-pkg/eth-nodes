@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="2d7f7c3b17b809bc2ff13c0dea159b53bc975f46", name= "eth-node-teku_25.2.0-1.dsc"},
+    { hash="db2a36ac542d8f911da8439517dd518e8690800e", name= "eth-node-teku_25.2.0.orig.tar.gz"},
+    { hash="5f351a09f3d8b18d79000470caa3172b80cbc0d3", name= "eth-node-teku_25.2.0-1.debian.tar.xz"},
+    { hash="17096987b0cca484b1e81094582f6f418e2b819e", name= "eth-node-teku_25.2.0-1_amd64.deb"},
+]
