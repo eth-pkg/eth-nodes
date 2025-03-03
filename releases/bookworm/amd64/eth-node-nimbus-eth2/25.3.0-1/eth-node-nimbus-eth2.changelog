@@ -1,0 +1,6 @@
+eth-node-nimbus-eth2 (25.3.0-1) bookworm; urgency=medium
+
+  * Support for 25.3.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Mon, 03 Mar 2025 08:56:16 +0100
+
