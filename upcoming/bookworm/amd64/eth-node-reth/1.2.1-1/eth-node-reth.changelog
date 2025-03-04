@@ -1,0 +1,6 @@
+eth-node-reth (1.2.1-1) bookworm; urgency=medium
+
+  * Support for 1.2.1-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 04 Mar 2025 07:18:26 +0100
+
