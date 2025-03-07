@@ -7,8 +7,9 @@ provides = []
 suggests = []
 depends = [
   "python3", 
-  "zcli", 
- "eth2-testnet-genesis",]
+  "zcli (>=0.8.0)", 
+ "eth2-testnet-genesis (>= 0.12.0)",
+ ]
 add_files = [
     "config /etc/ethereum-genesis-generator",
     "apps /usr/lib/ethereum-genesis-generator/",
