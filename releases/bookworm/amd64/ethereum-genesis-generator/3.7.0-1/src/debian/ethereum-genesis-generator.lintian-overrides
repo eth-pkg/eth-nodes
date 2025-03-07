@@ -1,0 +1,13 @@
+ethereum-genesis-generator: description-synopsis-is-duplicated line 1
+ethereum-genesis-generator: no-copyright-file
+ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu]
+ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_chainspec]
+ethereum-genesis-generator: hardening-no-pie [usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth]
+ethereum-genesis-generator: initial-upload-closes-no-bugs [usr/share/doc/ethereum-genesis-generator/changelog.Debian.gz:1]
+ethereum-genesis-generator: maintainer-script-ignores-errors [postrm]
+ethereum-genesis-generator: no-manual-page [usr/bin/ethereum-genesis-generator]
+
+ethereum-genesis-generator: package-installs-python-pycache-dir [usr/lib/ethereum-genesis-generator/apps/el-gen/.venv/*]
+
+
+ethereum-genesis-generator: extended-description-line-too-long line 1
