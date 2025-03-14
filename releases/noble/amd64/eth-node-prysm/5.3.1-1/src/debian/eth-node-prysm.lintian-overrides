@@ -1,0 +1,8 @@
+eth-node-prysm: initial-upload-closes-no-bugs [usr/share/doc/eth-node-prysm/changelog.Debian.gz:1]
+eth-node-prysm: maintainer-script-ignores-errors [postrm]
+eth-node-prysm: extended-description-line-too-long line 4
+eth-node-prysm: extended-description-line-too-long line 6
+eth-node-prysm: hardening-no-pie * 
+eth-node-prysm: no-manual-page * 
+eth-node-prysm: copyright-without-copyright-notice
+eth-node-prysm: embedded-library libzstd * 
