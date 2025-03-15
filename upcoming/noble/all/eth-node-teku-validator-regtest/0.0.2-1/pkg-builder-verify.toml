@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="228f338fa408c43acb1f08da4bb14062d38b7812", name= "eth-node-teku-validator-regtest_0.0.2-1.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-teku-validator-regtest_0.0.2.orig.tar.gz" },
+    # { hash="11da8cbe542c6445efd8d67fa5adfc00ecfd84cd", name= "eth-node-teku-validator-regtest_0.0.2-1.debian.tar.xz"},
+    { hash = "cb9565b4eeca384290f380954678444525859e57", name = "eth-node-teku-validator-regtest_0.0.2-1_all.deb" },
+]

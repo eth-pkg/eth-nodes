@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+  <Properties>
+    <Property name="root.log.level">INFO</Property>
+    <!-- Define log file name and location -->
+    <Property name="logPath">/var/logs/eth-node-regtest/besu/besu.log</Property>
+  </Properties>
+
+  <Appenders>
+    <!-- Console appender -->
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZZZ} | %t | %-5level | %c{1} | %msg %throwable{short.message}%n" />
+    </Console>
+
+    <!-- File appender for logging to a file -->
+    <File name="File" fileName="${logPath}">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSSZZZ} | %t | %-5level | %c{1} | %msg %throwable{short.message}%n" />
+    </File>
+  </Appenders>
+
+  <Loggers>
+    <Root level="${sys:root.log.level}">
+      <!-- Log to both console and file -->
+      <AppenderRef ref="Console" />
+      <AppenderRef ref="File" />
+    </Root>
+  </Loggers>
+</Configuration>

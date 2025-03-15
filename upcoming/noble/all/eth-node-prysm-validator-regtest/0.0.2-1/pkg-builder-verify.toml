@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="9b56dc209814628a44eb1088029f551ec5de9ec0", name= "eth-node-prysm-validator-regtest_0.0.2-1.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-prysm-validator-regtest_0.0.2.orig.tar.gz" },
+    # { hash="f999570db3a4fce99a40d8fb6b93d0f49e055759", name= "eth-node-prysm-validator-regtest_0.0.2-1.debian.tar.xz"},
+    { hash = "defb2b3a496173d179462f1f75715c991c47ca3f", name = "eth-node-prysm-validator-regtest_0.0.2-1_all.deb" },
+]

@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+#export SOURCE_DATE_EPOCH=$(dpkg-parsechangelog --show-field Date | date --date=- +%s)
+# hack for now, to produce the multiple packages as reproducible
+export SOURCE_DATE_EPOCH=1720044000
+
+%:
+	dh $@
+
+override_dh_dwz:
+
+override_dh_prep:
+	mkdir debian/tmp
+	cp debian/eth-node-nimbus-eth2-regtest.eth-node-nimbus-eth2-regtest.service debian/tmp/eth-node-nimbus-eth2-regtest.service 

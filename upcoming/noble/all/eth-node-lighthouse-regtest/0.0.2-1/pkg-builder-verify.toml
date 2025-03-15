@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="659923d1f0978197511d73d9afc55d580ddfebd3", name= "eth-node-lighthouse-regtest_0.0.2-1.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-lighthouse-regtest_0.0.2.orig.tar.gz" },
+    # { hash="bf0a229df898501b2599f76414604a60f9b8eb1c", name= "eth-node-lighthouse-regtest_0.0.2-1.debian.tar.xz"},
+    { hash = "14508b59365965bf6c9d657b1d5c89e6ea5b98f1", name = "eth-node-lighthouse-regtest_0.0.2-1_all.deb" },
+]

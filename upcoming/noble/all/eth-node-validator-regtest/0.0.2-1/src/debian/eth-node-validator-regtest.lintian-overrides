@@ -1,0 +1,7 @@
+eth-node-validator-regtest: description-too-short TODO
+eth-node-validator-regtest: no-copyright-file
+eth-node-validator-regtest: empty-binary-package
+eth-node-validator-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-validator-regtest: extended-description-line-too-long line 4
+eth-node-validator-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-validator-regtest/changelog.Debian.gz:1]
+eth-node-validator-regtest: uses-dpkg-database-directly [preinst]

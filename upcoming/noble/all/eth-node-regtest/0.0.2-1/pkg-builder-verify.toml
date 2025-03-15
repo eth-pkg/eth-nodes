@@ -1,0 +1,9 @@
+[verify]
+package_hash=[
+    # debian timestamps are again broken, this is a debian bug
+    # { hash="07dee9a67a9204bfe45ee9f67c2f7c5fefe4769b", name= "eth-node-regtest_1.0.0-1.dsc"},
+    { hash="b35f46d5fb424aee57b5d666e61b2eff83543aad", name= "eth-node-regtest_0.0.2.orig.tar.gz"},
+    # { hash="6333d13341a88585cc4e7c4542241f2775bcc54e", name= "eth-node-regtest_1.0.0-1.debian.tar.xz"},
+    { hash="652d6d9912f4e47ff0b398956675c160f0512c7c", name= "eth-node-regtest_0.0.2-1_all.deb"},
+
+]

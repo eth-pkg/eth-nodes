@@ -83,7 +83,7 @@ runs:
     - name: Create chroot env
       run: |
         pwd && ls -al
-        cd releases/noble/all/eth-node-regtest/0.0.1-2 && pkg-builder env create
+        cd upcoming/noble/all/eth-node-regtest/0.0.2-1 && pkg-builder env create
         echo "${HOME}/.cache/sbuild/noble-amd64.tar.gz" >> $GITHUB_PATH
       shell: bash
 
@@ -113,57 +113,59 @@ runs:
           eth-node-besu \
           eth-node-erigon \
           eth-node-geth \
-          eth-node-nethermind eth-node-reth \
+          eth-node-nethermind \
+          eth-node-reth \
           eth-node-lighthouse \
           eth-node-lodestar \
           eth-node-nimbus-eth2 \
           eth-node-prysm \
           eth-node-teku \
-          zcli \ 
+          zcli \
           eth2-testnet-genesis \
           eth2-val-tools \
           ethereum-genesis-generator
 
     - name: Build clients
       run: |
-        cd releases/noble/all
+        cd upcoming/noble/all
         mkdir ${HOME}/packages
 
         # network configs, not the same as client configs
-        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
-        cd eth-node-${{ inputs.network }}-config/0.0.1-1
+        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
+        cd eth-node-${{ inputs.network }}-config/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-0.0.1-1
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.network }}-config-0.0.2-1
         ls
-        cp eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.network }}-config_0.0.2-1_all.deb ${HOME}/packages/
 
         # execution client 
-        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
-        cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.1-2
+        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
+        cd eth-node-${{ inputs.el_name }}-${{ inputs.network }}/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.1-2
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.el_name }}-${{ inputs.network }}-0.0.2-1
         ls
-        cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-2_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
 
         # consensus client 
-        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
-        cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.1-2
+        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
+        cd eth-node-${{ inputs.cl_name }}-${{ inputs.network }}/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.1-2
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}-0.0.2-1
         ls
-        cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-2_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
+
 
         # validator 
-        cd $HOME/work/eth-nodes/eth-nodes/releases/noble/all
-        cd eth-node-${{inputs.validator_name}}-validator-${{ inputs.network }}/0.0.1-2
+        cd $HOME/work/eth-nodes/eth-nodes/upcoming/noble/all
+        cd eth-node-${{inputs.validator_name}}-validator-${{ inputs.network }}/0.0.2-1
         pkg-builder package  --run-piuparts false --run-autopkgtest false --run-lintian true
         pkg-builder verify --no-package true 
-        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}-0.0.1-2
+        cd $HOME/.pkg-builder/packages/noble/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}-0.0.2-1
         ls
-        cp eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.1-2_all.deb ${HOME}/packages/
+        cp eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
 
         echo "${HOME}/packages" >> $GITHUB_PATH
 
@@ -172,11 +174,11 @@ runs:
       run: |
         java --version 
         which java 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.1-1_all.deb
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.2-1_all.deb
         # have to install in one go 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.1-2_all.deb \
-          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.1-2_all.deb \
-          $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.1-2_all.deb  
+        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
+          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
+          $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
         # check if execution client is active 

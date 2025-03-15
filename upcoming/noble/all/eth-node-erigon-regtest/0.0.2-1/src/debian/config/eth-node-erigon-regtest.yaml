@@ -1,0 +1,11 @@
+# Automtically generated - DO NOT MODIFY!
+authrpc.addr: "127.0.0.1"
+authrpc.jwtsecret: "/etc/eth-node-regtest/jwt.hex"
+authrpc.vhosts: "localhost"
+datadir: "/var/lib/eth-node-regtest/erigon"
+http: true
+http.addr: "127.0.0.1"
+http.corsdomain: "*"
+http.vhosts: "localhost"
+log.dir.path: "/var/logs/eth-node-regtest/erigon"
+networkid: "1337"

@@ -1,0 +1,6 @@
+eth-node-regtest-config: description-too-short TODO
+eth-node-regtest-config: no-copyright-file
+eth-node-regtest-config: initial-upload-closes-no-bugs [usr/share/doc/eth-node-regtest-config/changelog.Debian.gz:1]
+eth-node-regtest-config: maintainer-script-ignores-errors [postrm]
+
+eth-node-regtest-config: script-not-executable [usr/lib/eth-node-regtest/postprocess.sh]
