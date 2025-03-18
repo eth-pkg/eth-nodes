@@ -250,7 +250,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
 @@ -1,12 +1,22 @@
  #!/bin/bash -e
 -export DEFAULT_ENV_FILE="/defaults/defaults.env"
-+export DEFAULT_ENV_FILE="defaults/defaults.env"
++export DEFAULT_ENV_FILE="config/defaults.env"
  # Load the default env vars into the environment
 -source $DEFAULT_ENV_FILE
  
@@ -274,8 +274,11 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
      # Pull these values out of the env file since they can be very large and cause
      # "arguments list too long" errors in the shell.
      grep -v "ADDITIONAL_PRELOADED_CONTRACTS" $FULL_ENV_FILE | grep -v "EL_PREMINE_ADDRS" > /tmp/values-short.env
-@@ -26,28 +36,27 @@ gen_shared_files(){
-     . /apps/el-gen/.venv/bin/activate
+@@ -23,31 +33,29 @@ SERVER_PORT="${SERVER_PORT:-8000}"
+ 
+ 
+ gen_shared_files(){
+-    . /apps/el-gen/.venv/bin/activate
      set -x
      # Shared files
 -    mkdir -p /data/metadata
@@ -316,7 +319,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
      else
          echo "el genesis already exists. skipping generation..."
      fi
-@@ -64,63 +73,62 @@ gen_minimal_config() {
+@@ -64,63 +72,62 @@ gen_minimal_config() {
    )
  
    for key in "${!replacements[@]}"; do
@@ -401,7 +404,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
              --preset-phase0 $PRESET_BASE
              --preset-altair $PRESET_BASE
              --preset-bellatrix $PRESET_BASE
-@@ -128,10 +136,10 @@ gen_cl_config(){
+@@ -128,10 +135,10 @@ gen_cl_config(){
          elif [[ $DENEB_FORK_EPOCH != 0 ]]; then
            genesis_args+=(
              capella
@@ -415,7 +418,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
              --preset-phase0 $PRESET_BASE
              --preset-altair $PRESET_BASE
              --preset-bellatrix $PRESET_BASE
-@@ -140,10 +148,10 @@ gen_cl_config(){
+@@ -140,10 +147,10 @@ gen_cl_config(){
          else
            genesis_args+=(
              deneb
@@ -429,7 +432,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
              --preset-phase0 $PRESET_BASE
              --preset-altair $PRESET_BASE
              --preset-bellatrix $PRESET_BASE
-@@ -159,7 +167,7 @@ gen_cl_config(){
+@@ -159,7 +166,7 @@ gen_cl_config(){
          elif [[ $SHADOW_FORK_RPC != "" ]]; then
            genesis_args+=(--shadow-fork-eth1-rpc=$SHADOW_FORK_RPC --eth1-config "")
          elif [[ $ALTAIR_FORK_EPOCH == 0 ]] && [[ $BELLATRIX_FORK_EPOCH == 0 ]]; then
@@ -438,7 +441,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
          fi
          if ! [ -z "$CL_ADDITIONAL_VALIDATORS" ]; then
            if [[ $CL_ADDITIONAL_VALIDATORS = /* ]]; then
-@@ -175,7 +183,7 @@ gen_cl_config(){
+@@ -175,7 +182,7 @@ gen_cl_config(){
              phase0
              BeaconState
              --preset-phase0 $PRESET_BASE
@@ -447,7 +450,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
            )
          elif [[ $BELLATRIX_FORK_EPOCH != 0 ]]; then
            zcli_args=(
-@@ -184,7 +192,7 @@ gen_cl_config(){
+@@ -184,7 +191,7 @@ gen_cl_config(){
              BeaconState
              --preset-phase0 $PRESET_BASE
              --preset-altair $PRESET_BASE
@@ -456,7 +459,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
            )
          elif [[ $CAPELLA_FORK_EPOCH != 0 ]]; then
            zcli_args=(
-@@ -194,7 +202,7 @@ gen_cl_config(){
+@@ -194,7 +201,7 @@ gen_cl_config(){
              --preset-phase0 $PRESET_BASE
              --preset-altair $PRESET_BASE
              --preset-bellatrix $PRESET_BASE
@@ -465,7 +468,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
            )
          elif [[ $DENEB_FORK_EPOCH != 0 ]]; then
            zcli_args=(
-@@ -204,7 +212,7 @@ gen_cl_config(){
+@@ -204,7 +211,7 @@ gen_cl_config(){
              --preset-phase0 $PRESET_BASE
              --preset-altair $PRESET_BASE
              --preset-bellatrix $PRESET_BASE
@@ -474,7 +477,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
            )
          else
          zcli_args=(
-@@ -215,16 +223,16 @@ gen_cl_config(){
+@@ -215,16 +222,16 @@ gen_cl_config(){
            --preset-altair $PRESET_BASE
            --preset-bellatrix $PRESET_BASE
            --preset-capella $PRESET_BASE
@@ -498,7 +501,7 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
      else
          echo "cl genesis already exists. skipping generation..."
      fi
-@@ -255,6 +263,6 @@ esac
+@@ -255,6 +262,6 @@ esac
  
  # Start webserver
  if [ "$SERVER_ENABLED" = true ] ; then
