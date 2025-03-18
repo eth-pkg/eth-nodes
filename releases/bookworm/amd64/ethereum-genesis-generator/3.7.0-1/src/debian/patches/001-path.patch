@@ -506,3 +506,14 @@ Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
 +  cd data && exec python3 -m http.server "$SERVER_PORT"
  fi
  
+Index: ethereum-genesis-generator-3.7.0/apps/requirements.txt
+===================================================================
+--- /dev/null
++++ ethereum-genesis-generator-3.7.0/apps/requirements.txt
+@@ -0,0 +1,6 @@
++altgraph==0.17.4
++packaging==24.2
++pyinstaller==6.12.0
++pyinstaller-hooks-contrib==2025.1
++python-dotenv==1.0.1
++
