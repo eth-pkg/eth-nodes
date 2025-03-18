@@ -13,13 +13,13 @@ SUPPORTED_CLIENTS=(
     "nimbus-eth2"
     "prysm"
     "reth"
-    "teku",
-    "ethereum-genesis-generator",
+    "teku"
+    "ethereum-genesis-generator"
     "eth2-testnet-genesis"
 )
 
 NON_CLIENTS=(
-    "ethereum-genesis-generator",
+    "ethereum-genesis-generator"
     "eth2-testnet-genesis"
 )
 
@@ -63,6 +63,7 @@ is_supported() {
     shift
     local array=("$@")
     for item in "${array[@]}"; do
+        echo "$item $value"
         if [[ "$item" == "$value" ]]; then
             return 0
         fi
