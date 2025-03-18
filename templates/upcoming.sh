@@ -63,7 +63,6 @@ is_supported() {
     shift
     local array=("$@")
     for item in "${array[@]}"; do
-        echo "$item $value"
         if [[ "$item" == "$value" ]]; then
             return 0
         fi
