@@ -1,0 +1,6 @@
+zcli: no-copyright-file
+zcli: hardening-no-pie [usr/lib/eth2-testnet-gensis/bin/zcli]
+zcli: hardening-no-relro [usr/lib/eth2-testnet-gensis/bin/zcli]
+zcli: initial-upload-closes-no-bugs [usr/share/doc/zcli/changelog.Debian.gz:1]
+zcli: maintainer-script-ignores-errors [postrm]
+zcli: no-manual-page [usr/bin/zcli]

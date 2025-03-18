@@ -1,0 +1,6 @@
+eth2-testnet-genesis (0.12.0-1) noble; urgency=medium
+
+  * Support for 0.12.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 07 Mar 2025 11:03:54 +0100
+
