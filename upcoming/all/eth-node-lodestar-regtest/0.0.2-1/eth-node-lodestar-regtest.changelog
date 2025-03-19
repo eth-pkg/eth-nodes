@@ -1,0 +1,6 @@
+eth-node-lodestar-regtest (0.0.2-1) noble; urgency=medium
+
+  * Initial packaging
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 19 Mar 2025 08:32:29 +0100
+ 

@@ -1,0 +1,12 @@
+eth-node-besu-regtest: extended-description-is-empty
+eth-node-besu-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-besu-regtest" [postinst:8]
+eth-node-besu-regtest: no-copyright-file
+eth-node-besu-regtest: no-template-description eth-node-besu-regtest/engine_jwt_disabled [templates:441]
+eth-node-besu-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-besu-regtest/changelog.Debian.gz:1]
+eth-node-besu-regtest: maintainer-script-ignores-errors [config]
+eth-node-besu-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-besu-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-besu-regtest: malformed-prompt-in-templates *
+eth-node-besu-regtest: script-not-executable [usr/lib/eth-node-besu-regtest/postprocess.sh]
+eth-node-besu-regtest: too-long-short-description-in-templates *
+

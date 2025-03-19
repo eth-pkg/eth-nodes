@@ -1,0 +1,11 @@
+eth-node-reth-regtest: extended-description-is-empty
+eth-node-reth-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-reth-regtest" [postinst:8]
+eth-node-reth-regtest: no-copyright-file
+eth-node-reth-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-reth-regtest/changelog.Debian.gz:1]
+eth-node-reth-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-reth-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-reth-regtest: malformed-prompt-in-templates *
+eth-node-reth-regtest: script-not-executable [usr/lib/eth-node-reth-regtest/postprocess.sh]
+eth-node-reth-regtest: too-long-short-description-in-templates *
+eth-node-reth-regtest: using-first-person-in-templates eth-node-reth-regtest/dev_block_max_transactions [templates:723]
+eth-node-reth-regtest: maintainer-script-ignores-errors [config]

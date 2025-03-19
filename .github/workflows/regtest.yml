@@ -3,7 +3,7 @@ name: regtest
 on:
   push:
     branches:
-      - fix/regtest-daily
+      - fix/genesis-pectra-changes
 
 jobs:
   test:
