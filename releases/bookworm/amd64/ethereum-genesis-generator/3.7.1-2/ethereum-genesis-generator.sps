@@ -12,8 +12,8 @@ depends = [
  ]
 add_files = [
     "config /etc/ethereum-genesis-generator",
-    "apps/envsubst /usr/lib/ethereum-genesis-generator/apps",
-    "apps/el-gen /usr/lib/ethereum-genesis-generator/",
+    "apps/envsubst /usr/lib/ethereum-genesis-generator/apps/",
+    "apps/el-gen /usr/lib/ethereum-genesis-generator/apps/",
     "defaults/defaults.env /etc/ethereum-genesis-generator/config/",
     "entrypoint.sh /usr/lib/ethereum-genesis-generator/bin",
     # "el-gen /usr/lib/el-gen/bin",
