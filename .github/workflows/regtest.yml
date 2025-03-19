@@ -532,7 +532,7 @@ jobs:
       # this works, but the problem it makes it look like that 125 tests are passed, when in practice
       # only the filtered tests passed, and the others are "fake green"
         if: matrix.cl_name == matrix.validator_name && matrix.el_name == 'besu'
-        uses: .github/workflows/regtest/action.yml
+        uses: ./.github/workflows/regtest/action.yml
         with:
           network: regtest
           el_name: ${{matrix.el_name}}
