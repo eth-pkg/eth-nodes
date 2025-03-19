@@ -49,7 +49,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-el-service"]
 conflicts = ["eth-node-regtest-el-service"]
-depends=["eth-node-regtest-config (>= 0.0.3)", "eth-node-regtest-config (<< 0.0.3)"]
+depends=["eth-node-regtest-config (>= 0.0.2)", "eth-node-regtest-config (<< 0.0.3)"]
 summary = "service file for eth-node-nethermind for network: regtest"
 
 [config."nethermind-regtest.conf".postprocess]

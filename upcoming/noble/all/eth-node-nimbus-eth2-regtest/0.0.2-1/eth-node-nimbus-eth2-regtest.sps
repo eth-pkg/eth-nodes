@@ -49,7 +49,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-cl-service"]
 conflicts = ["eth-node-regtest-cl-service"]
-depends=["eth-node-regtest-config (>= 0.0.3)", "eth-node-regtest-config (<< 0.0.3)"]
+depends=["eth-node-regtest-config (>= 0.0.2)", "eth-node-regtest-config (<< 0.0.3)"]
 summary = "service file for eth-node-nimbus-eth2 for network: regtest"
 
 [config."nimbus-eth2-regtest.conf".postprocess]
