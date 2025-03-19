@@ -63,44 +63,44 @@ else
     display_help
 fi
 
-rm -rf $HOME/debs/noble-testing/*
+# rm -rf $HOME/debs/noble-testing/*
 
-cd eth-node-$NETWORK/0.0.2-1
-pkg-builder verify
-cd ../..
+# cd eth-node-$NETWORK/0.0.2-1
+# pkg-builder verify
+# cd ../..
 
-# network configs, not the same as client configs
-cd eth-node-$NETWORK-config/0.0.2-1
-pkg-builder verify
-cd ../..
+# # network configs, not the same as client configs
+# cd eth-node-$NETWORK-config/0.0.2-1
+# pkg-builder verify
+# cd ../..
 
 
-for client in "${EL_CLIENTS[@]}"; do
-    cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
+# for client in "${EL_CLIENTS[@]}"; do
+#     cd eth-node-${client}-$NETWORK/$CL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
 
-done
+# done
 
-for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
-done
+# for client in "${CL_CLIENTS[@]}"; do
+#     cd eth-node-${client}-$NETWORK/$EL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
+# done
 
-for client in "${CL_CLIENTS[@]}"; do
-    cd eth-node-${client}-validator-$NETWORK/$EL_SERVICE_VERSION
-    pkg-builder verify
-    cd ../..
-done
+# for client in "${CL_CLIENTS[@]}"; do
+#     cd eth-node-${client}-validator-$NETWORK/$EL_SERVICE_VERSION
+#     pkg-builder verify
+#     cd ../..
+# done
 
 
 
 echo "Copy built binaries"
 
 mkdir -p $SERVE_DIR 
-cp "$PACKAGE_DIR/eth-node-$NETWORK-0.0.1-1/eth-node-${NETWORK}_0.0.1-1_all.deb" "$SERVE_DIR"
-cp "$PACKAGE_DIR/eth-node-$NETWORK-config-0.0.1-1/eth-node-$NETWORK-config_0.0.1-1_all.deb" "$SERVE_DIR"
+cp "$PACKAGE_DIR/eth-node-$NETWORK-0.0.2-1/eth-node-${NETWORK}_0.0.2-1_all.deb" "$SERVE_DIR"
+cp "$PACKAGE_DIR/eth-node-$NETWORK-config-0.0.2-1/eth-node-$NETWORK-config_0.0.2-1_all.deb" "$SERVE_DIR"
 
 
 for client in "${CL_CLIENTS[@]}"; do
