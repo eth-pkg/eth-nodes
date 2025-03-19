@@ -531,7 +531,7 @@ jobs:
       - name: tests
       # this works, but the problem it makes it look like that 125 tests are passed, when in practice
       # only the filtered tests passed, and the others are "fake green"
-        if: matrix.cl_name == matrix.validator_name
+        # if: matrix.cl_name == matrix.validator_name
         uses: ./network-tests
         with:
           network: regtest
