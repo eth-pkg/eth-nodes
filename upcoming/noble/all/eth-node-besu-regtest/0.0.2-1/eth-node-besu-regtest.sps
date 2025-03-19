@@ -50,7 +50,7 @@ add_files = [
 ]
 provides = ["eth-node-regtest-el-service"]
 conflicts = ["eth-node-regtest-el-service"]
-depends=["eth-node-regtest-config (=0.0.2)"]
+depends=["eth-node-regtest-config (>= 0.0.3)", "eth-node-regtest-config (<< 0.0.3)"]
 summary = "service file for eth-node-besu for network: regtest"
 
 [config."besu-regtest.conf".postprocess]

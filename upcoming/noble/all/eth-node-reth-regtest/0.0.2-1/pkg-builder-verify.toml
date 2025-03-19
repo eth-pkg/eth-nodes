@@ -5,5 +5,5 @@ package_hash = [
     # { hash="b27fcd453e0aeeedb0eeec234d31fb082c640862", name= "eth-node-reth-regtest_0.0.2-1.dsc"},
     { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-reth-regtest_0.0.2.orig.tar.gz" },
     # { hash="1d9b624e03e911fab5c115a18bbf19e45bef23d0", name= "eth-node-reth-regtest_0.0.2-1.debian.tar.xz"},
-    { hash = "971c91fcdf8dde02cc27d1b4b36f4d366475d605", name = "eth-node-reth-regtest_0.0.2-1_all.deb" },
+    { hash = "34a0a7fc0e25a89dd3b725acb5b3385a75d10686", name = "eth-node-reth-regtest_0.0.2-1_all.deb" },
 ]
