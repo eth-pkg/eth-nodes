@@ -72,7 +72,7 @@ append_option() {
   local option=$1
   local value=$2
   if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option=$value"
+    OPTIONS="$OPTIONS $option $value"
   fi
 }
 

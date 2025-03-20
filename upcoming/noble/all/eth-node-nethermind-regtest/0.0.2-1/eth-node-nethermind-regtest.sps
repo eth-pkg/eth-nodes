@@ -16,7 +16,7 @@ extra_service_config = """
 
 # additional flags not specified by debcrafter
 CapabilityBoundingSet=
-IPAddressDeny=none
+#IPAddressDeny=none
 LockPersonality=true
 PrivateIPC=true
 PrivateUsers=true
