@@ -16,7 +16,7 @@ extra_service_config = """
 
 # additional flags not specified by debcrafter
 CapabilityBoundingSet=
-IPAddressDeny=none
+#IPAddressDeny=none
 LockPersonality=true
 PrivateIPC=true
 PrivateUsers=true
@@ -36,7 +36,7 @@ RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
-SystemCallFilter=@system-service
+#SystemCallFilter=@system-service
 UMask=0077
 WorkingDirectory=/var/lib/eth-node-regtest/teku
 """
