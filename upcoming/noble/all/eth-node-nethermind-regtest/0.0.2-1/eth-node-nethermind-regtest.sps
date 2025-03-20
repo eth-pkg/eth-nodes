@@ -36,7 +36,7 @@ RestrictNamespaces=true
 RestrictRealtime=true
 RestrictSUIDSGID=true
 SystemCallArchitectures=native
-SystemCallFilter=@system-service
+#SystemCallFilter=@system-service
 UMask=0077
 WorkingDirectory=/var/lib/eth-node-regtest/nethermind
 """
