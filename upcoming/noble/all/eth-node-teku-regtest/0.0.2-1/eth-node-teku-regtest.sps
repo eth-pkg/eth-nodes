@@ -100,11 +100,11 @@ default = "true"
 priority = "low"
 summary = "Allows syncing outside of the weak subjectivity period. Default: false."
 
-[config."teku-regtest.conf".ivars."rest_api_cors_origins"]
-type = "string"
-default = "[]"
-priority = "low"
-summary = "Comma-separated list of origins to allow, or * to allow any origin. Default: []."
+# [config."teku-regtest.conf".ivars."rest_api_cors_origins"]
+# type = "string"
+# default = "[]"
+# priority = "low"
+# summary = "Comma-separated list of origins to allow, or * to allow any origin. Default: []."
 
 [config."teku-regtest.conf".ivars."rest_api_docs_enabled"]
 type = "string"
