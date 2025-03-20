@@ -541,4 +541,4 @@ jobs:
           network: regtest
           el_name: ${{matrix.el_name}}
           cl_name: ${{matrix.cl_name}}
-          validator_name: ${{matrix.cl_name}}
+          validator_name: ${{matrix.validator_name}}
