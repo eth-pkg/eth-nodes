@@ -96,6 +96,7 @@ runs:
 
     - name: Install dotnet
       run: |
+        sudo add-apt-repository ppa:dotnet/backports
         sudo apt update
         sudo apt install -y aspnetcore-runtime-9.0
       shell: bash
