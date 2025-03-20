@@ -1,0 +1,12 @@
+eth-node-lodestar-validator-regtest: extended-description-is-empty
+eth-node-lodestar-validator-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-lodestar-val-regtest" [postinst:8]
+eth-node-lodestar-validator-regtest: no-copyright-file
+eth-node-lodestar-validator-regtest: no-template-description *
+eth-node-lodestar-validator-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lodestar-validator-regtest/changelog.Debian.gz:1]
+eth-node-lodestar-validator-regtest: maintainer-script-ignores-errors [config]
+eth-node-lodestar-validator-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-lodestar-validator-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-lodestar-validator-regtest: malformed-prompt-in-templates *
+eth-node-lodestar-validator-regtest: script-not-executable [usr/lib/eth-node-lodestar-validator-regtest/postprocess.sh]
+eth-node-lodestar-validator-regtest: too-long-short-description-in-templates *
+eth-node-lodestar-validator-regtest: executable-not-elf-or-script [usr/lib/eth-node-lodestar-validator-regtest/bin/run-lodestar-validator.sh]

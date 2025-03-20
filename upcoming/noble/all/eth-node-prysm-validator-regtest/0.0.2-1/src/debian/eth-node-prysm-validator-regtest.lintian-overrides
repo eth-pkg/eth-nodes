@@ -1,0 +1,12 @@
+eth-node-prysm-validator-regtest: extended-description-is-empty
+eth-node-prysm-validator-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-prysm-val-regtest" [postinst:8]
+eth-node-prysm-validator-regtest: no-copyright-file
+eth-node-prysm-validator-regtest: no-template-description *
+eth-node-prysm-validator-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-prysm-validator-regtest/changelog.Debian.gz:1]
+eth-node-prysm-validator-regtest: maintainer-script-ignores-errors [config]
+eth-node-prysm-validator-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-prysm-validator-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-prysm-validator-regtest: malformed-prompt-in-templates *
+eth-node-prysm-validator-regtest: script-not-executable [usr/lib/eth-node-prysm-validator-regtest/postprocess.sh]
+eth-node-prysm-validator-regtest: too-long-short-description-in-templates *
+

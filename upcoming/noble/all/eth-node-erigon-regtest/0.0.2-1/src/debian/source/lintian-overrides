@@ -1,0 +1,6 @@
+eth-node-erigon-regtest source: no-debian-copyright-in-source
+eth-node-erigon-regtest source: no-newline-at-end [debian/changelog]
+eth-node-erigon-regtest source: no-newline-at-end [debian/rules]
+eth-node-erigon-regtest source: empty-upstream-sources
+eth-node-erigon-regtest source: not-using-po-debconf
+eth-node-erigon-regtest source: untranslatable-debconf-templates * 

@@ -1,0 +1,11 @@
+eth-node-lighthouse-validator-regtest: extended-description-is-empty
+eth-node-lighthouse-validator-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-lighthouse-val-regtest" *
+eth-node-lighthouse-validator-regtest: no-copyright-file
+eth-node-lighthouse-validator-regtest: no-template-description *
+eth-node-lighthouse-validator-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lighthouse-validator-regtest/changelog.Debian.gz:1]
+eth-node-lighthouse-validator-regtest: maintainer-script-ignores-errors [config]
+eth-node-lighthouse-validator-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-lighthouse-validator-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-lighthouse-validator-regtest: malformed-prompt-in-templates *
+eth-node-lighthouse-validator-regtest: script-not-executable [usr/lib/eth-node-lighthouse-validator-regtest/postprocess.sh]
+eth-node-lighthouse-validator-regtest: too-long-short-description-in-templates *

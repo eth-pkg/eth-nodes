@@ -1,0 +1,4 @@
+eth-node-validator-regtest source: no-debian-copyright-in-source
+eth-node-validator-regtest source: no-newline-at-end [debian/changelog]
+eth-node-validator-regtest source: empty-upstream-sources
+eth-node-validator-regtest source: maintainer-script-lacks-debhelper-token [debian/eth-node-validator-regtest.preinst]

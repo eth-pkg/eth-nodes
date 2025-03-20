@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+#export SOURCE_DATE_EPOCH=$(dpkg-parsechangelog --show-field Date | date --date=- +%s)
+# hack for now, to produce the @variant packages as reproducible
+export SOURCE_DATE_EPOCH=1720044000
+
+%:
+	dh $@
+
+override_dh_dwz:
+

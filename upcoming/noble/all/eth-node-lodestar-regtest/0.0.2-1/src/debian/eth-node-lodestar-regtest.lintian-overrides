@@ -1,0 +1,12 @@
+eth-node-lodestar-regtest: extended-description-is-empty
+eth-node-lodestar-regtest: maintainer-script-lacks-home-in-adduser "adduser --system --quiet --group eth-node-lodestar-regtest" [postinst:8]
+eth-node-lodestar-regtest: no-copyright-file
+eth-node-lodestar-regtest: no-template-description *
+eth-node-lodestar-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-lodestar-regtest/changelog.Debian.gz:1]
+eth-node-lodestar-regtest: maintainer-script-ignores-errors [config]
+eth-node-lodestar-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-lodestar-regtest: maintainer-script-needs-depends-on-adduser adduser (does not satisfy adduser) [postinst:8]
+eth-node-lodestar-regtest: malformed-prompt-in-templates *
+eth-node-lodestar-regtest: script-not-executable [usr/lib/eth-node-lodestar-regtest/postprocess.sh]
+eth-node-lodestar-regtest: too-long-short-description-in-templates *
+
