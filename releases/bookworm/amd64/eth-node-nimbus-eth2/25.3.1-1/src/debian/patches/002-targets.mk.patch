@@ -1,7 +1,7 @@
-Index: eth-node-nimbus-eth2-24.7.0/vendor/nimbus-build-system/makefiles/targets.mk
+Index: eth-node-nimbus-eth2-25.3.1/vendor/nimbus-build-system/makefiles/targets.mk
 ===================================================================
---- eth-node-nimbus-eth2-24.7.0.orig/vendor/nimbus-build-system/makefiles/targets.mk
-+++ eth-node-nimbus-eth2-24.7.0/vendor/nimbus-build-system/makefiles/targets.mk
+--- eth-node-nimbus-eth2-25.3.1.orig/vendor/nimbus-build-system/makefiles/targets.mk
++++ eth-node-nimbus-eth2-25.3.1/vendor/nimbus-build-system/makefiles/targets.mk
 @@ -107,7 +107,6 @@ $(NIM_BINARY): | sanity-checks
  
  # don't use this target, or you risk updating dependency repos that are not ready to be used in Nimbus
