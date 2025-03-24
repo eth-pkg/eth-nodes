@@ -1,0 +1,29 @@
+eth-node-erigon: initial-upload-closes-no-bugs [usr/share/doc/eth-node-erigon/changelog.Debian.gz:1]
+eth-node-erigon: maintainer-script-ignores-errors [postrm]
+eth-node-erigon: no-manual-page [usr/bin/erigon]
+eth-node-erigon: extended-description-line-too-long 
+
+#TODO 
+eth-node-erigon: copyright-without-copyright-notice
+
+#TODO fix this 
+#TODO fix this 
+# eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/capcli]
+# eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/caplin]
+# eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/devnet]
+# eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/downloader]
+eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/erigon]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/evm]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/hack]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/integration]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/observer]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/pics]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/rpcdaemon]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/rpctest]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/sentinel]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/sentry]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/state]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/txpool]
+#eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/verkle]
+# eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/snapshots]
+# eth-node-erigon: hardening-no-pie [usr/lib/eth-node-erigon/bin/diag]
