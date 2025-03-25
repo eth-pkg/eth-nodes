@@ -9,12 +9,4 @@ eth-node-geth: copyright-without-copyright-notice
 eth-node-geth: extended-description-line-too-long 
 
 #TODO 
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/abidump]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/abigen]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/blsync]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/clef]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/devp2p]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/ethkey]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/evm]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/geth]
-eth-node-geth: hardening-no-pie [usr/lib/eth-node-geth/bin/era]
+eth-node-geth: hardening-no-pie *
