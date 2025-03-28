@@ -1,27 +1,25 @@
 # Reproducible builds for Ethereum Ecosystem (Debian/Ubuntu) 
 
+> **IMPORTANT NOTICE**: This project is still a work in progress. Use it at your own risk. Please don't run in production environments yet.
+
 [![regtest daily](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest-daily.yml/badge.svg)](https://github.com/eth-pkg/eth-nodes/actions/workflows/regtest-daily.yml)
 
 This project provides reproducible Debian packages for Ethereum nodes. Each build generates identical hashes, allowing users to verify package authenticity and integrity. These Debian packages simplify node installation and maintenance on Debian-based systems.
 
 ## Quick Start
-
 1. Add the repository key and source
 2. Install desired client(s)
 3. Configure and run your node
 
 ### Repository Setup
-
 Choose your distribution:
 
 #### Debian 12 (bookworm), Ubuntu 24.04 LTS (Noble Numbat)
 ```bash
 # Add repository key
 sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
-
 # Add repository source
 echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/$(lsb_release -cs)-main $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ethpkg.list
-
 # Update package list
 sudo apt update
 ```
