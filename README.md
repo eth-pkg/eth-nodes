@@ -14,25 +14,13 @@ This project provides reproducible Debian packages for Ethereum nodes. Each buil
 
 Choose your distribution:
 
-#### Debian 12 (bookworm)
+#### Debian 12 (bookworm), Ubuntu 24.04 LTS (Noble Numbat)
 ```bash
 # Add repository key
 sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
 
 # Add repository source
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/bookworm-main bookworm main" | sudo tee /etc/apt/sources.list.d/ethpkg.list
-
-# Update package list
-sudo apt update
-```
-
-#### Ubuntu 24.04 LTS (Noble Numbat)
-```bash
-# Add repository key
-sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
-
-# Add repository source
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee /etc/apt/sources.list.d/ethpkg.list
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/$(lsb_release -cs)-main $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ethpkg.list
 
 # Update package list
 sudo apt update

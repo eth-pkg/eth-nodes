@@ -2,6 +2,20 @@
 
 This guide covers installing complete node setups with execution, consensus, and validator clients.
 
+## Add testing repo 
+
+#### Ubuntu 24.04 LTS (Noble Numbat)
+```bash
+# Add repository key
+sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
+
+# Add repository source
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-testing $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ethpkg.list
+
+# Update package list
+sudo apt update
+```
+
 ## Full Node Installation
 ```bash
 sudo apt install eth-node-regtest eth-node-validator-regtest
