@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="9ec55e9c0b1ac0a7ef744e02f2080f361c703c1f", name= "eth-node-lodestar-validator-regtest_0.0.2-1.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-lodestar-validator-regtest_0.0.2.orig.tar.gz" },
+    # { hash="dd7da20cafcbbeaf2a8fcb79aaedcfebc2681842", name= "eth-node-lodestar-validator-regtest_0.0.2-1.debian.tar.xz"},
+    { hash = "f49cbbbdc0acbcbed9bd315bc4ae74d2fa1239bc", name = "eth-node-lodestar-validator-regtest_0.0.2-1_all.deb" },
+]

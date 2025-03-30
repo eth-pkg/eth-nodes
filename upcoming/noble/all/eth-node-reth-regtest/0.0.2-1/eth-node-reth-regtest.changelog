@@ -1,0 +1,6 @@
+eth-node-reth-regtest (0.0.2-1) noble; urgency=medium
+
+  * Initial packaging
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Mon, 28 Oct 2024 15:00:27 +0700
+ 

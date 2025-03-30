@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="2553006e4270f4a70f25cdf4894e6c01294a4e20", name= "eth-node-nimbus-eth2-validator-regtest_0.0.2-1.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-nimbus-eth2-validator-regtest_0.0.2.orig.tar.gz" },
+    # { hash="7ef6f979c889a5d77808c61cf15605ea8edf8d7f", name= "eth-node-nimbus-eth2-validator-regtest_0.0.2-1.debian.tar.xz"},
+    { hash = "8d91a545f8ac6e93f03e530c3a06cb1775a5a242", name = "eth-node-nimbus-eth2-validator-regtest_0.0.2-1_all.deb" },
+]

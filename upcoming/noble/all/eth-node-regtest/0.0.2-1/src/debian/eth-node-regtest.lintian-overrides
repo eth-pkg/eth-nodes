@@ -1,0 +1,8 @@
+eth-node-regtest: description-too-short TODO
+eth-node-regtest: no-copyright-file
+eth-node-regtest: empty-binary-package
+eth-node-regtest: maintainer-script-ignores-errors [postrm]
+eth-node-regtest: extended-description-line-too-long line 4
+eth-node-regtest: initial-upload-closes-no-bugs [usr/share/doc/eth-node-regtest/changelog.Debian.gz:1]
+eth-node-regtest: uses-dpkg-database-directly [preinst]
+

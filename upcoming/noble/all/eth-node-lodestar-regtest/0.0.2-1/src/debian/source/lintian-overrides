@@ -1,0 +1,6 @@
+eth-node-lodestar-regtest source: no-debian-copyright-in-source
+eth-node-lodestar-regtest source: no-newline-at-end [debian/changelog]
+eth-node-lodestar-regtest source: no-newline-at-end [debian/rules]
+eth-node-lodestar-regtest source: empty-upstream-sources
+eth-node-lodestar-regtest source: not-using-po-debconf
+eth-node-lodestar-regtest source: untranslatable-debconf-templates * 
