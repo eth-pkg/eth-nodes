@@ -79,7 +79,7 @@ jobs:
           mkdir -p ${HOME}/.local/bin
           mv target/release/pkg-builder ${HOME}/.local/bin
           # add to path the prebuilt debcrafter binaries as well
-          cp bin_dependencies/debcrafter_* ${HOME}/.local/bin
+          cp workspace/pkg_builder/bin_dependencies/debcrafter_* ${HOME}/.local/bin
           chmod +x ${HOME}/.local/bin/pkg-builder
           chmod +x ${HOME}/.local/bin/debcrafter_*
           echo "${HOME}/.local/bin" >> $GITHUB_PATH
