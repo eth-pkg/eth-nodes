@@ -17,6 +17,7 @@ SUPPORTED_CLIENTS=(
     "ethereum-genesis-generator"
     "eth2-testnet-genesis"
     "geth-hdwallet"
+    "eth-beacon-genesis"
 )
 
 NON_CLIENTS=(
