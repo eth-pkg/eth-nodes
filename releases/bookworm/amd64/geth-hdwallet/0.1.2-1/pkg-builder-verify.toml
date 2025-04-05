@@ -1,7 +1,7 @@
 [verify]
 package_hash = [
-    { hash = "74f7e2a4dbbfc5fe8587ec26f49826c86ded1d5c", name = "geth-hdwallet_0.1.2-1.dsc" },
+    { hash = "ec18a410b6a7f02191d4d099104156f852acd3a8", name = "geth-hdwallet_0.1.2-1.dsc" },
     { hash = "35796009d99ce4839639852af54fc25d1cf6230e", name = "geth-hdwallet_0.1.2.orig.tar.gz" },
-    { hash = "2c6ea19ced72d251625259f5040588b8753ad9db", name = "geth-hdwallet_0.1.2-1.debian.tar.xz" },
-    { hash = "0a28a901517d2a7d16438c1f2d272fe8992ea396", name = "geth-hdwallet_0.1.2-1_amd64.deb" },
+    { hash = "cc79cb383e235a46c2f958d4e8a8827b59baf0f4", name = "geth-hdwallet_0.1.2-1.debian.tar.xz" },
+    { hash = "b7388af86bb6082c0238e2beb6bcfb9048d0778a", name = "geth-hdwallet_0.1.2-1_amd64.deb" },
 ]
