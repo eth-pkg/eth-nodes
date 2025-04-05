@@ -1,0 +1,2 @@
+ geth-hdwallet source: no-debian-copyright-in-source
+ geth-hdwallet source: no-newline-at-end [debian/rules]

@@ -89,8 +89,8 @@ runs:
 
     - name: Add eth-nodes repository
       run: |
-        sudo curl -fsSL https://packages.eth-pkg.com/keys/ethpkg-archive-keyring.asc -o /usr/share/keyrings/ethpkg-archive-keyring.asc
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethpkg-archive-keyring.asc] http://packages.eth-pkg.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethpkg.list
+        sudo curl -fsSL https://packages.eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
         sudo apt update
       shell: bash
 

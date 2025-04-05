@@ -1,0 +1,7 @@
+[verify]
+package_hash = [
+    { hash = "fc97f41bfd65b22bb5dc48a19c6c5c77a305a35e", name = "eth-beacon-genesis_0.0.1-1.dsc" },
+    { hash = "6a58d222d9fe23235bbab08e5bbac78375f49791", name = "eth-beacon-genesis_0.0.1.orig.tar.gz" },
+    { hash = "5ae89946fdc33e4cc56e2a28b5f4ee03710bb0b5", name = "eth-beacon-genesis_0.0.1-1.debian.tar.xz" },
+    { hash = "6fb830e68587922d3e36ed33204b9f9ebed9c113", name = "eth-beacon-genesis_0.0.1-1_amd64.deb" },
+]

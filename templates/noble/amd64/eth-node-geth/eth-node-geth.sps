@@ -16,6 +16,7 @@ add_files = [
 "build/bin/evm /usr/lib/eth-node-geth/bin",
 "build/bin/geth /usr/lib/eth-node-geth/bin",
 "build/bin/rlpdump /usr/lib/eth-node-geth/bin",
+"build/bin/workload /usr/lib/eth-node-geth/bin",
 ]
 add_links = ["/usr/lib/eth-node-geth/bin/geth /usr/bin/geth"]
 add_manpages = []

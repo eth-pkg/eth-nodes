@@ -1,0 +1,6 @@
+eth-node-lodestar (1.28.0-1) noble; urgency=medium
+
+  * Support for 1.28.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 19 Mar 2025 18:53:22 +0100
+

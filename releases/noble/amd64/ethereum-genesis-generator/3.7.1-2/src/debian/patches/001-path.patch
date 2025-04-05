@@ -1,0 +1,522 @@
+Index: ethereum-genesis-generator-3.7.0/apps/el-gen/genesis_besu.py
+===================================================================
+--- ethereum-genesis-generator-3.7.0.orig/apps/el-gen/genesis_besu.py
++++ ethereum-genesis-generator-3.7.0/apps/el-gen/genesis_besu.py
+@@ -5,11 +5,11 @@ import sys
+ 
+ w3.eth.account.enable_unaudited_hdwallet_features()
+ 
+-testnet_config_path = "genesis-config.yaml"
+-mainnet_config_path = "/apps/el-gen/mainnet/besu_genesis.json"
+-sepolia_config_path = "/apps/el-gen/sepolia/besu_genesis.json"
+-goerli_config_path = "/apps/el-gen/goerli/besu_genesis.json"
+-holesky_config_path = "/apps/el-gen/holesky/besu_genesis.json"
++testnet_config_path = "config/el/genesis-config.yaml"
++mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/besu_genesis.json"
++sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/besu_genesis.json"
++goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/besu_genesis.json"
++holesky_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/holesky/besu_genesis.json"
+ isNamedTestnet = False
+ combined_allocs = {}
+ 
+@@ -185,14 +185,14 @@ else:
+ 
+ # Add fork timestamps for each fork
+ # Altair and Bellatrix have no EL implication in terms of timestamp and hence are not included here
+-if 'terminal_total_difficulty' in data and not isNamedTestnet:
++if 'terminal_total_difficulty' in data and data['terminal_total_difficulty'] is not None and not isNamedTestnet:
+     if data['terminal_total_difficulty'] != 0:
+         out['config']['terminalTotalDifficulty'] = data['terminal_total_difficulty']
+     else:
+         out['config']['terminalTotalDifficulty'] = 0
+ 
+ 
+-if 'capella_fork_epoch' in data and not isNamedTestnet:
++if 'capella_fork_epoch' in data and data['capella_fork_epoch'] is not None and not isNamedTestnet:
+     if data['capella_fork_epoch'] != 0:
+         out['config']['shanghaiTime'] = \
+             int(data['genesis_timestamp']) + \
+@@ -201,7 +201,7 @@ if 'capella_fork_epoch' in data and not
+     else:
+         out['config']['shanghaiTime'] = 0
+ 
+-if 'deneb_fork_epoch' in data and not isNamedTestnet:
++if 'deneb_fork_epoch' in data and data['deneb_fork_epoch'] is not None and not isNamedTestnet:
+     if data['deneb_fork_epoch'] != 0:
+         out['config']['cancunTime'] = \
+         int(data['genesis_timestamp']) + \
+@@ -217,7 +217,7 @@ if 'deneb_fork_epoch' in data and not is
+         "baseFeeUpdateFraction": data['basefee_update_fraction_cancun']
+     }
+ 
+-if 'electra_fork_epoch' in data:
++if 'electra_fork_epoch' in data and data['electra_fork_epoch'] is not None:
+     if data['electra_fork_epoch'] != 0:
+         out['config']['pragueTime'] = \
+         int(data['genesis_timestamp']) + \
+@@ -232,7 +232,7 @@ if 'electra_fork_epoch' in data:
+         "baseFeeUpdateFraction": data['basefee_update_fraction_prague']
+     }
+ 
+-if 'fulu_fork_epoch' in data:
++if 'fulu_fork_epoch' in data and data['fulu_fork_epoch'] is not None:
+     if data['fulu_fork_epoch'] != 0:
+         out['config']['osakaTime'] =  \
+         int(data['genesis_timestamp']) + \
+Index: ethereum-genesis-generator-3.7.0/apps/el-gen/genesis_chainspec.py
+===================================================================
+--- ethereum-genesis-generator-3.7.0.orig/apps/el-gen/genesis_chainspec.py
++++ ethereum-genesis-generator-3.7.0/apps/el-gen/genesis_chainspec.py
+@@ -5,11 +5,11 @@ import sys
+ 
+ w3.eth.account.enable_unaudited_hdwallet_features()
+ 
+-testnet_config_path = "genesis-config.yaml"
+-mainnet_config_path = "/apps/el-gen/mainnet/chainspec.json"
+-sepolia_config_path = "/apps/el-gen/sepolia/chainspec.json"
+-goerli_config_path = "/apps/el-gen/goerli/chainspec.json"
+-holesky_config_path = "/apps/el-gen/holesky/chainspec.json"
++testnet_config_path = "config/el/genesis-config.yaml"
++mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/chainspec.json"
++sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/chainspec.json"
++goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/chainspec.json"
++holesky_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/holesky/chainspec.json"
+ isNamedTestnet = False
+ combined_allocs = {}
+ if len(sys.argv) > 1:
+@@ -219,13 +219,13 @@ else:
+ 
+         
+ # Terminal total difficulty
+-if 'terminal_total_difficulty' in data and not isNamedTestnet:
++if 'terminal_total_difficulty' in data and data['terminal_total_difficulty'] is not None and not isNamedTestnet:
+     if data['terminal_total_difficulty'] != 0:
+         out['params']['terminalTotalDifficulty'] = hex(data['terminal_total_difficulty'])
+     else:
+         out['params']['terminalTotalDifficulty'] = "0x0"
+ # Capella fork
+-if 'capella_fork_epoch' in data and not isNamedTestnet:
++if 'capella_fork_epoch' in data and data['capella_fork_epoch'] is not None and not isNamedTestnet:
+     if data['capella_fork_epoch'] != 0:
+         capella_timestamp = hex(
+             int(data['genesis_timestamp']) +
+@@ -243,7 +243,7 @@ if 'capella_fork_epoch' in data and not
+         out['params']['eip3860TransitionTimestamp'] = 0
+ 
+ # Dencun fork
+-if 'deneb_fork_epoch' in data and not isNamedTestnet:
++if 'deneb_fork_epoch' in data and data['deneb_fork_epoch'] is not None and not isNamedTestnet:
+     if data['deneb_fork_epoch'] != 0:
+         deneb_timestamp = hex(
+         int(data['genesis_timestamp']) +
+@@ -270,7 +270,7 @@ if 'deneb_fork_epoch' in data and not is
+             "baseFeeUpdateFraction": hex(data['basefee_update_fraction_cancun'])
+         }
+ 
+-if 'electra_fork_epoch' in data:
++if 'electra_fork_epoch' in data and data['electra_fork_epoch'] is not None:
+     if data['electra_fork_epoch'] != 0:
+         electra_timestamp = hex(
+             int(data['genesis_timestamp']) +
+@@ -300,7 +300,7 @@ if 'electra_fork_epoch' in data:
+         "baseFeeUpdateFraction": hex(data['basefee_update_fraction_prague'])
+     }
+ 
+-if 'fulu_fork_epoch' in data:
++if 'fulu_fork_epoch' in data and data['fulu_fork_epoch'] is not None:
+     if data['fulu_fork_epoch'] != 0:
+         out['params']['eip7692TransitionTimestamp'] = hex(
+             int(data['genesis_timestamp']) + \
+Index: ethereum-genesis-generator-3.7.0/apps/el-gen/genesis_geth.py
+===================================================================
+--- ethereum-genesis-generator-3.7.0.orig/apps/el-gen/genesis_geth.py
++++ ethereum-genesis-generator-3.7.0/apps/el-gen/genesis_geth.py
+@@ -5,11 +5,11 @@ import sys
+ 
+ w3.eth.account.enable_unaudited_hdwallet_features()
+ 
+-testnet_config_path = "genesis-config.yaml"
+-mainnet_config_path = "/apps/el-gen/mainnet/genesis.json"
+-sepolia_config_path = "/apps/el-gen/sepolia/genesis.json"
+-goerli_config_path = "/apps/el-gen/goerli/genesis.json"
+-holesky_config_path = "/apps/el-gen/holesky/genesis.json"
++testnet_config_path = "config/el/genesis-config.yaml"
++mainnet_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/mainnet/genesis.json"
++sepolia_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/sepolia/genesis.json"
++goerli_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/goerli/genesis.json"
++holesky_config_path = "/usr/lib/ethereum-genesis-generator/apps/el-gen/holesky/genesis.json"
+ isNamedTestnet = False
+ combined_allocs = {}
+ if len(sys.argv) > 1:
+@@ -183,14 +183,14 @@ else:
+ 
+ # Add fork timestamps for each fork
+ # Altair and Bellatrix have no EL implication in terms of timestamp and hence are not included here
+-if 'terminal_total_difficulty' in data and not isNamedTestnet:
++if 'terminal_total_difficulty' in data and data['terminal_total_difficulty'] is not None and not isNamedTestnet:
+     if data['terminal_total_difficulty'] != 0:
+         out['config']['terminalTotalDifficulty'] = data['terminal_total_difficulty']
+     else:
+         out['config']['terminalTotalDifficulty'] = 0
+         out['config']['terminalTotalDifficultyPassed'] = True
+ 
+-if 'capella_fork_epoch' in data and not isNamedTestnet:
++if 'capella_fork_epoch' in data and data['capella_fork_epoch'] is not None  and not isNamedTestnet:
+     if data['capella_fork_epoch'] != 0:
+         out['config']['shanghaiTime'] = \
+             int(data['genesis_timestamp']) + \
+@@ -200,7 +200,7 @@ if 'capella_fork_epoch' in data and not
+         out['config']['shanghaiTime'] = 0
+ 
+ 
+-if 'deneb_fork_epoch' in data and not isNamedTestnet:
++if 'deneb_fork_epoch' in data and data['deneb_fork_epoch'] is not None and not isNamedTestnet:
+     if data['deneb_fork_epoch'] != 0:
+         out['config']['cancunTime'] = \
+         int(data['genesis_timestamp']) + \
+@@ -216,7 +216,7 @@ if 'deneb_fork_epoch' in data and not is
+         "baseFeeUpdateFraction": data['basefee_update_fraction_cancun']
+     }
+ 
+-if 'electra_fork_epoch' in data:
++if 'electra_fork_epoch' in data and data['electra_fork_epoch'] is not None:
+     if data['electra_fork_epoch'] != 0:
+         out['config']['pragueTime'] = \
+             int(data['genesis_timestamp']) + \
+@@ -231,7 +231,7 @@ if 'electra_fork_epoch' in data:
+         "baseFeeUpdateFraction": data['basefee_update_fraction_prague']
+     }
+ 
+-if 'fulu_fork_epoch' in data:
++if 'fulu_fork_epoch' in data and data['fulu_fork_epoch'] is not None:
+     if data['fulu_fork_epoch'] != 0:
+         out['config']['osakaTime'] =  \
+             int(data['genesis_timestamp']) + \
+Index: ethereum-genesis-generator-3.7.0/apps/el-gen/requirements.txt
+===================================================================
+--- ethereum-genesis-generator-3.7.0.orig/apps/el-gen/requirements.txt
++++ ethereum-genesis-generator-3.7.0/apps/el-gen/requirements.txt
+@@ -1,4 +1,42 @@
++aiohappyeyeballs==2.4.3
++aiohttp==3.10.8
++aiosignal==1.3.1
++altgraph==0.17.4
++annotated-types==0.7.0
++attrs==24.2.0
++bitarray==2.9.2
++certifi==2024.8.30
++charset-normalizer==3.3.2
++ckzg==2.0.1
++cytoolz==0.12.3
++eth-account==0.13.4
++eth-hash==0.7.0
++eth-keyfile==0.8.1
++eth-keys==0.5.1
++eth-rlp==2.1.0
++eth-typing==5.0.0
++eth-utils==5.0.0
++eth_abi==5.1.0
++frozenlist==1.4.1
++hexbytes==1.2.1
++idna==3.10
++multidict==6.1.0
++packaging==24.1
++parsimonious==0.10.0
++pycryptodome==3.21.0
++pydantic==2.9.2
++pydantic_core==2.23.4
++pyinstaller==6.10.0
++pyinstaller-hooks-contrib==2024.8
++pyunormalize==16.0.0
++regex==2024.9.11
++requests==2.32.3
++rlp==4.0.1
+ ruamel.yaml==0.17.16
+-web3>=6.15.0
+-setuptools>=69.1.0
+-python-dotenv==1.0.1
+\ No newline at end of file
++toolz==0.12.1
++types-requests==2.32.0.20240914
++typing_extensions==4.12.2
++urllib3==2.2.3
++web3==7.3.0
++websockets==13.1
++yarl==1.13.1
+Index: ethereum-genesis-generator-3.7.0/entrypoint.sh
+===================================================================
+--- ethereum-genesis-generator-3.7.0.orig/entrypoint.sh
++++ ethereum-genesis-generator-3.7.0/entrypoint.sh
+@@ -1,12 +1,22 @@
+ #!/bin/bash -e
+-export DEFAULT_ENV_FILE="/defaults/defaults.env"
++export DEFAULT_ENV_FILE="config/defaults.env"
+ # Load the default env vars into the environment
+-source $DEFAULT_ENV_FILE
+ 
+-if [ -f /config/values.env ];
++# Copy recursively if not already exists in the current folder, do not overwrite
++cp -nR /etc/ethereum-genesis-generator/config . 
++
++if [ -f config/values.env ];
++then
++    source config/values.env 
++else 
++    source $DEFAULT_ENV_FILE
++fi
++
++
++if [ -f config/values.env ];
+ then
+     # Use user provided env vars if it exists
+-    export FULL_ENV_FILE="/config/values.env"
++    export FULL_ENV_FILE="config/values.env"
+     # Pull these values out of the env file since they can be very large and cause
+     # "arguments list too long" errors in the shell.
+     grep -v "ADDITIONAL_PRELOADED_CONTRACTS" $FULL_ENV_FILE | grep -v "EL_PREMINE_ADDRS" > /tmp/values-short.env
+@@ -23,31 +33,29 @@ SERVER_PORT="${SERVER_PORT:-8000}"
+ 
+ 
+ gen_shared_files(){
+-    . /apps/el-gen/.venv/bin/activate
+     set -x
+     # Shared files
+-    mkdir -p /data/metadata
+-    if ! [ -f "/data/jwt/jwtsecret" ]; then
+-        mkdir -p /data/jwt
+-        echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > /data/jwt/jwtsecret
++    mkdir -p data/metadata
++    if ! [ -f "data/jwt/jwtsecret" ]; then
++        mkdir -p data/jwt
++        echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > data/jwt/jwtsecret
+     fi
+-    if [ -f "/data/metadata/genesis.json" ]; then
+-        terminalTotalDifficulty=$(cat /data/metadata/genesis.json | jq -r '.config.terminalTotalDifficulty | tostring')
+-        sed -i "s/TERMINAL_TOTAL_DIFFICULTY:.*/TERMINAL_TOTAL_DIFFICULTY: $terminalTotalDifficulty/" /data/metadata/config.yaml
++    if [ -f "data/metadata/genesis.json" ]; then
++        terminalTotalDifficulty=$(cat data/metadata/genesis.json | jq -r '.config.terminalTotalDifficulty | tostring')
++        sed -i "s/TERMINAL_TOTAL_DIFFICULTY:.*/TERMINAL_TOTAL_DIFFICULTY: $terminalTotalDifficulty/" data/metadata/config.yaml
+     fi
+ }
+ 
+ gen_el_config(){
+-    . /apps/el-gen/.venv/bin/activate
+     set -x
+-    if ! [ -f "/data/metadata/genesis.json" ]; then
++    if ! [ -f "data/metadata/genesis.json" ]; then
+         tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+-        mkdir -p /data/metadata
+-        python3 /apps/envsubst.py < /config/el/genesis-config.yaml > $tmp_dir/genesis-config.yaml
++        mkdir -p data/metadata
++        /usr/lib/ethereum-genesis-generator/apps/envsubst < config/el/genesis-config.yaml > $tmp_dir/genesis-config.yaml
+         cat $tmp_dir/genesis-config.yaml
+-        python3 /apps/el-gen/genesis_geth.py $tmp_dir/genesis-config.yaml      > /data/metadata/genesis.json
+-        python3 /apps/el-gen/genesis_chainspec.py $tmp_dir/genesis-config.yaml > /data/metadata/chainspec.json
+-        python3 /apps/el-gen/genesis_besu.py $tmp_dir/genesis-config.yaml > /data/metadata/besu.json
++        /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_geth $tmp_dir/genesis-config.yaml      > data/metadata/genesis.json
++        /usr/lib/ethereum-genesis-generatorapps/el-gen/genesis_chainspec $tmp_dir/genesis-config.yaml > data/metadata/chainspec.json
++        /usr/lib/ethereum-genesis-generator/apps/el-gen/genesis_besu $tmp_dir/genesis-config.yaml > data/metadata/besu.json
+     else
+         echo "el genesis already exists. skipping generation..."
+     fi
+@@ -64,63 +72,62 @@ gen_minimal_config() {
+   )
+ 
+   for key in "${!replacements[@]}"; do
+-    sed -i "s/$key:.*/$key: ${replacements[$key]}/" /data/metadata/config.yaml
++    sed -i "s/$key:.*/$key: ${replacements[$key]}/" data/metadata/config.yaml
+   done
+ }
+ 
+ gen_cl_config(){
+-    . /apps/el-gen/.venv/bin/activate
+     set -x
+     # Consensus layer: Check if genesis already exists
+-    if ! [ -f "/data/metadata/genesis.ssz" ]; then
++    if ! [ -f "data/metadata/genesis.ssz" ]; then
+         tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+-        mkdir -p /data/metadata
+-        mkdir -p /data/parsed
++        mkdir -p data/metadata
++        mkdir -p data/parsed
+         HUMAN_READABLE_TIMESTAMP=$(date -u -d @"$GENESIS_TIMESTAMP" +"%Y-%b-%d %I:%M:%S %p %Z")
+         COMMENT="# $HUMAN_READABLE_TIMESTAMP"
+         export MAX_REQUEST_BLOB_SIDECARS_ELECTRA=$(($MAX_REQUEST_BLOCKS_DENEB * $MAX_BLOBS_PER_BLOCK_ELECTRA))
+         export MAX_REQUEST_BLOB_SIDECARS_FULU=$(($MAX_REQUEST_BLOCKS_DENEB * $MAX_BLOBS_PER_BLOCK_FULU))
+-        python3 /apps/envsubst.py < /config/cl/config.yaml > /data/metadata/config.yaml
+-        sed -i "s/#HUMAN_TIME_PLACEHOLDER/$COMMENT/" /data/metadata/config.yaml
+-        python3 /apps/envsubst.py < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
++        /usr/lib/ethereum-genesis-generator/apps/envsubst < config/cl/config.yaml > data/metadata/config.yaml
++        sed -i "s/#HUMAN_TIME_PLACEHOLDER/$COMMENT/" data/metadata/config.yaml
++        /usr/lib/ethereum-genesis-generator/apps/envsubst < config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
+         # Conditionally override values if preset is "minimal"
+         if [[ "$PRESET_BASE" == "minimal" ]]; then
+           gen_minimal_config
+         fi
+-        cp $tmp_dir/mnemonics.yaml /data/metadata/mnemonics.yaml
++        cp $tmp_dir/mnemonics.yaml data/metadata/mnemonics.yaml
+         # Create deposit_contract.txt and deploy_block.txt
+-        grep DEPOSIT_CONTRACT_ADDRESS /data/metadata/config.yaml | cut -d " " -f2 > /data/metadata/deposit_contract.txt
+-        echo $CL_EXEC_BLOCK > /data/metadata/deposit_contract_block.txt
+-        echo $BEACON_STATIC_ENR > /data/metadata/bootstrap_nodes.txt
++        grep DEPOSIT_CONTRACT_ADDRESS data/metadata/config.yaml | cut -d " " -f2 > data/metadata/deposit_contract.txt
++        echo $CL_EXEC_BLOCK > data/metadata/deposit_contract_block.txt
++        echo $BEACON_STATIC_ENR > data/metadata/bootstrap_nodes.txt
+         # Envsubst mnemonics
+-        python3 /apps/envsubst.py < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
++        /usr/lib/ethereum-genesis-generator/apps/envsubst < config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
+         # Generate genesis
+         if [[ $ALTAIR_FORK_EPOCH != 0 ]]; then
+           genesis_args+=(
+             phase0
+-          --config /data/metadata/config.yaml
++          --config data/metadata/config.yaml
+           --mnemonics $tmp_dir/mnemonics.yaml
+-          --tranches-dir /data/metadata/tranches
+-          --state-output /data/metadata/genesis.ssz
++          --tranches-dir data/metadata/tranches
++          --state-output data/metadata/genesis.ssz
+           --preset-phase0 $PRESET_BASE
+         )
+         elif [[ $BELLATRIX_FORK_EPOCH != 0 ]]; then
+           genesis_args+=(
+             altair
+-          --config /data/metadata/config.yaml
++          --config data/metadata/config.yaml
+           --mnemonics $tmp_dir/mnemonics.yaml
+-          --tranches-dir /data/metadata/tranches
+-          --state-output /data/metadata/genesis.ssz
++          --tranches-dir data/metadata/tranches
++          --state-output data/metadata/genesis.ssz
+           --preset-phase0 $PRESET_BASE
+           --preset-altair $PRESET_BASE
+         )
+         elif [[ $CAPELLA_FORK_EPOCH != 0 ]]; then
+           genesis_args+=(
+             bellatrix
+-            --config /data/metadata/config.yaml
++            --config data/metadata/config.yaml
+             --mnemonics $tmp_dir/mnemonics.yaml
+-            --tranches-dir /data/metadata/tranches
+-            --state-output /data/metadata/genesis.ssz
++            --tranches-dir data/metadata/tranches
++            --state-output data/metadata/genesis.ssz
+             --preset-phase0 $PRESET_BASE
+             --preset-altair $PRESET_BASE
+             --preset-bellatrix $PRESET_BASE
+@@ -128,10 +135,10 @@ gen_cl_config(){
+         elif [[ $DENEB_FORK_EPOCH != 0 ]]; then
+           genesis_args+=(
+             capella
+-            --config /data/metadata/config.yaml
++            --config data/metadata/config.yaml
+             --mnemonics $tmp_dir/mnemonics.yaml
+-            --tranches-dir /data/metadata/tranches
+-            --state-output /data/metadata/genesis.ssz
++            --tranches-dir data/metadata/tranches
++            --state-output data/metadata/genesis.ssz
+             --preset-phase0 $PRESET_BASE
+             --preset-altair $PRESET_BASE
+             --preset-bellatrix $PRESET_BASE
+@@ -140,10 +147,10 @@ gen_cl_config(){
+         else
+           genesis_args+=(
+             deneb
+-            --config /data/metadata/config.yaml
++            --config data/metadata/config.yaml
+             --mnemonics $tmp_dir/mnemonics.yaml
+-            --tranches-dir /data/metadata/tranches
+-            --state-output /data/metadata/genesis.ssz
++            --tranches-dir data/metadata/tranches
++            --state-output data/metadata/genesis.ssz
+             --preset-phase0 $PRESET_BASE
+             --preset-altair $PRESET_BASE
+             --preset-bellatrix $PRESET_BASE
+@@ -159,7 +166,7 @@ gen_cl_config(){
+         elif [[ $SHADOW_FORK_RPC != "" ]]; then
+           genesis_args+=(--shadow-fork-eth1-rpc=$SHADOW_FORK_RPC --eth1-config "")
+         elif [[ $ALTAIR_FORK_EPOCH == 0 ]] && [[ $BELLATRIX_FORK_EPOCH == 0 ]]; then
+-          genesis_args+=(--eth1-config /data/metadata/genesis.json)
++          genesis_args+=(--eth1-config data/metadata/genesis.json)
+         fi
+         if ! [ -z "$CL_ADDITIONAL_VALIDATORS" ]; then
+           if [[ $CL_ADDITIONAL_VALIDATORS = /* ]]; then
+@@ -175,7 +182,7 @@ gen_cl_config(){
+             phase0
+             BeaconState
+             --preset-phase0 $PRESET_BASE
+-            /data/metadata/genesis.ssz
++            data/metadata/genesis.ssz
+           )
+         elif [[ $BELLATRIX_FORK_EPOCH != 0 ]]; then
+           zcli_args=(
+@@ -184,7 +191,7 @@ gen_cl_config(){
+             BeaconState
+             --preset-phase0 $PRESET_BASE
+             --preset-altair $PRESET_BASE
+-            /data/metadata/genesis.ssz
++            data/metadata/genesis.ssz
+           )
+         elif [[ $CAPELLA_FORK_EPOCH != 0 ]]; then
+           zcli_args=(
+@@ -194,7 +201,7 @@ gen_cl_config(){
+             --preset-phase0 $PRESET_BASE
+             --preset-altair $PRESET_BASE
+             --preset-bellatrix $PRESET_BASE
+-            /data/metadata/genesis.ssz
++            data/metadata/genesis.ssz
+           )
+         elif [[ $DENEB_FORK_EPOCH != 0 ]]; then
+           zcli_args=(
+@@ -204,7 +211,7 @@ gen_cl_config(){
+             --preset-phase0 $PRESET_BASE
+             --preset-altair $PRESET_BASE
+             --preset-bellatrix $PRESET_BASE
+-            /data/metadata/genesis.ssz
++            data/metadata/genesis.ssz
+           )
+         else
+         zcli_args=(
+@@ -215,16 +222,16 @@ gen_cl_config(){
+           --preset-altair $PRESET_BASE
+           --preset-bellatrix $PRESET_BASE
+           --preset-capella $PRESET_BASE
+-          /data/metadata/genesis.ssz
++          data/metadata/genesis.ssz
+         )
+         fi
+-        /usr/local/bin/eth2-testnet-genesis "${genesis_args[@]}"
+-        /usr/local/bin/zcli "${zcli_args[@]}" > /data/parsed/parsedConsensusGenesis.json
++        eth2-testnet-genesis "${genesis_args[@]}"
++        zcli "${zcli_args[@]}" > data/parsed/parsedConsensusGenesis.json
+         echo "Genesis args: ${genesis_args[@]}"
+-        echo "Genesis block number: $(jq -r '.latest_execution_payload_header.block_number' /data/parsed/parsedConsensusGenesis.json)"
+-        echo "Genesis block hash: $(jq -r '.latest_execution_payload_header.block_hash' /data/parsed/parsedConsensusGenesis.json)"
+-        jq -r '.eth1_data.block_hash' /data/parsed/parsedConsensusGenesis.json| tr -d '\n' > /data/metadata/deposit_contract_block_hash.txt
+-        jq -r '.genesis_validators_root' /data/parsed/parsedConsensusGenesis.json | tr -d '\n' > /data/metadata/genesis_validators_root.txt
++        echo "Genesis block number: $(jq -r '.latest_execution_payload_header.block_number' data/parsed/parsedConsensusGenesis.json)"
++        echo "Genesis block hash: $(jq -r '.latest_execution_payload_header.block_hash' data/parsed/parsedConsensusGenesis.json)"
++        jq -r '.eth1_data.block_hash' data/parsed/parsedConsensusGenesis.json| tr -d '\n' > data/metadata/deposit_contract_block_hash.txt
++        jq -r '.genesis_validators_root' data/parsed/parsedConsensusGenesis.json | tr -d '\n' > data/metadata/genesis_validators_root.txt
+     else
+         echo "cl genesis already exists. skipping generation..."
+     fi
+@@ -255,6 +262,6 @@ esac
+ 
+ # Start webserver
+ if [ "$SERVER_ENABLED" = true ] ; then
+-  cd /data && exec python3 -m http.server "$SERVER_PORT"
++  cd data && exec python3 -m http.server "$SERVER_PORT"
+ fi
+ 
+Index: ethereum-genesis-generator-3.7.0/apps/requirements.txt
+===================================================================
+--- /dev/null
++++ ethereum-genesis-generator-3.7.0/apps/requirements.txt
+@@ -0,0 +1,6 @@
++altgraph==0.17.4
++packaging==24.2
++pyinstaller==6.12.0
++pyinstaller-hooks-contrib==2025.1
++python-dotenv==1.0.1
++
