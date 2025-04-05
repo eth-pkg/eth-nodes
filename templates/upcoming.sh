@@ -16,11 +16,14 @@ SUPPORTED_CLIENTS=(
     "teku"
     "ethereum-genesis-generator"
     "eth2-testnet-genesis"
+    "geth-hdwallet"
+    "eth-beacon-genesis"
 )
 
 NON_CLIENTS=(
     "ethereum-genesis-generator"
     "eth2-testnet-genesis"
+    "geth-hdwallet"
 )
 
 declare -A REPOSITORIES=(
@@ -36,6 +39,7 @@ declare -A REPOSITORIES=(
     ["teku"]="ConsenSys/teku"
     ["ethereum-genesis-generator"]="ethpandaops/ethereum-genesis-generator"
     ["eth2-testnet-genesis"]="protolambda/eth2-testnet-genesis"
+    ["geth-hdwallet"]="miguelmota/go-ethereum-hdwallet"
 )
 
 SUPPORTED_ARCHS=("amd64")
@@ -217,8 +221,6 @@ replace_git_submodules_in_file() {
     fi
 }
 
-
-
 HELP=false
 CLIENT_NAME=""
 CODENAME=""
@@ -284,7 +286,7 @@ function main() {
     fi
     TAG_NAME=$(echo "$LATEST_RELEASE" | tr '/' '\n' | tail -n1)
     CLIENT_VERSION=$(echo "$TAG_NAME" | sed 's/^v//g')
-    if is_supported "$CLIENT_NAME" "${NON_CLIENTS[@]}" ; then
+    if is_supported "$CLIENT_NAME" "${NON_CLIENTS[@]}"; then
         RELEASE_DIR="releases/$CODENAME/$ARCH/$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
         UPCOMING_DIR="upcoming/$CODENAME/$ARCH/$CLIENT_NAME/$CLIENT_VERSION-$CLIENT_REVISION"
     else
@@ -314,7 +316,7 @@ function main() {
 
     GIT_COMMIT_LONG=$(get_commit_hash_for_tag "$CLIENT_REPOSITORY" "$TAG_NAME")
     GIT_COMMIT_SHORT=${GIT_COMMIT_LONG:0:7}
-    if is_supported "$CLIENT_NAME" "${NON_CLIENTS[@]}" ; then
+    if is_supported "$CLIENT_NAME" "${NON_CLIENTS[@]}"; then
         TEMPLATE_DIR="templates/$CODENAME/$ARCH/$CLIENT_NAME"
     else
         TEMPLATE_DIR="templates/$CODENAME/$ARCH/eth-node-$CLIENT_NAME"
