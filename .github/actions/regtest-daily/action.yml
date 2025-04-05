@@ -49,14 +49,14 @@ runs:
 
     - name: Add eth-nodes repository
       run: |
-        sudo curl -fsSL  sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
+        sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
         sudo apt update
       shell: bash
 
     - name: Add eth-nodes testing repository
       run: |
-        sudo curl -fsSL  sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
+        sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
         sudo apt update
       shell: bash  
