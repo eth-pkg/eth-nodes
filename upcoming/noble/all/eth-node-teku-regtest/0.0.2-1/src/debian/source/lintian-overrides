@@ -1,0 +1,6 @@
+eth-node-teku-regtest source: no-debian-copyright-in-source
+eth-node-teku-regtest source: no-newline-at-end [debian/changelog]
+eth-node-teku-regtest source: no-newline-at-end [debian/rules]
+eth-node-teku-regtest source: empty-upstream-sources
+eth-node-teku-regtest source: not-using-po-debconf
+eth-node-teku-regtest source: untranslatable-debconf-templates * 
