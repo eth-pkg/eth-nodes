@@ -18,44 +18,44 @@ Index: ethereum-genesis-generator-4.0.2/apps/el-gen/generate_genesis.sh
 -        cp /apps/el-gen/mainnet/genesis.json $tmp_dir/genesis.json
 -        cp /apps/el-gen/mainnet/chainspec.json $tmp_dir/chainspec.json
 -        cp /apps/el-gen/mainnet/besu_genesis.json $tmp_dir/besu.json
-+        cp "$SCRIPT_DIR/el-gen/mainnet/genesis.json" $tmp_dir/genesis.json
-+        cp "$SCRIPT_DIR/el-gen/mainnet/chainspec.json" $tmp_dir/chainspec.json
-+        cp "$SCRIPT_DIR/el-gen/mainnet/besu_genesis.json" $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/mainnet/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/mainnet/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/mainnet/besu_genesis.json" $tmp_dir/besu.json
      elif [ "$CHAIN_ID" == "11155111" ]; then
          # sepolia shadowfork
          has_fork="4" # deneb
 -        cp /apps/el-gen/sepolia/genesis.json $tmp_dir/genesis.json
 -        cp /apps/el-gen/sepolia/chainspec.json $tmp_dir/chainspec.json
 -        cp /apps/el-gen/sepolia/besu_genesis.json $tmp_dir/besu.json
-+        cp "$SCRIPT_DIR/el-gen/sepolia/genesis.json" $tmp_dir/genesis.json
-+        cp "$SCRIPT_DIR/el-gen/sepolia/chainspec.json" $tmp_dir/chainspec.json
-+        cp "$SCRIPT_DIR/el-gen/sepolia/besu_genesis.json" $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/sepolia/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/sepolia/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/sepolia/besu_genesis.json" $tmp_dir/besu.json
      elif [ "$CHAIN_ID" == "17000" ]; then
          # holesky shadowfork
          has_fork="4" # deneb
 -        cp /apps/el-gen/holesky/genesis.json $tmp_dir/genesis.json
 -        cp /apps/el-gen/holesky/chainspec.json $tmp_dir/chainspec.json
 -        cp /apps/el-gen/holesky/besu_genesis.json $tmp_dir/besu.json
-+        cp "$SCRIPT_DIR/el-gen/holesky/genesis.json" $tmp_dir/genesis.json
-+        cp "$SCRIPT_DIR/el-gen/holesky/chainspec.json" $tmp_dir/chainspec.json
-+        cp "$SCRIPT_DIR/el-gen/holesky/besu_genesis.json" $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/holesky/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/holesky/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/holesky/besu_genesis.json" $tmp_dir/besu.json
      elif [ "$CHAIN_ID" == "560048" ]; then
          # hoodi shadowfork
          has_fork="5" # electra
 -        cp /apps/el-gen/hoodi/genesis.json $tmp_dir/genesis.json
 -        cp /apps/el-gen/hoodi/chainspec.json $tmp_dir/chainspec.json
 -        cp /apps/el-gen/hoodi/besu_genesis.json $tmp_dir/besu.json
-+        cp "$SCRIPT_DIR/el-gen/hoodi/genesis.json" $tmp_dir/genesis.json
-+        cp "$SCRIPT_DIR/el-gen/hoodi/chainspec.json" $tmp_dir/chainspec.json
-+        cp "$SCRIPT_DIR/el-gen/hoodi/besu_genesis.json" $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/hoodi/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/hoodi/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/hoodi/besu_genesis.json" $tmp_dir/besu.json
      else
          # Generate base genesis.json, chainspec.json and besu.json
 -        envsubst < /apps/el-gen/tpl-genesis.json   > $tmp_dir/genesis.json
 -        envsubst < /apps/el-gen/tpl-chainspec.json > $tmp_dir/chainspec.json
 -        envsubst < /apps/el-gen/tpl-besu.json      > $tmp_dir/besu.json
-+        envsubst < "$SCRIPT_DIR/el-gen/tpl-genesis.json"   > $tmp_dir/genesis.json
-+        envsubst < "$SCRIPT_DIR/el-gen/tpl-chainspec.json" > $tmp_dir/chainspec.json
-+        envsubst < "$SCRIPT_DIR/el-gen/tpl-besu.json"      > $tmp_dir/besu.json
++        envsubst < "$SCRIPT_DIR/tpl-genesis.json"   > $tmp_dir/genesis.json
++        envsubst < "$SCRIPT_DIR/tpl-chainspec.json" > $tmp_dir/chainspec.json
++        envsubst < "$SCRIPT_DIR/tpl-besu.json"      > $tmp_dir/besu.json
          is_shadowfork="0"
          has_fork="0"
      fi
@@ -64,7 +64,7 @@ Index: ethereum-genesis-generator-4.0.2/apps/el-gen/generate_genesis.sh
          # Initialize allocations with precompiles
          echo "Adding precompile allocations..."
 -        cat /apps/el-gen/precompile-allocs.yaml | yq -c > $tmp_dir/allocations.json
-+        cat "$SCRIPT_DIR/el-gen/precompile-allocs.yaml" | yq -c > $tmp_dir/allocations.json
++        cat "$SCRIPT_DIR/precompile-allocs.yaml" | yq -c > $tmp_dir/allocations.json
  
          # Add system contracts
          genesis_add_system_contracts $tmp_dir
@@ -73,7 +73,7 @@ Index: ethereum-genesis-generator-4.0.2/apps/el-gen/generate_genesis.sh
  genesis_add_system_contracts() {
      tmp_dir=$1
 -    system_contracts=$(cat /apps/el-gen/system-contracts.yaml | yq -c)
-+    system_contracts=$(cat "$SCRIPT_DIR/el-gen/system-contracts.yaml" | yq -c)
++    system_contracts=$(cat "$SCRIPT_DIR/system-contracts.yaml" | yq -c)
  
      echo "Adding system contracts"
  
