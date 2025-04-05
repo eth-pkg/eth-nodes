@@ -1,0 +1,5 @@
+ geth-hdwallet: no-copyright-file
+ geth-hdwallet: hardening-no-pie [usr/lib/eth2-testnet-gensis/bin/geth-hdwallet]
+ geth-hdwallet: initial-upload-closes-no-bugs [usr/share/doc/geth-hdwallet/changelog.Debian.gz:1]
+ geth-hdwallet: maintainer-script-ignores-errors [postrm]
+ geth-hdwallet: no-manual-page [usr/bin/geth-hdwallet]
