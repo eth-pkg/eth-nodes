@@ -1,7 +1,5 @@
 #!/usr/bin/make -f
 
-export PYTHONHASHSEED=1
-
 %:
 	dh $@
 
@@ -9,43 +7,9 @@ override_dh_dwz:
 	# skip of optimization of DWARF debug information in ELF binaries via dwz
 
 override_dh_auto_build:
-	cd apps && python3 -m venv .venv
-	cd apps && . .venv/bin/activate && pip install -r requirements.txt
-
-	cp debian/specs/envsubst.spec apps
-	cd apps && . .venv/bin/activate && pyinstaller envsubst.spec
-
-	cd apps/el-gen && python3 -m venv .venv
-	cd apps/el-gen && . .venv/bin/activate && pip install -r requirements.txt
-
-	cp debian/specs/genesis_besu.spec apps/el-gen
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_besu.spec
-
-	cp debian/specs/genesis_chainspec.spec apps/el-gen
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller genesis_chainspec.spec
-
-	cp debian/specs/genesis_geth.spec apps/el-gen
-	cd apps/el-gen && . .venv/bin/activate && pyinstaller  genesis_geth.spec
-
+	chmod +x entrypoint.sh 
+	chmod +x apps/el-gen/generate_genesis.sh
 	cp -R config-example config
-	chmod +x entrypoint.sh
-	chmod +x apps/el-gen/dist/genesis_besu
-	chmod +x apps/el-gen/dist/genesis_chainspec
-	chmod +x apps/el-gen/dist/genesis_geth
-	chmod +x apps/dist/envsubst
-
-	mv apps/el-gen/dist/genesis_besu apps/el-gen
-	mv apps/el-gen/dist/genesis_chainspec apps/el-gen
-	mv apps/el-gen/dist/genesis_geth apps/el-gen
-	mv apps/dist/envsubst apps
-
-	rm -rf apps/el-gen/.venv
-	rm -rf apps/el-gen/build
-	rm -rf apps/el-gen/dist
-
-	rm -rf apps/.venv
-	rm -rf apps/build
-	rm -rf apps/dist
 
 override_dh_auto_install:
 	# do nothing
