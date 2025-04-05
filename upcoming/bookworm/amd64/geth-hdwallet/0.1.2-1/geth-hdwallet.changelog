@@ -1,0 +1,6 @@
+geth-hdwallet (0.1.2-1) bookworm; urgency=medium
+
+  * Support for 0.1.2-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Sat, 05 Apr 2025 10:54:31 +0200
+
