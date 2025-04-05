@@ -5,16 +5,12 @@ conflicts = []
 recommends = []
 provides = []
 suggests = []
-depends = [
-  "zcli (>=0.8.0)", 
-  "eth2-testnet-genesis (>= 0.12.0)",
-]
+depends = ["eth-beacon-genesis", "eth2-val-tools", "geth-hdwallet"]
 add_files = [
-    "config-example /etc/ethereum-genesis-generator/config/",
-    "apps/el-gen /usr/lib/ethereum-genesis-generator/apps/",
-    "defaults /etc/ethereum-genesis-generator",
-    "entrypoint.sh /usr/lib/ethereum-genesis-generator/bin",
-    # "el-gen /usr/lib/el-gen/bin",
+  "config /etc/ethereum-genesis-generator/",
+  "apps/el-gen /usr/lib/ethereum-genesis-generator/apps/",
+  "defaults /etc/ethereum-genesis-generator/",
+  "entrypoint.sh /usr/lib/ethereum-genesis-generator/bin",
 ]
 add_links = ["/usr/lib/ethereum-genesis-generator/bin/entrypoint.sh /usr/bin/ethereum-genesis-generator"]
 add_manpages = []
