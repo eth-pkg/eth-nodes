@@ -3,29 +3,29 @@ spec_file = "ethereum-genesis-generator.sss"
 package_name = "ethereum-genesis-generator"
 version_number = "4.0.2"
 revision_number = "1"
-homepage="https://github.com/ethpandaops/ethereum-genesis-generator"
+homepage = "https://github.com/ethpandaops/ethereum-genesis-generator"
 
 [package_type]
 # virtual | git | default
-package_type="default"
+package_type = "default"
 tarball_url = "https://github.com/ethpandaops/ethereum-genesis-generator/archive/refs/tags/v4.0.2.tar.gz"
 ## Provided by debian package maintainer not by team developing the software
-tarball_hash = "a300195e8d59063c47b2b07eab267a7e2f2a72b84ffae63282a562fb6225bbe7"
+tarball_hash = "6d82fa1db4f2911ece8fe256138b0cd96b995dc5aa02b956c6151373ca69c267"
 
 [package_type.language_env]
 language_env = "python"
 
 [build_env]
-codename="bookworm"
+codename = "bookworm"
 arch = "amd64"
-pkg_builder_version="0.2.11"
+pkg_builder_version = "0.2.11"
 debcrafter_version = "8189263"
-run_lintian=true
-run_piuparts=true
-run_autopkgtest=true
-lintian_version="2.116.3"
-piuparts_version="1.1.7"
-autopkgtest_version="5.28"
-sbuild_version="0.85.6"
+run_lintian = true
+run_piuparts = true
+run_autopkgtest = true
+lintian_version = "2.116.3"
+piuparts_version = "1.1.7"
+autopkgtest_version = "5.28"
+sbuild_version = "0.85.6"
 # package directory
-workdir="~/.pkg-builder/packages/bookworm"
+workdir = "~/.pkg-builder/packages/bookworm"
