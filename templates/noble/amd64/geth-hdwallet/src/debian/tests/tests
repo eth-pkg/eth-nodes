@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path() {
+  output="$(which geth-hdwallet)"
+  assertEquals "/usr/bin/geth-hdwallet" "$output"
+}
+
+. shunit2
