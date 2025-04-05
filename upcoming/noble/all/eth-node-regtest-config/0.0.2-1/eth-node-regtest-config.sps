@@ -5,7 +5,7 @@ conflicts = []
 recommends = []
 provides = [""]
 suggests = []
-depends = ["ethereum-genesis-generator (>=4.0.2-4)"]
+depends = ["ethereum-genesis-generator (>=4.0.2-1)"]
 add_files = [
     "debian/regtest /var/lib/eth-node-regtest",
     "debian/config /etc/eth-node-regtest-config",
