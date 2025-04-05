@@ -5,7 +5,7 @@ conflicts = []
 recommends = []
 provides = [""]
 suggests = []
-depends=["ethereum-genesis-generator (>=3.7.1-4)"]
+depends = ["ethereum-genesis-generator (>=4.0.2-4)"]
 add_files = [
     "debian/regtest /var/lib/eth-node-regtest",
     "debian/config /etc/eth-node-regtest-config",
@@ -18,7 +18,7 @@ long_doc = """eth-node-regtest-config
 
 [config."regtest.conf"]
 format = "plain"
-public = true 
+public = true
 
 [config."regtest.conf".ivars."NETWORK"]
 type = "string"
@@ -60,8 +60,8 @@ summary = "Data directory where CL and EL directories are placed"
 type = "string"
 template = "{/ENGINE_SCHEME}://{/ENGINE_HOST}:{/ENGINE_API_PORT}"
 store = true
-# summary = "Endpoint URL for EL and CL communication"
 
+# summary = "Endpoint URL for EL and CL communication"
 [config."regtest.conf".ivars."JWT_FILE"]
 type = "path"
 file_type = "regular"
@@ -74,24 +74,21 @@ type = "string"
 default = "/var/lib/eth-node-regtest/regtest/genesis"
 priority = "low"
 summary = "Directory for custom network regtest configuration"
-
 # [config."regtest.conf".hvars."GENESIS_FILE"]
 # type = "string"
 # template = "{/TESTNET_DIR}/genesis.json"
 # # summary = "Custom network genesis file location"
 # store = true
-
 # [config."regtest.conf".hvars."GENESIS_STATE"]
 # type = "string"
 # template = "{/TESTNET_DIR}/genesis.ssz"
 # # summary = "Custom network genesis state location"
-# store = true 
-
+# store = true
 # [config."regtest.conf".hvars."CHAINCONFIG"]
 # type = "string"
 # template = "{/TESTNET_DIR}/config.yaml"
 # # summary = "Custom network chain configuration file"
-store = true 
+store = true
 
 [config."regtest.conf".ivars."NETWORK_ID"]
 type = "string"
@@ -153,12 +150,11 @@ default = ""
 priority = "low"
 summary = "Consensus Layer (CL) P2P port"
 
-
 [config."regtest.conf".hvars."VALIDATOR_BEACON_RPC_PROVIDER"]
 type = "string"
 template = "{/ENGINE_HOST}:4000"
 # summary = "Validator beacon RPC provider"
-store = true 
+store = true
 
 [config."regtest.conf".ivars."VALIDATOR_NUM_VALIDATORS"]
 type = "string"
@@ -177,7 +173,6 @@ type = "string"
 default = "/var/logs/eth-node-regtest"
 priority = "low"
 summary = "Base dir for logging"
-
 
 # going to fill the jwt file with random hex
 [config."regtest.conf".postprocess]
