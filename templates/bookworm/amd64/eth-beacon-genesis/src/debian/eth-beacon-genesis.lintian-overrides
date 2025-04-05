@@ -1,0 +1,6 @@
+ eth-beacon-genesis: no-copyright-file
+ eth-beacon-genesis: hardening-no-pie [usr/lib/eth-beacon-genesis/bin/eth-beacon-genesis]
+ eth-beacon-genesis: initial-upload-closes-no-bugs [usr/share/doc/eth-beacon-genesis/changelog.Debian.gz:1]
+ eth-beacon-genesis: maintainer-script-ignores-errors [postrm]
+ eth-beacon-genesis: no-manual-page [usr/bin/eth-beacon-genesis]
+ eth-beacon-genesis: description-synopsis-starts-with-article

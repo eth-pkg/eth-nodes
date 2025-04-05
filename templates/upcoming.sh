@@ -24,6 +24,7 @@ NON_CLIENTS=(
     "ethereum-genesis-generator"
     "eth2-testnet-genesis"
     "geth-hdwallet"
+    "eth-beacon-genesis"
 )
 
 declare -A REPOSITORIES=(
@@ -40,6 +41,7 @@ declare -A REPOSITORIES=(
     ["ethereum-genesis-generator"]="ethpandaops/ethereum-genesis-generator"
     ["eth2-testnet-genesis"]="protolambda/eth2-testnet-genesis"
     ["geth-hdwallet"]="miguelmota/go-ethereum-hdwallet"
+    ["eth-beacon-genesis"]="ethpandaops/eth-beacon-genesis"
 )
 
 SUPPORTED_ARCHS=("amd64")
