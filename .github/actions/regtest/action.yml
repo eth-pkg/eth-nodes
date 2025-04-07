@@ -127,6 +127,7 @@ runs:
 
     - name: Build clients
       run: |
+        sudo apt install yq ## this should be in ethereum-genesis-generator
         cd upcoming/noble/all
         mkdir ${HOME}/packages
 
