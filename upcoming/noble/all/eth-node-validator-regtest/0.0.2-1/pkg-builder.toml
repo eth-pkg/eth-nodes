@@ -11,7 +11,7 @@ package_type="virtual"
 [build_env]
 codename="noble numbat"
 arch = "amd64"
-pkg_builder_version="0.2.8"
+pkg_builder_version="0.2.11"
 debcrafter_version = "8189263"
 run_lintian=true
 run_piuparts=true
