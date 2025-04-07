@@ -38,11 +38,7 @@ generate_testnet() {
     tmp_dir=$(mktemp -d)
 
     cd "$tmp_dir"
-    ethereum-genesis-generator all \
-        --defaults-env /etc/eth-node-regtest/defaults/defaults.env \
-        --config-values /etc/eth-node-regtest/config/values.env \
-        --config-dir /etc/eth-node-regtest/config \
-        --data-dir data
+    ethereum-genesis-generator all --defaults-env=/etc/eth-node-regtest/defaults/defaults.env --config-dir=/etc/eth-node-regtest/config --data-dir=data
 
     mkdir -p /var/lib/eth-node-regtest/regtest
 
