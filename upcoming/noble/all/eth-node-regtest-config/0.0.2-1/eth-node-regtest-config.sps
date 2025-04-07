@@ -8,7 +8,8 @@ suggests = []
 depends = ["ethereum-genesis-generator (>=4.0.2-1)"]
 add_files = [
     "debian/regtest /var/lib/eth-node-regtest",
-    "debian/config /etc/eth-node-regtest-config",
+    "debian/config /etc/eth-node-regtest",
+    "debian/defaults /etc/eth-node-regtest",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-regtest",
 ]
 add_links = []
