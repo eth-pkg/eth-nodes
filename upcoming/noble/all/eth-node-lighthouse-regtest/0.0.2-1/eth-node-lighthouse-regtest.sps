@@ -42,14 +42,17 @@ WorkingDirectory=/var/lib/eth-node-regtest/lighthouse
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-lighthouse-service.sh /usr/lib/eth-node-lighthouse-regtest/", 
+    "debian/scripts/run-lighthouse-service.sh /usr/lib/eth-node-lighthouse-regtest/",
     "debian/scripts/run-lighthouse.sh /usr/lib/eth-node-lighthouse-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-lighthouse-regtest",
     "debian/tmp/eth-node-lighthouse-regtest.service /lib/systemd/system/",
 ]
 provides = ["eth-node-regtest-cl-service"]
 conflicts = ["eth-node-regtest-cl-service"]
-depends=["eth-node-regtest-config (>= 0.0.2)", "eth-node-regtest-config (<< 0.0.3)"]
+depends = [
+    "eth-node-regtest-config (>= 0.0.2)",
+    "eth-node-regtest-config (<< 0.0.3)"
+]
 summary = "service file for eth-node-lighthouse for network: regtest"
 
 [config."lighthouse-regtest.conf".postprocess]
@@ -58,11 +61,9 @@ command = ["bash", "/usr/lib/eth-node-lighthouse-regtest/postprocess.sh"]
 [config."lighthouse-regtest.conf"]
 format = "plain"
 
-
-
 [config."lighthouse-regtest.conf".ivars."network"]
 type = "string"
-default = ""  
+default = ""
 priority = "low"
 summary = "Specify the name of the Eth2 chain to sync and follow (e.g., mainnet, prater, goerli)."
 
@@ -84,13 +85,11 @@ default = "127.0.0.1"
 priority = "low"
 summary = "The IP or DNS address to broadcast to other peers for connecting to the node."
 
-
 [config."lighthouse-regtest.conf".ivars."enr_udp_port"]
 type = "string"
 default = "9000"
 priority = "low"
 summary = "The UDP4 port for the local ENR, used for incoming connections over IPv4."
-
 
 [config."lighthouse-regtest.conf".ivars."enr_tcp_port"]
 type = "string"
@@ -98,13 +97,11 @@ default = "9000"
 priority = "low"
 summary = "The TCP4 port for the local ENR, used for incoming connections over IPv4."
 
-
 [config."lighthouse-regtest.conf".ivars."quic_port"]
 type = "string"
 default = "9100"
 priority = "low"
 summary = "Set the UDP port for QUIC. Defaults to `port` + 1."
-
 
 [config."lighthouse-regtest.conf".ivars."listen_address"]
 type = "string"
@@ -154,7 +151,6 @@ default = "$ENDPOINT_URL"
 priority = "low"
 summary = "Server endpoint for an execution layer JWT-authenticated HTTP JSON-RPC connection."
 
-
 [config."lighthouse-regtest.conf".ivars."execution_jwt"]
 type = "string"
 default = "$JWT_FILE"
@@ -167,13 +163,11 @@ default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Specify an emergency fallback fee recipient for block production in case the validator client lacks one."
 
-
 [config."lighthouse-regtest.conf".ivars."enable_private_discovery"]
 type = "string"
 default = "true"
 priority = "low"
 summary = "Enable the discovery of private IP addresses to allow connection attempts to local addresses."
-
 
 [config."lighthouse-regtest.conf".ivars."testnet_dir"]
 type = "string"
@@ -193,19 +187,18 @@ default = "$LOG_DIR/lighthouse/lighthouse.log"
 priority = "low"
 summary = "File path where the log file will be stored."
 
+[config."lighthouse-regtest.conf".ivars."allow_insecure_genesis_sync"]
+type = "string"
+default = "true"
+priority = "low"
+summary = "Enable syncing from genesis, which is generally insecure and incompatible with data availability checks. Use checkpoint syncing instead. DO NOT use on mainnet."
+
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
 ####### OPTIONS below are all set to default and provided to be used with debconf ###########
 #############################################################################################
 #############################################################################################
-
-[config."lighthouse-regtest.conf".ivars."allow_insecure_genesis_sync"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Enable syncing from genesis, which is generally insecure and incompatible with data availability checks. Use checkpoint syncing instead. DO NOT use on mainnet."
-
 [config."lighthouse-regtest.conf".ivars."always_prefer_builder_payload"]
 type = "string"
 default = ""
@@ -253,7 +246,6 @@ summary = "This flag is deprecated and has no effect."
 # default = ""
 # priority = "low"
 # summary = "Disable automatic ENR updates, fixing the ENR's IP/PORT to those specified on boot."
-
 [config."lighthouse-regtest.conf".ivars."disable_lock_timeouts"]
 type = "string"
 default = ""
@@ -283,7 +275,6 @@ summary = "Force verification of every execution block hash with the execution c
 # default = ""
 # priority = "low"
 # summary = "Disable the discovery packet filter, useful for testing in smaller networks."
-
 [config."lighthouse-regtest.conf".ivars."disable_proposer_reorgs"]
 type = "string"
 default = ""
@@ -313,7 +304,6 @@ summary = "Use a dummy eth1 backend that generates static data, identical to the
 # default = ""
 # priority = "low"
 # summary = "Enable the discovery of private IP addresses to allow connection attempts to local addresses."
-
 [config."lighthouse-regtest.conf".ivars."enr_match"]
 type = "string"
 default = ""
@@ -349,7 +339,6 @@ summary = "Enable the graphical user interface, along with HTTP API, SSE logging
 # default = ""
 # priority = "low"
 # summary = "Enable the RESTful HTTP API server, which is disabled by default."
-
 [config."lighthouse-regtest.conf".ivars."http_allow_sync_stalled"]
 type = "string"
 default = ""
@@ -464,7 +453,6 @@ default = ""
 priority = "low"
 summary = "Set all listening TCP/UDP ports to 0, allowing the OS to choose arbitrary free ports."
 
-
 [config."lighthouse-regtest.conf".ivars."auto_compact_db"]
 type = "string"
 default = ""
@@ -494,7 +482,6 @@ summary = "Specifies the number of blocks the database should cache in memory."
 # default = ""
 # priority = "low"
 # summary = "Comma-delimited list of base64-encoded ENR's or Multiaddrs to bootstrap the p2p network."
-
 [config."lighthouse-regtest.conf".ivars."builder"]
 type = "string"
 default = ""
@@ -566,7 +553,6 @@ summary = "Set the timeout for checkpoint sync calls to a remote beacon node."
 # default = ""
 # priority = "low"
 # summary = "Specify a custom root data directory for Lighthouse keys and databases."
-
 [config."lighthouse-regtest.conf".ivars."debug_level"]
 type = "string"
 default = ""
@@ -590,7 +576,6 @@ summary = "The UDP port for discovery over IPv6 when listening on both IPv4 and 
 # default = ""
 # priority = "low"
 # summary = "The IP or DNS address to broadcast to other peers for connecting to the node."
-
 [config."lighthouse-regtest.conf".ivars."enr_quic_port"]
 type = "string"
 default = ""
@@ -608,7 +593,6 @@ summary = "The QUIC UDP6 port set in the local ENR for other nodes to connect to
 # default = ""
 # priority = "low"
 # summary = "The TCP4 port for the local ENR, used for incoming connections over IPv4."
-
 [config."lighthouse-regtest.conf".ivars."enr_tcp6_port"]
 type = "string"
 default = ""
@@ -620,7 +604,6 @@ summary = "The TCP6 port for the local ENR, used for incoming connections over I
 # default = ""
 # priority = "low"
 # summary = "The UDP4 port for the local ENR, used for incoming connections over IPv4."
-
 [config."lighthouse-regtest.conf".ivars."enr_udp6_port"]
 type = "string"
 default = ""
@@ -656,13 +639,11 @@ summary = "The distance between the Eth1 chain head and the last block to import
 # default = ""
 # priority = "low"
 # summary = "Server endpoint for an execution layer JWT-authenticated HTTP JSON-RPC connection."
-
 # [config."lighthouse-regtest.conf".ivars."execution_jwt"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "File path containing the hex-encoded JWT secret for the execution endpoint."
-
 [config."lighthouse-regtest.conf".ivars."execution_jwt_id"]
 type = "string"
 default = ""
@@ -728,7 +709,6 @@ summary = "Specifies how many states from the freezer database should be cached 
 # default = ""
 # priority = "low"
 # summary = "Set the listen address for the RESTful HTTP API server."
-
 [config."lighthouse-regtest.conf".ivars."http_allow_origin"]
 type = "string"
 default = ""
@@ -752,7 +732,6 @@ summary = "Enable or disable the beacon processor scheduler for HTTP API request
 # default = ""
 # priority = "low"
 # summary = "Set the listen TCP port for the RESTful HTTP API server."
-
 [config."lighthouse-regtest.conf".ivars."http_spec_fork"]
 type = "string"
 default = ""
@@ -794,7 +773,6 @@ summary = "Comma-delimited list of multiaddrs to manually connect to a libp2p pe
 # default = ""
 # priority = "low"
 # summary = "Specify the address Lighthouse will listen on for UDP and TCP connections."
-
 [config."lighthouse-regtest.conf".ivars."log_format"]
 type = "string"
 default = ""
@@ -806,7 +784,6 @@ summary = "Specify the log format when emitting logs to the terminal."
 # default = ""
 # priority = "low"
 # summary = "File path where the log file will be stored."
-
 [config."lighthouse-regtest.conf".ivars."logfile_debug_level"]
 type = "string"
 default = ""
@@ -830,7 +807,6 @@ type = "string"
 default = ""
 priority = "low"
 summary = "Set the maximum size in MB each log file can grow to before rotating."
-
 
 [config."lighthouse-regtest.conf".ivars."max_skip_slots"]
 type = "string"
@@ -873,7 +849,6 @@ summary = "Set the interval in seconds between sending messages to the monitorin
 # default = ""
 # priority = "low"
 # summary = "Specify the name of the Eth2 chain to sync and follow (e.g., mainnet, prater, goerli)."
-
 [config."lighthouse-regtest.conf".ivars."network_dir"]
 type = "string"
 default = ""
@@ -885,7 +860,6 @@ summary = "Specify the data directory for network keys."
 # default = ""
 # priority = "low"
 # summary = "Set the TCP/UDP port for listening. Defaults to 9000 for IPv4."
-
 [config."lighthouse-regtest.conf".ivars."port6"]
 type = "string"
 default = ""
@@ -945,13 +919,11 @@ summary = "Prune execution payloads from the database to save space."
 # default = ""
 # priority = "low"
 # summary = "Set the UDP port for QUIC. Defaults to `port` + 1."
-
 [config."lighthouse-regtest.conf".ivars."quic_port6"]
 type = "string"
 default = ""
 priority = "low"
 summary = "Set the UDP port for QUIC over IPv6. Defaults to `port6` + 1."
-
 
 [config."lighthouse-regtest.conf".ivars."safe_slots_to_import_optimistically"]
 type = "string"
@@ -1030,7 +1002,6 @@ summary = "Set the number of validators per chunk stored on disk by the slasher.
 # default = ""
 # priority = "low"
 # summary = "Specify how often a freezer DB restore point should be stored."
-
 [config."lighthouse-regtest.conf".ivars."state_cache_size"]
 type = "string"
 default = ""
@@ -1042,7 +1013,6 @@ summary = "Set the size of the snapshot cache."
 # default = ""
 # priority = "low"
 # summary = "Specify an emergency fallback fee recipient for block production in case the validator client lacks one."
-
 [config."lighthouse-regtest.conf".ivars."target_peers"]
 type = "string"
 default = ""
@@ -1072,8 +1042,6 @@ summary = "Manually override the TERMINAL_TOTAL_DIFFICULTY parameter. Use only w
 # default = ""
 # priority = "low"
 # summary = "Path to directory containing eth2_testnet specs. Defaults to a hard-coded Lighthouse testnet. Only effective if there is no existing database."
-
-
 [config."lighthouse-regtest.conf".ivars."trusted_peers"]
 type = "string"
 default = ""
