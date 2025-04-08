@@ -6,7 +6,8 @@
 ##
 mkdir -p src/debian/validator/validators
 
-output_file="validations_definitions.yaml"
+output_file="src/debian/validator/validator_definitions.yml"
+touch "$output_file"
 echo "# Validator definitions" >"$output_file"
 
 for json_file in src/debian/validator/keys/*.json; do
@@ -15,7 +16,7 @@ for json_file in src/debian/validator/keys/*.json; do
   json_filename=$(basename "$json_file")
 
   mkdir -p "src/debian/validator/validators/$pubkey"
-  # cp "$json_file" "src/debian/validator/validators/$pubkey/"
+  cp "$json_file" "src/debian/validator/validators/$pubkey/"
 
   cat <<EOF >>"$output_file"
 - enabled: true
