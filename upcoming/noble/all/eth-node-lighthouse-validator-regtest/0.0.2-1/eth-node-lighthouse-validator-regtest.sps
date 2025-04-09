@@ -42,26 +42,28 @@ WorkingDirectory=/var/lib/eth-node-regtest/lighthouse-validator
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-lighthouse-validator-service.sh /usr/lib/eth-node-lighthouse-validator-regtest/", 
+    "debian/scripts/run-lighthouse-validator-service.sh /usr/lib/eth-node-lighthouse-validator-regtest/",
     "debian/scripts/run-lighthouse-validator.sh /usr/lib/eth-node-lighthouse-validator-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-lighthouse-validator-regtest",
     "debian/tmp/eth-node-lighthouse-validator-regtest.service /lib/systemd/system/",
     "debian/validator/keys /var/lib/eth-node-regtest/lighthouse-validator",
-    "debian/validator/password /var/lib/eth-node-regtest/lighthouse-validator",
+    "debian/validator/passwords /var/lib/eth-node-regtest/lighthouse-validator",
     "debian/validator/validators /var/lib/eth-node-regtest/lighthouse-validator",
     "debian/validator/validator_definitions.yml /var/lib/eth-node-regtest/lighthouse-validator",
 ]
 provides = ["eth-node-validator-service-regtest"]
 conflicts = ["eth-node-validator-service-regtest"]
-depends=["eth-node-regtest-cl-service"]
+depends = ["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-lighthouse for network: regtest"
 
 [config."lighthouse-validator.conf".postprocess]
-command = ["bash", "/usr/lib/eth-node-lighthouse-validator-regtest/postprocess.sh"]
+command = [
+    "bash",
+    "/usr/lib/eth-node-lighthouse-validator-regtest/postprocess.sh"
+]
 
 [config."lighthouse-validator.conf"]
 format = "plain"
-
 
 [config."lighthouse-validator.conf".ivars."testnet_dir"]
 type = "string"
@@ -75,21 +77,17 @@ default = "$DATA_DIR/lighthouse-validator"
 priority = "low"
 summary = "Directory containing validator keystores, deposit data, and the slashing protection database."
 
-
 [config."lighthouse-validator.conf".ivars."secrets_dir"]
 type = "string"
-default = "/var/lib/eth-node-regtest/lighthouse-validator/password"
+default = "/var/lib/eth-node-regtest/lighthouse-validator/passwords"
 priority = "low"
 summary = "Directory containing passwords to unlock validator keypairs."
-
 
 # [config."lighthouse-validator.conf".ivars."datadir"]
 # type = "string"
 # default = "/var/lib/eth-node-regtest/lighthouse-validator"
 # priority = "low"
 # summary = "Custom root data directory for Lighthouse keys and databases."
-
-
 [config."lighthouse-validator.conf".ivars."init_slashing_protection"]
 type = "string"
 default = "true"
@@ -101,7 +99,6 @@ type = "string"
 default = "http://localhost:5052"
 priority = "low"
 summary = "Comma-separated addresses of one or more beacon node HTTP APIs."
-
 
 [config."lighthouse-validator.conf".ivars."suggested_fee_recipient"]
 type = "string"
@@ -115,15 +112,12 @@ default = "$LOG_DIR/lighthouse-validator/lighthouse.log"
 priority = "low"
 summary = "File path where the log file will be stored."
 
-
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
 ####### OPTIONS below are all set to default and provided to be used with debconf ###########
 #############################################################################################
 #############################################################################################
-
-
 [config."lighthouse-validator.conf".ivars."builder_proposals"]
 type = "string"
 default = ""
@@ -201,7 +195,6 @@ summary = "If set, keystore passwords created via HTTP will be stored in the sec
 # default = ""
 # priority = "low"
 # summary = "If set, the slashing protection database is not required before running."
-
 [config."lighthouse-validator.conf".ivars."log_color"]
 type = "string"
 default = ""
@@ -255,7 +248,6 @@ summary = "If set, the validator client will use longer timeouts for requests to
 # default = ""
 # priority = "low"
 # summary = "Comma-separated addresses of one or more beacon node HTTP APIs."
-
 [config."lighthouse-validator.conf".ivars."beacon_nodes_tls_certs"]
 type = "string"
 default = ""
@@ -357,7 +349,6 @@ summary = "Specifies the format used for terminal logs."
 # default = ""
 # priority = "low"
 # summary = "Path for storing log files."
-
 [config."lighthouse-validator.conf".ivars."logfile_debug_level"]
 type = "string"
 default = ""
@@ -435,13 +426,11 @@ summary = "Overrides the SAFE_SLOTS_TO_IMPORT_OPTIMISTICALLY parameter."
 # default = ""
 # priority = "low"
 # summary = "Directory containing passwords to unlock validator keypairs."
-
 # [config."lighthouse-validator.conf".ivars."suggested_fee_recipient"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "The address that will receive transaction fees post-merge."
-
 [config."lighthouse-validator.conf".ivars."terminal_block_hash_epoch_override"]
 type = "string"
 default = ""
@@ -465,7 +454,6 @@ summary = "Overrides the TERMINAL_TOTAL_DIFFICULTY parameter."
 # default = ""
 # priority = "low"
 # summary = "Path to directory containing Eth2 testnet specs."
-
 [config."lighthouse-validator.conf".ivars."validator_registration_batch_size"]
 type = "string"
 default = ""
@@ -477,7 +465,6 @@ summary = "Number of validators per register_validator request."
 # default = ""
 # priority = "low"
 # summary = "Directory containing validator keystores, deposit data, and the slashing protection database."
-
 [config."lighthouse-validator.conf".ivars."web3_signer_keep_alive_timeout"]
 type = "string"
 default = ""

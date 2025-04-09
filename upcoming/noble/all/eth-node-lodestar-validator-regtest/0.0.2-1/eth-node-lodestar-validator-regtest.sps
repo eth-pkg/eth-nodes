@@ -42,7 +42,7 @@ WorkingDirectory=/var/lib/eth-node-regtest/lodestar-validator
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-lodestar-validator-service.sh /usr/lib/eth-node-lodestar-validator-regtest/", 
+    "debian/scripts/run-lodestar-validator-service.sh /usr/lib/eth-node-lodestar-validator-regtest/",
     "debian/scripts/run-lodestar-validator.sh /usr/lib/eth-node-lodestar-validator-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-lodestar-validator-regtest",
     "debian/tmp/eth-node-lodestar-validator-regtest.service /lib/systemd/system/",
@@ -51,22 +51,23 @@ add_files = [
 ]
 provides = ["eth-node-validator-service-regtest"]
 conflicts = ["eth-node-validator-service-regtest"]
-depends=["eth-node-regtest-cl-service"]
+depends = ["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-lodestar for network: regtest"
 
 [config."lodestar-validator.conf".postprocess]
-command = ["bash", "/usr/lib/eth-node-lodestar-validator-regtest/postprocess.sh"]
+command = [
+    "bash",
+    "/usr/lib/eth-node-lodestar-validator-regtest/postprocess.sh"
+]
 
 [config."lodestar-validator.conf"]
 format = "plain"
-
 
 # [config."lodestar-validator.conf".ivars."validators_dir"]
 # type = "string"
 # default = "/var/lib/eth-node-regtest/lodestar-validator"
 # priority = "low"
 # summary = "Path to validators dir"
-
 [config."lodestar-validator.conf".ivars."params_file"]
 type = "string"
 default = "$TESTNET_DIR/config.yaml"
@@ -85,13 +86,11 @@ default = "true"
 priority = "low"
 summary = "Enable/disable usage of produceBlockV3 for block production"
 
-
 [config."lodestar-validator.conf".ivars."import_keystores"]
 type = "string"
 default = "$DATA_DIR/lodestar-validator/keys"
 priority = "low"
 summary = "Path(s) to a directory or single file path to validator keystores"
-
 
 [config."lodestar-validator.conf".ivars."import_keystores_password"]
 type = "string"
@@ -99,20 +98,17 @@ default = "$DATA_DIR/lodestar-validator/passwords/keystore-m_12381_3600_0_0_0-17
 priority = "low"
 summary = "Path to a file with password to decrypt all keystores from importKeystores"
 
-
 [config."lodestar-validator.conf".ivars."disable_keystores_thread_pool"]
 type = "string"
 default = "true"
 priority = "low"
 summary = "Disable the thread pool for keystore operations"
 
-
 [config."lodestar-validator.conf".ivars."data_dir"]
 type = "string"
 default = "$DATA_DIR/lodestar-validator"
 priority = "low"
 summary = "Lodestar root data directory"
-
 
 [config."lodestar-validator.conf".ivars."suggested_fee_recipient"]
 type = "string"
@@ -126,14 +122,12 @@ default = "$LOG_DIR/lodestar-validator/lodestar.log"
 priority = "low"
 summary = "Path to output all logs to a persistent log file"
 
-
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
 ####### OPTIONS below are all set to default and provided to be used with debconf ###########
 #############################################################################################
 #############################################################################################
-
 [config."lodestar-validator.conf".ivars."keymanager"]
 type = "string"
 default = ""
@@ -259,7 +253,6 @@ summary = "Interval in milliseconds between sending client stats to the remote s
 # default = ""
 # priority = "low"
 # summary = "Lodestar root data directory"
-
 [config."lodestar-validator.conf".ivars."network"]
 type = "string"
 default = ""
@@ -271,7 +264,6 @@ summary = "Name of the Ethereum Consensus chain network to join"
 # default = ""
 # priority = "low"
 # summary = "Network configuration file"
-
 [config."lodestar-validator.conf".ivars."terminal_total_difficulty_override"]
 type = "string"
 default = ""
@@ -307,7 +299,6 @@ summary = "Logging verbosity level for emitting logs to terminal"
 # default = ""
 # priority = "low"
 # summary = "Path to output all logs to a persistent log file"
-
 [config."lodestar-validator.conf".ivars."log_file_level"]
 type = "string"
 default = ""
@@ -325,7 +316,6 @@ summary = "Daily rotate log files, set to an integer to limit the file count"
 # default = ""
 # priority = "low"
 # summary = "Addresses to connect to BeaconNode"
-
 [config."lodestar-validator.conf".ivars."force"]
 type = "string"
 default = ""
@@ -349,7 +339,6 @@ summary = "A yaml file to specify customized proposer settings"
 # default = "0x0000000000000000000000000000000000000000"
 # priority = "low"
 # summary = "Specify fee recipient default for collecting EL block fees and rewards"
-
 [config."lodestar-validator.conf".ivars."strict_fee_recipient_check"]
 type = "string"
 default = ""
@@ -367,7 +356,6 @@ summary = "Suggested gas limit to the engine/builder for building execution payl
 # default = ""
 # priority = "low"
 # summary = "Enable/disable usage of produceBlockV3 for block production"
-
 [config."lodestar-validator.conf".ivars."broadcast_validation"]
 type = "string"
 default = ""
@@ -385,13 +373,11 @@ summary = "Request fetching local block in blinded format for produceBlockV3"
 # default = ""
 # priority = "low"
 # summary = "Path(s) to a directory or single file path to validator keystores"
-
 # [config."lodestar-validator.conf".ivars."import_keystores_password"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Path to a file with password to decrypt all keystores from importKeystores"
-
 [config."lodestar-validator.conf".ivars."doppelganger_protection_enabled"]
 type = "string"
 default = ""
@@ -404,10 +390,7 @@ default = ""
 priority = "low"
 summary = "Enables specific features required for distributed validation"
 
-
-
 ########################### Undocumented options #####################################################
-
 [config."lodestar-validator.conf".ivars."keystores_dir"]
 type = "string"
 default = ""
@@ -419,7 +402,6 @@ type = "string"
 default = ""
 priority = "low"
 summary = "Path to the directory where validator secrets are stored"
-
 # [config."lodestar-validator.conf".ivars."disable_keystores_thread_pool"]
 # type = "string"
 # default = ""
