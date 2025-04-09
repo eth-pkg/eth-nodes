@@ -1,0 +1,5 @@
+eth-node-prysm source: mismatched-override debian-rules-ignores-make-clean-error [debian/rules:26] [debian/source/lintian-overrides:1]
+eth-node-prysm source: no-newline-at-end [debian/changelog]
+eth-node-prysm source: missing-field-in-dep5-copyright Copyright [debian/copyright:10]
+eth-node-prysm source: missing-field-in-dep5-copyright Copyright [debian/copyright:6]
+eth-node-prysm source: debian-rules-ignores-make-clean-error [debian/rules:54]

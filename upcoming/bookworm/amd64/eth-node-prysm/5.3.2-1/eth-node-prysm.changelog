@@ -1,0 +1,6 @@
+eth-node-prysm (5.3.2-1) bookworm; urgency=medium
+
+  * Support for 5.3.2-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 09 Apr 2025 18:43:18 +0200
+
