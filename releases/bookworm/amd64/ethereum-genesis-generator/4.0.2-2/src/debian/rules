@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
+override_dh_auto_build:
+	chmod +x entrypoint.sh 
+	chmod +x apps/el-gen/generate_genesis.sh
+	cp -R config-example config
+
+override_dh_auto_install:
+	# do nothing
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
