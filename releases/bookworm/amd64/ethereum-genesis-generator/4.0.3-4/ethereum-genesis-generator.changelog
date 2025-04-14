@@ -1,0 +1,7 @@
+ethereum-genesis-generator (4.0.3-4) bookworm; urgency=medium
+
+  * Support for 4.0.3-4
+  * fix default dirs
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Mon, 14 Apr 2025 08:41:17 +0200
+
