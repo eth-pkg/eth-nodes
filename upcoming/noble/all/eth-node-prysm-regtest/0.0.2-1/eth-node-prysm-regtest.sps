@@ -206,7 +206,7 @@ summary = "Host on which the RPC server should listen. (default: \"127.0.0.1\")"
 
 [config."prysm-regtest.conf".ivars."rpc_port"]
 type = "string"
-default = "$CL_RPC_PORT"
+default = "4000"
 priority = "low"
 summary = "RPC port exposed by a beacon node. (default: 4000)"
 
@@ -224,7 +224,7 @@ summary = "http cors domain"
 
 [config."prysm-regtest.conf".ivars."http_port"]
 type = "string"
-default = "3500"
+default = "$CL_RPC_PORT"
 priority = "low"
 summary = "http port"
 

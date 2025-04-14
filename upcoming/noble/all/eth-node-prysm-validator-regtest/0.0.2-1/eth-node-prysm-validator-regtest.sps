@@ -118,13 +118,13 @@ summary = "Specifies log file name, relative or absolute."
 
 [config."prysm-validator.conf".ivars."beacon_rpc_provider"]
 type = "string"
-default = "127.0.0.1:5052"
+default = "127.0.0.1:4000"
 priority = "low"
 summary = "Beacon node RPC provider endpoint. (default: \"127.0.0.1:4000\")"
 
 [config."prysm-validator.conf".ivars."beacon_rest_api_provider"]
 type = "string"
-default = "http://127.0.0.1:3500"
+default = "http://127.0.0.1:$CL_RPC_PORT"
 priority = "low"
 summary = "Beacon node REST API provider endpoint. (default: \"http://127.0.0.1:3500\")"
 
