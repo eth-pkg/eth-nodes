@@ -40,14 +40,15 @@ generate_testnet() {
     cd "$tmp_dir"
     ## patch time
     export GENESIS_TIMESTAMP=$(date +%s)
-    # ethereum-genesis-generator all \
-    #     --values-env /etc/eth-node-regtest/config/values.env --config-dir /etc/eth-node-regtest/config --data-dir data
+    ethereum-genesis-generator all \
+        --values-env /etc/eth-node-regtest/config/values.env --config-dir /etc/eth-node-regtest/config --data-dir data
 
-    mkdir data
-    docker run --rm -t -u $UID -v $PWD/data:/data \
-        -v /etc/eth-node-regtest/config/values.env:/config/values.env \
-        -e GENESIS_TIMESTAMP="$GENESIS_TIMESTAMP" \
-        ethpandaops/ethereum-genesis-generator:master all
+    ## same as above, but without docker
+    # mkdir data
+    # docker run --rm -t -u $UID -v $PWD/data:/data \
+    #     -v /etc/eth-node-regtest/config/values.env:/config/values.env \
+    #     -e GENESIS_TIMESTAMP="$GENESIS_TIMESTAMP" \
+    #     ethpandaops/ethereum-genesis-generator:master all
 
     mkdir -p /var/lib/eth-node-regtest/regtest
 
