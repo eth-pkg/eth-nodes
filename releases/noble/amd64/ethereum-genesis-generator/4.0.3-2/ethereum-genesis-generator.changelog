@@ -1,0 +1,7 @@
+ethereum-genesis-generator (4.0.3-2) noble; urgency=medium
+
+  * Support for 4.0.3-2
+  * fix paths
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Mon, 14 Apr 2025 09:33:38 +0200
+
