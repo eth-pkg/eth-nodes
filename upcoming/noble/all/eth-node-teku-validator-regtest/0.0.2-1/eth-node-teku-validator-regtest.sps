@@ -42,7 +42,7 @@ WorkingDirectory=/var/lib/eth-node-regtest/teku-validator
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-teku-validator-service.sh /usr/lib/eth-node-teku-validator-regtest/", 
+    "debian/scripts/run-teku-validator-service.sh /usr/lib/eth-node-teku-validator-regtest/",
     "debian/scripts/run-teku-validator.sh /usr/lib/eth-node-teku-validator-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-teku-validator-regtest",
     "debian/tmp/eth-node-teku-validator-regtest.service /lib/systemd/system/",
@@ -51,7 +51,7 @@ add_files = [
 ]
 provides = ["eth-node-validator-service-regtest"]
 conflicts = ["eth-node-validator-service-regtest"]
-depends=["eth-node-regtest-cl-service"]
+depends = ["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-teku for network: regtest"
 
 [config."teku-validator.conf".postprocess]
@@ -60,23 +60,21 @@ command = ["bash", "/usr/lib/eth-node-teku-validator-regtest/postprocess.sh"]
 [config."teku-validator.conf"]
 format = "plain"
 
-
 [config."teku-validator.conf".ivars."beacon_node_api_endpoints"]
 type = "string"
-default = "http://127.0.0.1:5052"  
+default = "http://127.0.0.1:5052"
 priority = "low"
 summary = "Beacon Node REST API endpoint(s). If more than one endpoint is defined, the first node will be used as a primary and others as failovers."
 
-
 [config."teku-validator.conf".ivars."data_base_path"]
 type = "string"
-default = "$DATA_DIR/teku-validator"  
+default = "$DATA_DIR/teku-validator"
 priority = "low"
 summary = "Path to the base directory for storage. Default: $HOME/.local/share/teku."
 
 [config."teku-validator.conf".ivars."validator_keys"]
 type = "string"
-default = "$DATA_DIR/teku-validator/keys:$DATA_DIR/teku-validator/passwords"  
+default = "$DATA_DIR/teku-validator/keys:$DATA_DIR/teku-validator/passwords"
 priority = "low"
 summary = "<KEY_DIR>:<PASS_DIR> will find <KEY_DIR>/**.json and expect to find <PASS_DIR>/**.txt. <KEY_FILE>:<PASS_FILE> will expect that the file <KEY_FILE> exists, and the file containing the password for it is <PASS_FILE>. The path separator is operating system dependent, and should be ';' in Windows rather than ':'. Default: []"
 
@@ -86,20 +84,17 @@ default = "FILE"
 priority = "low"
 summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM). Default: DEFAULT_BOTH."
 
-
 [config."teku-validator.conf".ivars."log_file"]
 type = "string"
-default = "$LOG_DIR/teku-validator/teku.log"  
+default = "$LOG_DIR/teku-validator/teku.log"
 priority = "low"
 summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
 
-
 [config."teku-validator.conf".ivars."validators_proposer_default_fee_recipient"]
 type = "string"
-default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS" 
+default = "$VALIDATOR_SHARED_FEE_RECEIPENT_ADDRESS"
 priority = "low"
 summary = "Default fee recipient sent to the execution engine, which could use it as a fee recipient when producing a new execution block."
-
 
 [config."teku-validator.conf".ivars."exit_when_no_validator_keys_enabled"]
 type = "string"
@@ -107,20 +102,23 @@ default = "true"
 priority = "low"
 summary = "Enable terminating the process if no validator keys are found during startup. Default: false."
 
+[config."teku-validator.conf".ivars."network"]
+type = "string"
+default = "$TESTNET_DIR/config.yaml"
+priority = "low"
+summary = "Represents which network to use. Use `auto` to fetch network configuration from the beacon node endpoint directly. Default: auto."
+
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
 ####### OPTIONS below are all set to default and provided to be used with debconf ###########
 #############################################################################################
 #############################################################################################
-
-
 # [config."teku-validator.conf".ivars."beacon_node_api_endpoints"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Beacon Node REST API endpoint(s). If more than one endpoint is defined, the first node will be used as a primary and others as failovers."
-
 [config."teku-validator.conf".ivars."beacon_node_ssz_blocks_enabled"]
 type = "string"
 default = ""
@@ -138,7 +136,6 @@ summary = "Path/filename of the YAML config file."
 # default = ""
 # priority = "low"
 # summary = "Path to the base directory for storage. Default: $HOME/.local/share/teku."
-
 [config."teku-validator.conf".ivars."data_validator_path"]
 type = "string"
 default = ""
@@ -156,7 +153,6 @@ summary = "Enable validators doppelganger detection. Default: false."
 # default = ""
 # priority = "low"
 # summary = "Enable terminating the process if no validator keys are found during startup. Default: false."
-
 [config."teku-validator.conf".ivars."logging"]
 type = "string"
 default = ""
@@ -174,13 +170,11 @@ summary = "Whether Status and Event log messages include a console color display
 # default = ""
 # priority = "low"
 # summary = "Whether a logger is added for the console, the log file, or both (Valid values: BOTH, CONSOLE, DEFAULT_BOTH, FILE, CUSTOM). Default: DEFAULT_BOTH."
-
 # [config."teku-validator.conf".ivars."log_file"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Path containing the location (relative or absolute) and the log filename. If not set will default to <data-path>/logs/teku.log."
-
 [config."teku-validator.conf".ivars."log_file_name_pattern"]
 type = "string"
 default = ""
@@ -247,12 +241,11 @@ default = ""
 priority = "low"
 summary = "Interval between metric publications to the external service (measured in seconds). Default: 60."
 
-[config."teku-validator.conf".ivars."network"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Represents which network to use. Use `auto` to fetch network configuration from the beacon node endpoint directly. Default: auto."
-
+# [config."teku-validator.conf".ivars."network"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Represents which network to use. Use `auto` to fetch network configuration from the beacon node endpoint directly. Default: auto."
 [config."teku-validator.conf".ivars."shut_down_when_validator_slashed_enabled"]
 type = "string"
 default = ""
@@ -324,7 +317,6 @@ summary = "Restrict local signing to a single operation at a time. Default: true
 # default = ""
 # priority = "low"
 # summary = "<KEY_DIR>:<PASS_DIR> will find <KEY_DIR>/**.json and expect to find <PASS_DIR>/**.txt. <KEY_FILE>:<PASS_FILE> will expect that the file <KEY_FILE> exists, and the file containing the password for it is <PASS_FILE>. The path separator is operating system dependent, and should be ';' in Windows rather than ':'. Default: []"
-
 [config."teku-validator.conf".ivars."validators_builder_registration_default_enabled"]
 type = "string"
 default = ""
@@ -432,7 +424,6 @@ type = "string"
 default = ""
 priority = "low"
 summary = "Enable the proposer configuration reload on every proposer preparation (once per epoch). Default: false."
-
 # [config."teku-validator.conf".ivars."validators_proposer_default_fee_recipient"]
 # type = "string"
 # default = ""
