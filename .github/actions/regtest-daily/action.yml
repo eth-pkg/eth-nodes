@@ -211,8 +211,8 @@ runs:
         fi
 
 
-        echo "Waiting for 10 seconds for the transactions to be included..."
-        sleep 10 # increase time to https://github.com/eth-pkg/eth-nodes/actions/runs/11304204442/job/31442272249
+        echo "Waiting for 30 seconds for the transactions to be included..."
+        sleep 30 # increase time to https://github.com/eth-pkg/eth-nodes/actions/runs/11304204442/job/31442272249
 
         response=$(curl -s -X POST http://localhost:8545 \
         -H "Content-Type: application/json" \
