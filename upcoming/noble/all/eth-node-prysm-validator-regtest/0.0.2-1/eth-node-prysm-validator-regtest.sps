@@ -42,7 +42,7 @@ WorkingDirectory=/var/lib/eth-node-regtest/prysm-validator
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-prysm-validator-service.sh /usr/lib/eth-node-prysm-validator-regtest/", 
+    "debian/scripts/run-prysm-validator-service.sh /usr/lib/eth-node-prysm-validator-regtest/",
     "debian/scripts/run-prysm-validator.sh /usr/lib/eth-node-prysm-validator-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-prysm-validator-regtest",
     "debian/tmp/eth-node-prysm-validator-regtest.service /lib/systemd/system/",
@@ -53,7 +53,7 @@ add_files = [
 ]
 provides = ["eth-node-validator-service-regtest"]
 conflicts = ["eth-node-validator-service-regtest"]
-depends=["eth-node-regtest-cl-service"]
+depends = ["eth-node-regtest-cl-service"]
 summary = "validator service file for eth-node-prysm for network: regtest"
 
 [config."prysm-validator.conf".postprocess]
@@ -85,7 +85,6 @@ type = "string"
 default = "$DATA_DIR/prysm-validator/dummy_wallet_password.txt"
 priority = "low"
 summary = "Path to a plain-text, .txt file containing your wallet password."
-
 
 [config."prysm-validator.conf".ivars."account_password_file"]
 type = "string"
@@ -119,10 +118,15 @@ summary = "Specifies log file name, relative or absolute."
 
 [config."prysm-validator.conf".ivars."beacon_rpc_provider"]
 type = "string"
-default = "http://127.0.0.1:5052"
+default = "127.0.0.1:5052"
 priority = "low"
 summary = "Beacon node RPC provider endpoint. (default: \"127.0.0.1:4000\")"
 
+[config."prysm-validator.conf".ivars."beacon_rest_api_provider"]
+type = "string"
+default = "http://127.0.0.1:5052"
+priority = "low"
+summary = "Beacon node REST API provider endpoint. (default: \"http://127.0.0.1:3500\")"
 
 #############################################################################################
 #############################################################################################
@@ -130,16 +134,12 @@ summary = "Beacon node RPC provider endpoint. (default: \"127.0.0.1:4000\")"
 ####### OPTIONS below are all set to default and provided to be used with debconf ###########
 #############################################################################################
 #############################################################################################
-
-
-### cmd options 
-
+### cmd options
 # [config."prysm-validator.conf".ivars."accept_terms_of_use"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Accepts Terms and Conditions (for non-interactive environments). (default: false)"
-
 [config."prysm-validator.conf".ivars."api_timeout"]
 type = "string"
 default = ""
@@ -151,7 +151,6 @@ summary = "Specifies the timeout value for API requests in seconds. (default: 12
 # default = ""
 # priority = "low"
 # summary = "Path to a YAML file with chain config values."
-
 [config."prysm-validator.conf".ivars."clear_db"]
 type = "string"
 default = ""
@@ -169,7 +168,6 @@ summary = "Filepath to a yaml file with flag values."
 # default = ""
 # priority = "low"
 # summary = "Data directory for the databases. (default: \"$HOME/.eth2\")"
-
 [config."prysm-validator.conf".ivars."db_backup_output_dir"]
 type = "string"
 default = ""
@@ -217,7 +215,6 @@ summary = "Integer to define max receive message call size (in bytes). Validator
 # default = ""
 # priority = "low"
 # summary = "Specifies log file name, relative or absolute."
-
 [config."prysm-validator.conf".ivars."log_format"]
 type = "string"
 default = ""
@@ -271,15 +268,12 @@ summary = "Logging verbosity. (trace, debug, info, warn, error, fatal, panic) (d
 # default = ""
 # priority = "low"
 # summary = "Path to a wallet directory on-disk for Prysm validator accounts. (default: \"$HOME/.eth2validators/prysm-wallet-v2\")"
-
 # [config."prysm-validator.conf".ivars."wallet_password_file"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Path to a plain-text, .txt file containing your wallet password."
-
-
-#### debug options 
+#### debug options
 [config."prysm-validator.conf".ivars."blockprofilerate"]
 type = "string"
 default = ""
@@ -328,15 +322,12 @@ default = ""
 priority = "low"
 summary = "Writes execution trace to the given file."
 
-
 ###### rpc options
-
-[config."prysm-validator.conf".ivars."beacon_rest_api_provider"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Beacon node REST API provider endpoint. (default: \"http://127.0.0.1:3500\")"
-
+# [config."prysm-validator.conf".ivars."beacon_rest_api_provider"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Beacon node REST API provider endpoint. (default: \"http://127.0.0.1:3500\")"
 [config."prysm-validator.conf".ivars."beacon_rpc_gateway_provider"]
 type = "string"
 default = ""
@@ -348,7 +339,6 @@ summary = "Beacon node RPC gateway provider endpoint. (default: \"127.0.0.1:3500
 # default = ""
 # priority = "low"
 # summary = "Beacon node RPC provider endpoint. (default: \"127.0.0.1:4000\")"
-
 [config."prysm-validator.conf".ivars."grpc_gateway_corsdomain"]
 type = "string"
 default = ""
@@ -409,7 +399,6 @@ default = ""
 priority = "low"
 summary = "Certificate for secure gRPC. Pass this and the tls-key flag in order to use gRPC securely."
 
-
 #### proposer options
 [config."prysm-validator.conf".ivars."enable_builder"]
 type = "string"
@@ -452,7 +441,6 @@ summary = "Sets URL to a REST endpoint containing validator settings used when p
 # default = ""
 # priority = "low"
 # summary = "Sets ALL validators' mapping to a suggested eth address to receive gas fees when proposing a block. This is a suggestion when integrating with a Builder API. (default: \"0x0000000000000000000000000000000000000000\")"
-
 [config."prysm-validator.conf".ivars."suggested_gas_limit"]
 type = "string"
 default = ""
@@ -465,9 +453,7 @@ default = ""
 priority = "low"
 summary = "Sets the maximum size for one batch of validator registrations. Use a non-positive value to disable batching. (default: 0)"
 
-
 #### remote signer options
-
 [config."prysm-validator.conf".ivars."validators_external_signer_key_file"]
 type = "string"
 default = ""
@@ -486,9 +472,7 @@ default = ""
 priority = "low"
 summary = "URL for ConsenSys' web3signer software to use with the Prysm validator client."
 
-
 #### slasher options
-
 [config."prysm-validator.conf".ivars."slasher_rpc_provider"]
 type = "string"
 default = ""
@@ -501,9 +485,7 @@ default = ""
 priority = "low"
 summary = "Certificate for secure slasher gRPC. Pass this and the tls-key flag in order to use gRPC securely."
 
-
 #### misc options
-
 [config."prysm-validator.conf".ivars."disable_account_metrics"]
 type = "string"
 default = ""
@@ -534,9 +516,7 @@ default = ""
 priority = "low"
 summary = "(Work in progress): Enables the web portal for the validator client. (default: false)"
 
-
 #### feature options
-
 [config."prysm-validator.conf".ivars."attest_timely"]
 type = "string"
 default = ""
@@ -597,9 +577,7 @@ default = ""
 priority = "low"
 summary = "(Danger): Writes the wallet password to the wallet directory on completing Prysm web onboarding. (default: false)"
 
-
 #### interop options
-
 [config."prysm-validator.conf".ivars."interop_num_validators"]
 type = "string"
 default = ""
