@@ -40,7 +40,8 @@ generate_testnet() {
     cd "$tmp_dir"
     ## patch time
     export GENESIS_TIMESTAMP=$(date +%s)
-    ethereum-genesis-generator all --defaults-env=/etc/eth-node-regtest/defaults/defaults.env --config-dir=/etc/eth-node-regtest/config --data-dir=data
+    ethereum-genesis-generator all \
+        --values-env /etc/eth-node-regtest/config/values.env --config-dir /etc/eth-node-regtest/config --data-dir data
 
     mkdir -p /var/lib/eth-node-regtest/regtest
 
