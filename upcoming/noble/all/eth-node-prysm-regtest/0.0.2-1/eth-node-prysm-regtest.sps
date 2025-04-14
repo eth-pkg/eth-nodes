@@ -42,14 +42,17 @@ WorkingDirectory=/var/lib/eth-node-regtest/prysm
 """
 ## hack to actually use system.d but let debcrafter manage the user creation
 add_files = [
-    "debian/scripts/run-prysm-service.sh /usr/lib/eth-node-prysm-regtest/", 
+    "debian/scripts/run-prysm-service.sh /usr/lib/eth-node-prysm-regtest/",
     "debian/scripts/run-prysm.sh /usr/lib/eth-node-prysm-regtest/bin/",
     "debian/scripts/postprocess.sh /usr/lib/eth-node-prysm-regtest",
     "debian/tmp/eth-node-prysm-regtest.service /lib/systemd/system/",
 ]
 provides = ["eth-node-regtest-cl-service"]
 conflicts = ["eth-node-regtest-cl-service"]
-depends=["eth-node-regtest-config (>= 0.0.2)", "eth-node-regtest-config (<< 0.0.3)"]
+depends = [
+    "eth-node-regtest-config (>= 0.0.2)",
+    "eth-node-regtest-config (<< 0.0.3)"
+]
 summary = "service file for eth-node-prysm for network: regtest"
 
 [config."prysm-regtest.conf".postprocess]
@@ -172,12 +175,11 @@ default = ""
 priority = "low"
 summary = "The host on which the gRPC gateway server runs on."
 
-[config."prysm-regtest.conf".ivars."grpc_gateway_port"]
-type = "string"
-default = "$CL_RPC_PORT"
-priority = "low"
-summary = "The port on which the gRPC gateway server runs."
-
+# [config."prysm-regtest.conf".ivars."grpc_gateway_port"]
+# type = "string"
+# default = "$CL_RPC_PORT"
+# priority = "low"
+# summary = "The port on which the gRPC gateway server runs."
 [config."prysm-regtest.conf".ivars."http_modules"]
 type = "string"
 default = "eth"
@@ -196,22 +198,48 @@ default = "$LOG_DIR/prysm/prysm.log"
 priority = "low"
 summary = "Specifies log file name, relative or absolute."
 
+[config."prysm-regtest.conf".ivars."rpc_host"]
+type = "string"
+default = "127.0.0.1"
+priority = "low"
+summary = "Host on which the RPC server should listen. (default: \"127.0.0.1\")"
+
+[config."prysm-regtest.conf".ivars."rpc_port"]
+type = "string"
+default = "$CL_RPC_PORT"
+priority = "low"
+summary = "RPC port exposed by a beacon node. (default: 4000)"
+
+[config."prysm-regtest.conf".ivars."http_host"]
+type = "string"
+default = "127.0.0.1"
+priority = "low"
+summary = "Host on which the HTTP server should listen. (default: \"127.0.0.1\")"
+
+[config."prysm-regtest.conf".ivars."http_cors_domain"]
+type = "string"
+default = "*"
+priority = "low"
+summary = ""
+
+[config."prysm-regtest.conf".ivars."http_port"]
+type = "string"
+default = "3500"
+priority = "low"
+summary = ""
+
 #############################################################################################
 #############################################################################################
 ################ All Default options, commented out the used one ############################
 ####### OPTIONS below are all set to default and provided to be used with debconf ###########
 #############################################################################################
 #############################################################################################
-
-
 # Global options
-
 # [config."prysm-regtest.conf".ivars."accept_terms_of_use"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Accepts Terms and Conditions (for non-interactive environments). (default: false)"
-
 [config."prysm-regtest.conf".ivars."api_timeout"]
 type = "string"
 default = ""
@@ -223,13 +251,11 @@ summary = "Specifies the timeout value for API requests in seconds. (default: 12
 # default = ""
 # priority = "low"
 # summary = "The address of bootstrap node. Beacon node will connect for peer discovery via DHT. Multiple nodes can be passed by using the flag multiple times but not comma-separated."
-
 # [config."prysm-regtest.conf".ivars."chain_config_file"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Path to a YAML file with chain config values."
-
 [config."prysm-regtest.conf".ivars."clear_db"]
 type = "string"
 default = ""
@@ -247,7 +273,6 @@ summary = "Filepath to a yaml file with flag values."
 # default = ""
 # priority = "low"
 # summary = "Data directory for the databases. (default: \"$HOME/.eth2\")"
-
 [config."prysm-regtest.conf".ivars."disable_monitoring"]
 type = "string"
 default = ""
@@ -380,8 +405,7 @@ default = ""
 priority = "low"
 summary = "Logging verbosity. (trace, debug, info, warn, error, fatal, panic) (default: \"info\")"
 
-# debug options 
-
+# debug options
 [config."prysm-regtest.conf".ivars."blockprofilerate"]
 type = "string"
 default = ""
@@ -430,8 +454,7 @@ default = ""
 priority = "low"
 summary = "Writes execution trace to the given file."
 
-# beacon chain options 
-
+# beacon chain options
 [config."prysm-regtest.conf".ivars."backfill_batch_size"]
 type = "string"
 default = ""
@@ -491,7 +514,6 @@ summary = "The factor by which block batch limit may increase on burst. (default
 # default = ""
 # priority = "low"
 # summary = "Sets the chain id of the beacon chain. (default: 0)"
-
 [config."prysm-regtest.conf".ivars."checkpoint_block"]
 type = "string"
 default = ""
@@ -509,13 +531,11 @@ summary = "Rather than syncing from genesis, specify a local file containing the
 # default = ""
 # priority = "low"
 # summary = "URL of a synced beacon node to trust in obtaining checkpoint sync data."
-
 # [config."prysm-regtest.conf".ivars."contract_deployment_block"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "The eth1 block in which the deposit contract was deployed. (default: 11184524)"
-
 [config."prysm-regtest.conf".ivars."deposit_contract"]
 type = "string"
 default = ""
@@ -533,7 +553,6 @@ summary = "Disables the debug Beacon API namespace. (default: false)"
 # default = ""
 # priority = "low"
 # summary = "Disable the gRPC gateway for JSON-HTTP requests. (default: false)"
-
 [config."prysm-regtest.conf".ivars."enable_experimental_backfill"]
 type = "string"
 default = ""
@@ -557,7 +576,6 @@ summary = "Sets the maximum number of headers that a deposit log query can fetch
 # default = ""
 # priority = "low"
 # summary = "An execution client HTTP endpoint. Can contain an auth header in the format. (default: \"http://localhost:8551\")"
-
 [config."prysm-regtest.conf".ivars."execution_headers"]
 type = "string"
 default = ""
@@ -575,31 +593,26 @@ summary = "The percentage of freshly allocated data to live data on which the ga
 # default = ""
 # priority = "low"
 # summary = "URL of a synced beacon node to trust for obtaining the genesis state."
-
 # [config."prysm-regtest.conf".ivars."genesis_state"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Load a genesis state from an SSZ file. Testnet genesis files can be found in the eth2-clients/eth2-testnets repository on GitHub."
-
 # [config."prysm-regtest.conf".ivars."grpc_gateway_corsdomain"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Comma-separated list of domains from which to accept cross-origin requests (browser enforced)"
-
 # [config."prysm-regtest.conf".ivars."grpc_gateway_host"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "The host on which the gRPC gateway server runs. (default: \"127.0.0.1\")"
-
 # [config."prysm-regtest.conf".ivars."grpc_gateway_port"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "The port on which the gRPC gateway server runs. (default: 3500)"
-
 [config."prysm-regtest.conf".ivars."historical_slasher_node"]
 type = "string"
 default = ""
@@ -617,13 +630,11 @@ summary = "A MEV builder relay string HTTP endpoint to interact with the MEV bui
 # default = ""
 # priority = "low"
 # summary = "Comma-separated list of API module names. Possible values: prysm,eth. (default: \"prysm,eth\")"
-
 # [config."prysm-regtest.conf".ivars."interop_eth1data_votes"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Enable mocking of eth1 data votes for proposers to package into blocks. (default: false)"
-
 [config."prysm-regtest.conf".ivars."jwt_id"]
 type = "string"
 default = ""
@@ -635,7 +646,6 @@ summary = "JWT claims ID. Could be used to identify the client."
 # default = ""
 # priority = "low"
 # summary = "Path to a file containing a hex-encoded string representing a 32-byte secret for authentication with an execution node via HTTP. REQUIRED if connecting to an execution node via HTTP."
-
 [config."prysm-regtest.conf".ivars."local_block_value_boost"]
 type = "string"
 default = ""
@@ -677,25 +687,22 @@ summary = "Minimum difference in Gwei between the builder's bid and local block 
 # default = ""
 # priority = "low"
 # summary = "Sets the minimum number of peers that a node will attempt to peer with that are subscribed to a subnet. (default: 6)"
-
 [config."prysm-regtest.conf".ivars."network_id"]
 type = "string"
 default = ""
 priority = "low"
 summary = "Sets the network ID of the beacon chain. (default: 0)"
 
-[config."prysm-regtest.conf".ivars."rpc_host"]
-type = "string"
-default = ""
-priority = "low"
-summary = "Host on which the RPC server should listen. (default: \"127.0.0.1\")"
-
-[config."prysm-regtest.conf".ivars."rpc_port"]
-type = "string"
-default = ""
-priority = "low"
-summary = "RPC port exposed by a beacon node. (default: 4000)"
-
+# [config."prysm-regtest.conf".ivars."rpc_host"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "Host on which the RPC server should listen. (default: \"127.0.0.1\")"
+# [config."prysm-regtest.conf".ivars."rpc_port"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "RPC port exposed by a beacon node. (default: 4000)"
 [config."prysm-regtest.conf".ivars."slasher_datadir"]
 type = "string"
 default = ""
@@ -733,13 +740,11 @@ priority = "low"
 summary = "Input in block_root:epoch_number format. Guarantees that syncing leads to the given Weak Subjectivity Checkpoint along the canonical chain."
 
 # merge options
-
 # [config."prysm-regtest.conf".ivars."suggested_fee_recipient"]
 # type = "string"
 # default = ""
 # priority = "low"
 # summary = "Post bellatrix, this address will receive the transaction fees produced by any blocks from this node. (default: \"0x0000000000000000000000000000000000000000\")"
-
 [config."prysm-regtest.conf".ivars."terminal_block_hash_epoch_override"]
 type = "string"
 default = ""
@@ -759,7 +764,6 @@ priority = "low"
 summary = "Sets the total difficulty to manual overrides the default TERMINAL_TOTAL_DIFFICULTY value."
 
 # p2p Options
-
 [config."prysm-regtest.conf".ivars."enable_upnp"]
 type = "string"
 default = ""
@@ -771,7 +775,6 @@ summary = "Enable the service (Beacon chain or Validator) to use UPnP when possi
 # default = ""
 # priority = "low"
 # summary = "The required number of valid peers to connect with before syncing. (default: 3)"
-
 [config."prysm-regtest.conf".ivars."p2p_allowlist"]
 type = "string"
 default = ""
@@ -844,7 +847,6 @@ summary = "The size of the pubsub validation and outbound queue for the node. (d
 # default = ""
 # priority = "low"
 # summary = "Specifies log file name, relative or absolute."
-
 [config."prysm-regtest.conf".ivars."log_format"]
 type = "string"
 default = ""
@@ -959,7 +961,6 @@ summary = "Writes SSZ states to disk after attempted state transitions. (default
 # default = ""
 # priority = "low"
 # summary = "Runs on the Ethereum main network. (default: true)"
-
 [config."prysm-regtest.conf".ivars."prepare_all_payloads"]
 type = "string"
 default = ""
@@ -989,7 +990,6 @@ summary = "Writes invalid blocks to temp directory. (default: false)"
 # default = ""
 # priority = "low"
 # summary = "Runs Prysm configured for the Sepolia test network. (default: false)"
-
 [config."prysm-regtest.conf".ivars."slasher"]
 type = "string"
 default = ""
@@ -1002,7 +1002,6 @@ summary = "Enables a slasher in the beacon node for detecting slashable offenses
 # default = ""
 # priority = "low"
 # summary = "Load a genesis state from an SSZ file. Testnet genesis files can be found in the eth2-clients/eth2-testnets repository on GitHub."
-
 [config."prysm-regtest.conf".ivars."interop_genesis_time"]
 type = "string"
 default = ""

@@ -1,12 +1,12 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-set -e 
+set -e
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."   
+    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."
     echo "  --help, -h                    Displays this help text and exits."
     echo "  --version, -v                 Displays the version and exits."
     exit 0
@@ -24,22 +24,22 @@ VERSION=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --conf-file|-e)
-            CONFIG_FILES+=("$2")
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        --version|-v)
-            VERSION=true
-            shift
-            ;;  
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --conf-file | -e)
+        CONFIG_FILES+=("$2")
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    --version | -v)
+        VERSION=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -69,40 +69,40 @@ done
 OPTIONS=""
 
 append_option() {
-  local option=$1
-  local value=$2
-  if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option=$value"
-  fi
+    local option=$1
+    local value=$2
+    if [ -n "$value" ]; then
+        OPTIONS="$OPTIONS $option=$value"
+    fi
 }
 
-append_flag(){
- local option=$1
-  local value=$2
-  if [ "$value" = "true" ]; then
-    OPTIONS="$OPTIONS $option"
-  fi 
+append_flag() {
+    local option=$1
+    local value=$2
+    if [ "$value" = "true" ]; then
+        OPTIONS="$OPTIONS $option"
+    fi
 }
 
 # Global options
-append_flag   "--accept-terms-of-use" "$accept_terms_of_use"
+append_flag "--accept-terms-of-use" "$accept_terms_of_use"
 append_option "--api-timeout" "$api_timeout"
 append_option "--bootstrap-node" "$bootstrap_node"
 append_option "--chain-config-file" "$chain_config_file"
-append_flag   "--clear-db" "$clear_db"
+append_flag "--clear-db" "$clear_db"
 append_option "--config-file" "$config_file"
 append_option "--datadir" "$datadir"
-append_flag   "--disable-monitoring" "$disable_monitoring"
-append_flag   "--e2e-config" "$e2e_config"
-append_flag   "--enable-tracing" "$enable_tracing"
-append_flag   "--force-clear-db" "$force_clear_db"
+append_flag "--disable-monitoring" "$disable_monitoring"
+append_flag "--e2e-config" "$e2e_config"
+append_flag "--enable-tracing" "$enable_tracing"
+append_flag "--force-clear-db" "$force_clear_db"
 append_option "--grpc-max-msg-size" "$grpc_max_msg_size"
 append_option "--max-goroutines" "$max_goroutines"
-append_flag   "--minimal-config" "$minimal_config"
+append_flag "--minimal-config" "$minimal_config"
 append_option "--monitor-indices" "$monitor_indices"
 append_option "--monitoring-host" "$monitoring_host"
 append_option "--monitoring-port" "$monitoring_port"
-append_flag   "--no-discovery" "$no_discovery"
+append_flag "--no-discovery" "$no_discovery"
 append_option "--p2p-quic-port" "$p2p_quic_port"
 append_option "--p2p-tcp-port" "$p2p_tcp_port"
 append_option "--p2p-udp-port" "$p2p_udp_port"
@@ -120,7 +120,7 @@ append_option "--blockprofilerate" "$blockprofilerate"
 append_option "--cpuprofile" "$cpuprofile"
 append_option "--memprofilerate" "$memprofilerate"
 append_option "--mutexprofilefraction" "$mutexprofilefraction"
-append_flag   "--pprof" "$pprof"
+append_flag "--pprof" "$pprof"
 append_option "--pprofaddr" "$pprofaddr"
 append_option "--pprofport" "$pprofport"
 append_option "--trace" "$trace"
@@ -141,9 +141,9 @@ append_option "--checkpoint-state" "$checkpoint_state"
 append_option "--checkpoint-sync-url" "$checkpoint_sync_url"
 append_option "--contract-deployment-block" "$contract_deployment_block"
 append_option "--deposit-contract" "$deposit_contract"
-append_flag   "--disable-debug-rpc-endpoints" "$disable_debug_rpc_endpoints"
-append_flag   "--disable-grpc-gateway" "$disable_grpc_gateway"
-append_flag   "--enable-experimental-backfill" "$enable_experimental_backfill"
+append_flag "--disable-debug-rpc-endpoints" "$disable_debug_rpc_endpoints"
+append_flag "--disable-grpc-gateway" "$disable_grpc_gateway"
+append_flag "--enable-experimental-backfill" "$enable_experimental_backfill"
 append_option "--engine-endpoint-timeout-seconds" "$engine_endpoint_timeout_seconds"
 append_option "--eth1-header-req-limit" "$eth1_header_req_limit"
 append_option "--execution-endpoint" "$execution_endpoint"
@@ -154,10 +154,13 @@ append_option "--genesis-state" "$genesis_state"
 append_option "--grpc-gateway-corsdomain" "$grpc_gateway_corsdomain"
 append_option "--grpc-gateway-host" "$grpc_gateway_host"
 append_option "--grpc-gateway-port" "$grpc_gateway_port"
-append_flag   "--historical-slasher-node" "$historical_slasher_node"
+append_flag "--historical-slasher-node" "$historical_slasher_node"
+append_option "--http-host" "$http_host"
+append_option "--http-cors-domain" "$http_cors_domain"
+append_option "--http-port" "$http_port"
 append_option "--http-mev-relay" "$http_mev_relay"
 append_option "--http-modules" "$http_modules"
-append_flag   "--interop-eth1data-votes" "$interop_eth1data_votes"
+append_flag "--interop-eth1data-votes" "$interop_eth1data_votes"
 append_option "--jwt-id" "$jwt_id"
 append_option "--jwt-secret" "$jwt_secret"
 append_option "--local-block-value-boost" "$local_block_value_boost"
@@ -172,19 +175,19 @@ append_option "--rpc-host" "$rpc_host"
 append_option "--rpc-port" "$rpc_port"
 append_option "--slasher-datadir" "$slasher_datadir"
 append_option "--slots-per-archive-point" "$slots_per_archive_point"
-append_flag   "--subscribe-all-subnets" "$subscribe_all_subnets"
+append_flag "--subscribe-all-subnets" "$subscribe_all_subnets"
 append_option "--tls-cert" "$tls_cert"
 append_option "--tls-key" "$tls_key"
 append_option "--weak-subjectivity-checkpoint" "$weak_subjectivity_checkpoint"
 
-# merge options 
+# merge options
 append_option "--suggested-fee-recipient" "$suggested_fee_recipient"
 append_option "--terminal-block-hash-epoch-override" "$terminal_block_hash_epoch_override"
 append_option "--terminal-block-hash-override" "$terminal_block_hash_override"
 append_option "--terminal-total-difficulty-override" "$terminal_total_difficulty_override"
 
 # p2p OPTIONS:
-append_flag   "--enable-upnp" "$enable_upnp"
+append_flag "--enable-upnp" "$enable_upnp"
 append_option "--min-sync-peers" "$min_sync_peers"
 append_option "--p2p-allowlist" "$p2p_allowlist"
 append_option "--p2p-denylist" "$p2p_denylist"
@@ -194,7 +197,7 @@ append_option "--p2p-local-ip" "$p2p_local_ip"
 append_option "--p2p-max-peers" "$p2p_max_peers"
 append_option "--p2p-metadata" "$p2p_metadata"
 append_option "--p2p-priv-key" "$p2p_priv_key"
-append_flag   "--p2p-static-id" "$p2p_static_id"
+append_flag "--p2p-static-id" "$p2p_static_id"
 append_option "--peer" "$peer"
 append_option "--pubsub-queue-size" "$pubsub_queue_size"
 
@@ -202,7 +205,7 @@ append_option "--pubsub-queue-size" "$pubsub_queue_size"
 append_option "--log-file" "$log_file"
 append_option "--log-format" "$log_format"
 
-# features options 
+# features options
 append_flag "--blob-save-fsync" "$blob_save_fsync"
 append_flag "--dev" "$dev"
 append_flag "--disable-broadcast-slashings" "$disable_broadcast_slashings"
@@ -226,7 +229,7 @@ append_flag "--save-full-execution-payloads" "$save_full_execution_payloads"
 append_flag "--save-invalid-blob-temp" "$save_invalid_blob_temp"
 append_flag "--save-invalid-block-temp" "$save_invalid_block_temp"
 append_flag "--sepolia" "$sepolia"
-append_flag "--slasher" "$slasher" 
+append_flag "--slasher" "$slasher"
 
 # interop options
 append_option "--genesis-state" "$genesis_state"
@@ -235,8 +238,6 @@ append_option "--interop-num-validators" "$interop_num_validators"
 
 # deprecated options
 append_option "--db-backup-output-dir" "$db_backup_output_dir"
-
-
 
 echo "Using Options: beacon-chain $OPTIONS"
 
