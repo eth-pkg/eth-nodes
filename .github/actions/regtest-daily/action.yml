@@ -102,8 +102,8 @@ runs:
           eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
           eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }} 
         which java 
-        echo "Waiting for 60 seconds for nodes to check successful startup..."
-        sleep 60
+        echo "Waiting for 30 seconds for nodes to check successful startup..."
+        sleep 30
         # check if execution client is active 
         if systemctl is-active --quiet eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service; then
           echo "eth-node-${{ inputs.el_name }}-${{ inputs.network }} is active"
@@ -136,9 +136,9 @@ runs:
         # - name: Run API tests
         #   run: |
         # TESTS 
-        echo "Waiting for 180 seconds for nodes to check successful startup..."
+        echo "Waiting for 30 seconds for nodes to check successful startup..."
         # on localhost this is much faster, as keys are imported quicker on a faster machine
-        sleep 180 # it takes time to include the validators 
+        sleep 30 # it takes time to include the validators 
         # Check beacon state
         echo ""
         curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
@@ -211,8 +211,8 @@ runs:
         fi
 
 
-        echo "Waiting for 60 seconds for the transactions to be included..."
-        sleep 60 # increase time to https://github.com/eth-pkg/eth-nodes/actions/runs/11304204442/job/31442272249
+        echo "Waiting for 10 seconds for the transactions to be included..."
+        sleep 10 # increase time to https://github.com/eth-pkg/eth-nodes/actions/runs/11304204442/job/31442272249
 
         response=$(curl -s -X POST http://localhost:8545 \
         -H "Content-Type: application/json" \

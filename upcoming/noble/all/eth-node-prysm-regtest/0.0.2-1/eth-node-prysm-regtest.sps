@@ -220,13 +220,13 @@ summary = "Host on which the HTTP server should listen. (default: \"127.0.0.1\")
 type = "string"
 default = "*"
 priority = "low"
-summary = ""
+summary = "http cors domain"
 
 [config."prysm-regtest.conf".ivars."http_port"]
 type = "string"
 default = "3500"
 priority = "low"
-summary = ""
+summary = "http port"
 
 #############################################################################################
 #############################################################################################
