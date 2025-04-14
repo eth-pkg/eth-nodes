@@ -118,7 +118,7 @@ summary = "Specifies log file name, relative or absolute."
 
 [config."prysm-validator.conf".ivars."beacon_rpc_provider"]
 type = "string"
-default = "127.0.0.1:4000"
+default = "127.0.0.1:5052"
 priority = "low"
 summary = "Beacon node RPC provider endpoint. (default: \"127.0.0.1:4000\")"
 
@@ -127,6 +127,12 @@ type = "string"
 default = "http://127.0.0.1:$CL_RPC_PORT"
 priority = "low"
 summary = "Beacon node REST API provider endpoint. (default: \"http://127.0.0.1:3500\")"
+
+[config."prysm-validator.conf".ivars."enable_beacon_rest_api"]
+type = "string"
+default = "true"
+priority = "low"
+summary = "(Experimental): Enables the beacon REST API when querying a beacon node. (default: false)"
 
 #############################################################################################
 #############################################################################################
@@ -529,12 +535,11 @@ default = ""
 priority = "low"
 summary = "(Advanced): Specifies the time duration the validator waits to reload new keys if they have changed on disk. (default: 1s)"
 
-[config."prysm-validator.conf".ivars."enable_beacon_rest_api"]
-type = "string"
-default = ""
-priority = "low"
-summary = "(Experimental): Enables the beacon REST API when querying a beacon node. (default: false)"
-
+# [config."prysm-validator.conf".ivars."enable_beacon_rest_api"]
+# type = "string"
+# default = ""
+# priority = "low"
+# summary = "(Experimental): Enables the beacon REST API when querying a beacon node. (default: false)"
 [config."prysm-validator.conf".ivars."enable_doppelganger"]
 type = "string"
 default = ""
