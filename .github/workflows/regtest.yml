@@ -31,9 +31,9 @@ jobs:
           - el_name: besu
             cl_name: lighthouse
             validator_name: nimbus-eth2
-          - el_name: besu
-            cl_name: lighthouse
-            validator_name: prysm
+          # - el_name: besu
+          #   cl_name: lighthouse
+          #   validator_name: prysm
           - el_name: besu
             cl_name: lighthouse
             validator_name: teku
@@ -132,9 +132,9 @@ jobs:
           - el_name: erigon
             cl_name: lighthouse
             validator_name: nimbus-eth2
-          - el_name: erigon
-            cl_name: lighthouse
-            validator_name: prysm
+          # - el_name: erigon
+          #   cl_name: lighthouse
+          #   validator_name: prysm
           - el_name: erigon
             cl_name: lighthouse
             validator_name: teku
@@ -235,9 +235,9 @@ jobs:
           - el_name: geth
             cl_name: lighthouse
             validator_name: nimbus-eth2
-          - el_name: geth
-            cl_name: lighthouse
-            validator_name: prysm
+          # - el_name: geth
+          #   cl_name: lighthouse
+          #   validator_name: prysm
           - el_name: geth
             cl_name: lighthouse
             validator_name: teku
@@ -331,9 +331,9 @@ jobs:
           - el_name: nethermind
             cl_name: lighthouse
             validator_name: nimbus-eth2
-          - el_name: nethermind
-            cl_name: lighthouse
-            validator_name: prysm
+          # - el_name: nethermind
+          #   cl_name: lighthouse
+          #   validator_name: prysm
           - el_name: nethermind
             cl_name: lighthouse
             validator_name: teku
@@ -433,9 +433,9 @@ jobs:
           - el_name: reth
             cl_name: lighthouse
             validator_name: nimbus-eth2
-          - el_name: reth
-            cl_name: lighthouse
-            validator_name: prysm
+          # - el_name: reth
+          #   cl_name: lighthouse
+          #   validator_name: prysm
           - el_name: reth
             cl_name: lighthouse
             validator_name: teku
@@ -531,7 +531,7 @@ jobs:
       - name: tests
       # this works, but the problem it makes it look like that 125 tests are passed, when in practice
       # only the filtered tests passed, and the others are "fake green"
-        if: matrix.validator_name != 'prysm' && matrix.cl_name != 'lighthouse'
+        # if: matrix.validator_name != 'prysm' && matrix.cl_name != 'lighthouse'
         uses: ./.github/actions/regtest
         with:
           network: regtest
