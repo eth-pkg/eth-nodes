@@ -204,7 +204,7 @@ Index: ethereum-genesis-generator-4.0.3/entrypoint.sh
 +    shift 2
 +    ;;
 +  --values-env)
-+    DEFAULTS_ENV="$2"
++    VALUES_ENV="$2"
 +    shift 2
 +    ;;
 +  --config-dir)
