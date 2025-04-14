@@ -179,8 +179,8 @@ runs:
         sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
           $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb  
-        echo "Waiting for 30 seconds for nodes to check successful startup..."
-        sleep 30
+        echo "Waiting for 60 seconds for nodes to check successful startup..."
+        sleep 60
         # check if execution client is active 
         if systemctl is-active --quiet eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service; then
           echo "eth-node-${{ inputs.el_name }}-${{ inputs.network }} is active"
