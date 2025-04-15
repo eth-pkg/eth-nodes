@@ -1,0 +1,34 @@
+#!/bin/bash
+set -e
+
+# HACK to randomzie dependencies, while keep the virtual package dependency intact, but do not declare it in deps
+
+case "$1" in
+    upgrade)
+        echo "Not reinstalling packages on upgrade."
+        ;;
+    install)
+        cl_package=$(apt-cache showpkg eth-node-regtest-cl-service | awk '/Reverse Provides:/ {flag=1; next} flag' | grep -oP '^\s*\K[^ ]+' | sort -u | shuf --random-source=/dev/urandom -n 1)
+        el_package=$(apt-cache showpkg eth-node-regtest-el-service | awk '/Reverse Provides:/ {flag=1; next} flag' | grep -oP '^\s*\K[^ ]+' | sort -u | shuf --random-source=/dev/urandom -n 1)
+
+
+        echo "Selected CL package: $cl_package"
+        echo "Selected EL package: $el_package"
+
+        (( 
+            ## wait for install to finish
+            while pgrep -x 'dpkg|apt|apt-get' > /dev/null; do sleep 1; done
+            # clear environment
+            eval $(env|grep -E 'DPKG|DEB'|awk -F= '{print "unset "$1}')
+            #export DEBIAN_FRONTEND=noninteractive
+            # make sure no one else is locking the dpkg database
+            flock --exclusive --close /var/lib/dpkg/lock \
+                apt install $el_package $cl_package
+            ) 2>&1 >/dev/null </dev/null &)
+
+        ;;
+esac
+
+
+
+exit 0

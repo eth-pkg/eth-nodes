@@ -1,0 +1,6 @@
+eth-node-nethermind-regtest source: no-debian-copyright-in-source
+eth-node-nethermind-regtest source: no-newline-at-end [debian/changelog]
+eth-node-nethermind-regtest source: no-newline-at-end [debian/rules]
+eth-node-nethermind-regtest source: empty-upstream-sources
+eth-node-nethermind-regtest source: not-using-po-debconf
+eth-node-nethermind-regtest source: untranslatable-debconf-templates * 

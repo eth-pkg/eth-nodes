@@ -1,0 +1,9 @@
+[verify]
+package_hash = [
+    # debian timestamps are again broken, this is a debian bug, this doesn't affect the package reproducibility
+    # but would be a problem if we upload to official repository, which pkg-builder at this point can't support
+    # { hash="bc10b4d261d9ab21444fc3952f4d56b759731e91", name= "eth-node-erigon-regtest_0.0.2-1.dsc"},
+    { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-erigon-regtest_0.0.2.orig.tar.gz" },
+    # { hash="bec4f491f962031113d8203e6dfda1c791376621", name= "eth-node-erigon-regtest_0.0.2-1.debian.tar.xz"},
+    { hash = "a1f84a721b321b281d7ed272ddf452dc500e1b24", name = "eth-node-erigon-regtest_0.0.2-1_all.deb" },
+]

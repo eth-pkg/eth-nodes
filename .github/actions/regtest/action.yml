@@ -1,0 +1,342 @@
+name: network-tests
+description: Tests for different Ethereum networks and client combinations
+inputs:
+  cl_name:
+    description: "Consensus layer client name (lighthouse, prysm, teku, etc.)"
+    required: true
+  el_name:
+    description: "Execution layer client name (geth, erigon, nethermind, etc.)"
+    required: true
+  validator_name:
+    description: "Validator client name (lighthouse, prysm, teku, etc.)"
+    required: true  
+  network:
+    description: "Ethereum network name (mainnet, sepolia, holesky, etc.)"
+    required: true
+  build_from_source:
+    description: "Whether to build packages from source or use pre-built ones"
+    required: false
+    default: 'false'
+  package_version:
+    description: "Version of packages to build/install"
+    required: false
+    default: '0.0.2-1'
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Remove OpenJDK
+      id: remove-openjdk
+      run: |
+        sudo apt-get purge -y openjdk-*
+        sudo apt-get autoremove -y
+        sudo apt-get clean
+      shell: bash
+
+    - name: Setup Java
+      run: |
+        sudo apt -y install wget curl
+        wget https://download.oracle.com/java/21/archive/jdk-21.0.2_linux-x64_bin.deb
+        sudo apt install ./jdk-21.0.2_linux-x64_bin.deb
+        echo "export JAVA_HOME=/usr/lib/jvm/jdk-21" | sudo tee /etc/profile.d/jdk.sh
+        echo "export export PATH=\$PATH:\$JAVA_HOME/bin" | sudo tee -a /etc/profile.d/jdk.sh
+        sudo ln -s /usr/lib/jvm/jdk-21-oracle-x64 /usr/lib/jvm/jdk-21
+        source /etc/profile.d/jdk.sh
+        echo "/etc/profile.d/jdk.sh" >> $GITHUB_PATH
+        echo "/usr/lib/jvm/jdk-21-oracle-x64" >> $GITHUB_PATH
+        echo "/usr/lib/jvm/jdk-21/bin" >> $GITHUB_PATH
+        echo "JAVA_HOME=/usr/lib/jvm/jdk-21" >> $GITHUB_ENV
+        echo "PATH=$JAVA_HOME/bin:$PATH" >> $GITHUB_ENV
+        sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-21/bin/java 1
+        sudo update-alternatives --set java "$JAVA_HOME/bin/java"
+      shell: bash
+
+    # === Build dependencies (only when building from source) ===
+    - name: Setup build environment
+      id: setup-build-environment
+      if: ${{ inputs.build_from_source == 'true' }}
+      run: |
+        # Install pkg-builder dependencies
+        sudo apt update
+        sudo apt install -y debhelper schroot ubuntu-dev-tools autopkgtest vmdb2 qemu-system-x86
+        sudo apt install -y pkg-config libssl-dev uidmap
+        sudo apt install -y libfilesys-df-perl libmime-lite-perl
+      shell: bash
+
+    - name: Install pkg-builder
+      id: install-pkg-builder
+      if: ${{ inputs.build_from_source == 'true' }}
+      run: |
+        # Clone pkg-builder repository
+        git clone https://github.com/eth-pkg/pkg-builder.git
+        cd pkg-builder
+        
+        # Build pkg-builder
+        cargo build --release
+        
+        # Set up binaries
+        mkdir -p ${HOME}/.local/bin
+        mv target/release/pkg-builder ${HOME}/.local/bin
+        cp workspace/pkg_builder/bin_dependencies/debcrafter_* ${HOME}/.local/bin
+        chmod +x ${HOME}/.local/bin/pkg-builder
+        chmod +x ${HOME}/.local/bin/debcrafter_*
+        echo "${HOME}/.local/bin" >> $GITHUB_PATH
+        
+        # Install sbuild
+        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/sbuild_0.85.6_all.deb
+        wget https://github.com/eth-pkg/sbuild-ubuntu/releases/download/0.85-6-1/libsbuild-perl_0.85.6_all.deb
+        sudo dpkg -i sbuild_0.85.6_all.deb libsbuild-perl_0.85.6_all.deb || true
+        
+        # Create chroot environment
+        cd ${GITHUB_WORKSPACE}/upcoming/noble/all/eth-node-regtest/${{ inputs.package_version }} 
+        pkg-builder env create
+        echo "${HOME}/.cache/sbuild/noble-amd64.tar.gz" >> $GITHUB_PATH
+      shell: bash
+
+    - name: Add eth-nodes repositories
+      id: eth-nodes-repositories
+      run: |
+        # Add keyring
+        sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
+        
+        # Add main repository
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
+        
+        # Add testing repository when using pre-built packages
+        if [ "${{ inputs.build_from_source }}" != "true" ]; then
+          echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes-testing.list
+        fi
+        
+        sudo apt update
+      shell: bash
+
+    - name: Install dotnet
+      id: install-dotnet
+      run: |
+        sudo add-apt-repository ppa:dotnet/backports
+        sudo apt update
+        sudo apt install -y aspnetcore-runtime-9.0
+      shell: bash
+
+    - name: Install node.js dep
+      id: install-nodejs
+      run: |
+        curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
+        sudo apt install -y nodejs
+      shell: bash
+
+    # caches packages not to hit the repository in each CI run
+    - name: Cache apt packages
+      id: cache-packages
+      uses: eth-pkg/apt-deb-cache@v0.2.4
+      with:
+        packages: |
+          eth-node-besu \
+          eth-node-erigon \
+          eth-node-geth \
+          eth-node-nethermind eth-node-reth \
+          eth-node-lighthouse \
+          eth-node-lodestar \
+          eth-node-nimbus-eth2 \
+          eth-node-prysm \
+          eth-node-teku \
+          zcli \ 
+          eth2-testnet-genesis \
+          eth2-val-tools \
+          ethereum-genesis-generator \ 
+          eth-beacon-genesis \
+          geth-hdwallet
+
+    - name: Build clients
+      id: build_clients
+      if: ${{ inputs.build_from_source == 'true' }}
+      run: |
+        # Install dependencies
+        sudo apt install -y yq
+        
+        # Create packages directory
+        mkdir -p ${HOME}/packages
+        
+        # Function to build a package
+        build_package() {
+          local package_name=$1
+          local version="${{ inputs.package_version }}"
+          
+          echo "Building $package_name..."
+          cd ${GITHUB_WORKSPACE}/upcoming/noble/all/$package_name/$version
+          pkg-builder package --run-piuparts false --run-autopkgtest false --run-lintian true
+          pkg-builder verify --no-package true
+          
+          local package_dir="${HOME}/.pkg-builder/packages/noble/${package_name}-${version}"
+          cd $package_dir
+          cp ${package_name}_${version}_all.deb ${HOME}/packages/
+          echo "Package built: ${package_name}_${version}_all.deb"
+        }
+        
+        # Build network config
+        build_package "eth-node-${{ inputs.network }}-config"
+        
+        # Build execution client
+        build_package "eth-node-${{ inputs.el_name }}-${{ inputs.network }}"
+        
+        # Build consensus client
+        build_package "eth-node-${{ inputs.cl_name }}-${{ inputs.network }}"
+        
+        # Build validator
+        build_package "eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}"
+        
+        echo "${HOME}/packages" >> $GITHUB_PATH
+      shell: bash
+
+    - name: Install Packages
+      id: install-packages
+      run: |
+        java --version 
+        sudo apt install yq ## this should be in ethereum-genesis-generator
+        
+        if [ "${{ inputs.build_from_source }}" == "true" ]; then
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_${{ inputs.package_version }}_all.deb
+          # have to install in one go 
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_${{ inputs.package_version }}_all.deb \
+            $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_${{ inputs.package_version }}_all.deb \
+            $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_${{ inputs.package_version }}_all.deb
+        else
+          sudo apt install -y eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
+            eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
+            eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}
+        fi
+      shell: bash
+
+    - name: Check service status
+      id: check-service-status
+      run: |
+        which java
+        echo "Waiting for services to start (60s)..."
+        sleep 60
+        
+        # Function to check service status
+        check_service() {
+          local service_name=$1
+          if systemctl is-active --quiet $service_name.service; then
+            echo "✅ $service_name is active"
+          else
+            echo "❌ $service_name is not active" >&2
+            echo "Fetching logs for $service_name..."
+            journalctl -u $service_name.service --no-pager -n 100
+            return 1
+          fi
+        }
+        
+        # Check all services
+        check_service "eth-node-${{ inputs.el_name }}-${{ inputs.network }}" || exit 1
+        check_service "eth-node-${{ inputs.cl_name }}-${{ inputs.network }}" || exit 1
+        check_service "eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}" || exit 1
+      shell: bash
+        
+    - name: Test blockchain functionality
+      id: test-syncing
+      run: |
+        echo "Waiting for validators to be included (60s)..."
+        sleep 60
+        
+        # Check block number
+        echo "Checking current block number..."
+        curl -X POST -H "Content-Type: application/json" \
+          --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' \
+          http://localhost:8545
+        
+        # Check execution client sync status
+        echo "Checking execution client sync status..."
+        EL_SYNCING=$(curl -s -X POST \
+          --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":2}' \
+          -H "Content-Type: application/json" http://localhost:8545)
+          
+        if [ "$(echo $EL_SYNCING | jq '.result')" == "false" ]; then
+          echo "✅ Execution client is synced"
+        else
+          echo "⚠️ Execution client is still syncing"
+          # Not failing test as some clients (nethermind/erigon) may report syncing
+        fi
+        
+        # Check consensus client sync status 
+        echo "Checking consensus client sync status..."
+        CL_SYNCING=$(curl -s -X GET -H "Content-Type: application/json" http://localhost:5052/eth/v1/node/syncing)
+        if [ "$(echo $CL_SYNCING | jq '.data.is_syncing')" == "false" ]; then
+          echo "✅ Consensus client is already synced"
+          echo "$CL_SYNCING"
+        else
+          echo "⚠️ Consensus client is still syncing"
+          echo "$CL_SYNCING"
+          # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
+          # Not failing test as this is expected for some clients
+        fi
+        
+        # Verify block production started
+        block_number_result=$(curl -s -X POST \
+          --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}' \
+          -H "Content-Type: application/json" http://localhost:8545)
+          
+        if [ $(echo $block_number_result| jq -r '.result') != "0x0" ]; then
+          echo "✅ Block production started"
+        else
+          echo "❌ Block number is zero - no blocks being produced"
+          echo "Fetching logs for all services..."
+          journalctl -u eth-node-${{ inputs.el_name }}-${{ inputs.network }}.service --no-pager -n 100
+          journalctl -u eth-node-${{ inputs.cl_name }}-${{ inputs.network }}.service --no-pager -n 100
+          journalctl -u eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
+          exit 1
+        fi
+      shell: bash
+        
+    - name: Test transaction submission
+      id: test-transaction
+      run: |
+        # Send test transaction
+        echo "Submitting test transaction..."
+        transaction_response=$(curl -s -X POST \
+          -H "Content-Type: application/json" \
+          --data '{
+              "jsonrpc": "2.0",
+              "method": "eth_sendRawTransaction",
+              "params": ["0x01f86f8205398085e8d4a5100082520894000000000000000000000000000000000000dead872386f26fc1000080c080a09a4d7c7edb084f4323bdf7dd7f2042a8bf069fd64f32934ee91b50f4398f84a4a017e12b64ab00e30299b01c94e6e297ffbed21752ee7986e0ab5744b6a4a2bf72"],
+              "id": 4
+          }' http://localhost:8545)
+
+        error=$(echo "$transaction_response" | jq -r '.error.message // empty')
+        txHash=$(echo "$transaction_response" | jq -r '.result // empty')
+
+        if [ -n "$txHash" ]; then
+          echo "✅ Transaction submitted successfully. Hash: $txHash"
+        elif [ -n "$error" ]; then
+          echo "❌ Transaction submission failed: $error"
+          exit 1
+        else
+          echo "❌ Unexpected response: $transaction_response"
+          exit 1
+        fi
+
+        # Verify transaction inclusion
+        echo "Waiting for transaction inclusion (30s)..."
+        sleep 30
+        
+        response=$(curl -s -X POST http://localhost:8545 \
+          -H "Content-Type: application/json" \
+          --data '{
+              "jsonrpc": "2.0",
+              "method": "eth_getTransactionByHash",
+              "params": ["'"$txHash"'"],
+              "id": 5
+          }')
+
+        blockHash=$(echo $response | jq -r '.result.blockHash')
+
+        if [ "$blockHash" == "null" ] || [ -z "$blockHash" ]; then
+          echo "❌ Transaction not included in a block"
+          exit 1
+        else
+          echo "✅ Transaction included in block $blockHash"
+        fi
+      shell: bash
