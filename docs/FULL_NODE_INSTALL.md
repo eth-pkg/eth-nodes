@@ -10,7 +10,7 @@ This guide covers installing complete node setups with execution, consensus, and
 sudo curl -fsSL https://packages.eth-nodes.com/keys/ethnode-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
 
 # Add repository source
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/ethnodes.list
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing noble main" | sudo tee /etc/apt/sources.list.d/ethnodes.list
 
 # Update package list
 sudo apt update
