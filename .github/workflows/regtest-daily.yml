@@ -20,7 +20,7 @@ jobs:
         validator_name: [lighthouse, lodestar, nimbus-eth2, prysm, teku]
         exclude: 
         - cl_name: lighthouse 
-          el_name: prysm
+          validator_name: prysm
       fail-fast: false
      
     steps:
