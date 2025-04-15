@@ -158,18 +158,18 @@ runs:
           # exit 1
         fi
 
-        # Check if consensus client is syncing
-        CL_SYNCING=$(curl -s -X GET -H "Content-Type: application/json" http://localhost:5052/eth/v1/node/syncing)
-        if [ "$(echo $CL_SYNCING | jq '.data.is_syncing')" == "false" ]; then
-          echo "Consensus client is already synced"
-          echo "$CL_SYNCING"
-        else
-          echo "Consensus client is still syncing"
-          echo "$CL_SYNCING"
-          # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
-          # same for teku, lighthouse, and more ...
-          # exit 1
-        fi
+        # # Check if consensus client is syncing
+        # CL_SYNCING=$(curl -s -X GET -H "Content-Type: application/json" http://localhost:5052/eth/v1/node/syncing)
+        # if [ "$(echo $CL_SYNCING | jq '.data.is_syncing')" == "false" ]; then
+        #   echo "Consensus client is already synced"
+        #   echo "$CL_SYNCING"
+        # else
+        #   echo "Consensus client is still syncing"
+        #   echo "$CL_SYNCING"
+        #   # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
+        #   # same for teku, lighthouse, and more ...
+        #   # exit 1
+        # fi
 
         # uncommenting, could it be a bug with blocknumber???
         block_number_result=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}' -H "Content-Type: application/json" http://localhost:8545 )
