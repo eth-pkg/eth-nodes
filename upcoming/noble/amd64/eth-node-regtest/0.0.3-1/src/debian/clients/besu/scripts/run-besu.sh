@@ -1,12 +1,12 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-set -e 
+set -e
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."   
+    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."
     echo "  --help, -h                    Displays this help text and exits."
     echo "  --version, -v                 Displays the version and exits."
     exit 0
@@ -24,22 +24,22 @@ VERSION=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --conf-file|-e)
-            CONFIG_FILES+=("$2")
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        --version|-v)
-            VERSION=true
-            shift
-            ;;  
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --conf-file | -e)
+        CONFIG_FILES+=("$2")
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    --version | -v)
+        VERSION=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -66,213 +66,209 @@ for CONFIG_FILE in "${CONFIG_FILES[@]}"; do
     fi
 done
 
-
-
 OPTIONS=""
 
 append_option() {
-  local option=$1
-  local value=$2
-  if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option=$value"
-  fi
+    local option=$1
+    local value=$2
+    if [ -n "$value" ]; then
+        OPTIONS="$OPTIONS $option=$value"
+    fi
 }
 
-append_flag(){
- local option=$1
-  local value=$2
-  if [ "$value" = "true" ]; then
-    OPTIONS="$OPTIONS $option"
-  fi 
+append_flag() {
+    local option=$1
+    local value=$2
+    if [ "$value" = "true" ]; then
+        OPTIONS="$OPTIONS $option"
+    fi
 }
 
 # OPTIONS
-append_flag   "--auto-log-bloom-caching-enabled" "$auto_log_bloom_caching_enabled"
-append_option "--bonsai-historical-block-limit" "$bonsai_historical_block_limit"
-append_flag   "--bonsai-limit-trie-logs-enabled" "$bonsai_limit_trie_logs_enabled"
-append_option "--bonsai-trie-logs-pruning-window-size" "$bonsai_trie_logs_pruning_window_size"
-append_option "--cache-last-blocks" "$cache_last_blocks"
-append_flag   "--compatibility-eth64-forkid-enabled" "$compatibility_eth64_forkid_enabled"
-append_option "--config-file" "$config_file"
-append_option "--data-path" "$data_path"
-append_option "--data-storage-format" "$data_storage_format"
-append_option "--ethstats" "$ethstats_url"
-append_option "--ethstats-cacert-file" "$ethstats_cacert_file"
-append_option "--ethstats-contact" "$ethstats_contact"
-append_option "--genesis-file" "$genesis_file"
-append_flag   "--genesis-state-hash-cache-enabled" "$genesis_state_hash_cache_enabled"
-append_option "--host-allowlist" "$host_allowlist"
-append_option "--identity" "$identity"
-append_option "--key-value-storage" "$key_value_storage"
-append_option "--kzg-trusted-setup" "$kzg_trusted_setup"
-append_option "--logging" "$logging"
-append_option "--nat-method" "$nat_method"
-append_option "--network" "$network"
-append_option "--network-id" "$network_id"
-append_option "--node-private-key-file" "$node_private_key_file"
-append_option "--pid-path" "$pid_path"
-append_option "--profile" "$profile"
-append_option "--reorg-logging-threshold" "$reorg_logging_threshold"
-append_flag   "--receipt-compaction-enabled" "$receipt_compaction_enabled"
-append_option "--required-block" "$required_block"
-append_flag   "--revert-reason-enabled" "$revert_reason_enabled"
-append_option "--security-module" "$security_module"
-append_option "--static-nodes-file" "$static_nodes_file"
-append_option "--sync-min-peers" "$sync_min_peers"
-append_option "--sync-mode" "$sync_mode"
-append_flag   "--version-compatibility-protection" "$version_compatibility_protection"
+append_flag "--auto-log-bloom-caching-enabled" "$AUTO_LOG_BLOOM_CACHING_ENABLED"
+append_option "--bonsai-historical-block-limit" "$BONSAI_HISTORICAL_BLOCK_LIMIT"
+append_flag "--bonsai-limit-trie-logs-enabled" "$BONSAI_LIMIT_TRIE_LOGS_ENABLED"
+append_option "--bonsai-trie-logs-pruning-window-size" "$BONSAI_TRIE_LOGS_PRUNING_WINDOW_SIZE"
+append_option "--cache-last-blocks" "$CACHE_LAST_BLOCKS"
+append_flag "--compatibility-eth64-forkid-enabled" "$COMPATIBILITY_ETH64_FORKID_ENABLED"
+append_option "--config-file" "$BESU_CONFIG_FILE"
+append_option "--data-path" "$DATA_PATH"
+append_option "--data-storage-format" "$DATA_STORAGE_FORMAT"
+append_option "--ethstats" "$ETHSTATS_URL"
+append_option "--ethstats-cacert-file" "$ETHSTATS_CACERT_FILE"
+append_option "--ethstats-contact" "$ETHSTATS_CONTACT"
+append_option "--genesis-file" "$GENESIS_FILE"
+append_flag "--genesis-state-hash-cache-enabled" "$GENESIS_STATE_HASH_CACHE_ENABLED"
+append_option "--host-allowlist" "$HOST_ALLOWLIST"
+append_option "--identity" "$IDENTITY"
+append_option "--key-value-storage" "$KEY_VALUE_STORAGE"
+append_option "--kzg-trusted-setup" "$KZG_TRUSTED_SETUP"
+append_option "--logging" "$LOGGING"
+append_option "--nat-method" "$NAT_METHOD"
+append_option "--network" "$NETWORK"
+append_option "--network-id" "$NETWORK_ID"
+append_option "--node-private-key-file" "$NODE_PRIVATE_KEY_FILE"
+append_option "--pid-path" "$PID_PATH"
+append_option "--profile" "$PROFILE"
+append_option "--reorg-logging-threshold" "$REORG_LOGGING_THRESHOLD"
+append_flag "--receipt-compaction-enabled" "$RECEIPT_COMPACTION_ENABLED"
+append_option "--required-block" "$REQUIRED_BLOCK"
+append_flag "--revert-reason-enabled" "$REVERT_REASON_ENABLED"
+append_option "--security-module" "$SECURITY_MODULE"
+append_option "--static-nodes-file" "$STATIC_NODES_FILE"
+append_option "--sync-min-peers" "$SYNC_MIN_PEERS"
+append_option "--sync-mode" "$SYNC_MODE"
+append_flag "--version-compatibility-protection" "$VERSION_COMPATIBILITY_PROTECTION"
 
 # Tx Pool Layered Implementation Options
-append_option "--tx-pool-layer-max-capacity" "$tx_pool_layer_max_capacity"
-append_option "--tx-pool-max-future-by-sender" "$tx_pool_max_future_by_sender"
-append_option "--tx-pool-max-prioritized" "$tx_pool_max_prioritized"
-append_option "--tx-pool-max-prioritized-by-type" "$tx_pool_max_prioritized_by_type"
-append_option "--tx-pool-min-score" "$tx_pool_min_score"
+append_option "--tx-pool-layer-max-capacity" "$TX_POOL_LAYER_MAX_CAPACITY"
+append_option "--tx-pool-max-future-by-sender" "$TX_POOL_MAX_FUTURE_BY_SENDER"
+append_option "--tx-pool-max-prioritized" "$TX_POOL_MAX_PRIORITIZED"
+append_option "--tx-pool-max-prioritized-by-type" "$TX_POOL_MAX_PRIORITIZED_BY_TYPE"
+append_option "--tx-pool-min-score" "$TX_POOL_MIN_SCORE"
 
 # Tx Pool Sequenced Implementation Options
-append_option "--tx-pool-limit-by-account-percentage" "$tx_pool_limit_by_account_percentage"
-append_option "--tx-pool-max-size" "$tx_pool_max_size"
-append_option "--tx-pool-retention-hours" "$tx_pool_retention_hours"
+append_option "--tx-pool-limit-by-account-percentage" "$TX_POOL_LIMIT_BY_ACCOUNT_PERCENTAGE"
+append_option "--tx-pool-max-size" "$TX_POOL_MAX_SIZE"
+append_option "--tx-pool-retention-hours" "$TX_POOL_RETENTION_HOURS"
 
 # Tx Pool Common Options
-append_option "--rpc-tx-feecap" "$rpc_tx_feecap"
-append_flag   "--strict-tx-replay-protection-enabled" "$strict_tx_replay_protection_enabled"
-append_option "--tx-pool" "$tx_pool"
-append_option "--tx-pool-blob-price-bump" "$tx_pool_blob_price_bump"
-append_option "--tx-pool-disable-locals" "$tx_pool_disable_locals"
-append_option "--tx-pool-enable-save-restore" "$tx_pool_enable_save_restore"
-append_option "--tx-pool-min-gas-price" "$tx_pool_min_gas_price"
-append_option "--tx-pool-price-bump" "$tx_pool_price_bump"
-append_option "--tx-pool-priority-senders" "$tx_pool_priority_senders"
-append_option "--tx-pool-save-file" "$tx_pool_save_file"
+append_option "--rpc-tx-feecap" "$RPC_TX_FEECAP"
+append_flag "--strict-tx-replay-protection-enabled" "$STRICT_TX_REPLAY_PROTECTION_ENABLED"
+append_option "--tx-pool" "$TX_POOL"
+append_option "--tx-pool-blob-price-bump" "$TX_POOL_BLOB_PRICE_BUMP"
+append_option "--tx-pool-disable-locals" "$TX_POOL_DISABLE_LOCALS"
+append_option "--tx-pool-enable-save-restore" "$TX_POOL_ENABLE_SAVE_RESTORE"
+append_option "--tx-pool-min-gas-price" "$TX_POOL_MIN_GAS_PRICE"
+append_option "--tx-pool-price-bump" "$TX_POOL_PRICE_BUMP"
+append_option "--tx-pool-priority-senders" "$TX_POOL_PRIORITY_SENDERS"
+append_option "--tx-pool-save-file" "$TX_POOL_SAVE_FILE"
 
 # Block Builder Options
-append_option "--block-txs-selection-max-time" "$block_txs_selection_max_time"
-append_option "--min-block-occupancy-ratio" "$min_block_occupancy_ratio"
-append_option "--min-gas-price" "$min_gas_price"
-append_option "--min-priority-fee" "$min_priority_fee"
-append_flag   "--miner-enabled" "$miner_enabled"
-append_option "--miner-coinbase" "$miner_coinbase"
-append_option "--miner-extra-data" "$miner_extra_data"
-append_flag   "--miner-stratum-enabled" "$miner_stratum_enabled"
-append_option "--miner-stratum-host" "$miner_stratum_host"
-append_option "--miner-stratum-port" "$miner_stratum_port"
-append_option "--poa-block-txs-selection-max-time" "$poa_block_txs_selection_max_time"
-append_option "--target-gas-limit" "$target_gas_limit"
+append_option "--block-txs-selection-max-time" "$BLOCK_TXS_SELECTION_MAX_TIME"
+append_option "--min-block-occupancy-ratio" "$MIN_BLOCK_OCCUPANCY_RATIO"
+append_option "--min-gas-price" "$MIN_GAS_PRICE"
+append_option "--min-priority-fee" "$MIN_PRIORITY_FEE"
+append_flag "--miner-enabled" "$MINER_ENABLED"
+append_option "--miner-coinbase" "$MINER_COINBASE"
+append_option "--miner-extra-data" "$MINER_EXTRA_DATA"
+append_flag "--miner-stratum-enabled" "$MINER_STRATUM_ENABLED"
+append_option "--miner-stratum-host" "$MINER_STRATUM_HOST"
+append_option "--miner-stratum-port" "$MINER_STRATUM_PORT"
+append_option "--poa-block-txs-selection-max-time" "$POA_BLOCK_TXS_SELECTION_MAX_TIME"
+append_option "--target-gas-limit" "$TARGET_GAS_LIMIT"
 
 # P2P Discovery Options
-append_option "--banned-node-ids" "$banned_node_ids"
-append_option "--bootnodes" "$bootnodes"
-append_option "--discovery-dns-url" "$discovery_dns_url"
-append_flag   "--discovery-enabled" "$discovery_enabled"
-append_option "--max-peers" "$max_peers"
-append_option "--net-restrict" "$net_restrict"
-append_flag   "--p2p-enabled" "$p2p_enabled"
-append_option "--p2p-host" "$p2p_host"
-append_option "--p2p-interface" "$p2p_interface"
-append_option "--p2p-port" "$p2p_port"
-append_option "--poa-discovery-retry-bootnodes" "$p2p_poa_discovery_retry_bootnodes"
-append_flag   "--random-peer-priority-enabled" "$random_peer_priority_enabled"
-append_flag   "--remote-connections-limit-enabled" "$remote_connections_limit_enabled"
-append_option "--remote-connections-max-percentage" "$remote_connections_max_percentage"
+append_option "--banned-node-ids" "$BANNED_NODE_IDS"
+append_option "--bootnodes" "$BOOTNODES"
+append_option "--discovery-dns-url" "$DISCOVERY_DNS_URL"
+append_flag "--discovery-enabled" "$DISCOVERY_ENABLED"
+append_option "--max-peers" "$MAX_PEERS"
+append_option "--net-restrict" "$NET_RESTRICT"
+append_flag "--p2p-enabled" "$P2P_ENABLED"
+append_option "--p2p-host" "$P2P_HOST"
+append_option "--p2p-interface" "$P2P_INTERFACE"
+append_option "--p2p-port" "$P2P_PORT"
+append_option "--poa-discovery-retry-bootnodes" "$P2P_POA_DISCOVERY_RETRY_BOOTNODES"
+append_flag "--random-peer-priority-enabled" "$RANDOM_PEER_PRIORITY_ENABLED"
+append_flag "--remote-connections-limit-enabled" "$REMOTE_CONNECTIONS_LIMIT_ENABLED"
+append_option "--remote-connections-max-percentage" "$REMOTE_CONNECTIONS_MAX_PERCENTAGE"
 
 # GraphQL Options
-append_option "--graphql-http-cors-origins" "$graphql_http_cors_origins"
-append_flag   "--graphql-http-enabled" "$graphql_http_enabled"
-append_option "--graphql-http-host" "$graphql_http_host"
-append_option "--graphql-http-port" "$graphql_http_port"
+append_option "--graphql-http-cors-origins" "$GRAPHQL_HTTP_CORS_ORIGINS"
+append_flag "--graphql-http-enabled" "$GRAPHQL_HTTP_ENABLED"
+append_option "--graphql-http-host" "$GRAPHQL_HTTP_HOST"
+append_option "--graphql-http-port" "$GRAPHQL_HTTP_PORT"
 
 # Engine JSON-RPC Options
-append_option "--engine-host-allowlist" "$engine_host_allowlist"
-append_option "--engine-jwt-disabled" "$engine_jwt_disabled"
-append_option "--engine-jwt-secret" "$engine_jwt_secret"
-append_flag   "--engine-rpc-enabled" "$engine_rpc_enabled"
-append_option "--engine-rpc-port" "$engine_rpc_port"
+append_option "--engine-host-allowlist" "$ENGINE_HOST_ALLOWLIST"
+append_option "--engine-jwt-disabled" "$ENGINE_JWT_DISABLED"
+append_option "--engine-jwt-secret" "$ENGINE_JWT_SECRET"
+append_flag "--engine-rpc-enabled" "$ENGINE_RPC_ENABLED"
+append_option "--engine-rpc-port" "$ENGINE_RPC_PORT"
 
 # JSON-RPC HTTP Options
-append_flag   "--json-pretty-print-enabled" "$json_pretty_print_enabled"
-append_option "--rpc-http-api" "$rpc_http_api"
-append_option "--rpc-http-api-method-no-auth" "$rpc_http_api_method_no_auth"
-append_option "--rpc-http-authentication-credentials-file" "$rpc_http_authentication_credentials_file"
-append_flag   "--rpc-http-authentication-enabled" "$rpc_http_authentication_enabled"
-append_option "--rpc-http-authentication-jwt-algorithm" "$rpc_http_authentication_jwt_algorithm"
-append_option "--rpc-http-authentication-jwt-public-key-file" "$rpc_http_authentication_jwt_public_key_file"
-append_option "--rpc-http-cors-origins" "$rpc_http_cors_origins"
-append_flag   "--rpc-http-enabled" "$rpc_http_enabled"
-append_option "--rpc-http-host" "$rpc_http_host"
-append_option "--rpc-http-max-active-connections" "$rpc_http_max_active_connections"
-append_option "--rpc-http-max-batch-size" "$rpc_http_max_batch_size"
-append_option "--rpc-http-max-request-content-length" "$rpc_http_max_request_content_length"
-append_option "--rpc-http-port" "$rpc_http_port"
-append_flag   "--rpc-http-tls-ca-clients-enabled" "$rpc_http_tls_ca_clients_enabled"
-append_option "--rpc-http-tls-cipher-suites" "$rpc_http_tls_cipher_suites"
-append_flag   "--rpc-http-tls-client-auth-enabled" "$rpc_http_tls_client_auth_enabled"
-append_flag   "--rpc-http-tls-enabled" "$rpc_http_tls_enabled"
-append_option "--rpc-http-tls-keystore-file" "$rpc_http_tls_keystore_file"
-append_option "--rpc-http-tls-keystore-password-file" "$rpc_http_tls_keystore_password_file"
-append_option "--rpc-http-tls-known-clients-file" "$rpc_http_tls_known_clients_file"
-append_option "--rpc-http-tls-protocols" "$rpc_http_tls_protocols"
+append_flag "--json-pretty-print-enabled" "$JSON_PRETTY_PRINT_ENABLED"
+append_option "--rpc-http-api" "$RPC_HTTP_API"
+append_option "--rpc-http-api-method-no-auth" "$RPC_HTTP_API_METHOD_NO_AUTH"
+append_option "--rpc-http-authentication-credentials-file" "$RPC_HTTP_AUTHENTICATION_CREDENTIALS_FILE"
+append_flag "--rpc-http-authentication-enabled" "$RPC_HTTP_AUTHENTICATION_ENABLED"
+append_option "--rpc-http-authentication-jwt-algorithm" "$RPC_HTTP_AUTHENTICATION_JWT_ALGORITHM"
+append_option "--rpc-http-authentication-jwt-public-key-file" "$RPC_HTTP_AUTHENTICATION_JWT_PUBLIC_KEY_FILE"
+append_option "--rpc-http-cors-origins" "$RPC_HTTP_CORS_ORIGINS"
+append_flag "--rpc-http-enabled" "$RPC_HTTP_ENABLED"
+append_option "--rpc-http-host" "$RPC_HTTP_HOST"
+append_option "--rpc-http-max-active-connections" "$RPC_HTTP_MAX_ACTIVE_CONNECTIONS"
+append_option "--rpc-http-max-batch-size" "$RPC_HTTP_MAX_BATCH_SIZE"
+append_option "--rpc-http-max-request-content-length" "$RPC_HTTP_MAX_REQUEST_CONTENT_LENGTH"
+append_option "--rpc-http-port" "$RPC_HTTP_PORT"
+append_flag "--rpc-http-tls-ca-clients-enabled" "$RPC_HTTP_TLS_CA_CLIENTS_ENABLED"
+append_option "--rpc-http-tls-cipher-suites" "$RPC_HTTP_TLS_CIPHER_SUITES"
+append_flag "--rpc-http-tls-client-auth-enabled" "$RPC_HTTP_TLS_CLIENT_AUTH_ENABLED"
+append_flag "--rpc-http-tls-enabled" "$RPC_HTTP_TLS_ENABLED"
+append_option "--rpc-http-tls-keystore-file" "$RPC_HTTP_TLS_KEYSTORE_FILE"
+append_option "--rpc-http-tls-keystore-password-file" "$RPC_HTTP_TLS_KEYSTORE_PASSWORD_FILE"
+append_option "--rpc-http-tls-known-clients-file" "$RPC_HTTP_TLS_KNOWN_CLIENTS_FILE"
+append_option "--rpc-http-tls-protocols" "$RPC_HTTP_TLS_PROTOCOLS"
 
 # JSON-RPC Websocket Options
-append_option "--rpc-ws-api" "$rpc_ws_api"
-append_option "--rpc-ws-api-method-no-auth" "$rpc_ws_api_method_no_auth"
-append_option "--rpc-ws-authentication-credentials-file" "$rpc_ws_authentication_credentials_file"
-append_flag   "--rpc-ws-authentication-enabled" "$rpc_ws_authentication_enabled"
-append_option "--rpc-ws-authentication-jwt-algorithm" "$rpc_ws_authentication_jwt_algorithm"
-append_option "--rpc-ws-authentication-jwt-public-key-file" "$rpc_ws_authentication_jwt_public_key_file"
-append_flag   "--rpc-ws-enabled" "$rpc_ws_enabled"
-append_option "--rpc-ws-host" "$rpc_ws_host"
-append_option "--rpc-ws-max-active-connections" "$rpc_ws_max_active_connections"
-append_option "--rpc-ws-max-frame-size" "$rpc_ws_max_frame_size"
-append_option "--rpc-ws-port" "$rpc_ws_port"
+append_option "--rpc-ws-api" "$RPC_WS_API"
+append_option "--rpc-ws-api-method-no-auth" "$RPC_WS_API_METHOD_NO_AUTH"
+append_option "--rpc-ws-authentication-credentials-file" "$RPC_WS_AUTHENTICATION_CREDENTIALS_FILE"
+append_flag "--rpc-ws-authentication-enabled" "$RPC_WS_AUTHENTICATION_ENABLED"
+append_option "--rpc-ws-authentication-jwt-algorithm" "$RPC_WS_AUTHENTICATION_JWT_ALGORITHM"
+append_option "--rpc-ws-authentication-jwt-public-key-file" "$RPC_WS_AUTHENTICATION_JWT_PUBLIC_KEY_FILE"
+append_flag "--rpc-ws-enabled" "$RPC_WS_ENABLED"
+append_option "--rpc-ws-host" "$RPC_WS_HOST"
+append_option "--rpc-ws-max-active-connections" "$RPC_WS_MAX_ACTIVE_CONNECTIONS"
+append_option "--rpc-ws-max-frame-size" "$RPC_WS_MAX_FRAME_SIZE"
+append_option "--rpc-ws-port" "$RPC_WS_PORT"
 
 # In-Process RPC Options
 # Privacy Options
-append_flag   "--privacy-enable-database-migration" "$privacy_enable_database_migration"
-append_flag   "--privacy-enabled" "$privacy_enabled"
-append_flag   "--privacy-flexible-groups-enabled" "$privacy_flexible_groups_enabled"
-append_option "--privacy-marker-transaction-signing-key-file" "$privacy_marker_transaction_signing_key_file"
-append_flag   "--privacy-multi-tenancy-enabled" "$privacy_multi_tenancy_enabled"
-append_option "--privacy-public-key-file" "$privacy_public_key_file"
-append_flag   "--privacy-tls-enabled" "$privacy_tls_enabled"
-append_option "--privacy-tls-keystore-file" "$privacy_tls_keystore_file"
-append_option "--privacy-tls-keystore-password-file" "$privacy_tls_keystore_password_file"
-append_option "--privacy-tls-known-enclave-file" "$privacy_tls_known_enclave_file"
-append_option "--privacy-url" "$privacy_url"
+append_flag "--privacy-enable-database-migration" "$PRIVACY_ENABLE_DATABASE_MIGRATION"
+append_flag "--privacy-enabled" "$PRIVACY_ENABLED"
+append_flag "--privacy-flexible-groups-enabled" "$PRIVACY_FLEXIBLE_GROUPS_ENABLED"
+append_option "--privacy-marker-transaction-signing-key-file" "$PRIVACY_MARKER_TRANSACTION_SIGNING_KEY_FILE"
+append_flag "--privacy-multi-tenancy-enabled" "$PRIVACY_MULTI_TENANCY_ENABLED"
+append_option "--privacy-public-key-file" "$PRIVACY_PUBLIC_KEY_FILE"
+append_flag "--privacy-tls-enabled" "$PRIVACY_TLS_ENABLED"
+append_option "--privacy-tls-keystore-file" "$PRIVACY_TLS_KEYSTORE_FILE"
+append_option "--privacy-tls-keystore-password-file" "$PRIVACY_TLS_KEYSTORE_PASSWORD_FILE"
+append_option "--privacy-tls-known-enclave-file" "$PRIVACY_TLS_KNOWN_ENCLAVE_FILE"
+append_option "--privacy-url" "$PRIVACY_URL"
 
 # Metrics Options
-append_option "--metrics-category" "$metrics_category"
-append_flag   "--metrics-enabled" "$metrics_enabled"
-append_option "--metrics-host" "$metrics_host"
-append_option "--metrics-port" "$metrics_port"
-append_option "--metrics-protocol" "$metrics_protocol"
-append_flag   "--metrics-push-enabled" "$metrics_push_enabled"
-append_option "--metrics-push-host" "$metrics_push_host"
-append_option "--metrics-push-interval" "$metrics_push_interval"
-append_option "--metrics-push-port" "$metrics_push_port"
-append_option "--metrics-push-prometheus-job" "$metrics_push_prometheus_job"
+append_option "--metrics-category" "$METRICS_CATEGORY"
+append_flag "--metrics-enabled" "$METRICS_ENABLED"
+append_option "--metrics-host" "$METRICS_HOST"
+append_option "--metrics-port" "$METRICS_PORT"
+append_option "--metrics-protocol" "$METRICS_PROTOCOL"
+append_flag "--metrics-push-enabled" "$METRICS_PUSH_ENABLED"
+append_option "--metrics-push-host" "$METRICS_PUSH_HOST"
+append_option "--metrics-push-interval" "$METRICS_PUSH_INTERVAL"
+append_option "--metrics-push-port" "$METRICS_PUSH_PORT"
+append_option "--metrics-push-prometheus-job" "$METRICS_PUSH_PROMETHEUS_JOB"
 
 # Permissions Options
-append_option "--permissions-accounts-config-file" "$permissions_accounts_config_file"
-append_flag   "--permissions-accounts-config-file-enabled" "$permissions_accounts_config_file_enabled"
-append_option "--permissions-accounts-contract-address" "$permissions_accounts_contract_address"
-append_flag   "--permissions-accounts-contract-enabled" "$permissions_accounts_contract_enabled"
-append_option "--permissions-nodes-config-file" "$permissions_nodes_config_file"
-append_flag   "--permissions-nodes-config-file-enabled" "$permissions_nodes_config_file_enabled"
-append_option "--permissions-nodes-contract-address" "$permissions_nodes_contract_address"
-append_flag   "--permissions-nodes-contract-enabled" "$permissions_nodes_contract_enabled"
-append_option "--permissions-nodes-contract-version" "$permissions_nodes_contract_version"
+append_option "--permissions-accounts-config-file" "$PERMISSIONS_ACCOUNTS_CONFIG_FILE"
+append_flag "--permissions-accounts-config-file-enabled" "$PERMISSIONS_ACCOUNTS_CONFIG_FILE_ENABLED"
+append_option "--permissions-accounts-contract-address" "$PERMISSIONS_ACCOUNTS_CONTRACT_ADDRESS"
+append_flag "--permissions-accounts-contract-enabled" "$PERMISSIONS_ACCOUNTS_CONTRACT_ENABLED"
+append_option "--permissions-nodes-config-file" "$PERMISSIONS_NODES_CONFIG_FILE"
+append_flag "--permissions-nodes-config-file-enabled" "$PERMISSIONS_NODES_CONFIG_FILE_ENABLED"
+append_option "--permissions-nodes-contract-address" "$PERMISSIONS_NODES_CONTRACT_ADDRESS"
+append_flag "--permissions-nodes-contract-enabled" "$PERMISSIONS_NODES_CONTRACT_ENABLED"
+append_option "--permissions-nodes-contract-version" "$PERMISSIONS_NODES_CONTRACT_VERSION"
 
 # API Configuration Options
-append_option "--api-gas-price-blocks" "$api_gas_price_blocks"
-append_option "--api-gas-price-max" "$api_gas_price_max"
-append_option "--api-gas-price-percentile" "$api_gas_price_percentile"
-append_option "--rpc-gas-cap" "$rpc_gas_cap"
-append_option "--rpc-max-logs-range" "$rpc_max_logs_range"
-append_option "--rpc-max-trace-filter-range" "$rpc_max_trace_filter_range"
+append_option "--api-gas-price-blocks" "$API_GAS_PRICE_BLOCKS"
+append_option "--api-gas-price-max" "$API_GAS_PRICE_MAX"
+append_option "--api-gas-price-percentile" "$API_GAS_PRICE_PERCENTILE"
+append_option "--rpc-gas-cap" "$RPC_GAS_CAP"
+append_option "--rpc-max-logs-range" "$RPC_MAX_LOGS_RANGE"
+append_option "--rpc-max-trace-filter-range" "$RPC_MAX_TRACE_FILTER_RANGE"
 
+echo "Running: LOG4J_CONFIGURATION_FILE=/usr/lib/eth-node-regtest/besu/admin.xml besu $OPTIONS"
 
-
-echo "Running: LOG4J_CONFIGURATION_FILE=/usr/lib/eth-node-besu-regtest/admin.xml besu $OPTIONS"
-
-LOG4J_CONFIGURATION_FILE=/usr/lib/eth-node-besu-regtest/admin.xml exec besu $OPTIONS
+bash -c "LOG4J_CONFIGURATION_FILE=/usr/lib/eth-node-regtest/besu/admin.xml besu $OPTIONS"

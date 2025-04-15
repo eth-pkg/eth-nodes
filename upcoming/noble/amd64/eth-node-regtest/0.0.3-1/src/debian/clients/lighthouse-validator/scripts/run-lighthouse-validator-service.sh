@@ -1,6 +1,5 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-
-exec /usr/lib/eth-node-lighthouse-validator-regtest/bin/run-lighthouse-validator.sh \
-    --conf-file /etc/eth-node-regtest-config/regtest.conf \
-    --conf-file /etc/eth-node-lighthouse-validator-regtest/lighthouse-validator.conf
+exec /usr/lib/eth-node-regtest/lighthouse-validator/run-lighthouse-validator.sh \
+    --conf-file /etc/eth-node-regtest/conf/eth-node-regtest.conf \
+    --conf-file /etc/eth-node-regtest/conf/eth-node-lighthouse-validator-regtest.conf

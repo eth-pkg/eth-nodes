@@ -16,24 +16,29 @@ This package comes without validator. If you would like to have validator runnin
 please install eth-node-regtest-with-validator instead.
 """
 add_files = [
-    "debian/regtest /var/lib/eth-node-regtest",
-    "debian/config /etc/eth-node-regtest",
-    "debian/defaults /etc/eth-node-regtest",
-    "debian/scripts/postprocess.sh /usr/lib/eth-node-regtest",
     ## config
-    "debian/regtest /var/lib/eth-node-regtest/regtest",
-    "debian/scripts/postprocess.sh /usr/lib/eth-node-regtest",
+    "debian/regtest/regtest /var/lib/eth-node-regtest/regtest",
+    "debian/regtest/config /etc/eth-node-regtest/regtest/",
+    "debian/regtest/defaults /etc/eth-node-regtest/regtest/",
     ## besu
-    "debian/clients/besu/scripts /usr/lib/eth-node-regtest/besu",
+    "debian/clients/besu/scripts/* /usr/lib/eth-node-regtest/besu",
     "debian/clients/besu/eth-node-besu-regtest.service /lib/systemd/system/",
-    "debian/scripts/postprocess.sh /usr/lib/eth-node-besu-regtest",
     ## lighthouse
-    "debian/clients/lighthouse/scripts /usr/lib/eth-node-regtest/lighthouse",
+    "debian/clients/lighthouse/scripts/* /usr/lib/eth-node-regtest/lighthouse",
     "debian/clients/lighthouse/eth-node-lighthouse-regtest.service /lib/systemd/system/",
-    "debian/scripts/postprocess.sh /usr/lib/eth-node-lighthouse-regtest",
     ## lighthouse validator
-    "debian/clients/lighthouse-validator/scripts  /usr/lib/eth-node-regtest/lighthouse-validator",
-    "debian/clients/lighthouse/eth-node-lighthouse-validator-regtest.service /lib/systemd/system/",
-    "debian/validator /var/lib/eth-node-regtest/lighthouse-validator",
-    "debian/scripts/postprocess.sh /usr/lib/eth-node-lighthouse-validator-regtest",
+    "debian/clients/lighthouse-validator/scripts/*  /usr/lib/eth-node-regtest/lighthouse-validator",
+    "debian/clients/lighthouse-validator/eth-node-lighthouse-validator-regtest.service /lib/systemd/system/",
+    "debian/clients/lighthouse-validator/validator /var/lib/eth-node-regtest/lighthouse-validator",
+    ## package itself
+    "debian/regtest /var/lib/eth-node-regtest",
+    "debian/conf /etc/eth-node-regtest",
+    "debian/scripts/postprocess.sh /usr/lib/eth-node-regtest",
 ]
+
+[config."regtest.conf"]
+format = "plain"
+public = true
+
+[config."regtest.conf".postprocess]
+command = ["bash", "/usr/lib/eth-node-regtest/postprocess.sh"]
