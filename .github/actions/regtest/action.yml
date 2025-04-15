@@ -123,7 +123,9 @@ runs:
           zcli \ 
           eth2-testnet-genesis \
           eth2-val-tools \
-          ethereum-genesis-generator
+          ethereum-genesis-generator \ 
+          eth-beacon-genesis \
+          geth-hdwallet
 
     - name: Build clients
       run: |
@@ -213,9 +215,9 @@ runs:
         # - name: Run API tests
         #   run: |
         # TESTS 
-        echo "Waiting for 180 seconds for nodes to check successful startup..."
+        echo "Waiting for 60 seconds for nodes to check successful startup..."
         # on localhost this is much faster, as keys are imported quicker on a faster machine
-        sleep 180 # it takes time to include the validators 
+        sleep 60 # it takes time to include the validators 
         # Check beacon state
         echo ""
         curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545

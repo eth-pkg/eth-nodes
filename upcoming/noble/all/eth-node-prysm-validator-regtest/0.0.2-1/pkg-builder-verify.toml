@@ -5,5 +5,5 @@ package_hash = [
     # { hash="9b56dc209814628a44eb1088029f551ec5de9ec0", name= "eth-node-prysm-validator-regtest_0.0.1-1.dsc"},
     { hash = "b35f46d5fb424aee57b5d666e61b2eff83543aad", name = "eth-node-prysm-validator-regtest_0.0.2.orig.tar.gz" },
     # { hash="f999570db3a4fce99a40d8fb6b93d0f49e055759", name= "eth-node-prysm-validator-regtest_0.0.1-1.debian.tar.xz"},
-    { hash = "c2058ce5111a98b5929763ed3d94e4f08fb2483f", name = "eth-node-prysm-validator-regtest_0.0.2-1_all.deb" },
+    { hash = "945f3fce5ee28b8cb69c89b9d720ef50f056a0d1", name = "eth-node-prysm-validator-regtest_0.0.2-1_all.deb" },
 ]
