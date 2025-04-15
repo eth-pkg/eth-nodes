@@ -537,9 +537,10 @@ jobs:
       # only the filtered tests passed, and the others are "fake green"
       # if: matrix.cl_name == 'lighthouse' && matrix.cl_name == matrix.validator_name
         # if: matrix.validator_name != 'prysm' && matrix.cl_name != 'lighthouse'
-        uses: ./.github/actions/regtest-daily
+        uses: ./.github/actions/regtest
         with:
           network: regtest
           el_name: ${{matrix.el_name}}
           cl_name: ${{matrix.cl_name}}
           validator_name: ${{matrix.validator_name}}
+          build_from_source: "false"

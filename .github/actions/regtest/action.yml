@@ -13,6 +13,10 @@ inputs:
   network:
     description: "Ethereum network name"
     required: true
+  build_from_source:
+    description: "Whether to build packages from source or use pre-built ones"
+    required: false
+    default: 'false'
 
 runs:
   using: composite
@@ -26,8 +30,6 @@ runs:
         sudo apt-get autoremove -y
         sudo apt-get clean
       shell: bash
-
-
 
     - name: Setup Java
       run: |
@@ -48,6 +50,7 @@ runs:
       shell: bash
 
     - name: Checkout dependency repository
+      if: ${{ inputs.build_from_source == 'true' }}
       uses: actions/checkout@v4
       with:
         repository: eth-pkg/pkg-builder
@@ -55,6 +58,7 @@ runs:
         path: pkg-builder
 
     - name: Install pkg-builder
+      if: ${{ inputs.build_from_source == 'true' }}
       run: |
         cd pkg-builder
         cargo build --release
@@ -68,6 +72,7 @@ runs:
       shell: bash
 
     - name: Sbuild setup
+      if: ${{ inputs.build_from_source == 'true' }}
       run: |
         sudo apt update
         # Note this is an older version of sbuild, no need to patch it, yet
@@ -81,6 +86,7 @@ runs:
       shell: bash
 
     - name: Create chroot env
+      if: ${{ inputs.build_from_source == 'true' }}
       run: |
         pwd && ls -al
         cd upcoming/noble/all/eth-node-regtest/0.0.2-1 && pkg-builder env create
@@ -91,6 +97,14 @@ runs:
       run: |
         sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-main noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
+        sudo apt update
+      shell: bash
+
+    - name: Add eth-nodes testing repository
+      if: ${{ inputs.build_from_source != 'true' }}
+      run: |
+        sudo curl -fsSL https://eth-nodes.com/keys/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc -o /usr/share/keyrings/ethnodes-archive-keyring.asc
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
         sudo apt update
       shell: bash
 
@@ -106,6 +120,7 @@ runs:
         curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
         sudo apt install -y nodejs
       shell: bash
+
     # caches packages not to hit the repository in each CI run
     - name: Cache apt packages
       uses: eth-pkg/apt-deb-cache@v0.2.4
@@ -128,6 +143,7 @@ runs:
           geth-hdwallet
 
     - name: Build clients
+      if: ${{ inputs.build_from_source == 'true' }}
       run: |
         sudo apt install yq ## this should be in ethereum-genesis-generator
         cd upcoming/noble/all
@@ -170,17 +186,29 @@ runs:
         cp eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb ${HOME}/packages/
 
         echo "${HOME}/packages" >> $GITHUB_PATH
-
       shell: bash
-    - name: Run Service Tests
+
+    - name: Install Packages
       run: |
         java --version 
+        sudo apt install yq ## this should be in ethereum-genesis-generator
+        
+        if [ "${{ inputs.build_from_source }}" == "true" ]; then
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.2-1_all.deb
+          # have to install in one go 
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
+            $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
+            $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb
+        else
+          sudo apt install -y eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
+            eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
+            eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}
+        fi
+      shell: bash
+
+    - name: Run Service Tests
+      run: |
         which java 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_0.0.2-1_all.deb
-        # have to install in one go 
-        sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
-          $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_0.0.2-1_all.deb \
-          $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_0.0.2-1_all.deb  
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         sleep 60
         # check if execution client is active 
@@ -211,10 +239,7 @@ runs:
           journalctl -u eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}.service --no-pager -n 100
           exit 1
         fi
-        #   shell: bash
-        # - name: Run API tests
-        #   run: |
-        # TESTS 
+        
         echo "Waiting for 60 seconds for nodes to check successful startup..."
         # on localhost this is much faster, as keys are imported quicker on a faster machine
         sleep 60 # it takes time to include the validators 
@@ -222,7 +247,6 @@ runs:
         echo ""
         curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' http://localhost:8545
         echo ""
-
 
         # TEST if they are actually running correctly 
         # Check if execution client is syncing
@@ -237,18 +261,18 @@ runs:
           # exit 1
         fi
 
-        # Check if consensus client is syncing
-        CL_SYNCING=$(curl -s -X GET -H "Content-Type: application/json" http://localhost:5052/eth/v1/node/syncing)
-        if [ "$(echo $CL_SYNCING | jq '.data.is_syncing')" == "false" ]; then
-          echo "Consensus client is already synced"
-          echo "$CL_SYNCING"
-        else
-          echo "Consensus client is still syncing"
-          echo "$CL_SYNCING"
-          # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
-          # same for teku, lighthouse, and more ...
-          # exit 1
-        fi
+        # # Check if consensus client is syncing
+        # CL_SYNCING=$(curl -s -X GET -H "Content-Type: application/json" http://localhost:5052/eth/v1/node/syncing)
+        # if [ "$(echo $CL_SYNCING | jq '.data.is_syncing')" == "false" ]; then
+        #   echo "Consensus client is already synced"
+        #   echo "$CL_SYNCING"
+        # else
+        #   echo "Consensus client is still syncing"
+        #   echo "$CL_SYNCING"
+        #   # Might be not a bug https://github.com/sigp/lighthouse/issues/6425
+        #   # same for teku, lighthouse, and more ...
+        #   # exit 1
+        # fi
 
         # uncommenting, could it be a bug with blocknumber???
         block_number_result=$(curl -s -X POST --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":3}' -H "Content-Type: application/json" http://localhost:8545 )
@@ -289,7 +313,6 @@ runs:
             exit 1
         fi
 
-
         echo "Waiting for 30 seconds for the transactions to be included..."
         sleep 30 # increase time to https://github.com/eth-pkg/eth-nodes/actions/runs/11304204442/job/31442272249
 
@@ -312,5 +335,4 @@ runs:
         else
             echo "Transactions is included"
         fi
-
       shell: bash
