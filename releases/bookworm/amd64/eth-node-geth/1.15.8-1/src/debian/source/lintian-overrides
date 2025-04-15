@@ -1,0 +1,14 @@
+eth-node-geth source: source-is-missing [eth/tracers/js/internal/tracers/evmdis_tracer.js]
+eth-node-geth source: source-is-missing [graphql/internal/graphiql/graphiql.min.js]
+eth-node-geth source: source-is-missing [graphql/internal/graphiql/react-dom.production.min.js]
+eth-node-geth source: source-is-missing [graphql/internal/graphiql/react.production.min.js]
+eth-node-geth source: source-is-missing [internal/jsre/deps/bignumber.js]
+eth-node-geth source: source-is-missing [internal/jsre/deps/web3.js]
+eth-node-geth source: source-is-missing [tests/solidity/bytecode.js]
+
+eth-node-geth source: debian-rules-ignores-make-clean-error 
+eth-node-geth source: no-newline-at-end [debian/changelog]
+#TODO
+eth-node-geth source: source-contains-prebuilt-windows-binary [build/nsis.simplefc.dll]
+eth-node-geth source: missing-field-in-dep5-copyright Copyright [debian/copyright:7]
+eth-node-geth source: missing-field-in-dep5-copyright Copyright [debian/copyright:10]
