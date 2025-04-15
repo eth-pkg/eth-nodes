@@ -198,11 +198,11 @@ runs:
         sudo apt install yq ## this should be in ethereum-genesis-generator
         
         if [ "${{ inputs.build_from_source }}" == "true" ]; then
-          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_{{ inputs.package_version }}_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-config_${{ inputs.package_version }}_all.deb
           # have to install in one go 
-          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_{{ inputs.package_version }}_all.deb \
-            $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_{{ inputs.package_version }}_all.deb \
-            $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_{{ inputs.package_version }}_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.el_name }}-${{ inputs.network }}_${{ inputs.package_version }}_all.deb \
+            $HOME/packages/eth-node-${{ inputs.cl_name }}-${{ inputs.network }}_${{ inputs.package_version }}_all.deb \
+            $HOME/packages/eth-node-${{ inputs.validator_name }}-validator-${{ inputs.network }}_${{ inputs.package_version }}_all.deb
         else
           sudo apt install -y eth-node-${{ inputs.el_name }}-${{ inputs.network }} \
             eth-node-${{ inputs.cl_name }}-${{ inputs.network }} \
