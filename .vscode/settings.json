@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "*.sss": "toml",
-    "*.sps": "toml"
+    "*.sps": "toml",
+    "*.env.*": "env"
   }
 }
