@@ -1,0 +1,67 @@
+#!/bin/sh
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# Define package and config file
+PACKAGE_NAME="eth-node-regtest-full"
+CONFIG_FILE="/etc/$PACKAGE_NAME/regtest.conf"
+
+# Handle different preinst cases
+case "$1" in
+install | upgrade)
+    # Create config file if it doesn't exist
+    if [ ! -f "$CONFIG_FILE" ]; then
+        mkdir -p "$(dirname "$CONFIG_FILE")"
+        touch "$CONFIG_FILE"
+        chmod 644 "$CONFIG_FILE"
+    fi
+
+    # Prompt for configuration values
+    db_input high $PACKAGE_NAME/EL_CLIENT || true
+    db_input high $PACKAGE_NAME/CL_CLIENT || true
+    db_input high $PACKAGE_NAME/RUN_VL_CLIENT || true
+
+    # Conditional prompt for VL_CLIENT
+    db_get $PACKAGE_NAME/RUN_VL_CLIENT
+    if [ "$RET" = "true" ]; then
+        db_input high $PACKAGE_NAME/VL_CLIENT || true
+    fi
+    db_go || true
+
+    # Retrieve and store configuration values
+    db_get $PACKAGE_NAME/EL_CLIENT
+    EL_CLIENT="$RET"
+    db_get $PACKAGE_NAME/CL_CLIENT
+    CL_CLIENT="$RET"
+    db_get $PACKAGE_NAME/VL_CLIENT
+    VL_CLIENT="$RET"
+    db_get $PACKAGE_NAME/RUN_VL_CLIENT
+    RUN_VL_CLIENT="$RET"
+
+    # Update config file with sanitized values
+    for var in EL_CLIENT CL_CLIENT VL_CLIENT RUN_VL_CLIENT; do
+        eval value=\$$var
+        # Escape special characters for sed
+        value=$(echo "$value" | sed -e 's/[\/&]/\\&/g')
+        if grep -q "^$var=" "$CONFIG_FILE"; then
+            sed -i "s/^$var=.*/$var=\"$value\"/" "$CONFIG_FILE"
+        else
+            echo "$var=\"$value\"" >>"$CONFIG_FILE"
+        fi
+    done
+    ;;
+abort-upgrade)
+    # Do nothing on abort-upgrade
+    ;;
+*)
+    echo "preinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Clean up debconf
+db_stop
+
+exit 0
