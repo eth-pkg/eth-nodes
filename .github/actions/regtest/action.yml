@@ -116,7 +116,36 @@ runs:
     - name: Install dotnet
       id: install-dotnet
       run: |
-        sudo add-apt-repository ppa:dotnet/backports
+        add_repo_with_fallback() {
+          # Method 1: Standard add-apt-repository
+          if sudo add-apt-repository -y ppa:dotnet/backports; then
+            echo "Repository added successfully with standard method"
+            return 0
+          fi
+          
+          echo "Standard method failed, trying manual method..."
+          
+          # Method 2: Manual addition
+          echo "deb http://ppa.launchpad.net/dotnet/backports/ubuntu $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/dotnet-backports.list
+          
+          # Get key ID (this is the dotnet PPA key ID)
+          KEY_ID="BE1229CF"
+          
+          # Try different key servers until one works
+          for server in keyserver.ubuntu.com hkp://keyserver.ubuntu.com:80 keys.gnupg.net pgp.mit.edu; do
+            echo "Trying key server: $server"
+            if sudo apt-key adv --keyserver $server --recv-keys $KEY_ID; then
+              echo "Key added successfully from $server"
+              sudo apt update
+              return 0
+            fi
+          done
+          
+          echo "Failed to add repository key from any server"
+          return 1
+        }
+
+        add_repo_with_fallback
         sudo apt update
         sudo apt install -y aspnetcore-runtime-9.0
       shell: bash

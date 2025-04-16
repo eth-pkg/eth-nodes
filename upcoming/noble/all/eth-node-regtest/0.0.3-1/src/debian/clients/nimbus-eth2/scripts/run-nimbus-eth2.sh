@@ -80,11 +80,6 @@ add_option() {
     fi
 }
 
-
-
-
-
-
 add_option "--config-file" "$NIMBUS_ETH2_CONFIG_FILE"
 add_option "--log-level" "$NIMBUS_ETH2_LOG_LEVEL"
 add_option "--log-file" "$NIMBUS_ETH2_LOG_FILE"
@@ -166,7 +161,6 @@ add_option "--payload-builder-url" "$NIMBUS_ETH2_PAYLOAD_BUILDER_URL"
 add_option "--local-block-value-boost" "$NIMBUS_ETH2_LOCAL_BLOCK_VALUE_BOOST"
 add_option "--history" "$NIMBUS_ETH2_HISTORY"
 
-
 echo "Using Options: nimbus_beacon_node $OPTIONS"
 
 # hack to download state before starting client
@@ -184,4 +178,4 @@ if [ -n "$finalized_checkpoint_state" ]; then
 fi
 
 # on ci the postrm fails, so it not in path
-exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node $OPTIONS > $log_file
+exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node $OPTIONS >$NIMBUS_ETH2_LOG_FILE

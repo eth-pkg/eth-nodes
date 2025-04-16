@@ -179,12 +179,12 @@ append_flag "--mainnet" "$PRYSM_VALIDATOR_MAINNET"
 append_flag "--sepolia" "$PRYSM_VALIDATOR_SEPOLIA"
 append_flag "--write-wallet-password-on-web-onboarding" "$PRYSM_VALIDATOR_WRITE_WALLET_PASSWORD_ON_WEB_ONBOARDING"
 
-echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$wallet_keystore --wallet-dir=$wallet_dir --wallet-password-file=$wallet_password_file --account-password-file=$account_password_file"
+echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$PRYSM_VALIDATOR_WALLET_KEYSTORE --wallet-dir=$PRYSM_VALIDATOR_WALLET_DIR --wallet-password-file=$PRYSM_VALIDATOR_WALLET_PASSWORD_FILE --account-password-file=$PRYSM_VALIDATOR_ACCOUNT_PASSWORD_FILE"
 
-/usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir="$wallet_keystore" \
-    --wallet-dir="$wallet_dir" \
-    --wallet-password-file="$wallet_password_file" \
-    --account-password-file="$account_password_file" \
+/usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir="$PRYSM_VALIDATOR_WALLET_KEYSTORE" \
+    --wallet-dir="$PRYSM_VALIDATOR_WALLET_DIR" \
+    --wallet-password-file="$PRYSM_VALIDATOR_WALLET_PASSWORD_FILE" \
+    --account-password-file="$PRYSM_VALIDATOR_ACCOUNT_PASSWORD_FILE" \
     --accept-terms-of-use
 
 echo "Using Options  /usr/lib/eth-node-prysm/bin/validator $OPTIONS"

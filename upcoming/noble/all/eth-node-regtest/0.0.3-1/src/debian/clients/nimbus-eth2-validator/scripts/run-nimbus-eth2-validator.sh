@@ -129,4 +129,4 @@ echo "Using Options /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client: $
 #   --data-dir:/var/lib/eth-node-regtest/nimbus-eth2-validator
 
 # TODO
-exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client $OPTIONS >$log_file
+exec /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client $OPTIONS | tee -a $NIMBUS_ETH2_LOG_FILE >/dev/null
