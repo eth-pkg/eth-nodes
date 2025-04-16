@@ -173,8 +173,8 @@ runs:
           
           local package_dir="${HOME}/.pkg-builder/packages/noble/${package_name}-${version}"
           cd $package_dir
-          cp ${package_name}_${version}_all.deb ${HOME}/packages/
-          echo "Package built: ${package_name}_${version}_all.deb"
+          cp *.deb ${HOME}/packages/
+          echo "Packages copied to ${HOME}/packages/"
         }
         
         # Build  eth-node-${{ inputs.network }}
@@ -195,7 +195,7 @@ runs:
         echo "eth-node-regtest-full eth-node-${{ inputs.network }}-full/RUN_VL_CLIENT boolean true" | sudo debconf-set-selections
 
         if [ "${{ inputs.build_from_source }}" == "true" ]; then
-          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-full_all.deb
+          sudo dpkg -i $HOME/packages/eth-node-${{ inputs.network }}-full-${{ inputs.package_version }}_all.deb
         else
           sudo apt install -y eth-node-${{ inputs.network }}-full
         fi
