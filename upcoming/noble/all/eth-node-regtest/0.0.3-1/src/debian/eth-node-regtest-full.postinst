@@ -109,10 +109,6 @@ generate_testnet() {
     chown -R eth-node-regtest:eth-node-regtest "${BASE_DIR}"
 }
 
-remove_regtest() {
-    rm -rf "${BASE_DIR}"
-}
-
 setup_selected_clients() {
     local el_client=$(get_debconf_value "EL_CLIENT")
     local cl_client=$(get_debconf_value "CL_CLIENT")
@@ -152,7 +148,6 @@ setup_selected_clients() {
 # Main execution logic
 case "$1" in
 configure)
-    remove_regtest
     setup_package
     generate_testnet
     setup_selected_clients

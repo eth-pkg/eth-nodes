@@ -1,12 +1,12 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-set -e 
+set -e
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."   
+    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."
     echo "  --help, -h                    Displays this help text and exits."
     echo "  --version, -v                 Displays the version and exits."
     exit 0
@@ -24,22 +24,22 @@ VERSION=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --conf-file|-e)
-            CONFIG_FILES+=("$2")
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        --version|-v)
-            VERSION=true
-            shift
-            ;;  
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --conf-file | -e)
+        CONFIG_FILES+=("$2")
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    --version | -v)
+        VERSION=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -69,19 +69,19 @@ done
 OPTIONS=""
 
 append_option() {
-  local option=$1
-  local value=$2
-  if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option $value"
-  fi
+    local option=$1
+    local value=$2
+    if [ -n "$value" ]; then
+        OPTIONS="$OPTIONS $option $value"
+    fi
 }
 
-append_flag(){
- local option=$1
-  local value=$2
-  if [ "$value" = "true" ]; then
-    OPTIONS="$OPTIONS $option"
-  fi 
+append_flag() {
+    local option=$1
+    local value=$2
+    if [ "$value" = "true" ]; then
+        OPTIONS="$OPTIONS $option"
+    fi
 }
 
 # Options
@@ -267,9 +267,9 @@ append_option "--log.journald.filter" "$RETH_LOG_JOURNALD_FILTER"
 append_option "--color" "$RETH_COLOR"
 
 # Display:
-append_flag   "-v" "$verbosity"
-append_flag   "-q" "$quiet"
-
+append_flag "-v" "$verbosity"
+append_flag "-q" "$quiet"
 
 echo "Starting node with options: reth node $OPTIONS"
 
+exec reth node $OPTIONS

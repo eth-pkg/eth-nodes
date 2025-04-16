@@ -61,33 +61,33 @@ add_files = [
     ## lighthouse validator
     "debian/clients/lighthouse-validator/scripts/* /usr/lib/eth-node-regtest/lighthouse-validator",
     "debian/clients/lighthouse-validator/eth-node-lighthouse-validator-regtest.service /lib/systemd/system/",
-    "debian/clients/lighthouse-validator/validator /var/lib/eth-node-regtest/lighthouse-validator",
+    "debian/clients/lighthouse-validator/validator/* /var/lib/eth-node-regtest/lighthouse-validator",
     ## lodestar (consensus client)
     "debian/clients/lodestar/scripts/* /usr/lib/eth-node-regtest/lodestar",
     "debian/clients/lodestar/eth-node-lodestar-regtest.service /lib/systemd/system/",
     ## lodestar validator
     "debian/clients/lodestar-validator/scripts/* /usr/lib/eth-node-regtest/lodestar-validator",
     "debian/clients/lodestar-validator/eth-node-lodestar-validator-regtest.service /lib/systemd/system/",
-    "debian/clients/lodestar-validator/validator /var/lib/eth-node-regtest/lodestar-validator",
+    "debian/clients/lodestar-validator/validator/* /var/lib/eth-node-regtest/lodestar-validator",
     ## nimbus-eth2 (consensus client)
     "debian/clients/nimbus-eth2/scripts/* /usr/lib/eth-node-regtest/nimbus-eth2",
     "debian/clients/nimbus-eth2/eth-node-nimbus-eth2-regtest.service /lib/systemd/system/",
     ## nimbus-eth2 validator
     "debian/clients/nimbus-eth2-validator/scripts/* /usr/lib/eth-node-regtest/nimbus-eth2-validator",
     "debian/clients/nimbus-eth2-validator/eth-node-nimbus-eth2-validator-regtest.service /lib/systemd/system/",
-    "debian/clients/nimbus-eth2-validator/validator /var/lib/eth-node-regtest/nimbus-eth2-validator",
+    "debian/clients/nimbus-eth2-validator/validator/* /var/lib/eth-node-regtest/nimbus-eth2-validator",
     ## prysm (consensus client)
     "debian/clients/prysm/scripts/* /usr/lib/eth-node-regtest/prysm",
     "debian/clients/prysm/eth-node-prysm-regtest.service /lib/systemd/system/",
     ## prysm validator
     "debian/clients/prysm-validator/scripts/* /usr/lib/eth-node-regtest/prysm-validator",
     "debian/clients/prysm-validator/eth-node-prysm-validator-regtest.service /lib/systemd/system/",
-    "debian/clients/prysm-validator/validator /var/lib/eth-node-regtest/prysm-validator",
+    "debian/clients/prysm-validator/validator/* /var/lib/eth-node-regtest/prysm-validator",
     ## teku (consensus client)
     "debian/clients/teku/scripts/* /usr/lib/eth-node-regtest/teku",
     "debian/clients/teku/eth-node-teku-regtest.service /lib/systemd/system/",
     ## teku validator
     "debian/clients/teku-validator/scripts/* /usr/lib/eth-node-regtest/teku-validator",
     "debian/clients/teku-validator/eth-node-teku-validator-regtest.service /lib/systemd/system/",
-    "debian/clients/teku-validator/validator /var/lib/eth-node-regtest/teku-validator",
+    "debian/clients/teku-validator/validator/* /var/lib/eth-node-regtest/teku-validator",
 ]

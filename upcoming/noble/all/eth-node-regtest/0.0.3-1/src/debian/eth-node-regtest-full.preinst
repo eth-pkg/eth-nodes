@@ -7,6 +7,7 @@ set -e
 # Define package and config file
 PACKAGE_NAME="eth-node-regtest-full"
 CONFIG_FILE="/etc/$PACKAGE_NAME/regtest.conf"
+BASE_DIR="/var/lib/eth-node-regtest"
 
 # Handle different preinst cases
 case "$1" in
@@ -51,6 +52,10 @@ install | upgrade)
             echo "$var=\"$value\"" >>"$CONFIG_FILE"
         fi
     done
+    ## need to delete /var/lib/eth-node-regtest dir as regtest from previous installs will interfere
+    ## same for all other clients, which is actually might be wrong ...
+    ## this is testnet so we delete it
+    rm -rf "${BASE_DIR}"
     ;;
 abort-upgrade)
     # Do nothing on abort-upgrade

@@ -1,12 +1,12 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-set -e 
+set -e
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."    
+    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."
     echo "  --help, -h                    Displays this help text and exits."
     echo "  --version, -v                 Displays the version and exits."
     exit 0
@@ -24,22 +24,22 @@ VERSION=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --conf-file|-e)
-            CONFIG_FILES+=("$2")
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        --version|-v)
-            VERSION=true
-            shift
-            ;;  
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --conf-file | -e)
+        CONFIG_FILES+=("$2")
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    --version | -v)
+        VERSION=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -71,19 +71,19 @@ echo "Starting with configuration from $CONFIG_FILE"
 OPTIONS=""
 
 append_option() {
-  local option=$1
-  local value=$2
-  if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option=$value"
-  fi
+    local option=$1
+    local value=$2
+    if [ -n "$value" ]; then
+        OPTIONS="$OPTIONS $option=$value"
+    fi
 }
 
-append_flag(){
- local option=$1
-  local value=$2
-  if [ "$value" = "true" ]; then
-    OPTIONS="$OPTIONS $option"
-  fi 
+append_flag() {
+    local option=$1
+    local value=$2
+    if [ "$value" = "true" ]; then
+        OPTIONS="$OPTIONS $option"
+    fi
 }
 
 # cmd options
@@ -179,15 +179,16 @@ append_flag "--mainnet" "$PRYSM_VALIDATOR_MAINNET"
 append_flag "--sepolia" "$PRYSM_VALIDATOR_SEPOLIA"
 append_flag "--write-wallet-password-on-web-onboarding" "$PRYSM_VALIDATOR_WRITE_WALLET_PASSWORD_ON_WEB_ONBOARDING"
 
-
-echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$wallet_keystore --wallet-dir=$wallet_dir --wallet-password-file=$wallet_password_file --account-password-file=$account_password_file" 
+echo "Importing validator accounts: /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir=$wallet_keystore --wallet-dir=$wallet_dir --wallet-password-file=$wallet_password_file --account-password-file=$account_password_file"
 
 /usr/lib/eth-node-prysm/bin/validator accounts import --keys-dir="$wallet_keystore" \
-                                    --wallet-dir="$wallet_dir" \
-                                    --wallet-password-file="$wallet_password_file" \
-                                    --account-password-file="$account_password_file" \
-                                    --accept-terms-of-use
+    --wallet-dir="$wallet_dir" \
+    --wallet-password-file="$wallet_password_file" \
+    --account-password-file="$account_password_file" \
+    --accept-terms-of-use
 
-echo "Using Options  /usr/lib/eth-node-prysm/bin/validator: $OPTIONS"
+echo "Using Options  /usr/lib/eth-node-prysm/bin/validator $OPTIONS"
 
-# TODO 
+# TODO
+
+exec /usr/lib/eth-node-prysm/bin/validator $OPTIONS

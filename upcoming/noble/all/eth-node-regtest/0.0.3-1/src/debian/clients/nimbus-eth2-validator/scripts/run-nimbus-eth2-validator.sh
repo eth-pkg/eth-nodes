@@ -119,7 +119,7 @@ append_option "--builder-boost-factor" "$NIMBUS_ETH2_VALIDATOR_BUILDER_BOOST_FAC
 append_option "--beacon-node" "$NIMBUS_ETH2_VALIDATOR_BEACON_NODE"
 append_option "--block-monitor-type" "$NIMBUS_ETH2_VALIDATOR_BLOCK_MONITOR_TYPE"
 
-echo "Using Options /usr/lib/eth-node-nimbus-eth2/bin/validator: $OPTIONS"
+echo "Using Options /usr/lib/eth-node-nimbus-eth2/bin/nimbus_validator_client: $OPTIONS"
 
 # /usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node deposits import keys --data-dir=.
 # chmod +rwx secrets validators

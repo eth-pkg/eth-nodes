@@ -1,12 +1,12 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 
-set -e 
+set -e
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."   
+    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."
     echo "  --help, -h                    Displays this help text and exits."
     echo "  --version, -v                 Displays the version and exits."
     exit 0
@@ -24,22 +24,22 @@ VERSION=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --conf-file|-e)
-            CONFIG_FILES+=("$2")
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        --version|-v)
-            VERSION=true
-            shift
-            ;;  
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --conf-file | -e)
+        CONFIG_FILES+=("$2")
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    --version | -v)
+        VERSION=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -69,23 +69,23 @@ done
 OPTIONS=""
 
 append_option() {
-  local option=$1
-  local value=$2
-  if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option $value"
-  fi
+    local option=$1
+    local value=$2
+    if [ -n "$value" ]; then
+        OPTIONS="$OPTIONS $option $value"
+    fi
 }
 
-append_flag(){
- local option=$1
-  local value=$2
-  if [ "$value" = "true" ]; then
-    OPTIONS="$OPTIONS $option"
-  fi 
+append_flag() {
+    local option=$1
+    local value=$2
+    if [ "$value" = "true" ]; then
+        OPTIONS="$OPTIONS $option"
+    fi
 }
 
 append_option "--config-file" "$TEKU_CONFIG_FILE"
-# network 
+# network
 append_option "--checkpoint-sync-url" "$TEKU_CHECKPOINT_SYNC_URL"
 append_option "--eth1-deposit-contract-address" "$TEKU_ETH1_DEPOSIT_CONTRACT_ADDRESS"
 append_option "--genesis-state" "$TEKU_GENESIS_STATE"
@@ -93,7 +93,7 @@ append_option "--ignore-weak-subjectivity-period-enabled" "$TEKU_IGNORE_WEAK_SUB
 append_option "--initial-state" "$TEKU_INITIAL_STATE"
 append_option "--network" "$TEKU_NETWORK"
 
-# p2p 
+# p2p
 append_option "--p2p-advertised-ip" "$TEKU_P2P_ADVERTISED_IP"
 append_option "--p2p-advertised-port" "$TEKU_P2P_ADVERTISED_PORT"
 append_option "--p2p-advertised-port-ipv6" "$TEKU_P2P_ADVERTISED_PORT_IPV6"
@@ -116,7 +116,7 @@ append_option "--p2p-subscribe-all-subnets-enabled" "$TEKU_P2P_SUBSCRIBE_ALL_SUB
 append_option "--p2p-udp-port" "$TEKU_P2P_UDP_PORT"
 append_option "--p2p-udp-port-ipv6" "$TEKU_P2P_UDP_PORT_IPV6"
 
-# validator 
+# validator
 append_option "--doppelganger-detection-enabled" "$TEKU_DOPPELGANGER_DETECTION_ENABLED"
 append_option "--exit-when-no-validator-keys-enabled" "$TEKU_EXIT_WHEN_NO_VALIDATOR_KEYS_ENABLED"
 append_option "--shut-down-when-validator-slashed-enabled" "$TEKU_SHUT_DOWN_WHEN_VALIDATOR_SLASHED_ENABLED"
@@ -142,8 +142,7 @@ append_option "--validators-proposer-config" "$TEKU_VALIDATORS_PROPOSER_CONFIG"
 append_option "--validators-proposer-config-refresh-enabled" "$TEKU_VALIDATORS_PROPOSER_CONFIG_REFRESH_ENABLED"
 append_option "--validators-proposer-default-fee-recipient" "$TEKU_VALIDATORS_PROPOSER_DEFAULT_FEE_RECIPIENT"
 
-
-# execution layer 
+# execution layer
 append_option "--builder-bid-compare-factor" "$TEKU_BUILDER_BID_COMPARE_FACTOR"
 append_option "--builder-endpoint" "$TEKU_BUILDER_ENDPOINT"
 append_option "--builder-set-user-agent-header" "$TEKU_BUILDER_SET_USER_AGENT_HEADER"
@@ -155,7 +154,7 @@ append_option "--eth1-deposit-contract-max-request-size" "$TEKU_ETH1_DEPOSIT_CON
 append_option "--eth1-endpoint" "$TEKU_ETH1_ENDPOINT"
 append_option "--exchange-capabilities-monitoring-enabled" "$TEKU_EXCHANGE_CAPABILITIES_MONITORING_ENABLED"
 
-# data storage 
+# data storage
 append_option "--data-beacon-path" "$TEKU_DATA_BEACON_PATH"
 append_option "--data-path" "$TEKU_DATA_PATH"
 append_option "--data-storage-archive-frequency" "$TEKU_DATA_STORAGE_ARCHIVE_FREQUENCY"
@@ -164,7 +163,7 @@ append_option "--data-storage-non-canonical-blocks-enabled" "$TEKU_DATA_STORAGE_
 append_option "--data-validator-path" "$TEKU_DATA_VALIDATOR_PATH"
 append_option "--reconstruct-historic-states" "$TEKU_RECONSTRUCT_HISTORIC_STATES"
 
-# beacon rest api 
+# beacon rest api
 append_option "--beacon-liveness-tracking-enabled" "$TEKU_BEACON_LIVENESS_TRACKING_ENABLED"
 append_option "--rest-api-cors-origins" "$TEKU_REST_API_CORS_ORIGINS"
 append_option "--rest-api-docs-enabled" "$TEKU_REST_API_DOCS_ENABLED"
@@ -173,7 +172,7 @@ append_option "--rest-api-host-allowlist" "$TEKU_REST_API_HOST_ALLOWLIST"
 append_option "--rest-api-interface" "$TEKU_REST_API_INTERFACE"
 append_option "--rest-api-port" "$TEKU_REST_API_PORT"
 
-# validator rest api 
+# validator rest api
 append_option "--validator-api-bearer-file" "$TEKU_VALIDATOR_API_BEARER_FILE"
 append_option "--validator-api-cors-origins" "$TEKU_VALIDATOR_API_CORS_ORIGINS"
 append_option "--validator-api-docs-enabled" "$TEKU_VALIDATOR_API_DOCS_ENABLED"
@@ -184,11 +183,10 @@ append_option "--validator-api-keystore-file" "$TEKU_VALIDATOR_API_KEYSTORE_FILE
 append_option "--validator-api-keystore-password-file" "$TEKU_VALIDATOR_API_KEYSTORE_PASSWORD_FILE"
 append_option "--validator-api-port" "$TEKU_VALIDATOR_API_PORT"
 
-# weak subjectivity 
+# weak subjectivity
 append_option "--ws-checkpoint" "$TEKU_WS_CHECKPOINT"
 
-
-# logging 
+# logging
 append_option "--logging" "$TEKU_LOGGING"
 append_option "--log-color-enabled" "$TEKU_LOG_COLOR_ENABLED"
 append_option "--log-destination" "$TEKU_LOG_DESTINATION"
@@ -197,7 +195,7 @@ append_option "--log-file-name-pattern" "$TEKU_LOG_FILE_NAME_PATTERN"
 append_option "--log-include-events-enabled" "$TEKU_LOG_INCLUDE_EVENTS_ENABLED"
 append_option "--log-include-validator-duties-enabled" "$TEKU_LOG_INCLUDE_VALIDATOR_DUTIES_ENABLED"
 
-# metrics 
+# metrics
 append_option "--metrics-block-timing-tracking-enabled" "$TEKU_METRICS_BLOCK_TIMING_TRACKING_ENABLED"
 append_option "--metrics-categories" "$TEKU_METRICS_CATEGORIES"
 append_option "--metrics-enabled" "$TEKU_METRICS_ENABLED"
@@ -207,6 +205,6 @@ append_option "--metrics-port" "$TEKU_METRICS_PORT"
 append_option "--metrics-publish-endpoint" "$TEKU_METRICS_PUBLISH_ENDPOINT"
 append_option "--metrics-publish-interval" "$TEKU_METRICS_PUBLISH_INTERVAL"
 
-
 echo "Using Options: teku $OPTIONS"
 
+exec teku $OPTIONS

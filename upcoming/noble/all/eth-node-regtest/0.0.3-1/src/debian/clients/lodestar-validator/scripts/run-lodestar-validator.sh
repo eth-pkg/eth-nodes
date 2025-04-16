@@ -1,10 +1,10 @@
-set -e 
+set -e
 
 display_help() {
     echo "Usage: $0 [OPTIONS]"
     echo ""
     echo "Options:"
-    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."    
+    echo "  --conf-file FILE, -e FILE   Path to .conf formatted configuration file."
     echo "  --help, -h                    Displays this help text and exits."
     echo "  --version, -v                 Displays the version and exits."
     exit 0
@@ -22,22 +22,22 @@ VERSION=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
-        --conf-file|-e)
-            CONFIG_FILES+=("$2")
-            shift 2
-            ;;
-        --help|-h)
-            HELP=true
-            shift
-            ;;
-        --version|-v)
-            VERSION=true
-            shift
-            ;;  
-        *)
-            echo "Error: Unknown option $1"
-            display_help
-            ;;
+    --conf-file | -e)
+        CONFIG_FILES+=("$2")
+        shift 2
+        ;;
+    --help | -h)
+        HELP=true
+        shift
+        ;;
+    --version | -v)
+        VERSION=true
+        shift
+        ;;
+    *)
+        echo "Error: Unknown option $1"
+        display_help
+        ;;
     esac
 done
 
@@ -69,19 +69,19 @@ echo "Starting with configuration from $CONFIG_FILE"
 OPTIONS=""
 
 append_option() {
-  local option=$1
-  local value=$2
-  if [ -n "$value" ]; then
-    OPTIONS="$OPTIONS $option=$value"
-  fi
+    local option=$1
+    local value=$2
+    if [ -n "$value" ]; then
+        OPTIONS="$OPTIONS $option=$value"
+    fi
 }
 
-append_flag(){
- local option=$1
-  local value=$2
-  if [ "$value" = "true" ]; then
-    OPTIONS="$OPTIONS $option"
-  fi 
+append_flag() {
+    local option=$1
+    local value=$2
+    if [ "$value" = "true" ]; then
+        OPTIONS="$OPTIONS $option"
+    fi
 }
 
 append_flag "--keymanager" "$LODESTAR_VALIDATOR_KEYMANAGER"
@@ -136,7 +136,6 @@ append_option "--importKeystoresPassword" "$LODESTAR_VALIDATOR_IMPORT_KEYSTORES_
 append_flag "--doppelgangerProtection" "$LODESTAR_VALIDATOR_DOPPELGANGER_PROTECTION_ENABLED"
 append_flag "--distributed" "$LODESTAR_VALIDATOR_DISTRIBUTED"
 
-
 # Undocumented options
 append_option "--keystoresDir" "$LODESTAR_VALIDATOR_KEYSTORES_DIR"
 append_option "--secretsDir" "$LODESTAR_VALIDATOR_SECRETS_DIR"
@@ -144,3 +143,4 @@ append_flag "--disableKeystoresThreadPool" "$LODESTAR_VALIDATOR_DISABLE_KEYSTORE
 
 echo "Using Options: $OPTIONS"
 
+exec lodestar validator $OPTIONS
