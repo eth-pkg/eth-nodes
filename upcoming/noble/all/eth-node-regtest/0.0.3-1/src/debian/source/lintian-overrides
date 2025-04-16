@@ -1,4 +1,9 @@
 eth-node-regtest source: no-debian-copyright-in-source
 eth-node-regtest source: no-newline-at-end [debian/changelog]
 eth-node-regtest source: empty-upstream-sources
-eth-node-regtest source: maintainer-script-lacks-debhelper-token [debian/eth-node-regtest.preinst]
+eth-node-regtest source: not-using-po-debconf
+eth-node-regtest source: untranslatable-debconf-templates [debian/eth-node-regtest-full.templates:*]
+eth-node-regtest source: maintainer-script-lacks-debhelper-token [debian/eth-node-regtest-full.postinst]
+eth-node-regtest source: maintainer-script-lacks-debhelper-token [debian/eth-node-regtest-full.postrm]
+eth-node-regtest source: maintainer-script-lacks-debhelper-token [debian/eth-node-regtest-full.preinst]
+eth-node-regtest source: maintainer-script-lacks-debhelper-token [debian/eth-node-regtest-full.prerm]
