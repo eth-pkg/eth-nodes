@@ -173,8 +173,10 @@ runs:
           
           local package_dir="${HOME}/.pkg-builder/packages/noble/${package_name}-${version}"
           cd $package_dir
+          ls -al 
           cp *.deb ${HOME}/packages/
           echo "Packages copied to ${HOME}/packages/"
+          ls -al "${HOME}/packages"
         }
         
         # Build  eth-node-${{ inputs.network }}
