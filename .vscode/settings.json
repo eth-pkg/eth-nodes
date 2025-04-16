@@ -2,6 +2,10 @@
   "files.associations": {
     "*.sss": "toml",
     "*.sps": "toml",
-    "*.env.*": "env"
+    "*.env.*": "env",
+    "*.postinst": "shellscript",
+    "*.preinst": "shellscript",
+    "*.prerm": "shellscript",
+    "*.postrm": "shellscript"
   }
 }

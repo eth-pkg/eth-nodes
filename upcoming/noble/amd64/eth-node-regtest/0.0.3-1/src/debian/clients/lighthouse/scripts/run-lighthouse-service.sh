@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-exec /usr/lib/eth-node-regtest/lighthouse/run-lighthouse.sh \
+CLIENT="ligthouse"
+
+exec /usr/lib/eth-node-regtest/${CLIENT}/run-${CLIENT}.sh \
     --conf-file /etc/eth-node-regtest/conf/eth-node-regtest.conf \
-    --conf-file /etc/eth-node-regtest/conf/eth-node-lighthouse-regtest.conf
+    --conf-file /etc/eth-node-regtest/conf/eth-node-${CLIENT}-regtest.conf

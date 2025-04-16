@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-exec /usr/lib/eth-node-regtest/besu/run-besu.sh \
+CLIENT="besu"
+
+exec /usr/lib/eth-node-regtest/${CLIENT}/run-${CLIENT}.sh \
     --conf-file /etc/eth-node-regtest/conf/eth-node-regtest.conf \
-    --conf-file /etc/eth-node-regtest/conf/eth-node-besu-regtest.conf
+    --conf-file /etc/eth-node-regtest/conf/eth-node-${CLIENT}-regtest.conf

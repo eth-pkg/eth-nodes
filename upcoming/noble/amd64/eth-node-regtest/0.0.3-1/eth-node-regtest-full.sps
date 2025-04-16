@@ -36,7 +36,6 @@ add_files = [
     ## package itself
     "debian/regtest /var/lib/eth-node-regtest",
     "debian/conf /etc/eth-node-regtest",
-    "debian/scripts/postprocess.sh /usr/lib/eth-node-regtest",
     ## config
     "debian/regtest/regtest /var/lib/eth-node-regtest/regtest",
     "debian/regtest/config /etc/eth-node-regtest/regtest/",
