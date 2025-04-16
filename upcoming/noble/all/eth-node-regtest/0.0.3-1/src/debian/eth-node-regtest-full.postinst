@@ -60,8 +60,32 @@ setup_clients() {
 }
 
 setup_package() {
+    echo "Creating user and group eth-node-regtest"
     adduser --system --quiet --group eth-node-regtest || true
-    chown -R eth-node-regtest:eth-node-regtest "${CONFIG_DIR}"
+
+    # Default JWT file path
+    local jwt_file="$CONFIG_DIR/jwt.hex"
+
+    # Read BASECONF_JWT_FILE from config file without sourcing
+    if [ -f "$CONFIG_DIR/eth-node-regtest.conf" ]; then
+        local config_jwt
+        config_jwt=$(grep '^BASECONF_JWT_FILE=' $CONFIG_DIR/eth-node-regtest.conf | cut -d '=' -f 2- | tr -d '[:space:]')
+        if [ -n "$config_jwt" ]; then
+            jwt_file="$config_jwt"
+        fi
+    fi
+
+    # Ensure directory exists
+    mkdir -p "$(dirname "$jwt_file")"
+    touch "$jwt_file"
+
+    # Generate JWT if file doesn't exist or is empty
+    if [ ! -f "$jwt_file" ] || [ ! -s "$jwt_file" ]; then
+        openssl rand -hex 32 | tr -d "\n" >"$jwt_file"
+    fi
+
+    chmod 750 "$jwt_file"
+    chown -R eth-node-regtest:eth-node-regtest $CONFIG_DIR
 }
 
 generate_testnet() {
