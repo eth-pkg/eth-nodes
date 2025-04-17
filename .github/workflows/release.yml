@@ -135,6 +135,7 @@ jobs:
           name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
           path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload orig.tar.gz
         uses: actions/upload-artifact@v4
@@ -142,6 +143,7 @@ jobs:
           name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
           path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload debian.tar.xz
         uses: actions/upload-artifact@v4
@@ -149,6 +151,7 @@ jobs:
           name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
           path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload dsc
         uses: actions/upload-artifact@v4
@@ -156,6 +159,7 @@ jobs:
           name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
           path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload deb files
         uses: actions/upload-artifact@v4
@@ -163,6 +167,7 @@ jobs:
           name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}
           path: ${{ steps.env.outputs.build_dir }}/*.deb
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload build file
         uses: actions/upload-artifact@v4
@@ -170,6 +175,7 @@ jobs:
           name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
           path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
           if-no-files-found: error
+          compression-level: 0
 
       - name: Upload pkg-specs
         uses: actions/upload-artifact@v4
@@ -177,3 +183,4 @@ jobs:
           name: pkg_specs.tar.gz
           path: pkg_specs.tar.gz
           if-no-files-found: error
+          compression-level: 0
