@@ -164,7 +164,7 @@ jobs:
       - name: Upload deb files
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}
+          name: debs.zip
           path: ${{ steps.env.outputs.build_dir }}/*.deb
           if-no-files-found: error
           compression-level: 0
