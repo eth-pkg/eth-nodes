@@ -31,7 +31,6 @@ jobs:
           VERSION_NUMBER_WITHOUT_REVISON=$(echo $VERSION_NUMBER | cut -d'-' -f1)
           BUILD_DIR=$(echo "/home/runner/.pkg-builder/packages/$CODENAME/$PACKAGE_NAME-$VERSION_NUMBER")
 
-
           # Write outputs to GITHUB_OUTPUT environment file
           echo "tag_name=$TAG_NAME" >> $GITHUB_OUTPUT
           echo "codename=$CODENAME" >> $GITHUB_OUTPUT
@@ -51,7 +50,6 @@ jobs:
           echo "version_number=$VERSION_NUMBER"
           echo "version_number_without_revision=$VERSION_NUMBER_WITHOUT_REVISON"
           echo "build_dir=$BUILD_DIR"
-
 
       - name: Sbuild setup
         run: |
@@ -131,82 +129,51 @@ jobs:
           draft: false
           prerelease: true
 
-      # This should come after verify, but sometimes it is good to have it, to check why the verify fails
-      # TODO fix arch to support all arch
-      - name: Save ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload chroot tar.gz
+        uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
-          asset_name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
-          asset_content_type: application/octet-stream
+          name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
+          path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
+          if-no-files-found: error
 
-      - name: Save .orig.tar.gz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload orig.tar.gz
+        uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number_without_revision}}.orig.tar.gz
-          asset_content_type: application/x-tar+gzip
+          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
+          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
+          if-no-files-found: error
 
-      - name: Save .debian.tar.xz
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload debian.tar.xz
+        uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.debian.tar.xz
-          asset_content_type: application/x-tar
+          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
+          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
+          if-no-files-found: error
 
-      - name: Save .dsc
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload dsc
+        uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
-          asset_content_type: text/plain
+          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
+          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
+          if-no-files-found: error
 
-      - name: Save .deb files
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-            for deb in ${{ steps.env.outputs.build_dir }}/*.deb; do
-              if [ -f "$deb" ]; then
-                curl -sS \
-                  -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                  -H "Accept: application/vnd.github+json" \
-                  --form "file=@$deb" \
-                  --form "name=$(basename "$deb")" \
-                  "${{ steps.create_release.outputs.upload_url }}" || {
-                  echo "Failed to upload $deb"
-                  exit 1
-                }
-              fi
-            done
-      - name: Save .build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload deb files
+        uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.build_arch}}.build
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.build_arch}}.build
-          asset_content_type: text/plain
+          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}
+          path: ${{ steps.env.outputs.build_dir }}/*.deb
+          if-no-files-found: error
 
-      - name: Save pkg-specs
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload build file
+        uses: actions/upload-artifact@v4
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url  }}
-          asset_path: pkg_specs.tar.gz
-          asset_name: pkg_specs.tar.gz
-          asset_content_type: application/x-tar+gzip
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
+          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
+          if-no-files-found: error
+
+      - name: Upload pkg-specs
+        uses: actions/upload-artifact@v4
+        with:
+          name: pkg_specs.tar.gz
+          path: pkg_specs.tar.gz
+          if-no-files-found: error
