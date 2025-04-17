@@ -1,0 +1,10 @@
+eth-node-reth: maintainer-script-ignores-errors [postrm]
+eth-node-reth: no-manual-page [usr/bin/reth]
+eth-node-reth: synopsis-too-long
+eth-node-reth: copyright-without-copyright-notice
+eth-node-reth: extended-description-line-too-long line 1
+eth-node-reth: extended-description-line-too-long line 2
+eth-node-reth: extended-description-line-too-long line 3
+eth-node-reth: extended-description-line-too-long line 4
+eth-node-reth: initial-upload-closes-no-bugs [usr/share/doc/eth-node-reth/changelog.Debian.gz:1]
+eth-node-reth: zero-byte-file-in-doc-directory [usr/share/doc/eth-node-reth/copyright]
