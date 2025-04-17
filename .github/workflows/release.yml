@@ -120,67 +120,18 @@ jobs:
       - name: Pkg specs
         run: tar -czvf pkg_specs.tar.gz  ${{ steps.env.outputs.tag_name }}
 
-      - name: Create Release
-        id: create_release
-        uses: ncipollo/release-action@v1
+      - name: Release Assets
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          draft: false
+          tag_name: ${{ github.ref_name }}
           prerelease: true
-
-      - name: Upload chroot tar.gz
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
-          path: /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
-          if-no-files-found: error
-          compression-level: 0
-
-      - name: Upload orig.tar.gz
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
-          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
-          if-no-files-found: error
-          compression-level: 0
-
-      - name: Upload debian.tar.xz
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
-          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
-          if-no-files-found: error
-          compression-level: 0
-
-      - name: Upload dsc
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
-          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
-          if-no-files-found: error
-          compression-level: 0
-
-      - name: Upload deb files
-        uses: actions/upload-artifact@v4
-        with:
-          name: debs.zip
-          path: ${{ steps.env.outputs.build_dir }}/*.deb
-          if-no-files-found: error
-          compression-level: 0
-
-      - name: Upload build file
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
-          path: ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
-          if-no-files-found: error
-          compression-level: 0
-
-      - name: Upload pkg-specs
-        uses: actions/upload-artifact@v4
-        with:
-          name: pkg_specs.tar.gz
-          path: pkg_specs.tar.gz
-          if-no-files-found: error
-          compression-level: 0
+          files: |
+            /home/runner/.cache/sbuild/${{ steps.env.outputs.codename }}-${{ steps.env.outputs.build_arch }}.tar.gz
+            ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number_without_revision }}.orig.tar.gz
+            ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.debian.tar.xz
+            ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}.dsc
+            ${{ steps.env.outputs.build_dir }}/*.deb
+            ${{ steps.env.outputs.build_dir }}/${{ steps.env.outputs.package_name }}_${{ steps.env.outputs.version_number }}_${{ steps.env.outputs.build_arch }}.build
+            pkg_specs.tar.gz
