@@ -1,6 +1,11 @@
 {
   "files.associations": {
     "*.sss": "toml",
-    "*.sps": "toml"
+    "*.sps": "toml",
+    "*.env.*": "env",
+    "*.postinst": "shellscript",
+    "*.preinst": "shellscript",
+    "*.prerm": "shellscript",
+    "*.postrm": "shellscript"
   }
 }

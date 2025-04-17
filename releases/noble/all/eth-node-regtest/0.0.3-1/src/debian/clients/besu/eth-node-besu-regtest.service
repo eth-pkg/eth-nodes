@@ -1,0 +1,52 @@
+[Unit]
+Description=service file for eth-node-besu for network: regtest
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/lib/eth-node-regtest/besu/run-besu-service.sh $DEBCRAFTER_EXTRA_SERVICE_ARGS
+User=eth-node-besu-regtest
+Group=eth-node-besu-regtest
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RuntimeDirectory=eth-node-besu-regtest
+RuntimeDirectoryMode=750
+# no need to specify, these come from debcrafter
+# User=eth-node-besu-regtest
+# NoNewPrivileges=true
+# ProtectHome=true
+# PrivateTmp=true
+# PrivateDevices=true
+
+# additional flags not specified by debcrafter
+CapabilityBoundingSet=
+IPAddressDeny=none
+LockPersonality=true
+PrivateIPC=true
+PrivateUsers=true
+ProtectClock=true
+ProtectControlGroups=true
+ProtectHostname=true
+ProtectKernelLogs=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectProc=invisible
+ReadWritePaths=/var/lib/eth-node-regtest/besu
+ReadOnlyPaths=/var/lib/eth-node-regtest
+RemoveIPC=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK 
+
+RestrictNamespaces=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+UMask=0077
+WorkingDirectory=/var/lib/eth-node-regtest/besu
+
+
+[Install]
+WantedBy=multi-user.target

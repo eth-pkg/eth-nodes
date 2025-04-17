@@ -3,7 +3,7 @@ name: regtest
 on:
   push:
     branches:
-        - fix/nonexistant
+         - feat/non-existant
         # - fix/genesis-pectra-changes
 
 jobs:
@@ -19,6 +19,7 @@ jobs:
         - cl_name: lighthouse 
           validator_name: prysm
       fail-fast: false
+      max-parallel: 6  
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
