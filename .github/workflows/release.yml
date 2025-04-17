@@ -173,15 +173,19 @@ jobs:
           asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}.dsc
           asset_content_type: text/plain
 
-      - name: Save .deb
-        uses: actions/upload-release-asset@v1
+      - name: Save .deb files
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.env.outputs.build_dir }}/${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.target_arch}}.deb
-          asset_name: ${{steps.env.outputs.package_name}}_${{steps.env.outputs.version_number}}_${{steps.env.outputs.target_arch}}.deb
-          asset_content_type: application/vnd.debian.binary-package
+        run: |
+          for deb in ${{ steps.env.outputs.build_dir }}/*.deb; do
+            if [ -f "$deb" ]; then
+              curl -sS \
+                -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Content-Type: application/vnd.debian.binary-package" \
+                --data-binary @"$deb" \
+                "${{ steps.create_release.outputs.upload_url }}?name=$(basename "$deb")"
+            fi
+          done
 
       - name: Save .build
         uses: actions/upload-release-asset@v1
