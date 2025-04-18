@@ -1,0 +1,6 @@
+eth-node-teku (25.4.1-1) noble; urgency=medium
+
+  * Support for 25.4.1-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 18 Apr 2025 07:15:49 +0200
+
