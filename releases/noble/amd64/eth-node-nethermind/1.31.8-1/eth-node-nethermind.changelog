@@ -1,0 +1,6 @@
+eth-node-nethermind (1.31.8-1) noble; urgency=medium
+
+  * Support for 1.31.8-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 18 Apr 2025 09:23:38 +0200
+
