@@ -14,9 +14,9 @@ tarball_hash = "55f2fc3fbb6a22473fb9c6722fde349b5c7e4861786b48d3f9076d857ccc7bc2
 
 [package_type.language_env]
 language_env = "go"
-go_version = "1.22.2"
-go_binary_url = "https://go.dev/dl/go1.22.2.linux-amd64.tar.gz"
-go_binary_checksum = "5901c52b7a78002aeff14a21f93e0f064f74ce1360fce51c6ee68cd471216a17"
+go_version = "1.24.2"
+go_binary_url = "https://go.dev/dl/go1.24.2.linux-amd64.tar.gz"
+go_binary_checksum = "68097bd680839cbc9d464a0edce4f7c333975e27a90246890e9f1078c7e702ad"
 
 [build_env]
 codename="bookworm"
