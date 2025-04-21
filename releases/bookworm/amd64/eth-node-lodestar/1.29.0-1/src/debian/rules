@@ -34,19 +34,19 @@ override_dh_auto_build:
 	rm -rf node_modules/.cache 
 
 	# Makefiles not needed, for sure, so you can safely remove it
-	rm node_modules/bcrypto/build/Makefile
-	rm node_modules/bigint-buffer/build/Makefile
-	rm node_modules/c-kzg/build/Makefile
-	rm node_modules/cpu-features/build/Makefile
-	rm node_modules/ssh2/lib/protocol/crypto/build/Makefile
-	rm node_modules/c-kzg/build/kzg.target.mk
+	rm -f node_modules/bcrypto/build/Makefile
+	rm -f node_modules/bigint-buffer/build/Makefile
+	rm -f node_modules/c-kzg/build/Makefile
+	rm -f node_modules/cpu-features/build/Makefile
+	rm -f node_modules/ssh2/lib/protocol/crypto/build/Makefile
+	rm -f node_modules/c-kzg/build/kzg.target.mk
 
 	# not sure what python3 is doing there, in those folders
-	rm node_modules/bcrypto/build/node_gyp_bins/python3
-	rm node_modules/bigint-buffer/build/node_gyp_bins/python3
-	rm node_modules/c-kzg/build/node_gyp_bins/python3
-	rm node_modules/cpu-features/build/node_gyp_bins/python3
-	rm node_modules/ssh2/lib/protocol/crypto/build/node_gyp_bins/python3
+	rm -f node_modules/bcrypto/build/node_gyp_bins/python3
+	rm -f node_modules/bigint-buffer/build/node_gyp_bins/python3
+	rm -f node_modules/c-kzg/build/node_gyp_bins/python3
+	rm -f node_modules/cpu-features/build/node_gyp_bins/python3
+	rm -f node_modules/ssh2/lib/protocol/crypto/build/node_gyp_bins/python3
 
     # Not sure about pycache, let's remove it
 	rm -rf node_modules/node-gyp/gyp/pylib/gyp/__pycache__
