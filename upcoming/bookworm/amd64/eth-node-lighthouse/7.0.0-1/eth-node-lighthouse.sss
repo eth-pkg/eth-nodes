@@ -1,0 +1,20 @@
+name = "eth-node-lighthouse"
+maintainer = "Eniko Nagy <mail+ethnodes@eenagy.com>"
+section = "net"
+variants = []
+build_depends = [ 
+"curl",
+"git", 
+"cmake (>= 3.12)", 
+"pkg-config", 
+"llvm-dev", 
+"libclang-dev", 
+"libpq-dev",
+"clang", 
+"libsnappy-dev",
+"librust-cmake-dev",
+"wget"
+]
+packages = ["eth-node-lighthouse"]
+skip_debug_symbols = true
+
