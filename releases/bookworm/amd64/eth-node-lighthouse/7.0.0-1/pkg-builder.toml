@@ -14,24 +14,24 @@ tarball_hash = "ba59e42ffdd37c41b9beb46ca2f49712141508d2424a33e3db28fc619b60cfda
 
 [package_type.language_env]
 language_env = "rust"
-rust_version="1.80.0"
-rust_binary_url="https://static.rust-lang.org/dist/rust-1.80.0-x86_64-unknown-linux-gnu.tar.xz"
+rust_version="1.86.0"
+rust_binary_url="https://static.rust-lang.org/dist/rust-1.86.0-x86_64-unknown-linux-gnu.tar.xz"
 rust_binary_gpg_asc="""
 -----BEGIN PGP SIGNATURE-----
 
-wsFcBAABCgAQBQJmojj/CRCFq5bm+hvl/gAAi3sP+QG3gZE1dkfvBekboErT06B6
-x0WvX804JYXqUZ4RLkL/va5l2qv/9SyxXg/kkWXFYcH6f4YetNKULDsw4nzFxYp0
-l40BO6u/rkVlZNlXZG6cwH4/85TWDq5B2q3jjH0edAalxyWg4X8axeMxJlPc1rfZ
-sk2Vb8xeRX4N+3tK72G9yk/oENS3+ql8KKyULiVDDSKAo52irWEa7rdy7Wf+sccS
-JcdTyoaELAX6ehnopjGWY1sBQShUNsfWmJIko/r/jHbF+yev2mgJLWudnt2DSS00
-2uFHdw1dvusttetr1pCaO8/lNkrre3TrpZO/G+9eWsGfYjS6mrFLgZ20QY7bPsm+
-6UV76EyHw9rr3IXS67xjWGwq5o2L14Mz1yWpd+52GyQQjmsJ38EBn68IGbuaL+Vx
-tVRFKBeaiOsKTfaQFLYbsvMcTBGUN/rCJGYnNE2f/DyIB09f7K8A67zgMKlJcA95
-W+SffkgIRdr4VinUKMKlxiDhC8E8Ui9ELhspI1ePGINMuuYMY9MgO0kv+kMjeN71
-FcEV2PJ7tzK41yNfKreWG8O1Cd4iy2zb/TzfmFKQBJr9W7pq+5VBB1UYDT8ijwXl
-nqoketEWbKjQ8BmczA8snkKlV4rXSdr6ASVRBDzNLcj+/brt02vuW2AoIkkNJN0p
-jLlWAGKzzn+fUhIAPObF
-=wO+a
+wsFcBAABCgAQBQJn7lKjCRCFq5bm+hvl/gAAbMQP/Rm2D8s/A2/nGhB1gBqJrCCN
+89TIdhLG1vpN5aoYWUiIIGRAxm5ap7sD9XNRq+LjQBf/X4VsHtlM90oXNvDp6nTR
+UMgjHIAzGrcf1ZuqZoUU/uJx6K/sbXSMssGQ/TLRfXBtsAj88qMgtasIZE+FJCu2
+mujv0bt0n0+eI5YsqSZxdNhn1QyrAx0QMD3jO3nlv+xnqQXHg/EBPUtHeSTRxLIo
+GluO1fmhPNMA6yunWvDIsjpctEAxq+cHrdYhqpEO9AY/wtr804aaM46BOt1pnaMU
+4Ii6LJTO7/d2WCuq5dVqpT2Mh9rugBT9mu9uX0UC6xt//UZzTylb7hn47+5Os/9M
+pYYqYnht8ngvOoiVshbZxeofGQMTnUHs8bRm7Z/6huUiw2XAaHn0aho72sbN7y0q
+oNWgVNcStk9xydfrpUTgHRRXnodhQG0I7sX91AnNNMnmRel235ZsXnUpL1L6q9Yb
+nLHZeE2er5csSMXP011vlRVZyzANsTaBonSnUZoBtdYcp7jEcmEzjqwKyMc9hI6Q
+vHFFq66L5AHdDIJdvJzQsnuSU2/eyLHnMD++MPZfnntMH7+Q2x6BMGC2K6doIah2
+1C8rxfrZCTgOrzWJGl6oGZ8Vqrb4rUcGfHfEs6DX1b804iuWqVouAhi2qWVT+/28
+JvjcCeMNUaUMeBriRG7I
+=sAbx
 -----END PGP SIGNATURE-----
 """
 
