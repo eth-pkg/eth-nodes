@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="be023d91da64019f9635259eaa4113fe959baaa7", name= "eth-node-lighthouse_7.0.0-1.dsc"},
+    { hash="fdbc6b61d596d7da4a0d2526318bff3dc21a19cf", name= "eth-node-lighthouse_7.0.0.orig.tar.gz"},
+    { hash="44e0a1f5f0da234f77f50b9a6bd8b8e6dc45db10", name= "eth-node-lighthouse_7.0.0-1.debian.tar.xz"},
+    { hash="0e80905d9323190fe9bc4b815de0a06af979efef", name= "eth-node-lighthouse_7.0.0-1_amd64.deb"},
+]
