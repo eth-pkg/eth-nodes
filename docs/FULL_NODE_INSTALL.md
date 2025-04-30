@@ -18,7 +18,7 @@ sudo apt update
 
 ## Full Node Installation
 ```bash
-sudo apt install eth-node-regtest eth-node-validator-regtest
+sudo apt install eth-node-regtest-full
 ```
 
 ### Dependencies
@@ -27,21 +27,6 @@ Install required dependencies for your chosen clients:
 - .NET: Required for Nethermind
 - Node.js: Required for Lodestar
 
-## Custom Client Combinations
-View available options:
-```bash
-apt-cache depends eth-node-regtest
-apt-cache depends eth-node-validator-regtest
-```
-
-Install specific combinations:
-```bash
-sudo apt install eth-node-<el_name>-regtest eth-node-<cl_name>-regtest eth-node-<validator_name>-validator
-```
-
-Example combinations:
-- Geth + Lighthouse: `sudo apt install eth-node-geth-regtest eth-node-lighthouse-regtest eth-node-lighthouse-validator-regtest`
-- Nethermind + Prysm: `sudo apt install eth-node-nethermind-regtest eth-node-prysm-regtest eth-node-prysm-validator-regtest`
 
 ## System Locations
 - Data: `/var/lib/eth-node-regtest/`
