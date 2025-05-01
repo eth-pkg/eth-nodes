@@ -28,11 +28,11 @@ sudo apt update
 
 ### 1. Full Node Setup
 Complete node setup including execution, consensus, and validator clients. Recommended for running a full Ethereum node.
-- [Full Installation Guide (ALPHA release on custom testnet)](docs/FULL_NODE_INSTALL.md)
+- [Full Installation Guide (ALPHA release on custom testnet)](docs/node-install.md)
 
 ### 2. Individual Clients
 Install specific clients for custom configurations:
-- [Client Installation Guide](docs/CLIENT_INSTALL.md)
+- [Client Installation Guide](docs/client-install.md)
 
 ## Available Clients
 
@@ -61,13 +61,13 @@ Install specific clients for custom configurations:
 - `zcli`
 
 ## Documentation
-- [Building Guide](docs/BUILDING.md) - Create your own packages
-- [Verification Guide](docs/VERIFICATION.md) - Verify package integrity
-- [Architecture](docs/ARCHITECTURE.md) - System design details
-- [FAQ](docs/FAQ.md) - Common questions and answers
+- [Building Guide](docs/building.md) - Create your own packages
+- [Verification Guide](docs/verification.md) - Verify package integrity
+- [Architecture](docs/arch.md) - System design details
+- [FAQ](docs/faq.md) - Common questions and answers
 
 ## Contributing
-Contributions are welcome! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+Contributions are welcome! Please see our [Contributing Guide](Contributing.md) for details.
 
 ## License
 AGPL v3  
