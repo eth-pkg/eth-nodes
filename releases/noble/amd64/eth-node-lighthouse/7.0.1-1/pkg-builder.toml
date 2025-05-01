@@ -1,0 +1,53 @@
+[package_fields]
+spec_file = "eth-node-lighthouse.sss"
+package_name = "eth-node-lighthouse"
+version_number = "7.0.1"
+revision_number = "1"
+homepage="https://github.com/sigp/lighthouse"
+
+[package_type]
+# virtual | git | default
+package_type="default"
+tarball_url = "https://github.com/sigp/lighthouse/archive/refs/tags/v7.0.1.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "e2432feb02d6dd86faec3831731a88993c428a87df1fa6a43efd576bdf01f259"
+
+[package_type.language_env]
+language_env = "rust"
+rust_version="1.86.0"
+rust_binary_url="https://static.rust-lang.org/dist/rust-1.86.0-x86_64-unknown-linux-gnu.tar.xz"
+rust_binary_gpg_asc="""
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAABCgAQBQJn7lKjCRCFq5bm+hvl/gAAbMQP/Rm2D8s/A2/nGhB1gBqJrCCN
+89TIdhLG1vpN5aoYWUiIIGRAxm5ap7sD9XNRq+LjQBf/X4VsHtlM90oXNvDp6nTR
+UMgjHIAzGrcf1ZuqZoUU/uJx6K/sbXSMssGQ/TLRfXBtsAj88qMgtasIZE+FJCu2
+mujv0bt0n0+eI5YsqSZxdNhn1QyrAx0QMD3jO3nlv+xnqQXHg/EBPUtHeSTRxLIo
+GluO1fmhPNMA6yunWvDIsjpctEAxq+cHrdYhqpEO9AY/wtr804aaM46BOt1pnaMU
+4Ii6LJTO7/d2WCuq5dVqpT2Mh9rugBT9mu9uX0UC6xt//UZzTylb7hn47+5Os/9M
+pYYqYnht8ngvOoiVshbZxeofGQMTnUHs8bRm7Z/6huUiw2XAaHn0aho72sbN7y0q
+oNWgVNcStk9xydfrpUTgHRRXnodhQG0I7sX91AnNNMnmRel235ZsXnUpL1L6q9Yb
+nLHZeE2er5csSMXP011vlRVZyzANsTaBonSnUZoBtdYcp7jEcmEzjqwKyMc9hI6Q
+vHFFq66L5AHdDIJdvJzQsnuSU2/eyLHnMD++MPZfnntMH7+Q2x6BMGC2K6doIah2
+1C8rxfrZCTgOrzWJGl6oGZ8Vqrb4rUcGfHfEs6DX1b804iuWqVouAhi2qWVT+/28
+JvjcCeMNUaUMeBriRG7I
+=sAbx
+-----END PGP SIGNATURE-----
+"""
+
+[build_env]
+codename="noble numbat"
+arch = "amd64"
+pkg_builder_version="0.2.11"
+debcrafter_version = "2711b53"
+# needed for tests
+docker=true
+run_lintian=true
+run_piuparts=true
+run_autopkgtest=true
+lintian_version="2.116.3"
+piuparts_version="1.1.7"
+autopkgtest_version="5.28"
+sbuild_version="0.85.6"
+# package directory
+workdir="~/.pkg-builder/packages/noble"
