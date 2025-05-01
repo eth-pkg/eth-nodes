@@ -6,7 +6,7 @@
 ### Besu
 Dependencies:
 ```bash
-curl -fsSL https://eth-nodes.com/scripts/install-java.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eth-pkg/eth-nodes/main/scripts/install-java.sh | bash
 ```
 
 Installation:
@@ -27,7 +27,7 @@ sudo apt install eth-node-geth
 ### Nethermind
 Dependencies:
 ```bash
-curl -fsSL https://eth-nodes.com/scripts/install-dotnet.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eth-pkg/eth-nodes/main/scripts/install-dotnet.sh | bash
 ```
 
 Installation:
@@ -50,7 +50,7 @@ sudo apt install eth-node-lighthouse
 ### Lodestar
 Dependencies:
 ```bash
-curl -fsSL https://eth-nodes.com/scripts/install-nodejs.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eth-pkg/eth-nodes/main/scripts/install-nodejs.sh | bash
 ```
 
 Installation:
@@ -71,7 +71,7 @@ sudo apt install eth-node-prysm
 ### Teku
 Dependencies:
 ```bash
-curl -fsSL https://eth-nodes.com/scripts/install-java.sh | bash
+curl -fsSL https://raw.githubusercontent.com/eth-pkg/eth-nodes/main/scripts/install-java.sh | bash
 ```
 
 Installation:
