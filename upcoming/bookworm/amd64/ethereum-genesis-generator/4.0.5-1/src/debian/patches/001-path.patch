@@ -1,0 +1,483 @@
+Index: ethereum-genesis-generator-4.0.3/apps/el-gen/generate_genesis.sh
+===================================================================
+--- ethereum-genesis-generator-4.0.3.orig/apps/el-gen/generate_genesis.sh
++++ ethereum-genesis-generator-4.0.3/apps/el-gen/generate_genesis.sh
+@@ -1,5 +1,8 @@
+ #!/bin/bash
+ 
++# Get the directory where the script is located
++SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
++
+ generate_genesis() {
+     set +x
+     export CHAIN_ID_HEX="0x$(printf "%x" $CHAIN_ID)"
+@@ -26,55 +29,55 @@ generate_genesis() {
+     if [ "$CHAIN_ID" == "1" ]; then
+         # mainnet shadowfork
+         has_fork="4" # deneb
+-        cp /apps/el-gen/mainnet/genesis.json $tmp_dir/genesis.json
+-        cp /apps/el-gen/mainnet/chainspec.json $tmp_dir/chainspec.json
+-        cp /apps/el-gen/mainnet/besu_genesis.json $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/mainnet/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/mainnet/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/mainnet/besu_genesis.json" $tmp_dir/besu.json
+     elif [ "$CHAIN_ID" == "11155111" ]; then
+         # sepolia shadowfork
+         has_fork="4" # deneb
+-        cp /apps/el-gen/sepolia/genesis.json $tmp_dir/genesis.json
+-        cp /apps/el-gen/sepolia/chainspec.json $tmp_dir/chainspec.json
+-        cp /apps/el-gen/sepolia/besu_genesis.json $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/sepolia/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/sepolia/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/sepolia/besu_genesis.json" $tmp_dir/besu.json
+     elif [ "$CHAIN_ID" == "17000" ]; then
+         # holesky shadowfork
+         has_fork="4" # deneb
+-        cp /apps/el-gen/holesky/genesis.json $tmp_dir/genesis.json
+-        cp /apps/el-gen/holesky/chainspec.json $tmp_dir/chainspec.json
+-        cp /apps/el-gen/holesky/besu_genesis.json $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/holesky/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/holesky/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/holesky/besu_genesis.json" $tmp_dir/besu.json
+     elif [ "$CHAIN_ID" == "560048" ]; then
+         # hoodi shadowfork
+         has_fork="5" # electra
+-        cp /apps/el-gen/hoodi/genesis.json $tmp_dir/genesis.json
+-        cp /apps/el-gen/hoodi/chainspec.json $tmp_dir/chainspec.json
+-        cp /apps/el-gen/hoodi/besu_genesis.json $tmp_dir/besu.json
++        cp "$SCRIPT_DIR/hoodi/genesis.json" $tmp_dir/genesis.json
++        cp "$SCRIPT_DIR/hoodi/chainspec.json" $tmp_dir/chainspec.json
++        cp "$SCRIPT_DIR/hoodi/besu_genesis.json" $tmp_dir/besu.json
+     else
+         # Generate base genesis.json, chainspec.json and besu.json
+-        envsubst < /apps/el-gen/tpl-genesis.json   > $tmp_dir/genesis.json
+-        envsubst < /apps/el-gen/tpl-chainspec.json > $tmp_dir/chainspec.json
+-        envsubst < /apps/el-gen/tpl-besu.json      > $tmp_dir/besu.json
++        envsubst <"$SCRIPT_DIR/tpl-genesis.json" >$tmp_dir/genesis.json
++        envsubst <"$SCRIPT_DIR/tpl-chainspec.json" >$tmp_dir/chainspec.json
++        envsubst <"$SCRIPT_DIR/tpl-besu.json" >$tmp_dir/besu.json
+         is_shadowfork="0"
+         has_fork="0"
+     fi
+ 
+     # Add additional fork properties
+     [ $has_fork -lt 2 ] && genesis_add_bellatrix $tmp_dir
+-    [ $has_fork -lt 3 ] && [ ! "$CAPELLA_FORK_EPOCH"   == "18446744073709551615" ] && genesis_add_capella $tmp_dir
+-    [ $has_fork -lt 4 ] && [ ! "$DENEB_FORK_EPOCH"     == "18446744073709551615" ] && genesis_add_deneb $tmp_dir
+-    [ $has_fork -lt 5 ] && [ ! "$ELECTRA_FORK_EPOCH"   == "18446744073709551615" ] && genesis_add_electra $tmp_dir
+-    [ $has_fork -lt 6 ] && [ ! "$FULU_FORK_EPOCH"      == "18446744073709551615" ] && genesis_add_fulu $tmp_dir
+-    [ $has_fork -lt 7 ] && [ ! "$EIP7805_FORK_EPOCH"   == "18446744073709551615" ] && genesis_add_eip7805 $tmp_dir
++    [ $has_fork -lt 3 ] && [ ! "$CAPELLA_FORK_EPOCH" == "18446744073709551615" ] && genesis_add_capella $tmp_dir
++    [ $has_fork -lt 4 ] && [ ! "$DENEB_FORK_EPOCH" == "18446744073709551615" ] && genesis_add_deneb $tmp_dir
++    [ $has_fork -lt 5 ] && [ ! "$ELECTRA_FORK_EPOCH" == "18446744073709551615" ] && genesis_add_electra $tmp_dir
++    [ $has_fork -lt 6 ] && [ ! "$FULU_FORK_EPOCH" == "18446744073709551615" ] && genesis_add_fulu $tmp_dir
++    [ $has_fork -lt 7 ] && [ ! "$EIP7805_FORK_EPOCH" == "18446744073709551615" ] && genesis_add_eip7805 $tmp_dir
+ 
+     if [ "$is_shadowfork" == "0" ]; then
+         # Initialize allocations with precompiles
+         echo "Adding precompile allocations..."
+-        cat /apps/el-gen/precompile-allocs.yaml | yq -c > $tmp_dir/allocations.json
++        cat "$SCRIPT_DIR/precompile-allocs.yaml" | yq -c >$tmp_dir/allocations.json
+ 
+         # Add system contracts
+         genesis_add_system_contracts $tmp_dir
+ 
+         # Build complete allocations object before applying
+-        if [ -f /config/el/genesis-config.yaml ]; then
+-            envsubst < /config/el/genesis-config.yaml | yq -c > $tmp_dir/el-genesis-config.json
++        if [ -f "$CONFIG_DIR/el/genesis-config.yaml" ]; then
++            envsubst <"$CONFIG_DIR/el/genesis-config.yaml" | yq -c >$tmp_dir/el-genesis-config.json
+ 
+             el_mnemonic=$(jq -r '.mnemonic // env.EL_AND_CL_MNEMONIC' $tmp_dir/el-genesis-config.json)
+ 
+@@ -84,7 +87,7 @@ generate_genesis() {
+                 path=$(echo $premine | jq -r '.key')
+                 address=$(geth-hdwallet -mnemonic "$el_mnemonic" -path "$path" | grep "public address:" | awk '{print $3}')
+                 echo "  adding allocation for $address"
+-                echo "$premine" | jq -c '.value |= gsub(" *ETH"; "000000000000000000") | {"'"$address"'":{"balance":.value}}' >> $tmp_dir/allocations.json
++                echo "$premine" | jq -c '.value |= gsub(" *ETH"; "000000000000000000") | {"'"$address"'":{"balance":.value}}' >>$tmp_dir/allocations.json
+             done
+ 
+             # Process static premine addresses
+@@ -92,7 +95,7 @@ generate_genesis() {
+             cat $tmp_dir/el-genesis-config.json | jq -c '.el_premine_addrs
+                 | with_entries(.value = (if (.value|type) == "string" then {"balance": .value} else .value end))
+                 | with_entries(.value.balance |= gsub(" *ETH"; "000000000000000000"))
+-            ' >> $tmp_dir/allocations.json
++            ' >>$tmp_dir/allocations.json
+ 
+             # Process additional contracts
+             additional_contracts=$(cat $tmp_dir/el-genesis-config.json | jq -cr '.additional_preloaded_contracts')
+@@ -107,7 +110,7 @@ generate_genesis() {
+ 
+             # Add additional contracts to allocations
+             echo "Adding additional contracts..."
+-            echo "$additional_contracts" | jq -c 'with_entries(.value.balance |= gsub(" *ETH"; "000000000000000000"))' >> $tmp_dir/allocations.json
++            echo "$additional_contracts" | jq -c 'with_entries(.value.balance |= gsub(" *ETH"; "000000000000000000"))' >>$tmp_dir/allocations.json
+         fi
+ 
+         # Apply combined allocations in one shot
+@@ -118,9 +121,9 @@ generate_genesis() {
+         genesis_add_json $tmp_dir/besu.json '.alloc += '"$allocations"
+     fi
+ 
+-    cat $tmp_dir/genesis.json | jq > $out_dir/genesis.json
+-    cat $tmp_dir/chainspec.json | jq > $out_dir/chainspec.json
+-    cat $tmp_dir/besu.json | jq > $out_dir/besu.json
++    cat $tmp_dir/genesis.json | jq >$out_dir/genesis.json
++    cat $tmp_dir/chainspec.json | jq >$out_dir/chainspec.json
++    cat $tmp_dir/besu.json | jq >$out_dir/besu.json
+     rm -rf $tmp_dir
+ }
+ 
+@@ -133,8 +136,8 @@ genesis_get_activation_time() {
+         else
+             slots_per_epoch=32
+         fi
+-        epoch_delay=$(( $SLOT_DURATION_IN_SECONDS * $slots_per_epoch * $1 ))
+-        echo $(( $GENESIS_TIMESTAMP + $GENESIS_DELAY + $epoch_delay ))
++        epoch_delay=$(($SLOT_DURATION_IN_SECONDS * $slots_per_epoch * $1))
++        echo $(($GENESIS_TIMESTAMP + $GENESIS_DELAY + $epoch_delay))
+     fi
+ }
+ 
+@@ -142,7 +145,7 @@ genesis_add_json() {
+     file=$1
+     data=$2
+ 
+-    jq -c "$data" "$file" > "$file.out"
++    jq -c "$data" "$file" >"$file.out"
+     mv "$file.out" "$file"
+ }
+ 
+@@ -152,12 +155,12 @@ genesis_add_allocation() {
+     allocation=$3
+ 
+     echo "  adding allocation for $address"
+-    echo "$allocation" | jq -c '.balance |= gsub(" *ETH"; "000000000000000000") | {("'"$address"'"): .}' >> $tmp_dir/allocations.json
++    echo "$allocation" | jq -c '.balance |= gsub(" *ETH"; "000000000000000000") | {("'"$address"'"): .}' >>$tmp_dir/allocations.json
+ }
+ 
+ genesis_add_system_contracts() {
+     tmp_dir=$1
+-    system_contracts=$(cat /apps/el-gen/system-contracts.yaml | yq -c)
++    system_contracts=$(cat "$SCRIPT_DIR/system-contracts.yaml" | yq -c)
+ 
+     echo "Adding system contracts"
+ 
+@@ -412,3 +415,4 @@ genesis_add_eip7805() {
+         "eip7805Time": '"$eip7805_time"'
+     }'
+ }
++
+Index: ethereum-genesis-generator-4.0.3/entrypoint.sh
+===================================================================
+--- ethereum-genesis-generator-4.0.3.orig/entrypoint.sh
++++ ethereum-genesis-generator-4.0.3/entrypoint.sh
+@@ -1,42 +1,90 @@
+ #!/bin/bash -e
+ 
+-# Load the default env vars into the environment
+-source /defaults/defaults.env
++# Default values
++DEFAULT_DATA_DIR="data"
++DEFAULT_DEFAULTS_ENV="/etc/ethereum-genesis-generator/defaults/defaults.env"
++DEFAULT_VALUES_ENV="/etc/ethereum-genesis-generator/config/values.env"
++DEFAULT_CONFIG_DIR="/etc/ethereum-genesis-generator/config"
++DEFAULT_EL_GEN_PATH="/usr/lib/ethereum-genesis-generator/apps/el-gen/generate_genesis.sh"
++
++# Set defaults AFTER parsing
++DATA_DIR="${DEFAULT_DATA_DIR}"
++DEFAULTS_ENV="${DEFAULT_DEFAULTS_ENV}"
++VALUES_ENV="${DEFAULT_VALUES_ENV}"
++CONFIG_DIR="${DEFAULT_CONFIG_DIR}"
++EL_GEN_PATH="${DEFAULT_EL_GEN_PATH}"
++
++while [[ $# -gt 0 ]]; do
++  case $1 in
++  --data-dir)
++    DATA_DIR="$2"
++    shift 2
++    ;;
++  --defaults-env)
++    DEFAULTS_ENV="$2"
++    shift 2
++    ;;
++  --values-env)
++    VALUES_ENV="$2"
++    shift 2
++    ;;
++  --config-dir)
++    CONFIG_DIR="$2"
++    shift 2
++    ;;
++  --el-gen-path)
++    EL_GEN_PATH="$2"
++    shift 2
++    ;;
++  *)
++    # Save the command (el, cl, all)
++    if [[ -z "$COMMAND" ]]; then
++      COMMAND="$1"
++    fi
++    shift
++    ;;
++  esac
++done
++
++echo "Using DATA_DIR: $DATA_DIR"
++echo "Using DEFAULTS_ENV: $DEFAULTS_ENV"
++echo "Using CONFIG_DIR: $CONFIG_DIR"
++echo "Using EL_GEN_PATH: $EL_GEN_PATH"
+ 
+-# Load the env vars entered by the user
+-if [ -f /config/values.env ];
+-then
+-    source /config/values.env
++if [ -f "$DEFAULTS_ENV" ]; then
++  source "$DEFAULTS_ENV"
+ fi
+ 
++if [ -f "$VALUES_ENV" ]; then
++  source "$VALUES_ENV"
++fi
+ 
+ SERVER_ENABLED="${SERVER_ENABLED:-false}"
+ SERVER_PORT="${SERVER_PORT:-8000}"
+ 
+-
+-gen_shared_files(){
+-    set -x
+-    # Shared files
+-    mkdir -p /data/metadata
+-    if ! [ -f "/data/jwt/jwtsecret" ]; then
+-        mkdir -p /data/jwt
+-        echo -n 0x$(openssl rand -hex 32 | tr -d "\n") > /data/jwt/jwtsecret
+-    fi
+-    if [ -f "/data/metadata/genesis.json" ]; then
+-        terminalTotalDifficulty=$(cat /data/metadata/genesis.json | jq -r '.config.terminalTotalDifficulty | tostring')
+-        sed -i "s/TERMINAL_TOTAL_DIFFICULTY:.*/TERMINAL_TOTAL_DIFFICULTY: $terminalTotalDifficulty/" /data/metadata/config.yaml
+-    fi
++gen_shared_files() {
++  set -x
++  # Shared files
++  mkdir -p "$DATA_DIR/metadata"
++  if ! [ -f "$DATA_DIR/jwt/jwtsecret" ]; then
++    mkdir -p "$DATA_DIR/jwt"
++    echo -n 0x$(openssl rand -hex 32 | tr -d "\n") >"$DATA_DIR/jwt/jwtsecret"
++  fi
++  if [ -f "$DATA_DIR/metadata/genesis.json" ]; then
++    terminalTotalDifficulty=$(cat "$DATA_DIR/metadata/genesis.json" | jq -r '.config.terminalTotalDifficulty | tostring')
++    sed -i "s/TERMINAL_TOTAL_DIFFICULTY:.*/TERMINAL_TOTAL_DIFFICULTY: $terminalTotalDifficulty/" "$DATA_DIR/metadata/config.yaml"
++  fi
+ }
+ 
+-gen_el_config(){
+-    set -x
+-    if ! [ -f "/data/metadata/genesis.json" ]; then
+-        mkdir -p /data/metadata
+-        source /apps/el-gen/generate_genesis.sh
+-        generate_genesis /data/metadata
+-    else
+-        echo "el genesis already exists. skipping generation..."
+-    fi
++gen_el_config() {
++  set -x
++  if ! [ -f "$DATA_DIR/metadata/genesis.json" ]; then
++    mkdir -p "$DATA_DIR/metadata"
++    source "$EL_GEN_PATH"
++    generate_genesis "$DATA_DIR/metadata"
++  else
++    echo "el genesis already exists. skipping generation..."
++  fi
+ }
+ 
+ gen_minimal_config() {
+@@ -50,99 +98,105 @@ gen_minimal_config() {
+   )
+ 
+   for key in "${!replacements[@]}"; do
+-    sed -i "s/$key:.*/$key: ${replacements[$key]}/" /data/metadata/config.yaml
++    sed -i "s/$key:.*/$key: ${replacements[$key]}/" "$DATA_DIR/metadata/config.yaml"
+   done
+ }
+ 
+-gen_cl_config(){
+-    set -x
+-    # Consensus layer: Check if genesis already exists
+-    if ! [ -f "/data/metadata/genesis.ssz" ]; then
+-        tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
+-        mkdir -p /data/metadata
+-        mkdir -p /data/parsed
+-        HUMAN_READABLE_TIMESTAMP=$(date -u -d @"$GENESIS_TIMESTAMP" +"%Y-%b-%d %I:%M:%S %p %Z")
+-        COMMENT="# $HUMAN_READABLE_TIMESTAMP"
+-        export MAX_REQUEST_BLOB_SIDECARS_ELECTRA=$(($MAX_REQUEST_BLOCKS_DENEB * $MAX_BLOBS_PER_BLOCK_ELECTRA))
+-        export MAX_REQUEST_BLOB_SIDECARS_FULU=$(($MAX_REQUEST_BLOCKS_DENEB * $MAX_BLOBS_PER_BLOCK_FULU))
+-        envsubst < /config/cl/config.yaml > /data/metadata/config.yaml
+-        sed -i "s/#HUMAN_TIME_PLACEHOLDER/$COMMENT/" /data/metadata/config.yaml
+-        envsubst < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
+-        # Conditionally override values if preset is "minimal"
+-        if [[ "$PRESET_BASE" == "minimal" ]]; then
+-          gen_minimal_config
+-        fi
+-        cp $tmp_dir/mnemonics.yaml /data/metadata/mnemonics.yaml
+-        # Create deposit_contract.txt and deposit_contract_block.txt
+-        grep DEPOSIT_CONTRACT_ADDRESS /data/metadata/config.yaml | cut -d " " -f2 > /data/metadata/deposit_contract.txt
+-        echo $CL_EXEC_BLOCK > /data/metadata/deposit_contract_block.txt
+-        echo $BEACON_STATIC_ENR > /data/metadata/bootstrap_nodes.txt
+-        # Envsubst mnemonics
+-        if [ "$WITHDRAWAL_TYPE" == "0x00" ]; then
+-          export WITHDRAWAL_ADDRESS="null"
+-        fi
+-        envsubst < /config/cl/mnemonics.yaml > $tmp_dir/mnemonics.yaml
+-        # Generate genesis
+-        genesis_args+=(
+-          devnet
+-          --config /data/metadata/config.yaml
+-          --eth1-config /data/metadata/genesis.json
+-          --mnemonics $tmp_dir/mnemonics.yaml
+-          --state-output /data/metadata/genesis.ssz
+-          --json-output /data/parsed/parsedConsensusGenesis.json
+-        )
+-
+-        if [[ $SHADOW_FORK_FILE != "" ]]; then
+-          genesis_args+=(--shadow-fork-block=$SHADOW_FORK_FILE)
+-        elif [[ $SHADOW_FORK_RPC != "" ]]; then
+-          genesis_args+=(--shadow-fork-rpc=$SHADOW_FORK_RPC)
+-        fi
+-
+-        if ! [ -z "$CL_ADDITIONAL_VALIDATORS" ]; then
+-          if [[ $CL_ADDITIONAL_VALIDATORS = /* ]]; then
+-            validators_file=$CL_ADDITIONAL_VALIDATORS
+-          else
+-            validators_file="/config/$CL_ADDITIONAL_VALIDATORS"
+-          fi
+-          genesis_args+=(--additional-validators $validators_file)
+-        fi
+-        
+-        /usr/local/bin/eth-beacon-genesis "${genesis_args[@]}"
+-        echo "Genesis args: ${genesis_args[@]}"
+-        echo "Genesis block number: $(jq -r '.latest_execution_payload_header.block_number' /data/parsed/parsedConsensusGenesis.json)"
+-        echo "Genesis block hash: $(jq -r '.latest_execution_payload_header.block_hash' /data/parsed/parsedConsensusGenesis.json)"
+-        jq -r '.eth1_data.block_hash' /data/parsed/parsedConsensusGenesis.json| tr -d '\n' > /data/metadata/deposit_contract_block_hash.txt
+-        jq -r '.genesis_validators_root' /data/parsed/parsedConsensusGenesis.json | tr -d '\n' > /data/metadata/genesis_validators_root.txt
+-    else
+-        echo "cl genesis already exists. skipping generation..."
++gen_cl_config() {
++  set -x
++  # Consensus layer: Check if genesis already exists
++  if ! [ -f "$DATA_DIR/metadata/genesis.ssz" ]; then
++    tmp_dir=$(mktemp -d -t ci-XXXXXXXXXX)
++    mkdir -p "$DATA_DIR/metadata"
++    mkdir -p "$DATA_DIR/parsed"
++    HUMAN_READABLE_TIMESTAMP=$(date -u -d @"$GENESIS_TIMESTAMP" +"%Y-%b-%d %I:%M:%S %p %Z")
++    COMMENT="# $HUMAN_READABLE_TIMESTAMP"
++    export MAX_REQUEST_BLOB_SIDECARS_ELECTRA=$(($MAX_REQUEST_BLOCKS_DENEB * $MAX_BLOBS_PER_BLOCK_ELECTRA))
++    export MAX_REQUEST_BLOB_SIDECARS_FULU=$(($MAX_REQUEST_BLOCKS_DENEB * $MAX_BLOBS_PER_BLOCK_FULU))
++    envsubst <"$CONFIG_DIR/cl/config.yaml" >"$DATA_DIR/metadata/config.yaml"
++    sed -i "s/#HUMAN_TIME_PLACEHOLDER/$COMMENT/" "$DATA_DIR/metadata/config.yaml"
++    envsubst <"$CONFIG_DIR/cl/mnemonics.yaml" >$tmp_dir/mnemonics.yaml
++    # Conditionally override values if preset is "minimal"
++    if [[ "$PRESET_BASE" == "minimal" ]]; then
++      gen_minimal_config
++    fi
++    cp $tmp_dir/mnemonics.yaml "$DATA_DIR/metadata/mnemonics.yaml"
++    # Create deposit_contract.txt and deposit_contract_block.txt
++    grep DEPOSIT_CONTRACT_ADDRESS "$DATA_DIR/metadata/config.yaml" | cut -d " " -f2 >"$DATA_DIR/metadata/deposit_contract.txt"
++    echo $CL_EXEC_BLOCK >"$DATA_DIR/metadata/deposit_contract_block.txt"
++    echo $BEACON_STATIC_ENR >"$DATA_DIR/metadata/bootstrap_nodes.txt"
++    # Envsubst mnemonics
++    if [ "$WITHDRAWAL_TYPE" == "0x00" ]; then
++      export WITHDRAWAL_ADDRESS="null"
++    fi
++    envsubst <"$CONFIG_DIR/cl/mnemonics.yaml" >"$tmp_dir/mnemonics.yaml"
++    # Generate genesis
++    genesis_args+=(
++      devnet
++      --config "$DATA_DIR/metadata/config.yaml"
++      --eth1-config "$DATA_DIR/metadata/genesis.json"
++      --mnemonics "$tmp_dir/mnemonics.yaml"
++      --state-output "$DATA_DIR/metadata/genesis.ssz"
++      --json-output "$DATA_DIR/parsed/parsedConsensusGenesis.json"
++    )
++
++    if [[ $SHADOW_FORK_FILE != "" ]]; then
++      genesis_args+=(--shadow-fork-block=$SHADOW_FORK_FILE)
++    elif [[ $SHADOW_FORK_RPC != "" ]]; then
++      genesis_args+=(--shadow-fork-rpc=$SHADOW_FORK_RPC)
++    fi
++
++    if ! [ -z "$CL_ADDITIONAL_VALIDATORS" ]; then
++      if [[ $CL_ADDITIONAL_VALIDATORS = /* ]]; then
++        validators_file=$CL_ADDITIONAL_VALIDATORS
++      else
++        validators_file="$CONFIG_DIR/$CL_ADDITIONAL_VALIDATORS"
++      fi
++      genesis_args+=(--additional-validators $validators_file)
+     fi
++
++    eth-beacon-genesis "${genesis_args[@]}"
++    echo "Genesis args: ${genesis_args[@]}"
++    echo "Genesis block number: $(jq -r '.latest_execution_payload_header.block_number' "$DATA_DIR/parsed/parsedConsensusGenesis.json")"
++    echo "Genesis block hash: $(jq -r '.latest_execution_payload_header.block_hash' "$DATA_DIR/parsed/parsedConsensusGenesis.json")"
++    jq -r '.eth1_data.block_hash' "$DATA_DIR/parsed/parsedConsensusGenesis.json" | tr -d '\n' >"$DATA_DIR/metadata/deposit_contract_block_hash.txt"
++    jq -r '.genesis_validators_root' "$DATA_DIR/parsed/parsedConsensusGenesis.json" | tr -d '\n' >"$DATA_DIR/metadata/genesis_validators_root.txt"
++  else
++    echo "cl genesis already exists. skipping generation..."
++  fi
+ }
+ 
+-gen_all_config(){
+-    gen_el_config
+-    gen_cl_config
+-    gen_shared_files
++gen_all_config() {
++  gen_el_config
++  gen_cl_config
++  gen_shared_files
+ }
+ 
+-case $1 in
+-  el)
+-    gen_el_config
+-    ;;
+-  cl)
+-    gen_cl_config
+-    ;;
+-  all)
+-    gen_all_config
+-    ;;
+-  *)
+-    set +x
+-    echo "Usage: [all|cl|el]"
+-    exit 1
+-    ;;
++case $COMMAND in
++el)
++  gen_el_config
++  ;;
++cl)
++  gen_cl_config
++  ;;
++all)
++  gen_all_config
++  ;;
++*)
++  set +x
++  echo "Usage: $(basename $0) [all|cl|el] [--data-dir=/path/to/data] [--config-dir=/path/to/config] [--defaults-env=/path/to/defaults.env] [--values-env=/path/to/values.env] [--el-gen-path=/path/to/generate_genesis.sh]"
++  echo "Options:"
++  echo "  --data-dir=PATH         Set custom data directory (default: $DEFAULT_DATA_DIR)"
++  echo "  --config-dir=PATH       Set custom config directory (default: $DEFAULT_CONFIG_DIR)"
++  echo "  --defaults-env=PATH     Set custom defaults env file (default: $DEFAULT_DEFAULTS_ENV)"
++  echo "  --values-env=PATH       Set custom values env file (default: $DEFAULT_VALUES_ENV)"
++  echo "  --el-gen-path=PATH      Set custom EL generator script path (default: $DEFAULT_EL_GEN_PATH)"
++  exit 1
++  ;;
+ esac
+ 
+ # Start webserver
+-if [ "$SERVER_ENABLED" = true ] ; then
++if [ "$SERVER_ENABLED" = true ]; then
+   cd /data && exec python3 -m http.server "$SERVER_PORT"
+ fi
+ 
