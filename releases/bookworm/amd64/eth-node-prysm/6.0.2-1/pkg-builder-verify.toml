@@ -1,0 +1,7 @@
+[verify]
+package_hash=[
+    { hash="209db5f2443fc6688e536007e411e611f1ba2f0a", name= "eth-node-prysm_6.0.2-1.dsc"},
+    { hash="d5dea59a0ce1fbffade676eb3b5212626c2fefc8", name= "eth-node-prysm_6.0.2.orig.tar.gz"},
+    { hash="a0fd7df1815c2a82cdeb32e2d32eaa95dfa508fd", name= "eth-node-prysm_6.0.2-1.debian.tar.xz"},
+    { hash="390debe141f1b3f656da72e633ed02753216dd58", name= "eth-node-prysm_6.0.2-1_amd64.deb"},
+]
