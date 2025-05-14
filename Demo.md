@@ -1,4 +1,4 @@
-# Ethereum Node Setup Guide
+# Demo guide
 
 ## Add Repository Key
 ```bash
