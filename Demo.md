@@ -78,3 +78,10 @@ Monitor logs (example for Lodestar):
 ```bash
 sudo tail -f /var/logs/eth-node-regtest/lodestar/lodestar-2025-05-14.log
 ```
+
+## See installed system.d files 
+
+```bash
+sudo cat /lib/systemd/system/eth-node-<clietname>-regtest.service
+sudo cat /lib/systemd/system/eth-node-<clietname>-validator-regtest.service
+```
