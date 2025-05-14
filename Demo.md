@@ -74,14 +74,14 @@ List logs:
 ```bash
 ls /var/logs/eth-node-regtest
 ```
-Monitor logs (example for Lodestar):
+Monitor logs (example for Lodestar): (replace date with the current date)
 ```bash
-sudo tail -f /var/logs/eth-node-regtest/lodestar/lodestar-2025-05-14.log
+sudo tail -f /var/logs/eth-node-regtest/lodestar/lodestar-year-month-day.log
 ```
 
 ## See installed system.d files 
 
 ```bash
-sudo cat /lib/systemd/system/eth-node-<clietname>-regtest.service
-sudo cat /lib/systemd/system/eth-node-<clietname>-validator-regtest.service
+sudo cat /lib/systemd/system/eth-node-<clientname>-regtest.service
+sudo cat /lib/systemd/system/eth-node-<clientname>-validator-regtest.service
 ```
