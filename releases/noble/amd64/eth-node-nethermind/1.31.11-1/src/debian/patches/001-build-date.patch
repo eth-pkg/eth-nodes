@@ -1,0 +1,36 @@
+Index: eth-node-nethermind-1.30.0/src/Nethermind/Directory.Build.props
+===================================================================
+--- eth-node-nethermind-1.30.0.orig/src/Nethermind/Directory.Build.props
++++ eth-node-nethermind-1.30.0/src/Nethermind/Directory.Build.props
+@@ -11,7 +11,6 @@
+   </PropertyGroup>
+ 
+   <PropertyGroup Label="ProductInfo">
+-    <BuildTimestamp Condition="'$(BuildTimestamp)' == ''">$([System.DateTimeOffset]::UtcNow.ToUnixTimeSeconds())</BuildTimestamp>
+     <Copyright>Demerzel Solutions Limited</Copyright>
+     <Product>Nethermind</Product>
+     <SourceRevisionId Condition="'$(Commit)' != ''">$(Commit)</SourceRevisionId>
+@@ -19,11 +18,4 @@
+     <VersionSuffix></VersionSuffix>
+   </PropertyGroup>
+ 
+-  <ItemGroup Label="AssemblyCustomMetadata">
+-    <AssemblyAttribute Include="System.Reflection.AssemblyMetadataAttribute">
+-      <_Parameter1>BuildTimestamp</_Parameter1>
+-      <_Parameter2>$(BuildTimestamp)</_Parameter2>
+-    </AssemblyAttribute>
+-  </ItemGroup>
+-
+ </Project>
+Index: eth-node-nethermind-1.30.0/src/Nethermind/Nethermind.Runner/Program.cs
+===================================================================
+--- eth-node-nethermind-1.30.0.orig/src/Nethermind/Nethermind.Runner/Program.cs
++++ eth-node-nethermind-1.30.0/src/Nethermind/Nethermind.Runner/Program.cs
+@@ -316,7 +316,6 @@ CliConfiguration ConfigureCli()
+             Console.WriteLine($"""
+                 Version:    {ProductInfo.Version}
+                 Commit:     {ProductInfo.Commit}
+-                Build date: {ProductInfo.BuildTimestamp:u}
+                 Runtime:    {ProductInfo.Runtime}
+                 Platform:   {ProductInfo.OS} {ProductInfo.OSArchitecture}
+                 """);
