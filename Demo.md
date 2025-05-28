@@ -12,7 +12,7 @@ echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc
 ```
 For the testing repository:
 ```bash
-echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing noble main" | sudo tee /etc/apt/sources.list.d/ethnodes.list
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/ethnodes-archive-keyring.asc] http://packages.eth-nodes.com/noble-testing noble main" | sudo tee -a /etc/apt/sources.list.d/ethnodes.list
 ```
 
 ## Update Package List
@@ -40,6 +40,8 @@ sudo apt purge eth-node-regtest-full
 ```
 Install the package:
 ```bash
+sudo apt install ethereum-genesis-generator=4.0.3-4
+apt install wget curl sudo gettext-base jq yq
 sudo apt install eth-node-regtest-full
 ```
 
