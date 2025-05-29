@@ -1,0 +1,6 @@
+eth-node-erigon (3.0.4-1) bookworm; urgency=medium
+
+  * Support for 3.0.4-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 28 May 2025 07:40:27 +0200
+
