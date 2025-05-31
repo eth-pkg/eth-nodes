@@ -1,0 +1,6 @@
+eth-node-teku (25.5.0-1) bookworm; urgency=medium
+
+  * Support for 25.5.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 29 May 2025 07:12:39 +0200
+
