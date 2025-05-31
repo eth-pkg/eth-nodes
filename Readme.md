@@ -70,5 +70,5 @@ Install specific clients for custom configurations:
 Contributions are welcome! Please see our [Contributing Guide](Contributing.md) for details.
 
 ## License
-AGPL v3  
+Apache License 2.0  
 See [LICENSE](LICENSE) for details
