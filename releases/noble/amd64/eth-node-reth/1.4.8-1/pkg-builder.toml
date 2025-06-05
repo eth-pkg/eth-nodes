@@ -1,0 +1,53 @@
+[package_fields]
+spec_file = "eth-node-reth.sss"
+package_name = "eth-node-reth"
+version_number = "1.4.8"
+revision_number = "1"
+homepage = "https://github.com/paradigmxyz/reth"
+
+[package_type]
+# virtual | git | default
+package_type = "default"
+tarball_url = "https://github.com/paradigmxyz/reth/archive/refs/tags/v1.4.8.tar.gz"
+## Provided by debian package maintainer not by team developing the software
+tarball_hash = "713244344773f9ed1ee9fb49680783f921cbb631e0b77adb3e56d6b84c33c388"
+
+[package_type.language_env]
+language_env = "rust"
+rust_version = "1.87.0"
+rust_binary_url = "https://static.rust-lang.org/dist/rust-1.87.0-x86_64-unknown-linux-gnu.tar.xz"
+rust_binary_gpg_asc = """
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAABCgAQBQJoJh80CRCFq5bm+hvl/gAAJxwQAJ2mzXu8tnbQ1OVWMa0qEnW+
+vRc4FqWr68LpYnUEedlWL8MVOY8n3FYNpJR2taUfF8irMZzp2xyFZxKfKgYFSsmB
+bqiQs2tgsZUWEWKXJ9qFOm6L0bb8zWrJqgxwPXvoz8tkeZ85Nf9e1tCvoOCYLdbh
+M3oqa7AFRTDV/IfE0qCuoWfDLpUowXobCq7Ngt6yoxjZGdIWYgL7f2A7xVNvr07h
+QVU6zpt0sN0VHIqX4yFg/2cR1gY+Y+hUGbt0jzYSvDBaOrSaaRudo946RYD8P97S
+tpcK8X8prvJFznK1tCg7px6ewhvWfosumvV/v+KIybn/qx81cLo3z0lCBN2CQhla
+YWxQHU92PbGIqVlJ3Z5G+9yF2j5ku3yoHxDfhls3nErIoFe/ra5+qCuifta3RFqo
+QGxIswJJzcQdkEO7lYs/nXr99asyPcUH4UCmnqZZWXbW9QvxymfpEsKf+AEK+Ci4
+U1QU2eM0SsDEcPInsfGmOdijBo9g2XhFmCJPzAFYZrp4EEXiyaPzscqH4+pj5Tp4
+QH+FDe6MBL/T9IhBqefvzdQ8rG8qosutQjrOBNX9RkOoUqUMjKuZb3f5OW+uXOM4
+nBnRn+lyKwka/CxLxkdW5YAOpPoVH02V30RFiguCtZR7Iduu2hRL/qPL8LReovSL
+8ysuchyKHPcc6FO7fNf2
+=94PC
+-----END PGP SIGNATURE-----
+"""
+
+[build_env]
+codename = "noble numbat"
+arch = "amd64"
+pkg_builder_version = "0.3.1"
+debcrafter_version = "2711b53"
+# needed for tests
+docker = true
+run_lintian = true
+run_piuparts = true
+run_autopkgtest = true
+lintian_version = "2.116.3"
+piuparts_version = "1.1.7"
+autopkgtest_version = "5.28"
+sbuild_version = "0.85.6"
+# package directory
+workdir = "~/.pkg-builder/packages/noble"
