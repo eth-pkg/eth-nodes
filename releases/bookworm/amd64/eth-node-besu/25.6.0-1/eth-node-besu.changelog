@@ -1,0 +1,6 @@
+eth-node-besu (25.6.0-1) bookworm; urgency=medium
+
+  * Support for 25.6.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Wed, 04 Jun 2025 07:54:55 +0200
+
