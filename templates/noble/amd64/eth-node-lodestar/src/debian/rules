@@ -42,6 +42,7 @@ override_dh_auto_build:
 	rm -f node_modules/cpu-features/build/Makefile
 	rm -f node_modules/ssh2/lib/protocol/crypto/build/Makefile
 	rm -f node_modules/c-kzg/build/kzg.target.mk
+	rm -f node_modules/ssh2/node_modules/cpu-features/build/Makefile
 
 	# not sure what python3 is doing there, in those folders
 	rm -f node_modules/bcrypto/build/node_gyp_bins/python3
