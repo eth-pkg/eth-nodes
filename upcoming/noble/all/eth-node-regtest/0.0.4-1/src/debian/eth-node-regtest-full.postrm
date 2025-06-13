@@ -1,0 +1,106 @@
+#!/bin/sh
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# Define package and directories
+PACKAGE_NAME="eth-node-regtest-full"
+BASE_DIR="/var/lib/eth-node-regtest"
+LOG_DIR="/var/logs/eth-node-regtest"
+CONFIG_DIR="/etc/$PACKAGE_NAME"
+SCRIPTS_BASE_DIR="/usr/lib/eth-node-regtest"
+
+# Helper function to get debconf value
+get_debconf_value() {
+    local key=$1
+    db_get "$PACKAGE_NAME/$key"
+    echo "$RET"
+}
+
+# Handle different postrm cases
+case "$1" in
+purge)
+    # Get selected clients
+    EL_CLIENT=$(get_debconf_value "EL_CLIENT")
+    CL_CLIENT=$(get_debconf_value "CL_CLIENT")
+    VL_CLIENT=$(get_debconf_value "VL_CLIENT")
+    RUN_VL_CLIENT=$(get_debconf_value "RUN_VL_CLIENT")
+
+    # Map clients to user/group names
+    case "$EL_CLIENT" in
+    besu) EL_USER="besu" EL_GROUP="besu" ;;
+    erigon) EL_USER="erigon" EL_GROUP="erigon" ;;
+    geth) EL_USER="geth" EL_GROUP="geth" ;;
+    nethermind) EL_USER="nethermind" EL_GROUP="nethermind" ;;
+    reth) EL_USER="reth" EL_GROUP="reth" ;;
+    *) EL_USER="" EL_GROUP="" ;;
+    esac
+
+    case "$CL_CLIENT" in
+    lighthouse) CL_USER="lighthouse" CL_GROUP="lighthouse" ;;
+    lodestar) CL_USER="lodestar" CL_GROUP="lodestar" ;;
+    nimbus-eth2) CL_USER="nimbus-eth2" CL_GROUP="nimbus-eth2" ;;
+    prysm) CL_USER="prysm" CL_GROUP="prysm" ;;
+    teku) CL_USER="teku" CL_GROUP="teku" ;;
+    *) CL_USER="" CL_GROUP="" ;;
+    esac
+
+    if [ "$RUN_VL_CLIENT" = "true" ]; then
+        case "$VL_CLIENT" in
+        lighthouse) VL_USER="lighthouse-val" VL_GROUP="lighthouse-val" ;;
+        lodestar) VL_USER="lodestar-val" VL_GROUP="lodestar-val" ;;
+        nimbus-eth2) VL_USER="nimbus-eth2-val" VL_GROUP="nimbus-eth2-val" ;;
+        prysm) VL_USER="prysm-val" VL_GROUP="prysm-val" ;;
+        teku) VL_USER="teku-val" VL_GROUP="teku-val" ;;
+        *) VL_USER="" VL_GROUP="" ;;
+        esac
+    else
+        VL_USER="" VL_GROUP=""
+    fi
+
+    # Remove configuration, data, and log directories
+    rm -rf "$CONFIG_DIR" "$BASE_DIR" "$LOG_DIR" "$SCRIPTS_BASE_DIR" 2>/dev/null || true
+
+    # Remove users and groups for selected clients
+    for client in "$EL_USER" "$CL_USER" "$VL_USER"; do
+        if [ -n "$client" ]; then
+            user="eth-node-${client}-regtest"
+            if id "$user" >/dev/null 2>&1; then
+                deluser --system --quiet "$user" || true
+            fi
+        fi
+    done
+    for group in "$EL_GROUP" "$CL_GROUP" "$VL_GROUP"; do
+        if [ -n "$group" ]; then
+            group_name="eth-node-${group}-regtest"
+            if getent group "$group_name" >/dev/null; then
+                delgroup --system --quiet "$group_name" || true
+            fi
+        fi
+    done
+
+    # Remove package-wide user and group
+    if id eth-node-regtest >/dev/null 2>&1; then
+        deluser --system --quiet eth-node-regtest || true
+    fi
+    if getent group eth-node-regtest >/dev/null; then
+        delgroup --system --quiet eth-node-regtest || true
+    fi
+
+    # Purge debconf data
+    db_purge || true
+    ;;
+remove | upgrade | failed-upgrade | abort-install | abort-upgrade | disappear)
+    # Do nothing for these cases
+    ;;
+*)
+    echo "postrm called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Clean up debconf
+db_stop
+
+exit 0

@@ -20,7 +20,7 @@ inputs:
   package_version:
     description: "Version of packages to build/install"
     required: false
-    default: '0.0.3-1'
+    default: '0.0.4-1'
 
 runs:
   using: composite
@@ -157,6 +157,22 @@ runs:
       run: |
         curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
         sudo apt install -y nodejs
+      shell: bash
+
+    - name: Install smithy
+      id: install-smithy
+      run: |
+        git clone https://github.com/eth-pkg/smithy.git
+        cd smithy
+        
+        npm run install 
+        npm run build
+        
+        chmod +x ${HOME}/smithy/bin/smithy
+
+        echo "${HOME}/smithy/bin" >> $GITHUB_PATH
+        echo "PATH=$PATH:${HOME}/smithy/dist" >> $GITHUB_ENV
+        
       shell: bash
 
     # caches packages not to hit the repository in each CI run

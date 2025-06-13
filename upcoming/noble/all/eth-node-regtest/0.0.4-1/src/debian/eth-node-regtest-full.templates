@@ -1,0 +1,19 @@
+Template: eth-node-regtest-full/EL_CLIENT
+Type: select
+Choices: besu, erigon, geth, nethermind, reth
+Description: Select the execution client to run with regtest
+
+Template: eth-node-regtest-full/CL_CLIENT
+Type: select
+Choices: lighthouse, lodestar, nimbus-eth2, prysm, teku
+Description: Select the consensus client to run with regtest
+
+Template: eth-node-regtest-full/RUN_VL_CLIENT
+Type: boolean
+Default: true
+Description: Enable staking?
+
+Template: eth-node-regtest-full/VL_CLIENT
+Type: select
+Choices: lighthouse, lodestar, nimbus-eth2, prysm, teku
+Description: Select the validator client to run with regtest

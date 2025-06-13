@@ -1,0 +1,167 @@
+#!/bin/sh
+set -e
+
+# Configuration variables
+BASE_DIR="/var/lib/eth-node-regtest"
+SCRIPTS_BASE_DIR="/usr/lib/eth-node-regtest"
+LOG_DIR="/var/logs/eth-node-regtest"
+CONFIG_DIR="/etc/eth-node-regtest"
+REGTEST_DIR="${BASE_DIR}/regtest"
+REGTEST_CONFIG_DIR="${CONFIG_DIR}/regtest/config"
+PACKAGE_NAME="eth-node-regtest-full"
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# Helper functions
+get_debconf_value() {
+    local key=$1
+    db_get "$PACKAGE_NAME/$key"
+    echo "$RET"
+}
+
+setup_clients() {
+    local client=$1
+    local group=$2
+    local client_sub_dir=$3
+    local client_dir="${BASE_DIR}/${client_sub_dir}"
+    local client_log_dir="${LOG_DIR}/${client_sub_dir}"
+    local client_user="eth-node-${client}-regtest"
+    local group_name="eth-node-${group}-regtest"
+    local scripts="$SCRIPTS_BASE_DIR/$client_sub_dir/*"
+    local service_name
+
+    # Create client-specific user and group
+    adduser --system --quiet --group "$client_user" --no-create-home || true
+    addgroup --system --quiet "$group_name" || true
+
+    mkdir -p "${client_dir}"
+    chown -R "${client_user}:${group_name}" "${client_dir}"
+
+    mkdir -p "${client_log_dir}"
+    chown -R "${client_user}:${group_name}" "${client_log_dir}"
+
+    usermod -aG eth-node-regtest "${client_user}" || true
+    chmod a+x $scripts 2>/dev/null || true
+
+    # Determine service name (use -validator for validator clients)
+    case "$client" in
+    lighthouse-val | lodestar-val | nimbus-eth2-val | prysm-val | teku-val)
+        service_name="eth-node-${client%-val}-validator-regtest"
+        ;;
+    *)
+        service_name="eth-node-${client}-regtest"
+        ;;
+    esac
+
+    # Enable and start the service
+    systemctl enable "$service_name" 2>/dev/null || true
+    systemctl start "$service_name" 2>/dev/null || true
+}
+
+setup_package() {
+    echo "Creating user and group eth-node-regtest"
+    adduser --system --quiet --group eth-node-regtest || true
+
+    # Default JWT file path
+    local jwt_file="$CONFIG_DIR/jwt.hex"
+
+    # Read BASECONF_JWT_FILE from config file without sourcing
+    if [ -f "$CONFIG_DIR/eth-node-regtest.conf" ]; then
+        local config_jwt
+        config_jwt=$(grep '^BASECONF_JWT_FILE=' $CONFIG_DIR/eth-node-regtest.conf | cut -d '=' -f 2- | tr -d '[:space:]')
+        if [ -n "$config_jwt" ]; then
+            jwt_file="$config_jwt"
+        fi
+    fi
+
+    # Ensure directory exists
+    mkdir -p "$(dirname "$jwt_file")"
+    touch "$jwt_file"
+
+    # Generate JWT if file doesn't exist or is empty
+    if [ ! -f "$jwt_file" ] || [ ! -s "$jwt_file" ]; then
+        openssl rand -hex 32 | tr -d "\n" >"$jwt_file"
+    fi
+
+    chmod 750 "$jwt_file"
+    chown -R eth-node-regtest:eth-node-regtest $CONFIG_DIR
+}
+
+generate_testnet() {
+    local tmp_dir=$(mktemp -d)
+    local data_dir="${tmp_dir}/data"
+
+    cd "$tmp_dir"
+    export GENESIS_TIMESTAMP=$(date +%s)
+
+    ethereum-genesis-generator all \
+        --values-env "${REGTEST_CONFIG_DIR}/values.env" \
+        --config-dir "${REGTEST_CONFIG_DIR}" \
+        --data-dir "${data_dir}"
+
+    mkdir -p "${REGTEST_DIR}"
+    cp "${data_dir}/metadata/deposit_contract_block.txt" "${data_dir}/metadata/deploy_block.txt"
+    cp -R "${data_dir}/jwt" "${data_dir}/metadata" "${data_dir}/parsed" "${REGTEST_DIR}"
+    mv "${REGTEST_DIR}/metadata" "${REGTEST_DIR}/genesis"
+
+    rm -rf "${tmp_dir}"
+    chown -R eth-node-regtest:eth-node-regtest "${BASE_DIR}"
+}
+
+setup_selected_clients() {
+    local el_client=$(get_debconf_value "EL_CLIENT")
+    local cl_client=$(get_debconf_value "CL_CLIENT")
+    local vl_client=$(get_debconf_value "VL_CLIENT")
+    local run_vl_client=$(get_debconf_value "RUN_VL_CLIENT")
+
+    case "$el_client" in
+    besu) setup_clients "besu" "besu" "besu" ;;
+    erigon) setup_clients "erigon" "erigon" "erigon" ;;
+    geth) setup_clients "geth" "geth" "geth" ;;
+    nethermind) setup_clients "nethermind" "nethermind" "nethermind" ;;
+    reth) setup_clients "reth" "reth" "reth" ;;
+    *) echo "Unknown execution client: ${el_client}" >&2 ;;
+    esac
+
+    case "$cl_client" in
+    lighthouse) setup_clients "lighthouse" "lighthouse" "lighthouse" ;;
+    lodestar) setup_clients "lodestar" "lodestar" "lodestar" ;;
+    nimbus-eth2) setup_clients "nimbus-eth2" "nimbus-eth2" "nimbus-eth2" ;;
+    prysm) setup_clients "prysm" "prysm" "prysm" ;;
+    teku) setup_clients "teku" "teku" "teku" ;;
+    *) echo "Unknown consensus client: ${cl_client}" >&2 ;;
+    esac
+
+    if [ "$run_vl_client" = "true" ]; then
+        case "$vl_client" in
+        lighthouse) setup_clients "lighthouse-val" "lighthouse-val" "lighthouse-validator" ;;
+        lodestar) setup_clients "lodestar-val" "lodestar-val" "lodestar-validator" ;;
+        nimbus-eth2) setup_clients "nimbus-eth2-val" "nimbus-eth2-val" "nimbus-eth2-validator" ;;
+        prysm) setup_clients "prysm-val" "prysm-val" "prysm-validator" ;;
+        teku) setup_clients "teku-val" "teku-val" "teku-validator" ;;
+        *) echo "Unknown validator client: ${vl_client}" >&2 ;;
+        esac
+    fi
+}
+
+# Main execution logic
+case "$1" in
+configure)
+    setup_package
+    generate_testnet
+    setup_selected_clients
+    ;;
+abort-upgrade | abort-remove | abort-deconfigure)
+    # Do nothing
+    ;;
+*)
+    echo "postinst called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Clean up debconf
+db_stop
+
+exit 0

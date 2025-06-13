@@ -1,0 +1,14 @@
+eth-node-regtest-full: maintainer-script-lacks-home-in-adduser * [postinst:*]
+eth-node-regtest-full: no-copyright-file
+eth-node-regtest-full: extended-description-line-too-long line *
+eth-node-regtest-full: initial-upload-closes-no-bugs [usr/share/doc/eth-node-regtest-full/changelog.Debian.gz:1]
+eth-node-regtest-full: maintainer-script-calls-systemctl [postinst:58]
+eth-node-regtest-full: maintainer-script-calls-systemctl [postinst:59]
+eth-node-regtest-full: maintainer-script-calls-systemctl [prerm:63]
+eth-node-regtest-full: maintainer-script-calls-systemctl [prerm:66]
+eth-node-regtest-full: missing-debconf-dependency-for-preinst
+eth-node-regtest-full: recursive-privilege-change "chown -R" [postinst:*]
+eth-node-regtest-full: script-not-executable *
+eth-node-regtest-full: using-imperative-form-in-templates eth-node-regtest-full/EL_CLIENT *
+eth-node-regtest-full: using-imperative-form-in-templates eth-node-regtest-full/VL_CLIENT *
+eth-node-regtest-full: using-imperative-form-in-templates eth-node-regtest-full/CL_CLIENT *
