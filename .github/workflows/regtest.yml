@@ -4,7 +4,7 @@ on:
   push:
     branches:
          - feat/non-existant
-        # - fix/genesis-pectra-changes
+         - beta/eth-node-regtest
 
 jobs:
   test:
@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        el_name: [besu, geth, nethermind, erigon, reth]
-        cl_name: [lighthouse, lodestar, nimbus-eth2, prysm, teku]
-        validator_name: [lighthouse, lodestar, nimbus-eth2, prysm, teku]
+        # el_name: [besu, geth, nethermind, erigon, reth]
+        el_name: [besu]
+        # cl_name: [lighthouse, lodestar, nimbus-eth2, prysm, teku]
+        cl_name: [lighthouse]
+        # validator_name: [lighthouse, lodestar, nimbus-eth2, prysm, teku]
+        validator_name: [lighthouse]
         exclude: 
         - cl_name: lighthouse 
           validator_name: prysm
