@@ -16,9 +16,9 @@ submodules = <GIT_SUBMODULES>
 
 [package_type.language_env]
 language_env = "nim"
-nim_version = "2.0.6"
-nim_binary_url = "https://nim-lang.org/download/nim-2.0.6-linux_x64.tar.xz"
-nim_version_checksum = "4613c18f6c70d14f7fcbcb0c644425699862902ec64d7b785ededaf161815cdc nim-2.0.6-linux_x64.tar.xz"
+nim_version = "2.2.4" # according to docs, downgrade nim version to this version
+nim_binary_url = "https://nim-lang.org/download/nim-2.2.4-linux_x64.tar.xz"
+nim_version_checksum = "791802138aaf19c8579232c50b4998ce2ae2928b791127ce5b4ef3c7af53fb46 nim-2.2.4-linux_x64.tar.xz"
 
 
 [build_env]
