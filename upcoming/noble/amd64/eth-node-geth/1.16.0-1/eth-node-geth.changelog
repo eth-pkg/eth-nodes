@@ -1,0 +1,6 @@
+eth-node-geth (1.16.0-1) noble; urgency=medium
+
+  * Support for 1.16.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Fri, 27 Jun 2025 07:45:20 +0200
+
