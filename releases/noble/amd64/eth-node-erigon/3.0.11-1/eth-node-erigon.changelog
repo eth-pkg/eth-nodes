@@ -1,0 +1,6 @@
+eth-node-erigon (3.0.11-1) noble; urgency=medium
+
+  * Support for 3.0.11-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Tue, 01 Jul 2025 14:41:53 +0200
+
