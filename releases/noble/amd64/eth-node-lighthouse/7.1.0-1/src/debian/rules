@@ -24,9 +24,9 @@ override_dh_auto_test:
  		--exclude ef_tests --exclude beacon_chain --exclude slasher --exclude network \
 		--exclude lighthouse_metrics \
 		--exclude web3signer_tests \
+		--exclude lighthouse_network \
 		--exclude watch # Same as make test-release, except additionally disabling docker tests  
 	#make run-ef-tests
-
 
 override_dh_auto_install:
 	# install is not the same as debian install, ignore it 
