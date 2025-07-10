@@ -1,0 +1,6 @@
+eth-node-lighthouse (7.1.0-1) bookworm; urgency=medium
+
+  * Support for 7.1.0-1
+
+ -- Eniko Nagy <mail+ethnodes@eenagy.com>  Thu, 10 Jul 2025 07:57:02 +0200
+
