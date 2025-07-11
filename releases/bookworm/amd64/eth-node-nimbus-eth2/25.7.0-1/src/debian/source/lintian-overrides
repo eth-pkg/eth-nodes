@@ -1,0 +1,10 @@
+# Not bugs
+eth-node-nimbus-eth2 source: source-is-missing [vendor/**/*.html]
+eth-node-nimbus-eth2 source: missing-field-in-dep5-copyright Copyright [debian/copyright:10]
+eth-node-nimbus-eth2 source: source-contains-prebuilt-ms-help-file [vendor/**/*.chm]
+eth-node-nimbus-eth2 source: source-contains-prebuilt-windows-binary [vendor/nim-bearssl/bearssl/csources/T0Comp.exe]
+
+eth-node-nimbus-eth2 source: missing-field-in-dep5-copyright Copyright [debian/copyright:14]
+eth-node-nimbus-eth2 source: no-newline-at-end [debian/changelog]
+eth-node-nimbus-eth2 source: debian-rules-ignores-make-clean-error [debian/rules:48]
+
