@@ -1,0 +1,34 @@
+#!/usr/bin/make -f
+# Flags based on https://wiki.debian.org/Hardening 
+export CPPFLAGS:=$(shell dpkg-buildflags --get CPPFLAGS)
+export CFLAGS:=$(shell dpkg-buildflags --get CFLAGS)
+export CXXFLAGS:=$(shell dpkg-buildflags --get CXXFLAGS)
+export LDFLAGS:=$(shell dpkg-buildflags --get LDFLAGS)
+export BINARIES=erigon
+# export BINARIES=capcli caplin devnet downloader erigon evm hack integration observer
+# BINARIES+=pics rpcdaemon rpctest sentinel sentry snapshots state txpool verkle diag 
+
+%:
+	dh $@
+
+override_dh_dwz:
+	# skip of optimization of DWARF debug information in ELF binaries via dwz
+
+override_dh_auto_test:
+	make -j1 test
+
+override_dh_auto_build:
+	make erigon.cmd 
+	for bin in $(BINARIES) ; do \
+		llvm-objcopy --remove-section .note.gnu.build-id build/bin/$$bin build/bin/$$bin; \
+	done
+	
+
+override_dh_strip:
+	dh_strip --no-automatic-dbgsym
+
+override_dh_auto_clean:
+	# on ubuntu clean fails, before dependency installation
+	# on bookworm clean succeeds, even if dependency is not installed
+	-make -j1 clean
+
