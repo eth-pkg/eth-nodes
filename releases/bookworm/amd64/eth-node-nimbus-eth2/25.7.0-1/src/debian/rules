@@ -41,7 +41,6 @@ override_dh_auto_build:
 		readelf -n "build/$${bin}"; \
 	done
 	chmod +x scripts/run-beacon-node.sh
-	rm vendor/nim-bearssl/bearssl/csources/T0Comp.exe
 
 override_dh_auto_clean:
 	# on ubuntu clean fails, before dependency installation
