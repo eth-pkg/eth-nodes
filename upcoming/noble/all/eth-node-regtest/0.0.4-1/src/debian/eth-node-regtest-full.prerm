@@ -1,0 +1,83 @@
+#!/bin/sh
+set -e
+
+# Source debconf library
+. /usr/share/debconf/confmodule
+
+# Define package
+PACKAGE_NAME="eth-node-regtest-full"
+
+# Helper function to get debconf value
+get_debconf_value() {
+    local key=$1
+    db_get "$PACKAGE_NAME/$key"
+    echo "$RET"
+}
+
+# Handle different prerm cases
+case "$1" in
+remove | purge)
+    # Get selected clients
+    EL_CLIENT=$(get_debconf_value "EL_CLIENT")
+    CL_CLIENT=$(get_debconf_value "CL_CLIENT")
+    VL_CLIENT=$(get_debconf_value "VL_CLIENT")
+    RUN_VL_CLIENT=$(get_debconf_value "RUN_VL_CLIENT")
+
+    # Map clients to service names
+    case "$EL_CLIENT" in
+    besu) EL_SERVICE="besu" ;;
+    erigon) EL_SERVICE="erigon" ;;
+    geth) EL_SERVICE="geth" ;;
+    nethermind) EL_SERVICE="nethermind" ;;
+    reth) EL_SERVICE="reth" ;;
+    *) EL_SERVICE="" ;;
+    esac
+
+    case "$CL_CLIENT" in
+    lighthouse) CL_SERVICE="lighthouse" ;;
+    lodestar) CL_SERVICE="lodestar" ;;
+    nimbus-eth2) CL_SERVICE="nimbus-eth2" ;;
+    prysm) CL_SERVICE="prysm" ;;
+    teku) CL_SERVICE="teku" ;;
+    *) CL_SERVICE="" ;;
+    esac
+
+    if [ "$RUN_VL_CLIENT" = "true" ]; then
+        case "$VL_CLIENT" in
+        lighthouse) VL_SERVICE="lighthouse-validator" ;;
+        lodestar) VL_SERVICE="lodestar-validator" ;;
+        nimbus-eth2) VL_SERVICE="nimbus-eth2-validator" ;;
+        prysm) VL_SERVICE="prysm-validator" ;;
+        teku) VL_SERVICE="teku-validator" ;;
+        *) VL_SERVICE="" ;;
+        esac
+    else
+        VL_SERVICE=""
+    fi
+
+    # Stop and disable services for selected clients
+    for client in "$EL_SERVICE" "$CL_SERVICE" "$VL_SERVICE"; do
+        if [ -n "$client" ]; then
+            service_name="eth-node-${client}-regtest"
+            if systemctl is-active --quiet "$service_name"; then
+                systemctl stop "$service_name" 2>/dev/null || true
+            fi
+            if systemctl is-enabled --quiet "$service_name"; then
+                systemctl disable "$service_name" 2>/dev/null || true
+            fi
+        fi
+    done
+    ;;
+upgrade)
+    # Do nothing on upgrade
+    ;;
+*)
+    echo "prerm called with unknown argument \`$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Clean up debconf
+db_stop
+
+exit 0
