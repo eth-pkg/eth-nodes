@@ -1,0 +1,84 @@
+[package_fields]
+spec_file = "eth-node-nimbus-eth2.sss"
+package_name = "eth-node-nimbus-eth2"
+version_number = "25.7.1"
+revision_number = "1"
+homepage = "https://github.com/status-im/nimbus-eth2"
+
+[package_type]
+# virtual | git | default
+package_type = "git"
+git_url = "https://github.com/status-im/nimbus-eth2.git"
+git_tag = "v25.7.1"
+submodules = [
+        { "commit" = "73fbb29019c19887235c1da456cfbfd5b4835184", "path" = "vendor/EIPs" },
+        { "commit" = "9e43c0ab26381889a3d932b1e811def60f7408e1", "path" = "vendor/NimYAML" },
+        { "commit" = "d447a94bbe1bafbef4fe5a2fbb2e5469e7b494bb", "path" = "vendor/gnosis-chain-configs" },
+        { "commit" = "099fee50a944e76c595398e69bfda0a6f1e799a1", "path" = "vendor/holesky" },
+        { "commit" = "3a17a5f5a3e8bccd6609a887f0bbe7ffc71e99e4", "path" = "vendor/hoodi" },
+        { "commit" = "9df5a5b0955dd1ed4bb103a9bba9a22742ea956c", "path" = "vendor/mainnet" },
+        { "commit" = "11e798b62b8e6beabe958e048e9e24c7e0f9ee63", "path" = "vendor/nim-bearssl" },
+        { "commit" = "bcfb3e77a2c5e1a02611ee4d03f3a655fe902eb1", "path" = "vendor/nim-blscurve" },
+        { "commit" = "a537556963bb42e048c7f7229456995355d360e5", "path" = "vendor/nim-chronicles" },
+        { "commit" = "0646c444fce7c7ed08ef6f2c9a7abfd172ffe655", "path" = "vendor/nim-chronos" },
+        { "commit" = "e214b3992a31acece6a9aada7d0a1ad37c928f3b", "path" = "vendor/nim-confutils" },
+        { "commit" = "92a02b672f60e6b5e5ea570d684904c289b495fa", "path" = "vendor/nim-eth" },
+        { "commit" = "dbdf898961ad8895398cec5756f6f452c060e685", "path" = "vendor/nim-eth2-scenarios" },
+        { "commit" = "6b3fea903ea0ee058ac7698c5e6af63b3a43fed5", "path" = "vendor/nim-faststreams" },
+        { "commit" = "79cbab1460f4c0cdde2084589d017c43a3d7b4f1", "path" = "vendor/nim-http-utils" },
+        { "commit" = "cbe8edf69d743a787b76b1cd25bfc4eae89927f7", "path" = "vendor/nim-json-rpc" },
+        { "commit" = "6eadb6e939ffa7882ff5437033c11a9464d3385c", "path" = "vendor/nim-json-serialization" },
+        { "commit" = "644a19b9874516446411aa31a7747b81d21431e5", "path" = "vendor/nim-kzg4844" },
+        { "commit" = "d8bd4ce5c46bb6d2f984f6b3f3d7380897d95ecb", "path" = "vendor/nim-libbacktrace" },
+        { "commit" = "d803352bd63fe2215e149a5f72de98229cfb7867", "path" = "vendor/nim-libp2p" },
+        { "commit" = "11d0cddfb0e711aa2a8c75d1892ae24a64c299fc", "path" = "vendor/nim-metrics" },
+        { "commit" = "0c4b2bce959591f0a862e9b541ba43c6d0cf3476", "path" = "vendor/nim-minilru" },
+        { "commit" = "981821197e839dc0544fe49c58e0da3f8a6104bf", "path" = "vendor/nim-nat-traversal" },
+        { "commit" = "08caa2a4da40580ed7fe3ce723b3f7feabcca8e5", "path" = "vendor/nim-normalize" },
+        { "commit" = "92b1c7ff141e6920e1f8a98a14c35c1fa098e3be", "path" = "vendor/nim-presto" },
+        { "commit" = "df8113dda4c2d74d460a8fa98252b0b771bf1f27", "path" = "vendor/nim-results" },
+        { "commit" = "f808ed5e7a7bfc42204ec7830f14b7a42b63c284", "path" = "vendor/nim-secp256k1" },
+        { "commit" = "c87b6da82365e99499f0ab81ed6f633be23b0f2c", "path" = "vendor/nim-serialization" },
+        { "commit" = "829133735113951b219e3b108a6bd2146209300b", "path" = "vendor/nim-snappy" },
+        { "commit" = "bdf01cf4236fb40788f0733466cdf6708783cbac", "path" = "vendor/nim-sqlite3-abi" },
+        { "commit" = "3ad8102750e6dd24323b2c114189ece79fd605c0", "path" = "vendor/nim-ssz-serialization" },
+        { "commit" = "9cc65bbf9d42d11efe3c3dcc687f6f69f4951627", "path" = "vendor/nim-stew" },
+        { "commit" = "1a2c661e3f50ff696b0b6692fab0d7bb2abf10cc", "path" = "vendor/nim-stint" },
+        { "commit" = "9e8ccc754631ac55ac2fd495e167e74e86293edb", "path" = "vendor/nim-taskpools" },
+        { "commit" = "e4d37dc1652d5c63afb89907efb5a5e812261797", "path" = "vendor/nim-testutils" },
+        { "commit" = "fea85b27f0badcf617033ca1bc05444b5fd8aa7a", "path" = "vendor/nim-toml-serialization" },
+        { "commit" = "66f2458710dc641dd4640368f9483c8a0ec70561", "path" = "vendor/nim-unicodedb" },
+        { "commit" = "8b51e99b4a57fcfb31689230e75595f024543024", "path" = "vendor/nim-unittest2" },
+        { "commit" = "85af8f228a7032d60572685513607fdb2d587a53", "path" = "vendor/nim-web3" },
+        { "commit" = "ebe308a79a7b440a11dfbe74f352be86a3883508", "path" = "vendor/nim-websock" },
+        { "commit" = "daa8723fd32299d4ca621c837430c29a5a11e19a", "path" = "vendor/nim-zlib" },
+        { "commit" = "d827fdc9968a4f06bba587dc38df2b20399f8cf5", "path" = "vendor/nim-zxcvbn" },
+        { "commit" = "dff3634b5d843f9b63425086f1b13245e26b6177", "path" = "vendor/nimbus-benchmarking" },
+        { "commit" = "d7be8e52434abb003d4bf9e73dcb72559ddf79ba", "path" = "vendor/nimbus-build-system" },
+        { "commit" = "ce9945b1b159d4c9b628f8c4cd2d262964692810", "path" = "vendor/nimbus-security-resources" },
+        { "commit" = "19c41d6be4c00b4a2c8000583bd30cf8ceb5f4b1", "path" = "vendor/nimcrypto" },
+        { "commit" = "129de385d8bb7d794dc4b864b0ebeb4d73753f98", "path" = "vendor/sepolia" }
+        ]
+
+
+[package_type.language_env]
+language_env = "nim"
+nim_version = "2.2.4" # according to docs, downgrade nim version to this version
+nim_binary_url = "https://nim-lang.org/download/nim-2.2.4-linux_x64.tar.xz"
+nim_version_checksum = "791802138aaf19c8579232c50b4998ce2ae2928b791127ce5b4ef3c7af53fb46 nim-2.2.4-linux_x64.tar.xz"
+
+
+[build_env]
+codename = "bookworm"
+arch = "amd64"
+pkg_builder_version = "0.3.1"
+debcrafter_version = "2711b53"
+run_lintian = true
+run_piuparts = true
+run_autopkgtest = true
+lintian_version = "2.116.3"
+piuparts_version = "1.1.7"
+autopkgtest_version = "5.28"
+sbuild_version = "0.85.6"
+# package directory
+workdir = "~/.pkg-builder/packages/bookworm"

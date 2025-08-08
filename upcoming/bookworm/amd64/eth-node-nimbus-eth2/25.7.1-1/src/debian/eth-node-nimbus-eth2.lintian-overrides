@@ -1,0 +1,12 @@
+# not a bug
+
+eth-node-nimbus-eth2: initial-upload-closes-no-bugs [usr/share/doc/eth-node-nimbus-eth2/changelog.Debian.gz:1]
+eth-node-nimbus-eth2: maintainer-script-ignores-errors [postrm]
+
+eth-node-nimbus-eth2: copyright-without-copyright-notice
+eth-node-nimbus-eth2: extended-description-line-too-long line 1
+eth-node-nimbus-eth2: extended-description-line-too-long line 3
+eth-node-nimbus-eth2: no-manual-page [usr/bin/nimbus_beacon_node]
+
+eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/bin/nimbus_beacon_node]
+eth-node-nimbus-eth2: embedded-library libminiupnpc [usr/lib/eth-node-nimbus-eth2/bin/nimbus_light_client]

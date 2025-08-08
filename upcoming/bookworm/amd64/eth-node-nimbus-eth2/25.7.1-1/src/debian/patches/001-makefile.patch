@@ -1,0 +1,36 @@
+Index: eth-node-nimbus-eth2-24.5.1/vendor/nimbus-build-system/makefiles/targets.mk
+===================================================================
+--- eth-node-nimbus-eth2-24.5.1.orig/vendor/nimbus-build-system/makefiles/targets.mk
++++ eth-node-nimbus-eth2-24.5.1/vendor/nimbus-build-system/makefiles/targets.mk
+@@ -78,14 +78,6 @@ endif
+ #- macOS is also a special case, with its "ln" not supporting "-r"
+ #- the AppVeyor 32-bit build is done on a 64-bit image, so we need to override the architecture detection with ARCH_OVERRIDE
+ build-nim: | sanity-checks
+-	+ if [[ -z "$(NIM_COMMIT)" ]]; then git submodule update --init --recursive "$(BUILD_SYSTEM_DIR)"; fi; \
+-		NIM_BUILD_MSG="$(BUILD_MSG) Nim compiler" \
+-		V=$(V) \
+-		CC=$(CC) \
+-		MAKE="$(MAKE)" \
+-		ARCH_OVERRIDE=$(ARCH_OVERRIDE) \
+-		QUICK_AND_DIRTY_COMPILER=$(QUICK_AND_DIRTY_COMPILER) \
+-		"$(CURDIR)/$(BUILD_SYSTEM_DIR)/scripts/build_nim.sh" "$(NIM_DIR)" ../Nim-csources ../nimble "$(CI_CACHE)"
+ 
+ # Check if the update might cause loss of work. Abort, if so, while allowing an override mechanism.
+ update-test:
+@@ -104,16 +96,6 @@ update-test:
+ #- allows parallel building with the '+' prefix
+ #- rebuilds the Nim compiler if the corresponding submodule is updated
+ update-common: | sanity-checks update-test
+-	git submodule foreach --quiet 'git ls-files --exclude-standard --recurse-submodules -z -- ":!:.*" | xargs -0 rm -rf'
+-	git $(GIT_SUBMODULE_CONFIG) submodule update --init --recursive || true
+-	# changing URLs in a submodule's submodule means we have to sync and update twice
+-	git submodule sync --quiet --recursive
+-	git $(GIT_SUBMODULE_CONFIG) submodule update --init --recursive
+-	git submodule foreach --quiet --recursive 'git $(GIT_SUBMODULE_CONFIG) reset --quiet --hard'
+-	find . -type d -name nimcache -print0 | xargs -0 rm -rf
+-	$(GET_CURRENT_COMMIT_TIMESTAMP) > $(UPDATE_TIMESTAMP)
+-	rm -rf $(NIMBLE_DIR)
+-	+ "$(MAKE)" --no-print-directory deps-common
+ 
+ # supposed to be used by developers, instead of "update", to avoid losing submodule work
+ update-dev:

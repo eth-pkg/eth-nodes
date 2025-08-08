@@ -1,0 +1,22 @@
+Index: eth-node-nimbus-eth2-24.7.0/vendor/nimbus-build-system/makefiles/targets.mk
+===================================================================
+--- eth-node-nimbus-eth2-24.7.0.orig/vendor/nimbus-build-system/makefiles/targets.mk
++++ eth-node-nimbus-eth2-24.7.0/vendor/nimbus-build-system/makefiles/targets.mk
+@@ -107,7 +107,6 @@ $(NIM_BINARY): | sanity-checks
+ 
+ # don't use this target, or you risk updating dependency repos that are not ready to be used in Nimbus
+ update-remote:
+-	git submodule update --remote
+ 
+ nat-libs: | libminiupnpc.a libnatpmp.a
+ 
+@@ -130,9 +129,6 @@ endif
+ #- fakes a Nimble package repository with the minimum info needed by the Nim compiler
+ #  for runtime path (i.e.: the second line in $(NIMBLE_DIR)/pkgs/*/*.nimble-link)
+ $(NIMBLE_DIR):
+-	mkdir -p $(NIMBLE_DIR)/pkgs
+-	NIMBLE_DIR="$(CURDIR)/$(NIMBLE_DIR)" PWD_CMD="$(PWD)" EXCLUDED_NIM_PACKAGES="$(EXCLUDED_NIM_PACKAGES)" \
+-		git submodule foreach --recursive --quiet '"$(CURDIR)/$(BUILD_SYSTEM_DIR)/scripts/create_nimble_link.sh" "$$sm_path"'
+ 
+ clean-cross:
+ 	+ [[ -e vendor/nim-nat-traversal/vendor/miniupnp/miniupnpc ]] && "$(MAKE)" -C vendor/nim-nat-traversal/vendor/miniupnp/miniupnpc CC=$(CC) clean $(HANDLE_OUTPUT) || true
