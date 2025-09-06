@@ -1,0 +1,18 @@
+#!/usr/bin/env sh
+
+exec 2>&1
+
+set -e
+
+test_binary_in_path(){
+  output="$(which nethermind)"
+  assertEquals "/usr/bin/nethermind" "$output"
+}
+
+
+test_invocation_without_dotnet(){
+  output="$(nethermind 2>&1 || true)"
+  assertContains "You must install .NET to run this application." "$output"
+}
+
+. shunit2
