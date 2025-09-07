@@ -1,0 +1,12 @@
+eth-node-geth: statically-linked-binary [usr/lib/eth-node-geth/bin/rlpdump]
+
+eth-node-geth: initial-upload-closes-no-bugs [usr/share/doc/eth-node-geth/changelog.Debian.gz:1]
+eth-node-geth: maintainer-script-ignores-errors [postrm]
+eth-node-geth: no-manual-page [usr/bin/geth]
+
+eth-node-geth: copyright-without-copyright-notice
+
+eth-node-geth: extended-description-line-too-long 
+
+#TODO 
+eth-node-geth: hardening-no-pie *
